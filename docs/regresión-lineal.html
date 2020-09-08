@@ -852,7 +852,7 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <span id="cb154-8"><a href="regresión-lineal.html#cb154-8"></a>}</span>
 <span id="cb154-9"><a href="regresión-lineal.html#cb154-9"></a></span>
 <span id="cb154-10"><a href="regresión-lineal.html#cb154-10"></a><span class="kw">sd</span>(temperature_coef)</span></code></pre></div>
-<pre><code>## [1] 284.6248</code></pre>
+<pre><code>## [1] 284.9588</code></pre>
 <p>En este caso, la estimación de <span class="math inline">\(SE (\beta_{temp})\)</span> es similar pero menor que la calculada analíticamente. Por lo tanto, la estimación <code>lm()</code> es en realidad más conservadora en este caso.</p>
 <p>El <span class="math inline">\(SE\)</span> para los coeficientes en la salida de <code>lm ()</code> se puede usar para calcular los IC para la estimación del coeficiente. <span class="math inline">\(\hat {\beta} + 1.96 (SE)\)</span> nos da el límite superior al 95%, y $ - 1.96 (SE) $ el límite inferior. Los IC del 95% que no incluyen 0 indican que el coeficiente es estadísticamente significativo, equivalente a un valor p del coeficiente menor de .05.</p>
 <p>El uso de IC en lugar de p-valores nos da una forma más flexible de hacer inferencia. Además, también suele ser útil porque nos indica qué posibles valores puede tomar nuestros parámetros (si quisiéramos cuantificar el efecto). Ésta es otra razón para usar la función <code>display ()</code> del paquete arm. No solo presenta la salida de <code>lm ()</code> de manera más compacta, sino que tampoco reporta estadísticas t ni valores p. Como hemos visto, <span class="math inline">\(SE\)</span>s transmiten la misma información.</p>
