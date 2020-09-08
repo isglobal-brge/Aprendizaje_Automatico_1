@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Tidyverse | Aprendizaje Automático 1</title>
-  <meta name="description" content="Chapter 2 Tidyverse | Aprendizaje Automático 1" />
+  <title>2 Tidyverse | Aprendizaje Automático 1</title>
+  <meta name="description" content="2 Tidyverse | Aprendizaje Automático 1" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Tidyverse | Aprendizaje Automático 1" />
+  <meta property="og:title" content="2 Tidyverse | Aprendizaje Automático 1" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Tidyverse | Aprendizaje Automático 1" />
+  <meta name="twitter:title" content="2 Tidyverse | Aprendizaje Automático 1" />
   
   
   
@@ -212,7 +212,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="tidyverse" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Tidyverse</h1>
+<h1><span class="header-section-number">2</span> Tidyverse</h1>
 <div id="introducción" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Introducción</h2>
 <center>
@@ -372,12 +372,12 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <span id="cb13-5"><a href="tidyverse.html#cb13-5"></a></span>
 <span id="cb13-6"><a href="tidyverse.html#cb13-6"></a><span class="co"># Extract by name</span></span>
 <span id="cb13-7"><a href="tidyverse.html#cb13-7"></a>df<span class="op">$</span>x</span></code></pre></div>
-<pre><code>## [1] 0.14403895 0.81922083 0.04021627 0.23279746 0.79988112</code></pre>
+<pre><code>## [1] 0.2473859 0.7915032 0.8237611 0.2765597 0.9102768</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="tidyverse.html#cb15-1"></a>df[[<span class="st">&quot;x&quot;</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.14403895 0.81922083 0.04021627 0.23279746 0.79988112</code></pre>
+<pre><code>## [1] 0.2473859 0.7915032 0.8237611 0.2765597 0.9102768</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="tidyverse.html#cb17-1"></a><span class="co"># Extract by position</span></span>
 <span id="cb17-2"><a href="tidyverse.html#cb17-2"></a>df[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.14403895 0.81922083 0.04021627 0.23279746 0.79988112</code></pre>
+<pre><code>## [1] 0.2473859 0.7915032 0.8237611 0.2765597 0.9102768</code></pre>
 </div>
 </div>
 <div id="exercises-tibbles" class="section level2" number="2.5">
@@ -418,10 +418,10 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="tidyverse.html#cb20-1"></a><span class="kw">library</span>(readr)</span>
 <span id="cb20-2"><a href="tidyverse.html#cb20-2"></a><span class="kw">system.time</span>(dd1 &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    2.35    0.05    2.39</code></pre>
+##    3.06    0.05    3.11</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="tidyverse.html#cb22-1"></a><span class="kw">system.time</span>(dd2 &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>, <span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.44    0.00    0.43</code></pre>
+##    0.42    0.01    0.44</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="tidyverse.html#cb24-1"></a><span class="kw">dim</span>(dd2)</span></code></pre></div>
 <pre><code>## [1] 733202      5</code></pre>
 <p>Efectivamente ambos objetos contienen la misma información</p>
@@ -759,7 +759,7 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="tidyverse.html#cb60-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> delay, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> dist, <span class="dt">y =</span> delay)) <span class="op">+</span></span>
 <span id="cb60-2"><a href="tidyverse.html#cb60-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">size =</span> count), <span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>) <span class="op">+</span></span>
 <span id="cb60-3"><a href="tidyverse.html#cb60-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<p><img src="aprendizaje_automatico_1_files/figure-html/plot_pipe-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/plot_pipe-1.png" width="672" /></p>
 <hr />
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="tidyverse.html#cb61-1"></a>delays &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb61-2"><a href="tidyverse.html#cb61-2"></a><span class="st">  </span><span class="kw">group_by</span>(dest) <span class="op">%&gt;%</span><span class="st"> </span></span>
