@@ -10,7 +10,7 @@ options(scipen = 0)
 
 <center>
 
-![Tidyverse](figures/tidiverse.png){width=450px}
+![Tidyverse](fig/tidiverse.png){width=450px}
 
 </center>
 
@@ -24,7 +24,7 @@ Existen numeros ayudas, cursos y material en general para aprender todo sobre la
 El libro de [R for Data Science](https://r4ds.had.co.nz/) se organiza siguiendo este esquema: 
 
 ```{r flujo, echo=FALSE, fig.cap="Esquema R for Data Science", out.width = '100%'}
-knitr::include_graphics("figures/flujoTrabajoAnalsisiDatos.gif")
+knitr::include_graphics("fig/flujoTrabajoAnalsisiDatos.gif")
 ```
 
 De forma que las librerías incluidas en `tidyverse` cubren todos estos aspectos. Está pensado para facilitar tareas de gestión de datos, y en su caso, el manejo de grandes volúmenes de información de forma eficiente. Se describen técnicas que ayudan a la visualización de datos que es el primer paso que se debe llevar a cabo en cualquier análisis estadístico que se precie. Esta visualización y posterior análisis no sólo deber llevarse a cab o en toda la base de datos, puede requerirse analizar subconjuntos de datos obtenidos mediante algún filtro o inlcuso puede necesitarse recodificar o restructurar la información disponible . Quizás estos sean los procedimientos para los que `tidiverse` mejore de forma sustancial el uso de R tradicional (junto con la forma compacta y clara de escribir código), ya que la posterior modelización puede llevarse a cabo con decenas de librerías diseñadas para tal efecto. 
@@ -256,7 +256,7 @@ R either prints out the results, or saves them to a variable. If you want to do 
 ```
 ## Logical filtering
 
-![boolean operations](figures/transform-logical.png)
+![boolean operations](fig/transform-logical.png)
 
 --- 
 

@@ -217,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.1</span> Introducción</h2>
 <center>
 <div class="figure">
-<img src="figures/tidiverse.png" width="450" alt="" />
+<img src="fig/tidiverse.png" width="450" alt="" />
 <p class="caption">Tidyverse</p>
 </div>
 </center>
@@ -226,7 +226,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Existen numeros ayudas, cursos y material en general para aprender todo sobre las librerías de tidyverse, pero el autor ha usado el libro <a href="https://r4ds.had.co.nz/">R for Data Science</a> como base para ilustrar cómo usar este conjunto de herramientas para el análisis de datos en ciencias. Este libro (del que os he puesto el link) es una excelente fuente para aprender todo sobre <code>tidyverse</code>. En este capítulo os referenciaré otro material que puede ser de ayuda.</p>
 <p>El libro de <a href="https://r4ds.had.co.nz/">R for Data Science</a> se organiza siguiendo este esquema:</p>
 <div class="figure"><span id="fig:flujo"></span>
-<img src="figures/flujoTrabajoAnalsisiDatos.gif" alt="Esquema R for Data Science" width="100%" />
+<img src="fig/flujoTrabajoAnalsisiDatos.gif" alt="Esquema R for Data Science" width="100%" />
 <p class="caption">
 Figure 2.1: Esquema R for Data Science
 </p>
@@ -372,12 +372,12 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <span id="cb13-5"><a href="tidyverse.html#cb13-5"></a></span>
 <span id="cb13-6"><a href="tidyverse.html#cb13-6"></a><span class="co"># Extract by name</span></span>
 <span id="cb13-7"><a href="tidyverse.html#cb13-7"></a>df<span class="op">$</span>x</span></code></pre></div>
-<pre><code>## [1] 0.2473859 0.7915032 0.8237611 0.2765597 0.9102768</code></pre>
+<pre><code>## [1] 0.82282326 0.83243375 0.08886823 0.41844178 0.48792204</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="tidyverse.html#cb15-1"></a>df[[<span class="st">&quot;x&quot;</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.2473859 0.7915032 0.8237611 0.2765597 0.9102768</code></pre>
+<pre><code>## [1] 0.82282326 0.83243375 0.08886823 0.41844178 0.48792204</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="tidyverse.html#cb17-1"></a><span class="co"># Extract by position</span></span>
 <span id="cb17-2"><a href="tidyverse.html#cb17-2"></a>df[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.2473859 0.7915032 0.8237611 0.2765597 0.9102768</code></pre>
+<pre><code>## [1] 0.82282326 0.83243375 0.08886823 0.41844178 0.48792204</code></pre>
 </div>
 </div>
 <div id="exercises-tibbles" class="section level2" number="2.5">
@@ -418,10 +418,10 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="tidyverse.html#cb20-1"></a><span class="kw">library</span>(readr)</span>
 <span id="cb20-2"><a href="tidyverse.html#cb20-2"></a><span class="kw">system.time</span>(dd1 &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    3.06    0.05    3.11</code></pre>
+##    2.25    0.09    2.34</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="tidyverse.html#cb22-1"></a><span class="kw">system.time</span>(dd2 &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>, <span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.42    0.01    0.44</code></pre>
+##    0.40    0.03    0.44</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="tidyverse.html#cb24-1"></a><span class="kw">dim</span>(dd2)</span></code></pre></div>
 <pre><code>## [1] 733202      5</code></pre>
 <p>Efectivamente ambos objetos contienen la misma información</p>
@@ -518,7 +518,7 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <div id="logical-filtering" class="section level2" number="2.8">
 <h2><span class="header-section-number">2.8</span> Logical filtering</h2>
 <div class="figure">
-<img src="figures/transform-logical.png" alt="" />
+<img src="fig/transform-logical.png" alt="" />
 <p class="caption">boolean operations</p>
 </div>
 <hr />
