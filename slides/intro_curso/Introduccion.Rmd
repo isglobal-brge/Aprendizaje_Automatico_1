@@ -45,7 +45,11 @@ options(width=80)
     
 ## Material del curso
 
-* No seguiremos ningún libro de texto porque estamos tratando muchos temas que están muy bien explicados en varios libros y, sobre todo, en materiales públicos. He creado un bookdown accesible en 
+* No seguiremos ningún libro de texto porque estamos tratando muchos temas que están muy bien explicados en varios libros y, sobre todo, en materiales públicos. He creado un bookdown accesible en https://isglobal-brge.github.io/Aprendizaje_Automatico_1/ que describe el contenido del curso
+
+* Habrán presentaciones en diapositivas que estarán disponibles en el Moodle de la asignatura
+
+* 
 
 
 ## Session info
