@@ -118,7 +118,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -131,9 +130,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Aprendizaje Automático 1</a></li>
-
-<li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Inroducción</a></li>
 <li class="chapter" data-level="2" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>2</b> Tidyverse</a>
 <ul>
@@ -198,9 +194,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.17" data-path="regresión-lineal.html"><a href="regresión-lineal.html#colinealidad"><i class="fa fa-check"></i><b>3.17</b> Colinealidad</a></li>
 <li class="chapter" data-level="3.18" data-path="regresión-lineal.html"><a href="regresión-lineal.html#valores-atípicos"><i class="fa fa-check"></i><b>3.18</b> Valores atípicos</a></li>
 </ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -379,12 +372,12 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <span id="cb13-5"><a href="tidyverse.html#cb13-5"></a></span>
 <span id="cb13-6"><a href="tidyverse.html#cb13-6"></a><span class="co"># Extract by name</span></span>
 <span id="cb13-7"><a href="tidyverse.html#cb13-7"></a>df<span class="op">$</span>x</span></code></pre></div>
-<pre><code>## [1] 0.67925025 0.02731511 0.65943230 0.50599325 0.06386186</code></pre>
+<pre><code>## [1] 0.2857124 0.9456638 0.1896749 0.4047951 0.2505404</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="tidyverse.html#cb15-1"></a>df[[<span class="st">&quot;x&quot;</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.67925025 0.02731511 0.65943230 0.50599325 0.06386186</code></pre>
+<pre><code>## [1] 0.2857124 0.9456638 0.1896749 0.4047951 0.2505404</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="tidyverse.html#cb17-1"></a><span class="co"># Extract by position</span></span>
 <span id="cb17-2"><a href="tidyverse.html#cb17-2"></a>df[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.67925025 0.02731511 0.65943230 0.50599325 0.06386186</code></pre>
+<pre><code>## [1] 0.2857124 0.9456638 0.1896749 0.4047951 0.2505404</code></pre>
 </div>
 </div>
 <div id="exercises-tibbles" class="section level2" number="2.5">
@@ -425,10 +418,10 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="tidyverse.html#cb20-1"></a><span class="kw">library</span>(readr)</span>
 <span id="cb20-2"><a href="tidyverse.html#cb20-2"></a><span class="kw">system.time</span>(dd1 &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    5.75    0.10    5.85</code></pre>
+##    2.42    0.03    2.45</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="tidyverse.html#cb22-1"></a><span class="kw">system.time</span>(dd2 &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>, <span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.50    0.07    0.58</code></pre>
+##    0.42    0.00    0.44</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="tidyverse.html#cb24-1"></a><span class="kw">dim</span>(dd2)</span></code></pre></div>
 <pre><code>## [1] 733202      5</code></pre>
 <p>Efectivamente ambos objetos contienen la misma información</p>
@@ -598,7 +591,7 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 </div>
 <div id="select-columns" class="section level2" number="2.10">
 <h2><span class="header-section-number">2.10</span> Select columns</h2>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="tidyverse.html#cb44-1"></a><span class="kw">select</span>(flights, year, month, day)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="tidyverse.html#cb44-1"></a>dplyr<span class="op">::</span><span class="kw">select</span>(flights, year, month, day)</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 x 3
 ##     year month   day
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;
@@ -614,7 +607,7 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 ## 10  2013     1     1
 ## # ... with 336,766 more rows</code></pre>
 <hr />
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="tidyverse.html#cb46-1"></a><span class="kw">select</span>(flights, year<span class="op">:</span>day)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="tidyverse.html#cb46-1"></a>dplyr<span class="op">::</span><span class="kw">select</span>(flights, year<span class="op">:</span>day)</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 x 3
 ##     year month   day
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;
@@ -630,7 +623,7 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 ## 10  2013     1     1
 ## # ... with 336,766 more rows</code></pre>
 <hr />
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="tidyverse.html#cb48-1"></a><span class="kw">select</span>(flights, <span class="op">-</span>(year<span class="op">:</span>day))</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="tidyverse.html#cb48-1"></a>dplyr<span class="op">::</span><span class="kw">select</span>(flights, <span class="op">-</span>(year<span class="op">:</span>day))</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 x 16
 ##    dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time distance  hour minute
 ##       &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
@@ -657,7 +650,7 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 </div>
 <div id="add-new-variables" class="section level2" number="2.11">
 <h2><span class="header-section-number">2.11</span> Add new variables</h2>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="tidyverse.html#cb50-1"></a>flights_sml &lt;-<span class="st"> </span><span class="kw">select</span>(flights, </span>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="tidyverse.html#cb50-1"></a>flights_sml &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(flights, </span>
 <span id="cb50-2"><a href="tidyverse.html#cb50-2"></a>  year<span class="op">:</span>day, </span>
 <span id="cb50-3"><a href="tidyverse.html#cb50-3"></a>  <span class="kw">ends_with</span>(<span class="st">&quot;delay&quot;</span>), </span>
 <span id="cb50-4"><a href="tidyverse.html#cb50-4"></a>  distance, </span>
@@ -766,7 +759,7 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="tidyverse.html#cb60-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> delay, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> dist, <span class="dt">y =</span> delay)) <span class="op">+</span></span>
 <span id="cb60-2"><a href="tidyverse.html#cb60-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">size =</span> count), <span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>) <span class="op">+</span></span>
 <span id="cb60-3"><a href="tidyverse.html#cb60-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/plot_pipe-1.png" width="672" /></p>
+<p><img src="aprendizaje_automatico_1_files/figure-html/plot_pipe-1.png" width="672" /></p>
 <hr />
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="tidyverse.html#cb61-1"></a>delays &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb61-2"><a href="tidyverse.html#cb61-2"></a><span class="st">  </span><span class="kw">group_by</span>(dest) <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -887,8 +880,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-tidyverse.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -898,7 +891,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }

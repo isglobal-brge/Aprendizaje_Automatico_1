@@ -287,19 +287,19 @@ NOTE: missing values are located at the end
 ## Select columns
 
 ```{r select}
-select(flights, year, month, day)
+dplyr::select(flights, year, month, day)
 ```
 
 --- 
 
 ```{r select2}
-select(flights, year:day)
+dplyr::select(flights, year:day)
 ```
 
 ---
 
 ```{r select3}
-select(flights, -(year:day))
+dplyr::select(flights, -(year:day))
 ```
 
 ---
@@ -319,7 +319,7 @@ There are a number of helper functions you can use within select():
 ## Add new variables
 
 ```{r add_var}
-flights_sml <- select(flights, 
+flights_sml <- dplyr::select(flights, 
   year:day, 
   ends_with("delay"), 
   distance, 
