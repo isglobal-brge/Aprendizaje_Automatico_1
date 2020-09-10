@@ -1,4 +1,4 @@
-# Tidyverse
+# Introducción a Tidyverse
 
  
 ```{r include=FALSE}
@@ -206,26 +206,26 @@ dd2
 
 ### Transformación de datos
 
-* It is rare that you get the data in exactly the right form you need. 
-* Often you’ll need to create some new variables or summaries.
-* Or maybe you just want to rename the variables or reorder the observations in order to make the data a little easier to work with. 
+Antes de empezar a analizar los datos suele ser necesario realizar algunas transformaciones o crear nuevas variables ya que:
 
----
+* Es raro que obtengamos los datos exactamente en la forma correcta que necesitamos.
+* A menudo, se deberán crear algunas variables o resúmenes nuevos.
+* A veces se necesita cambiar el nombre de las variables o reordenar las observaciones para que sea un poco más fácil trabajar con los datos.
 
-Let us illustrate how to manage available data using NYC fligths database. `nycflights13::flights` data frame contains all 336,776 flights that departed from New York City in 2013. The data comes from the US Bureau of Transportation Statistics, and is documented in `?flights`.
+
+Ilustremos cómo realizar estas tareas utilizando los datos disponibles en una base de datos de vuelos de NYC. El objeto `nycflights13::fligths` contiene los 336,776 vuelos que partieron de la ciudad de Nueva York en 2013. Los datos provienen de la Oficina de Estadísticas de Transporte de EE. UU. y están documentados en `?flights`.
 
 ```{r load_data}
 library(nycflights13)
 library(tidyverse)
 ```
 
-----
 
 ```{r show_flights}
 flights
 ```
 
-## dlpyr basics
+Las funciones básicas que usaremos están disponibles en la librería `dlpyr` y son las siguientes:
 
 * Pick observations by their values: `filter()`.
 * Reorder the rows: `arrange()`.
@@ -233,90 +233,108 @@ flights
 * Create new variables with functions of existing variables: `mutate()`.
 * Collapse many values down to a single summary: `summarise()`.
 
----- 
+* Elegir observaciones por sus valores: `filter()`.
+* Reordenar las filas: `arrange()`.
+* Elegir las variables por sus nombres: `select()`.
+* Crear nuevas variables a partir de variables existentes: `mutate()`.
+* Colapsar valores en un sólo resumen: `summarise()`.
 
-All verbs work similarly:
 
-- The first argument is a data frame.
+Todos los **verbos** (e.g funciones) se usan  de la misma forma:
 
-- The subsequent arguments describe what to do with the data frame, using the variable names (without quotes).
 
-- The result is a new data frame.
+- El primer argumento es un *tibble* o un *data.frame*.
 
-## Filter rows
+- Los argumentos siguientes describen qué hacer con los datos, utilizando los nombres de las variables (sin comillas).
+
+- El resultado es un nuevo *tibble*.
+
+### Filtrar filas
 
 ```{r filter}
 jan1 <- filter(flights, month == 1, day == 1)
 ```
 
-R either prints out the results, or saves them to a variable. If you want to do both, you can wrap the assignment in parentheses:
+R imprime los resultados o los guarda en una variable. Si desea hacer ambas cosas, podemos envolver la sintaxis entre paréntesis:
 
 ```{r filter2}
 (jan1 <- filter(flights, month == 1, day == 1))
 ```
-## Logical filtering
 
-![boolean operations](fig/transform-logical.png)
 
---- 
+### Filtrado lógico
+
+Estos son los operadoles lógicos que podemos aplicar
+
+![boolean operations](fig/transform-logical.png)    
+
+
+
 
 ```{r example_boolean1}
 filter(flights, month == 11 | month == 12)
 ```
 
----
+
 
 ```{r example_boolean2}
 filter(flights, !(arr_delay > 120 | dep_delay > 120))
 ```
 
 
-## Arrange rows
+### Ordenar filas
+
+En orden ascendente
 
 ```{r arrange}
 arrange(flights, year, month, day)
 ```
 
-----
+y descendente
 
 ```{r arrange2}
 arrange(flights, desc(dep_delay))
 ```
-NOTE: missing values are located at the end
+NOTA: los valores missing están situados al final
 
-## Select columns
+
+### Seleccionar columnas (e.g. variables)
+
+Seleccionamos las columnas que queremos
 
 ```{r select}
 dplyr::select(flights, year, month, day)
 ```
 
---- 
+o las que están entre dos columnas
 
 ```{r select2}
 dplyr::select(flights, year:day)
 ```
 
----
+también podemos seleccionar todas las columnas menos algunas
 
 ```{r select3}
 dplyr::select(flights, -(year:day))
 ```
 
----
+Existen numerosas funciones que pueden ser de mucha utilidad para hacer selecciones más complejas y rápidas dentro de la función `select()`
 
-There are a number of helper functions you can use within select():
 
-*  `starts_with("abc")`: matches names that begin with “abc”.
+*  `starts_with("abc")`: nombres que empiezan con “abc”.
 
-* `ends_with("xyz")`: matches names that end with “xyz”.
+* `ends_with("xyz")`: nombres que acaban con “xyz”.
 
-* `contains("ijk")`: matches names that contain “ijk”.
+* `contains("ijk")`: nombres que contienen “ijk”.
 
-* `matches("(.)\\1")`: selects variables that match a regular expression. This one matches any variables that contain repeated characters. You’ll learn more about regular expressions in `strings`.
+* `matches("(.)\\1")`: selecciona variables que coinciden con una expresión regular. Se puede aprender más con `strings`.
 
-* `num_range("x", 1:3)`: matches x1, x2 and x3.
+* `num_range("x", 1:3)`: coincide con x1, x2 and x3.
 
-## Add new variables
+### Añadir nuevas variables
+
+
+Debemos usar la función `mutate()`
 
 ```{r add_var}
 flights_sml <- dplyr::select(flights, 
@@ -331,9 +349,8 @@ mutate(flights_sml,
 )
 ```
 
-----
 
-If you only want to keep the new variables, use `transmute()`:
+Si sólo queremos mantener las nuevas variables en nuestra tabla de datos, debemos usar `transmute()`:
 
 ```{r transmute}
 transmute(flights,
@@ -343,35 +360,59 @@ transmute(flights,
 )
 ```
 
-## Grouped summaries
+### Grouped summaries
+
+Podemos agrupar variables de la siguiente forma:
+
 
 ```{r summary}
 summarise(flights, delay = mean(dep_delay, na.rm = TRUE))
 ```
 
---- 
 
 ```{r summary2}
 by_day <- group_by(flights, year, month, day)
 summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))
 ```
 
-## The pipe `%>%`
+También podemos agrupar según varios criterios
 
-Imagine that we want to explore the relationship between the distance and average delay for each location. The steps are:
+```{r group_var}
+flights %>%
+  group_by(year, month, day) %>% 
+  summarise(
+    avg_delay1 = mean(arr_delay, na.rm=TRUE),
+    avg_delay2 = mean(arr_delay[arr_delay > 0], na.rm=TRUE) 
+  )
+```
 
-There are three steps to prepare this data:
+Existen otras funciones útiles por las que nos podría interesar agrupar
 
-* Group flights by destination.
+* `count()`
+* `mean()`
+* `median()`
+* `min()`
+* `max()`
+* `quantile(x, 0.25)`
+* `IQR()`
+* `mad()`
 
-* Summarise to compute distance, average delay, and number of flights.
-
-* Filter to remove noisy points and Honolulu airport, which is almost twice as far away as the next closest airport.
 
 
----
 
-Using what you know about `dplyr`, you might write code like this:
+## Uso del pipe `%>%`
+
+Imaginemos que queremos explorar la relación entre la distancia y el retraso promedio para cada ubicación. Los pasos para obtener esta información serían:
+
+
+* Agrupar los vuelos por destino.
+
+* Resumir la información calculando la distancia, el retraso promedio y el número de vuelos.
+
+* Filtrar algunos valores que introducen ruido (producen sesgo) como el aeropuerto de Honolulu, que está casi el doble de lejos que el siguiente aeropuerto más cercano.
+
+
+Utilizando `dplyr` escribiríamos algo como esto (aún más largo en R tradicional y menos legible):
 
 ```{r pipe}
 by_dest <- group_by(flights, dest)
@@ -384,7 +425,8 @@ delay <- filter(delay, count > 20, dest != "HNL")
 delay
 ```
 
-----
+
+Y podríamos tener un gráfico de la siguiente forma (veremos cómo hacer esto en la siguiente sesión)
 
 ```{r plot_pipe}
 ggplot(data = delay, mapping = aes(x = dist, y = delay)) +
@@ -392,7 +434,9 @@ ggplot(data = delay, mapping = aes(x = dist, y = delay)) +
   geom_smooth(se = FALSE)
 ```
 
-----
+
+Utilizando *pipe*s el código quedaría mucho más compacto y legible
+
 
 ```{r pipe_use}
 delays <- flights %>% 
@@ -406,43 +450,420 @@ delays <- flights %>%
 delays
 ```
 
-## Group by different variables
 
-```{r group_var}
-flights %>%
-  group_by(year, month, day) %>% 
-  summarise(
-    avg_delay1 = mean(arr_delay, na.rm=TRUE),
-    avg_delay2 = mean(arr_delay[arr_delay > 0], na.rm=TRUE) 
-  )
+## Ejercicios (manejo de datos)
+
+Los siguientes ejercicios os ayudarán a trabajar con las tareas más básicas de `dplyr`. **Debéis  realizarlos usando las funciones que hemos visto en esta presentación - no vale usar código R básico**. Usaremos los datos `mtcars` vistos en clase. Recordad que podemos obtener más información sobre las variables con `?mtcars`. También podemos usar `glimpse()` para ver qué tipo de variables tenemos, y en caso de ser variables categóricas, qué categorías hay (Siempre es muy recomendable hacer este tipo de visualización de datos para ver que no hayan valores raros ni categorías no definidas o errores en la definición de categorías - por ejemplo tener la variable sexo como: H, M, h, m, hombre).
+
+- Visualiza la variable 'hp' usando la función `select()`. Intenta usar la función `pull()` para hacer lo mismo y ver cuál es la diferencia.
+
+- Visualiza todos los datos excepto la columna 'hp'. 
+
+
+- Visualiza las columnas mpg, hp, vs, am y gear escribiendo el código más corto posible.
+
+- Crea un objeto que se llame 'mycars' que contenga las columnas mpg y hp pero que el nombre de la variable sea 'miles_per_gallon' y 'horse_power' respectivamente. Pon los rownames del data.frame en una variable que se llame 'model' [PISTA: debes buscar qué función hay para poner los rownames en una columna].
+
+- Crea una nueva variable en 'mycars' que sea 'km_per_litre' que describa el consumo del coche (variable 'mpg'). NOTA: 1 mpg es 0.425 km / l.
+
+- Selecciona al azar (y visualiza) la mitad de las observaciones de 'mycars' [PISTA: busca una función de `dplyr` que haga esto de forma sencilla (similar a `sample` en R tradicional).
+
+- Crea un objeto 'mycars_s' que contenga de la 10ª a la 35ª fila de mycars [PISTA: considera usar la función `slice()`].
+
+- Visualiza el objeto 'mycars_s' sin duplicados [PISTA_ encia: considera usar la función `distinct()`].
+
+- Visualiza del objeto 'mycars_s' todas las observaciones que tengan mpg> 20 y hp> 100.
+
+- Visualiza la la fila correspondiente al coche Lotus Europa.
+
+
+
+## Visualización de datos
+
+R es una herramienta muy potente para realizar gráficos, mucho más que otros software de análisis estadístico como SPSS, SAS o Stata. Aún así, `ggplot` fue desarrollado con los siguientes objetivos:
+
+
+```The aim of the grammar is to “bring together in a coherent way things that previously appeared unrelated and which also will provide a basis for dealing systematically with new situations” (Cox 1978). How well have we succeeded? (Wickham, 2012)``` 
+
+``The emphasis in ggplot2 is reducing the amount of thinking time by making it easier to go from the plot in your brain to the plot on the page." (Wickham, 2012)```
+
+```Base graphics are good for drawing pictures; ggplot2 graphics are good for understanding the data." (Wickham, 2012)```
+
+En definitiva, deberíamos usar `ggplot` porque:
+
+- Es flexible
+- Tenemos gran control de lo que estamos haciendo
+- Crea gráficos muy bonitos (y se usan en la mayoría de revistas científicas)
+- De forma más importante, hay mucha documentación sobre cómo hacer gráficos muy complicados de forma sencilla (libros, páginas web, infografrías, etc. 
+
+[Aquí](https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf) podéis encontrar una chuleta con las principales funciones 
+
+
+
+
+Cada visualización en ggplot se compone de:
+
+**plot = data + Aesthetics + geometry**
+
+- **Datos** (*Data*) que queremos representar (que serán un data frame).
+- **Características estéticas** (*aesthetic mappings*) que describen cómo queremos que los datos se vean en el gráfico. Para más información podemos consultar la vignette (vignette(“ggplot2-specs”)). Como luego veremos, se introducen con la función aes() y se refieren a:
+    - posición (en los ejes)
+    - color exterior (color) y de relleno (fill)
+    - forma de puntos (shape)
+    - tipo de línea (linetype)
+    - tamaño (size)
+- **Objetos geométricos** (*Geom*) representan lo que vemos en un gráficos (puntos, líneas, etc.). Todo gráfico tiene, como mínimo, una geometría. La geometría determina el tipo de gráfico:
+    - geom_point (para puntos)
+    - geom_lines (para lineas)
+    - geom_histogram (para histograma)
+    - geom_boxplot (para boxplot)
+    - geom_bar (para barras)
+    - geom_smooth (líneas suavizadas)
+    - geom_polygons (para polígonos en un mapa)
+    - etc. (si ejecutáis el comando help.search(“geom_”, package = “ggplot2”) podéis ver el listado de objetos geométricos)
+
+Por tanto, para construir un gráfico con ggplot2 comenzamos con la siguiente estructura de código:
+
+**ggplot(datos, aes()) + geom_tipo()**
+
+Por ejemplo para hacer una gráfica que represente las millas por galón (mpg) en función del peso del coche, podemos hacer los siguiente:
+
+```{r mtcars}
+mtcars[1:5,1:8]
 ```
 
-## Useful summary functions
 
-* `count()`
-* `mean()`
-* `median()`
-* `min()`
-* `max()`
-* `quantile(x, 0.25)`
-* `IQR()`
-* `mad()`
+```{r plot_mtcars}
+ggplot(mtcars) +         # data
+  aes(x = mpg, y=wt) +   # Aesthetics
+  geom_point()           # geometry (layer)  
+```
+
+Podemos cambiar a una de estas estéticas
+
+* `theme_dark()`
+* `theme_minimal()`
+* `theme_classic()` 
+* `theme_void()` 
+* `theme_test()`
 
 
-## Exercises (data transform)
+```{r plot_mtcars2}
+ggplot(mtcars) +         # data
+  aes(x = mpg, y=wt) +   # Aesthetics
+  geom_point() +         # geometry (layer)  
+  theme_minimal()        # theme 
+```
 
-1. Using `flights` dataset, find all flights that
-     - Had an arrival delay of two or more hours
-     - Flew to Houston (IAH or HOU)
-          - Arrived more than two hours late, but didn’t leave late
-     - Were delayed by at least an hour, but made up over 30 minutes in flight
-     
-2. Another useful dplyr filtering helper is between(). What does it do? Can you use it to simplify the code needed to answer the previous challenges?
+o alguna geometría
 
-3. Sort flights to find the fastest flights.
 
-4. Create a new data frame having variables with the `dep` string.
+```{r area}
+ggplot(mtcars) +        
+  aes(sample = mpg) + stat_qq()
+```
 
-5. Create a new data frame having the hour and minute of depature (Hint: information is in the variable `dep_time` with format HHMM or HMM. Use `%/%` or `%%` when appropriate) 
+A continuación ilustratemos cómo hacer los principales tipos de gráficos que necesitamos en estadística
 
-6. Create a summary of each airline (variable `carrier`) describing the total number of flights, the average, median, IQR and variance delays. Which is the best airline in terms of those summary statistics?
+
+### Distribución de datos categóricos
+
+```{r data}
+library(tidyverse)
+diamonds
+count(diamonds, cut)
+```
+
+```{r empty}
+ggplot(data = diamonds)
+```
+
+
+
+```{r dist_cat}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut))
+```
+
+### Distribución de datos continuos 
+
+```{r dist_cont}
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), binwidth = 0.5)
+```
+
+### Distribución de datos continuos según una variable categórica
+
+```{r dist_2}
+ggplot(data = diamonds, mapping = aes(x = price)) + 
+  geom_freqpoly(mapping = aes(colour = cut), binwidth = 500)
+```
+
+Idealmente esta descriptiva debemos hacerla con un boxplot
+
+![Box-plot](fig/EDA-boxplot.png)
+
+
+
+```{r boxplot}
+ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
+  geom_boxplot()
+```
+
+Podemos reordenar el boxplot para facilitar la interpretación de la siguiente manera (notamos que el código es mucho más compacto y legible que en R tradicional)
+
+```{r boxplot2}
+ggplot(data = mpg) +
+  geom_boxplot(mapping = aes(x = reorder(class, hwy, 
+                                         FUN = median), 
+                             y = hwy))
+```
+
+Podemos cambiar las coordenadas añadiendo otra función 
+
+```{r boxplot_flipped}
+ggplot(data = mpg) +
+  geom_boxplot(mapping = aes(x = reorder(class, hwy, 
+                                         FUN = median), 
+                             y = hwy)) +  coord_flip()
+```
+
+
+Los gráficos se pueden reciclar y aprovechar el código ya escrito
+
+```{r boxplot_recy, eval=FALSE}
+plt <- ggplot(data = mpg) +
+  geom_boxplot(mapping = aes(x = reorder(class, hwy, 
+                                         FUN = median), 
+                             y = hwy))
+
+plt + coord_flip()
+```
+
+
+Podemos mejorar un boxplot añadiendo más información tras ' + ' 
+
+
+```{r improved_boxplot, fig.height=2.5}
+ggplot(iris, aes(x=Species, y=Sepal.Width) ) +
+  geom_boxplot(alpha=0.3, outlier.colour = "blue") +
+  geom_point(stat= "summary", fun.y=mean, 
+             shape=16, size=1.5, color="red") +
+  geom_jitter(width = 0.1, alpha = 0.2)
+```
+
+### Dos variables categóricas
+
+Podemos resumir dos variables categóricas de esta forma
+
+```{r two_cat, fig.height=3, fig.width=4.5}
+ggplot(data = diamonds) +
+  geom_count(mapping = aes(x = cut, y = color))
+```
+
+Otra aproximación sería contar cuántos hay en una categoría con `dplyr`:
+
+```{r get_count}
+diamonds %>% 
+  count(color, cut)
+```
+
+y luego visualizarlo con  `geom_tile()` que nos daría un gráfico tipo heatmap
+
+```{r visualize, fig.height=2, fig.width=4}
+diamonds %>% 
+  count(color, cut) %>%  
+  ggplot(mapping = aes(x = color, y = cut)) +
+    geom_tile(mapping = aes(fill = n))
+```
+
+### Dos variables continuas 
+
+```{r 2cont , fig.height=2.5, fig.width=3.5}
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = carat, y = price))
+```
+
+
+Scatterplots se vuelven menos útiles cuando el tamaño del conjunto de datos aumenta porque los puntos coinciden. En ese caso podemos usar la estética `alpha`:
+
+```{r plot_alpha, fig.height=2.5}
+ggplot(data = diamonds) + 
+  geom_point(mapping = aes(x = carat, y = price), 
+             alpha = 1 / 100)
+```
+
+Otra opción es discretizar una de las variables continuas y usar  `boxplot()`
+
+```{r bin_2cont}
+ggplot(data = diamonds, mapping = aes(x = carat, y = price)) + 
+  geom_boxplot(mapping = aes(group = cut_width(carat, 0.1)))
+```
+
+A veces nos interesa añadir una línea de regresión al gráfico. Exsiten numerosas librerías que extienden las facilidades de `ggplot` com esta:
+
+```{r lm_info}
+library(ggpmisc)
+set.seed(1234)
+iris <- mutate(iris,
+               Y = 1.5 + 3.2*Sepal.Width +
+                 rnorm(nrow(iris)))
+ggplot(iris, aes(x = Sepal.Width, y = Y)) +
+  geom_smooth(method = "lm", se=FALSE, color="black",
+              formula = y ~ x) +
+  stat_poly_eq(formula = y ~ x,
+               aes(label = paste(..eq.label.., ..rr.label.., 
+                                 sep = "~~~")),
+               parse = TRUE) +
+  geom_point()
+```
+
+
+R tiene unas capacidades gráficas excelentes, pero el uso de `ggplot` hace que éstas sean aún más espectaculares. Imaginemos que queremos comparar la expresión génica según la tasa de crecimiento en 20 genes y seis condiciones^[ejemplo obtenido de http://varianceexplained.org/r/why-I-use-ggplot2/)]
+
+
+
+```{r get_gene_expr}
+load("data/genes.Rdata")
+genes
+```
+
+Este tendría que ser el (largo) código para hacer este gráfico usando funciones básicas de R (el aspecto del gráfico es mejorable y la sintaxis de R ilegible)
+
+```{r plot_with_r}
+par(mar = c(1.5, 1.5, 1.5, 1.5))
+
+colors <- 1:6
+names(colors) <- unique(genes$nutrient)
+
+m <- matrix(c(1:20, 21, 21, 21, 21), nrow = 6, 
+            ncol = 4, byrow = TRUE)
+layout(mat = m, heights = c(.18, .18, .18, .18, .18, .1))
+
+genes$combined <- paste(genes$name, genes$systematic_name)
+for (gene in unique(genes$combined)) {
+    sub_data <- filter(genes, combined == gene)
+    plot(expression ~ rate, sub_data, 
+         col = colors[sub_data$nutrient], main = gene)
+    for (n in unique(sub_data$nutrient)) {
+        m <- lm(expression ~ rate, 
+                filter(sub_data, nutrient == n))
+        if (!is.na(m$coefficients[2])) {
+            abline(m, col = colors[n])
+        }
+    }
+}
+
+# create a new plot for legend
+plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")
+legend("top", names(colors), col = colors, horiz = TRUE, lwd = 4)
+```
+
+Sin embargo con `ggplot2` bastaría con
+
+
+
+
+```{r plot_genes, fig.width=7}
+ggplot(genes, aes(rate, expression, color = nutrient)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE) +
+    facet_wrap(~name + systematic_name, scales = "free_y")
+```
+
+
+
+
+### Facets
+
+
+*Faceting*  es el proceso que en el dividimos la ventana del gráfico en varias partes pequeñas (una cuadrícula) y muestra un gráfico similar en cada sección. Cada sección generalmente muestra el mismo gráfico para un grupo específico del conjunto de datos. Aquí podemos ver cómo llevar a cabo este tipo de gráficos. Utilizaremos una base de datos sobre propinas
+
+
+
+```{r tips}
+data(tips, package="reshape2")
+head(tips)
+```
+
+Imaginemos que queremos representar qué propinas se dan en función del total de la cuenta
+
+```{r facet}
+sp <- ggplot(tips, aes(x=total_bill, y=tip/total_bill)) +
+  geom_point()
+sp
+```
+
+Ahora nos puede interesar obtener el mismo gráfico para hombres y mujeres. Para ello, podemos hacer el *faceting* de forma vertical
+
+
+```{r grid_vertical}
+# vertical direction
+sp + facet_grid(sex ~ .)
+```
+
+
+u horizontal
+
+```{r grid_horiz}
+# horizontal direction
+sp + facet_grid(. ~ sex)
+```
+
+también según dos variables
+
+```{r grid_two}
+# Divide with "sex" vertical, "day" horizontal
+sp + facet_grid(sex ~ day)
+```
+
+
+En lugar de crear los paneles con una variable en la dirección horizontal o vertical, las gráficas se pueden colocar una al lado de la otra, envolviéndose con un cierto número de columnas o filas. La etiqueta de cada figura estará en la parte superior.
+
+
+```{r wrap, fig.height=2}
+# Divide by day, going horizontally and wrapping with 2 columns
+sp + facet_wrap( ~ day, ncol=2)
+```
+
+
+Podemos cambiar todo lo que queramos. Este es sólo un ejemplo
+
+
+```{r modifying}
+sp + facet_grid(sex ~ day) +
+    theme(strip.text.x = element_text(size=8, angle=75),
+          strip.text.y = element_text(size=12, face="bold"),
+          strip.background = element_rect(colour="brown",
+                                          fill="tomato"))
+```
+
+En este [link](https://ggplot2.tidyverse.org/reference/) tenéis la referencia de ggplot2. 
+
+
+
+
+## Ejercicios (Visualización de datos)
+
+1. Visualiza el número de vuelos para cada aerolínia por mes.
+
+2. Visualiza la distribución de la variabla carat según el precio en el dataset `diamonds`. 
+
+3. Carga los datos qe están en https://raw.githubusercontent.com/isglobal-brge/TeachingMaterials/master/Master_Modelling/data/genome.txt en tu sesión de RStudio utilizando la función `read_delim` (NOTA: los datos están delimitados por tabulaciones - no hace falta bajarlos al ordenador se cargan desde la URL). 
+
+El archivo contiene información sobre ~730K variantes genéticas en todo el genoma: 
+
+* Name: variante genómica (single nucleotide polymorphism)
+* Chr: cromosoma 
+* Position: posición en el cromosoma
+* Log.R.Ratio: log-ratio de la intensidad de los dos alelos
+* B.Allele.Freq: frecuencia del alelo alternativo
+
+    - ¿Cuál es el valor esperado (media) de `Log.R.Ratio` y `B.Allel.Freq` para cada cromosoma? (muestra el código de R que usas para obtener dicha información)
+    - Crea un "facet plot" que represente el `Log.R.Ratio` para cada cromosoma
+    - Crea un "facet plot" que represente el `B.Allele.Freq` para los cromosomas 1, 2, 3, ..., 6 y pinta la etiqueta `B.Allele.Freq` en rojo.
+
+
+
+
+

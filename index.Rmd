@@ -12,6 +12,6 @@ encoding: latin1
 ---
 
 
-# Inroducción
+# Introducción
 
 To be supplied
