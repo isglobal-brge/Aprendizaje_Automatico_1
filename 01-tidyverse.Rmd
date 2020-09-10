@@ -140,32 +140,6 @@ df[["x"]]
 df[[1]]
 ```
 
-## Exercises (tibbles)
-
-
-1. How can you know whether an object is a tibble? (Hint: try printing mtcars, which is a regular data frame).
-
-2. If you have the name of a variable stored in an object, e.g. var <- "mpg", how can you extract the reference variable from a tibble?
-
-3. What option controls how many additional column names are printed at the footer of a tibble?
-
-4. Practice creating new variables in the following data frame
-
-``` 
-         tbl <- tibble(
-                  age = c(14, 18, 22, 12, 16, 19, 21, 24),
-                  chol = c(172, 180, 185, 170, 175, 188, 190, 192),
-                  sex = c("male", "male", "female", "female", "female", "male", "male", "male"
-                  )
-                )
-```
-
-by:
-    + Extracting the variable called sex.
-    + Plotting a scatterplot of age vs chol.
-    + Creating a new column called chol2 which is chol to the power of 2.
-    + Rename the columns to one, two and three.
-
 
 ### Importar datos
 
