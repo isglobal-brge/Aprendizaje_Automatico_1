@@ -498,7 +498,13 @@ $$
 $$
  
 
-donde $n$ es el número de observaciones en el conjunto de datos y $p$ es el número de predictores en el modelo.
+donde $n$ es el número de observaciones en el conjunto de datos y $p$ es el número de predictores en el modelo. Es fácil calcular este resultado utilizando la función `summary()`
+
+```{r  summary_multi}
+summary(multivariable_model)
+```
+
+En este caso $\bar R^2=0.8325$ lo que indica que nuestro modelo explica un 83.25% de la variabilidad observada de la variable 'mpg'.
 
  
 
