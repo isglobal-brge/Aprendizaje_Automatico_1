@@ -4,10 +4,9 @@
 .RData
 _publish.R
 _book
-_bookdown_files
+*_bookdown_files
 rsconnect
 
 *_cache
 *_datos_files
-*_files
 header.tex
