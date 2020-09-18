@@ -410,10 +410,10 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introducción-a-tidyverse.html#cb19-1"></a><span class="kw">library</span>(readr)</span>
 <span id="cb19-2"><a href="introducción-a-tidyverse.html#cb19-2"></a><span class="kw">system.time</span>(dd1 &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    2.34    0.06    2.41</code></pre>
+##    2.34    0.04    2.39</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introducción-a-tidyverse.html#cb21-1"></a><span class="kw">system.time</span>(dd2 &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>, <span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.45    0.01    0.47</code></pre>
+##    0.44    0.00    0.44</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="introducción-a-tidyverse.html#cb23-1"></a><span class="kw">dim</span>(dd2)</span></code></pre></div>
 <pre><code>## [1] 733202      5</code></pre>
 <p>Efectivamente ambos objetos contienen la misma información</p>

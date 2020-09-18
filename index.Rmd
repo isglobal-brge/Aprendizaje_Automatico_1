@@ -15,3 +15,15 @@ encoding: latin1
 # Introducción
 
 To be supplied
+
+
+ 
+```{r include=FALSE}
+knitr::opts_chunk$set(cache=F, warning=FALSE, message=FALSE)
+library(arm)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+options(scipen = 0)
+```
+ 

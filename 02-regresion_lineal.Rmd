@@ -1,15 +1,6 @@
 # Regresión lineal
 
- 
-```{r include=FALSE}
-knitr::opts_chunk$set(cache=F, warning=FALSE, message=FALSE)
-library(arm)
-library(ggplot2)
-library(tidyr)
-library(dplyr)
-options(scipen = 0)
-```
- 
+
 
 Este capítulo presenta la regresión lineal, el método de regresión paramétrica que usamos cuando la variable de resultado o respuesta es continua. Cuando el resultado es binario, utilizamos la regresión logística, tema de un capítulo posterior.
 
