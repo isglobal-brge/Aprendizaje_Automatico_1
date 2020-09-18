@@ -298,28 +298,28 @@ Figure 2.1: Esquema R for Data Science
 <h3><span class="header-section-number">2.4.1</span> Tibbles</h3>
 <p>Empecemos introduciendo lo que es un <em>tibble</em> (pronunciado “tibel”). Se puede aprender más cosas ejecutando <code>vignette("tibble")</code> en la consola de RStudio. Tras cargar la librería <code>tidyverse</code> podemos crear un tibble a partir de un data.frame de la siguiente forma. Usaremos la base de datos iris a modo de ejemplo</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introducción-a-tidyverse.html#cb3-1"></a><span class="kw">head</span>(iris)</span></code></pre></div>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1          5.1         3.5          1.4         0.2  setosa
-## 2          4.9         3.0          1.4         0.2  setosa
-## 3          4.7         3.2          1.3         0.2  setosa
-## 4          4.6         3.1          1.5         0.2  setosa
-## 5          5.0         3.6          1.4         0.2  setosa
-## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species         Y
+## 1          5.1         3.5          1.4         0.2  setosa 11.492934
+## 2          4.9         3.0          1.4         0.2  setosa 11.377429
+## 3          4.7         3.2          1.3         0.2  setosa 12.824441
+## 4          4.6         3.1          1.5         0.2  setosa  9.074302
+## 5          5.0         3.6          1.4         0.2  setosa 13.449125
+## 6          5.4         3.9          1.7         0.4  setosa 14.486056</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introducción-a-tidyverse.html#cb5-1"></a>iris.tib &lt;-<span class="st"> </span><span class="kw">tibble</span>(iris)</span>
 <span id="cb5-2"><a href="introducción-a-tidyverse.html#cb5-2"></a>iris.tib</span></code></pre></div>
-<pre><code>## # A tibble: 150 x 5
-##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
-##  1          5.1         3.5          1.4         0.2 setosa 
-##  2          4.9         3            1.4         0.2 setosa 
-##  3          4.7         3.2          1.3         0.2 setosa 
-##  4          4.6         3.1          1.5         0.2 setosa 
-##  5          5           3.6          1.4         0.2 setosa 
-##  6          5.4         3.9          1.7         0.4 setosa 
-##  7          4.6         3.4          1.4         0.3 setosa 
-##  8          5           3.4          1.5         0.2 setosa 
-##  9          4.4         2.9          1.4         0.2 setosa 
-## 10          4.9         3.1          1.5         0.1 setosa 
+<pre><code>## # A tibble: 150 x 6
+##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species     Y
+##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;
+##  1          5.1         3.5          1.4         0.2 setosa  11.5 
+##  2          4.9         3            1.4         0.2 setosa  11.4 
+##  3          4.7         3.2          1.3         0.2 setosa  12.8 
+##  4          4.6         3.1          1.5         0.2 setosa   9.07
+##  5          5           3.6          1.4         0.2 setosa  13.4 
+##  6          5.4         3.9          1.7         0.4 setosa  14.5 
+##  7          4.6         3.4          1.4         0.3 setosa  11.8 
+##  8          5           3.4          1.5         0.2 setosa  11.8 
+##  9          4.4         2.9          1.4         0.2 setosa  10.2 
+## 10          4.9         3.1          1.5         0.1 setosa  10.5 
 ## # ... with 140 more rows</code></pre>
 <p>También podemos crear un nuevo <em>tibble</em> mediante (los datos se reciclan):</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="introducción-a-tidyverse.html#cb7-1"></a><span class="kw">tibble</span>(</span>
@@ -339,23 +339,23 @@ Figure 2.1: Esquema R for Data Science
 NOTA 2: El <code>rownames</code> desaparece</p>
 <p>Quizás uno de los aspectos más novedosos de las <em>tibble</em> sea que se ha re-definido el método <code>print()</code> que permite, por defecto, ver las 10 primeras filas y todas las columnas que quepan en la pantalla. Esto puede cambiarse con</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="introducción-a-tidyverse.html#cb9-1"></a><span class="kw">print</span>(iris.tib, <span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">width =</span> <span class="ot">Inf</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 150 x 5
-##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
-##  1          5.1         3.5          1.4         0.2 setosa 
-##  2          4.9         3            1.4         0.2 setosa 
-##  3          4.7         3.2          1.3         0.2 setosa 
-##  4          4.6         3.1          1.5         0.2 setosa 
-##  5          5           3.6          1.4         0.2 setosa 
-##  6          5.4         3.9          1.7         0.4 setosa 
-##  7          4.6         3.4          1.4         0.3 setosa 
-##  8          5           3.4          1.5         0.2 setosa 
-##  9          4.4         2.9          1.4         0.2 setosa 
-## 10          4.9         3.1          1.5         0.1 setosa 
+<pre><code>## # A tibble: 150 x 6
+##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species     Y
+##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;
+##  1          5.1         3.5          1.4         0.2 setosa  11.5 
+##  2          4.9         3            1.4         0.2 setosa  11.4 
+##  3          4.7         3.2          1.3         0.2 setosa  12.8 
+##  4          4.6         3.1          1.5         0.2 setosa   9.07
+##  5          5           3.6          1.4         0.2 setosa  13.4 
+##  6          5.4         3.9          1.7         0.4 setosa  14.5 
+##  7          4.6         3.4          1.4         0.3 setosa  11.8 
+##  8          5           3.4          1.5         0.2 setosa  11.8 
+##  9          4.4         2.9          1.4         0.2 setosa  10.2 
+## 10          4.9         3.1          1.5         0.1 setosa  10.5 
 ## # ... with 140 more rows</code></pre>
 <p>ó</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="introducción-a-tidyverse.html#cb11-1"></a><span class="kw">print</span>(iris.tib, <span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">width =</span> <span class="dv">25</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 150 x 5
+<pre><code>## # A tibble: 150 x 6
 ##    Sepal.Length
 ##           &lt;dbl&gt;
 ##  1          5.1
@@ -369,12 +369,13 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 ##  9          4.4
 ## 10          4.9
 ## # ... with 140 more
-## #   rows, and 4 more
+## #   rows, and 5 more
 ## #   variables:
 ## #   Sepal.Width &lt;dbl&gt;,
 ## #   Petal.Length &lt;dbl&gt;,
 ## #   Petal.Width &lt;dbl&gt;,
-## #   Species &lt;fct&gt;</code></pre>
+## #   Species &lt;fct&gt;,
+## #   Y &lt;dbl&gt;</code></pre>
 <p>Podemos acceder a una columna (e.g. variable) de la misma forma que con un data.frame</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="introducción-a-tidyverse.html#cb13-1"></a>df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</span>
 <span id="cb13-2"><a href="introducción-a-tidyverse.html#cb13-2"></a>  <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">5</span>),</span>
@@ -383,12 +384,12 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <span id="cb13-5"><a href="introducción-a-tidyverse.html#cb13-5"></a></span>
 <span id="cb13-6"><a href="introducción-a-tidyverse.html#cb13-6"></a><span class="co"># Extract by name</span></span>
 <span id="cb13-7"><a href="introducción-a-tidyverse.html#cb13-7"></a>df<span class="op">$</span>x</span></code></pre></div>
-<pre><code>## [1] 0.99484205 0.06474153 0.02989567 0.65188977 0.49238563</code></pre>
+<pre><code>## [1] 0.11263386 0.99747715 0.05467677 0.36455551 0.07494088</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introducción-a-tidyverse.html#cb15-1"></a>df[[<span class="st">&quot;x&quot;</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.99484205 0.06474153 0.02989567 0.65188977 0.49238563</code></pre>
+<pre><code>## [1] 0.11263386 0.99747715 0.05467677 0.36455551 0.07494088</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="introducción-a-tidyverse.html#cb17-1"></a><span class="co"># Extract by position</span></span>
 <span id="cb17-2"><a href="introducción-a-tidyverse.html#cb17-2"></a>df[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.99484205 0.06474153 0.02989567 0.65188977 0.49238563</code></pre>
+<pre><code>## [1] 0.11263386 0.99747715 0.05467677 0.36455551 0.07494088</code></pre>
 </div>
 <div id="importar-datos" class="section level3" number="2.4.2">
 <h3><span class="header-section-number">2.4.2</span> Importar datos</h3>
@@ -409,10 +410,10 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introducción-a-tidyverse.html#cb19-1"></a><span class="kw">library</span>(readr)</span>
 <span id="cb19-2"><a href="introducción-a-tidyverse.html#cb19-2"></a><span class="kw">system.time</span>(dd1 &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    4.21    0.14    4.39</code></pre>
+##    2.55    0.07    2.70</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introducción-a-tidyverse.html#cb21-1"></a><span class="kw">system.time</span>(dd2 &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>, <span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.43    0.09    0.54</code></pre>
+##    0.37    0.03    0.40</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="introducción-a-tidyverse.html#cb23-1"></a><span class="kw">dim</span>(dd2)</span></code></pre></div>
 <pre><code>## [1] 733202      5</code></pre>
 <p>Efectivamente ambos objetos contienen la misma información</p>
