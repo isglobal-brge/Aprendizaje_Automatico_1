@@ -160,7 +160,7 @@ El modelo se puede utilizar para calcular valores ajustados para coches individu
 Los residuales del modelo --- representados por los segmentos de línea vertical en el gráfico siguiente --- son las diferencias entre los valores ajustados y reales de mpg.
 
  
-```{r}
+```{r plotResid}
 ggplot(mtcars_new, aes(x = wt, y = mpg)) +
   geom_smooth(method = "lm", se = FALSE, color = "lightgrey") +   
   geom_segment(aes(xend = wt, yend = fitted), alpha = .2) + 
