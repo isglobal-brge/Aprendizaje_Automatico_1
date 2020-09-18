@@ -24,6 +24,34 @@ options(width=80)
 ```
 
 
+## Introducción
+
+![](fig/intro_AA)
+
+Sobre 2010 DL obtuvo una gran popularidad ya que ha permitido acercarse a sitemas de inteligencia artificial de forma más eficientge que ML. Los tres términos están ligados y cada uno forma una parte esencial de los otros. DL permite llevar a cabo ML, que en última instancia permite la AI. 
+
+No obstante, es más fácil aprender ML como herramienta para AI. En el siguente curso (AA_2) veréis cómo llevar a cabo técnicas de DL. 
+
+
+## Introducción
+
+![](fig/ML_DL)
+
+
+## Ejemplos
+
+
+![](fig/ojos_rojos){width=50%}
+
+![](fig/deep_learning)
+
+
+## Ejemplos
+
+![](fig/ML)
+
+
+
 ## Temario
 
 *	Introducción a Tidyverse
