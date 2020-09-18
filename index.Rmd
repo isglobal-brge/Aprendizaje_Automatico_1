@@ -2,7 +2,7 @@
 title: "Aprendizaje Automático 1"
 author: "Juan R González"
 date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
+output: bookdown::gitbook
 documentclass: book
 bibliography: [aprendizaje.bib]
 biblio-style: apalike
@@ -18,7 +18,7 @@ To be supplied
 
  
 ```{r include=FALSE}
-knitr::opts_chunk$set(cache=F, warning=FALSE, message=FALSE, fig.path = "_main_files/figure-html/")
+knitr::opts_chunk$set(cache=F, warning=FALSE, message=FALSE)
 library(arm)
 library(ggplot2)
 library(tidyr)
