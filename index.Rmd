@@ -4,7 +4,6 @@ author: "Juan R González"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-output_dir: "docs"
 bibliography: [aprendizaje.bib]
 biblio-style: apalike
 link-citations: yes
