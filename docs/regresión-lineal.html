@@ -249,14 +249,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="conceptos-básicos" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Conceptos básicos</h2>
 <p>Comencemos por presentar brevemente el modelo lineal junto con algunos de los conceptos y terminología que usaremos a lo largo del curso.</p>
-<p>Un modelo lineal es <em>paramétrico</em> porque asumimos que la relación entre dos variables es lineal y puede ser definida por los <em>parámetros</em> de una recta (el <em>intercept</em> y la pendiente). Comenzaremos considerando un modelo lineal simple.</p>
+<p>Un modelo lineal es <em>paramétrico</em> porque asumimos que la relación entre dos variables es lineal y puede ser definida por los <em>parámetros</em> de una recta (el <em>intercept</em> y la pendiente). Comenzaremos considerando un modelo lineal simple. En la siguiente figura podemos observar cómo existe una relación lineal entre la dosis de chocolate consumida y el nivel de felicidad reportado por una muestra de individuos seleccionados al azar en una población de Barcelona. Los puntos negros muestran los datos observados para cada individuo y los blancos representan a la felicidad que tendría cada individuo según la dosis de chocolate que reporta tomar.</p>
 <div class="figure">
 <img src="fig/reg_lin.png" alt="" />
 <p class="caption">Regresión lineal simple</p>
 </div>
 <div id="modelo-lineal-simple" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Modelo lineal simple</h3>
-<p>Un modelo lineal simple tiene un resultado (outcome, variable predictiva), <span class="math inline">\(y\)</span>, y un predictor, <span class="math inline">\(x\)</span>. Está definido por la siguiente ecuación.</p>
+<p>Un modelo lineal simple tiene un resultado (outcome, variable predictiva - en nuestro ejemplo la felicidad), <span class="math inline">\(y\)</span>, y un predictor, <span class="math inline">\(x\)</span> (el consumo de chocolate en nuestro ejemplo). Está definido por la siguiente ecuación.</p>
 <p><span class="math display">\[
 y_i = \beta_0 + \beta_1x_i + \epsilon_i,
 \]</span></p>
