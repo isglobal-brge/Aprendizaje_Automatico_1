@@ -755,7 +755,7 @@ df %>%
   geom_vline(xintercept = lambdas[which.max(lv)], color="red",size=2)
 ``` 
 
-En general, podemos usar `optim()` para buscar el máximo de cualquier otro dataset 
+En general, podemos usar `optim()` para buscar el máximo de cualquier función. En este caso 
 
 ```{r optim}
 optim(par=2, fn=lver_poisson, x=alumnos, 
@@ -763,7 +763,41 @@ optim(par=2, fn=lver_poisson, x=alumnos,
 ```
 
 
-Esta metodología podría ser utilizada para encontrar $\alpha$ y $\beta$ escribiendo de forma adecuada la función que se le pasa a `optim()` en el argumento 'fn' [EJERCICIO]. Sin embargo, R tiene incorporado una función para obtener los estimadores máximos verosímiles utilizando algoritmos más eficientes basados en la estimación por mínimos cuadrados vista en secciones anteriores  y que están implementados en la función `lm()`.  
+
+----------------------------------------------------------------------------------------------------------------------
+
+**EJERCICIO** (Entrega en Moodle P-Regresión lineal función):
+
+Consideremos el siguiente modelo de regresión: 
+
+\begin{align*}
+\textrm{altura}_i &\sim N(\mu_i, \sigma^2), \\
+\mu_i &= 105 + 0.9 \textrm{peso}_i, \\
+\sigma &= 8, \\
+\textrm{peso} &\sim Normal(45, 12).
+\end{align*}
+
+El siguiente código permite simular un conjunto de datos de valores con la estructura anterior.
+
+```{r}
+n <- 1000
+peso <- rnorm(n=n, mean=45, sd=12)
+altura <- rnorm(n=n, mean=105 + 0.9 * peso, sd=8)
+```
+
+Estima los parámetros del modelo lineal ($\beta_0$ y $\beta_1$) utilizando R tal que minimicen el RSS 
+
+$$
+\operatorname {RSS} = \sum_ {i = 1} ^ n ((\beta_0 + \beta_1\textrm{peso}_i) - \textrm{altura}_i) ^ 2 
+$$
+
+
+OPCIONAL: Haz lo mismo maximizando el logaritmo de la verosimilitud 
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+Sin embargo, R tiene incorporado una función para obtener los estimadores máximos verosímiles utilizando algoritmos más eficientes basados en la estimación por mínimos cuadrados vista en secciones anteriores  y que están implementados en la función `lm()`.  
 
 ```{r}
 summary(linear_fit <- lm(count ~ temperature, data = day))
