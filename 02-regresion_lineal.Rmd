@@ -4,7 +4,7 @@
 
 Este capítulo presenta la regresión lineal, el método de regresión paramétrica que usamos cuando la variable de resultado o respuesta es continua. Cuando el resultado es binario, utilizamos la regresión logística, tema de un capítulo posterior.
 
- 
+El contenido de este capítulo ya se ha visto en la asignatura [Inferencia Estadística 1](https://guies.uab.cat/guies_docents/public/portal/html/2020/assignatura/104855/es), pero aquí pretendemos extender muchos de los conceptos aprendidos, así como introducir nuevas metodologías relacionadas con la regresión lineal. 
 
 Qué pretendemos aprender en este capítulo:
 
@@ -534,7 +534,7 @@ Dadas las complejidades anteriores, se podría pensar que el uso de la regresió
 
  
 
-Consideremos el siguiente ejemplo. En 2011 se inició un programa de uso compartido de bicicletas en USA y se recopilaron datos durante 2011 y 2012 sobre el uso estacional de bicicletas y las condiciones climáticas. Estos datos se encuentran recogidos en el fichero [day.csv](https://raw.githubusercontent.com/isglobal-brge/TeachingMaterials/master/Aprendizaje_Automatico_1/data/day.csv). La variable de resultado que nos interesa es " contar "--- el número total de ciclistas que alquilan bicicletas en un día determinado. El conjunto de datos tiene una fila para cada día, con variables para (entre otras) estación, año, mes, feriado, día de la semana, temperatura, temperatura percibida, humedad y velocidad del viento (nombradas en inglés).
+Consideremos el siguiente ejemplo. En 2011 se inició un programa de uso compartido de bicicletas en USA y se recopilaron datos durante 2011 y 2012 sobre el uso estacional de bicicletas y las condiciones climáticas. Estos datos se encuentran recogidos en el fichero [day.csv](https://raw.githubusercontent.com/isglobal-brge/TeachingMaterials/master/Aprendizaje_Automatico_1/data/day.csv). La variable de resultado que nos interesa es "count"--- el número total de ciclistas que alquilan bicicletas en un día determinado. El conjunto de datos tiene una fila para cada día, con variables para (entre otras) estación, año, mes, feriado, día de la semana, temperatura, temperatura percibida, humedad y velocidad del viento (nombradas en inglés).
 
  
 
@@ -589,7 +589,7 @@ La salida del modelo incluye un *intercept* y un coeficiente para el año. El *i
 
  
 
-En general, dadas dos variables aleatorias, X e Y (piense: año y número de pasajeros), podemos definir la media condicional como el valor esperado o promedio de Y dado que X está restringido a tener un valor específico, $x$, a partir de su rango: $\mathbf {E} [Y \mid X = x]$. Ejemplo: $\mathbf{E} [Ridership \mid Year = 2012]$ es el número promedio de pasajeros dado ese año = 2012. Una media condicional tiene un valor descriptivo --- sabemos que el coeficiente $\beta $para el año de nuestro modelo, 2194, representa la relación entre el número de pasajeros y el año, con la magnitud o el valor absoluto del coeficiente que indica la fuerza de la relación, positiva o negativa. Los coeficientes también se pueden utilizar para la predicción. ¿Cuántos ciclistas más deberíamos esperar en 2013? Utilice el modelo: $\mathbf {E} [riders \mid year = 2013]$ es igual al número en 2012, 5600, más el coeficiente del año: 5600 + 2194 = `r 5600 + 2194`. 
+En general, dadas dos variables aleatorias, X e Y (piense: año y número de pasajeros), podemos definir la media condicional como el valor esperado o promedio de Y dado que X está restringido a tener un valor específico, $x$, a partir de su rango: $\mathbf {E} [Y \mid X = x]$. Ejemplo: $\mathbf{E} [Ridership \mid Year = 2012]$ es el número promedio de pasajeros dado ese año = 2012. Una media condicional tiene un valor descriptivo --- sabemos que el coeficiente $\beta$ para el año de nuestro modelo, 2194, representa la relación entre el número de pasajeros y el año, con la magnitud o el valor absoluto del coeficiente que indica la fuerza de la relación, positiva o negativa. Los coeficientes también se pueden utilizar para la predicción. ¿Cuántos ciclistas más deberíamos esperar en 2013? Utilice el modelo: $\mathbf {E} [riders \mid year = 2013]$ es igual al número en 2012, 5600, más el coeficiente del año: 5600 + 2194 = `r 5600 + 2194`. 
 
  
 
@@ -710,9 +710,60 @@ Como referencia, aquí hay un código para ajustar una regresión KNN usando el 
 ## Estimación paramétrica de la función de regresión: regresión lineal
 
  
-Con la regresión KNN no asumimos nada sobre la forma de la función de regresión, sino que la estimamos directamente a partir de los datos. Supongamos ahora que $\mu(t)$ es lineal y se puede describir con los parámetros de una recta: $\mu (t) = \beta_0 + \beta_1t$, donde $\beta_0$ es el *intercept* de la recta y $\beta_1$ es la pendiente. En este caso, entonces, $\widehat{riders} = \beta_0 + \beta_1temperature$. Dado que $\mu(t)$ es una función poblacinal (es decir, promedio), los parámetros $\beta_0$ y $\beta_1$ son valores de población y son desconocidos, pero podemos estimarlos fácilmente.
+Con la regresión KNN no asumimos nada sobre la forma de la función de regresión, sino que la estimamos directamente a partir de los datos. Supongamos ahora que $\mu(t)$ es lineal y se puede describir con los parámetros de una recta: $\mu (t) = \beta_0 + \beta_1t$, donde $\beta_0$ es el *intercept* de la recta y $\beta_1$ es la pendiente. En este caso, entonces, $\widehat{riders} = \beta_0 + \beta_1temperature$. Dado que $\mu(t)$ es una función poblacional (es decir, promedio), los parámetros $\beta_0$ y $\beta_1$ son valores de población y son desconocidos, pero podemos estimarlos (también) con versosimilitud. Hagamos un breve repaso de este concepto tan importante en estadística.
 
- 
+La **función de verosimilitud** para un vector de parámetros $\boldsymbol{\Theta}$ dada una muestra aleatoria $\boldsymbol{x}$ con una distribución asumida se define como:
+
+$$
+L(\boldsymbol{\Theta} | \boldsymbol{x}) = \prod_{i=1}^{n}  f(x_i | \boldsymbol{\Theta}),
+$$
+
+donde $x_i$ representa uno de los elementos de la muestra aleatoria y $f$ es la función de masa/densidad de la distribución de la cual se obtuvo $\boldsymbol{x}$. Por otro lado, la función de log-verosimilitud $l$ se define como el logaritmo de la función de verosimilitud $L$, es decir
+
+$$
+l(\boldsymbol{\Theta} | \boldsymbol{x}) = \log L(\boldsymbol{\Theta} | \boldsymbol{x}) = \sum_{i=1}^{n} \log f(x_i | \boldsymbol{\Theta})
+$$
+
+Los parámetros de esta distribución se pueden estimar mediante el método de máxima verosimilitud. El objetivo de este método es encontrar los valores de $\boldsymbol{\Theta}$ que maximizan $L$ o $l$ y valores encontrados se representan por $\hat{\boldsymbol{\Theta}}$. Veamos como estimar los parámetros para unos datos que pensamos que siguen una distribución de [Poisson](https://es.wikipedia.org/wiki/Distribuci%C3%B3n_de_Poisson). Hemos recogido el número de veces que 20 alumnos escogidos al azar no han asistido a una clase durante un semestre del total de alumnos del Grado de Estadística. Queremos estimar cuál es el parámetro $\lambda$ que nos cuantificaría cual es el promedio de no asistencia semetral de los alumnos de nuestra clase
+
+```{r alumnos}
+alumnos <- c(6, 6, 6, 0, 5, 2, 4, 4, 5, 5, 5, 6, 4, 5, 2, 5, 3, 2, 3, 2)
+```
+
+La fución de log-versomilitud para nuestro problema la podemos escribir en R como
+
+```{r llpois}
+lver_poisson <- function(lambda, x){
+  ans <- sum(dpois(x, lambda, log=TRUE))
+  return(ans)
+}
+```
+
+Podemos encontrar el máximo de forma visual
+
+```{r plotll}
+lambdas <- seq(1,15, by=0.5)
+lv <- sapply(lambdas, function(x) {lver_poisson(x, alumnos)})
+df <- tibble(lambda = lambdas, lv= lv)
+
+df %>% 
+  ggplot(aes(x=lambda, y=lv))+
+  geom_point(size=4,color="dodgerblue")+
+  xlab("Lambda") +
+  ylab("Log-Verosimilitud")+
+  theme_bw(base_size = 16) +
+  geom_vline(xintercept = lambdas[which.max(lv)], color="red",size=2)
+``` 
+
+En general, podemos usar `optim()` para buscar el máximo de cualquier otro dataset 
+
+```{r optim}
+optim(par=2, fn=lver_poisson, x=alumnos, 
+      control=list(fnscale=-1))
+```
+
+
+Esta metodología podría ser utilizada para encontrar $\alpha$ y $\beta$ escribiendo de forma adecuada la función que se le pasa a `optim()` en el argumento 'fn' [EJERCICIO]. Sin embargo, R tiene incorporado una función para obtener los estimadores máximos verosímiles utilizando algoritmos más eficientes basados en la estimación por mínimos cuadrados vista en secciones anteriores  y que están implementados en la función `lm()`.  
 
 ```{r}
 summary(linear_fit <- lm(count ~ temperature, data = day))
@@ -870,8 +921,7 @@ Podemos ver que `lm()` ha convertido la variable de temporada en 3 vectores vari
 
  
 
-## Predicción usando el objeto del modelo
-
+## Predicción 
  
 
 Podemos usar un modelo lineal no solo para la descripción sino también para la predicción. Si, por ejemplo, estuviéramos interesados en usar el modelo anterior para predecir el número de pasajeros para una temporada y temperatura en particular, digamos, un día caluroso en primavera, simplemente podríamos usar la ecuación de regresión. Definiremos un día caluroso como .85 (ojo con las escalas y las unidades de medida). Así:
