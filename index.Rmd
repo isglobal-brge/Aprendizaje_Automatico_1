@@ -19,7 +19,7 @@ To be supplied
 
  
 ```{r include=FALSE}
-knitr::opts_chunk$set(cache=F, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(cache=T, warning=FALSE, message=FALSE, fig.path = "fig/")
 library(arm)
 library(ggplot2)
 library(tidyr)
