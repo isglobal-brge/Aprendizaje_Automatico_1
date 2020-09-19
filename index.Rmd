@@ -2,9 +2,11 @@
 title: "Aprendizaje Automático 1"
 author: "Juan R González"
 date: "`r Sys.Date()`"
-output: bookdown::gitbook
+output:
+  html_document:
+    df_print: paged
 documentclass: book
-bibliography: [aprendizaje.bib]
+bibliography: aprendizaje.bib
 biblio-style: apalike
 link-citations: yes
 encoding: latin1
