@@ -1,11 +1,5 @@
 # Introducción a Tidyverse
 
- 
-```{r include=FALSE}
-knitr::opts_chunk$set(cache=F, warning=FALSE, message=FALSE)
-options(scipen = 0)
-```
- 
 ## Introducción
 
 <center>
