@@ -5,9 +5,6 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::pdf_gitbook
 documentclass: book
-bibliography: aprendizaje.bib
-biblio-style: apalike
-link-citations: yes
 encoding: latin1
 ---
 
