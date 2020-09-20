@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-09-19" />
+<meta name="date" content="2020-09-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -198,7 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.14.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interpretación-del-intercept-y-los-coeficientes-beta-para-un-modelo-con-predictores-continuos-con-interacciones"><i class="fa fa-check"></i><b>3.14.4</b> Interpretación del <em>intercept</em> y los coeficientes <span class="math inline">\(\beta\)</span> para un modelo con predictores continuos, con interacciones</a></li>
 </ul></li>
 <li class="chapter" data-level="3.15" data-path="regresión-lineal.html"><a href="regresión-lineal.html#centrado-y-escalado"><i class="fa fa-check"></i><b>3.15</b> Centrado y escalado</a></li>
-<li class="chapter" data-level="3.16" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#transformación-de-datos"><i class="fa fa-check"></i><b>3.16</b> Transformación de datos</a></li>
+<li class="chapter" data-level="3.16" data-path="regresión-lineal.html"><a href="regresión-lineal.html#transformación-de-variables"><i class="fa fa-check"></i><b>3.16</b> Transformación de variables</a></li>
 <li class="chapter" data-level="3.17" data-path="regresión-lineal.html"><a href="regresión-lineal.html#colinealidad"><i class="fa fa-check"></i><b>3.17</b> Colinealidad</a></li>
 <li class="chapter" data-level="3.18" data-path="regresión-lineal.html"><a href="regresión-lineal.html#valores-atípicos"><i class="fa fa-check"></i><b>3.18</b> Valores atípicos</a></li>
 </ul></li>
@@ -702,7 +702,7 @@ l(\boldsymbol{\Theta} | \boldsymbol{x}) = \log L(\boldsymbol{\Theta} | \boldsymb
 ## $message
 ## NULL</code></pre>
 <hr />
-<p><strong>EJERCICIO</strong> (Entrega en Moodle P-Regresión lineal función):</p>
+<p><strong>EJERCICIO</strong> (Entrega en Moodle: P-Regresión lineal función):</p>
 <p>Consideremos el siguiente modelo de regresión:</p>
 <p><span class="math display">\[\begin{align*}
 \textrm{altura}_i &amp;\sim N(\mu_i, \sigma^2), \\
@@ -714,7 +714,7 @@ l(\boldsymbol{\Theta} | \boldsymbol{x}) = \log L(\boldsymbol{\Theta} | \boldsymb
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="regresión-lineal.html#cb151-1"></a>n &lt;-<span class="st"> </span><span class="dv">1000</span></span>
 <span id="cb151-2"><a href="regresión-lineal.html#cb151-2"></a>peso &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span>n, <span class="dt">mean=</span><span class="dv">45</span>, <span class="dt">sd=</span><span class="dv">12</span>)</span>
 <span id="cb151-3"><a href="regresión-lineal.html#cb151-3"></a>altura &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span>n, <span class="dt">mean=</span><span class="dv">105</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.9</span> <span class="op">*</span><span class="st"> </span>peso, <span class="dt">sd=</span><span class="dv">8</span>)</span></code></pre></div>
-<p>Estima los parámetros del modelo lineal (<span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span>) tal que minimicen el RSS</p>
+<p>Estima los parámetros del modelo lineal (<span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span>) utilizando R tal que minimicen el RSS</p>
 <p><span class="math display">\[
 \operatorname {RSS} = \sum_ {i = 1} ^ n ((\beta_0 + \beta_1\textrm{peso}_i) - \textrm{altura}_i) ^ 2 
 \]</span></p>
@@ -1203,8 +1203,8 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <p>La función <code>standardize()</code> nos advierte que la velocidad del viento es ahora un z-score (z.windspeed), y que ese año se ha centrado (c.year). La interpretación de c.year es la misma que para año: un aumento de 1 unidad (-.5 a .5) se asocia con un aumento previsto de 2183,75 pasajeros. Sin embargo, la interpretación de z.windspeed ahora es diferente, ya que un aumento de 1 unidad en z.windspeed es 2 desviaciones estándar. Por lo tanto, un aumento de 2 desviaciones estándar en la velocidad del viento (0.15) se asocia con un cambio previsto en el número de pasajeros de -882.</p>
 <p>¿Por qué nos importa poder comparar coeficientes? El valor absoluto de <span class="math inline">\(\beta\)</span> es una medida de la fuerza de la relación entre un predictor y el resultado y, por lo tanto, de la importancia de ese predictor para explicar el resultado. Los valores p no ofrecen orientación sobre la <em>fuerza</em> de un predictor: un predictor estadísticamente significativo podría tener un tamaño de efecto minúsculo y prácticamente intrascendente. El valor absoluto de <span class="math inline">\(\beta\)</span> es, por tanto, una medida de importancia práctica, en oposición a la significación estadística. La significancia estadística expresa la improbabilidad de un resultado, mientras que <span class="math inline">\(\beta\)</span> representa el tamaño del efecto, cuánto esperamos que cambie el resultado como resultado de variar el predictor. Estandarizar <span class="math inline">\(\beta\)</span> nos permite interpretar el tamaño del efecto sin dejarnos engañar por diferencias arbitrarias en la escala variable.</p>
 </div>
-<div id="transformación-de-datos" class="section level2" number="3.16">
-<h2><span class="header-section-number">3.16</span> Transformación de datos</h2>
+<div id="transformación-de-variables" class="section level2" number="3.16">
+<h2><span class="header-section-number">3.16</span> Transformación de variables</h2>
 <p>Hasta ahora hemos considerado transformaciones que no cambian el ajuste del modelo, sino que simplemente ayudan a la interpretación. A veces, sin embargo, queremos cambiar las variables para que un modelo lineal se ajuste mejor. La transformación logarítmica ampliamente utilizada es un ejemplo. Deberíamos considerar una transformación logarítmica si nuestros datos están sesgados, muestran un aumento no lineal o tienen un rango grande. Regla empírica: si una variable tiene un margen superior a dos órdenes de magnitud (x 100), la transformación logarítmica probablemente mejorará el modelo.</p>
 <p>Para la transformación logarítmica usaremos el logaritmo natural, designado <span class="math inline">\(\log_e\)</span>, o <span class="math inline">\(\ln\)</span>, o, en código R: <code>log()</code>. El logaritmo natural es la función inversa de la función exponencial (y viceversa): se deshacen entre sí. Por lo tanto, estas identidades: <span class="math inline">\(e ^ {\ln (x)} = x\)</span> (si <span class="math inline">\(x&gt; 0\)</span>); <span class="math inline">\(\ln (e ^ x) = x\)</span>. Para volver a poner una variable transformada logarítmica en la escala original, simplemente exponenciamos: <span class="math inline">\(x = e ^ {\ln (x)}\)</span>. En código R: <code>x = exp (log (x)</code>). Una razón para usar registros naturales es que <em>los coeficientes en la escala logarítmica natural son, aproximadamente, interpretables como diferencias proporcionales.</em> Ejemplo: para una variable transformada logarítmicamente, un coeficiente de .06 significa que una diferencia de 1 unidad en <span class="math inline">\(x\)</span> corresponde a una diferencia aproximada del 6% en <span class="math inline">\(y\)</span>, y así sucesivamente. ¿Por qué? <code>exp (.06)</code> = 1.06, un aumento del 6% desde 1 como referencia. Sin embargo, con coeficientes más grandes, esto no funciona exactamente: <code>exp (.42)</code> = 1.52, una diferencia del 52%.</p>
 <p>La población de EE. UU. De 1790 a 1970 es un ejemplo de una variable que nos gustaría transformar, ya que el aumento no es lineal y es grande:</p>
@@ -1267,6 +1267,7 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <li><p><strong>intercept</strong>: log (medv) es 4.36 cuando lstat = 1. (Tenga en cuenta que no podemos centrar lstat en este caso porque no podemos tomar el logaritmo de un número negativo).</p></li>
 <li><p><em>log (lstat)</em>: -.56 o -56% representa el cambio porcentual previsto en medv asociado con un aumento del 1% en lstat.</p></li>
 </ul>
+<p>En este artículo <a href="https://pubmed.ncbi.nlm.nih.gov/25643111/">Models with transformed variables: interpretation and software</a> se muesrta cómo reportar e interpretar efectos en escalas originales de las variables en el caso de los modelos de regresión lineal, logística y Poisson con transformaciones logarítmicas y de potencia.</p>
 </div>
 <div id="colinealidad" class="section level2" number="3.17">
 <h2><span class="header-section-number">3.17</span> Colinealidad</h2>

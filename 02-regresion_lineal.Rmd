@@ -766,7 +766,7 @@ optim(par=2, fn=lver_poisson, x=alumnos,
 
 ----------------------------------------------------------------------------------------------------------------------
 
-**EJERCICIO** (Entrega en Moodle P-Regresión lineal función):
+**EJERCICIO** (Entrega en Moodle: P-Regresión lineal función):
 
 Consideremos el siguiente modelo de regresión: 
 
@@ -1579,10 +1579,9 @@ La función `standardize()` nos advierte que la velocidad del viento es ahora un
 
  
 
-## Transformación de datos
+## Transformación de variables
 
  
-
 Hasta ahora hemos considerado transformaciones que no cambian el ajuste del modelo, sino que simplemente ayudan a la interpretación. A veces, sin embargo, queremos cambiar las variables para que un modelo lineal se ajuste mejor. La transformación logarítmica ampliamente utilizada es un ejemplo. Deberíamos considerar una transformación logarítmica si nuestros datos están sesgados, muestran un aumento no lineal o tienen un rango grande. Regla empírica: si una variable tiene un margen superior a dos órdenes de magnitud (x 100), la transformación logarítmica probablemente mejorará el modelo.
 
  
@@ -1673,6 +1672,10 @@ La transformación del registro de un predictor, así como el resultado, es una 
 - **intercept**: log (medv) es 4.36 cuando lstat = 1. (Tenga en cuenta que no podemos centrar lstat en este caso porque no podemos tomar el logaritmo de un número negativo).
 
 - *log (lstat)*: -.56 o -56% representa el cambio porcentual previsto en medv asociado con un aumento del 1% en lstat.
+
+
+
+En este artículo [Models with transformed variables: interpretation and software](https://pubmed.ncbi.nlm.nih.gov/25643111/) se muesrta cómo reportar e interpretar efectos en escalas originales de las variables en el caso de los modelos de regresión lineal, logística y Poisson con transformaciones logarítmicas y de potencia.
 
  
 
