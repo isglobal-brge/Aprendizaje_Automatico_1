@@ -10,7 +10,7 @@ La principal diferencia entre estas áreas radica en el objetivo (e.g pregunta c
 En la siguiente figura podemos ver la clasificación (de manera muy genérica) de los tipos de AA a los que podemos enfrentarnos
 
 
-![Tipos de Aprendizaje Automático](fig/aa_tipos)
+![Tipos de Aprendizaje Automático](fig/aa_tipos.png)
 
 
 En estadística, el AA se ha considerado como una ciencia independiente en la que se dispone de un conjunto de herramientas basadas en diferentes métodos y algoritmos que permiten clasificar individuos según una serie de variables. Concer estas técnicas estadísticas es de gran ayuda para la IA y el AP. En este curso estudiaremos estas metodologías en detalle que incluirán:
