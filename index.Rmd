@@ -3,7 +3,7 @@ title: "Aprendizaje Automático 1"
 author: "Juan R González"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::pdf_gitbook
+output: bookdown::html_gitbook
 documentclass: book
 bibliography: aprendizaje.bib
 biblio-style: apalike
@@ -14,8 +14,32 @@ encoding: latin1
 
 # Introducción
 
-To be supplied
+Este bookdown sirven como notas para el curso [Aprendizaje Automático 1](https://guies.uab.cat/guies_docents/public/portal/html/2020/assignatura/104870/es) impartido en el [Grado de Estadística](https://www.uab.cat/web/estudiar/listado-de-grados/informacion-general-1216708258897.html?param1=1264404714557) de la UAB
 
+El objetivo de este material es familiarizar al alumno con diferentes métodos de aprendizaje automático (machine learning en inglés) desde un punto de vista aplicado haciéndo énfasis a situaciones donde se dispone de grandes cantidades de datos.
+
+Los contenidos incluyen los siguientes:
+
+- Breve introducción a Tidyverse
+- Introducción al aprendizaje automático
+- Regresión lineal y logística
+- Pasos previos a la creación de un modelo predictivo y medidas de validación
+- Métodos de aprendizaje automático
+    - Arboles de clasificación
+    - K-vecinos más cercanos
+    - Random Forest
+    - Boosting
+    - Métodos de aprendizaje para datos n<<p
+    - Métodos de penalización (shrinkage)
+    - Métodos de regularización
+- La librería ‘caret’
+- Métodos de aprendizaje para datos grandes (big data)
+    - XGBoost
+    - Lasso
+    - La librería ‘H20’
+
+
+En el aula virtual de la asignatura (Moodle) se dispondrán de numerosas preguntas de autoevaluación para que el alumno pueda ver si adquiere los conocimientos descritos en cada sesión teórica, así como varias prácticas que permitirán formar al alumno en el análisis de datos mediante las principales técnicas de aprendizaje automático utilizando datos reales.
 
  
 ```{r include=FALSE}
