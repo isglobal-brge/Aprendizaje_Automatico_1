@@ -194,14 +194,7 @@ flights
 ```
 
 Las funciones básicas que usaremos están disponibles en la librería `dlpyr` y son las siguientes:
-<!--
-* Pick observations by their values: `filter()`.
-* Reorder the rows: `arrange()`.
-* Pick variables by their names: `select()`.
-* Create new variables with functions of existing variables: `mutate()`.
-* Collapse many values down to a single summary: `summarise()`.
-Repetido?
--->
+
 * Elegir observaciones por sus valores: `filter()`.
 * Reordenar las filas: `arrange()`.
 * Elegir las variables por sus nombres: `select()`.

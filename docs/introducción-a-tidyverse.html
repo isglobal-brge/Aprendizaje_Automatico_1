@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-09-20" />
+<meta name="date" content="2020-09-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -202,6 +202,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.17" data-path="regresión-lineal.html"><a href="regresión-lineal.html#colinealidad"><i class="fa fa-check"></i><b>3.17</b> Colinealidad</a></li>
 <li class="chapter" data-level="3.18" data-path="regresión-lineal.html"><a href="regresión-lineal.html#valores-atípicos"><i class="fa fa-check"></i><b>3.18</b> Valores atípicos</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html"><i class="fa fa-check"></i><b>4</b> Ajuste de modelos</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#reglas-generales-para-la-selección-de-variables"><i class="fa fa-check"></i><b>4.1</b> Reglas generales para la selección de variables</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regresión-ridge-y-lasso.html"><a href="regresión-ridge-y-lasso.html"><i class="fa fa-check"></i><b>5</b> Regresión ridge y lasso</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -242,12 +247,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 2.1: Esquema R for Data Science
 </p>
 </div>
-<p>De forma que las librerías incluidas en <code>tidyverse</code> cubren todos estos aspectos. Está pensado para facilitar tareas de gestión de datos, y en su caso, el manejo de grandes volúmenes de información de forma eficiente. Se describen técnicas que ayudan a la visualización de datos que es el primer paso que se debe llevar a cabo en cualquier análisis estadístico que se precie. Esta visualización y posterior análisis no sólo deber llevarse a cab o en toda la base de datos, puede requerirse analizar subconjuntos de datos obtenidos mediante algún filtro o inlcuso puede necesitarse recodificar o restructurar la información disponible . Quizás estos sean los procedimientos para los que <code>tidiverse</code> mejore de forma sustancial el uso de R tradicional (junto con la forma compacta y clara de escribir código), ya que la posterior modelización puede llevarse a cabo con decenas de librerías diseñadas para tal efecto.</p>
+<p>De forma que las librerías incluidas en <code>tidyverse</code> cubren todos estos aspectos. Está pensado para facilitar tareas de gestión de datos, y en su caso, el manejo de grandes volúmenes de información de forma eficiente. Se describen técnicas que ayudan a la visualización de datos que es el primer paso que se debe llevar a cabo en cualquier análisis estadístico que se precie. Esta visualización y posterior análisis no sólo deber llevarse a cabo en toda la base de datos, puede requerirse analizar subconjuntos de datos obtenidos mediante algún filtro o inlcuso puede necesitarse recodificar o restructurar la información disponible . Quizás estos sean los procedimientos para los que <code>tidiverse</code> mejore de forma sustancial el uso de R tradicional (junto con la forma compacta y clara de escribir código), ya que la posterior modelización puede llevarse a cabo con decenas de librerías diseñadas para tal efecto.</p>
 </div>
 <div id="instalación" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Instalación</h2>
 <p>Para instalar el conjunto básico de liberías relacionadas con <code>tidyverse</code> basta con ejecutar_</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introducción-a-tidyverse.html#cb1-1"></a><span class="kw">install.package</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introducción-a-tidyverse.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
 <p>Las librerías básicas relacionadas con <code>tidyverse</code> se cargan de la forma usual, con una única llamada</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introducción-a-tidyverse.html#cb2-1"></a><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
 <p>La diferencia con el hecho de cargar cualquier otra librería, es que en un sólo comando se instalan/cargan un par de docenas de paquetes. Como beneficio adicional, uno puede estar seguro de que todos los paquetes instalados / cargados son de versiones compatibles.</p>
@@ -401,7 +406,7 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 </ul>
 <p>Estas funciones suelen ser mucho más rápidas (~ 10x) que sus equivalentes en R básico. Además, la importación de datos de ejecución prolongada tienen una barra de progreso para que se pueda ver lo que está sucediendo. Si se está buscando velocidad bruta, también podemos usar <em>data.table::fread()</em> que aunque no encaja tan bien en <code>tidyverse</code> puede usarse en ocasiones donde precie la velocidad (pero no es mucho más rápido). Los datos se importan como objetos que:</p>
 <ul>
-<li>son *tibbles</li>
+<li>son <em>tibbles</em></li>
 <li>no convierten vectores de caracteres en factores</li>
 <li>no usan nombres de filas ni modifican los nombres de columnas. Éstas son fuentes comunes de frustración con las funciones base R [¡declaración de Hadley!].</li>
 <li>Son más reproducibles. Las funciones de Base R heredan algún comportamiento de su sistema operativo y variables de entorno, por lo que el código para importar datos que funciona en un ordenador, podría no funcionar en el de otra persona.</li>
@@ -469,16 +474,11 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 ## # ... with 336,766 more rows, and 4 more variables: distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Las funciones básicas que usaremos están disponibles en la librería <code>dlpyr</code> y son las siguientes:</p>
 <ul>
-<li><p>Pick observations by their values: <code>filter()</code>.</p></li>
-<li><p>Reorder the rows: <code>arrange()</code>.</p></li>
-<li><p>Pick variables by their names: <code>select()</code>.</p></li>
-<li><p>Create new variables with functions of existing variables: <code>mutate()</code>.</p></li>
-<li><p>Collapse many values down to a single summary: <code>summarise()</code>.</p></li>
-<li><p>Elegir observaciones por sus valores: <code>filter()</code>.</p></li>
-<li><p>Reordenar las filas: <code>arrange()</code>.</p></li>
-<li><p>Elegir las variables por sus nombres: <code>select()</code>.</p></li>
-<li><p>Crear nuevas variables a partir de variables existentes: <code>mutate()</code>.</p></li>
-<li><p>Colapsar valores en un sólo resumen: <code>summarise()</code>.</p></li>
+<li>Elegir observaciones por sus valores: <code>filter()</code>.</li>
+<li>Reordenar las filas: <code>arrange()</code>.</li>
+<li>Elegir las variables por sus nombres: <code>select()</code>.</li>
+<li>Crear nuevas variables a partir de variables existentes: <code>mutate()</code>.</li>
+<li>Colapsar valores en un sólo resumen: <code>summarise()</code>.</li>
 </ul>
 <p>Todos los <strong>verbos</strong> (e.g funciones) se usan de la misma forma:</p>
 <ul>
@@ -637,7 +637,7 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <li><p><code>ends_with("xyz")</code>: nombres que acaban con “xyz”.</p></li>
 <li><p><code>contains("ijk")</code>: nombres que contienen “ijk”.</p></li>
 <li><p><code>matches("(.)\\1")</code>: selecciona variables que coinciden con una expresión regular. Se puede aprender más con <code>strings</code>.</p></li>
-<li><p><code>num_range("x", 1:3)</code>: coincide con x1, x2 and x3.</p></li>
+<li><p><code>num_range("x", 1:3)</code>: coincide con x1, x2 y x3.</p></li>
 </ul>
 </div>
 <div id="añadir-nuevas-variables" class="section level3" number="2.4.8">
@@ -820,7 +820,7 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <li><p>Crea una nueva variable en ‘mycars’ que sea ‘km_per_litre’ que describa el consumo del coche (variable ‘mpg’). NOTA: 1 mpg es 0.425 km / l.</p></li>
 <li><p>Selecciona al azar (y visualiza) la mitad de las observaciones de ‘mycars’ [PISTA: busca una función de <code>dplyr</code> que haga esto de forma sencilla (similar a <code>sample</code> en R tradicional).</p></li>
 <li><p>Crea un objeto ‘mycars_s’ que contenga de la 10ª a la 35ª fila de mycars [PISTA: considera usar la función <code>slice()</code>].</p></li>
-<li><p>Visualiza el objeto ‘mycars_s’ sin duplicados [PISTA_ encia: considera usar la función <code>distinct()</code>].</p></li>
+<li><p>Visualiza el objeto ‘mycars_s’ sin duplicados [PISTA: considera usar la función <code>distinct()</code>].</p></li>
 <li><p>Visualiza del objeto ‘mycars_s’ todas las observaciones que tengan mpg&gt; 20 y hp&gt; 100.</p></li>
 <li><p>Visualiza la la fila correspondiente al coche Lotus Europa.</p></li>
 </ul>
