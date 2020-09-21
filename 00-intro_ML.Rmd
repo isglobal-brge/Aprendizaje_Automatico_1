@@ -1,1 +1,32 @@
-# Introducción al Machine Learning
+# Introducción al Aprendizaje Automático 
+
+El aprendizaje automático (AA) (Machine Learning en inglés) es una disciplina científica que suele incluirse en el ámbito de la Inteligencia Artificial (IA) que crea sistemas que aprenden automáticamente. Aprender en este contexto quiere decir identificar patrones complejos en millones de datos. La máquina/ordenador que realmente aprende es un algoritmo que usando datos existentes es capaz de predecir comportamientos futuros. Automáticamente, también en este contexto, implica que estos sistemas se mejoran de forma autónoma con el tiempo, sin intervención humana. En esta figura podemos observar la conexión que hay entre estas áreas y una más reciente conocida como aprendizaje profundo (AP) (Deep Learning en inglés) que veréis en el curso de Aprendizaje Automático 2. 
+
+![Relación entre AA, AI y AP](slides/intro_curso/fig/intro_AA.png)
+
+La principal diferencia entre estas áreas radica en el objetivo (e.g pregunta científica) que queremos tratar. Así, la IA vendría a representar a un sistema no biológico que es inteligente basándose en reglas. El AA se basa en algoritmos que entrenan modelos usando datos existentes, y el AP se basa en algoritmos que parametriza redes neuronales de múltiples capas que representan los datos mediante diferentes niveles de abstracción.
+
+
+En la siguiente figura podemos ver la clasificación (de manera muy genérica) de los tipos de AA a los que podemos enfrentarnos
+
+
+![Tipos de Aprendizaje Automático](fig/aa_tipos)
+
+
+En estadística, el AA se ha considerado como una ciencia independiente en la que se dispone de un conjunto de herramientas basadas en diferentes métodos y algoritmos que permiten clasificar individuos según una serie de variables. Concer estas técnicas estadísticas es de gran ayuda para la IA y el AP. En este curso estudiaremos estas metodologías en detalle que incluirán:
+
+- Regresión lineal
+- Regresión logística
+- Regresión lasso (ridge, elastic net)
+- Análisis lineal discriminante
+- Árboles de clasificación
+- KNN
+- Random Forest
+- Boosting
+- XGBoost
+
+y cómo implementar estos algoritmos con funciones eficientes ([caret](https://www.jstatsoft.org/article/view/v028i05)) y escalables ([H2O](http://docs.h2o.ai/)).
+
+
+
+

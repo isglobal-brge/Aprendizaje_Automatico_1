@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6 Regresión ridge y lasso | Aprendizaje Automático 1</title>
-  <meta name="description" content="6 Regresión ridge y lasso | Aprendizaje Automático 1" />
+  <title>2 Introducción al Aprendizaje Automático | Aprendizaje Automático 1</title>
+  <meta name="description" content="2 Introducción al Aprendizaje Automático | Aprendizaje Automático 1" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6 Regresión ridge y lasso | Aprendizaje Automático 1" />
+  <meta property="og:title" content="2 Introducción al Aprendizaje Automático | Aprendizaje Automático 1" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Regresión ridge y lasso | Aprendizaje Automático 1" />
+  <meta name="twitter:title" content="2 Introducción al Aprendizaje Automático | Aprendizaje Automático 1" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ajuste-de-modelos.html"/>
-
+<link rel="prev" href="index.html"/>
+<link rel="next" href="introducción-a-tidyverse.html"/>
 <script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -228,27 +228,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="regresión-ridge-y-lasso" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Regresión ridge y lasso</h1>
-<p>La regresión ridge y LASSO son técnicas útiles de aprendizaje automático basadas en regresión para seleccionar automáticamente variables en datos de alta dimensión a fin de equilibrar la compensación sesgo-varianza.</p>
+<div id="introducción-al-aprendizaje-automático" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Introducción al Aprendizaje Automático</h1>
+<p>El aprendizaje automático (AA) (Machine Learning en inglés) es una disciplina científica que suele incluirse en el ámbito de la Inteligencia Artificial (IA) que crea sistemas que aprenden automáticamente. Aprender en este contexto quiere decir identificar patrones complejos en millones de datos. La máquina/ordenador que realmente aprende es un algoritmo que usando datos existentes es capaz de predecir comportamientos futuros. Automáticamente, también en este contexto, implica que estos sistemas se mejoran de forma autónoma con el tiempo, sin intervención humana. En esta figura podemos observar la conexión que hay entre estas áreas y una más reciente conocida como aprendizaje profundo (AP) (Deep Learning en inglés) que veréis en el curso de Aprendizaje Automático 2.</p>
+<div class="figure">
+<img src="slides/intro_curso/fig/intro_AA.png" alt="" />
+<p class="caption">Relación entre AA, AI y AP</p>
+</div>
+<p>La principal diferencia entre estas áreas radica en el objetivo (e.g pregunta científica) que queremos tratar. Así, la IA vendría a representar a un sistema no biológico que es inteligente basándose en reglas. El AA se basa en algoritmos que entrenan modelos usando datos existentes, y el AP se basa en algoritmos que parametriza redes neuronales de múltiples capas que representan los datos mediante diferentes niveles de abstracción.</p>
+<p>En la siguiente figura podemos ver la clasificación (de manera muy genérica) de los tipos de AA a los que podemos enfrentarnos</p>
+<div class="figure">
+<img src="fig/aa_tipos" alt="" />
+<p class="caption">Tipos de Aprendizaje Automático</p>
+</div>
+<p>En estadística, el AA se ha considerado como una ciencia independiente en la que se dispone de un conjunto de herramientas basadas en diferentes métodos y algoritmos que permiten clasificar individuos según una serie de variables. Concer estas técnicas estadísticas es de gran ayuda para la IA y el AP. En este curso estudiaremos estas metodologías en detalle que incluirán:</p>
+<ul>
+<li>Regresión lineal</li>
+<li>Regresión logística</li>
+<li>Regresión lasso (ridge, elastic net)</li>
+<li>Análisis lineal discriminante</li>
+<li>Árboles de clasificación</li>
+<li>KNN</li>
+<li>Random Forest</li>
+<li>Boosting</li>
+<li>XGBoost</li>
+</ul>
+<p>y cómo implementar estos algoritmos con funciones eficientes (<a href="https://www.jstatsoft.org/article/view/v028i05">caret</a>) y escalables (<a href="http://docs.h2o.ai/">H2O</a>).</p>
 
 </div>
-
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="ajuste-de-modelos.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introducción-a-tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -279,7 +293,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/isglobal-brge/Aprendizaje_Automatico_1/tree/master/docs0X-lasso.Rmd",
+"link": "https://github.com/isglobal-brge/Aprendizaje_Automatico_1/tree/master/docs00-intro_ML.Rmd",
 "text": "Edit"
 },
 "history": {
