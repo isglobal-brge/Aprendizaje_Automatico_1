@@ -1,3 +1,3 @@
 # Regresión ridge y lasso 
 
-Culmina con una discusión de la regresión ridge y LASSO, dos técnicas útiles de aprendizaje automático basadas en regresión para seleccionar automáticamente variables en datos de alta dimensión a fin de equilibrar la compensación sesgo-varianza.
+La regresión ridge y LASSO son técnicas útiles de aprendizaje automático basadas en regresión para seleccionar automáticamente variables en datos de alta dimensión a fin de equilibrar la compensación sesgo-varianza.
