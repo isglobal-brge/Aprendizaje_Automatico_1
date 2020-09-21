@@ -16,9 +16,9 @@ encoding: latin1
 
 Este bookdown sirven como notas para el curso [Aprendizaje Automático 1](https://guies.uab.cat/guies_docents/public/portal/html/2020/assignatura/104870/es) impartido en el [Grado de Estadística](https://www.uab.cat/web/estudiar/listado-de-grados/informacion-general-1216708258897.html?param1=1264404714557) de la UAB
 
-El objetivo de este material es familiarizar al alumno con diferentes métodos de aprendizaje automático (machine learning en inglés) desde un punto de vista aplicado haciéndo énfasis a situaciones donde se dispone de grandes cantidades de datos.
+El objetivo de este material es familiarizar al alumno con diferentes métodos de aprendizaje automático (machine learning en inglés) desde un punto de vista aplicado haciendo énfasis a situaciones donde se dispone de grandes cantidades de datos.
 
-Los contenidos incluyen los siguientes:
+Los contenidos incluyen los siguientes temas:
 
 - Breve introducción a Tidyverse
 - Introducción al aprendizaje automático
