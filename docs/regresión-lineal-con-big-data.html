@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Aprendizaje Automático 1</title>
-  <meta name="description" content="Aprendizaje Automático 1" />
+  <title>6 Regresión lineal con Big Data | Aprendizaje Automático 1</title>
+  <meta name="description" content="6 Regresión lineal con Big Data | Aprendizaje Automático 1" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Aprendizaje Automático 1" />
+  <meta property="og:title" content="6 Regresión lineal con Big Data | Aprendizaje Automático 1" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Aprendizaje Automático 1" />
+  <meta name="twitter:title" content="6 Regresión lineal con Big Data | Aprendizaje Automático 1" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="ajuste-de-modelos.html"/>
 
-<link rel="next" href="introducción-a-tidyverse.html"/>
 <script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -231,51 +231,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Aprendizaje Automático 1</h1>
-<p class="author"><em>Juan R González</em></p>
-<p class="date"><em>2020-09-25</em></p>
-</div>
-<div id="introducción" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Introducción</h1>
-<p>Este bookdown sirven como notas para el curso <a href="https://guies.uab.cat/guies_docents/public/portal/html/2020/assignatura/104870/es">Aprendizaje Automático 1</a> impartido en el <a href="https://www.uab.cat/web/estudiar/listado-de-grados/informacion-general-1216708258897.html?param1=1264404714557">Grado de Estadística</a> de la UAB</p>
-<p>El objetivo de este material es familiarizar al alumno con diferentes métodos de aprendizaje automático (machine learning en inglés) desde un punto de vista aplicado haciendo énfasis a situaciones donde se dispone de grandes cantidades de datos.</p>
-<p>Los contenidos incluyen los siguientes temas:</p>
-<ul>
-<li>Breve introducción a Tidyverse</li>
-<li>Introducción al aprendizaje automático</li>
-<li>Regresión lineal y logística</li>
-<li>Pasos previos a la creación de un modelo predictivo y medidas de validación</li>
-<li>Métodos de aprendizaje automático
-<ul>
-<li>Arboles de clasificación</li>
-<li>K-vecinos más cercanos</li>
-<li>Random Forest</li>
-<li>Boosting</li>
-<li>Métodos de aprendizaje para datos n&lt;&lt;p</li>
-<li>Métodos de penalización (shrinkage)</li>
-<li>Métodos de regularización</li>
-</ul></li>
-<li>La librería ‘caret’</li>
-<li>Métodos de aprendizaje para datos grandes (big data)
-<ul>
-<li>XGBoost</li>
-<li>Lasso</li>
-<li>La librería ‘H20’</li>
-</ul></li>
-</ul>
-<p>En el aula virtual de la asignatura (Moodle) se dispondrán de numerosas preguntas de autoevaluación para que el alumno pueda ver si adquiere los conocimientos descritos en cada sesión teórica, así como varias prácticas que permitirán formar al alumno en el análisis de datos mediante las principales técnicas de aprendizaje automático utilizando datos reales usando el software R.</p>
-<p>Algunas partes de este material está inspirados en vignettes que se referencian en cada capítulo. Los ejemplos de regresión lineal se basan en el trabajo de <a href="https://github.com/jefftwebb">Jeff Webb</a>. Este material está licenciado bajo una <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAMAAABUFvrSAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAEZ0FNQQAAsY58+1GTAAAAAXNSR0IB2cksfwAAAW5QTFRF////////////////7+/v39/f1tXV09bS0tXS0tXR0dTR0dTQ0NTQ0NPPz9PPztLOztHNzdHNzdHMz8/PzdDMzNDMzNDLzM/Ly8/Ly8/Ky87Kys3Jyc3Jyc3IyMzIyMzHx8vHxsrGxsrFxcnFxcnExMnExMjDw8jDxMfDw8fCwsfCwcXAwMXAwMW/wMS/v8S+v8O+vsO+vsK9vcK9vcK8v7+/vMG8vMG7vMC8u8C7u8C6ur+6ur+5ub65ub64uL23t7y2tru1tbq0tLqztLmzs7iysrixsrexsbewsbawsLavsLWvr7Wur7SusLOvrrStrrOtr7KvrbOsrLKrr6+vq7Gqn6OenqCdn5+flpmWk5iTkZSRkZORj4+PiYyJhIaEhIWEgoWCgICAfX98fH98eXx5cHJvcHBwYGBgXV5dUFFQUFBQQ0RDQEBAPj8+NTY1MjMxMDAwKSkpKCkoICAgGxsbEBAQDg4ODQ4NAAAAlzoSDQAAAAN0Uk5TAAoO5yEBUwAAAvhJREFUeNq1lutX2kAQxWmXFDVGYy1EIjQ2VZDiu1CsRQQURYvV+qSKj6II8rANYOT+9z0JqIASo9Y5ydkP2f2d2Ts7d2N4jRcJgwEIBwO+SbdTFGw8ZzZz1n5BdLgnfLPBcCT6fW1jY3P78QEYEA76PWMu0W5lGbrNZGrrYNg+u+ga9fgVcmxtY/NJZAOCfs+IY4Bn6eN8RdlEJX9Ed1uFIfdnfzC8uBJbv5tyqqhMLKa0wQHPiEOwMInLW4Eu9xmzfdDtmQ0uLK3cSXmvBBTS6QJQ2tMC+8YcgpnOApAzSa83mZEBZIff2odGfYFQJNqc8s4VchQhhFA5XO1pgCddAxaFKyeNpBpxGSgNmwXXxMxcWE25fkkJGUIIoExESQPsFnkmC0gUuQmjBGQZq+j2BEKR5dUGLVLIvbkGkxxSrcHO92wCkIyENJL3u+2O8Zng/FJsvR5cRF0GFIqtwaKVvoTcSxrCKOOS7hPdXwLhxUYtUFC+Z6AKQgpoDRZ6joEkaYo4cMQKril/KLLcCE4TVYmqFmkNsK0rD9lIiDdXKCSrwwEhREae6Ve0WIiuPg3M0xVlW171BBe21CGjbLbSYR0c/To3H409TQquHTggREKZ8pbjEiRqqxxXtWjjRLdvLrzUAK4Vr5qwZvEsJsCrzExWF9Tk9gIm84e74BRyRN9xeyS4vkHSmg1yK4Wxt5yUIClDayn0t3SteLWq3RQvjQrN31O87e2dEiBl0tJDJmTrykImN8dtq6AOpIw8Y3OMf2s+bvptU+hJqFrc1yCfpmZDkWYX0mv0H9WWpvS2tH6w8z27e58JJVi7c2ImuNBkQvrBOOWZc0CqsyFKtU3+97OuaQBnXGe90RuTMvCHtpziuWCcmDvPm64m+t2vlmuq/YHqqwnGCcfs1l+mCcbSmgtSe8iDGQNnPEsnrq//fZrltXS4tk3oAOPvT2tPF91uMrXTDNv340JrjQ4hbsHAxeE0z1ksHD99eKFdl0dl/P//Cl+9EPcfS+yBAoqk3eUAAAAASUVORK5CYII=" /></p>
+<div id="regresión-lineal-con-big-data" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Regresión lineal con Big Data</h1>
+<div id="paralelización" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Paralelización</h2>
+<p>En la era de los macrodatos (Big Data), podemos tener acceso a grandes volúmenes de datos obtenidos de nuestra población de interés teniendo así la oportunidad de analizar la población prácticamente en su totalidad. Sin embargo, los algoritmos tradicionales para incluso los métodos estadísticos más sencillos (descriptivas, regresión lineal, …) necesitan mucho tiempo de computación. Para resolver este problema de computación, una de las herramientas que disponemos es paralelizar nuestros cálculos puesto que incluso los ordenadores portátiles ya disponen de multiples cores de computación.</p>
 
 </div>
+</div>
+
+
+
+
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
+<a href="ajuste-de-modelos.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="introducción-a-tidyverse.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -306,7 +285,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/isglobal-brge/Aprendizaje_Automatico_1/tree/master/docsindex.Rmd",
+"link": "https://github.com/isglobal-brge/Aprendizaje_Automatico_1/tree/master/docs0X-lasso.Rmd",
 "text": "Edit"
 },
 "history": {

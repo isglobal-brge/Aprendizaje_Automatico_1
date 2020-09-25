@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-09-21" />
+<meta name="date" content="2020-09-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -207,7 +207,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="5.1" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#reglas-generales-para-la-selección-de-variables"><i class="fa fa-check"></i><b>5.1</b> Reglas generales para la selección de variables</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="regresión-ridge-y-lasso.html"><a href="regresión-ridge-y-lasso.html"><i class="fa fa-check"></i><b>6</b> Regresión ridge y lasso</a></li>
+<li class="chapter" data-level="6" data-path="regresión-lineal-con-big-data.html"><a href="regresión-lineal-con-big-data.html"><i class="fa fa-check"></i><b>6</b> Regresión lineal con Big Data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regresión-lineal-con-big-data.html"><a href="regresión-lineal-con-big-data.html#paralelización"><i class="fa fa-check"></i><b>6.1</b> Paralelización</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -231,7 +234,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="regresión-lineal" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Regresión lineal</h1>
 <p>Este capítulo presenta la regresión lineal, el método de regresión paramétrica que usamos cuando la variable de resultado o respuesta es continua. Cuando el resultado es binario, utilizamos la regresión logística, tema de un capítulo posterior.</p>
-<p>El contenido de este capítulo ya se ha visto en la asignatura <a href="https://guies.uab.cat/guies_docents/public/portal/html/2020/assignatura/104855/es">Inferencia Estadística 1</a>, pero aquí pretendemos extender muchos de los conceptos aprendidos, así como introducir nuevas metodologías relacionadas con la regresión lineal.</p>
+<p>El contenido de este capítulo ya se introdujo en la asignatura <a href="https://guies.uab.cat/guies_docents/public/portal/html/2020/assignatura/104855/es">Inferencia Estadística 1</a>, y se vió de forma exhaustiva en la asignatura de <a href="https://guies.uab.cat/guies_docents/public/portal/html/2020/assignatura/104860/es">Modelos lineales 1</a> y aquí se hará un breve repaso de los conceptos más importantes y se hará énfasis en la interpretación práctica de los conceptos aprendidos.</p>
 <p>Qué pretendemos aprender en este capítulo:</p>
 <ul>
 <li>Entender qué pretende y cuándo se usa la regresión lineal</li>
@@ -714,7 +717,7 @@ l(\boldsymbol{\Theta} | \boldsymbol{x}) = \log L(\boldsymbol{\Theta} | \boldsymb
 \textrm{altura}_i &amp;\sim N(\mu_i, \sigma^2), \\
 \mu_i &amp;= 105 + 0.9 \textrm{peso}_i, \\
 \sigma &amp;= 8, \\
-\textrm{peso} &amp;\sim Normal(45, 12).
+\textrm{peso} &amp;\sim Normal(45, 144).
 \end{align*}\]</span></p>
 <p>El siguiente código permite simular un conjunto de datos de valores con la estructura anterior.</p>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="regresión-lineal.html#cb151-1"></a>n &lt;-<span class="st"> </span><span class="dv">1000</span></span>

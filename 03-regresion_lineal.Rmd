@@ -4,7 +4,7 @@
 
 Este capítulo presenta la regresión lineal, el método de regresión paramétrica que usamos cuando la variable de resultado o respuesta es continua. Cuando el resultado es binario, utilizamos la regresión logística, tema de un capítulo posterior.
 
-El contenido de este capítulo ya se ha visto en la asignatura [Inferencia Estadística 1](https://guies.uab.cat/guies_docents/public/portal/html/2020/assignatura/104855/es), pero aquí pretendemos extender muchos de los conceptos aprendidos, así como introducir nuevas metodologías relacionadas con la regresión lineal. 
+El contenido de este capítulo ya se introdujo en la asignatura [Inferencia Estadística 1](https://guies.uab.cat/guies_docents/public/portal/html/2020/assignatura/104855/es), y se vió de forma exhaustiva en la asignatura de [Modelos lineales 1](https://guies.uab.cat/guies_docents/public/portal/html/2020/assignatura/104860/es) y aquí se hará un breve repaso de los conceptos más importantes y se hará énfasis en la interpretación práctica de los conceptos aprendidos. 
 
 Qué pretendemos aprender en este capítulo:
 
@@ -774,7 +774,7 @@ Consideremos el siguiente modelo de regresión:
 \textrm{altura}_i &\sim N(\mu_i, \sigma^2), \\
 \mu_i &= 105 + 0.9 \textrm{peso}_i, \\
 \sigma &= 8, \\
-\textrm{peso} &\sim Normal(45, 12).
+\textrm{peso} &\sim Normal(45, 144).
 \end{align*}
 
 El siguiente código permite simular un conjunto de datos de valores con la estructura anterior.

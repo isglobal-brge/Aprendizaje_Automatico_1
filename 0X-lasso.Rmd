@@ -1,3 +1,5 @@
-# Regresión ridge y lasso 
+# Regresión lineal con Big Data 
 
-La regresión ridge y LASSO son técnicas útiles de aprendizaje automático basadas en regresión para seleccionar automáticamente variables en datos de alta dimensión a fin de equilibrar la compensación sesgo-varianza.
+## Paralelización
+
+En la era de los macrodatos (Big Data), podemos tener acceso a grandes volúmenes de datos obtenidos de nuestra población de interés teniendo así la oportunidad de analizar la población prácticamente en su totalidad. Sin embargo, los algoritmos tradicionales para incluso los métodos estadísticos más sencillos (descriptivas, regresión lineal, ...) necesitan mucho tiempo de computación. Para resolver este problema de computación, una de las herramientas que disponemos es paralelizar nuestros cálculos puesto que incluso los ordenadores portátiles ya disponen de multiples cores de computación. 
