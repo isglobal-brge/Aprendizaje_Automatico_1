@@ -765,7 +765,6 @@ optim(par=2, fn=lver_poisson, x=alumnos,
 
 
 ----------------------------------------------------------------------------------------------------------------------
-
 **EJERCICIO** (Entrega en Moodle: P2-Regresión lineal función):
 
 Consideremos el siguiente modelo de regresión: 
@@ -793,7 +792,6 @@ $$
 
 
 OPCIONAL: Haz lo mismo maximizando el logaritmo de la verosimilitud 
-
 ----------------------------------------------------------------------------------------------------------------------
 
 

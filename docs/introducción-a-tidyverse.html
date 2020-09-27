@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-09-25" />
+<meta name="date" content="2020-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -206,10 +206,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html"><i class="fa fa-check"></i><b>5</b> Ajuste de modelos</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#reglas-generales-para-la-selección-de-variables"><i class="fa fa-check"></i><b>5.1</b> Reglas generales para la selección de variables</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="regresión-lineal-con-big-data.html"><a href="regresión-lineal-con-big-data.html"><i class="fa fa-check"></i><b>6</b> Regresión lineal con Big Data</a>
+<li class="chapter" data-level="5.2" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#selección-paso-a-paso-stepwise"><i class="fa fa-check"></i><b>5.2</b> Selección paso a paso (stepwise)</a></li>
+<li class="chapter" data-level="5.3" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#comparación-de-modelos"><i class="fa fa-check"></i><b>5.3</b> Comparación de modelos</a></li>
+<li class="chapter" data-level="5.4" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#métodos-de-selección-automática"><i class="fa fa-check"></i><b>5.4</b> Métodos de selección automática</a></li>
+<li class="chapter" data-level="5.5" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#validación-cruzada"><i class="fa fa-check"></i><b>5.5</b> Validación cruzada</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="regresión-lineal-con-big-data.html"><a href="regresión-lineal-con-big-data.html#paralelización"><i class="fa fa-check"></i><b>6.1</b> Paralelización</a></li>
+<li class="chapter" data-level="5.5.1" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#validación-en-un-conjunto-de-datos-externo"><i class="fa fa-check"></i><b>5.5.1</b> Validación en un conjunto de datos externo</a></li>
+<li class="chapter" data-level="5.5.2" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#leave-one-out-cross-validation-loocv"><i class="fa fa-check"></i><b>5.5.2</b> Leave-one-out cross validation (LOOCV)</a></li>
+<li class="chapter" data-level="5.5.3" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#k-fold-cross-validation-k-fold-cv"><i class="fa fa-check"></i><b>5.5.3</b> K-fold cross validation (K-fold CV)</a></li>
+<li class="chapter" data-level="5.5.4" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#uso-de-cv-para-estimar-el-hiper-parámetro"><i class="fa fa-check"></i><b>5.5.4</b> Uso de CV para estimar el hiper-parámetro</a></li>
+<li class="chapter" data-level="5.5.5" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#uso-de-bootstrap"><i class="fa fa-check"></i><b>5.5.5</b> Uso de bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#imputación-de-datos-faltantes"><i class="fa fa-check"></i><b>5.6</b> Imputación de datos faltantes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regresion-lineal-con-big-data.html"><a href="regresion-lineal-con-big-data.html"><i class="fa fa-check"></i><b>6</b> Regresion lineal con Big Data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regresion-lineal-con-big-data.html"><a href="regresion-lineal-con-big-data.html#paralelización"><i class="fa fa-check"></i><b>6.1</b> Paralelización</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -307,28 +319,28 @@ Figure 2.1: Esquema R for Data Science
 <h3><span class="header-section-number">2.4.1</span> Tibbles</h3>
 <p>Empecemos introduciendo lo que es un <em>tibble</em> (pronunciado “tibel”). Se puede aprender más cosas ejecutando <code>vignette("tibble")</code> en la consola de RStudio. Tras cargar la librería <code>tidyverse</code> podemos crear un tibble a partir de un data.frame de la siguiente forma. Usaremos la base de datos iris a modo de ejemplo</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introducción-a-tidyverse.html#cb3-1"></a><span class="kw">head</span>(iris)</span></code></pre></div>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species         Y
-## 1          5.1         3.5          1.4         0.2  setosa 11.492934
-## 2          4.9         3.0          1.4         0.2  setosa 11.377429
-## 3          4.7         3.2          1.3         0.2  setosa 12.824441
-## 4          4.6         3.1          1.5         0.2  setosa  9.074302
-## 5          5.0         3.6          1.4         0.2  setosa 13.449125
-## 6          5.4         3.9          1.7         0.4  setosa 14.486056</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introducción-a-tidyverse.html#cb5-1"></a>iris.tib &lt;-<span class="st"> </span><span class="kw">tibble</span>(iris)</span>
 <span id="cb5-2"><a href="introducción-a-tidyverse.html#cb5-2"></a>iris.tib</span></code></pre></div>
-<pre><code>## # A tibble: 150 x 6
-##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species     Y
-##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;
-##  1          5.1         3.5          1.4         0.2 setosa  11.5 
-##  2          4.9         3            1.4         0.2 setosa  11.4 
-##  3          4.7         3.2          1.3         0.2 setosa  12.8 
-##  4          4.6         3.1          1.5         0.2 setosa   9.07
-##  5          5           3.6          1.4         0.2 setosa  13.4 
-##  6          5.4         3.9          1.7         0.4 setosa  14.5 
-##  7          4.6         3.4          1.4         0.3 setosa  11.8 
-##  8          5           3.4          1.5         0.2 setosa  11.8 
-##  9          4.4         2.9          1.4         0.2 setosa  10.2 
-## 10          4.9         3.1          1.5         0.1 setosa  10.5 
+<pre><code>## # A tibble: 150 x 5
+##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+##  1          5.1         3.5          1.4         0.2 setosa 
+##  2          4.9         3            1.4         0.2 setosa 
+##  3          4.7         3.2          1.3         0.2 setosa 
+##  4          4.6         3.1          1.5         0.2 setosa 
+##  5          5           3.6          1.4         0.2 setosa 
+##  6          5.4         3.9          1.7         0.4 setosa 
+##  7          4.6         3.4          1.4         0.3 setosa 
+##  8          5           3.4          1.5         0.2 setosa 
+##  9          4.4         2.9          1.4         0.2 setosa 
+## 10          4.9         3.1          1.5         0.1 setosa 
 ## # ... with 140 more rows</code></pre>
 <p>También podemos crear un nuevo <em>tibble</em> mediante (los datos se reciclan):</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="introducción-a-tidyverse.html#cb7-1"></a><span class="kw">tibble</span>(</span>
@@ -348,23 +360,23 @@ Figure 2.1: Esquema R for Data Science
 NOTA 2: El <code>rownames</code> desaparece</p>
 <p>Quizás uno de los aspectos más novedosos de las <em>tibble</em> sea que se ha re-definido el método <code>print()</code> que permite, por defecto, ver las 10 primeras filas y todas las columnas que quepan en la pantalla. Esto puede cambiarse con</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="introducción-a-tidyverse.html#cb9-1"></a><span class="kw">print</span>(iris.tib, <span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">width =</span> <span class="ot">Inf</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 150 x 6
-##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species     Y
-##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;
-##  1          5.1         3.5          1.4         0.2 setosa  11.5 
-##  2          4.9         3            1.4         0.2 setosa  11.4 
-##  3          4.7         3.2          1.3         0.2 setosa  12.8 
-##  4          4.6         3.1          1.5         0.2 setosa   9.07
-##  5          5           3.6          1.4         0.2 setosa  13.4 
-##  6          5.4         3.9          1.7         0.4 setosa  14.5 
-##  7          4.6         3.4          1.4         0.3 setosa  11.8 
-##  8          5           3.4          1.5         0.2 setosa  11.8 
-##  9          4.4         2.9          1.4         0.2 setosa  10.2 
-## 10          4.9         3.1          1.5         0.1 setosa  10.5 
+<pre><code>## # A tibble: 150 x 5
+##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+##  1          5.1         3.5          1.4         0.2 setosa 
+##  2          4.9         3            1.4         0.2 setosa 
+##  3          4.7         3.2          1.3         0.2 setosa 
+##  4          4.6         3.1          1.5         0.2 setosa 
+##  5          5           3.6          1.4         0.2 setosa 
+##  6          5.4         3.9          1.7         0.4 setosa 
+##  7          4.6         3.4          1.4         0.3 setosa 
+##  8          5           3.4          1.5         0.2 setosa 
+##  9          4.4         2.9          1.4         0.2 setosa 
+## 10          4.9         3.1          1.5         0.1 setosa 
 ## # ... with 140 more rows</code></pre>
 <p>ó</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="introducción-a-tidyverse.html#cb11-1"></a><span class="kw">print</span>(iris.tib, <span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">width =</span> <span class="dv">25</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 150 x 6
+<pre><code>## # A tibble: 150 x 5
 ##    Sepal.Length
 ##           &lt;dbl&gt;
 ##  1          5.1
@@ -378,13 +390,12 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 ##  9          4.4
 ## 10          4.9
 ## # ... with 140 more
-## #   rows, and 5 more
+## #   rows, and 4 more
 ## #   variables:
 ## #   Sepal.Width &lt;dbl&gt;,
 ## #   Petal.Length &lt;dbl&gt;,
 ## #   Petal.Width &lt;dbl&gt;,
-## #   Species &lt;fct&gt;,
-## #   Y &lt;dbl&gt;</code></pre>
+## #   Species &lt;fct&gt;</code></pre>
 <p>Podemos acceder a una columna (e.g. variable) de la misma forma que con un data.frame</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="introducción-a-tidyverse.html#cb13-1"></a>df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</span>
 <span id="cb13-2"><a href="introducción-a-tidyverse.html#cb13-2"></a>  <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">5</span>),</span>
@@ -393,12 +404,12 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <span id="cb13-5"><a href="introducción-a-tidyverse.html#cb13-5"></a></span>
 <span id="cb13-6"><a href="introducción-a-tidyverse.html#cb13-6"></a><span class="co"># Extract by name</span></span>
 <span id="cb13-7"><a href="introducción-a-tidyverse.html#cb13-7"></a>df<span class="op">$</span>x</span></code></pre></div>
-<pre><code>## [1] 0.11263386 0.99747715 0.05467677 0.36455551 0.07494088</code></pre>
+<pre><code>## [1] 0.5383504 0.9134672 0.6056936 0.7669130 0.9625209</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introducción-a-tidyverse.html#cb15-1"></a>df[[<span class="st">&quot;x&quot;</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.11263386 0.99747715 0.05467677 0.36455551 0.07494088</code></pre>
+<pre><code>## [1] 0.5383504 0.9134672 0.6056936 0.7669130 0.9625209</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="introducción-a-tidyverse.html#cb17-1"></a><span class="co"># Extract by position</span></span>
 <span id="cb17-2"><a href="introducción-a-tidyverse.html#cb17-2"></a>df[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.11263386 0.99747715 0.05467677 0.36455551 0.07494088</code></pre>
+<pre><code>## [1] 0.5383504 0.9134672 0.6056936 0.7669130 0.9625209</code></pre>
 </div>
 <div id="importar-datos" class="section level3" number="2.4.2">
 <h3><span class="header-section-number">2.4.2</span> Importar datos</h3>
@@ -419,10 +430,10 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introducción-a-tidyverse.html#cb19-1"></a><span class="kw">library</span>(readr)</span>
 <span id="cb19-2"><a href="introducción-a-tidyverse.html#cb19-2"></a><span class="kw">system.time</span>(dd1 &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    1.95    0.02    1.97</code></pre>
+##    6.01    0.11    6.19</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introducción-a-tidyverse.html#cb21-1"></a><span class="kw">system.time</span>(dd2 &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>, <span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.43    0.00    0.42</code></pre>
+##    0.42    0.03    0.45</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="introducción-a-tidyverse.html#cb23-1"></a><span class="kw">dim</span>(dd2)</span></code></pre></div>
 <pre><code>## [1] 733202      5</code></pre>
 <p>Efectivamente ambos objetos contienen la misma información</p>
@@ -463,19 +474,19 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <span id="cb29-2"><a href="introducción-a-tidyverse.html#cb29-2"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="introducción-a-tidyverse.html#cb30-1"></a>flights</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
-##  1  2013     1     1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH        227
-##  2  2013     1     1      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH        227
-##  3  2013     1     1      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA        160
-##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN        183
-##  5  2013     1     1      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL        116
-##  6  2013     1     1      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD        150
-##  7  2013     1     1      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL        158
-##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD         53
-##  9  2013     1     1      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO        140
-## 10  2013     1     1      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD        138
-## # ... with 336,766 more rows, and 4 more variables: distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time distance  hour minute
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1  2013     1     1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH        227     1400     5     15
+##  2  2013     1     1      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH        227     1416     5     29
+##  3  2013     1     1      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA        160     1089     5     40
+##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN        183     1576     5     45
+##  5  2013     1     1      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL        116      762     6      0
+##  6  2013     1     1      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD        150      719     5     58
+##  7  2013     1     1      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL        158     1065     6      0
+##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD         53      229     6      0
+##  9  2013     1     1      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO        140      944     6      0
+## 10  2013     1     1      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD        138      733     6      0
+## # ... with 336,766 more rows, and 1 more variable: time_hour &lt;dttm&gt;</code></pre>
 <p>Las funciones básicas que usaremos están disponibles en la librería <code>dlpyr</code> y son las siguientes:</p>
 <ul>
 <li>Elegir observaciones por sus valores: <code>filter()</code>.</li>
@@ -497,19 +508,19 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <p>R imprime los resultados o los guarda en una variable. Si desea hacer ambas cosas, podemos envolver la sintaxis entre paréntesis:</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="introducción-a-tidyverse.html#cb33-1"></a>(jan1 &lt;-<span class="st"> </span><span class="kw">filter</span>(flights, month <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, day <span class="op">==</span><span class="st"> </span><span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 842 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
-##  1  2013     1     1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH        227
-##  2  2013     1     1      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH        227
-##  3  2013     1     1      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA        160
-##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN        183
-##  5  2013     1     1      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL        116
-##  6  2013     1     1      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD        150
-##  7  2013     1     1      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL        158
-##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD         53
-##  9  2013     1     1      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO        140
-## 10  2013     1     1      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD        138
-## # ... with 832 more rows, and 4 more variables: distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time distance  hour minute
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1  2013     1     1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH        227     1400     5     15
+##  2  2013     1     1      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH        227     1416     5     29
+##  3  2013     1     1      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA        160     1089     5     40
+##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN        183     1576     5     45
+##  5  2013     1     1      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL        116      762     6      0
+##  6  2013     1     1      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD        150      719     5     58
+##  7  2013     1     1      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL        158     1065     6      0
+##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD         53      229     6      0
+##  9  2013     1     1      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO        140      944     6      0
+## 10  2013     1     1      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD        138      733     6      0
+## # ... with 832 more rows, and 1 more variable: time_hour &lt;dttm&gt;</code></pre>
 </div>
 <div id="filtrado-lógico" class="section level3" number="2.4.5">
 <h3><span class="header-section-number">2.4.5</span> Filtrado lógico</h3>
@@ -520,69 +531,69 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 </div>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="introducción-a-tidyverse.html#cb35-1"></a><span class="kw">filter</span>(flights, month <span class="op">==</span><span class="st"> </span><span class="dv">11</span> <span class="op">|</span><span class="st"> </span>month <span class="op">==</span><span class="st"> </span><span class="dv">12</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 55,403 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
-##  1  2013    11     1        5           2359         6      352            345         7 B6         745 N568JB  JFK    PSE        205
-##  2  2013    11     1       35           2250       105      123           2356        87 B6        1816 N353JB  JFK    SYR         36
-##  3  2013    11     1      455            500        -5      641            651       -10 US        1895 N192UW  EWR    CLT         88
-##  4  2013    11     1      539            545        -6      856            827        29 UA        1714 N38727  LGA    IAH        229
-##  5  2013    11     1      542            545        -3      831            855       -24 AA        2243 N5CLAA  JFK    MIA        147
-##  6  2013    11     1      549            600       -11      912            923       -11 UA         303 N595UA  JFK    SFO        359
-##  7  2013    11     1      550            600       -10      705            659         6 US        2167 N748UW  LGA    DCA         57
-##  8  2013    11     1      554            600        -6      659            701        -2 US        2134 N742PS  LGA    BOS         40
-##  9  2013    11     1      554            600        -6      826            827        -1 DL         563 N912DE  LGA    ATL        126
-## 10  2013    11     1      554            600        -6      749            751        -2 DL         731 N315NB  LGA    DTW         93
-## # ... with 55,393 more rows, and 4 more variables: distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time distance  hour minute
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1  2013    11     1        5           2359         6      352            345         7 B6         745 N568JB  JFK    PSE        205     1617    23     59
+##  2  2013    11     1       35           2250       105      123           2356        87 B6        1816 N353JB  JFK    SYR         36      209    22     50
+##  3  2013    11     1      455            500        -5      641            651       -10 US        1895 N192UW  EWR    CLT         88      529     5      0
+##  4  2013    11     1      539            545        -6      856            827        29 UA        1714 N38727  LGA    IAH        229     1416     5     45
+##  5  2013    11     1      542            545        -3      831            855       -24 AA        2243 N5CLAA  JFK    MIA        147     1089     5     45
+##  6  2013    11     1      549            600       -11      912            923       -11 UA         303 N595UA  JFK    SFO        359     2586     6      0
+##  7  2013    11     1      550            600       -10      705            659         6 US        2167 N748UW  LGA    DCA         57      214     6      0
+##  8  2013    11     1      554            600        -6      659            701        -2 US        2134 N742PS  LGA    BOS         40      184     6      0
+##  9  2013    11     1      554            600        -6      826            827        -1 DL         563 N912DE  LGA    ATL        126      762     6      0
+## 10  2013    11     1      554            600        -6      749            751        -2 DL         731 N315NB  LGA    DTW         93      502     6      0
+## # ... with 55,393 more rows, and 1 more variable: time_hour &lt;dttm&gt;</code></pre>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introducción-a-tidyverse.html#cb37-1"></a><span class="kw">filter</span>(flights, <span class="op">!</span>(arr_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">120</span> <span class="op">|</span><span class="st"> </span>dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">120</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 316,050 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
-##  1  2013     1     1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH        227
-##  2  2013     1     1      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH        227
-##  3  2013     1     1      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA        160
-##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN        183
-##  5  2013     1     1      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL        116
-##  6  2013     1     1      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD        150
-##  7  2013     1     1      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL        158
-##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD         53
-##  9  2013     1     1      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO        140
-## 10  2013     1     1      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD        138
-## # ... with 316,040 more rows, and 4 more variables: distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time distance  hour minute
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1  2013     1     1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH        227     1400     5     15
+##  2  2013     1     1      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH        227     1416     5     29
+##  3  2013     1     1      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA        160     1089     5     40
+##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN        183     1576     5     45
+##  5  2013     1     1      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL        116      762     6      0
+##  6  2013     1     1      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD        150      719     5     58
+##  7  2013     1     1      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL        158     1065     6      0
+##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD         53      229     6      0
+##  9  2013     1     1      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO        140      944     6      0
+## 10  2013     1     1      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD        138      733     6      0
+## # ... with 316,040 more rows, and 1 more variable: time_hour &lt;dttm&gt;</code></pre>
 </div>
 <div id="ordenar-filas" class="section level3" number="2.4.6">
 <h3><span class="header-section-number">2.4.6</span> Ordenar filas</h3>
 <p>En orden ascendente</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="introducción-a-tidyverse.html#cb39-1"></a><span class="kw">arrange</span>(flights, year, month, day)</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
-##  1  2013     1     1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH        227
-##  2  2013     1     1      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH        227
-##  3  2013     1     1      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA        160
-##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN        183
-##  5  2013     1     1      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL        116
-##  6  2013     1     1      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD        150
-##  7  2013     1     1      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL        158
-##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD         53
-##  9  2013     1     1      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO        140
-## 10  2013     1     1      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD        138
-## # ... with 336,766 more rows, and 4 more variables: distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time distance  hour minute
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1  2013     1     1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH        227     1400     5     15
+##  2  2013     1     1      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH        227     1416     5     29
+##  3  2013     1     1      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA        160     1089     5     40
+##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN        183     1576     5     45
+##  5  2013     1     1      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL        116      762     6      0
+##  6  2013     1     1      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD        150      719     5     58
+##  7  2013     1     1      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL        158     1065     6      0
+##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD         53      229     6      0
+##  9  2013     1     1      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO        140      944     6      0
+## 10  2013     1     1      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD        138      733     6      0
+## # ... with 336,766 more rows, and 1 more variable: time_hour &lt;dttm&gt;</code></pre>
 <p>y descendente</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="introducción-a-tidyverse.html#cb41-1"></a><span class="kw">arrange</span>(flights, <span class="kw">desc</span>(dep_delay))</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
-##  1  2013     1     9      641            900      1301     1242           1530      1272 HA          51 N384HA  JFK    HNL        640
-##  2  2013     6    15     1432           1935      1137     1607           2120      1127 MQ        3535 N504MQ  JFK    CMH         74
-##  3  2013     1    10     1121           1635      1126     1239           1810      1109 MQ        3695 N517MQ  EWR    ORD        111
-##  4  2013     9    20     1139           1845      1014     1457           2210      1007 AA         177 N338AA  JFK    SFO        354
-##  5  2013     7    22      845           1600      1005     1044           1815       989 MQ        3075 N665MQ  JFK    CVG         96
-##  6  2013     4    10     1100           1900       960     1342           2211       931 DL        2391 N959DL  JFK    TPA        139
-##  7  2013     3    17     2321            810       911      135           1020       915 DL        2119 N927DA  LGA    MSP        167
-##  8  2013     6    27      959           1900       899     1236           2226       850 DL        2007 N3762Y  JFK    PDX        313
-##  9  2013     7    22     2257            759       898      121           1026       895 DL        2047 N6716C  LGA    ATL        109
-## 10  2013    12     5      756           1700       896     1058           2020       878 AA         172 N5DMAA  EWR    MIA        149
-## # ... with 336,766 more rows, and 4 more variables: distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time distance  hour minute
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1  2013     1     9      641            900      1301     1242           1530      1272 HA          51 N384HA  JFK    HNL        640     4983     9      0
+##  2  2013     6    15     1432           1935      1137     1607           2120      1127 MQ        3535 N504MQ  JFK    CMH         74      483    19     35
+##  3  2013     1    10     1121           1635      1126     1239           1810      1109 MQ        3695 N517MQ  EWR    ORD        111      719    16     35
+##  4  2013     9    20     1139           1845      1014     1457           2210      1007 AA         177 N338AA  JFK    SFO        354     2586    18     45
+##  5  2013     7    22      845           1600      1005     1044           1815       989 MQ        3075 N665MQ  JFK    CVG         96      589    16      0
+##  6  2013     4    10     1100           1900       960     1342           2211       931 DL        2391 N959DL  JFK    TPA        139     1005    19      0
+##  7  2013     3    17     2321            810       911      135           1020       915 DL        2119 N927DA  LGA    MSP        167     1020     8     10
+##  8  2013     6    27      959           1900       899     1236           2226       850 DL        2007 N3762Y  JFK    PDX        313     2454    19      0
+##  9  2013     7    22     2257            759       898      121           1026       895 DL        2047 N6716C  LGA    ATL        109      762     7     59
+## 10  2013    12     5      756           1700       896     1058           2020       878 AA         172 N5DMAA  EWR    MIA        149     1085    17      0
+## # ... with 336,766 more rows, and 1 more variable: time_hour &lt;dttm&gt;</code></pre>
 <p>NOTA: los valores missing están situados al final</p>
 </div>
 <div id="seleccionar-columnas-e.g.-variables" class="section level3" number="2.4.7">
@@ -622,19 +633,19 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <p>también podemos seleccionar todas las columnas menos algunas</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="introducción-a-tidyverse.html#cb47-1"></a>dplyr<span class="op">::</span><span class="kw">select</span>(flights, <span class="op">-</span>(year<span class="op">:</span>day))</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 x 16
-##    dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time distance  hour minute
-##       &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-##  1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH        227     1400     5     15
-##  2      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH        227     1416     5     29
-##  3      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA        160     1089     5     40
-##  4      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN        183     1576     5     45
-##  5      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL        116      762     6      0
-##  6      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD        150      719     5     58
-##  7      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL        158     1065     6      0
-##  8      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD         53      229     6      0
-##  9      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO        140      944     6      0
-## 10      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD        138      733     6      0
-## # ... with 336,766 more rows, and 1 more variable: time_hour &lt;dttm&gt;</code></pre>
+##    dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time distance  hour minute time_hour          
+##       &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dttm&gt;             
+##  1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH        227     1400     5     15 2013-01-01 05:00:00
+##  2      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH        227     1416     5     29 2013-01-01 05:00:00
+##  3      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA        160     1089     5     40 2013-01-01 05:00:00
+##  4      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN        183     1576     5     45 2013-01-01 05:00:00
+##  5      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL        116      762     6      0 2013-01-01 06:00:00
+##  6      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD        150      719     5     58 2013-01-01 05:00:00
+##  7      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL        158     1065     6      0 2013-01-01 06:00:00
+##  8      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD         53      229     6      0 2013-01-01 06:00:00
+##  9      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO        140      944     6      0 2013-01-01 06:00:00
+## 10      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD        138      733     6      0 2013-01-01 06:00:00
+## # ... with 336,766 more rows</code></pre>
 <p>Existen numerosas funciones que pueden ser de mucha utilidad para hacer selecciones más complejas y rápidas dentro de la función <code>select()</code></p>
 <ul>
 <li><p><code>starts_with("abc")</code>: nombres que empiezan con “abc”.</p></li>
