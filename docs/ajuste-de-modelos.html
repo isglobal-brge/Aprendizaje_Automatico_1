@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-09-27" />
+<meta name="date" content="2020-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -275,7 +275,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Con <em>selección hacia atrás</em> comenzamos con un modelo completo (todos los términos disponibles) y eliminamos variables en serie (una a una). Si el modelo es mejor después de eliminar una variable, lo dejamos fuera. Continuamos hasta que se hayan probado todas las variables como podemos ver en la siguiente figura:</p>
 <div class="figure">
-<img src="figures/fwd_stepwise.png" style="width:40.0%" alt="" />
+<img src="figures/bwd_stepwise.png" style="width:40.0%" alt="" />
 <p class="caption">Selección hacia atrás</p>
 </div>
 <p><em>Selección hacia adelante seguida de selección hacia atrás (saltos)</em>. Consiste en ir realizando en cada paso una selección hacia adelante o hacia atrás en función del mejor paso que podamos hacer.</p>
@@ -482,7 +482,7 @@ donde <span class="math inline">\(\ln(L_{c})\)</span> es el logaritmo de la prob
 <h2><span class="header-section-number">5.5</span> Validación cruzada</h2>
 <p>La validación cruzada (CV por sus siglas en inglés) es la técnica que usamos para evaluar si un modelo está sobreajustado y para estimar cómo funcionará con nuevos datos.</p>
 <p>El sobreajuste es un peligro importante en el análisis predictivo, especialmente cuando se utilizan algoritmos de aprendizaje automático que, sin el ajuste adecuado, puede aprender datos de nuestra muestra casi a la perfección, esencialmente ajustando el ruido (o variabilidad). Cuando se utiliza un modelo de este tipo para predecir nuevos datos, con un ruido (o variabilidad) diferente, el rendimiento del modelo puede ser sorprendentemente malo. Usamos CV para ayudarnos a identificar y evitar tales situaciones. ¿Cómo podemos hacer esto? Muchos algoritmos de aprendizaje automático requieren que el usuario especifique ciertos parámetros (hiper-parámetros). Veremos más adelante que, por ejemplo, necesitaremos especificar un valor para <span class="math inline">\(m\)</span> que corresponde al número de predictores elegidos al azar que se utilizarán en cada división de árbol cuando usemos “random forest” como algoritmo de aprendizaje. Cuanto menor sea <span class="math inline">\(m\)</span>, más simple será el árbol. Podemos usar CV para elegir el valor de <span class="math inline">\(m\)</span> que minimiza la variación y reduce el sobreajuste. La regresión lineal no tiene parámetros que debe especificar el usuario, pero la CV aún nos ayuda a evaluar cuánto podría sobreajustarse un modelo a los datos de muestra.</p>
-<p>De manera breve, los algorithmos de cross-validation se pueden resumir como:</p>
+<p>De manera breve, los algoritmos de cross-validation se pueden resumir como:</p>
 <ul>
 <li>Reserva una parte pequeña de los datos</li>
 <li>Crea (o entrena) el modelo usando el resto de datos</li>

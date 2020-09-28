@@ -59,7 +59,7 @@ Con *selección hacia adelante* comenzamos con un modelo nulo (solo contiene el 
 
 Con *selección hacia atrás* comenzamos con un modelo completo (todos los términos disponibles) y eliminamos variables en serie (una a una). Si el modelo es mejor después de eliminar una variable, lo dejamos fuera. Continuamos hasta que se hayan probado todas las variables  como podemos ver en la siguiente figura:
 
-![Selección hacia atrás](figures/fwd_stepwise.png){width=40%}
+![Selección hacia atrás](figures/bwd_stepwise.png){width=40%}
 
 *Selección hacia adelante seguida de selección hacia atrás (saltos)*. Consiste en ir realizando en cada paso una selección hacia adelante o hacia atrás en función del mejor paso que podamos hacer.
 
@@ -173,7 +173,7 @@ La validación cruzada (CV por sus siglas en inglés) es la técnica que usamos 
 El sobreajuste es un peligro importante en el análisis predictivo, especialmente cuando se utilizan algoritmos de aprendizaje automático que, sin el ajuste adecuado, puede aprender datos de nuestra muestra casi a la perfección, esencialmente ajustando el ruido (o variabilidad). Cuando se utiliza un modelo de este tipo para predecir nuevos datos, con un ruido (o variabilidad) diferente, el rendimiento del modelo puede ser sorprendentemente malo. Usamos CV para ayudarnos a identificar y evitar tales situaciones. ¿Cómo podemos hacer esto? Muchos algoritmos de aprendizaje automático requieren que el usuario especifique ciertos parámetros (hiper-parámetros). Veremos más adelante que, por ejemplo, necesitaremos especificar un valor para $m$ que corresponde al número de predictores elegidos al azar que se utilizarán en cada división de árbol cuando usemos "random forest" como algoritmo de aprendizaje. Cuanto menor sea $m$, más simple será el árbol. Podemos usar CV para elegir el valor de $m$ que minimiza la variación y reduce el sobreajuste. La regresión lineal no tiene parámetros que debe especificar el usuario, pero la CV aún nos ayuda a evaluar cuánto podría sobreajustarse un modelo a los datos de muestra.
 
 
-De manera breve, los algorithmos de cross-validation se pueden resumir como:
+De manera breve, los algoritmos de cross-validation se pueden resumir como:
 
    - Reserva una parte pequeña de los datos
    - Crea (o entrena) el modelo usando el resto de datos
