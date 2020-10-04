@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-09-28" />
+<meta name="date" content="2020-10-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -219,9 +219,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.6" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#imputación-de-datos-faltantes"><i class="fa fa-check"></i><b>5.6</b> Imputación de datos faltantes</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="regresion-lineal-con-big-data.html"><a href="regresion-lineal-con-big-data.html"><i class="fa fa-check"></i><b>6</b> Regresion lineal con Big Data</a>
+<li class="chapter" data-level="6" data-path="regresión-logística.html"><a href="regresión-logística.html"><i class="fa fa-check"></i><b>6</b> Regresión logística</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="regresion-lineal-con-big-data.html"><a href="regresion-lineal-con-big-data.html#paralelización"><i class="fa fa-check"></i><b>6.1</b> Paralelización</a></li>
+<li class="chapter" data-level="6.1" data-path="regresión-logística.html"><a href="regresión-logística.html#la-función-logit-inversa"><i class="fa fa-check"></i><b>6.1</b> La función logit inversa</a></li>
+<li class="chapter" data-level="6.2" data-path="regresión-logística.html"><a href="regresión-logística.html#ejemplo-de-regresión-logística"><i class="fa fa-check"></i><b>6.2</b> Ejemplo de regresión logística</a></li>
+<li class="chapter" data-level="6.3" data-path="regresión-logística.html"><a href="regresión-logística.html#coeficientes-de-regresión-logística-como-probabilidades"><i class="fa fa-check"></i><b>6.3</b> Coeficientes de regresión logística como probabilidades</a></li>
+<li class="chapter" data-level="6.4" data-path="regresión-logística.html"><a href="regresión-logística.html#coeficientes-de-regresión-logística-como-razones-de-odds"><i class="fa fa-check"></i><b>6.4</b> Coeficientes de regresión logística como razones de odds</a></li>
+<li class="chapter" data-level="6.5" data-path="regresión-logística.html"><a href="regresión-logística.html#bondad-de-ajuste"><i class="fa fa-check"></i><b>6.5</b> Bondad de ajuste</a></li>
+<li class="chapter" data-level="6.6" data-path="regresión-logística.html"><a href="regresión-logística.html#ejemplo-de-regresión-logística-modelización-de-riesgo-diabetes"><i class="fa fa-check"></i><b>6.6</b> Ejemplo de regresión logística: modelización de riesgo diabetes</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="regresión-logística.html"><a href="regresión-logística.html#modelo-simple"><i class="fa fa-check"></i><b>6.6.1</b> Modelo simple</a></li>
+<li class="chapter" data-level="6.6.2" data-path="regresión-logística.html"><a href="regresión-logística.html#agregar-predictores-y-evaluar-el-ajuste"><i class="fa fa-check"></i><b>6.6.2</b> Agregar predictores y evaluar el ajuste</a></li>
+<li class="chapter" data-level="6.6.3" data-path="regresión-logística.html"><a href="regresión-logística.html#análisis-de-interacciones"><i class="fa fa-check"></i><b>6.6.3</b> Análisis de interacciones</a></li>
+<li class="chapter" data-level="6.6.4" data-path="regresión-logística.html"><a href="regresión-logística.html#gráfico-de-la-interacción"><i class="fa fa-check"></i><b>6.6.4</b> Gráfico de la interacción</a></li>
+<li class="chapter" data-level="6.6.5" data-path="regresión-logística.html"><a href="regresión-logística.html#uso-del-modelo-para-predecir-probabilidades"><i class="fa fa-check"></i><b>6.6.5</b> Uso del modelo para predecir probabilidades</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="regresión-logística.html"><a href="regresión-logística.html#creación-de-un-modelo-y-validación"><i class="fa fa-check"></i><b>6.7</b> Creación de un modelo y validación</a></li>
+<li class="chapter" data-level="6.8" data-path="regresión-logística.html"><a href="regresión-logística.html#nomogramas"><i class="fa fa-check"></i><b>6.8</b> Nomogramas</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -246,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Aprendizaje Automático 1</h1>
 <p class="author"><em>Juan R González</em></p>
-<p class="date"><em>2020-09-28</em></p>
+<p class="date"><em>2020-10-04</em></p>
 </div>
 <div id="introducción" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introducción</h1>
