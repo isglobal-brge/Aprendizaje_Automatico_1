@@ -515,7 +515,7 @@ Aunque existen otro tipo de herramientas de cálculo vía web para estas probabi
 
 Existen numerosas herramientas para crear nomogramas en R, empecemos con la creación de nomogramas sencillos. Para ello usaremos los datos del ejemplo de diabetes con el modelo que hemos obtenido y validado anteriormente. Para usar la librería `rms` necesitamos que el modelo esté estimado con la función `lrm ()` 
 
-```{r, fig.height=8}
+```{r, fig.height=7, fig.width=8}
 library(rms)
 
 t.data <- datadist(Pima.tr)
@@ -542,7 +542,7 @@ Estos cálculos se pueden programar en R y hace una función, o también una apl
 
 ```{r, eval=FALSE}
 library(DynNom)
-DynNom(bin_model2, d)
+DynNom(mod, Pima.tr)
 ```
 
 Con estas simples instrucciones obtendríamos esta aplicación Shiny (Figura abajo) donde cada intervalo de confianza corresponde a un cálculo obtenido variando alguna de las variables predictoras

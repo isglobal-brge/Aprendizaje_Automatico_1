@@ -293,7 +293,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb305-4"><a href="regresión-logística.html#cb305-4"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb305-5"><a href="regresión-logística.html#cb305-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(logit<span class="op">^-</span><span class="dv">1</span>,<span class="st">&quot;(x)&quot;</span>))) <span class="op">+</span></span>
 <span id="cb305-6"><a href="regresión-logística.html#cb305-6"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;y = &quot;</span>, logit<span class="op">^-</span><span class="dv">1</span>,<span class="st">&quot;(x)&quot;</span>)))</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-92-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-91-1.png" width="672" /></p>
 <p>Los valores <span class="math inline">\(x\)</span>, que van de -6 a 6, son comprimidos por la función logit inversa en el rango 0-1. El logit inverso es curvo, por lo que la diferencia esperada en <span class="math inline">\(y\)</span> correspondiente a una diferencia fija en <span class="math inline">\(x\)</span> no es constante. A valores bajos y valores altos de <span class="math inline">\(x\)</span>, un cambio de unidad corresponde a un cambio muy pequeño en <span class="math inline">\(y\)</span>, mientras que en la mitad de la curva un pequeño cambio en <span class="math inline">\(x\)</span> corresponde a un cambio relativamente grande en <span class="math inline">\(y\)</span>. En la regresión lineal, la diferencia esperada en <span class="math inline">\(y\)</span> correspondiente a una diferencia fija en <span class="math inline">\(x\)</span> es, por el contrario, constante. <em>Por lo tanto, cuando interpretamos los resultados logísticos debemos elegir en qué parte de la curva queremos evaluar la probabilidad del resultado, dado el modelo.</em></p>
 </div>
 <div id="ejemplo-de-regresión-logística" class="section level2" number="6.2">
@@ -310,7 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="regresión-logística.html#cb308-1"></a><span class="kw">ggplot</span>(Default, <span class="kw">aes</span>(<span class="dt">x =</span> balance, <span class="dt">y =</span> income, <span class="dt">col =</span> default)) <span class="op">+</span></span>
 <span id="cb308-2"><a href="regresión-logística.html#cb308-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.4</span>) <span class="op">+</span></span>
 <span id="cb308-3"><a href="regresión-logística.html#cb308-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Balance vs. Income by Default&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-93-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-92-1.png" width="672" /></p>
 <div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="regresión-logística.html#cb309-1"></a><span class="kw">grid.arrange</span>(</span>
 <span id="cb309-2"><a href="regresión-logística.html#cb309-2"></a><span class="kw">ggplot</span>(Default, <span class="kw">aes</span>(default, balance)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb309-3"><a href="regresión-logística.html#cb309-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
@@ -321,7 +321,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb309-8"><a href="regresión-logística.html#cb309-8"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Income by Default&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb309-9"><a href="regresión-logística.html#cb309-9"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;income&quot;</span>),</span>
 <span id="cb309-10"><a href="regresión-logística.html#cb309-10"></a><span class="dt">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-93-2.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-92-2.png" width="672" /></p>
 <p>Claramente, los valores altos de saldo están asociados con el incumplimiento en todos los niveles de ingresos. Esto sugiere que los ingresos en realidad no son un fuerte predictor de incumplimiento, en comparación con el saldo, que es exactamente lo que vemos en los diagramas de cajas.</p>
 <p>Exploremos estas relaciones usando la regresión logística. En R ajustamos un modelo logístico usando la función <code>glm ()</code> con <code>family = binomial</code>.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> Centraremos y escalaremos las variables para facilitar la interpretación.</p>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="regresión-logística.html#cb310-1"></a><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>balance <span class="op">+</span><span class="st"> </span>income, </span>
@@ -523,7 +523,7 @@ e^{\text{log} \left(\frac{p}{1-p}\right) + \beta} = \frac{p}{1-p} *e^ \beta
 <span id="cb338-3"><a href="regresión-logística.html#cb338-3"></a><span class="kw">invisible</span>(<span class="kw">plot</span>(<span class="kw">roc</span>(<span class="kw">factor</span>(<span class="kw">ifelse</span>(Default<span class="op">$</span>default <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)), </span>
 <span id="cb338-4"><a href="regresión-logística.html#cb338-4"></a>                   <span class="kw">fitted</span>(logistic_model2)), <span class="dt">print.thres =</span> <span class="kw">c</span>(.<span class="dv">1</span>, <span class="fl">.5</span>), </span>
 <span id="cb338-5"><a href="regresión-logística.html#cb338-5"></a>               <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">print.auc =</span> T))</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-107-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-106-1.png" width="672" /></p>
 <p>Un modelo con una precisión del 50%, es decir, un clasificador aleatorio, tendría una curva ROC que siguiera la línea de referencia diagonal. Un modelo con una precisión del 100%, un clasificador perfecto, tendría una curva ROC siguiendo los márgenes del triángulo superior. Cada punto de la curva ROC representa un par de sensibilidad / especificidad correspondiente a un umbral de decisión particular. Cuando establecimos el umbral de decisión en .1, la sensibilidad fue .73 (243 / (243 + 90)) y la especificidad fue .94 (9105 / (9105 + 562)). Ese punto se muestra en la curva. Del mismo modo, cuando establecimos el umbral de decisión en .5, la sensibilidad fue .32 y la especificidad fue .996. Ese punto también está en la curva. ¿Qué umbral de decisión es óptimo? Nuevamente, depende del problema (pensad en cáncer o en este ejemplo de dinero). Las curvas ROC nos permiten elegir los errores específicos de clase que podemos cometer.</p>
 <p>El AUC es el resumen de cómo funciona el modelo en cada umbral de decisión. En general, los modelos con AUC más altos son mejores. Esta medida nos servirá para comparar métodos de aprendizaje automático que iremos aprendiendo durante el curso.</p>
 </div>
@@ -634,7 +634,7 @@ e^{\text{log} \left(\frac{p}{1-p}\right) + \beta} = \frac{p}{1-p} *e^ \beta
 <span id="cb351-7"><a href="regresión-logística.html#cb351-7"></a>               <span class="dt">print.auc =</span> T, </span>
 <span id="cb351-8"><a href="regresión-logística.html#cb351-8"></a>               <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, </span>
 <span id="cb351-9"><a href="regresión-logística.html#cb351-9"></a>               <span class="dt">add =</span> T))</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-114-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-113-1.png" width="672" /></p>
 <p>El modelo más grande es claramente mejor: el AUC es más alto.</p>
 </div>
 <div id="análisis-de-interacciones" class="section level3" number="6.6.3">
@@ -681,13 +681,13 @@ e^{\text{log} \left(\frac{p}{1-p}\right) + \beta} = \frac{p}{1-p} *e^ \beta
 <span id="cb354-6"><a href="regresión-logística.html#cb354-6"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb354-7"><a href="regresión-logística.html#cb354-7"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="kw">aes</span>(glu, prob, <span class="dt">col =</span> ped_bin), <span class="dt">se =</span> F) <span class="op">+</span></span>
 <span id="cb354-8"><a href="regresión-logística.html#cb354-8"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Pr(diabetes)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Diabetes ~ glu varying by ped_bin&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-116-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-115-1.png" width="672" /></p>
 <p>La relación entre glu y diabetes depende claramente de los niveles de ped. Como en el caso lineal, las líneas no paralelas indican una interacción. El coeficiente de <em>log-odds</em> negativo para la interacción del modelo indica que a medida que ped aumenta, la fuerza de la relación entre glu y type (diabetes) disminuye. Esto es exactamente lo que vemos en este gráfico:</p>
 <div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="regresión-logística.html#cb355-1"></a><span class="kw">ggplot</span>(d, <span class="kw">aes</span>(ped, type_num)) <span class="op">+</span></span>
 <span id="cb355-2"><a href="regresión-logística.html#cb355-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb355-3"><a href="regresión-logística.html#cb355-3"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="kw">aes</span>(ped, prob, <span class="dt">col =</span> glu_bin), <span class="dt">se =</span> F) <span class="op">+</span></span>
 <span id="cb355-4"><a href="regresión-logística.html#cb355-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Pr(diabetes)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Diabetes ~ ped varying by glu_bin&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-117-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-116-1.png" width="672" /></p>
 <p>La interacción es más difícil de ver aquí porque la escala de ped está comprimida, con la mayoría de las observaciones cercanas a 0. Sin embargo, podemos ver que a medida que glu aumenta, la fuerza de la relación entre ped y diabetes disminuye. Nuevamente, las líneas no paralelas indican la presencia de una interacción.</p>
 </div>
 <div id="uso-del-modelo-para-predecir-probabilidades" class="section level3" number="6.6.5">
@@ -883,7 +883,7 @@ e^{\text{log} \left(\frac{p}{1-p}\right) + \beta} = \frac{p}{1-p} *e^ \beta
 <span id="cb368-7"><a href="regresión-logística.html#cb368-7"></a></span>
 <span id="cb368-8"><a href="regresión-logística.html#cb368-8"></a>nom &lt;-<span class="st"> </span><span class="kw">nomogram</span>(mod.lrm, <span class="dt">fun =</span> plogis, <span class="dt">funlabel=</span><span class="st">&quot;Risk of diabetes&quot;</span>)</span>
 <span id="cb368-9"><a href="regresión-logística.html#cb368-9"></a><span class="kw">plot</span>(nom)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-122-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-121-1.png" width="768" /></p>
 <p>Supongamos que llega a la consulta una persona con un bmi de 35. Eso sumaría 30 puntos (basta con subir hacia arriba y ver qué valor de ‘Points’ corresponde a un bmi de 35). Una edad de 50 años (~22 puntos), una función del pedigrí de la diabetes de 1.8 (~62 puntos), una glucosa de 120 (~50 puntos) y 0 embarazos que sumaría 0 puntos. En total, el paciente suma un total de 164 puntos. Si ahora vamos a la línea de ‘Total Points’ y proyectamos sobre el predictor lineal de aproximadamente ~1.9 que se asocia con un riesgo de diabetes ligeramente superior al 80% (proyectar sobre ‘Risk of diabetes’).</p>
 <p>Obviamente estos cálculos se pueden hacer de forma más directa calculando la predicción sobre este individuo con el objeto de R</p>
 <div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="regresión-logística.html#cb369-1"></a>indiv &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">bmi=</span><span class="dv">35</span>, <span class="dt">age=</span><span class="dv">50</span>, <span class="dt">ped=</span><span class="fl">1.8</span>, <span class="dt">glu=</span><span class="dv">120</span>, <span class="dt">npreg=</span><span class="dv">0</span>)</span>
@@ -895,7 +895,7 @@ e^{\text{log} \left(\frac{p}{1-p}\right) + \beta} = \frac{p}{1-p} *e^ \beta
 ## 0.8690262</code></pre>
 <p>Estos cálculos se pueden programar en R y hace una función, o también una aplicación Shiny para aquellos médicos que no sepan usar R (los nomogramas se siguen utilizando). Otra opción es que hagamos uso de una librería para hacer nomogramas dinámicos (crea Shiny app) de forma sencilla con la librería <code>DynNom</code></p>
 <div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="regresión-logística.html#cb373-1"></a><span class="kw">library</span>(DynNom)</span>
-<span id="cb373-2"><a href="regresión-logística.html#cb373-2"></a><span class="kw">DynNom</span>(bin_model2, d)</span></code></pre></div>
+<span id="cb373-2"><a href="regresión-logística.html#cb373-2"></a><span class="kw">DynNom</span>(mod, Pima.tr)</span></code></pre></div>
 <p>Con estas simples instrucciones obtendríamos esta aplicación Shiny (Figura abajo) donde cada intervalo de confianza corresponde a un cálculo obtenido variando alguna de las variables predictoras</p>
 <div class="figure">
 <img src="figures/nomograma.png" alt="" />
