@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-10-04" />
+<meta name="date" content="2020-10-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -410,12 +410,15 @@ e^{\text{log} \left(\frac{p}{1-p}\right) + \beta} = \frac{p}{1-p} *e^ \beta
 <pre><code>## [1] 1578.966</code></pre>
 <p>En este caso, la <em>deviance</em> se redujo en más de 1, lo que indica que los ingresos mejoran el ajuste del modelo. Podemos hacer una prueba formal de la diferencia usando, como para los modelos lineales, la prueba de razón de verosimilitud:</p>
 <div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="regresión-logística.html#cb324-1"></a><span class="kw">lrtest</span>(logistic_model1, logistic_model2)</span></code></pre></div>
-<pre><code>## 
+<pre><code>## Likelihood ratio test
+## 
 ## Model 1: default ~ balance
 ## Model 2: default ~ balance + income
-## 
-##   L.R. Chisq         d.f.            P 
-## 1.748541e+01 1.000000e+00 2.895205e-05</code></pre>
+##   #Df  LogLik Df  Chisq Pr(&gt;Chisq)    
+## 1   2 -798.23                         
+## 2   3 -789.48  1 17.485  2.895e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>También podemos traducir las probabilidades de un modelo logístico para el incumplimiento del pago en predicciones de clase asignando “Sí” (predeterminado) a probabilidades mayores o iguales a .5 y “No” (sin valor predeterminado) a probabilidades menores que .5, y luego contar el número de veces que el modelo asigna la clase predeterminada correcta. Si dividimos este número por el total de observaciones, habremos calculado la “precisión”. La precisión se utiliza a menudo como medida del rendimiento del modelo.</p>
 <div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="regresión-logística.html#cb326-1"></a>preds &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">fitted</span>(logistic_model2) <span class="op">&gt;=</span><span class="st"> </span><span class="fl">.5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>) </span>
 <span id="cb326-2"><a href="regresión-logística.html#cb326-2"></a>(<span class="kw">length</span>(<span class="kw">which</span>(preds <span class="op">==</span><span class="st"> </span>Default<span class="op">$</span>default)) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(Default))<span class="op">*</span><span class="dv">100</span></span></code></pre></div>
@@ -605,12 +608,15 @@ e^{\text{log} \left(\frac{p}{1-p}\right) + \beta} = \frac{p}{1-p} *e^ \beta
 ##   residual deviance = 466.5, null deviance = 676.8 (difference = 210.3)</code></pre>
 <p>La <em>deviance</em> disminuye de 577 en el modelo anterior a 466.5 en este modelo, muy por encima de los 4 puntos que debería bajar simplemente al incluir 4 predictores adicionales. Además, el LRT nos indica que estas diferencias son estadísticamente significativas:</p>
 <div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="regresión-logística.html#cb345-1"></a><span class="kw">lrtest</span>(bin_model1, bin_model2)</span></code></pre></div>
-<pre><code>## 
+<pre><code>## Likelihood ratio test
+## 
 ## Model 1: type ~ bmi + age
 ## Model 2: type ~ bmi + age + ped + glu + npreg + bp
-## 
-## L.R. Chisq       d.f.          P 
-##   110.6664     4.0000     0.0000</code></pre>
+##   #Df  LogLik Df  Chisq Pr(&gt;Chisq)    
+## 1   3 -288.60                         
+## 2   7 -233.27  4 110.67  &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>El segundo modelo es mucho mejor que el primero, lo que también es evidente cuando observamos las matrices de confusión (con el umbral de decisión establecido en .5)</p>
 <div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="regresión-logística.html#cb347-1"></a>preds &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">ifelse</span>(<span class="kw">fitted</span>(bin_model1) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
 <span id="cb347-2"><a href="regresión-logística.html#cb347-2"></a><span class="kw">confusionMatrix</span>(preds, d<span class="op">$</span>type)<span class="op">$</span>table</span></code></pre></div>
@@ -901,6 +907,52 @@ e^{\text{log} \left(\frac{p}{1-p}\right) + \beta} = \frac{p}{1-p} *e^ \beta
 <img src="figures/nomograma.png" alt="" />
 <p class="caption">Nomograma para el modelo de predicción para diabetes</p>
 </div>
+<table style="width:94%;">
+<colgroup>
+<col width="94%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>EJERCICIO</strong> (Entrega en Moodle: P-Práctica regresión logística):</td>
+</tr>
+<tr class="even">
+<td align="left">En esta página <a href="https://vincentarelbundock.github.io/Rdatasets/datasets.html" class="uri">https://vincentarelbundock.github.io/Rdatasets/datasets.html</a> tienes acceso a cientos de bases de datos que hay en R y que también puedes descargar como ficheros .csv.</td>
+</tr>
+<tr class="odd">
+<td align="left">Elige una base de datos donde la pregunta científica requiera el análisis de una variable respuesta binaria. Selecciona unas 8-10 variables independientes (intenta que hayan categóricas y continuas). Crea un pdf en el que muestres un análisis completo de los datos incluyendo:</td>
+</tr>
+<tr class="even">
+<td align="left">1. Descripción de tu pregunta científica</td>
+</tr>
+<tr class="odd">
+<td align="left">2. Análisis descriptivo de las variables independientes en función de tu variable respuesta</td>
+</tr>
+<tr class="even">
+<td align="left">3. Imputación de datos en caso de ser necesario</td>
+</tr>
+<tr class="odd">
+<td align="left">4. Creación de un modelo predictivo</td>
+</tr>
+<tr class="even">
+<td align="left">5. Descripción de las ORs para el modelo final</td>
+</tr>
+<tr class="odd">
+<td align="left">6. Validación del modelo mediante CV</td>
+</tr>
+<tr class="even">
+<td align="left">7. Descripción de la capacidad predictiva del modelo (Sensibilidad, Precisión, curva ROC, …)</td>
+</tr>
+<tr class="odd">
+<td align="left">8. Creación de un nomograma estático que incluya la ilustración del cálculo de riesgo para un individuo ficticio.</td>
+</tr>
+<tr class="even">
+<td align="left">9. Apéndice con el código R utilizado</td>
+</tr>
+<tr class="odd">
+<td align="left">Se trata de crear un documento de unas 2-3 páginas (figuras y tablas aparte) explicando los principales resultados del estudio donde cada párrafo podría corresponder a cada una de las tareas anteriores. El documento debe incluir las tablas y/o figuras que creas conveniente que sostengan los resultados descritos en el documento. Se trata de intentar escribir el apartado de resultados de un artículo científico. Antes de escribir este apartado de resultados, el documento deberá empezar con un apartado breve de métodos describiendo los datos (brevemente - podéis usar la información que hay en la página de donde habéis descargado los datos) y los métodos estadísticos utilizados. Aquellos que quieran, lo pueden hacer con R Markdown.</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
