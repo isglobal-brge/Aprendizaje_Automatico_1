@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-10-05" />
+<meta name="date" content="2020-10-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -418,12 +418,12 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <span id="cb13-5"><a href="introducción-a-tidyverse.html#cb13-5"></a></span>
 <span id="cb13-6"><a href="introducción-a-tidyverse.html#cb13-6"></a><span class="co"># Extract by name</span></span>
 <span id="cb13-7"><a href="introducción-a-tidyverse.html#cb13-7"></a>df<span class="op">$</span>x</span></code></pre></div>
-<pre><code>## [1] 0.95367156 0.47759624 0.04818468 0.24569433 0.04531599</code></pre>
+<pre><code>## [1] 0.6013053 0.3191631 0.3842864 0.7869046 0.8002453</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introducción-a-tidyverse.html#cb15-1"></a>df[[<span class="st">&quot;x&quot;</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.95367156 0.47759624 0.04818468 0.24569433 0.04531599</code></pre>
+<pre><code>## [1] 0.6013053 0.3191631 0.3842864 0.7869046 0.8002453</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="introducción-a-tidyverse.html#cb17-1"></a><span class="co"># Extract by position</span></span>
 <span id="cb17-2"><a href="introducción-a-tidyverse.html#cb17-2"></a>df[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.95367156 0.47759624 0.04818468 0.24569433 0.04531599</code></pre>
+<pre><code>## [1] 0.6013053 0.3191631 0.3842864 0.7869046 0.8002453</code></pre>
 </div>
 <div id="importar-datos" class="section level3" number="2.4.2">
 <h3><span class="header-section-number">2.4.2</span> Importar datos</h3>
@@ -444,10 +444,10 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introducción-a-tidyverse.html#cb19-1"></a><span class="kw">library</span>(readr)</span>
 <span id="cb19-2"><a href="introducción-a-tidyverse.html#cb19-2"></a><span class="kw">system.time</span>(dd1 &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    6.02    0.06    6.09</code></pre>
+##    6.38    0.11    6.50</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introducción-a-tidyverse.html#cb21-1"></a><span class="kw">system.time</span>(dd2 &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>, <span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.41    0.06    0.52</code></pre>
+##    0.47    0.02    0.51</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="introducción-a-tidyverse.html#cb23-1"></a><span class="kw">dim</span>(dd2)</span></code></pre></div>
 <pre><code>## [1] 733202      5</code></pre>
 <p>Efectivamente ambos objetos contienen la misma información</p>

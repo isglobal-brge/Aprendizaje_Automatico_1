@@ -373,6 +373,15 @@ carseats_imp <- mice(carseats_miss, printFlag = F)
 
 El objeto `carseats_imp` incluye (entre muchas otras cosas) $m$ conjuntos de datos imputados (la configuración predeterminada es $m$ = 5). Los conjuntos de datos imputados difieren porque las imputaciones se extraen aleatoriamente de distribuciones de valores plausibles. Podemos visualizar la variabilidad de los predictores en estos conjuntos de datos imputados usando la función `densityplot ()`.
 
+
+```{r}
+library(lattice)
+densityplot(carseats_imp)
+```
+
+Las líneas azules continuas representan la distribución real de los predictores, mientras que las líneas rojas muestran las distribuciones imputadas. El siguiente paso es usar estos conjuntos de datos imputados para promediar los $\beta$s y los SE utilizando la función `pool ()` de la librería `mice`.
+
+
 ```{r}
 carseats_model_imp <- with(data = carseats_imp, 
      exp = lm(Sales ~ CompPrice + Income + Advertising + Population + Price))
@@ -382,16 +391,16 @@ mi <- summary(pool(carseats_model_imp))
 
 Estos coeficientes son similares a los del modelo anterior ajustado utilizando los datos no imputados, pero deberían estar más cerca de los valores de la población porque, en lugar de simplemente eliminar los casos incompletos, utiliza información de distribución para hacer suposiciones fundamentadas sobre los datos faltantes. La imputación múltiple funciona mejor para fines de descripción --- estimar coeficientes para informar en un artículo académico, por ejemplo --- pero usarla para predecir nuevos datos es incómodo o imposible, por las siguientes razones:
 
-- Si los nuevos datos están completos, podemos utilizar las estimaciones de coeficientes derivadas de la imputación múltiple en una ecuación de regresión para la predicción. Pero esto es difícil. Usamos los datos originales de Carseats como ilustración.
+- Si los nuevos datos están completos, podemos utilizar las estimaciones de coeficientes derivadas de la imputación múltiple en una ecuación de regresión para la predicción. Pero esto es difícil ya que hay que hacerlo manualmente. Usamos los datos originales de Carseats como ilustración.
 
 
 ```{r}
-preds <- mi[1, 1] + 
-  mi[2, 1]*Carseats$CompPrice +
-  mi[3, 1]*Carseats$Income +
-  mi[4, 1]*Carseats$Advertising +
-  mi[5, 1]*Carseats$Population +
-  mi[6, 1]*Carseats$Price
+preds <- mi[1, 2] + 
+  mi[2, 2]*Carseats$CompPrice +
+  mi[3, 2]*Carseats$Income +
+  mi[4, 2]*Carseats$Advertising +
+  mi[5, 2]*Carseats$Population +
+  mi[6, 2]*Carseats$Price
   
    
 head(preds)
@@ -401,12 +410,12 @@ head(preds)
 
 
 ```{r}
-preds <- mi[1, 1] + 
-  mi[2, 1]*carseats_miss$CompPrice +
-  mi[3, 1]*carseats_miss$Income +
-  mi[4, 1]*carseats_miss$Advertising +
-  mi[5, 1]*carseats_miss$Population +
-  mi[6, 1]*carseats_miss$Price
+preds <- mi[1, 2] + 
+  mi[2, 2]*carseats_miss$CompPrice +
+  mi[3, 2]*carseats_miss$Income +
+  mi[4, 2]*carseats_miss$Advertising +
+  mi[5, 2]*carseats_miss$Population +
+  mi[6, 2]*carseats_miss$Price
   
    
 head(preds)
