@@ -692,6 +692,34 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 <div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="dealing-with-big-data-in-r.html#cb432-1"></a><span class="co"># error</span></span>
 <span id="cb432-2"><a href="dealing-with-big-data-in-r.html#cb432-2"></a><span class="kw">sum</span>((beta <span class="op">-</span><span class="st"> </span><span class="kw">coef</span>(mod)) <span class="op">**</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 2.607678e-28</code></pre>
+<table style="width:94%;">
+<colgroup>
+<col width="94%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>EJERCICIO</strong> (Entrega en Moodle: P2-MapReduce):</td>
+</tr>
+<tr class="even">
+<td align="left">Realiza todos las operaciones que puedas usando Map() o Reduce() para resolver los siguientes ejercicios:</td>
+</tr>
+<tr class="odd">
+<td align="left">1. Genera una lista con 3 vectores que tenga 10 letras seleccionadas al azar (usa <code>letters</code>). Devuelve la intersección de esos tres vectores (<code>intersect()</code>).</td>
+</tr>
+<tr class="even">
+<td align="left">2. Crea una función a la que se le pase una lista con varios vectores de datos continuos (pueden tener distinto tamaño) y que devuelva la media de todos los datos. Pista: usa la idea de la media ponderada. Úsala para calular la media en este ejemplo:</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>X &lt;- list(estudio1=c(120, 134, 156, 167, 122), estudio2=c(134, 116, 123), estudio3=c(110, 145, 124, 145, 160, 134, 122), estudio4=c(114, 113, 129, 178, 155, 144, 134, 145))</code></td>
+</tr>
+<tr class="even">
+<td align="left">3. Genera una lista con 4 vectores de tamaño 100 correspondientes a una Normal de media 0 y desviación standard 6. Considera que cada vector es una medida repetida de 100 individuos. Calcula la media de las 4 medidas para los 100 individuos y comprueba que se cumple el teorema central del límite.</td>
+</tr>
+<tr class="odd">
+<td align="left">4. Re-implementa la función que hay en la solución para LOOCV que vimos en clase usando MapReduce.</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
