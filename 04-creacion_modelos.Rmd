@@ -222,7 +222,7 @@ results
 
 Podemos ver que el modelo completo está sobreajustado --- el RMSE dentro de la muestra es mejor que el RMSE fuera de muestra --- mientras que el modelo seleccionado elegido por `regsubsets ()` usando BIC no está sobreajustado. De hecho, el modelo seleccionado funciona mucho mejor fuera de la muestra que dentro de la muestra, aunque este resultado en particular es probablemente una cuestión de azar, una función de división aleatoria que estamos usando. Sin embargo, en general, estos resultados ilustran el peligro de la complejidad del modelo y por qué tiene sentido elegir predictores utilizando medidas de ajuste del modelo que penalicen la complejidad. Los modelos simples tienden a generalizar mejor. Esta figura muestra estas relaciones:
 
-![Sobreajuste](overfit.png)
+![Sobreajuste](figures/overfit.png)
 
 
 ### Leave-one-out cross validation (LOOCV)

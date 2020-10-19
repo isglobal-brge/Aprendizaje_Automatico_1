@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-10-06" />
+<meta name="date" content="2020-10-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -236,6 +236,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.7" data-path="regresión-logística.html"><a href="regresión-logística.html#creación-de-un-modelo-y-validación"><i class="fa fa-check"></i><b>6.7</b> Creación de un modelo y validación</a></li>
 <li class="chapter" data-level="6.8" data-path="regresión-logística.html"><a href="regresión-logística.html#nomogramas"><i class="fa fa-check"></i><b>6.8</b> Nomogramas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html"><i class="fa fa-check"></i><b>7</b> Dealing with Big Data in R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#nodes-cores-processes-and-threads"><i class="fa fa-check"></i><b>7.1</b> Nodes, cores, processes and threads</a></li>
+<li class="chapter" data-level="7.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#paralelización"><i class="fa fa-check"></i><b>7.2</b> Paralelización</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#shared-memory-programming"><i class="fa fa-check"></i><b>7.2.1</b> Shared Memory Programming</a></li>
+<li class="chapter" data-level="7.2.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#distributed-memory-programming"><i class="fa fa-check"></i><b>7.2.2</b> Distributed Memory Programming</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#mapreduce"><i class="fa fa-check"></i><b>7.3</b> MapReduce</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#map"><i class="fa fa-check"></i><b>7.3.1</b> Map</a></li>
+<li class="chapter" data-level="7.3.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#reduce"><i class="fa fa-check"></i><b>7.3.2</b> Reduce</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>7.4</b> Example: Linear regression for Big Data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -453,7 +468,7 @@ donde <span class="math inline">\(\ln(L_{c})\)</span> es el logaritmo de la prob
 <p>La función <code>regsubsets ()</code> en el paquete <code>leaps</code> realiza una búsqueda exhaustiva del espacio modelo utilizando el algoritmo de saltos (adelante y atrás) para la selección de variables.</p>
 <div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="ajuste-de-modelos.html#cb280-1"></a><span class="kw">library</span>(leaps)</span>
 <span id="cb280-2"><a href="ajuste-de-modelos.html#cb280-2"></a><span class="kw">plot</span>(<span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters, <span class="dt">method =</span> <span class="st">&quot;exhaustive&quot;</span>, <span class="dt">nbest =</span> <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-85-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-77-1.png" width="672" /></p>
 <p>El gráfico presenta diferentes modelos que pueden ser buenos candidatos organizados según el BIC (<span class="math inline">\(\mathrm{BIC} = {\ln(n) k - 2 \ ln ({L})}\)</span>, donde <span class="math inline">\(L\)</span> es el valor de máxima verosimilitud, <span class="math inline">\(n\)</span> es el número de observaciones, <span class="math inline">\(k\)</span> es el número de parámetros y <span class="math inline">\(ln\)</span> es el logaritmo natural). Como el AIC, el BIC penaliza por la complejidad del modelo. Un BIC más bajo es mejor. El modelo con el BIC más bajo es el bastante simple en la parte superior de la figura: <em>intercept</em>, AtBat, Hits, Walks, CRBI, DivisionW y PutOuts. Si reajustamos un modelo con estos predictores usando <code>lm ()</code> encontramos que tiene un <span class="math inline">\(R^2\)</span> de .51, que tampoco está muy lejos del valor obtenido con un método hacia adelante y con muchísimas menos variables (principio de parsimonia). Notemos que, además, todos los coefecientes de este modelo (a excepción del <em>intercept</em>, pero que es necesario introducir) son estadísticamente significativos según el test de score:</p>
 <div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="ajuste-de-modelos.html#cb281-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>AtBat <span class="op">+</span><span class="st"> </span>Hits <span class="op">+</span><span class="st"> </span>Walks <span class="op">+</span><span class="st"> </span>CRBI <span class="op">+</span><span class="st"> </span>Division <span class="op">+</span><span class="st"> </span>PutOuts, <span class="dt">data =</span> Hitters))</span></code></pre></div>
 <pre><code>## 
@@ -529,7 +544,7 @@ donde <span class="math inline">\(\ln(L_{c})\)</span> es el logaritmo de la prob
 ## 4    Modelo seleccionado muestra validación 306.4</code></pre>
 <p>Podemos ver que el modelo completo está sobreajustado — el RMSE dentro de la muestra es mejor que el RMSE fuera de muestra — mientras que el modelo seleccionado elegido por <code>regsubsets ()</code> usando BIC no está sobreajustado. De hecho, el modelo seleccionado funciona mucho mejor fuera de la muestra que dentro de la muestra, aunque este resultado en particular es probablemente una cuestión de azar, una función de división aleatoria que estamos usando. Sin embargo, en general, estos resultados ilustran el peligro de la complejidad del modelo y por qué tiene sentido elegir predictores utilizando medidas de ajuste del modelo que penalicen la complejidad. Los modelos simples tienden a generalizar mejor. Esta figura muestra estas relaciones:</p>
 <div class="figure">
-<img src="overfit.png" alt="" />
+<img src="figures/overfit.png" alt="" />
 <p class="caption">Sobreajuste</p>
 </div>
 </div>
@@ -662,17 +677,17 @@ y</p>
 <span id="cb288-8"><a href="ajuste-de-modelos.html#cb288-8"></a><span class="kw">glimpse</span>(carseats_miss)</span></code></pre></div>
 <pre><code>## Rows: 400
 ## Columns: 11
-## $ Sales       &lt;dbl&gt; 9.50, 11.22, 10.06, 7.40, 4.15, 10.81, 6.63, 11.85, 6.54, 4.69, 9.01, 11.96, 3.98, 10.96, 11.17, 8.71, 7...
-## $ CompPrice   &lt;dbl&gt; 138, 111, 113, 117, 141, 124, 115, NA, NA, NA, 121, 117, NA, 115, 107, NA, 118, NA, 110, 129, 125, 134, ...
-## $ Income      &lt;dbl&gt; 73, 48, 35, 100, 64, 113, NA, 81, 110, 113, 78, 94, NA, 28, 117, 95, 32, 74, 110, 76, NA, NA, 46, NA, 11...
-## $ Advertising &lt;dbl&gt; 11, 16, NA, 4, 3, 13, NA, 15, 0, 0, 9, 4, 2, NA, 11, 5, NA, 13, 0, 16, 2, 12, 6, 0, 16, 0, 11, 0, NA, 15...
-## $ Population  &lt;dbl&gt; 276, 260, 269, NA, 340, 501, 45, 425, 108, 131, 150, 503, NA, 29, 148, 400, 284, 251, 408, 58, 367, 239,...
-## $ Price       &lt;dbl&gt; 120, NA, NA, 97, 128, 72, 108, 120, NA, 124, 100, NA, NA, NA, 118, 144, 110, 131, 68, 121, NA, 109, 138,...
-## $ ShelveLoc   &lt;fct&gt; Bad, NA, Good, NA, Bad, Bad, Good, NA, Good, Good, Bad, Medium, NA, Medium, Medium, Good, Medium, Medium...
-## $ Age         &lt;dbl&gt; 42, 65, NA, 55, 38, NA, 71, 67, 76, 76, 26, 50, NA, 53, 52, 76, 63, 52, 46, 69, NA, NA, NA, 79, 42, 54, ...
-## $ Education   &lt;dbl&gt; NA, 10, 12, NA, 13, 16, 15, 10, 10, 17, 10, 13, NA, NA, NA, 18, 13, 10, 17, 12, 18, NA, NA, NA, 12, 11, ...
-## $ Urban       &lt;fct&gt; NA, Yes, Yes, Yes, Yes, NA, NA, Yes, No, NA, NA, Yes, Yes, Yes, Yes, No, Yes, Yes, No, NA, Yes, No, Yes,...
-## $ US          &lt;fct&gt; Yes, Yes, Yes, Yes, No, Yes, No, Yes, NA, Yes, Yes, Yes, No, Yes, Yes, No, No, NA, Yes, Yes, NA, Yes, No...</code></pre>
+## $ Sales       &lt;dbl&gt; 9.50, 11.22, 10.06, 7.40, 4.15, 10.81, 6.63, 11.85, 6.54, 4.69, 9.01, 11.96, 3.98, 10.96, 11.17, 8.7...
+## $ CompPrice   &lt;dbl&gt; 138, 111, 113, 117, 141, 124, 115, NA, NA, NA, 121, 117, NA, 115, 107, NA, 118, NA, 110, 129, 125, 1...
+## $ Income      &lt;dbl&gt; 73, 48, 35, 100, 64, 113, NA, 81, 110, 113, 78, 94, NA, 28, 117, 95, 32, 74, 110, 76, NA, NA, 46, NA...
+## $ Advertising &lt;dbl&gt; 11, 16, NA, 4, 3, 13, NA, 15, 0, 0, 9, 4, 2, NA, 11, 5, NA, 13, 0, 16, 2, 12, 6, 0, 16, 0, 11, 0, NA...
+## $ Population  &lt;dbl&gt; 276, 260, 269, NA, 340, 501, 45, 425, 108, 131, 150, 503, NA, 29, 148, 400, 284, 251, 408, 58, 367, ...
+## $ Price       &lt;dbl&gt; 120, NA, NA, 97, 128, 72, 108, 120, NA, 124, 100, NA, NA, NA, 118, 144, 110, 131, 68, 121, NA, 109, ...
+## $ ShelveLoc   &lt;fct&gt; Bad, NA, Good, NA, Bad, Bad, Good, NA, Good, Good, Bad, Medium, NA, Medium, Medium, Good, Medium, Me...
+## $ Age         &lt;dbl&gt; 42, 65, NA, 55, 38, NA, 71, 67, 76, 76, 26, 50, NA, 53, 52, 76, 63, 52, 46, 69, NA, NA, NA, 79, 42, ...
+## $ Education   &lt;dbl&gt; NA, 10, 12, NA, 13, 16, 15, 10, 10, 17, 10, 13, NA, NA, NA, 18, 13, 10, 17, 12, 18, NA, NA, NA, 12, ...
+## $ Urban       &lt;fct&gt; NA, Yes, Yes, Yes, Yes, NA, NA, Yes, No, NA, NA, Yes, Yes, Yes, Yes, No, Yes, Yes, No, NA, Yes, No, ...
+## $ US          &lt;fct&gt; Yes, Yes, Yes, Yes, No, Yes, No, Yes, NA, Yes, Yes, Yes, No, Yes, Yes, No, No, NA, Yes, Yes, NA, Yes...</code></pre>
 <p>Ahora faltan muchas observaciones. Cuando ajustamos un modelo de regresión para la variable Sales observamos que <code>lm ()</code> analiza casos completos y se estima un modelo basado en un subconjunto muy pequeño de datos.</p>
 <div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="ajuste-de-modelos.html#cb290-1"></a><span class="kw">display</span>(<span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>CompPrice <span class="op">+</span><span class="st"> </span>Income <span class="op">+</span><span class="st"> </span>Advertising <span class="op">+</span><span class="st"> </span>Population <span class="op">+</span><span class="st"> </span>Price, <span class="dt">data =</span> carseats_miss))</span></code></pre></div>
 <pre><code>## lm(formula = Sales ~ CompPrice + Income + Advertising + Population + 
@@ -696,7 +711,7 @@ y</p>
 <p>El objeto <code>carseats_imp</code> incluye (entre muchas otras cosas) <span class="math inline">\(m\)</span> conjuntos de datos imputados (la configuración predeterminada es <span class="math inline">\(m\)</span> = 5). Los conjuntos de datos imputados difieren porque las imputaciones se extraen aleatoriamente de distribuciones de valores plausibles. Podemos visualizar la variabilidad de los predictores en estos conjuntos de datos imputados usando la función <code>densityplot ()</code>.</p>
 <div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="ajuste-de-modelos.html#cb295-1"></a><span class="kw">library</span>(lattice)</span>
 <span id="cb295-2"><a href="ajuste-de-modelos.html#cb295-2"></a><span class="kw">densityplot</span>(carseats_imp)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-93-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-85-1.png" width="672" /></p>
 <p>Las líneas azules continuas representan la distribución real de los predictores, mientras que las líneas rojas muestran las distribuciones imputadas. El siguiente paso es usar estos conjuntos de datos imputados para promediar los <span class="math inline">\(\beta\)</span>s y los SE utilizando la función <code>pool ()</code> de la librería <code>mice</code>.</p>
 <div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="ajuste-de-modelos.html#cb296-1"></a>carseats_model_imp &lt;-<span class="st"> </span><span class="kw">with</span>(<span class="dt">data =</span> carseats_imp, </span>
 <span id="cb296-2"><a href="ajuste-de-modelos.html#cb296-2"></a>     <span class="dt">exp =</span> <span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>CompPrice <span class="op">+</span><span class="st"> </span>Income <span class="op">+</span><span class="st"> </span>Advertising <span class="op">+</span><span class="st"> </span>Population <span class="op">+</span><span class="st"> </span>Price))</span>
