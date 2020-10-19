@@ -548,9 +548,7 @@ X <- list(estudio1=c(120, 134, 156, 167, 122),
           estudio4=c(114, 113, 129, 178, 155, 144, 134, 145))
 ```
 
-3. Genera una lista con 4 vectores de tamaño 100 correspondientes a una Normal de media 0 y desviación standard 6. Considera que cada vector es una medida repetida de 100 individuos. Calcula la media de las 4 medidas para los 100 individuos y comprueba que se cumple el teorema central del límite. 
-
-4. Re-implementa la función que hay en la solución para LOOCV que vimos en clase usando MapReduce.
+3. Re-implementa la función que hay en la solución para LOOCV que vimos en clase usando MapReduce.
 -------------------------------------------------------------------
 
 
