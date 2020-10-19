@@ -502,7 +502,7 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 <p><code>map(YOUR_LIST, YOUR_FUNCTION)</code></p>
 <p>or, graphically:</p>
 <div class="figure">
-<img src="figures/map.png" alt="" />
+<img src="figures/map.png" style="width:30.0%" alt="" />
 <p class="caption">Map</p>
 </div>
 <p>Previous operations could also be executed by using this code (<code>sapply ()</code> es un caso especial de la función <code>Map ()</code>):</p>
@@ -568,7 +568,7 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 <p>Another way of thinking about functionals is as a set of general tools for altering, subsetting, and collapsing lists. Every functional programming language has three tools for this: <code>Map()</code>, <code>Reduce()</code>, and <code>Filter()</code>. We have seen <code>Map()</code> already, and next we describe <code>Reduce()</code>, a powerful tool for extending two-argument functions. <code>Filter()</code> is a member of an important class of functionals that work with predicates, functions that return a single TRUE or FALSE (we will not cover that).</p>
 <p><code>Reduce()</code> reduces a vector, x, to a single value by recursively calling a function, f, two arguments at a time. It combines the first two elements with f, then combines the result of that call with the third element, and so on. Calling <code>Reduce(f, 1:3)</code> is equivalent to <code>f(f(1, 2), 3)</code></p>
 <div class="figure">
-<img src="figures/reduce.png" alt="" />
+<img src="figures/reduce.png" style="width:40.0%" alt="" />
 <p class="caption">Reduce</p>
 </div>
 <p>The following two examples show what Reduce does with an infix and prefix function:</p>
