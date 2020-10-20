@@ -392,7 +392,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb385-18"><a href="dealing-with-big-data-in-r.html#cb385-18"></a></span>
 <span id="cb385-19"><a href="dealing-with-big-data-in-r.html#cb385-19"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
 <span id="cb385-20"><a href="dealing-with-big-data-in-r.html#cb385-20"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> replications, <span class="dt">y =</span> elapsed, <span class="dt">colour =</span> test), <span class="dt">data =</span> testdata1)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-126-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-141-1.png" width="672" /></p>
 <p>Another example could be to compare the performance of the five methods for matrix multiplication</p>
 <div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="dealing-with-big-data-in-r.html#cb386-1"></a><span class="kw">set.seed</span>(<span class="dv">12345</span>)</span>
 <span id="cb386-2"><a href="dealing-with-big-data-in-r.html#cb386-2"></a>A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">20</span>), <span class="dt">nrow=</span><span class="dv">4</span>, <span class="dt">ncol=</span><span class="dv">5</span>)</span>
@@ -414,7 +414,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb386-18"><a href="dealing-with-big-data-in-r.html#cb386-18"></a></span>
 <span id="cb386-19"><a href="dealing-with-big-data-in-r.html#cb386-19"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
 <span id="cb386-20"><a href="dealing-with-big-data-in-r.html#cb386-20"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> replications, <span class="dt">y =</span> elapsed, <span class="dt">colour =</span> test), <span class="dt">data =</span> testdata2)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-127-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-142-1.png" width="672" /></p>
 <p>Finally, we could also compare the performance of the five methods for fitting generalized linear model</p>
 <div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="dealing-with-big-data-in-r.html#cb387-1"></a>FUN &lt;-<span class="st"> </span><span class="cf">function</span>(i) {</span>
 <span id="cb387-2"><a href="dealing-with-big-data-in-r.html#cb387-2"></a>  ind &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
@@ -434,7 +434,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb387-16"><a href="dealing-with-big-data-in-r.html#cb387-16"></a></span>
 <span id="cb387-17"><a href="dealing-with-big-data-in-r.html#cb387-17"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
 <span id="cb387-18"><a href="dealing-with-big-data-in-r.html#cb387-18"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> replications, <span class="dt">y =</span> elapsed, <span class="dt">colour =</span> test), <span class="dt">data =</span> testdata3)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-128-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-143-1.png" width="672" /></p>
 <div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="dealing-with-big-data-in-r.html#cb388-1"></a><span class="kw">stopCluster</span>(cl)</span></code></pre></div>
 <p>To sum up, generally, <code>parLapply ()</code> perform better than <code>foreach ()</code>. However, for all parallel implementation methods, the increase in terms of efficiency is not proportional to the number of cores being used (Theoretical efficiency).</p>
 </div>
@@ -452,7 +452,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 The MapReduce paradigm has long been a staple of big data computational strategies. However, properly leveraging MapReduce in R can be a challenge, even for experienced users. To get the most out of MapReduce, it is helpful to understand its relationship to functional programming. Functional programming, in a broad sense, is the one that some functions allows to have another function in one of its arguments. For instance, the function <code>sapply()</code>:</p>
 <div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="dealing-with-big-data-in-r.html#cb389-1"></a>ff &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="cf">if</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="kw">log</span>(x) <span class="cf">else</span> <span class="kw">log</span>(<span class="op">-</span>x)<span class="op">^</span><span class="dv">2</span></span>
 <span id="cb389-2"><a href="dealing-with-big-data-in-r.html#cb389-2"></a><span class="kw">sapply</span>(<span class="op">-</span><span class="dv">4</span><span class="op">:</span><span class="dv">10</span>, ff)</span></code></pre></div>
-<pre><code>##  [1] 1.9218121 1.2069490 0.4804530 0.0000000       Inf 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
+<pre><code>##  [1] 1.9218121 1.2069490 0.4804530 0.0000000       Inf 0.0000000
+##  [7] 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
 ## [13] 2.0794415 2.1972246 2.3025851</code></pre>
 <p>Functional programming is a very powerful tool that allows you to program in the following way:</p>
 <ul>
@@ -487,14 +488,17 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 ## $Y
 ## [1] &quot;numeric&quot;</code></pre>
 <div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="dealing-with-big-data-in-r.html#cb393-1"></a><span class="kw">sapply</span>(iris, length)</span></code></pre></div>
-<pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species            Y 
-##          150          150          150          150          150          150</code></pre>
+<pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+##          150          150          150          150          150 
+##            Y 
+##          150</code></pre>
 <p>One of the advantages of this type of programming is that the code is shorter and more readable. We must remember that these functions include the argument <code>...</code> that allows to pass additional arguments to the function they call. For example this function would do the same as the previous one, but it would be more generic since it would allow calculations by varying the <code>s</code> argument.</p>
 <div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="dealing-with-big-data-in-r.html#cb395-1"></a>ff2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, s) {</span>
 <span id="cb395-2"><a href="dealing-with-big-data-in-r.html#cb395-2"></a>  <span class="cf">if</span>(x <span class="op">&gt;</span><span class="st"> </span>s) <span class="kw">log</span>(x) <span class="cf">else</span> <span class="kw">log</span>(<span class="op">-</span>x)<span class="op">^</span><span class="dv">2</span></span>
 <span id="cb395-3"><a href="dealing-with-big-data-in-r.html#cb395-3"></a>}</span>
 <span id="cb395-4"><a href="dealing-with-big-data-in-r.html#cb395-4"></a><span class="kw">sapply</span>(<span class="op">-</span><span class="dv">4</span><span class="op">:</span><span class="dv">10</span>, ff2, <span class="dt">s=</span><span class="dv">0</span>)</span></code></pre></div>
-<pre><code>##  [1] 1.9218121 1.2069490 0.4804530 0.0000000       Inf 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
+<pre><code>##  [1] 1.9218121 1.2069490 0.4804530 0.0000000       Inf 0.0000000
+##  [7] 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
 ## [13] 2.0794415 2.1972246 2.3025851</code></pre>
 <div id="map" class="section level3" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> Map</h3>
@@ -615,82 +619,90 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 <p><span class="math display">\[\mathbf{Y}=\mathbf{X}\mathbf{\beta}+\mathbf{\varepsilon}.\]</span></p>
 <p>The ordinary least square (OLS) estimate of <span class="math inline">\(\mathbf{\beta}\)</span> is <span class="math display">\[\widehat{\mathbf{\beta}}=[\mathbf{X}^T\mathbf{X}]^{-1}\mathbf{X}^T\mathbf{y}\]</span>. To illustrate, let us consider the “mtcars” example, and run this regression:</p>
 <div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="dealing-with-big-data-in-r.html#cb420-1"></a><span class="kw">data</span>(mtcars)</span>
-<span id="cb420-2"><a href="dealing-with-big-data-in-r.html#cb420-2"></a>mod &lt;-<span class="st"> </span>(<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>cyl, <span class="dt">data =</span> mtcars))</span></code></pre></div>
+<span id="cb420-2"><a href="dealing-with-big-data-in-r.html#cb420-2"></a>(mod &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>cyl, <span class="dt">data =</span> mtcars))</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ wt + cyl, data = mtcars)
+## 
+## Coefficients:
+## (Intercept)           wt          cyl  
+##      39.686       -3.191       -1.508</code></pre>
 <p>The algorithm implemented in the <code>lm ()</code> function uses the QR decomposition of <span class="math inline">\(\mathbf{X},\)</span> <span class="math display">\[\mathbf{X}=\mathbf{Q}\mathbf{R},\]</span> where <span class="math inline">\(\mathbf{Q}\)</span> is an orthogonal matrix (i.e. <span class="math inline">\(\mathbf{Q}^T\mathbf{Q}=\mathbb{I}\)</span>).Then,</p>
 <p><span class="math display">\[\widehat{\mathbf{\beta}}=[\mathbf{X}^T\mathbf{X}]^{-1}\mathbf{X}^T\mathbf{y}=\mathbf{R}^{-1}\mathbf{Q}^T\mathbf{y}\]</span></p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="dealing-with-big-data-in-r.html#cb421-1"></a>Y &lt;-<span class="st"> </span>mtcars<span class="op">$</span>mpg</span>
-<span id="cb421-2"><a href="dealing-with-big-data-in-r.html#cb421-2"></a><span class="co">#similar to cbind(1, mtcars$wt, mtcars$cyl)</span></span>
-<span id="cb421-3"><a href="dealing-with-big-data-in-r.html#cb421-3"></a>X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>cyl, <span class="dt">data=</span>mtcars)</span>
-<span id="cb421-4"><a href="dealing-with-big-data-in-r.html#cb421-4"></a>QR &lt;-<span class="st"> </span><span class="kw">qr</span>(<span class="kw">as.matrix</span>(X))</span>
-<span id="cb421-5"><a href="dealing-with-big-data-in-r.html#cb421-5"></a>R &lt;-<span class="st"> </span><span class="kw">qr.R</span>(QR)</span>
-<span id="cb421-6"><a href="dealing-with-big-data-in-r.html#cb421-6"></a>Q &lt;-<span class="st"> </span><span class="kw">qr.Q</span>(QR)</span>
-<span id="cb421-7"><a href="dealing-with-big-data-in-r.html#cb421-7"></a><span class="kw">solve</span>(R) <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(Q) <span class="op">%*%</span><span class="st"> </span>Y</span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="dealing-with-big-data-in-r.html#cb422-1"></a>Y &lt;-<span class="st"> </span>mtcars<span class="op">$</span>mpg</span>
+<span id="cb422-2"><a href="dealing-with-big-data-in-r.html#cb422-2"></a><span class="co">#similar to cbind(1, mtcars$wt, mtcars$cyl)</span></span>
+<span id="cb422-3"><a href="dealing-with-big-data-in-r.html#cb422-3"></a>X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>cyl, <span class="dt">data=</span>mtcars)</span>
+<span id="cb422-4"><a href="dealing-with-big-data-in-r.html#cb422-4"></a>QR &lt;-<span class="st"> </span><span class="kw">qr</span>(<span class="kw">as.matrix</span>(X))</span>
+<span id="cb422-5"><a href="dealing-with-big-data-in-r.html#cb422-5"></a>R &lt;-<span class="st"> </span><span class="kw">qr.R</span>(QR)</span>
+<span id="cb422-6"><a href="dealing-with-big-data-in-r.html#cb422-6"></a>Q &lt;-<span class="st"> </span><span class="kw">qr.Q</span>(QR)</span>
+<span id="cb422-7"><a href="dealing-with-big-data-in-r.html#cb422-7"></a><span class="kw">solve</span>(R) <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(Q) <span class="op">%*%</span><span class="st"> </span>Y</span></code></pre></div>
 <pre><code>##                  [,1]
 ## (Intercept) 39.686261
 ## wt          -3.190972
 ## cyl         -1.507795</code></pre>
 <p>We can parallelise computations using the MLR-MR method as follows:</p>
 <p>Consider <span class="math inline">\(m\)</span> blocks, for instance 3 (given tha we have 4 cores)</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="dealing-with-big-data-in-r.html#cb423-1"></a>m &lt;-<span class="st"> </span><span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="dealing-with-big-data-in-r.html#cb424-1"></a>m &lt;-<span class="st"> </span><span class="dv">3</span></span></code></pre></div>
 <p>and split vectors and matrices</p>
 <p><span class="math display">\[\mathbf{y}=\left[\begin{matrix}\mathbf{y}_1\\\mathbf{y}_2\\\vdots \\\mathbf{y}_m\end{matrix}\right]\]</span></p>
 <p>and</p>
 <p><span class="math display">\[\mathbf{X}=\left[\begin{matrix}\mathbf{X}_1\\\mathbf{X}_2\\\vdots\\\mathbf{X}_m\end{matrix}\right]=\left[\begin{matrix}\mathbf{Q}_1^{(1)}\mathbf{R}_1^{(1)}\\\mathbf{Q}_2^{(1)}\mathbf{R}_2^{(1)}\\\vdots \\\mathbf{Q}_m^{(1)}\mathbf{R}_m^{(1)}\end{matrix}\right]\]</span></p>
 <p>In R to split vectors and matrices we can use these two functions:</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="dealing-with-big-data-in-r.html#cb424-1"></a>chunk &lt;-<span class="st"> </span><span class="cf">function</span>(x,n) <span class="kw">split</span>(x, <span class="kw">cut</span>(<span class="kw">seq_along</span>(x), n, <span class="dt">labels =</span> <span class="ot">FALSE</span>)) </span>
-<span id="cb424-2"><a href="dealing-with-big-data-in-r.html#cb424-2"></a></span>
-<span id="cb424-3"><a href="dealing-with-big-data-in-r.html#cb424-3"></a>splitMatByRow =<span class="st"> </span><span class="cf">function</span>(mat, size){</span>
-<span id="cb424-4"><a href="dealing-with-big-data-in-r.html#cb424-4"></a>  row.index &lt;-<span class="st"> </span><span class="kw">chunk</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(mat), size)</span>
-<span id="cb424-5"><a href="dealing-with-big-data-in-r.html#cb424-5"></a>  <span class="kw">lapply</span>(row.index, <span class="cf">function</span>(val) mat[val, ])</span>
-<span id="cb424-6"><a href="dealing-with-big-data-in-r.html#cb424-6"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="dealing-with-big-data-in-r.html#cb425-1"></a>chunk &lt;-<span class="st"> </span><span class="cf">function</span>(x,n) <span class="kw">split</span>(x, <span class="kw">cut</span>(<span class="kw">seq_along</span>(x), n, <span class="dt">labels =</span> <span class="ot">FALSE</span>)) </span>
+<span id="cb425-2"><a href="dealing-with-big-data-in-r.html#cb425-2"></a></span>
+<span id="cb425-3"><a href="dealing-with-big-data-in-r.html#cb425-3"></a>splitMatByRow =<span class="st"> </span><span class="cf">function</span>(mat, size){</span>
+<span id="cb425-4"><a href="dealing-with-big-data-in-r.html#cb425-4"></a>  row.index &lt;-<span class="st"> </span><span class="kw">chunk</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(mat), size)</span>
+<span id="cb425-5"><a href="dealing-with-big-data-in-r.html#cb425-5"></a>  <span class="kw">lapply</span>(row.index, <span class="cf">function</span>(val) mat[val, ])</span>
+<span id="cb425-6"><a href="dealing-with-big-data-in-r.html#cb425-6"></a>}</span></code></pre></div>
 <p>We can do that with our data</p>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="dealing-with-big-data-in-r.html#cb425-1"></a>x.block &lt;-<span class="st"> </span><span class="kw">splitMatByRow</span>(X, m)</span>
-<span id="cb425-2"><a href="dealing-with-big-data-in-r.html#cb425-2"></a>y.block &lt;-<span class="st"> </span><span class="kw">splitMatByRow</span>(<span class="kw">matrix</span>(Y, <span class="dt">ncol =</span> <span class="dv">1</span>), m)</span></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="dealing-with-big-data-in-r.html#cb426-1"></a>x.block &lt;-<span class="st"> </span><span class="kw">splitMatByRow</span>(X, m)</span>
+<span id="cb426-2"><a href="dealing-with-big-data-in-r.html#cb426-2"></a>y.block &lt;-<span class="st"> </span><span class="kw">splitMatByRow</span>(<span class="kw">matrix</span>(Y, <span class="dt">ncol =</span> <span class="dv">1</span>), m)</span></code></pre></div>
 <p>Then, we get small QR decomposition (per subset). This step correspond to de <strong>Map</strong> step in the <code>MapReduce</code> framework</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="dealing-with-big-data-in-r.html#cb426-1"></a><span class="co"># Algorithm 2 Mapper function in step1</span></span>
-<span id="cb426-2"><a href="dealing-with-big-data-in-r.html#cb426-2"></a>x.block.qr &lt;-<span class="st"> </span><span class="kw">lapply</span>(x.block, <span class="cf">function</span>(val){</span>
-<span id="cb426-3"><a href="dealing-with-big-data-in-r.html#cb426-3"></a>  qrresult &lt;-<span class="st"> </span><span class="kw">qr</span>(val)</span>
-<span id="cb426-4"><a href="dealing-with-big-data-in-r.html#cb426-4"></a>  <span class="kw">list</span>(<span class="dt">Q=</span><span class="kw">qr.Q</span>(qrresult), <span class="dt">R=</span><span class="kw">qr.R</span>(qrresult))</span>
-<span id="cb426-5"><a href="dealing-with-big-data-in-r.html#cb426-5"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="dealing-with-big-data-in-r.html#cb427-1"></a><span class="co"># Algorithm 2 Mapper function in step1</span></span>
+<span id="cb427-2"><a href="dealing-with-big-data-in-r.html#cb427-2"></a>getQR &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
+<span id="cb427-3"><a href="dealing-with-big-data-in-r.html#cb427-3"></a>  qrresult &lt;-<span class="st"> </span><span class="kw">qr</span>(x)</span>
+<span id="cb427-4"><a href="dealing-with-big-data-in-r.html#cb427-4"></a>  ans &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">Q=</span><span class="kw">qr.Q</span>(qrresult), <span class="dt">R=</span><span class="kw">qr.R</span>(qrresult))</span>
+<span id="cb427-5"><a href="dealing-with-big-data-in-r.html#cb427-5"></a>  ans</span>
+<span id="cb427-6"><a href="dealing-with-big-data-in-r.html#cb427-6"></a>}</span>
+<span id="cb427-7"><a href="dealing-with-big-data-in-r.html#cb427-7"></a>x.block.qr &lt;-<span class="st"> </span><span class="kw">Map</span>(getQR, x.block)</span></code></pre></div>
 <p>Now, consider the QR decomposition of <span class="math inline">\(\mathbf{R}^{(1)}\)</span> which is the first step of the reduce part</p>
 <p><span class="math display">\[\mathbf{R}^{(1)}=\left[\begin{matrix}\mathbf{R}_1^{(1)}\\\mathbf{R}_2^{(1)}\\\vdots \\\mathbf{R}_m^{(1)}\end{matrix}\right]=\mathbf{Q}^{(2)}\mathbf{R}^{(2)}\]</span> where</p>
 <p><span class="math display">\[\mathbf{Q}^{(2)}=\left[\begin{matrix}\mathbf{Q}^{(2)}_1\\\mathbf{Q}^{(2)}_2\\\vdots\\\mathbf{Q}^{(2)}_m\end{matrix}\right]\]</span></p>
 <p>that can be computed as</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="dealing-with-big-data-in-r.html#cb427-1"></a><span class="co"># Algorithm 3 Reducer function in step1</span></span>
-<span id="cb427-2"><a href="dealing-with-big-data-in-r.html#cb427-2"></a>Rtemp &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, <span class="kw">lapply</span>(x.block.qr, <span class="cf">function</span> (l) l<span class="op">$</span>R))</span>
-<span id="cb427-3"><a href="dealing-with-big-data-in-r.html#cb427-3"></a>qrresult &lt;-<span class="st"> </span><span class="kw">qr</span>(Rtemp)</span>
-<span id="cb427-4"><a href="dealing-with-big-data-in-r.html#cb427-4"></a>Rtemp.qr &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">Q=</span><span class="kw">qr.Q</span>(qrresult), <span class="dt">R=</span><span class="kw">qr.R</span>(qrresult))</span>
-<span id="cb427-5"><a href="dealing-with-big-data-in-r.html#cb427-5"></a></span>
-<span id="cb427-6"><a href="dealing-with-big-data-in-r.html#cb427-6"></a>R.final &lt;-<span class="st"> </span>Rtemp.qr<span class="op">$</span>R</span>
-<span id="cb427-7"><a href="dealing-with-big-data-in-r.html#cb427-7"></a>Rtemp.Q.divide &lt;-<span class="st"> </span><span class="kw">splitMatByRow</span>(Rtemp.qr<span class="op">$</span>Q, m)</span>
-<span id="cb427-8"><a href="dealing-with-big-data-in-r.html#cb427-8"></a></span>
-<span id="cb427-9"><a href="dealing-with-big-data-in-r.html#cb427-9"></a></span>
-<span id="cb427-10"><a href="dealing-with-big-data-in-r.html#cb427-10"></a>Q.result =<span class="st"> </span><span class="kw">list</span>()</span>
-<span id="cb427-11"><a href="dealing-with-big-data-in-r.html#cb427-11"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>m){</span>
-<span id="cb427-12"><a href="dealing-with-big-data-in-r.html#cb427-12"></a>  Q.result[[i]] &lt;-<span class="st"> </span>x.block.qr[[i]]<span class="op">$</span>Q <span class="op">%*%</span><span class="st"> </span>Rtemp.Q.divide[[i]]</span>
-<span id="cb427-13"><a href="dealing-with-big-data-in-r.html#cb427-13"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="dealing-with-big-data-in-r.html#cb428-1"></a><span class="co"># Algorithm 3 Reducer function in step1</span></span>
+<span id="cb428-2"><a href="dealing-with-big-data-in-r.html#cb428-2"></a>Rs &lt;-<span class="st"> </span><span class="kw">Map</span>(<span class="cf">function</span> (l) l<span class="op">$</span>R, x.block.qr)</span>
+<span id="cb428-3"><a href="dealing-with-big-data-in-r.html#cb428-3"></a>Rtemp &lt;-<span class="st"> </span><span class="kw">Reduce</span>(rbind, Rs)</span>
+<span id="cb428-4"><a href="dealing-with-big-data-in-r.html#cb428-4"></a>qrresult &lt;-<span class="st"> </span><span class="kw">qr</span>(Rtemp)</span>
+<span id="cb428-5"><a href="dealing-with-big-data-in-r.html#cb428-5"></a>Rtemp.qr &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">Q=</span><span class="kw">qr.Q</span>(qrresult), <span class="dt">R=</span><span class="kw">qr.R</span>(qrresult))</span>
+<span id="cb428-6"><a href="dealing-with-big-data-in-r.html#cb428-6"></a></span>
+<span id="cb428-7"><a href="dealing-with-big-data-in-r.html#cb428-7"></a>R.final &lt;-<span class="st"> </span>Rtemp.qr<span class="op">$</span>R</span>
+<span id="cb428-8"><a href="dealing-with-big-data-in-r.html#cb428-8"></a>Rtemp.Q.divide &lt;-<span class="st"> </span><span class="kw">splitMatByRow</span>(Rtemp.qr<span class="op">$</span>Q, m)</span></code></pre></div>
 <p>Define – as step 2 of the reduce part</p>
 <p><span class="math display">\[\mathbf{Q}^{(3)}_j=\mathbf{Q}^{(2)}_j\mathbf{Q}^{(1)}_j\]</span></p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="dealing-with-big-data-in-r.html#cb429-1"></a>Q.result =<span class="st"> </span><span class="kw">list</span>()</span>
+<span id="cb429-2"><a href="dealing-with-big-data-in-r.html#cb429-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>m){</span>
+<span id="cb429-3"><a href="dealing-with-big-data-in-r.html#cb429-3"></a>  Q.result[[i]] &lt;-<span class="st"> </span>x.block.qr[[i]]<span class="op">$</span>Q <span class="op">%*%</span><span class="st"> </span>Rtemp.Q.divide[[i]]</span>
+<span id="cb429-4"><a href="dealing-with-big-data-in-r.html#cb429-4"></a>}</span></code></pre></div>
 <p>and</p>
 <p><span class="math display">\[\mathbf{V}_j=\mathbf{Q}^{(3)T}_j\mathbf{y}_j\]</span></p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="dealing-with-big-data-in-r.html#cb428-1"></a><span class="co"># Algorithm 4 Reduce function in step2</span></span>
-<span id="cb428-2"><a href="dealing-with-big-data-in-r.html#cb428-2"></a>V =<span class="st"> </span><span class="kw">list</span>()</span>
-<span id="cb428-3"><a href="dealing-with-big-data-in-r.html#cb428-3"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>m){</span>
-<span id="cb428-4"><a href="dealing-with-big-data-in-r.html#cb428-4"></a>  V[[i]]  &lt;-<span class="st">  </span><span class="kw">crossprod</span>(Q.result[[i]], y.block[[i]])  </span>
-<span id="cb428-5"><a href="dealing-with-big-data-in-r.html#cb428-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="dealing-with-big-data-in-r.html#cb430-1"></a><span class="co"># Algorithm 4 Reduce function in step2</span></span>
+<span id="cb430-2"><a href="dealing-with-big-data-in-r.html#cb430-2"></a>V =<span class="st"> </span><span class="kw">list</span>()</span>
+<span id="cb430-3"><a href="dealing-with-big-data-in-r.html#cb430-3"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>m){</span>
+<span id="cb430-4"><a href="dealing-with-big-data-in-r.html#cb430-4"></a>  V[[i]]  &lt;-<span class="st">  </span><span class="kw">crossprod</span>(Q.result[[i]], y.block[[i]])  </span>
+<span id="cb430-5"><a href="dealing-with-big-data-in-r.html#cb430-5"></a>}</span></code></pre></div>
 <p>and finally set – as the step 3 of the reduce part</p>
 <p><span class="math display">\[\widehat{\mathbf{\beta}}=[\mathbf{R}^{(2)}]^{-1}\sum_{j=1}^m\mathbf{V}_j\]</span></p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="dealing-with-big-data-in-r.html#cb429-1"></a><span class="co"># Algorithm 5 Reduce function in step3</span></span>
-<span id="cb429-2"><a href="dealing-with-big-data-in-r.html#cb429-2"></a>V.sum &lt;-<span class="st"> </span><span class="kw">Reduce</span>(<span class="st">&#39;+&#39;</span>, V)</span>
-<span id="cb429-3"><a href="dealing-with-big-data-in-r.html#cb429-3"></a>beta &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">solve</span>(R.final) <span class="op">%*%</span><span class="st"> </span>V.sum)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="dealing-with-big-data-in-r.html#cb431-1"></a><span class="co"># Algorithm 5 Reduce function in step3</span></span>
+<span id="cb431-2"><a href="dealing-with-big-data-in-r.html#cb431-2"></a>V.sum &lt;-<span class="st"> </span><span class="kw">Reduce</span>(<span class="st">&#39;+&#39;</span>, V)</span>
+<span id="cb431-3"><a href="dealing-with-big-data-in-r.html#cb431-3"></a>beta &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">solve</span>(R.final) <span class="op">%*%</span><span class="st"> </span>V.sum)</span></code></pre></div>
 <p>Let us compare the results</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="dealing-with-big-data-in-r.html#cb430-1"></a><span class="kw">cbind</span>(<span class="dt">lm=</span><span class="kw">coef</span>(mod), <span class="dt">parallel=</span>beta)</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="dealing-with-big-data-in-r.html#cb432-1"></a><span class="kw">cbind</span>(<span class="dt">lm=</span><span class="kw">coef</span>(mod), <span class="dt">parallel=</span>beta)</span></code></pre></div>
 <pre><code>##                    lm  parallel
 ## (Intercept) 39.686261 39.686261
 ## wt          -3.190972 -3.190972
 ## cyl         -1.507795 -1.507795</code></pre>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="dealing-with-big-data-in-r.html#cb432-1"></a><span class="co"># error</span></span>
-<span id="cb432-2"><a href="dealing-with-big-data-in-r.html#cb432-2"></a><span class="kw">sum</span>((beta <span class="op">-</span><span class="st"> </span><span class="kw">coef</span>(mod)) <span class="op">**</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="dealing-with-big-data-in-r.html#cb434-1"></a><span class="co"># error</span></span>
+<span id="cb434-2"><a href="dealing-with-big-data-in-r.html#cb434-2"></a><span class="kw">sum</span>((beta <span class="op">-</span><span class="st"> </span><span class="kw">coef</span>(mod)) <span class="op">**</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 2.607678e-28</code></pre>
 <table style="width:94%;">
 <colgroup>

@@ -399,7 +399,7 @@ The ordinary least square (OLS) estimate of $\mathbf{\beta}$ is $$\widehat{\math
 
 ```{r}
 data(mtcars)
-mod <- (lm(mpg ~ wt + cyl, data = mtcars))
+(mod <- lm(mpg ~ wt + cyl, data = mtcars))
 ```
 
 
@@ -460,10 +460,12 @@ Then, we get small QR decomposition (per subset). This step correspond to de **M
 
 ```{r}
 # Algorithm 2 Mapper function in step1
-x.block.qr <- lapply(x.block, function(val){
-  qrresult <- qr(val)
-  list(Q=qr.Q(qrresult), R=qr.R(qrresult))
-})
+getQR <- function(x){
+  qrresult <- qr(x)
+  ans <- list(Q=qr.Q(qrresult), R=qr.R(qrresult))
+  ans
+}
+x.block.qr <- Map(getQR, x.block)
 ```
 
 Now, consider the QR decomposition of $\mathbf{R}^{(1)}$ which is the first step of the reduce part 
@@ -477,23 +479,27 @@ that can be computed as
 
 ```{r}
 # Algorithm 3 Reducer function in step1
-Rtemp <- do.call(rbind, lapply(x.block.qr, function (l) l$R))
+Rs <- Map(function (l) l$R, x.block.qr)
+Rtemp <- Reduce(rbind, Rs)
 qrresult <- qr(Rtemp)
 Rtemp.qr <- list(Q=qr.Q(qrresult), R=qr.R(qrresult))
 
 R.final <- Rtemp.qr$R
 Rtemp.Q.divide <- splitMatByRow(Rtemp.qr$Q, m)
+```
 
 
+Define – as step 2 of the reduce part
+
+$$\mathbf{Q}^{(3)}_j=\mathbf{Q}^{(2)}_j\mathbf{Q}^{(1)}_j$$
+
+```{r}
 Q.result = list()
 for (i in 1:m){
   Q.result[[i]] <- x.block.qr[[i]]$Q %*% Rtemp.Q.divide[[i]]
 }
 ```
 
-Define – as step 2 of the reduce part
-
-$$\mathbf{Q}^{(3)}_j=\mathbf{Q}^{(2)}_j\mathbf{Q}^{(1)}_j$$
 
 and
 
