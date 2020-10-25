@@ -48,7 +48,7 @@ Algunas partes de este material está inspirados en vignettes que se referencian
 
  
 ```{r include=FALSE}
-knitr::opts_chunk$set(cache=T, warning=FALSE, message=FALSE, fig.path = "fig/")
+knitr::opts_chunk$set(cache=T, warning=FALSE, message=FALSE, fig.path = "fig/", comment = "")
 library(arm)
 library(ggplot2)
 library(tidyr)

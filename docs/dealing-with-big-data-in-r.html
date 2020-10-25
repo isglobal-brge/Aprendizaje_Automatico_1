@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-10-19" />
+<meta name="date" content="2020-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="regresión-logística.html"/>
-
+<link rel="next" href="la-librería-caret.html"/>
 <script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -252,6 +252,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>7.4</b> Example: Linear regression for Big Data</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="la-librería-caret.html"><a href="la-librería-caret.html"><i class="fa fa-check"></i><b>8</b> La librería <code>caret</code></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="la-librería-caret.html"><a href="la-librería-caret.html#pre-procesado"><i class="fa fa-check"></i><b>8.1</b> Pre-procesado</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="la-librería-caret.html"><a href="la-librería-caret.html#creación-de-variables"><i class="fa fa-check"></i><b>8.1.1</b> Creación de variables</a></li>
+<li class="chapter" data-level="8.1.2" data-path="la-librería-caret.html"><a href="la-librería-caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>8.1.2</b> Predictores con poca variabilidad</a></li>
+<li class="chapter" data-level="8.1.3" data-path="la-librería-caret.html"><a href="la-librería-caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>8.1.3</b> Identificación de predictores correlacionados</a></li>
+<li class="chapter" data-level="8.1.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#centrado-y-escalado"><i class="fa fa-check"></i><b>8.1.4</b> Centrado y escalado</a></li>
+<li class="chapter" data-level="8.1.5" data-path="la-librería-caret.html"><a href="la-librería-caret.html#imputación"><i class="fa fa-check"></i><b>8.1.5</b> Imputación</a></li>
+<li class="chapter" data-level="8.1.6" data-path="la-librería-caret.html"><a href="la-librería-caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>8.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="la-librería-caret.html"><a href="la-librería-caret.html#visualización"><i class="fa fa-check"></i><b>8.2</b> Visualización</a></li>
+<li class="chapter" data-level="8.3" data-path="la-librería-caret.html"><a href="la-librería-caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>8.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
+<li class="chapter" data-level="8.4" data-path="la-librería-caret.html"><a href="la-librería-caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>8.4</b> Creación de un modelo predictivo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="k-vecinos-más-próximos-knn.html"><a href="k-vecinos-más-próximos-knn.html"><i class="fa fa-check"></i><b>9</b> K vecinos más próximos (KNN)</a></li>
+<li class="chapter" data-level="10" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>10</b> Análisis discriminante lineal (LDA)</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -369,8 +386,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb382-2"><a href="dealing-with-big-data-in-r.html#cb382-2"></a>result &lt;-<span class="st"> </span><span class="kw">mclapply</span>(x, f, <span class="dt">mc.cores=</span>ncores)</span></code></pre></div>
 <p>In order to compare computation time, we can run</p>
 <div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="dealing-with-big-data-in-r.html#cb383-1"></a><span class="kw">system.time</span>(result &lt;-<span class="st"> </span><span class="kw">lapply</span>(vec, f))</span></code></pre></div>
-<pre><code>##    user  system elapsed 
-##       0       0       0</code></pre>
+<pre><code>   user  system elapsed 
+   0.00    0.01    0.01 </code></pre>
 <p>Nonetheless, <code>rbenchmark</code> function serves as a more accurate replacement of the often seen <code>system.time()</code> function and the more sophisticated <code>system.time(replicate(1000, expr))</code> expression (that incorporates variability). It tries hard to accurately measure only the time it takes to evaluate expr. To achieved this, the sub-millisecond (supposedly nanosecond) accurate timing functions most modern operating systems provide are used. Additionally all evaluations of the expressions are done in C code to minimize any overhead. In our example:</p>
 <div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="dealing-with-big-data-in-r.html#cb385-1"></a><span class="kw">library</span>(rbenchmark)</span>
 <span id="cb385-2"><a href="dealing-with-big-data-in-r.html#cb385-2"></a><span class="kw">library</span>(doParallel)</span>
@@ -392,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb385-18"><a href="dealing-with-big-data-in-r.html#cb385-18"></a></span>
 <span id="cb385-19"><a href="dealing-with-big-data-in-r.html#cb385-19"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
 <span id="cb385-20"><a href="dealing-with-big-data-in-r.html#cb385-20"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> replications, <span class="dt">y =</span> elapsed, <span class="dt">colour =</span> test), <span class="dt">data =</span> testdata1)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-141-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-126-1.png" width="672" /></p>
 <p>Another example could be to compare the performance of the five methods for matrix multiplication</p>
 <div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="dealing-with-big-data-in-r.html#cb386-1"></a><span class="kw">set.seed</span>(<span class="dv">12345</span>)</span>
 <span id="cb386-2"><a href="dealing-with-big-data-in-r.html#cb386-2"></a>A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">20</span>), <span class="dt">nrow=</span><span class="dv">4</span>, <span class="dt">ncol=</span><span class="dv">5</span>)</span>
@@ -414,7 +431,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb386-18"><a href="dealing-with-big-data-in-r.html#cb386-18"></a></span>
 <span id="cb386-19"><a href="dealing-with-big-data-in-r.html#cb386-19"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
 <span id="cb386-20"><a href="dealing-with-big-data-in-r.html#cb386-20"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> replications, <span class="dt">y =</span> elapsed, <span class="dt">colour =</span> test), <span class="dt">data =</span> testdata2)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-142-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-127-1.png" width="672" /></p>
 <p>Finally, we could also compare the performance of the five methods for fitting generalized linear model</p>
 <div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="dealing-with-big-data-in-r.html#cb387-1"></a>FUN &lt;-<span class="st"> </span><span class="cf">function</span>(i) {</span>
 <span id="cb387-2"><a href="dealing-with-big-data-in-r.html#cb387-2"></a>  ind &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
@@ -434,7 +451,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb387-16"><a href="dealing-with-big-data-in-r.html#cb387-16"></a></span>
 <span id="cb387-17"><a href="dealing-with-big-data-in-r.html#cb387-17"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
 <span id="cb387-18"><a href="dealing-with-big-data-in-r.html#cb387-18"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> replications, <span class="dt">y =</span> elapsed, <span class="dt">colour =</span> test), <span class="dt">data =</span> testdata3)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-143-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-128-1.png" width="672" /></p>
 <div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="dealing-with-big-data-in-r.html#cb388-1"></a><span class="kw">stopCluster</span>(cl)</span></code></pre></div>
 <p>To sum up, generally, <code>parLapply ()</code> perform better than <code>foreach ()</code>. However, for all parallel implementation methods, the increase in terms of efficiency is not proportional to the number of cores being used (Theoretical efficiency).</p>
 </div>
@@ -452,9 +469,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 The MapReduce paradigm has long been a staple of big data computational strategies. However, properly leveraging MapReduce in R can be a challenge, even for experienced users. To get the most out of MapReduce, it is helpful to understand its relationship to functional programming. Functional programming, in a broad sense, is the one that some functions allows to have another function in one of its arguments. For instance, the function <code>sapply()</code>:</p>
 <div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="dealing-with-big-data-in-r.html#cb389-1"></a>ff &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="cf">if</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="kw">log</span>(x) <span class="cf">else</span> <span class="kw">log</span>(<span class="op">-</span>x)<span class="op">^</span><span class="dv">2</span></span>
 <span id="cb389-2"><a href="dealing-with-big-data-in-r.html#cb389-2"></a><span class="kw">sapply</span>(<span class="op">-</span><span class="dv">4</span><span class="op">:</span><span class="dv">10</span>, ff)</span></code></pre></div>
-<pre><code>##  [1] 1.9218121 1.2069490 0.4804530 0.0000000       Inf 0.0000000
-##  [7] 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
-## [13] 2.0794415 2.1972246 2.3025851</code></pre>
+<pre><code> [1] 1.9218121 1.2069490 0.4804530 0.0000000       Inf 0.0000000
+ [7] 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
+[13] 2.0794415 2.1972246 2.3025851</code></pre>
 <p>Functional programming is a very powerful tool that allows you to program in the following way:</p>
 <ul>
 <li>Create small and simple functions that solve a small and bounded problem</li>
@@ -470,36 +487,36 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 </ul>
 <p>A very common example of this type of functions is used to inspect the type of columns in a table since they take advantage of the fact that a table is a list of columns and go through them one by one</p>
 <div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="dealing-with-big-data-in-r.html#cb391-1"></a><span class="kw">lapply</span>(iris, class)</span></code></pre></div>
-<pre><code>## $Sepal.Length
-## [1] &quot;numeric&quot;
-## 
-## $Sepal.Width
-## [1] &quot;numeric&quot;
-## 
-## $Petal.Length
-## [1] &quot;numeric&quot;
-## 
-## $Petal.Width
-## [1] &quot;numeric&quot;
-## 
-## $Species
-## [1] &quot;factor&quot;
-## 
-## $Y
-## [1] &quot;numeric&quot;</code></pre>
+<pre><code>$Sepal.Length
+[1] &quot;numeric&quot;
+
+$Sepal.Width
+[1] &quot;numeric&quot;
+
+$Petal.Length
+[1] &quot;numeric&quot;
+
+$Petal.Width
+[1] &quot;numeric&quot;
+
+$Species
+[1] &quot;factor&quot;
+
+$Y
+[1] &quot;numeric&quot;</code></pre>
 <div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="dealing-with-big-data-in-r.html#cb393-1"></a><span class="kw">sapply</span>(iris, length)</span></code></pre></div>
-<pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##          150          150          150          150          150 
-##            Y 
-##          150</code></pre>
+<pre><code>Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+         150          150          150          150          150 
+           Y 
+         150 </code></pre>
 <p>One of the advantages of this type of programming is that the code is shorter and more readable. We must remember that these functions include the argument <code>...</code> that allows to pass additional arguments to the function they call. For example this function would do the same as the previous one, but it would be more generic since it would allow calculations by varying the <code>s</code> argument.</p>
 <div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="dealing-with-big-data-in-r.html#cb395-1"></a>ff2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, s) {</span>
 <span id="cb395-2"><a href="dealing-with-big-data-in-r.html#cb395-2"></a>  <span class="cf">if</span>(x <span class="op">&gt;</span><span class="st"> </span>s) <span class="kw">log</span>(x) <span class="cf">else</span> <span class="kw">log</span>(<span class="op">-</span>x)<span class="op">^</span><span class="dv">2</span></span>
 <span id="cb395-3"><a href="dealing-with-big-data-in-r.html#cb395-3"></a>}</span>
 <span id="cb395-4"><a href="dealing-with-big-data-in-r.html#cb395-4"></a><span class="kw">sapply</span>(<span class="op">-</span><span class="dv">4</span><span class="op">:</span><span class="dv">10</span>, ff2, <span class="dt">s=</span><span class="dv">0</span>)</span></code></pre></div>
-<pre><code>##  [1] 1.9218121 1.2069490 0.4804530 0.0000000       Inf 0.0000000
-##  [7] 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
-## [13] 2.0794415 2.1972246 2.3025851</code></pre>
+<pre><code> [1] 1.9218121 1.2069490 0.4804530 0.0000000       Inf 0.0000000
+ [7] 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
+[13] 2.0794415 2.1972246 2.3025851</code></pre>
 <div id="map" class="section level3" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> Map</h3>
 <p>The MapReduce methodology is also implemented in base R (<code>Map ()</code> and <code>Reduce ()</code> functions) as well as in <code>tidyverse</code>. Function <code>Map ()</code> applies one function to all elements from a list o vector:</p>
@@ -511,61 +528,61 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 </div>
 <p>Previous operations could also be executed by using this code (<code>sapply ()</code> es un caso especial de la función <code>Map ()</code>):</p>
 <div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="dealing-with-big-data-in-r.html#cb397-1"></a><span class="kw">Map</span>(ff, <span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">25</span>))</span></code></pre></div>
-<pre><code>## [[1]]
-## [1] 2.197225
-## 
-## [[2]]
-## [1] 2.772589
-## 
-## [[3]]
-## [1] 3.218876</code></pre>
+<pre><code>[[1]]
+[1] 2.197225
+
+[[2]]
+[1] 2.772589
+
+[[3]]
+[1] 3.218876</code></pre>
 <p>y</p>
 <div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="dealing-with-big-data-in-r.html#cb399-1"></a><span class="kw">Map</span>(ff2, <span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">25</span>), <span class="dt">s=</span><span class="dv">0</span>)</span></code></pre></div>
-<pre><code>## [[1]]
-## [1] 2.197225
-## 
-## [[2]]
-## [1] 2.772589
-## 
-## [[3]]
-## [1] 3.218876</code></pre>
+<pre><code>[[1]]
+[1] 2.197225
+
+[[2]]
+[1] 2.772589
+
+[[3]]
+[1] 3.218876</code></pre>
 <p>Another advantage appears when we want to <strong>vary more than one argument</strong>. With <code>lapply ()</code>, only one argument varies; the others are fixed. For example, how would you find a weighted mean when you have two lists, one of observations and the other of weights?</p>
 <div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="dealing-with-big-data-in-r.html#cb401-1"></a><span class="co"># Generate some sample data</span></span>
 <span id="cb401-2"><a href="dealing-with-big-data-in-r.html#cb401-2"></a>xs &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">5</span>, <span class="kw">runif</span>(<span class="dv">10</span>), <span class="dt">simplify =</span> <span class="ot">FALSE</span>)</span>
 <span id="cb401-3"><a href="dealing-with-big-data-in-r.html#cb401-3"></a>ws &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">5</span>, <span class="kw">rpois</span>(<span class="dv">10</span>, <span class="dv">5</span>) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">simplify =</span> <span class="ot">FALSE</span>)</span>
 <span id="cb401-4"><a href="dealing-with-big-data-in-r.html#cb401-4"></a><span class="kw">str</span>(xs)</span></code></pre></div>
-<pre><code>## List of 5
-##  $ : num [1:10] 0.767 0.671 0.909 0.198 0.436 ...
-##  $ : num [1:10] 0.296 0.306 0.126 0.518 0.831 ...
-##  $ : num [1:10] 0.607 0.6956 0.1348 0.0715 0.1021 ...
-##  $ : num [1:10] 0.655 0.107 0.925 0.557 0.742 ...
-##  $ : num [1:10] 0.149 0.47 0.668 0.194 0.451 ...</code></pre>
+<pre><code>List of 5
+ $ : num [1:10] 0.767 0.671 0.909 0.198 0.436 ...
+ $ : num [1:10] 0.296 0.306 0.126 0.518 0.831 ...
+ $ : num [1:10] 0.607 0.6956 0.1348 0.0715 0.1021 ...
+ $ : num [1:10] 0.655 0.107 0.925 0.557 0.742 ...
+ $ : num [1:10] 0.149 0.47 0.668 0.194 0.451 ...</code></pre>
 <div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="dealing-with-big-data-in-r.html#cb403-1"></a><span class="kw">str</span>(ws)</span></code></pre></div>
-<pre><code>## List of 5
-##  $ : num [1:10] 6 3 5 4 8 13 5 5 3 5
-##  $ : num [1:10] 3 9 6 5 6 4 6 6 6 5
-##  $ : num [1:10] 3 14 12 4 8 8 4 8 3 4
-##  $ : num [1:10] 7 7 8 5 9 7 6 6 8 4
-##  $ : num [1:10] 4 5 7 4 3 4 8 4 4 7</code></pre>
+<pre><code>List of 5
+ $ : num [1:10] 6 3 5 4 8 13 5 5 3 5
+ $ : num [1:10] 3 9 6 5 6 4 6 6 6 5
+ $ : num [1:10] 3 14 12 4 8 8 4 8 3 4
+ $ : num [1:10] 7 7 8 5 9 7 6 6 8 4
+ $ : num [1:10] 4 5 7 4 3 4 8 4 4 7</code></pre>
 <div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="dealing-with-big-data-in-r.html#cb405-1"></a><span class="co"># compute the weighted.mean</span></span>
 <span id="cb405-2"><a href="dealing-with-big-data-in-r.html#cb405-2"></a><span class="kw">unlist</span>(<span class="kw">Map</span>(weighted.mean, xs, ws))</span></code></pre></div>
-<pre><code>## [1] 0.4676235 0.5447004 0.3928258 0.4760168 0.5505697</code></pre>
+<pre><code>[1] 0.4676235 0.5447004 0.3928258 0.4760168 0.5505697</code></pre>
 <p>If some of the arguments should be fixed and constant, use an anonymous function:</p>
 <div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="dealing-with-big-data-in-r.html#cb407-1"></a><span class="kw">Map</span>(<span class="cf">function</span>(x, w) <span class="kw">weighted.mean</span>(x, w, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), xs, ws)</span></code></pre></div>
-<pre><code>## [[1]]
-## [1] 0.4676235
-## 
-## [[2]]
-## [1] 0.5447004
-## 
-## [[3]]
-## [1] 0.3928258
-## 
-## [[4]]
-## [1] 0.4760168
-## 
-## [[5]]
-## [1] 0.5505697</code></pre>
+<pre><code>[[1]]
+[1] 0.4676235
+
+[[2]]
+[1] 0.5447004
+
+[[3]]
+[1] 0.3928258
+
+[[4]]
+[1] 0.4760168
+
+[[5]]
+[1] 0.5505697</code></pre>
 </div>
 <div id="reduce" class="section level3" number="7.3.2">
 <h3><span class="header-section-number">7.3.2</span> Reduce</h3>
@@ -577,9 +594,9 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 </div>
 <p>The following two examples show what Reduce does with an infix and prefix function:</p>
 <div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="dealing-with-big-data-in-r.html#cb409-1"></a><span class="kw">Reduce</span>(<span class="st">`</span><span class="dt">+</span><span class="st">`</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="co"># -&gt; ((1 + 2) + 3)</span></span></code></pre></div>
-<pre><code>## [1] 6</code></pre>
+<pre><code>[1] 6</code></pre>
 <div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="dealing-with-big-data-in-r.html#cb411-1"></a><span class="kw">Reduce</span>(sum, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="co"># -&gt; sum(sum(1, 2), 3)</span></span></code></pre></div>
-<pre><code>## [1] 6</code></pre>
+<pre><code>[1] 6</code></pre>
 <p>The essence of <code>Reduce()</code> can be described by a simple for loop:</p>
 <pre><code>Reduce2 &lt;- function(f, x) {
   out &lt;- x[[1]]
@@ -591,19 +608,19 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 <p><code>Reduce()</code> is also an elegant way of extending a function that works with two inputs into a function that can deal with any number of inputs. It is useful for implementing many types of recursive operations, like merges and intersections. Imagine you have a list of numeric vectors, and you want to find the values that occur in every element:</p>
 <div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="dealing-with-big-data-in-r.html#cb414-1"></a>l &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">5</span>, <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">15</span>, <span class="dt">replace =</span> T), <span class="dt">simplify =</span> <span class="ot">FALSE</span>)</span>
 <span id="cb414-2"><a href="dealing-with-big-data-in-r.html#cb414-2"></a><span class="kw">str</span>(l)</span></code></pre></div>
-<pre><code>## List of 5
-##  $ : int [1:15] 9 7 9 6 6 6 10 4 3 8 ...
-##  $ : int [1:15] 8 3 7 1 9 5 3 8 10 7 ...
-##  $ : int [1:15] 8 6 9 8 9 3 9 10 9 4 ...
-##  $ : int [1:15] 7 4 10 8 6 6 3 7 6 4 ...
-##  $ : int [1:15] 10 7 8 10 5 1 6 9 6 8 ...</code></pre>
+<pre><code>List of 5
+ $ : int [1:15] 9 7 9 6 6 6 10 4 3 8 ...
+ $ : int [1:15] 8 3 7 1 9 5 3 8 10 7 ...
+ $ : int [1:15] 8 6 9 8 9 3 9 10 9 4 ...
+ $ : int [1:15] 7 4 10 8 6 6 3 7 6 4 ...
+ $ : int [1:15] 10 7 8 10 5 1 6 9 6 8 ...</code></pre>
 <p>You could do that by intersecting each element in turn:</p>
 <div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="dealing-with-big-data-in-r.html#cb416-1"></a><span class="kw">intersect</span>(<span class="kw">intersect</span>(<span class="kw">intersect</span>(<span class="kw">intersect</span>(l[[<span class="dv">1</span>]], l[[<span class="dv">2</span>]]),</span>
 <span id="cb416-2"><a href="dealing-with-big-data-in-r.html#cb416-2"></a>                              l[[<span class="dv">3</span>]]), l[[<span class="dv">4</span>]]), l[[<span class="dv">5</span>]])</span></code></pre></div>
-<pre><code>## [1]  9  6 10  8</code></pre>
+<pre><code>[1]  9  6 10  8</code></pre>
 <p>That’s hard to read. With <code>Reduce()</code>, the equivalent is:</p>
 <div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="dealing-with-big-data-in-r.html#cb418-1"></a><span class="kw">Reduce</span>(intersect, l)</span></code></pre></div>
-<pre><code>## [1]  9  6 10  8</code></pre>
+<pre><code>[1]  9  6 10  8</code></pre>
 </div>
 </div>
 <div id="example-linear-regression-for-big-data" class="section level2" number="7.4">
@@ -620,13 +637,13 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 <p>The ordinary least square (OLS) estimate of <span class="math inline">\(\mathbf{\beta}\)</span> is <span class="math display">\[\widehat{\mathbf{\beta}}=[\mathbf{X}^T\mathbf{X}]^{-1}\mathbf{X}^T\mathbf{y}\]</span>. To illustrate, let us consider the “mtcars” example, and run this regression:</p>
 <div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="dealing-with-big-data-in-r.html#cb420-1"></a><span class="kw">data</span>(mtcars)</span>
 <span id="cb420-2"><a href="dealing-with-big-data-in-r.html#cb420-2"></a>(mod &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>cyl, <span class="dt">data =</span> mtcars))</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = mpg ~ wt + cyl, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)           wt          cyl  
-##      39.686       -3.191       -1.508</code></pre>
+<pre><code>
+Call:
+lm(formula = mpg ~ wt + cyl, data = mtcars)
+
+Coefficients:
+(Intercept)           wt          cyl  
+     39.686       -3.191       -1.508  </code></pre>
 <p>The algorithm implemented in the <code>lm ()</code> function uses the QR decomposition of <span class="math inline">\(\mathbf{X},\)</span> <span class="math display">\[\mathbf{X}=\mathbf{Q}\mathbf{R},\]</span> where <span class="math inline">\(\mathbf{Q}\)</span> is an orthogonal matrix (i.e. <span class="math inline">\(\mathbf{Q}^T\mathbf{Q}=\mathbb{I}\)</span>).Then,</p>
 <p><span class="math display">\[\widehat{\mathbf{\beta}}=[\mathbf{X}^T\mathbf{X}]^{-1}\mathbf{X}^T\mathbf{y}=\mathbf{R}^{-1}\mathbf{Q}^T\mathbf{y}\]</span></p>
 <div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="dealing-with-big-data-in-r.html#cb422-1"></a>Y &lt;-<span class="st"> </span>mtcars<span class="op">$</span>mpg</span>
@@ -636,10 +653,10 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 <span id="cb422-5"><a href="dealing-with-big-data-in-r.html#cb422-5"></a>R &lt;-<span class="st"> </span><span class="kw">qr.R</span>(QR)</span>
 <span id="cb422-6"><a href="dealing-with-big-data-in-r.html#cb422-6"></a>Q &lt;-<span class="st"> </span><span class="kw">qr.Q</span>(QR)</span>
 <span id="cb422-7"><a href="dealing-with-big-data-in-r.html#cb422-7"></a><span class="kw">solve</span>(R) <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(Q) <span class="op">%*%</span><span class="st"> </span>Y</span></code></pre></div>
-<pre><code>##                  [,1]
-## (Intercept) 39.686261
-## wt          -3.190972
-## cyl         -1.507795</code></pre>
+<pre><code>                 [,1]
+(Intercept) 39.686261
+wt          -3.190972
+cyl         -1.507795</code></pre>
 <p>We can parallelise computations using the MLR-MR method as follows:</p>
 <p>Consider <span class="math inline">\(m\)</span> blocks, for instance 3 (given tha we have 4 cores)</p>
 <div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="dealing-with-big-data-in-r.html#cb424-1"></a>m &lt;-<span class="st"> </span><span class="dv">3</span></span></code></pre></div>
@@ -697,13 +714,13 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 <span id="cb431-3"><a href="dealing-with-big-data-in-r.html#cb431-3"></a>beta &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">solve</span>(R.final) <span class="op">%*%</span><span class="st"> </span>V.sum)</span></code></pre></div>
 <p>Let us compare the results</p>
 <div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="dealing-with-big-data-in-r.html#cb432-1"></a><span class="kw">cbind</span>(<span class="dt">lm=</span><span class="kw">coef</span>(mod), <span class="dt">parallel=</span>beta)</span></code></pre></div>
-<pre><code>##                    lm  parallel
-## (Intercept) 39.686261 39.686261
-## wt          -3.190972 -3.190972
-## cyl         -1.507795 -1.507795</code></pre>
+<pre><code>                   lm  parallel
+(Intercept) 39.686261 39.686261
+wt          -3.190972 -3.190972
+cyl         -1.507795 -1.507795</code></pre>
 <div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="dealing-with-big-data-in-r.html#cb434-1"></a><span class="co"># error</span></span>
 <span id="cb434-2"><a href="dealing-with-big-data-in-r.html#cb434-2"></a><span class="kw">sum</span>((beta <span class="op">-</span><span class="st"> </span><span class="kw">coef</span>(mod)) <span class="op">**</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 2.607678e-28</code></pre>
+<pre><code>[1] 2.607678e-28</code></pre>
 <table style="width:94%;">
 <colgroup>
 <col width="94%" />
@@ -732,25 +749,13 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 
 </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="regresión-logística.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="regresión-logística.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="la-librería-caret.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

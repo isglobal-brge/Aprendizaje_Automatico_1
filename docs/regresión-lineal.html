@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-10-19" />
+<meta name="date" content="2020-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -252,6 +252,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>7.4</b> Example: Linear regression for Big Data</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="la-librería-caret.html"><a href="la-librería-caret.html"><i class="fa fa-check"></i><b>8</b> La librería <code>caret</code></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="la-librería-caret.html"><a href="la-librería-caret.html#pre-procesado"><i class="fa fa-check"></i><b>8.1</b> Pre-procesado</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="la-librería-caret.html"><a href="la-librería-caret.html#creación-de-variables"><i class="fa fa-check"></i><b>8.1.1</b> Creación de variables</a></li>
+<li class="chapter" data-level="8.1.2" data-path="la-librería-caret.html"><a href="la-librería-caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>8.1.2</b> Predictores con poca variabilidad</a></li>
+<li class="chapter" data-level="8.1.3" data-path="la-librería-caret.html"><a href="la-librería-caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>8.1.3</b> Identificación de predictores correlacionados</a></li>
+<li class="chapter" data-level="8.1.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#centrado-y-escalado"><i class="fa fa-check"></i><b>8.1.4</b> Centrado y escalado</a></li>
+<li class="chapter" data-level="8.1.5" data-path="la-librería-caret.html"><a href="la-librería-caret.html#imputación"><i class="fa fa-check"></i><b>8.1.5</b> Imputación</a></li>
+<li class="chapter" data-level="8.1.6" data-path="la-librería-caret.html"><a href="la-librería-caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>8.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="la-librería-caret.html"><a href="la-librería-caret.html#visualización"><i class="fa fa-check"></i><b>8.2</b> Visualización</a></li>
+<li class="chapter" data-level="8.3" data-path="la-librería-caret.html"><a href="la-librería-caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>8.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
+<li class="chapter" data-level="8.4" data-path="la-librería-caret.html"><a href="la-librería-caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>8.4</b> Creación de un modelo predictivo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="k-vecinos-más-próximos-knn.html"><a href="k-vecinos-más-próximos-knn.html"><i class="fa fa-check"></i><b>9</b> K vecinos más próximos (KNN)</a></li>
+<li class="chapter" data-level="10" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>10</b> Análisis discriminante lineal (LDA)</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -336,13 +353,13 @@ y_i = \beta_0 + \beta_1 x_ {i1} + \cdots + \beta_p x_ {ip} + \varepsilon_i,
 <p>Para ajustar un modelo lineal usamos la función <code>lm()</code>. (La función <code>glm()</code> también se ajusta a un modelo lineal por defecto, definido por <code>family = gaussian</code>. También usaremos<code>glm()</code> para ajustar una regresión logística, con<code>family = binomial</code>). Por ejemplo, usemos el conjunto de dataos mtcars para averiguar si el consumo de combustible (mpg) está correlacionado con el peso del coche (wt). En R deberíamos ejecutar:</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="regresión-lineal.html#cb102-1"></a><span class="kw">data</span>(mtcars)</span>
 <span id="cb102-2"><a href="regresión-lineal.html#cb102-2"></a>(simple_model &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars))</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = mpg ~ wt, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)           wt  
-##      37.285       -5.344</code></pre>
+<pre><code>
+Call:
+lm(formula = mpg ~ wt, data = mtcars)
+
+Coefficients:
+(Intercept)           wt  
+     37.285       -5.344  </code></pre>
 <p>La ecuación del modelo es: <span class="math inline">\(\widehat {mpg} = 37.285 - 5.344wt\)</span>. (La notación del sombrero, <span class="math inline">\(\widehat {mpg}\)</span>, significa “estimación de”). Sin embargo, con el término de error incluido, ya no estamos <em>estimando</em> mpg sino describiéndolo exactamente: <span class="math inline">\(mpg = 37.285 - 5.344wt + error\)</span> (Por lo tanto, no hay notación de sombrero). Los componentes del modelo se pueden extraer del objeto del modelo usando <code>adjust()</code>, o, de manera equivalente en este caso, <code>predict()</code> y <code>residuals()</code>:</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="regresión-lineal.html#cb104-1"></a>mtcars_new &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb104-2"><a href="regresión-lineal.html#cb104-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cars =</span> <span class="kw">rownames</span>(mtcars),</span>
@@ -351,13 +368,13 @@ y_i = \beta_0 + \beta_1 x_ {i1} + \cdots + \beta_p x_ {ip} + \varepsilon_i,
 <span id="cb104-5"><a href="regresión-lineal.html#cb104-5"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(cars, mpg, wt, fitted, residuals)</span>
 <span id="cb104-6"><a href="regresión-lineal.html#cb104-6"></a></span>
 <span id="cb104-7"><a href="regresión-lineal.html#cb104-7"></a><span class="kw">head</span>(mtcars_new)</span></code></pre></div>
-<pre><code>##                cars  mpg    wt   fitted  residuals
-## 1         Mazda RX4 21.0 2.620 23.28261 -2.2826106
-## 2     Mazda RX4 Wag 21.0 2.875 21.91977 -0.9197704
-## 3        Datsun 710 22.8 2.320 24.88595 -2.0859521
-## 4    Hornet 4 Drive 21.4 3.215 20.10265  1.2973499
-## 5 Hornet Sportabout 18.7 3.440 18.90014 -0.2001440
-## 6           Valiant 18.1 3.460 18.79325 -0.6932545</code></pre>
+<pre><code>               cars  mpg    wt   fitted  residuals
+1         Mazda RX4 21.0 2.620 23.28261 -2.2826106
+2     Mazda RX4 Wag 21.0 2.875 21.91977 -0.9197704
+3        Datsun 710 22.8 2.320 24.88595 -2.0859521
+4    Hornet 4 Drive 21.4 3.215 20.10265  1.2973499
+5 Hornet Sportabout 18.7 3.440 18.90014 -0.2001440
+6           Valiant 18.1 3.460 18.79325 -0.6932545</code></pre>
 <p>El modelo se puede utilizar para calcular valores ajustados para coches individuales en el conjunto de datos. Por ejemplo, el valor ajustado para el Mazda RX4, <span class="math inline">\(\widehat {mpg_1}\)</span>, se puede derivar de la ecuación del modelo, <span class="math inline">\(\beta_0 + \beta_1 x_ {i1}\)</span>: 37.29 - 5.34 x 2.62 = 23.28. (El valor <em>real</em> del Mazda RX4, calculado a partir del modelo, sería: 37.29 - 5.34 x 2.62 + 2.28 = 21). El modelo también se puede utilizar para la predicción. ¿Cuál sería el mpg para un coche que pesa 5000 libras? Según el modelo: 37,29 - 5,34 x 5 = 10.56.</p>
 <div id="residuos" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Residuos</h3>
@@ -379,7 +396,7 @@ y_i = \beta_0 + \beta_1 x_ {i1} + \cdots + \beta_p x_ {ip} + \varepsilon_i,
 <span id="cb107-3"><a href="regresión-lineal.html#cb107-3"></a>}</span>
 <span id="cb107-4"><a href="regresión-lineal.html#cb107-4"></a></span>
 <span id="cb107-5"><a href="regresión-lineal.html#cb107-5"></a><span class="kw">rss</span>(<span class="kw">fitted</span>(simple_model), mtcars<span class="op">$</span>mpg)</span></code></pre></div>
-<pre><code>## [1] 278.3219</code></pre>
+<pre><code>[1] 278.3219</code></pre>
 </div>
 <div id="coeficientes-de-interpretación" class="section level3" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Coeficientes de interpretación</h3>
@@ -389,15 +406,15 @@ y_i = \beta_0 + \beta_1 x_ {i1} + \cdots + \beta_p x_ {ip} + \varepsilon_i,
 </ul>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="regresión-lineal.html#cb109-1"></a>mtcars<span class="op">$</span>wt_centered &lt;-<span class="st"> </span>mtcars<span class="op">$</span>wt <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mtcars<span class="op">$</span>wt)</span>
 <span id="cb109-2"><a href="regresión-lineal.html#cb109-2"></a>(simple_model &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt_centered, <span class="dt">data =</span> mtcars))</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = mpg ~ wt_centered, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)  wt_centered  
-##      20.091       -5.344</code></pre>
+<pre><code>
+Call:
+lm(formula = mpg ~ wt_centered, data = mtcars)
+
+Coefficients:
+(Intercept)  wt_centered  
+     20.091       -5.344  </code></pre>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="regresión-lineal.html#cb111-1"></a><span class="kw">rss</span>(<span class="kw">fitted</span>(simple_model), mtcars<span class="op">$</span>mpg)</span></code></pre></div>
-<pre><code>## [1] 278.3219</code></pre>
+<pre><code>[1] 278.3219</code></pre>
 <p>Ahora el <em>intercept</em>, 20.09, es significativa y representa el valor predicho de mpg cuando wt_centered es 0 — es decir, cuando wt es promedio.</p>
 <p>Hay dos formas de interpretar los coeficientes en un modelo lineal:</p>
 <ol style="list-style-type: decimal">
@@ -412,15 +429,15 @@ y_i = \beta_0 + \beta_1 x_ {i1} + \cdots + \beta_p x_ {ip} + \varepsilon_i,
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="regresión-lineal.html#cb113-1"></a>mtcars<span class="op">$</span>hp_bin &lt;-<span class="st"> </span><span class="kw">ifelse</span>(mtcars<span class="op">$</span>hp <span class="op">&lt;</span><span class="st"> </span><span class="kw">mean</span>(mtcars<span class="op">$</span>hp), <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb113-2"><a href="regresión-lineal.html#cb113-2"></a></span>
 <span id="cb113-3"><a href="regresión-lineal.html#cb113-3"></a>(multivariable_model &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt_centered <span class="op">+</span><span class="st"> </span>hp_bin , <span class="dt">data =</span> mtcars))</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = mpg ~ wt_centered + hp_bin, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)  wt_centered       hp_bin  
-##      21.649       -4.168       -3.324</code></pre>
+<pre><code>
+Call:
+lm(formula = mpg ~ wt_centered + hp_bin, data = mtcars)
+
+Coefficients:
+(Intercept)  wt_centered       hp_bin  
+     21.649       -4.168       -3.324  </code></pre>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="regresión-lineal.html#cb115-1"></a><span class="kw">rss</span>(<span class="kw">fitted</span>(multivariable_model), mtcars<span class="op">$</span>mpg)</span></code></pre></div>
-<pre><code>## [1] 231.3121</code></pre>
+<pre><code>[1] 231.3121</code></pre>
 <p>Este modelo multivariante es una mejora con respecto al modelo simple ya que tiene un RSS menor.</p>
 <ul>
 <li><p><strong>intercept</strong>: 21,65 representa el mpg predicho cuando los predictores continuos o binarios son iguales a 0 o (no aplicable en este caso) cuando las variables de los factores están en su nivel de referencia. El <em>intercept</em> es el mpg pronosticado por el modelo para autos de peso promedio que tienen caballos de fuerza por debajo del promedio.</p></li>
@@ -432,24 +449,24 @@ y_i = \beta_0 + \beta_1 x_ {i1} + \cdots + \beta_p x_ {ip} + \varepsilon_i,
 <h3><span class="header-section-number">4.3.3</span> Interacciones</h3>
 <p>Podemos agregar una interacción a este modelo. A menudo, la relación entre un predictor y un resultado puede depender del nivel de otra variable predictiva. Por ejemplo, la pendiente de la recta de regresión que define la relación entre wt_centrado y mpg puede variar con los niveles de hp_bin. Si es así, decimos que existe una interacción entre wt_centered y hp_bin al predecir mpg. Para incluir una interacción entre dos variables en la fórmula del modelo, simplemente reemplazamos “+” por “*” en la fórmula del modelo. Esta fórmula, <code>mpg ~ wt_centered * hp_bin</code>, es exactamente equivalente a <code>mpg ~ wt_centered + wt_centered * hp_bin</code>, o a <code>mpg ~ wt_centered + hp_bin + wt_centered*hp_bin</code> ya que <code>lm ()</code> agrega automáticamente el efecto principal junto con la interacción. También se puede usar “:” para el término exacto de la interacción `<code>mpg ~ wt_centered + hp_bin + wt_centered:hp_bin</code>. Por “efecto principal” nos referimos a los términos que interactúan entre si. En este modelo, el efecto de interacción es wt_centered:hp_bin, mientras que wt_centered y hp_bin por sí mismos son los efectos principales.</p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="regresión-lineal.html#cb117-1"></a>(multivariable_model &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt_centered  <span class="op">*</span><span class="st"> </span>hp_bin, <span class="dt">data =</span> mtcars))</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = mpg ~ wt_centered * hp_bin, data = mtcars)
-## 
-## Coefficients:
-##        (Intercept)         wt_centered              hp_bin  
-##             20.276              -6.391              -3.163  
-## wt_centered:hp_bin  
-##              3.953</code></pre>
+<pre><code>
+Call:
+lm(formula = mpg ~ wt_centered * hp_bin, data = mtcars)
+
+Coefficients:
+       (Intercept)         wt_centered              hp_bin  
+            20.276              -6.391              -3.163  
+wt_centered:hp_bin  
+             3.953  </code></pre>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="regresión-lineal.html#cb119-1"></a><span class="kw">rss</span>(<span class="kw">fitted</span>(multivariable_model), mtcars<span class="op">$</span>mpg)</span></code></pre></div>
-<pre><code>## [1] 170.3792</code></pre>
+<pre><code>[1] 170.3792</code></pre>
 <p>RSS mejora una vez más.</p>
 <p>Las interacciones pueden ser difíciles de interpretar es por ello que la visualización ayuda a comprender qué está sucediendo.</p>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="regresión-lineal.html#cb121-1"></a><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(wt_centered, mpg, <span class="dt">col =</span> <span class="kw">factor</span>(hp_bin), <span class="dt">group =</span> <span class="kw">factor</span>(hp_bin))) <span class="op">+</span></span>
 <span id="cb121-2"><a href="regresión-lineal.html#cb121-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb121-3"><a href="regresión-lineal.html#cb121-3"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) <span class="op">+</span></span>
 <span id="cb121-4"><a href="regresión-lineal.html#cb121-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;mpg ~ wt_centered * hp_bin&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Podemos ver que la relación entre wt y mpg depende de los niveles de hp_bin: las pendientes de las rectas de regresión difieren. <em>Las rectas de regresión no paralelas indican la presencia de una interacción</em>. Observamos una relación más fuerte entre el peso y las millas por galón entre los autos con caballos de fuerza por debajo del promedio (una relación <em>negativa</em> más fuerte) que entre los autos con más caballos de fuerza. Las rectas de regresión para hp_bin se vuelven más planas a medida que aumenta wt_centrado.</p>
 <p><em>NOTA: la presencia de una interacción cambia la interpretación de los efectos principales</em>. En un modelo sin interacción, los efectos principales son independientes de los valores particulares de los otros predictores. Por el contrario, una interacción hace que los efectos principales dependan de valores particulares de los otros predictores.</p>
 <ul>
@@ -459,13 +476,13 @@ y_i = \beta_0 + \beta_1 x_ {i1} + \cdots + \beta_p x_ {ip} + \varepsilon_i,
 </ul>
 <p>Puede resultar instructivo ver qué está haciendo <code>lm ()</code> en segundo plano para ajustarse a este modelo. El comando <code>model.matrix ()</code> muestra cómo se ha reformateado la matriz del predictor para la regresión:</p>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="regresión-lineal.html#cb122-1"></a><span class="kw">head</span>(<span class="kw">model.matrix</span>(multivariable_model))</span></code></pre></div>
-<pre><code>##                   (Intercept) wt_centered hp_bin wt_centered:hp_bin
-## Mazda RX4                   1    -0.59725      0            0.00000
-## Mazda RX4 Wag               1    -0.34225      0            0.00000
-## Datsun 710                  1    -0.89725      0            0.00000
-## Hornet 4 Drive              1    -0.00225      0            0.00000
-## Hornet Sportabout           1     0.22275      1            0.22275
-## Valiant                     1     0.24275      0            0.00000</code></pre>
+<pre><code>                  (Intercept) wt_centered hp_bin wt_centered:hp_bin
+Mazda RX4                   1    -0.59725      0            0.00000
+Mazda RX4 Wag               1    -0.34225      0            0.00000
+Datsun 710                  1    -0.89725      0            0.00000
+Hornet 4 Drive              1    -0.00225      0            0.00000
+Hornet Sportabout           1     0.22275      1            0.22275
+Valiant                     1     0.24275      0            0.00000</code></pre>
 <p>El <em>intercept</em> es un vector de 1s. El vector para el término de interacción, wt_centered: hp_bin, consiste simplemente en el producto de los dos vectores con las componentes de cada variable</p>
 </div>
 </div>
@@ -498,11 +515,11 @@ X&#39;X \beta = X&#39;y
 <span id="cb124-2"><a href="regresión-lineal.html#cb124-2"></a>y &lt;-<span class="st"> </span>mtcars<span class="op">$</span>mpg</span>
 <span id="cb124-3"><a href="regresión-lineal.html#cb124-3"></a></span>
 <span id="cb124-4"><a href="regresión-lineal.html#cb124-4"></a><span class="kw">solve</span>(<span class="kw">t</span>(X) <span class="op">%*%</span><span class="st"> </span>X) <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(X) <span class="op">%*%</span><span class="st"> </span>y</span></code></pre></div>
-<pre><code>##                         [,1]
-## (Intercept)        20.276155
-## wt_centered        -6.390834
-## hp_bin             -3.162983
-## wt_centered:hp_bin  3.953027</code></pre>
+<pre><code>                        [,1]
+(Intercept)        20.276155
+wt_centered        -6.390834
+hp_bin             -3.162983
+wt_centered:hp_bin  3.953027</code></pre>
 <p>Este método devuelve las mismas estimaciones de coeficientes que <code>lm ()</code>.</p>
 </div>
 <div id="medidas-adicionales-de-ajuste-del-modelo" class="section level2" number="4.5">
@@ -516,13 +533,13 @@ X&#39;X \beta = X&#39;y
 \]</span></p>
 <p>Lo bueno de RMSE es que, a diferencia de RSS, devuelve un valor que está en la escala del variable resultado.</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="regresión-lineal.html#cb126-1"></a><span class="kw">rss</span>(<span class="kw">fitted</span>(multivariable_model), mtcars<span class="op">$</span>mpg)</span></code></pre></div>
-<pre><code>## [1] 170.3792</code></pre>
+<pre><code>[1] 170.3792</code></pre>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="regresión-lineal.html#cb128-1"></a>rmse &lt;-<span class="st"> </span><span class="cf">function</span>(fitted, actual){</span>
 <span id="cb128-2"><a href="regresión-lineal.html#cb128-2"></a>  <span class="kw">sqrt</span>(<span class="kw">mean</span>((fitted <span class="op">-</span><span class="st"> </span>actual)<span class="op">^</span><span class="dv">2</span>))</span>
 <span id="cb128-3"><a href="regresión-lineal.html#cb128-3"></a>}</span>
 <span id="cb128-4"><a href="regresión-lineal.html#cb128-4"></a></span>
 <span id="cb128-5"><a href="regresión-lineal.html#cb128-5"></a><span class="kw">rmse</span>(<span class="kw">fitted</span>(multivariable_model), mtcars<span class="op">$</span>mpg)</span></code></pre></div>
-<pre><code>## [1] 2.307455</code></pre>
+<pre><code>[1] 2.307455</code></pre>
 <p>En promedio, entonces, este modelo tiene una diferencia de aproximadamente 2.31 mpg por cada coche.</p>
 <p><span class="math inline">\(R^2\)</span> es otra medida de ajuste del modelo que es conveniente porque es una medida estandarizada — escalada entre 0 y 1 — y, por lo tanto, es comparable en todos los contextos.</p>
 <p><span class="math display">\[
@@ -544,10 +561,10 @@ R^2 = 1 - \frac{SS_\text{resid}}{SS_\text{tot}},
 <span id="cb130-13"><a href="regresión-lineal.html#cb130-13"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;Residual Sum of Squares (RSS) </span><span class="ch">\n</span><span class="st">&quot;</span>,rss))</span>
 <span id="cb130-14"><a href="regresión-lineal.html#cb130-14"></a></span>
 <span id="cb130-15"><a href="regresión-lineal.html#cb130-15"></a><span class="kw">grid.arrange</span>(plot1, plot2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Para nuestro modelo lineal simple, mpg ~ wt, <span class="math inline">\(R^2\)</span> era de .75, que coincide con nuestro cálculo aquí: 1 - 278/1126 = .75. Esto significa que wt explica el 75% de la variación total en mpg. Cuanto mejor se ajusta la regresión lineal a los datos en comparación con el promedio simple, más se acerca el valor de <span class="math inline">\(R^2\)</span> a 1. Para la regresión lineal simple, <span class="math inline">\(R^2\)</span> es como la correlación al cuadrado entre el resultado y el predictor.</p>
 <div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="regresión-lineal.html#cb131-1"></a><span class="kw">cor</span>(mtcars<span class="op">$</span>mpg, mtcars<span class="op">$</span>wt)<span class="op">^</span><span class="dv">2</span></span></code></pre></div>
-<pre><code>## [1] 0.7528328</code></pre>
+<pre><code>[1] 0.7528328</code></pre>
 <p>Un problema con el <span class="math inline">\(R^2\)</span> es que agregar variables al modelo tiende a mejorarlo aunque las nuevas variables no sean relevantes. Añadir más variables puede conducir a un sobreajuste. Se ha desarrollado una variante de <span class="math inline">\(R^2\)</span> que penaliza la medida para predictores adicionales: <span class="math inline">\(R^2\)</span>ajustados.</p>
 <p><span class="math display">\[
 \bar R^2 = {1-(1-R^2){n-1 \over n-p-1}} 
@@ -555,26 +572,26 @@ R^2 = 1 - \frac{SS_\text{resid}}{SS_\text{tot}},
 \]</span></p>
 <p>donde <span class="math inline">\(n\)</span> es el número de observaciones en el conjunto de datos y <span class="math inline">\(p\)</span> es el número de predictores en el modelo. Es fácil calcular este resultado utilizando la función <code>summary()</code></p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="regresión-lineal.html#cb133-1"></a><span class="kw">summary</span>(multivariable_model)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = mpg ~ wt_centered * hp_bin, data = mtcars)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.5837 -1.4371 -0.8214  1.4517  5.6228 
-## 
-## Coefficients:
-##                    Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)         20.2762     0.8323  24.363  &lt; 2e-16 ***
-## wt_centered         -6.3908     0.9367  -6.823 2.06e-07 ***
-## hp_bin              -3.1630     1.1971  -2.642  0.01333 *  
-## wt_centered:hp_bin   3.9530     1.2492   3.164  0.00373 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 2.467 on 28 degrees of freedom
-## Multiple R-squared:  0.8487,	Adjusted R-squared:  0.8325 
-## F-statistic: 52.35 on 3 and 28 DF,  p-value: 1.324e-11</code></pre>
+<pre><code>
+Call:
+lm(formula = mpg ~ wt_centered * hp_bin, data = mtcars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.5837 -1.4371 -0.8214  1.4517  5.6228 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         20.2762     0.8323  24.363  &lt; 2e-16 ***
+wt_centered         -6.3908     0.9367  -6.823 2.06e-07 ***
+hp_bin              -3.1630     1.1971  -2.642  0.01333 *  
+wt_centered:hp_bin   3.9530     1.2492   3.164  0.00373 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 2.467 on 28 degrees of freedom
+Multiple R-squared:  0.8487,	Adjusted R-squared:  0.8325 
+F-statistic: 52.35 on 3 and 28 DF,  p-value: 1.324e-11</code></pre>
 <p>En este caso <span class="math inline">\(\bar R^2=0.8325\)</span> lo que indica que nuestro modelo explica un 83.25% de la variabilidad observada de la variable ‘mpg’.</p>
 </div>
 <div id="sesgo-variación-sobreajuste" class="section level2" number="4.6">
@@ -610,37 +627,37 @@ R^2 = 1 - \frac{SS_\text{resid}}{SS_\text{tot}},
 <span id="cb135-12"><a href="regresión-lineal.html#cb135-12"></a>         <span class="dt">humidity =</span> hum,</span>
 <span id="cb135-13"><a href="regresión-lineal.html#cb135-13"></a>         windspeed)</span></code></pre></div>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="regresión-lineal.html#cb136-1"></a><span class="kw">glimpse</span>(day)</span></code></pre></div>
-<pre><code>## Rows: 731
-## Columns: 10
-## $ count       &lt;int&gt; 985, 801, 1349, 1562, 1600, 1606, 1510, 959,...
-## $ season      &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
-## $ year        &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ month       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
-## $ holiday     &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ weekday     &lt;int&gt; 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6,...
-## $ temperature &lt;dbl&gt; 0.3441670, 0.3634780, 0.1963640, 0.2000000, ...
-## $ atemp       &lt;dbl&gt; 0.3636250, 0.3537390, 0.1894050, 0.2121220, ...
-## $ humidity    &lt;dbl&gt; 0.805833, 0.696087, 0.437273, 0.590435, 0.43...
-## $ windspeed   &lt;dbl&gt; 0.1604460, 0.2485390, 0.2483090, 0.1602960, ...</code></pre>
+<pre><code>Rows: 731
+Columns: 10
+$ count       &lt;int&gt; 985, 801, 1349, 1562, 1600, 1606, 1510, 959, 8...
+$ season      &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
+$ year        &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+$ month       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
+$ holiday     &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+$ weekday     &lt;int&gt; 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0...
+$ temperature &lt;dbl&gt; 0.3441670, 0.3634780, 0.1963640, 0.2000000, 0....
+$ atemp       &lt;dbl&gt; 0.3636250, 0.3537390, 0.1894050, 0.2121220, 0....
+$ humidity    &lt;dbl&gt; 0.805833, 0.696087, 0.437273, 0.590435, 0.4369...
+$ windspeed   &lt;dbl&gt; 0.1604460, 0.2485390, 0.2483090, 0.1602960, 0....</code></pre>
 <p>Una pregunta exploratoria inicial es: ¿cómo varía el uso de la bicicleta por año? Podemos responder a esta pregunta simplemente calculando un promedio para cada año:</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="regresión-lineal.html#cb138-1"></a>day <span class="op">%&gt;%</span></span>
 <span id="cb138-2"><a href="regresión-lineal.html#cb138-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> <span class="kw">ifelse</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">2011</span>, <span class="dv">2012</span>)) <span class="op">%&gt;%</span></span>
 <span id="cb138-3"><a href="regresión-lineal.html#cb138-3"></a><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span></span>
 <span id="cb138-4"><a href="regresión-lineal.html#cb138-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarize</span>(<span class="st">`</span><span class="dt">average ridership</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">mean</span>(count)))</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 2
-##    year `average ridership`
-##   &lt;dbl&gt;               &lt;dbl&gt;
-## 1  2011                3406
-## 2  2012                5600</code></pre>
+<pre><code># A tibble: 2 x 2
+   year `average ridership`
+  &lt;dbl&gt;               &lt;dbl&gt;
+1  2011                3406
+2  2012                5600</code></pre>
 <p>El número de pasajeros promedio en este resumen representa una media condicional: la media de la variable de recuento, condicional al año. ¿Qué nos dice la regresión lineal sobre el promedio de pasajeros (riders) por año?</p>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="regresión-lineal.html#cb140-1"></a><span class="kw">lm</span>(count <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> day)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = count ~ year, data = day)
-## 
-## Coefficients:
-## (Intercept)         year  
-##        3406         2194</code></pre>
+<pre><code>
+Call:
+lm(formula = count ~ year, data = day)
+
+Coefficients:
+(Intercept)         year  
+       3406         2194  </code></pre>
 <p>La salida del modelo incluye un <em>intercept</em> y un coeficiente para el año. El <em>intercept</em> es el promedio de la variable de resultado cuando los predictores numéricos son iguales a cero. Por lo tanto, 3406 es el número de pasajeros promedio cuando año = 0 (es decir, 2011), y el coeficiente para el año, 2194, es el aumento esperado en el número de pasajeros asociado con un aumento de 1 unidad en el año (es decir, cuando el año pasa de 0 a 1 ). Por lo tanto, el número promedio de pasajeros en el año 1 (2012) es solo la suma de los dos coeficientes — 3406 + 2194 = 5600 — que es idéntica a la media condicional para 2012 que calculamos anteriormente usando<code>dplyr</code> .</p>
 <p>En general, dadas dos variables aleatorias, X e Y (piense: año y número de pasajeros), podemos definir la media condicional como el valor esperado o promedio de Y dado que X está restringido a tener un valor específico, <span class="math inline">\(x\)</span>, a partir de su rango: <span class="math inline">\(\mathbf {E} [Y \mid X = x]\)</span>. Ejemplo: <span class="math inline">\(\mathbf{E} [Ridership \mid Year = 2012]\)</span> es el número promedio de pasajeros dado ese año = 2012. Una media condicional tiene un valor descriptivo — sabemos que el coeficiente <span class="math inline">\(\beta\)</span> para el año de nuestro modelo, 2194, representa la relación entre el número de pasajeros y el año, con la magnitud o el valor absoluto del coeficiente que indica la fuerza de la relación, positiva o negativa. Los coeficientes también se pueden utilizar para la predicción. ¿Cuántos ciclistas más deberíamos esperar en 2013? Utilice el modelo: <span class="math inline">\(\mathbf {E} [riders \mid year = 2013]\)</span> es igual al número en 2012, 5600, más el coeficiente del año: 5600 + 2194 = 7794.</p>
 <p>El modelo nos permite predecir, pero debemos recordar que no hay nada mágico en la predicción. Deberíamos pensar críticamente al respecto. Por un lado, asume una tendencia constante año tras año. ¿Es esta una suposición razonable?</p>
@@ -652,20 +669,20 @@ R^2 = 1 - \frac{SS_\text{resid}}{SS_\text{tot}},
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="regresión-lineal.html#cb142-1"></a>day <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb142-2"><a href="regresión-lineal.html#cb142-2"></a><span class="st">  </span><span class="kw">group_by</span>(<span class="dt">temperature =</span> <span class="kw">round</span>(temperature, <span class="dv">2</span>)) <span class="op">%&gt;%</span></span>
 <span id="cb142-3"><a href="regresión-lineal.html#cb142-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarize</span>(<span class="dt">mean =</span> <span class="kw">round</span>(<span class="kw">mean</span>(count))) </span></code></pre></div>
-<pre><code>## # A tibble: 77 x 2
-##    temperature  mean
-##          &lt;dbl&gt; &lt;dbl&gt;
-##  1        0.06   981
-##  2        0.1   1201
-##  3        0.11  2368
-##  4        0.13  1567
-##  5        0.14  1180
-##  6        0.15  1778
-##  7        0.16  1441
-##  8        0.17  1509
-##  9        0.18  1597
-## 10        0.19  2049
-## # ... with 67 more rows</code></pre>
+<pre><code># A tibble: 77 x 2
+   temperature  mean
+         &lt;dbl&gt; &lt;dbl&gt;
+ 1        0.06   981
+ 2        0.1   1201
+ 3        0.11  2368
+ 4        0.13  1567
+ 5        0.14  1180
+ 6        0.15  1778
+ 7        0.16  1441
+ 8        0.17  1509
+ 9        0.18  1597
+10        0.19  2049
+# ... with 67 more rows</code></pre>
 <p>Sin embargo, se puede observar que faltan valores en la secuencia. Aquí hay un gráfico que muestra las brechas en los datos.</p>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="regresión-lineal.html#cb144-1"></a>day <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb144-2"><a href="regresión-lineal.html#cb144-2"></a><span class="st">  </span><span class="kw">group_by</span>(<span class="dt">temperature =</span> <span class="kw">round</span>(temperature, <span class="dv">2</span>)) <span class="op">%&gt;%</span></span>
@@ -685,7 +702,7 @@ R^2 = 1 - \frac{SS_\text{resid}}{SS_\text{tot}},
 <p>A veces no es posible calcular buenas medias condicionales para el resultado debido a la falta de valores de predicción. Supongamos que queremos encontrar <span class="math inline">\(\hat{\mu} (. 12)\)</span>. Resulta que no hubo días en nuestro conjunto de datos en los que la temperatura fuera de .12. El algoritmo KNN resuelve este problema usando las <span class="math inline">\(k\)</span> observaciones más cercanas a <span class="math inline">\(t\)</span>= .12 para calcular la media condicional, <span class="math inline">\(\hat {\mu} (. 12)\)</span>. Si definimos <span class="math inline">\(k\)</span>= 4, entonces tomaríamos los <em>cuatro</em> valores más cercanos a .12 en el conjunto de datos — .1275, .134783, .138333, .1075. (“Más cercano” en este caso se define como la distancia euclidiana, que en un espacio unidimensional, una recta numérica, es simplemente: <span class="math inline">\(\sqrt {(xy) ^ 2}\)</span>.) Estos <span class="math inline">\(k\)</span>= 4 valores más cercanos se usarían para calcular <span class="math inline">\(\hat{\mu} (. 12)\)</span> calculando el promedio.</p>
 <p>Establecer el valor de <span class="math inline">\(k\)</span> es obviamente una decisión crítica. Si usamos <span class="math inline">\(k\)</span>= 100, por ejemplo, nuestras estimaciones podrían no ser muy buenas. Y quizás <span class="math inline">\(k\)</span>= 4 sea demasiado bajo — podría llevar a un sobreajuste. En el caso de <span class="math inline">\(k\)</span>= 4, el error dentro de la muestra (sesgo) puede ser bajo, pero el error al predecir nuevas observaciones (varianza) puede ser alto.</p>
 <p>Aquí, por ejemplo, hay una gráfica de los valores ajustados de un modelo KNN de la temperatura de los pasajeros cuando <span class="math inline">\(k\)</span>= 4.</p>
-<p><img src="fig/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-18-1.png" width="672" /></p>
 <p>El sesgo en este modelo es presumiblemente bajo porque el ajuste es muy flexible: los valores ajustados están muy cerca de los valores reales. El problema es que la función de regresión KNN en <span class="math inline">\(k\)</span>= 4 podría estar haciendo <em>demasiado</em> buen trabajo al describir la muestra. Cuando este modelo encuentra nuevos datos, sin las mismas idiosincrasias, su rendimiento puede ser muy pobre, con una gran variación. Es posible que el modelo esté sobre-ajustado a la muestra. La compensación de sesgo-varianza expresa esta idea: cuando el sesgo es bajo, es probable que la varianza sea alta, y viceversa.</p>
 <p>A continuación se muestra un ejemplo de un sesgo más alto, posiblemente un caso de varianza menor cuando <span class="math inline">\(k\)</span>= 40.</p>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="regresión-lineal.html#cb145-1"></a>r &lt;-<span class="st"> </span>day</span>
@@ -700,7 +717,7 @@ R^2 = 1 - \frac{SS_\text{resid}}{SS_\text{tot}},
 <span id="cb145-10"><a href="regresión-lineal.html#cb145-10"></a><span class="kw">plot</span>(<span class="dt">x=</span>est<span class="op">$</span>temp_rounded, <span class="dt">y=</span>est<span class="op">$</span>count, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">ylab=</span><span class="st">&quot;mean riders&quot;</span>,</span>
 <span id="cb145-11"><a href="regresión-lineal.html#cb145-11"></a>      <span class="dt">xlab=</span><span class="st">&quot;temperature&quot;</span>, <span class="dt">main =</span><span class="st">&quot;KNN fit for riders ~ temperature, k = 40&quot;</span>)</span>
 <span id="cb145-12"><a href="regresión-lineal.html#cb145-12"></a><span class="kw">lines</span>(<span class="dt">x=</span>est<span class="op">$</span>temp_rounded, <span class="dt">y=</span>est<span class="op">$</span>knn, <span class="dt">col=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-19-1.png" width="672" /></p>
 <p>El sesgo es mayor aquí porque el error del modelo en la muestra es visiblemente mayor que en el caso de <span class="math inline">\(k\)</span>= 4, pero por esa misma razón es probable que la varianza sea menor. <em>No hay forma de lograr un sesgo bajo y una varianza baja simultáneamente.</em> Todo lo que puede hacer es tratar de equilibrar los dos, aceptando un sesgo moderado para lograr un mejor rendimiento fuera de la muestra. La técnica que usamos para lograr este equilibrio es la validación cruzada, que cubriremos más adelante en el curso. Por ahora podemos notar que el mejor valor para <span class="math inline">\(k\)</span> en la regresión KNN es el que minimiza la varianza, no el sesgo.</p>
 <p>Como referencia, aquí hay un código para ajustar una regresión KNN usando el paquete <code>caret</code> en R. Usaremos<code>caret</code> frecuentemente en el curso porque proporciona una sintaxis consistente para ajustar una amplia gama de modelos (incluyendo, si quisiéramos, regresión lineal) y porque, muy convenientemente, ejecuta una validación cruzada en segundo plano para elegir parámetros de modelo óptimos como <span class="math inline">\(k\)</span>. Pero esto lo veremos más adelante.</p>
 </div>
@@ -738,21 +755,21 @@ l(\boldsymbol{\Theta} | \boldsymbol{x}) = \log L(\boldsymbol{\Theta} | \boldsymb
 <p>En general, podemos usar <code>optim()</code> para buscar el máximo de cualquier función. En este caso</p>
 <div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="regresión-lineal.html#cb149-1"></a><span class="kw">optim</span>(<span class="dt">par=</span><span class="dv">2</span>, <span class="dt">fn=</span>lver_poisson, <span class="dt">x=</span>alumnos, </span>
 <span id="cb149-2"><a href="regresión-lineal.html#cb149-2"></a>      <span class="dt">control=</span><span class="kw">list</span>(<span class="dt">fnscale=</span><span class="op">-</span><span class="dv">1</span>))</span></code></pre></div>
-<pre><code>## $par
-## [1] 4
-## 
-## $value
-## [1] -40.02868
-## 
-## $counts
-## function gradient 
-##       30       NA 
-## 
-## $convergence
-## [1] 0
-## 
-## $message
-## NULL</code></pre>
+<pre><code>$par
+[1] 4
+
+$value
+[1] -40.02868
+
+$counts
+function gradient 
+      30       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
 <table>
 <colgroup>
 <col width="100%" />
@@ -793,29 +810,29 @@ l(\boldsymbol{\Theta} | \boldsymbol{x}) = \log L(\boldsymbol{\Theta} | \boldsymb
 </table>
 <p>Sin embargo, R tiene incorporado una función para obtener los estimadores máximos verosímiles utilizando algoritmos más eficientes basados en la estimación por mínimos cuadrados vista en secciones anteriores y que están implementados en la función <code>lm()</code>.</p>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="regresión-lineal.html#cb151-1"></a><span class="kw">summary</span>(linear_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(count <span class="op">~</span><span class="st"> </span>temperature, <span class="dt">data =</span> day))</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = count ~ temperature, data = day)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -4615.3 -1134.9  -104.4  1044.3  3737.8 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   1214.6      161.2   7.537 1.43e-13 ***
-## temperature   6640.7      305.2  21.759  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 1509 on 729 degrees of freedom
-## Multiple R-squared:  0.3937,	Adjusted R-squared:  0.3929 
-## F-statistic: 473.5 on 1 and 729 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>
+Call:
+lm(formula = count ~ temperature, data = day)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4615.3 -1134.9  -104.4  1044.3  3737.8 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   1214.6      161.2   7.537 1.43e-13 ***
+temperature   6640.7      305.2  21.759  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1509 on 729 degrees of freedom
+Multiple R-squared:  0.3937,	Adjusted R-squared:  0.3929 
+F-statistic: 473.5 on 1 and 729 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="regresión-lineal.html#cb153-1"></a><span class="kw">ggplot</span>(day, <span class="kw">aes</span>(temperature, count)) <span class="op">+</span></span>
 <span id="cb153-2"><a href="regresión-lineal.html#cb153-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb153-3"><a href="regresión-lineal.html#cb153-3"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span>F) <span class="op">+</span></span>
 <span id="cb153-4"><a href="regresión-lineal.html#cb153-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;riders ~ temperature, mediante regresión lineal&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-22-1.png" width="672" /></p>
 <p>Interpretemos estos coeficientes del modelo:</p>
 <ul>
 <li><p><strong>intercept</strong>: 1214.6 representa el número de pasajeros pronosticado cuando la temperatura es igual a 0. El <em>intercept</em> no es significativo porque la temperatura mínima en el conjunto de datos es . Podríamos hacerlo significativo al centrar la variable de temperatura en 0, en cuyo caso el <em>intercept</em> representaría el número de pasajeros promedio a la temperatura promedio. (Recuerde: las transformaciones lineales como el centrado no cambian el ajuste del modelo). La función <code>summary()</code> también genera un error estándar, valor t y valor p (“Pr (&gt; | t |)”) para el <em>intercept</em>ar. Explicaremos estos valores a continuación cuando revisemos la inferencia en el contexto de la regresión.</p></li>
@@ -823,38 +840,38 @@ l(\boldsymbol{\Theta} | \boldsymbol{x}) = \log L(\boldsymbol{\Theta} | \boldsymb
 </ul>
 <p>Ahora podemos preguntar: ¿cuál de estos dos modelos de pasajeros, el modelo paramétrico que usa regresión lineal o el modelo no paramétrico que usa KNN, es mejor? ¿Qué entendemos por mejor? Una respuesta a esa pregunta está en términos del ajuste en la muestra. ¿Cuál es el RMSE del modelo KNN en comparación con el RMSE del modelo lineal?</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="regresión-lineal.html#cb154-1"></a><span class="kw">rmse</span>(<span class="kw">predict</span>(linear_fit), day<span class="op">$</span>count)</span></code></pre></div>
-<pre><code>## [1] 1507.322</code></pre>
+<pre><code>[1] 1507.322</code></pre>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="regresión-lineal.html#cb156-1"></a><span class="kw">rmse</span>(<span class="kw">predict</span>(knn_fit), day<span class="op">$</span>count)</span></code></pre></div>
-<pre><code>## [1] 1321.889</code></pre>
+<pre><code>[1] 1321.889</code></pre>
 <p>(<code>predict()</code> es equivalente a <code>adjust()</code> en este contexto.) Aquí podemos ver que el modelo KNN supera al modelo lineal en la muestra: en promedio, el modelo KNN está desfasado en aproximadamente 1322 ciclistas por día, mientras que el modelo lineal tiene una diferencia de 1507. Este tipo de comparación de modelos puede resultar muy útil. En este caso, sugiere que hay margen de mejora en el modelo lineal. Por un lado, podemos ver que la relación entre la temperatura y los pasajeros no es exactamente lineal: el número de pasajeros aumenta con la temperatura hasta aproximadamente .6, momento en el que se estabiliza y disminuye. La regresión KNN es mejor para modelar esta no linealidad. Sin embargo, podemos usar un modelo lineal para modelar un resultado no lineal agregando predictores.</p>
 <p>Es probable que el número de pasajeros varíe bastante según la temporada. Agreguemos una variable por temporada para ver si mejora el modelo. Necesitamos definir la temporada explícitamente como un factor, lo cual podemos hacer dentro de la función <code>lm ()</code> usando <code>factor ()</code>. Esto es apropiado porque la estación no es una variable continua, sino un número entero que representa las diferentes estaciones y que toma solo cuatro valores: 1 - 4. R malinterpretará la estación como una variable continua a menos que la definamos explícitamente como un factor. El orden numérico de los valores de temporada definirá automáticamente los niveles. La función <code>lm ()</code> tratará el primer nivel, temporada = 1, como el nivel de referencia, con el que se compararán los otros niveles.</p>
 <p>¿Cómo sabemos cuándo un predictor debe definirse como continuo y cuándo debe definirse como factor? Aquí hay una regla general: si restamos un nivel de otro y la diferencia tiene sentido, entonces podemos representar con seguridad esa variable como un número entero. Pensemos en la variable años de educación. La diferencia entre 10 años de escolaridad y 11 años es un año de educación, lo cual es una diferencia significativa. No estamos <em>obligados</em> a representar la educación como una variable continua, pero podríamos. (Codificar la educación como un factor esencialmente encajaría en una regresión separada para cada nivel, lo que podría correr el riesgo de sobreajuste.) Por el contrario, consideremos el código postal: una diferencia de 1 entre dos códigos postales de 5 dígitos no tiene sentido porque los códigos postales no tienen un orden intrínseco; representan diferencias categóricas, que nunca deben codificarse como números enteros. En cambio, estas variables siempre deben codificarse como factores. En este <a href="https://stats.idre.ucla.edu/other/mult-pkg/whatstat/what-is-the-difference-between-categorical-ordinal-and-variables-de-intervalo/">link</a> podéis encontrar más información al respecto.</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="regresión-lineal.html#cb158-1"></a><span class="kw">summary</span>(linear_fit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(count <span class="op">~</span><span class="st"> </span>temperature <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(season), <span class="dt">data =</span> day))</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = count ~ temperature + factor(season), data = day)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -4812.9  -996.8  -271.3  1240.9  3881.1 
-## 
-## Coefficients:
-##                 Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)        745.8      187.5   3.978 7.65e-05 ***
-## temperature       6241.3      518.1  12.046  &lt; 2e-16 ***
-## factor(season)2    848.7      197.1   4.306 1.89e-05 ***
-## factor(season)3    490.2      259.0   1.893   0.0588 .  
-## factor(season)4   1342.9      164.6   8.159 1.49e-15 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 1433 on 726 degrees of freedom
-## Multiple R-squared:  0.4558,	Adjusted R-squared:  0.4528 
-## F-statistic:   152 on 4 and 726 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>
+Call:
+lm(formula = count ~ temperature + factor(season), data = day)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4812.9  -996.8  -271.3  1240.9  3881.1 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        745.8      187.5   3.978 7.65e-05 ***
+temperature       6241.3      518.1  12.046  &lt; 2e-16 ***
+factor(season)2    848.7      197.1   4.306 1.89e-05 ***
+factor(season)3    490.2      259.0   1.893   0.0588 .  
+factor(season)4   1342.9      164.6   8.159 1.49e-15 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1433 on 726 degrees of freedom
+Multiple R-squared:  0.4558,	Adjusted R-squared:  0.4528 
+F-statistic:   152 on 4 and 726 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="regresión-lineal.html#cb160-1"></a><span class="kw">rmse</span>(<span class="kw">predict</span>(linear_fit), day<span class="op">$</span>count)</span></code></pre></div>
-<pre><code>## [1] 1507.322</code></pre>
+<pre><code>[1] 1507.322</code></pre>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="regresión-lineal.html#cb162-1"></a><span class="kw">rmse</span>(<span class="kw">predict</span>(linear_fit2), day<span class="op">$</span>count)</span></code></pre></div>
-<pre><code>## [1] 1428.151</code></pre>
+<pre><code>[1] 1428.151</code></pre>
 <p>El ajuste ha mejorado; el modelo con temporada (season) tiene un RMSE más bajo. Pero, ¿cómo interpretamos los coeficientes de una variable factor?. Observamos que sólo hay 3 coeficientes para 4 temporadas. ¿No debería haber 4 coeficientes? ¿Ha cometido un error la función <code>lm ()</code>? No. Para una variable factor como la temporada, cada coeficiente representa el cambio en la respuesta asociado con un cambio en el predictor desde el primer nivel o nivel de referencia a cada nivel de factor subsiguiente. (Esta codificación, la predeterminada en <code>lm ()</code>, se puede ajustar con el argumento <code>contrasts</code>). El nivel de referencia normalmente no se muestra en la salida del modelo. Si un predictor tiene <span class="math inline">\(k\)</span> niveles, entonces habrá <span class="math inline">\(k-1\)</span> coeficientes que representan los cambios previstos en el resultado asociados con aumentos desde el nivel de referencia en el predictor.</p>
 <ul>
 <li><p><em>factor(temporada)2</em>: 848,7 es el cambio previsto en los ciclistas de primavera con respecto al invierno (temporada = 1).</p></li>
@@ -863,23 +880,23 @@ l(\boldsymbol{\Theta} | \boldsymbol{x}) = \log L(\boldsymbol{\Theta} | \boldsymb
 <p>Los aumentos de temperatura pueden tener diferentes impactos en el número de ciclistas en diferentes estaciones. Podríamos probar esta hipótesis al incluir una interacción entre la estación y la temperatura.</p>
 <p>La salida de la función <code>summary ()</code> puede volverse difícil de manejar. En su lugar, usaremos la función <code>display ()</code> del paquete arm, que ofrece un resumen del modelo más conciso.</p>
 <div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="regresión-lineal.html#cb164-1"></a><span class="kw">display</span>(linear_fit3 &lt;-<span class="st"> </span><span class="kw">lm</span>(count <span class="op">~</span><span class="st"> </span>temperature <span class="op">*</span><span class="st"> </span><span class="kw">factor</span>(season), <span class="dt">data =</span> day))</span></code></pre></div>
-<pre><code>## lm(formula = count ~ temperature * factor(season), data = day)
-##                             coef.est coef.se 
-## (Intercept)                  -111.04   321.28
-## temperature                  9119.04  1020.33
-## factor(season)2              1513.43   571.76
-## factor(season)3              6232.96  1079.33
-## factor(season)4              2188.52   534.98
-## temperature:factor(season)2 -2524.78  1326.47
-## temperature:factor(season)3 -9795.26  1774.32
-## temperature:factor(season)4 -2851.25  1414.93
-## ---
-## n = 731, k = 8
-## residual sd = 1406.35, R-Squared = 0.48</code></pre>
+<pre><code>lm(formula = count ~ temperature * factor(season), data = day)
+                            coef.est coef.se 
+(Intercept)                  -111.04   321.28
+temperature                  9119.04  1020.33
+factor(season)2              1513.43   571.76
+factor(season)3              6232.96  1079.33
+factor(season)4              2188.52   534.98
+temperature:factor(season)2 -2524.78  1326.47
+temperature:factor(season)3 -9795.26  1774.32
+temperature:factor(season)4 -2851.25  1414.93
+---
+n = 731, k = 8
+residual sd = 1406.35, R-Squared = 0.48</code></pre>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="regresión-lineal.html#cb166-1"></a><span class="kw">rmse</span>(<span class="kw">predict</span>(linear_fit2), day<span class="op">$</span>count)</span></code></pre></div>
-<pre><code>## [1] 1428.151</code></pre>
+<pre><code>[1] 1428.151</code></pre>
 <div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="regresión-lineal.html#cb168-1"></a><span class="kw">rmse</span>(<span class="kw">predict</span>(linear_fit3), day<span class="op">$</span>count)</span></code></pre></div>
-<pre><code>## [1] 1398.634</code></pre>
+<pre><code>[1] 1398.634</code></pre>
 <p>La interacción mejora el ajuste del modelo.</p>
 <ul>
 <li><p><em>temperatura: factor (temporada) 2</em>: -2524.8 representa la diferencia en la pendiente de la temperatura comparando la temporada 2 con la temporada 1. El coeficiente negativo significa que un aumento de 1 unidad la temperatura se asocia con un cambio * menor * en el número de pasajeros en primavera en comparación con el invierno.</p></li>
@@ -895,60 +912,60 @@ l(\boldsymbol{\Theta} | \boldsymbol{x}) = \log L(\boldsymbol{\Theta} | \boldsymb
 <span id="cb170-2"><a href="regresión-lineal.html#cb170-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb170-3"><a href="regresión-lineal.html#cb170-3"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="kw">aes</span>(<span class="dt">group =</span> <span class="kw">factor</span>(season), <span class="dt">col =</span> <span class="kw">factor</span>(season)), <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) <span class="op">+</span></span>
 <span id="cb170-4"><a href="regresión-lineal.html#cb170-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Riders ~ temperature, según estación (season)&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-42-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-27-1.png" width="672" /></p>
 <p>Aquí podemos ver que la relación entre la temperatura y los ciclistas es más fuertemente positiva (más pronunciada) en la temporada 1, más plana en las temporadas 2 y 4, y negativa en la temporada 3. Claramente, la temperatura tiene diferentes efectos en diferentes estaciones. En enero y febrero, un día más cálido provoca un gran aumento de ciclistas: el clima es mejor para ir en bici. En julio, un día más cálido provoca una disminución de ciclistas: el clima es “peor” para ir en bici (peor = cuesta más).</p>
 <p>Los coeficientes del modelo lineal proporcionan una gran información sobre de los factores que influyen en el número de pasajeros. Sin embargo, nuestro modelo lineal todavía tiene un rendimiento inferior al modelo KNN.</p>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="regresión-lineal.html#cb171-1"></a><span class="kw">rmse</span>(<span class="kw">predict</span>(knn_fit), day<span class="op">$</span>count)</span></code></pre></div>
-<pre><code>## [1] 1321.889</code></pre>
+<pre><code>[1] 1321.889</code></pre>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="regresión-lineal.html#cb173-1"></a><span class="kw">rmse</span>(<span class="kw">predict</span>(linear_fit3), day<span class="op">$</span>count)</span></code></pre></div>
-<pre><code>## [1] 1398.634</code></pre>
+<pre><code>[1] 1398.634</code></pre>
 <p>La regresión lineal a menudo tendrá un sesgo más alto que un método flexible como la regresión KNN, pero también tenderá a tener una varianza más baja. Exploraremos estas propiedades más a fondo cuando lleguemos a la validación cruzada.</p>
 <p>Echemos un vistazo a la matriz del modelo.</p>
 <div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="regresión-lineal.html#cb175-1"></a><span class="kw">head</span>(<span class="kw">model.matrix</span>(linear_fit3))</span></code></pre></div>
-<pre><code>##   (Intercept) temperature factor(season)2 factor(season)3
-## 1           1    0.344167               0               0
-## 2           1    0.363478               0               0
-## 3           1    0.196364               0               0
-## 4           1    0.200000               0               0
-## 5           1    0.226957               0               0
-## 6           1    0.204348               0               0
-##   factor(season)4 temperature:factor(season)2
-## 1               0                           0
-## 2               0                           0
-## 3               0                           0
-## 4               0                           0
-## 5               0                           0
-## 6               0                           0
-##   temperature:factor(season)3 temperature:factor(season)4
-## 1                           0                           0
-## 2                           0                           0
-## 3                           0                           0
-## 4                           0                           0
-## 5                           0                           0
-## 6                           0                           0</code></pre>
+<pre><code>  (Intercept) temperature factor(season)2 factor(season)3
+1           1    0.344167               0               0
+2           1    0.363478               0               0
+3           1    0.196364               0               0
+4           1    0.200000               0               0
+5           1    0.226957               0               0
+6           1    0.204348               0               0
+  factor(season)4 temperature:factor(season)2
+1               0                           0
+2               0                           0
+3               0                           0
+4               0                           0
+5               0                           0
+6               0                           0
+  temperature:factor(season)3 temperature:factor(season)4
+1                           0                           0
+2                           0                           0
+3                           0                           0
+4                           0                           0
+5                           0                           0
+6                           0                           0</code></pre>
 <p>Podemos ver que <code>lm()</code> ha convertido la variable de temporada en 3 vectores variables ficticias: factor (temporada) 2, factor (temporada) 3 y factor (temporada) 4. (Si un factor tiene niveles de $k $, entonces una variable ficticia para ese factor codifica $k - 1 $de esos niveles como variables binarias, con los valores 0 o 1 indicando la ausencia o presencia de ese nivel). Los términos de interacción consisten en los productos de los vectores componentes.</p>
 </div>
 <div id="predicción" class="section level2" number="4.11">
 <h2><span class="header-section-number">4.11</span> Predicción</h2>
 <p>Podemos usar un modelo lineal no solo para la descripción sino también para la predicción. Si, por ejemplo, estuviéramos interesados en usar el modelo anterior para predecir el número de pasajeros para una temporada y temperatura en particular, digamos, un día caluroso en primavera, simplemente podríamos usar la ecuación de regresión. Definiremos un día caluroso como .85 (ojo con las escalas y las unidades de medida). Así:</p>
 <div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="regresión-lineal.html#cb177-1"></a><span class="dv">-111</span> <span class="op">+</span><span class="st"> </span><span class="dv">9119</span><span class="op">*</span>.<span class="dv">85</span> <span class="op">+</span><span class="st"> </span><span class="dv">1513</span><span class="op">*</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">6233</span><span class="op">*</span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="dv">2189</span><span class="op">*</span><span class="dv">0</span> <span class="op">-</span><span class="st"> </span><span class="dv">2525</span><span class="op">*</span>.<span class="dv">85</span><span class="op">*</span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">9795</span><span class="op">*</span>.<span class="dv">85</span><span class="op">*</span><span class="dv">0</span> <span class="op">-</span><span class="st"> </span><span class="dv">2851</span><span class="op">*</span>.<span class="dv">85</span><span class="op">*</span><span class="dv">0</span> </span></code></pre></div>
-<pre><code>## [1] 7006.9</code></pre>
+<pre><code>[1] 7006.9</code></pre>
 <p>Aquí hay una forma más precisa de hacer el cálculo que evita errores de redondeo al hacer referencia al objeto del modelo:</p>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="regresión-lineal.html#cb179-1"></a>t &lt;-<span class="st"> </span><span class="fl">.85</span></span>
 <span id="cb179-2"><a href="regresión-lineal.html#cb179-2"></a>coefs &lt;-<span class="st"> </span><span class="kw">coef</span>(linear_fit3)</span>
 <span id="cb179-3"><a href="regresión-lineal.html#cb179-3"></a>coefs[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coefs[<span class="dv">2</span>]<span class="op">*</span>t <span class="op">+</span><span class="st"> </span>coefs[<span class="dv">3</span>]<span class="op">*</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>coefs[<span class="dv">4</span>]<span class="op">*</span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span></span>
 <span id="cb179-4"><a href="regresión-lineal.html#cb179-4"></a><span class="st">  </span>coefs[<span class="dv">5</span>]<span class="op">*</span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>coefs[<span class="dv">6</span>]<span class="op">*</span>t<span class="op">*</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>coefs[<span class="dv">7</span>]<span class="op">*</span>t<span class="op">*</span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>coefs[<span class="dv">8</span>]<span class="op">*</span>t<span class="op">*</span><span class="dv">0</span>  </span></code></pre></div>
-<pre><code>## (Intercept) 
-##    7007.501</code></pre>
+<pre><code>(Intercept) 
+   7007.501 </code></pre>
 <p>Los resultados son diferentes debido al error de redondeo en el primer caso. El segundo método es más preciso.</p>
 <p>Podemos hacer el mismo cálculo tratando el vector de coeficientes como una matriz y usando la multiplicación de matrices. Esto requiere menos escritura pero, al igual que con el método anterior, requiere prestar mucha atención al orden de los términos.</p>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="regresión-lineal.html#cb181-1"></a>coefs <span class="op">%*%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, t, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, t<span class="op">*</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span></code></pre></div>
-<pre><code>##          [,1]
-## [1,] 7007.501</code></pre>
+<pre><code>         [,1]
+[1,] 7007.501</code></pre>
 <p>Lo más simple de todo es definir un marco de datos con nuestros valores deseados y usar <code>predecir ()</code>:</p>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="regresión-lineal.html#cb183-1"></a><span class="kw">predict</span>(linear_fit3, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">season =</span> <span class="dv">2</span>, <span class="dt">temperature =</span> <span class="fl">.85</span>))</span></code></pre></div>
-<pre><code>##        1 
-## 7007.501</code></pre>
+<pre><code>       1 
+7007.501 </code></pre>
 </div>
 <div id="inferencia-en-el-contexto-de-regresión" class="section level2" number="4.12">
 <h2><span class="header-section-number">4.12</span> Inferencia en el contexto de regresión</h2>
@@ -972,36 +989,36 @@ RSS = \sum_ {i = 1} ^ n (y_i - f (x_i)) ^ 2.
 \]</span></p>
 <p>Después de calcular el estadístico t, usamos una prueba t para compararlo con el valor crítico dado un nivel de significación que suele ser del 5% para la distribución <span class="math inline">\(t\)</span> con n - 2 grados de libertad.</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="regresión-lineal.html#cb185-1"></a><span class="kw">summary</span>(linear_fit)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = count ~ temperature, data = day)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -4615.3 -1134.9  -104.4  1044.3  3737.8 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   1214.6      161.2   7.537 1.43e-13 ***
-## temperature   6640.7      305.2  21.759  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 1509 on 729 degrees of freedom
-## Multiple R-squared:  0.3937,	Adjusted R-squared:  0.3929 
-## F-statistic: 473.5 on 1 and 729 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>
+Call:
+lm(formula = count ~ temperature, data = day)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4615.3 -1134.9  -104.4  1044.3  3737.8 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   1214.6      161.2   7.537 1.43e-13 ***
+temperature   6640.7      305.2  21.759  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1509 on 729 degrees of freedom
+Multiple R-squared:  0.3937,	Adjusted R-squared:  0.3929 
+F-statistic: 473.5 on 1 and 729 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="regresión-lineal.html#cb187-1"></a>rse &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>((day<span class="op">$</span>count <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(linear_fit))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="kw">nrow</span>(day) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>))</span>
 <span id="cb187-2"><a href="regresión-lineal.html#cb187-2"></a>(seb &lt;-<span class="st"> </span>rse<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">sum</span>((day<span class="op">$</span>temperature <span class="op">-</span></span>
 <span id="cb187-3"><a href="regresión-lineal.html#cb187-3"></a><span class="st">                        </span><span class="kw">mean</span>(day<span class="op">$</span>temperature))<span class="op">^</span><span class="dv">2</span>)))</span></code></pre></div>
-<pre><code>## [1] 305.188</code></pre>
+<pre><code>[1] 305.188</code></pre>
 <div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="regresión-lineal.html#cb189-1"></a>(t &lt;-<span class="st"> </span><span class="kw">as.numeric</span>((<span class="kw">coef</span>(linear_fit)[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span><span class="dv">0</span>) <span class="op">/</span><span class="st"> </span>seb))</span></code></pre></div>
-<pre><code>## [1] 21.75941</code></pre>
+<pre><code>[1] 21.75941</code></pre>
 <p>Nuestro cálculo coincide exactamente con la salida del modelo lineal.</p>
 <p>Grafiquemos este estadístico t contra la distribución nula de una t de Student con 729 grados de libertad. Usamos la función <code>dt ()</code> para generar una gráfica de densidad para una distribución t con 729 grados de libertad, y <code>qt ()</code> para identificar los valores críticos para un IC del 95% en la distribución nula; los valores con baja probabilidad (p &lt;.05) estarán a la izquierda del IC inferior oa la derecha del IC superior. Los valores P y los IC proporcionan la misma información sobre lo inusual de un valor observado bajo el nulo.</p>
 <div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="regresión-lineal.html#cb191-1"></a>tdist &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">25</span>, <span class="fl">.01</span>), <span class="dt">y =</span> <span class="kw">dt</span>(<span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">25</span>, <span class="fl">.01</span>), <span class="dt">df =</span> <span class="dv">729</span>))</span>
 <span id="cb191-2"><a href="regresión-lineal.html#cb191-2"></a></span>
 <span id="cb191-3"><a href="regresión-lineal.html#cb191-3"></a><span class="kw">qt</span>(<span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.975</span>), <span class="dt">df =</span> <span class="dv">729</span>)</span></code></pre></div>
-<pre><code>## [1] -1.963223  1.963223</code></pre>
+<pre><code>[1] -1.963223  1.963223</code></pre>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="regresión-lineal.html#cb193-1"></a><span class="kw">ggplot</span>(tdist, <span class="kw">aes</span>(x, y)) <span class="op">+</span></span>
 <span id="cb193-2"><a href="regresión-lineal.html#cb193-2"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb193-3"><a href="regresión-lineal.html#cb193-3"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> t, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
@@ -1010,13 +1027,13 @@ RSS = \sum_ {i = 1} ^ n (y_i - f (x_i)) ^ 2.
 <span id="cb193-6"><a href="regresión-lineal.html#cb193-6"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;t(n - 2 = 729) según valores críticos (negro) y el estadístico t observado (rojo)&quot;</span>) <span class="op">+</span></span>
 <span id="cb193-7"><a href="regresión-lineal.html#cb193-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;t-statistic&quot;</span>) <span class="op">+</span></span>
 <span id="cb193-8"><a href="regresión-lineal.html#cb193-8"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;density&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-35-1.png" width="672" /></p>
 <p>Un estadístico t de 21.76 esencialmente nunca ocurriría bajo la distribución nula, lo que nos permite “rechazar <span class="math inline">\(H_0\)</span>” con un nivel de confianza del 95% (suponiendo un nivel de significación del 5%). El valor p asociado con el coeficiente <span class="math inline">\(\beta\)</span> para la temperatura en el resumen del modelo — esencialmente cero — refleja este resultado. Podemos calcular nuestro propio valor p con el siguiente código:</p>
 <div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="regresión-lineal.html#cb194-1"></a><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">pt</span>(t, <span class="dt">df =</span> <span class="dv">729</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<pre><code>## [1] 2.810622e-81</code></pre>
+<pre><code>[1] 2.810622e-81</code></pre>
 <p>Usamos <code>lower.tail = F</code> porque estamos interesados en la probabilidad de t =<code>r round (as.numeric (t), 2)</code>en la cola <em>superior</em> además esta forma es más informativa que hacerlo con:</p>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="regresión-lineal.html#cb196-1"></a><span class="dv">1</span> <span class="op">-</span><span class="st">  </span><span class="kw">pt</span>(t, <span class="dt">df =</span> <span class="dv">729</span>)</span></code></pre></div>
-<pre><code>## [1] 0</code></pre>
+<pre><code>[1] 0</code></pre>
 <p>que nos daría un p-valor de 0 por un problema de tolerancia de nuestra máquina (del orden de <span class="math inline">\(10^{-21}\)</span>)</p>
 <p>El resumen del modelo también genera otro estadístico basado en la distribución F con un valor p asociado:</p>
 <p><span class="math display">\[
@@ -1034,18 +1051,18 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <span id="cb198-8"><a href="regresión-lineal.html#cb198-8"></a>}</span>
 <span id="cb198-9"><a href="regresión-lineal.html#cb198-9"></a></span>
 <span id="cb198-10"><a href="regresión-lineal.html#cb198-10"></a><span class="kw">sd</span>(temperature_coef)</span></code></pre></div>
-<pre><code>## [1] 275.6306</code></pre>
+<pre><code>[1] 275.6306</code></pre>
 <p>En este caso, la estimación de <span class="math inline">\(SE (\beta_{temp})\)</span> es similar pero menor que la calculada analíticamente. Por lo tanto, la estimación <code>lm()</code> es en realidad más conservadora en este caso.</p>
 <p>El <span class="math inline">\(SE\)</span> para los coeficientes en la salida de <code>lm ()</code> se puede usar para calcular los IC para la estimación del coeficiente. <span class="math inline">\(\hat {\beta} + 1.96 (SE)\)</span> nos da el límite superior al 95%, y $ - 1.96 (SE) $ el límite inferior. Los IC del 95% que no incluyen 0 indican que el coeficiente es estadísticamente significativo, equivalente a un valor p del coeficiente menor de .05.</p>
 <p>El uso de IC en lugar de p-valores nos da una forma más flexible de hacer inferencia. Además, también suele ser útil porque nos indica qué posibles valores puede tomar nuestros parámetros (si quisiéramos cuantificar el efecto). Ésta es otra razón para usar la función <code>display ()</code> del paquete arm. No solo presenta la salida de <code>lm ()</code> de manera más compacta, sino que tampoco reporta estadísticas t ni valores p. Como hemos visto, <span class="math inline">\(SE\)</span>s transmiten la misma información.</p>
 <div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="regresión-lineal.html#cb200-1"></a><span class="kw">display</span>(linear_fit)</span></code></pre></div>
-<pre><code>## lm(formula = count ~ temperature, data = day)
-##             coef.est coef.se
-## (Intercept) 1214.64   161.16
-## temperature 6640.71   305.19
-## ---
-## n = 731, k = 2
-## residual sd = 1509.39, R-Squared = 0.39</code></pre>
+<pre><code>lm(formula = count ~ temperature, data = day)
+            coef.est coef.se
+(Intercept) 1214.64   161.16
+temperature 6640.71   305.19
+---
+n = 731, k = 2
+residual sd = 1509.39, R-Squared = 0.39</code></pre>
 <p>Los valores posibles (recordamos que el verdadero valor del parámetro es desconocido en la población) para la temperatura son <span class="math inline">\(6641 \pm 2(305)\)</span> o aproximadamente [6031,<code>r 6641 + 2 * 305</code>].<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> Este IC no incluye 0, de lo cual podemos concluir que la temperatura se asocia con el resultado de forma estadísticamente significativa. (El valor p para la temperatura informado en el <code>summary()</code> concuerda).</p>
 </div>
 <div id="asunciones-de-un-modelo-de-regresión" class="section level2" number="4.13">
@@ -1073,29 +1090,29 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <span id="cb202-2"><a href="regresión-lineal.html#cb202-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb202-3"><a href="regresión-lineal.html#cb202-3"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) <span class="op">+</span></span>
 <span id="cb202-4"><a href="regresión-lineal.html#cb202-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;count ~ temperature&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-55-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-40-1.png" width="672" /></p>
 <p>Los datos son claramente <em>no</em> lineales, ¿qué hacemos? Podemos agregar predictores al modelo, como la temporada, que permiten que un modelo <em>lineal</em> se ajuste mejor a datos <em>no</em> lineales. También podríamos considerar añadir un término cuadrático al modelo: conteo ~ temperatura + temperatura<span class="math inline">\(^2\)</span>.</p>
 <div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="regresión-lineal.html#cb203-1"></a>linear_fit4 &lt;-<span class="st"> </span><span class="kw">lm</span>(count <span class="op">~</span><span class="st"> </span>temperature <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(temperature<span class="op">^</span><span class="dv">2</span>), <span class="dt">data =</span> day)</span>
 <span id="cb203-2"><a href="regresión-lineal.html#cb203-2"></a><span class="kw">ggplot</span>(day, <span class="kw">aes</span>(temperature, count)) <span class="op">+</span></span>
 <span id="cb203-3"><a href="regresión-lineal.html#cb203-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb203-4"><a href="regresión-lineal.html#cb203-4"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(temperature, <span class="kw">fitted</span>(linear_fit4)), <span class="dt">col=</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
 <span id="cb203-5"><a href="regresión-lineal.html#cb203-5"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;count ~ temperature + temperature^2&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-56-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-41-1.png" width="672" /></p>
 <p>Una vez que se han añadido predictores adicionales, podemos verificar los gráficos de residuos, ya que si el modelo no cumple la condición de linealidad se mostrará en los residuos. <code>plot ()</code> es una función R incorporada para verificar la distribución de errores de un modelo.</p>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="regresión-lineal.html#cb204-1"></a><span class="kw">plot</span>(linear_fit, <span class="dt">which =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-57-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-42-1.png" width="672" /></p>
 <p>Podemos ver, como era de esperar, una no linealidad significativa en la gráfica residual para el modelo con temperatura solamente. Esperamos que los residuos no tengan una estructura visible, ningún patrón. En términos del supuesto de linealidad, la línea de resumen roja no debe tener curvatura. Cuando agregamos temporada, la parcela residual, aunque no es perfecta, mejora mucho.</p>
 <div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="regresión-lineal.html#cb205-1"></a><span class="kw">plot</span>(linear_fit2, <span class="dt">which =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-58-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-43-1.png" width="672" /></p>
 <p>Sin embargo, el modelo todavía lucha con días de gran volumen, con más de 5000 ciclistas previstos. Veamos si agregar una interacción entre la estación y la temperatura ayuda:</p>
 <div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="regresión-lineal.html#cb206-1"></a><span class="kw">plot</span>(linear_fit3, <span class="dt">which =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-59-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-44-1.png" width="672" /></p>
 <p>Quizás esto sea mejor. La no linealidad implica menos observaciones, la mayoría de ellas en los días con valores ajustados superiores a 6000. Pero ha surgido otro problema con este modelo: los errores heterocedásticos. Discutiremos este supuesto antes de la independencia de errores.</p>
 <p><em>4. Igual varianza de errores</em> (homocedasticidad)</p>
 <p>Observamos cómo los errores en el gráfico residual anterior tienen forma de embudo. Los errores del modelo no se distribuyen por igual en el rango de los valores ajustados, una situación conocida como heterocedasticidad. Una solución es transformar la variable de resultado tomando el registro (solo funciona con valores positivos). Si esto no funciona, recuerde que la principal consecuencia de los errores heterocedásticos es que los <span class="math inline">\(SE (\beta)\)</span>s son más pequeños de lo que deberían ser, lo que lleva a valores p más significativos de los que debería haber. Un remedio para este problema inferencial es calcular los errores estándar ajustados que son robustos a la varianza desigual; el paquete MASS ofrece la función <code>rlm ()</code> para ajustar tal modelo.</p>
 <p>Aquí está la gráfica residual para un modelo de log (recuento):</p>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="regresión-lineal.html#cb207-1"></a><span class="kw">plot</span>(<span class="kw">lm</span>(<span class="kw">log</span>(count) <span class="op">~</span><span class="st"> </span>temperature <span class="op">*</span><span class="st"> </span>season, <span class="dt">data =</span> day), <span class="dt">which =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-60-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-45-1.png" width="672" /></p>
 <p>Es posible que la heterocedasticidad haya mejorado, pero ahora han surgido algunos valores atípicos y todavía tenemos un problema de no linealidad. ¿Qué hacemos?</p>
 <p>Después de revisar estos gráficos de residuos, deberíamos dar un paso atrás y pensar en nuestros datos. Un problema queda claro. Es probable que el número de pasajeros en días consecutivos sea muy similar debido a la temperatura, el clima y la temporada. En consecuencia, los residuos del modelo se agruparán (veríamos clusters). Si el modelo no hace un buen trabajo al contabilizar el número de pasajeros en, digamos, días de alta temperatura, los errores grandes no se distribuirán al azar sino que ocurrirán juntos, producidos por una ola de calor en julio, por ejemplo. Los errores de los días siguientes serán similares. En estos casos, la regresión lineal no sería un buen modelo ya que el supuesto de independencia de errores no se cumpliría. Estos problemas ocurren en la mayoría de casos que nuestros datos se recogen de forma seriada (series temporales). Es por ello que en estos casos se debe de utilizar otros modelos más complejos como la regresión KNN (entre otros). Sin embargo, debemos tener en cuenta que la regresión KNN puede ajustarse mejor a los datos y posiblemente ofrecer mejores predicciones, pero no ofrece ninguna ayuda para comprender las relaciones entre las variables y muchas veces (sobre todo en medicina) esto es muy importante. La regresión lineal, incluso si el modelo no es perfecto, proporciona información sobre los factores que afectan a la cantidad de usuarios, información que puede ser extremadamente valiosa, por ejemplo, para los administradores del programa de bicicletas compartidas, mientras que la regresión KNN solo puede ofrecer una predicción.</p>
 <p><em>3. No independencia de errores (residuales correlacionados)</em></p>
@@ -1106,7 +1123,7 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <span id="cb208-4"><a href="regresión-lineal.html#cb208-4"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb208-5"><a href="regresión-lineal.html#cb208-5"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residuales según el día: count ~ temperature * season&quot;</span>) <span class="op">+</span></span>
 <span id="cb208-6"><a href="regresión-lineal.html#cb208-6"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-61-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-46-1.png" width="672" /></p>
 <p>Podemos ver muy claramente que los errores ocurren en grupos relacionados con la fecha. Quizás el patrón más importante venga dado por la variable año. Sin una variable que determine el año, el modelo tiene problemas ya que predice de forma insuficiente en el primer año y prediciendo de más en el segundo. Si agregamos un año al modelo, los residuos se ven mejor pero la agrupación sigue siendo evidente.</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="regresión-lineal.html#cb209-1"></a><span class="kw">data.frame</span>(<span class="dt">day =</span> <span class="kw">seq</span>(<span class="dv">1</span>,<span class="kw">nrow</span>(day)),</span>
 <span id="cb209-2"><a href="regresión-lineal.html#cb209-2"></a>             <span class="dt">residuals =</span> <span class="kw">residuals</span>(<span class="kw">update</span>(linear_fit3, <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span>year))) <span class="op">%&gt;%</span></span>
@@ -1114,7 +1131,7 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <span id="cb209-4"><a href="regresión-lineal.html#cb209-4"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb209-5"><a href="regresión-lineal.html#cb209-5"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residuales según el día: count ~ temperature * season + year&quot;</span>) <span class="op">+</span></span>
 <span id="cb209-6"><a href="regresión-lineal.html#cb209-6"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-62-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-47-1.png" width="672" /></p>
 <p>¿Cómo abordamos los errores no independientes? Si la no independencia está relacionada con el tiempo, entonces deberíamos usar un modelo apropiado para datos de series de tiempo, como ARIMA (que se podrá ver en otras asignaturas). Si la agrupación se debe a alguna otra estructura en los datos, por ejemplo, la agrupación debido a la ubicación, entonces podríamos considerar el uso de un modelo jerárquico o multinivel (también se podrá ver en otras asignaturas). Para manejar errores no independientes con un modelo lineal, necesitamos agregar variables que controlen el agrupamiento. La agrupación en este caso se debe a la estacionalidad, por lo que agregamos predictores como año, temporada, mes o día de la semana. Si el modelo resultante aún no se ajusta bien a los datos y solo nos interesa la predicción, entonces podríamos considerar el uso de un modelo no paramétrico como KNN.</p>
 <p><em>5. Normalidad de los residuales</em></p>
 <p>Comparado con los otros supuestos, este no es muy importante. La regresión lineal es extremadamente robusta a las violaciones de la normalidad. Podemos comprobar visualmente la normalidad de los residuales con un histograma:</p>
@@ -1122,12 +1139,12 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <span id="cb210-2"><a href="regresión-lineal.html#cb210-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(residuals)) <span class="op">+</span></span>
 <span id="cb210-3"><a href="regresión-lineal.html#cb210-3"></a><span class="kw">geom_histogram</span>() <span class="op">+</span></span>
 <span id="cb210-4"><a href="regresión-lineal.html#cb210-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residuales:  count ~ temperature * season&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-63-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-48-1.png" width="672" /></p>
 <p>Queda bastante claro que el modelo sin año no es normal. La bimodalidad de esta distribución ofrece una pista de que el año es un término estacional clave. La librería car incluye una función, <code>qqPlot ()</code> que “muestra cuantiles empíricos de una variable, o de residuales studentizados de un modelo lineal, contra cuantiles teóricos de una distribución teórica con la que podemos comparar”.</p>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="regresión-lineal.html#cb211-1"></a><span class="kw">library</span>(car)</span>
 <span id="cb211-2"><a href="regresión-lineal.html#cb211-2"></a><span class="kw">qqPlot</span>(linear_fit3, <span class="dt">pch =</span> <span class="dv">20</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-64-1.png" width="672" /></p>
-<pre><code>## [1] 239 668</code></pre>
+<p><img src="fig/unnamed-chunk-49-1.png" width="672" /></p>
+<pre><code>[1] 239 668</code></pre>
 <p>Aquí podemos ver desviaciones de la normalidad que también tienen una estructura anual discernible.</p>
 <p>En resumen, utilizamos gráficos de residuos para validar y mejorar el ajuste del modelo. Si bien hay funciones disponibles para probar formalmente la mayoría de los supuestos del modelo anterior, es mejor (en mi opinión) evitar tales pruebas binarias a favor de graficar los residuos y pensar en los datos y cómo mejorar un modelo.</p>
 </div>
@@ -1146,14 +1163,14 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <span id="cb213-3"><a href="regresión-lineal.html#cb213-3"></a>Boston<span class="op">$</span>rm_centered  &lt;-<span class="st"> </span>Boston<span class="op">$</span>rm <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(Boston<span class="op">$</span>rm)</span>
 <span id="cb213-4"><a href="regresión-lineal.html#cb213-4"></a>Boston<span class="op">$</span>lstat_centered &lt;-<span class="st">  </span>Boston<span class="op">$</span>lstat <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(Boston<span class="op">$</span>lstat)</span>
 <span id="cb213-5"><a href="regresión-lineal.html#cb213-5"></a><span class="kw">display</span>(<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>rm_centered <span class="op">+</span><span class="st"> </span>lstat_centered, <span class="dt">data =</span> Boston))</span></code></pre></div>
-<pre><code>## lm(formula = medv ~ rm_centered + lstat_centered, data = Boston)
-##                coef.est coef.se
-## (Intercept)    22.53     0.25  
-## rm_centered     5.09     0.44  
-## lstat_centered -0.64     0.04  
-## ---
-## n = 506, k = 3
-## residual sd = 5.54, R-Squared = 0.64</code></pre>
+<pre><code>lm(formula = medv ~ rm_centered + lstat_centered, data = Boston)
+               coef.est coef.se
+(Intercept)    22.53     0.25  
+rm_centered     5.09     0.44  
+lstat_centered -0.64     0.04  
+---
+n = 506, k = 3
+residual sd = 5.54, R-Squared = 0.64</code></pre>
 <ul>
 <li><p>La intersección con el eje Y (<em>intercept</em>) es el valor predicho de la variable de resultado cuando los predictores son 0. A veces, la intersección no será interpretable porque un predictor no puede = 0. La solución es centrar la variable para que 0 tenga sentido.</p></li>
 <li><p><strong>intercept</strong>: El valor predicho de medv cuando todos los predictores son 0: 22.53 + 5.09 (0) - .64 (0).</p></li>
@@ -1164,15 +1181,15 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <div id="interpretación-del-intercept-y-los-coeficientes-beta-para-un-modelo-con-predictores-binarios-y-continuos" class="section level3" number="4.14.2">
 <h3><span class="header-section-number">4.14.2</span> Interpretación del <em>intercept</em> y los coeficientes <span class="math inline">\(\beta\)</span> para un modelo con predictores binarios y continuos</h3>
 <div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="regresión-lineal.html#cb215-1"></a><span class="kw">display</span>(<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>rm_centered <span class="op">+</span><span class="st"> </span>lstat_centered <span class="op">+</span><span class="st"> </span>chas, <span class="dt">data =</span> Boston))</span></code></pre></div>
-<pre><code>## lm(formula = medv ~ rm_centered + lstat_centered + chas, data = Boston)
-##                coef.est coef.se
-## (Intercept)    22.25     0.25  
-## rm_centered     4.96     0.44  
-## lstat_centered -0.64     0.04  
-## chas            4.12     0.96  
-## ---
-## n = 506, k = 4
-## residual sd = 5.45, R-Squared = 0.65</code></pre>
+<pre><code>lm(formula = medv ~ rm_centered + lstat_centered + chas, data = Boston)
+               coef.est coef.se
+(Intercept)    22.25     0.25  
+rm_centered     4.96     0.44  
+lstat_centered -0.64     0.04  
+chas            4.12     0.96  
+---
+n = 506, k = 4
+residual sd = 5.45, R-Squared = 0.65</code></pre>
 <ul>
 <li><p>La intersección (<em>intercept</em>) es el valor predicho de la variable de resultado cuando el predictor binario es 0 y la variable continua es 0 (que, para las variables centradas, es el promedio).</p></li>
 <li><p><strong>intercept</strong>: El valor predicho de medv cuando todos los predictores son 0: 22.25 + 4.96 (0) -.64 (0) + 4.12 (0).</p></li>
@@ -1184,22 +1201,22 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <div id="interpretación-del-intercept-y-los-coeficientes-beta-para-un-modelo-con-predictores-binarios-y-continuos-con-interacciones" class="section level3" number="4.14.3">
 <h3><span class="header-section-number">4.14.3</span> Interpretación del <em>intercept</em> y los coeficientes <span class="math inline">\(\beta\)</span> para un modelo con predictores binarios y continuos, con interacciones</h3>
 <div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="regresión-lineal.html#cb217-1"></a><span class="kw">display</span>(<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>rm_centered<span class="op">*</span><span class="st"> </span>chas <span class="op">+</span><span class="st"> </span>lstat_centered, <span class="dt">data =</span> Boston))</span></code></pre></div>
-<pre><code>## lm(formula = medv ~ rm_centered * chas + lstat_centered, data = Boston)
-##                  coef.est coef.se
-## (Intercept)      22.25     0.25  
-## rm_centered       4.98     0.46  
-## chas              4.17     0.99  
-## lstat_centered   -0.64     0.04  
-## rm_centered:chas -0.22     1.13  
-## ---
-## n = 506, k = 5
-## residual sd = 5.45, R-Squared = 0.65</code></pre>
+<pre><code>lm(formula = medv ~ rm_centered * chas + lstat_centered, data = Boston)
+                 coef.est coef.se
+(Intercept)      22.25     0.25  
+rm_centered       4.98     0.46  
+chas              4.17     0.99  
+lstat_centered   -0.64     0.04  
+rm_centered:chas -0.22     1.13  
+---
+n = 506, k = 5
+residual sd = 5.45, R-Squared = 0.65</code></pre>
 <p>Recordemos que la visualización de datos en estadística es muy necesaria!</p>
 <div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="regresión-lineal.html#cb219-1"></a><span class="kw">ggplot</span>(Boston, <span class="kw">aes</span>(rm_centered, medv, <span class="dt">col=</span> <span class="kw">factor</span>(chas))) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb219-2"><a href="regresión-lineal.html#cb219-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb219-3"><a href="regresión-lineal.html#cb219-3"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span>F)<span class="op">+</span></span>
 <span id="cb219-4"><a href="regresión-lineal.html#cb219-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;medv ~ rm_centered según chas&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-67-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-52-1.png" width="672" /></p>
 <p>Estas rectas de regresión son prácticamente paralelas, lo que indica que no hay interacción. Este resultado se confirma por el hecho de que el valor p para rm_centered: chas es .85 (p&gt; .05).</p>
 <ul>
 <li><p><strong>intercept</strong>: 4.98 es el valor predicho de medv cuando todos los predictores son 0.</p></li>
@@ -1212,22 +1229,22 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <div id="interpretación-del-intercept-y-los-coeficientes-beta-para-un-modelo-con-predictores-continuos-con-interacciones" class="section level3" number="4.14.4">
 <h3><span class="header-section-number">4.14.4</span> Interpretación del <em>intercept</em> y los coeficientes <span class="math inline">\(\beta\)</span> para un modelo con predictores continuos, con interacciones</h3>
 <div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="regresión-lineal.html#cb220-1"></a><span class="kw">display</span>(<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>rm_centered <span class="op">*</span><span class="st"> </span>lstat_centered, <span class="dt">data =</span> Boston))</span></code></pre></div>
-<pre><code>## lm(formula = medv ~ rm_centered * lstat_centered, data = Boston)
-##                            coef.est coef.se
-## (Intercept)                21.04     0.23  
-## rm_centered                 3.57     0.39  
-## lstat_centered             -0.85     0.04  
-## rm_centered:lstat_centered -0.48     0.03  
-## ---
-## n = 506, k = 4
-## residual sd = 4.70, R-Squared = 0.74</code></pre>
+<pre><code>lm(formula = medv ~ rm_centered * lstat_centered, data = Boston)
+                           coef.est coef.se
+(Intercept)                21.04     0.23  
+rm_centered                 3.57     0.39  
+lstat_centered             -0.85     0.04  
+rm_centered:lstat_centered -0.48     0.03  
+---
+n = 506, k = 4
+residual sd = 4.70, R-Squared = 0.74</code></pre>
 <p>Primero, visualizaremos la interacción dicotomizando lstat.</p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="regresión-lineal.html#cb222-1"></a>Boston<span class="op">$</span>lstat_bin &lt;-<span class="st"> </span><span class="kw">ifelse</span>(Boston<span class="op">$</span>lstat <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(Boston<span class="op">$</span>lstat), <span class="st">&quot;above avg&quot;</span>,<span class="st">&quot;below avg&quot;</span>)</span>
 <span id="cb222-2"><a href="regresión-lineal.html#cb222-2"></a><span class="kw">ggplot</span>(Boston, <span class="kw">aes</span>(rm_centered, medv, <span class="dt">col=</span> lstat_bin) ) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb222-3"><a href="regresión-lineal.html#cb222-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb222-4"><a href="regresión-lineal.html#cb222-4"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span></span>
 <span id="cb222-5"><a href="regresión-lineal.html#cb222-5"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;medv ~ rm según lstat&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-69-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-54-1.png" width="672" /></p>
 <p>El número de habitaciones en una casa claramente afecta el valor — ambas rectas de regresión son positivas. Pero esta relación positiva es más pronunciada entre los hogares con menor lstat. Aumentar la cantidad de habitaciones tiene un impacto mayor en los vecindarios más pobres que en los vecindarios más ricos.</p>
 <p>A continuación, dicotomizamos rm.</p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="regresión-lineal.html#cb223-1"></a>Boston<span class="op">$</span>rm_bin &lt;-<span class="st"> </span><span class="kw">ifelse</span>(Boston<span class="op">$</span>rm <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(Boston<span class="op">$</span>rm), <span class="st">&quot;above avg&quot;</span>,<span class="st">&quot;below avg&quot;</span>)</span>
@@ -1235,7 +1252,7 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <span id="cb223-3"><a href="regresión-lineal.html#cb223-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb223-4"><a href="regresión-lineal.html#cb223-4"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span></span>
 <span id="cb223-5"><a href="regresión-lineal.html#cb223-5"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;medv ~ lstat según rm&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-70-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-55-1.png" width="672" /></p>
 <p>El nivel socioeconómico promedio en un vecindario afecta claramente el valor de la vivienda; ambas rectas de regresión son negativas. Pero esta relación negativa es más pronunciada entre los hogares con habitaciones por encima del promedio. El nivel socioeconómico bajo (lstat aumentado) tiene un mayor impacto en el valor de las viviendas con habitaciones por encima del promedio que en las casas con habitaciones por debajo del promedio.</p>
 <ul>
 <li><p><strong>intercept</strong>: 21.04 es el valor predicho de medv cuando tanto rm como lstat son promedios.</p></li>
@@ -1250,34 +1267,34 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <p>Hemos visto cómo los predictores centrados pueden ayudar a la interpretación del modelo. Además de centrar, podemos <em>escalar</em> predictores, lo que hace que los coeficientes del modelo resultante sean directamente comparables (nos puede servir para discernir qué variable influye más en el resultado). La función <code>rescale ()</code> en el paquete arm automáticamente centra una variable y divide por 2 desviaciones estándar (<span class="math inline">\(\frac {x_i - \bar {x}}{2sd}\)</span>). La configuración predeterminada ignora las variables binarias. La división por 2 desviaciones estándar, en lugar de 1 (como cuando se calcula una puntuación z tradicional), hace que las variables continuas reescaladas sean comparables a las variables binarias no transformadas. Después de centrar y escalar, los coeficientes del modelo se pueden usar para evaluar los tamaños del efecto e identificar los predictores más fuertes.</p>
 <p>¿Cuál es un predictor más sólido del número de ciclistas, la velocidad del viento o el año?</p>
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="regresión-lineal.html#cb224-1"></a><span class="kw">display</span>(<span class="kw">lm</span>(count <span class="op">~</span><span class="st"> </span>windspeed <span class="op">+</span><span class="st"> </span>year, <span class="dt">data =</span> day))</span></code></pre></div>
-<pre><code>## lm(formula = count ~ windspeed + year, data = day)
-##             coef.est coef.se 
-## (Intercept)  4496.05   161.80
-## windspeed   -5696.31   733.60
-## year         2183.75   113.63
-## ---
-## n = 731, k = 3
-## residual sd = 1535.95, R-Squared = 0.37</code></pre>
+<pre><code>lm(formula = count ~ windspeed + year, data = day)
+            coef.est coef.se 
+(Intercept)  4496.05   161.80
+windspeed   -5696.31   733.60
+year         2183.75   113.63
+---
+n = 731, k = 3
+residual sd = 1535.95, R-Squared = 0.37</code></pre>
 <p>Este modelo hace que parezca que windpseed es, con mucho, el predictor más fuerte: el valor absoluto del coeficiente es más de 2 veces mayor. Pero este resultado es engañoso, un artefacto de escala variable.</p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="regresión-lineal.html#cb226-1"></a><span class="kw">display</span>(<span class="kw">lm</span>(count <span class="op">~</span><span class="st"> </span>arm<span class="op">::</span><span class="kw">rescale</span>(windspeed) <span class="op">+</span><span class="st"> </span>year, <span class="dt">data =</span> day))</span></code></pre></div>
-<pre><code>## lm(formula = count ~ arm::rescale(windspeed) + year, data = day)
-##                         coef.est coef.se
-## (Intercept)             3410.98    80.40
-## arm::rescale(windspeed) -882.90   113.70
-## year                    2183.75   113.63
-## ---
-## n = 731, k = 3
-## residual sd = 1535.95, R-Squared = 0.37</code></pre>
+<pre><code>lm(formula = count ~ arm::rescale(windspeed) + year, data = day)
+                        coef.est coef.se
+(Intercept)             3410.98    80.40
+arm::rescale(windspeed) -882.90   113.70
+year                    2183.75   113.63
+---
+n = 731, k = 3
+residual sd = 1535.95, R-Squared = 0.37</code></pre>
 <p>El ajuste del modelo no ha cambiado — <span class="math inline">\(R^2\)</span> es el mismo en ambos modelos — pero el centrado y la escala nos permiten ver que el año en realidad tiene un tamaño de efecto mucho mayor que la velocidad del viento: se asocia un aumento de 1 unidad en el año con un mayor cambio en el número de pasajeros. Podríamos, de manera equivalente, usar la función <code>estandardize ()</code>, también del paquete arm, que convenientemente cambia la escala de todas las variables en un modelo a la vez.</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="regresión-lineal.html#cb228-1"></a><span class="kw">display</span>(<span class="kw">standardize</span>(<span class="kw">lm</span>(count <span class="op">~</span><span class="st"> </span>windspeed <span class="op">+</span><span class="st"> </span>year, <span class="dt">data=</span> day)))</span></code></pre></div>
-<pre><code>## lm(formula = count ~ z.windspeed + c.year, data = day)
-##             coef.est coef.se
-## (Intercept) 4504.35    56.81
-## z.windspeed -882.90   113.70
-## c.year      2183.75   113.63
-## ---
-## n = 731, k = 3
-## residual sd = 1535.95, R-Squared = 0.37</code></pre>
+<pre><code>lm(formula = count ~ z.windspeed + c.year, data = day)
+            coef.est coef.se
+(Intercept) 4504.35    56.81
+z.windspeed -882.90   113.70
+c.year      2183.75   113.63
+---
+n = 731, k = 3
+residual sd = 1535.95, R-Squared = 0.37</code></pre>
 <p>La función <code>standardize()</code> nos advierte que la velocidad del viento es ahora un z-score (z.windspeed), y que ese año se ha centrado (c.year). La interpretación de c.year es la misma que para año: un aumento de 1 unidad (-.5 a .5) se asocia con un aumento previsto de 2183,75 pasajeros. Sin embargo, la interpretación de z.windspeed ahora es diferente, ya que un aumento de 1 unidad en z.windspeed es 2 desviaciones estándar. Por lo tanto, un aumento de 2 desviaciones estándar en la velocidad del viento (0.15) se asocia con un cambio previsto en el número de pasajeros de -882.</p>
 <p>¿Por qué nos importa poder comparar coeficientes? El valor absoluto de <span class="math inline">\(\beta\)</span> es una medida de la fuerza de la relación entre un predictor y el resultado y, por lo tanto, de la importancia de ese predictor para explicar el resultado. Los valores p no ofrecen orientación sobre la <em>fuerza</em> de un predictor: un predictor estadísticamente significativo podría tener un tamaño de efecto minúsculo y prácticamente intrascendente. El valor absoluto de <span class="math inline">\(\beta\)</span> es, por tanto, una medida de importancia práctica, en oposición a la significación estadística. La significancia estadística expresa la improbabilidad de un resultado, mientras que <span class="math inline">\(\beta\)</span> representa el tamaño del efecto, cuánto esperamos que cambie el resultado como resultado de variar el predictor. Estandarizar <span class="math inline">\(\beta\)</span> nos permite interpretar el tamaño del efecto sin dejarnos engañar por diferencias arbitrarias en la escala variable.</p>
 </div>
@@ -1288,10 +1305,10 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <p>La población de EE. UU. De 1790 a 1970 es un ejemplo de una variable que nos gustaría transformar, ya que el aumento no es lineal y es grande:</p>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="regresión-lineal.html#cb230-1"></a><span class="kw">data</span>(<span class="st">&quot;uspop&quot;</span>)</span>
 <span id="cb230-2"><a href="regresión-lineal.html#cb230-2"></a><span class="kw">plot</span>(uspop, <span class="dt">main =</span> <span class="st">&quot;US population, 1790 - 1970, en millones&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-74-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-59-1.png" width="672" /></p>
 <p>Pero cuando tomamos el logaritmo de la población, el aumento es (más) lineal:</p>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="regresión-lineal.html#cb231-1"></a><span class="kw">plot</span>(<span class="kw">log</span>(uspop), <span class="dt">main =</span> <span class="st">&quot;US population (scala logartímica), 1790 - 1970, en millones&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-75-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-60-1.png" width="672" /></p>
 <p>La transformación logarítmica se usa con frecuencia con precios o ingresos, ya que el extremo superior de la escala para tales variables suele ser exponencialmente mayor que el inferior. Podemos registrar los valores de las viviendas en el conjunto de datos de viviendas de Boston para mejorar el ajuste del modelo.</p>
 <div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="regresión-lineal.html#cb232-1"></a>Boston <span class="op">%&gt;%</span></span>
 <span id="cb232-2"><a href="regresión-lineal.html#cb232-2"></a><span class="st">  </span><span class="kw">arrange</span>(medv) <span class="op">%&gt;%</span></span>
@@ -1303,26 +1320,26 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <span id="cb232-8"><a href="regresión-lineal.html#cb232-8"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
 <span id="cb232-9"><a href="regresión-lineal.html#cb232-9"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>type, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="op">+</span></span>
 <span id="cb232-10"><a href="regresión-lineal.html#cb232-10"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Comparación de log(medv) y medv&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-76-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-61-1.png" width="672" /></p>
 <p>Tomar el logaritmo de medv no ha desplazado medv hacia la linealidad tanto como podríamos haber esperado. No obstante, ¿mejorará el ajuste?</p>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="regresión-lineal.html#cb233-1"></a><span class="kw">display</span>(<span class="kw">standardize</span>(<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>rm <span class="op">+</span><span class="st"> </span>lstat, <span class="dt">data =</span> Boston)))</span></code></pre></div>
-<pre><code>## lm(formula = medv ~ z.rm + z.lstat, data = Boston)
-##             coef.est coef.se
-## (Intercept) 22.53     0.25  
-## z.rm         7.16     0.62  
-## z.lstat     -9.17     0.62  
-## ---
-## n = 506, k = 3
-## residual sd = 5.54, R-Squared = 0.64</code></pre>
+<pre><code>lm(formula = medv ~ z.rm + z.lstat, data = Boston)
+            coef.est coef.se
+(Intercept) 22.53     0.25  
+z.rm         7.16     0.62  
+z.lstat     -9.17     0.62  
+---
+n = 506, k = 3
+residual sd = 5.54, R-Squared = 0.64</code></pre>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="regresión-lineal.html#cb235-1"></a><span class="kw">display</span>(<span class="kw">standardize</span>(<span class="kw">lm</span>(<span class="kw">log</span>(medv) <span class="op">~</span><span class="st"> </span>rm <span class="op">+</span><span class="st"> </span>lstat, <span class="dt">data =</span> Boston)))</span></code></pre></div>
-<pre><code>## lm(formula = log(medv) ~ z.rm + z.lstat, data = Boston)
-##             coef.est coef.se
-## (Intercept)  3.03     0.01  
-## z.rm         0.18     0.03  
-## z.lstat     -0.55     0.03  
-## ---
-## n = 506, k = 3
-## residual sd = 0.23, R-Squared = 0.68</code></pre>
+<pre><code>lm(formula = log(medv) ~ z.rm + z.lstat, data = Boston)
+            coef.est coef.se
+(Intercept)  3.03     0.01  
+z.rm         0.18     0.03  
+z.lstat     -0.55     0.03  
+---
+n = 506, k = 3
+residual sd = 0.23, R-Squared = 0.68</code></pre>
 <p>Un poco. <span class="math inline">\(R^2\)</span> ha mejorado de .64 a .68.</p>
 <p>Se debe tener cuidado al interpretar un modelo transformado logarítmicamente.</p>
 <ul>
@@ -1333,13 +1350,13 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 </ul>
 <p>¿Y si tanto el resultado como el predictor se transforman logarítmicamente?</p>
 <div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="regresión-lineal.html#cb237-1"></a><span class="kw">display</span>(<span class="kw">lm</span>(<span class="kw">log</span>(medv) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(lstat), <span class="dt">data =</span> Boston))</span></code></pre></div>
-<pre><code>## lm(formula = log(medv) ~ log(lstat), data = Boston)
-##             coef.est coef.se
-## (Intercept)  4.36     0.04  
-## log(lstat)  -0.56     0.02  
-## ---
-## n = 506, k = 2
-## residual sd = 0.23, R-Squared = 0.68</code></pre>
+<pre><code>lm(formula = log(medv) ~ log(lstat), data = Boston)
+            coef.est coef.se
+(Intercept)  4.36     0.04  
+log(lstat)  -0.56     0.02  
+---
+n = 506, k = 2
+residual sd = 0.23, R-Squared = 0.68</code></pre>
 <p>La transformación del registro de un predictor, así como el resultado, es una táctica perfectamente razonable si cree que la no normalidad en ambos podría estar contribuyendo a gráficos residuales problemáticos. En este caso, <span class="math inline">\(R^2\)</span> no ha cambiado, lo que sugiere que la transformación logarítmica de lstat no es necesaria.</p>
 <ul>
 <li><p><strong>intercept</strong>: log (medv) es 4.36 cuando lstat = 1. (Tenga en cuenta que no podemos centrar lstat en este caso porque no podemos tomar el logaritmo de un número negativo).</p></li>
@@ -1355,25 +1372,25 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <span id="cb239-2"><a href="regresión-lineal.html#cb239-2"></a><span class="st">  </span><span class="kw">geom_density</span>()<span class="op">+</span></span>
 <span id="cb239-3"><a href="regresión-lineal.html#cb239-3"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(atemp), <span class="dt">col=</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
 <span id="cb239-4"><a href="regresión-lineal.html#cb239-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Densidad de la temperatura (black) vs. la temperatura percibida (red)&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-79-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-64-1.png" width="672" /></p>
 <p>Ahora compare el modelo de uso de la bicicleta con solo la temperatura como predictor con el modelo con temperatura y temperatura. Observe lo que sucede con los errores estándar y los coeficientes:</p>
 <div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="regresión-lineal.html#cb240-1"></a><span class="kw">display</span>(<span class="kw">standardize</span>(<span class="kw">lm</span>(count <span class="op">~</span><span class="st"> </span>temperature, <span class="dt">data =</span> day)))</span></code></pre></div>
-<pre><code>## lm(formula = count ~ z.temperature, data = day)
-##               coef.est coef.se
-## (Intercept)   4504.35    55.83
-## z.temperature 2431.18   111.73
-## ---
-## n = 731, k = 2
-## residual sd = 1509.39, R-Squared = 0.39</code></pre>
+<pre><code>lm(formula = count ~ z.temperature, data = day)
+              coef.est coef.se
+(Intercept)   4504.35    55.83
+z.temperature 2431.18   111.73
+---
+n = 731, k = 2
+residual sd = 1509.39, R-Squared = 0.39</code></pre>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="regresión-lineal.html#cb242-1"></a><span class="kw">display</span>(model &lt;-<span class="st"> </span><span class="kw">standardize</span>(<span class="kw">lm</span>(count <span class="op">~</span><span class="st"> </span>temperature <span class="op">+</span><span class="st"> </span>atemp, <span class="dt">data =</span> day)))</span></code></pre></div>
-<pre><code>## lm(formula = count ~ z.temperature + z.atemp, data = day)
-##               coef.est coef.se
-## (Intercept)   4504.35    55.65
-## z.temperature  390.34   866.32
-## z.atemp       2057.91   866.32
-## ---
-## n = 731, k = 3
-## residual sd = 1504.60, R-Squared = 0.40</code></pre>
+<pre><code>lm(formula = count ~ z.temperature + z.atemp, data = day)
+              coef.est coef.se
+(Intercept)   4504.35    55.65
+z.temperature  390.34   866.32
+z.atemp       2057.91   866.32
+---
+n = 731, k = 3
+residual sd = 1504.60, R-Squared = 0.40</code></pre>
 <p>Los <span class="math inline">\(SE\)</span>s se hacen enormes y los coeficientes se vuelven poco fiables.</p>
 <p>La solución práctica en el caso anterior es usar solo una de estas variables sabiendo que contienen la misma información. Pero las variables a menudo están correlacionadas. ¿Cuánta correlación está bien? El factor de inflación de la varianza (VIF) puede ayudarnos a decidir.</p>
 <p>La varianza muestral estimada del coeficiente de regresión <span class="math inline">\(j\)</span>-ésimo se puede escribir como:</p>
@@ -1381,11 +1398,11 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <p>donde <span class="math inline">\(\hat {\sigma} ^ 2\)</span> es la varianza del error estimada, <span class="math inline">\(s_j ^ 2\)</span> es la varianza muestral de $x_j $y <span class="math inline">\(\frac {1} {1-R_j ^ 2}\)</span> es el factor de inflación de la varianza o <span class="math inline">\(VIF_j\)</span>.</p>
 <p>El término <span class="math inline">\(R_j ^ 2\)</span> es el <span class="math inline">\(R ^ 2\)</span> de un modelo de regresión lineal en el que el predictor <span class="math inline">\(X_j\)</span> se utiliza como variable de respuesta y todas las demás covariables como variables explicativas. Un <span class="math inline">\(R ^ 2\)</span> alto en dicho modelo significa que la mayor parte de la variación en el predictor <span class="math inline">\(X_j\)</span> se explica por todas las demás covariables, lo que significa que hay colinealidad. Esto infla los errores estándar, ensanchando los IC y disminuyendo la probabilidad de detectar un efecto. Para evaluar la colinealidad entre los predictores, use <code>vif ()</code> del paquete car:</p>
 <div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="regresión-lineal.html#cb244-1"></a><span class="kw">cor</span>(day<span class="op">$</span>temperature, day<span class="op">$</span>atemp)</span></code></pre></div>
-<pre><code>## [1] 0.9917016</code></pre>
+<pre><code>[1] 0.9917016</code></pre>
 <p>Estas variables están casi perfectamente correlacionadas.</p>
 <div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="regresión-lineal.html#cb246-1"></a>car<span class="op">::</span><span class="kw">vif</span>(model)</span></code></pre></div>
-<pre><code>## z.temperature       z.atemp 
-##      60.50328      60.50328</code></pre>
+<pre><code>z.temperature       z.atemp 
+     60.50328      60.50328 </code></pre>
 <p>Este resultado significa que los errores estándar son aproximadamente <span class="math inline">\(\sqrt {60.5}\)</span>= 7.8 más grandes de lo que serían sin la otra variable. El punto críto es ver que valor se considera grande … Hay autores que consideran un umbral de VIF de 4 (John Fox) o 5-10 (Hastie &amp; Tibshirani) para eliminar una variable. Lo que hay que hacer es decir cuál es nuestro criterio y dejar que el lector considere si es mucho o poco.</p>
 </div>
 <div id="valores-atípicos" class="section level2" number="4.18">
@@ -1397,25 +1414,25 @@ F = \frac{\frac{TSS - RSS}{p - 1}}{\frac{RSS}{n - p}}
 <span id="cb248-4"><a href="regresión-lineal.html#cb248-4"></a><span class="kw">display</span>(<span class="kw">standardize</span>(m &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Salary) <span class="op">~</span><span class="st"> </span>AtBat <span class="op">+</span><span class="st"> </span>Hits <span class="op">+</span></span>
 <span id="cb248-5"><a href="regresión-lineal.html#cb248-5"></a><span class="st">                              </span>Years <span class="op">+</span><span class="st"> </span>HmRun <span class="op">+</span><span class="st"> </span>RBI <span class="op">+</span><span class="st"> </span>Walks <span class="op">+</span></span>
 <span id="cb248-6"><a href="regresión-lineal.html#cb248-6"></a><span class="st">                              </span>Assists, <span class="dt">data =</span> Hitters)))</span></code></pre></div>
-<pre><code>## lm(formula = log(Salary) ~ z.AtBat + z.Hits + z.Years + z.HmRun + 
-##     z.RBI + z.Walks + z.Assists, data = Hitters)
-##             coef.est coef.se
-## (Intercept)  5.88     0.04  
-## z.AtBat     -0.81     0.34  
-## z.Hits       1.29     0.32  
-## z.Years      0.91     0.08  
-## z.HmRun      0.11     0.17  
-## z.RBI        0.02     0.23  
-## z.Walks      0.34     0.10  
-## z.Assists    0.03     0.09  
-## ---
-## n = 263, k = 8
-## residual sd = 0.63, R-Squared = 0.51</code></pre>
+<pre><code>lm(formula = log(Salary) ~ z.AtBat + z.Hits + z.Years + z.HmRun + 
+    z.RBI + z.Walks + z.Assists, data = Hitters)
+            coef.est coef.se
+(Intercept)  5.88     0.04  
+z.AtBat     -0.81     0.34  
+z.Hits       1.29     0.32  
+z.Years      0.91     0.08  
+z.HmRun      0.11     0.17  
+z.RBI        0.02     0.23  
+z.Walks      0.34     0.10  
+z.Assists    0.03     0.09  
+---
+n = 263, k = 8
+residual sd = 0.63, R-Squared = 0.51</code></pre>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="regresión-lineal.html#cb250-1"></a><span class="kw">plot</span>(m, <span class="dt">which=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-83-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-68-1.png" width="672" /></p>
 <p>Los salarios de tres jugadores — Mike Schmidt, Terry Kennedy y Steve Sax — claramente no están muy bien explicados por este modelo. El modelo predice que a los dos primeros se les debería pagar menos y que al tercero se les debería pagar más. Podemos obtener otra perspectiva de estas observaciones utilizando una métrica llamada “distancia de Cook”, que es una medida de influencia de uso común.</p>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="regresión-lineal.html#cb251-1"></a><span class="kw">plot</span>(m, <span class="dt">which=</span><span class="dv">4</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-84-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-69-1.png" width="672" /></p>
 <p>Un punto influyente es aquel que, si se elimina de los datos, cambiaría significativamente el ajuste. El punto podría ser un valor atípico o tener un alto apalancamiento. La distancia de Cook&gt; 1 se usa a menudo como un umbral aproximado para identificar puntos influyentes. La diferencia de Cook para estos tres jugadores es menor que 1, pero al mismo tiempo no están bien explicados por el modelo. ¿Qué debemos hacer?</p>
 <p>Primero, pensar en los datos. Hablar con expertos, generalmente con los investigadores que han diseñado el estudio y han recogido la información para que nos ayuden a comprender si dichos valores tienen sentido (quizás podrían ser errores de medida o de entrada de datos).</p>
 <ul>

@@ -322,7 +322,7 @@ El conjunto de datos incluye las siguientes variables:
 9. type: Sí o No (diabetes)
 
 
-La variable resultado es "type", que indica si una persona tiene diabetes. Dividiremos los datos en un conjunto de entrenamiento y otro test que combinaremos para ilustrar este ejemplo.
+La variable resultado es "type", que indica si una persona tiene diabetes. Los datos están divididos en un conjunto de entrenamiento y otro test que combinaremos para ilustrar este ejemplo.
 
 
 ```{r}

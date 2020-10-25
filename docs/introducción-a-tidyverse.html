@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-10-19" />
+<meta name="date" content="2020-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -252,6 +252,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>7.4</b> Example: Linear regression for Big Data</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="la-librería-caret.html"><a href="la-librería-caret.html"><i class="fa fa-check"></i><b>8</b> La librería <code>caret</code></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="la-librería-caret.html"><a href="la-librería-caret.html#pre-procesado"><i class="fa fa-check"></i><b>8.1</b> Pre-procesado</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="la-librería-caret.html"><a href="la-librería-caret.html#creación-de-variables"><i class="fa fa-check"></i><b>8.1.1</b> Creación de variables</a></li>
+<li class="chapter" data-level="8.1.2" data-path="la-librería-caret.html"><a href="la-librería-caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>8.1.2</b> Predictores con poca variabilidad</a></li>
+<li class="chapter" data-level="8.1.3" data-path="la-librería-caret.html"><a href="la-librería-caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>8.1.3</b> Identificación de predictores correlacionados</a></li>
+<li class="chapter" data-level="8.1.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#centrado-y-escalado"><i class="fa fa-check"></i><b>8.1.4</b> Centrado y escalado</a></li>
+<li class="chapter" data-level="8.1.5" data-path="la-librería-caret.html"><a href="la-librería-caret.html#imputación"><i class="fa fa-check"></i><b>8.1.5</b> Imputación</a></li>
+<li class="chapter" data-level="8.1.6" data-path="la-librería-caret.html"><a href="la-librería-caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>8.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="la-librería-caret.html"><a href="la-librería-caret.html#visualización"><i class="fa fa-check"></i><b>8.2</b> Visualización</a></li>
+<li class="chapter" data-level="8.3" data-path="la-librería-caret.html"><a href="la-librería-caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>8.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
+<li class="chapter" data-level="8.4" data-path="la-librería-caret.html"><a href="la-librería-caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>8.4</b> Creación de un modelo predictivo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="k-vecinos-más-próximos-knn.html"><a href="k-vecinos-más-próximos-knn.html"><i class="fa fa-check"></i><b>9</b> K vecinos más próximos (KNN)</a></li>
+<li class="chapter" data-level="10" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>10</b> Análisis discriminante lineal (LDA)</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -348,83 +365,83 @@ Figure 2.1: Esquema R for Data Science
 <h3><span class="header-section-number">2.4.1</span> Tibbles</h3>
 <p>Empecemos introduciendo lo que es un <em>tibble</em> (pronunciado “tibel”). Se puede aprender más cosas ejecutando <code>vignette("tibble")</code> en la consola de RStudio. Tras cargar la librería <code>tidyverse</code> podemos crear un tibble a partir de un data.frame de la siguiente forma. Usaremos la base de datos iris a modo de ejemplo</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introducción-a-tidyverse.html#cb3-1"></a><span class="kw">head</span>(iris)</span></code></pre></div>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1          5.1         3.5          1.4         0.2  setosa
-## 2          4.9         3.0          1.4         0.2  setosa
-## 3          4.7         3.2          1.3         0.2  setosa
-## 4          4.6         3.1          1.5         0.2  setosa
-## 5          5.0         3.6          1.4         0.2  setosa
-## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introducción-a-tidyverse.html#cb5-1"></a>iris.tib &lt;-<span class="st"> </span><span class="kw">tibble</span>(iris)</span>
 <span id="cb5-2"><a href="introducción-a-tidyverse.html#cb5-2"></a>iris.tib</span></code></pre></div>
-<pre><code>## # A tibble: 150 x 5
-##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
-##  1          5.1         3.5          1.4         0.2 setosa 
-##  2          4.9         3            1.4         0.2 setosa 
-##  3          4.7         3.2          1.3         0.2 setosa 
-##  4          4.6         3.1          1.5         0.2 setosa 
-##  5          5           3.6          1.4         0.2 setosa 
-##  6          5.4         3.9          1.7         0.4 setosa 
-##  7          4.6         3.4          1.4         0.3 setosa 
-##  8          5           3.4          1.5         0.2 setosa 
-##  9          4.4         2.9          1.4         0.2 setosa 
-## 10          4.9         3.1          1.5         0.1 setosa 
-## # ... with 140 more rows</code></pre>
+<pre><code># A tibble: 150 x 5
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+ 1          5.1         3.5          1.4         0.2 setosa 
+ 2          4.9         3            1.4         0.2 setosa 
+ 3          4.7         3.2          1.3         0.2 setosa 
+ 4          4.6         3.1          1.5         0.2 setosa 
+ 5          5           3.6          1.4         0.2 setosa 
+ 6          5.4         3.9          1.7         0.4 setosa 
+ 7          4.6         3.4          1.4         0.3 setosa 
+ 8          5           3.4          1.5         0.2 setosa 
+ 9          4.4         2.9          1.4         0.2 setosa 
+10          4.9         3.1          1.5         0.1 setosa 
+# ... with 140 more rows</code></pre>
 <p>También podemos crear un nuevo <em>tibble</em> mediante (los datos se reciclan):</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="introducción-a-tidyverse.html#cb7-1"></a><span class="kw">tibble</span>(</span>
 <span id="cb7-2"><a href="introducción-a-tidyverse.html#cb7-2"></a>  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, </span>
 <span id="cb7-3"><a href="introducción-a-tidyverse.html#cb7-3"></a>  <span class="dt">y =</span> <span class="dv">1</span>, </span>
 <span id="cb7-4"><a href="introducción-a-tidyverse.html#cb7-4"></a>  <span class="dt">z =</span> x <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y</span>
 <span id="cb7-5"><a href="introducción-a-tidyverse.html#cb7-5"></a>)</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 3
-##       x     y     z
-##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     1     1     2
-## 2     2     1     5
-## 3     3     1    10
-## 4     4     1    17
-## 5     5     1    26</code></pre>
+<pre><code># A tibble: 5 x 3
+      x     y     z
+  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     1     1     2
+2     2     1     5
+3     3     1    10
+4     4     1    17
+5     5     1    26</code></pre>
 <p>NOTA 1: Nunca cambia los tipos de datos! (i.e. caracter a factor)
 NOTA 2: El <code>rownames</code> desaparece</p>
 <p>Quizás uno de los aspectos más novedosos de las <em>tibble</em> sea que se ha re-definido el método <code>print()</code> que permite, por defecto, ver las 10 primeras filas y todas las columnas que quepan en la pantalla. Esto puede cambiarse con</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="introducción-a-tidyverse.html#cb9-1"></a><span class="kw">print</span>(iris.tib, <span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">width =</span> <span class="ot">Inf</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 150 x 5
-##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
-##  1          5.1         3.5          1.4         0.2 setosa 
-##  2          4.9         3            1.4         0.2 setosa 
-##  3          4.7         3.2          1.3         0.2 setosa 
-##  4          4.6         3.1          1.5         0.2 setosa 
-##  5          5           3.6          1.4         0.2 setosa 
-##  6          5.4         3.9          1.7         0.4 setosa 
-##  7          4.6         3.4          1.4         0.3 setosa 
-##  8          5           3.4          1.5         0.2 setosa 
-##  9          4.4         2.9          1.4         0.2 setosa 
-## 10          4.9         3.1          1.5         0.1 setosa 
-## # ... with 140 more rows</code></pre>
+<pre><code># A tibble: 150 x 5
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+ 1          5.1         3.5          1.4         0.2 setosa 
+ 2          4.9         3            1.4         0.2 setosa 
+ 3          4.7         3.2          1.3         0.2 setosa 
+ 4          4.6         3.1          1.5         0.2 setosa 
+ 5          5           3.6          1.4         0.2 setosa 
+ 6          5.4         3.9          1.7         0.4 setosa 
+ 7          4.6         3.4          1.4         0.3 setosa 
+ 8          5           3.4          1.5         0.2 setosa 
+ 9          4.4         2.9          1.4         0.2 setosa 
+10          4.9         3.1          1.5         0.1 setosa 
+# ... with 140 more rows</code></pre>
 <p>ó</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="introducción-a-tidyverse.html#cb11-1"></a><span class="kw">print</span>(iris.tib, <span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">width =</span> <span class="dv">25</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 150 x 5
-##    Sepal.Length
-##           &lt;dbl&gt;
-##  1          5.1
-##  2          4.9
-##  3          4.7
-##  4          4.6
-##  5          5  
-##  6          5.4
-##  7          4.6
-##  8          5  
-##  9          4.4
-## 10          4.9
-## # ... with 140 more
-## #   rows, and 4 more
-## #   variables:
-## #   Sepal.Width &lt;dbl&gt;,
-## #   Petal.Length &lt;dbl&gt;,
-## #   Petal.Width &lt;dbl&gt;,
-## #   Species &lt;fct&gt;</code></pre>
+<pre><code># A tibble: 150 x 5
+   Sepal.Length
+          &lt;dbl&gt;
+ 1          5.1
+ 2          4.9
+ 3          4.7
+ 4          4.6
+ 5          5  
+ 6          5.4
+ 7          4.6
+ 8          5  
+ 9          4.4
+10          4.9
+# ... with 140 more
+#   rows, and 4 more
+#   variables:
+#   Sepal.Width &lt;dbl&gt;,
+#   Petal.Length &lt;dbl&gt;,
+#   Petal.Width &lt;dbl&gt;,
+#   Species &lt;fct&gt;</code></pre>
 <p>Podemos acceder a una columna (e.g. variable) de la misma forma que con un data.frame</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="introducción-a-tidyverse.html#cb13-1"></a>df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</span>
 <span id="cb13-2"><a href="introducción-a-tidyverse.html#cb13-2"></a>  <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">5</span>),</span>
@@ -433,12 +450,12 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <span id="cb13-5"><a href="introducción-a-tidyverse.html#cb13-5"></a></span>
 <span id="cb13-6"><a href="introducción-a-tidyverse.html#cb13-6"></a><span class="co"># Extract by name</span></span>
 <span id="cb13-7"><a href="introducción-a-tidyverse.html#cb13-7"></a>df<span class="op">$</span>x</span></code></pre></div>
-<pre><code>## [1] 0.6013053 0.3191631 0.3842864 0.7869046 0.8002453</code></pre>
+<pre><code>[1] 0.24597024 0.53714090 0.30188242 0.06693261 0.64063899</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introducción-a-tidyverse.html#cb15-1"></a>df[[<span class="st">&quot;x&quot;</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.6013053 0.3191631 0.3842864 0.7869046 0.8002453</code></pre>
+<pre><code>[1] 0.24597024 0.53714090 0.30188242 0.06693261 0.64063899</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="introducción-a-tidyverse.html#cb17-1"></a><span class="co"># Extract by position</span></span>
 <span id="cb17-2"><a href="introducción-a-tidyverse.html#cb17-2"></a>df[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>## [1] 0.6013053 0.3191631 0.3842864 0.7869046 0.8002453</code></pre>
+<pre><code>[1] 0.24597024 0.53714090 0.30188242 0.06693261 0.64063899</code></pre>
 </div>
 <div id="importar-datos" class="section level3" number="2.4.2">
 <h3><span class="header-section-number">2.4.2</span> Importar datos</h3>
@@ -458,37 +475,37 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <p>Hagamos una comparación con un archivo grande</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introducción-a-tidyverse.html#cb19-1"></a><span class="kw">library</span>(readr)</span>
 <span id="cb19-2"><a href="introducción-a-tidyverse.html#cb19-2"></a><span class="kw">system.time</span>(dd1 &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>))</span></code></pre></div>
-<pre><code>##    user  system elapsed 
-##    6.38    0.11    6.50</code></pre>
+<pre><code>   user  system elapsed 
+   7.02    0.12    7.17 </code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introducción-a-tidyverse.html#cb21-1"></a><span class="kw">system.time</span>(dd2 &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;data/genome.txt&quot;</span>, <span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>))</span></code></pre></div>
-<pre><code>##    user  system elapsed 
-##    0.47    0.02    0.51</code></pre>
+<pre><code>   user  system elapsed 
+   0.53    0.11    0.66 </code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="introducción-a-tidyverse.html#cb23-1"></a><span class="kw">dim</span>(dd2)</span></code></pre></div>
-<pre><code>## [1] 733202      5</code></pre>
+<pre><code>[1] 733202      5</code></pre>
 <p>Efectivamente ambos objetos contienen la misma información</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="introducción-a-tidyverse.html#cb25-1"></a><span class="kw">head</span>(dd1)</span></code></pre></div>
-<pre><code>##         Name Chr  Position  Log.R.Ratio B.Allele.Freq
-## 1  rs1000000  12 125456933 -0.002501764   1.000000000
-## 2  rs1000002   3 185118461 -0.029741180   0.000336171
-## 3 rs10000023   4  95952928  0.004015533   0.460671800
-## 4  rs1000003   3  99825597 -0.142527700   0.541123600
-## 5 rs10000030   4 103593179  0.365104000   1.000000000
-## 6 rs10000037   4  38600725 -0.005177616   0.504625300</code></pre>
+<pre><code>        Name Chr  Position  Log.R.Ratio B.Allele.Freq
+1  rs1000000  12 125456933 -0.002501764   1.000000000
+2  rs1000002   3 185118461 -0.029741180   0.000336171
+3 rs10000023   4  95952928  0.004015533   0.460671800
+4  rs1000003   3  99825597 -0.142527700   0.541123600
+5 rs10000030   4 103593179  0.365104000   1.000000000
+6 rs10000037   4  38600725 -0.005177616   0.504625300</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="introducción-a-tidyverse.html#cb27-1"></a>dd2</span></code></pre></div>
-<pre><code>## # A tibble: 733,202 x 5
-##    Name       Chr    Position Log.R.Ratio B.Allele.Freq
-##    &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
-##  1 rs1000000  12    125456933    -0.00250      1       
-##  2 rs1000002  3     185118461    -0.0297       0.000336
-##  3 rs10000023 4      95952928     0.00402      0.461   
-##  4 rs1000003  3      99825597    -0.143        0.541   
-##  5 rs10000030 4     103593179     0.365        1       
-##  6 rs10000037 4      38600725    -0.00518      0.505   
-##  7 rs10000041 4     165841405    -0.179        0       
-##  8 rs10000042 4       5288053     0.168        0.998   
-##  9 rs10000049 4     119167668    -0.00238      0       
-## 10 rs1000007  2     237416793    -0.00411      0       
-## # ... with 733,192 more rows</code></pre>
+<pre><code># A tibble: 733,202 x 5
+   Name       Chr    Position Log.R.Ratio B.Allele.Freq
+   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
+ 1 rs1000000  12    125456933    -0.00250      1       
+ 2 rs1000002  3     185118461    -0.0297       0.000336
+ 3 rs10000023 4      95952928     0.00402      0.461   
+ 4 rs1000003  3      99825597    -0.143        0.541   
+ 5 rs10000030 4     103593179     0.365        1       
+ 6 rs10000037 4      38600725    -0.00518      0.505   
+ 7 rs10000041 4     165841405    -0.179        0       
+ 8 rs10000042 4       5288053     0.168        0.998   
+ 9 rs10000049 4     119167668    -0.00238      0       
+10 rs1000007  2     237416793    -0.00411      0       
+# ... with 733,192 more rows</code></pre>
 </div>
 <div id="transformación-de-datos" class="section level3" number="2.4.3">
 <h3><span class="header-section-number">2.4.3</span> Transformación de datos</h3>
@@ -502,20 +519,24 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="introducción-a-tidyverse.html#cb29-1"></a><span class="kw">library</span>(nycflights13)</span>
 <span id="cb29-2"><a href="introducción-a-tidyverse.html#cb29-2"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="introducción-a-tidyverse.html#cb30-1"></a>flights</span></code></pre></div>
-<pre><code>## # A tibble: 336,776 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest 
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;
-##  1  2013     1     1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH  
-##  2  2013     1     1      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH  
-##  3  2013     1     1      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA  
-##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN  
-##  5  2013     1     1      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL  
-##  6  2013     1     1      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD  
-##  7  2013     1     1      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL  
-##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD  
-##  9  2013     1     1      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO  
-## 10  2013     1     1      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD  
-## # ... with 336,766 more rows, and 5 more variables: air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<pre><code># A tibble: 336,776 x 19
+    year month   day dep_time sched_dep_time dep_delay arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+ 1  2013     1     1      517            515         2      830
+ 2  2013     1     1      533            529         4      850
+ 3  2013     1     1      542            540         2      923
+ 4  2013     1     1      544            545        -1     1004
+ 5  2013     1     1      554            600        -6      812
+ 6  2013     1     1      554            558        -4      740
+ 7  2013     1     1      555            600        -5      913
+ 8  2013     1     1      557            600        -3      709
+ 9  2013     1     1      557            600        -3      838
+10  2013     1     1      558            600        -2      753
+# ... with 336,766 more rows, and 12 more variables:
+#   sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+#   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+#   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,
+#   time_hour &lt;dttm&gt;</code></pre>
 <p>Las funciones básicas que usaremos están disponibles en la librería <code>dlpyr</code> y son las siguientes:</p>
 <ul>
 <li>Elegir observaciones por sus valores: <code>filter()</code>.</li>
@@ -536,20 +557,23 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="introducción-a-tidyverse.html#cb32-1"></a>jan1 &lt;-<span class="st"> </span><span class="kw">filter</span>(flights, month <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, day <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
 <p>R imprime los resultados o los guarda en una variable. Si desea hacer ambas cosas, podemos envolver la sintaxis entre paréntesis:</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="introducción-a-tidyverse.html#cb33-1"></a>(jan1 &lt;-<span class="st"> </span><span class="kw">filter</span>(flights, month <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, day <span class="op">==</span><span class="st"> </span><span class="dv">1</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 842 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest 
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;
-##  1  2013     1     1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH  
-##  2  2013     1     1      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH  
-##  3  2013     1     1      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA  
-##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN  
-##  5  2013     1     1      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL  
-##  6  2013     1     1      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD  
-##  7  2013     1     1      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL  
-##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD  
-##  9  2013     1     1      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO  
-## 10  2013     1     1      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD  
-## # ... with 832 more rows, and 5 more variables: air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<pre><code># A tibble: 842 x 19
+    year month   day dep_time sched_dep_time dep_delay arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+ 1  2013     1     1      517            515         2      830
+ 2  2013     1     1      533            529         4      850
+ 3  2013     1     1      542            540         2      923
+ 4  2013     1     1      544            545        -1     1004
+ 5  2013     1     1      554            600        -6      812
+ 6  2013     1     1      554            558        -4      740
+ 7  2013     1     1      555            600        -5      913
+ 8  2013     1     1      557            600        -3      709
+ 9  2013     1     1      557            600        -3      838
+10  2013     1     1      558            600        -2      753
+# ... with 832 more rows, and 12 more variables: sched_arr_time &lt;int&gt;,
+#   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
+#   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
 <div id="filtrado-lógico" class="section level3" number="2.4.5">
 <h3><span class="header-section-number">2.4.5</span> Filtrado lógico</h3>
@@ -559,122 +583,141 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <p class="caption">boolean operations</p>
 </div>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="introducción-a-tidyverse.html#cb35-1"></a><span class="kw">filter</span>(flights, month <span class="op">==</span><span class="st"> </span><span class="dv">11</span> <span class="op">|</span><span class="st"> </span>month <span class="op">==</span><span class="st"> </span><span class="dv">12</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 55,403 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest 
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;
-##  1  2013    11     1        5           2359         6      352            345         7 B6         745 N568JB  JFK    PSE  
-##  2  2013    11     1       35           2250       105      123           2356        87 B6        1816 N353JB  JFK    SYR  
-##  3  2013    11     1      455            500        -5      641            651       -10 US        1895 N192UW  EWR    CLT  
-##  4  2013    11     1      539            545        -6      856            827        29 UA        1714 N38727  LGA    IAH  
-##  5  2013    11     1      542            545        -3      831            855       -24 AA        2243 N5CLAA  JFK    MIA  
-##  6  2013    11     1      549            600       -11      912            923       -11 UA         303 N595UA  JFK    SFO  
-##  7  2013    11     1      550            600       -10      705            659         6 US        2167 N748UW  LGA    DCA  
-##  8  2013    11     1      554            600        -6      659            701        -2 US        2134 N742PS  LGA    BOS  
-##  9  2013    11     1      554            600        -6      826            827        -1 DL         563 N912DE  LGA    ATL  
-## 10  2013    11     1      554            600        -6      749            751        -2 DL         731 N315NB  LGA    DTW  
-## # ... with 55,393 more rows, and 5 more variables: air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<pre><code># A tibble: 55,403 x 19
+    year month   day dep_time sched_dep_time dep_delay arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+ 1  2013    11     1        5           2359         6      352
+ 2  2013    11     1       35           2250       105      123
+ 3  2013    11     1      455            500        -5      641
+ 4  2013    11     1      539            545        -6      856
+ 5  2013    11     1      542            545        -3      831
+ 6  2013    11     1      549            600       -11      912
+ 7  2013    11     1      550            600       -10      705
+ 8  2013    11     1      554            600        -6      659
+ 9  2013    11     1      554            600        -6      826
+10  2013    11     1      554            600        -6      749
+# ... with 55,393 more rows, and 12 more variables:
+#   sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+#   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+#   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,
+#   time_hour &lt;dttm&gt;</code></pre>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introducción-a-tidyverse.html#cb37-1"></a><span class="kw">filter</span>(flights, <span class="op">!</span>(arr_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">120</span> <span class="op">|</span><span class="st"> </span>dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">120</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 316,050 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest 
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;
-##  1  2013     1     1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH  
-##  2  2013     1     1      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH  
-##  3  2013     1     1      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA  
-##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN  
-##  5  2013     1     1      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL  
-##  6  2013     1     1      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD  
-##  7  2013     1     1      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL  
-##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD  
-##  9  2013     1     1      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO  
-## 10  2013     1     1      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD  
-## # ... with 316,040 more rows, and 5 more variables: air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<pre><code># A tibble: 316,050 x 19
+    year month   day dep_time sched_dep_time dep_delay arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+ 1  2013     1     1      517            515         2      830
+ 2  2013     1     1      533            529         4      850
+ 3  2013     1     1      542            540         2      923
+ 4  2013     1     1      544            545        -1     1004
+ 5  2013     1     1      554            600        -6      812
+ 6  2013     1     1      554            558        -4      740
+ 7  2013     1     1      555            600        -5      913
+ 8  2013     1     1      557            600        -3      709
+ 9  2013     1     1      557            600        -3      838
+10  2013     1     1      558            600        -2      753
+# ... with 316,040 more rows, and 12 more variables:
+#   sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+#   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+#   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,
+#   time_hour &lt;dttm&gt;</code></pre>
 </div>
 <div id="ordenar-filas" class="section level3" number="2.4.6">
 <h3><span class="header-section-number">2.4.6</span> Ordenar filas</h3>
 <p>En orden ascendente</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="introducción-a-tidyverse.html#cb39-1"></a><span class="kw">arrange</span>(flights, year, month, day)</span></code></pre></div>
-<pre><code>## # A tibble: 336,776 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest 
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;
-##  1  2013     1     1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH  
-##  2  2013     1     1      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH  
-##  3  2013     1     1      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA  
-##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN  
-##  5  2013     1     1      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL  
-##  6  2013     1     1      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD  
-##  7  2013     1     1      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL  
-##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD  
-##  9  2013     1     1      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO  
-## 10  2013     1     1      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD  
-## # ... with 336,766 more rows, and 5 more variables: air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<pre><code># A tibble: 336,776 x 19
+    year month   day dep_time sched_dep_time dep_delay arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+ 1  2013     1     1      517            515         2      830
+ 2  2013     1     1      533            529         4      850
+ 3  2013     1     1      542            540         2      923
+ 4  2013     1     1      544            545        -1     1004
+ 5  2013     1     1      554            600        -6      812
+ 6  2013     1     1      554            558        -4      740
+ 7  2013     1     1      555            600        -5      913
+ 8  2013     1     1      557            600        -3      709
+ 9  2013     1     1      557            600        -3      838
+10  2013     1     1      558            600        -2      753
+# ... with 336,766 more rows, and 12 more variables:
+#   sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+#   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+#   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,
+#   time_hour &lt;dttm&gt;</code></pre>
 <p>y descendente</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="introducción-a-tidyverse.html#cb41-1"></a><span class="kw">arrange</span>(flights, <span class="kw">desc</span>(dep_delay))</span></code></pre></div>
-<pre><code>## # A tibble: 336,776 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest 
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;
-##  1  2013     1     9      641            900      1301     1242           1530      1272 HA          51 N384HA  JFK    HNL  
-##  2  2013     6    15     1432           1935      1137     1607           2120      1127 MQ        3535 N504MQ  JFK    CMH  
-##  3  2013     1    10     1121           1635      1126     1239           1810      1109 MQ        3695 N517MQ  EWR    ORD  
-##  4  2013     9    20     1139           1845      1014     1457           2210      1007 AA         177 N338AA  JFK    SFO  
-##  5  2013     7    22      845           1600      1005     1044           1815       989 MQ        3075 N665MQ  JFK    CVG  
-##  6  2013     4    10     1100           1900       960     1342           2211       931 DL        2391 N959DL  JFK    TPA  
-##  7  2013     3    17     2321            810       911      135           1020       915 DL        2119 N927DA  LGA    MSP  
-##  8  2013     6    27      959           1900       899     1236           2226       850 DL        2007 N3762Y  JFK    PDX  
-##  9  2013     7    22     2257            759       898      121           1026       895 DL        2047 N6716C  LGA    ATL  
-## 10  2013    12     5      756           1700       896     1058           2020       878 AA         172 N5DMAA  EWR    MIA  
-## # ... with 336,766 more rows, and 5 more variables: air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<pre><code># A tibble: 336,776 x 19
+    year month   day dep_time sched_dep_time dep_delay arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+ 1  2013     1     9      641            900      1301     1242
+ 2  2013     6    15     1432           1935      1137     1607
+ 3  2013     1    10     1121           1635      1126     1239
+ 4  2013     9    20     1139           1845      1014     1457
+ 5  2013     7    22      845           1600      1005     1044
+ 6  2013     4    10     1100           1900       960     1342
+ 7  2013     3    17     2321            810       911      135
+ 8  2013     6    27      959           1900       899     1236
+ 9  2013     7    22     2257            759       898      121
+10  2013    12     5      756           1700       896     1058
+# ... with 336,766 more rows, and 12 more variables:
+#   sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+#   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+#   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,
+#   time_hour &lt;dttm&gt;</code></pre>
 <p>NOTA: los valores missing están situados al final</p>
 </div>
 <div id="seleccionar-columnas-e.g.-variables" class="section level3" number="2.4.7">
 <h3><span class="header-section-number">2.4.7</span> Seleccionar columnas (e.g. variables)</h3>
 <p>Seleccionamos las columnas que queremos</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="introducción-a-tidyverse.html#cb43-1"></a>dplyr<span class="op">::</span><span class="kw">select</span>(flights, year, month, day)</span></code></pre></div>
-<pre><code>## # A tibble: 336,776 x 3
-##     year month   day
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;
-##  1  2013     1     1
-##  2  2013     1     1
-##  3  2013     1     1
-##  4  2013     1     1
-##  5  2013     1     1
-##  6  2013     1     1
-##  7  2013     1     1
-##  8  2013     1     1
-##  9  2013     1     1
-## 10  2013     1     1
-## # ... with 336,766 more rows</code></pre>
+<pre><code># A tibble: 336,776 x 3
+    year month   day
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;
+ 1  2013     1     1
+ 2  2013     1     1
+ 3  2013     1     1
+ 4  2013     1     1
+ 5  2013     1     1
+ 6  2013     1     1
+ 7  2013     1     1
+ 8  2013     1     1
+ 9  2013     1     1
+10  2013     1     1
+# ... with 336,766 more rows</code></pre>
 <p>o las que están entre dos columnas</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="introducción-a-tidyverse.html#cb45-1"></a>dplyr<span class="op">::</span><span class="kw">select</span>(flights, year<span class="op">:</span>day)</span></code></pre></div>
-<pre><code>## # A tibble: 336,776 x 3
-##     year month   day
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;
-##  1  2013     1     1
-##  2  2013     1     1
-##  3  2013     1     1
-##  4  2013     1     1
-##  5  2013     1     1
-##  6  2013     1     1
-##  7  2013     1     1
-##  8  2013     1     1
-##  9  2013     1     1
-## 10  2013     1     1
-## # ... with 336,766 more rows</code></pre>
+<pre><code># A tibble: 336,776 x 3
+    year month   day
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;
+ 1  2013     1     1
+ 2  2013     1     1
+ 3  2013     1     1
+ 4  2013     1     1
+ 5  2013     1     1
+ 6  2013     1     1
+ 7  2013     1     1
+ 8  2013     1     1
+ 9  2013     1     1
+10  2013     1     1
+# ... with 336,766 more rows</code></pre>
 <p>también podemos seleccionar todas las columnas menos algunas</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="introducción-a-tidyverse.html#cb47-1"></a>dplyr<span class="op">::</span><span class="kw">select</span>(flights, <span class="op">-</span>(year<span class="op">:</span>day))</span></code></pre></div>
-<pre><code>## # A tibble: 336,776 x 16
-##    dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight tailnum origin dest  air_time distance
-##       &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1      517            515         2      830            819        11 UA        1545 N14228  EWR    IAH        227     1400
-##  2      533            529         4      850            830        20 UA        1714 N24211  LGA    IAH        227     1416
-##  3      542            540         2      923            850        33 AA        1141 N619AA  JFK    MIA        160     1089
-##  4      544            545        -1     1004           1022       -18 B6         725 N804JB  JFK    BQN        183     1576
-##  5      554            600        -6      812            837       -25 DL         461 N668DN  LGA    ATL        116      762
-##  6      554            558        -4      740            728        12 UA        1696 N39463  EWR    ORD        150      719
-##  7      555            600        -5      913            854        19 B6         507 N516JB  EWR    FLL        158     1065
-##  8      557            600        -3      709            723       -14 EV        5708 N829AS  LGA    IAD         53      229
-##  9      557            600        -3      838            846        -8 B6          79 N593JB  JFK    MCO        140      944
-## 10      558            600        -2      753            745         8 AA         301 N3ALAA  LGA    ORD        138      733
-## # ... with 336,766 more rows, and 3 more variables: hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<pre><code># A tibble: 336,776 x 16
+   dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay
+      &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;
+ 1      517            515         2      830            819        11
+ 2      533            529         4      850            830        20
+ 3      542            540         2      923            850        33
+ 4      544            545        -1     1004           1022       -18
+ 5      554            600        -6      812            837       -25
+ 6      554            558        -4      740            728        12
+ 7      555            600        -5      913            854        19
+ 8      557            600        -3      709            723       -14
+ 9      557            600        -3      838            846        -8
+10      558            600        -2      753            745         8
+# ... with 336,766 more rows, and 10 more variables: carrier &lt;chr&gt;,
+#   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+#   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,
+#   time_hour &lt;dttm&gt;</code></pre>
 <p>Existen numerosas funciones que pueden ser de mucha utilidad para hacer selecciones más complejas y rápidas dentro de la función <code>select()</code></p>
 <ul>
 <li><p><code>starts_with("abc")</code>: nombres que empiezan con “abc”.</p></li>
@@ -697,66 +740,66 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <span id="cb49-8"><a href="introducción-a-tidyverse.html#cb49-8"></a>  <span class="dt">gain =</span> dep_delay <span class="op">-</span><span class="st"> </span>arr_delay,</span>
 <span id="cb49-9"><a href="introducción-a-tidyverse.html#cb49-9"></a>  <span class="dt">speed =</span> distance <span class="op">/</span><span class="st"> </span>air_time <span class="op">*</span><span class="st"> </span><span class="dv">60</span></span>
 <span id="cb49-10"><a href="introducción-a-tidyverse.html#cb49-10"></a>)</span></code></pre></div>
-<pre><code>## # A tibble: 336,776 x 9
-##     year month   day dep_delay arr_delay distance air_time  gain speed
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1  2013     1     1         2        11     1400      227    -9  370.
-##  2  2013     1     1         4        20     1416      227   -16  374.
-##  3  2013     1     1         2        33     1089      160   -31  408.
-##  4  2013     1     1        -1       -18     1576      183    17  517.
-##  5  2013     1     1        -6       -25      762      116    19  394.
-##  6  2013     1     1        -4        12      719      150   -16  288.
-##  7  2013     1     1        -5        19     1065      158   -24  404.
-##  8  2013     1     1        -3       -14      229       53    11  259.
-##  9  2013     1     1        -3        -8      944      140     5  405.
-## 10  2013     1     1        -2         8      733      138   -10  319.
-## # ... with 336,766 more rows</code></pre>
+<pre><code># A tibble: 336,776 x 9
+    year month   day dep_delay arr_delay distance air_time  gain speed
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  2013     1     1         2        11     1400      227    -9  370.
+ 2  2013     1     1         4        20     1416      227   -16  374.
+ 3  2013     1     1         2        33     1089      160   -31  408.
+ 4  2013     1     1        -1       -18     1576      183    17  517.
+ 5  2013     1     1        -6       -25      762      116    19  394.
+ 6  2013     1     1        -4        12      719      150   -16  288.
+ 7  2013     1     1        -5        19     1065      158   -24  404.
+ 8  2013     1     1        -3       -14      229       53    11  259.
+ 9  2013     1     1        -3        -8      944      140     5  405.
+10  2013     1     1        -2         8      733      138   -10  319.
+# ... with 336,766 more rows</code></pre>
 <p>Si sólo queremos mantener las nuevas variables en nuestra tabla de datos, debemos usar <code>transmute()</code>:</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="introducción-a-tidyverse.html#cb51-1"></a><span class="kw">transmute</span>(flights,</span>
 <span id="cb51-2"><a href="introducción-a-tidyverse.html#cb51-2"></a>  <span class="dt">gain =</span> dep_delay <span class="op">-</span><span class="st"> </span>arr_delay,</span>
 <span id="cb51-3"><a href="introducción-a-tidyverse.html#cb51-3"></a>  <span class="dt">hours =</span> air_time <span class="op">/</span><span class="st"> </span><span class="dv">60</span>,</span>
 <span id="cb51-4"><a href="introducción-a-tidyverse.html#cb51-4"></a>  <span class="dt">gain_per_hour =</span> gain <span class="op">/</span><span class="st"> </span>hours</span>
 <span id="cb51-5"><a href="introducción-a-tidyverse.html#cb51-5"></a>)</span></code></pre></div>
-<pre><code>## # A tibble: 336,776 x 3
-##     gain hours gain_per_hour
-##    &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;
-##  1    -9 3.78          -2.38
-##  2   -16 3.78          -4.23
-##  3   -31 2.67         -11.6 
-##  4    17 3.05           5.57
-##  5    19 1.93           9.83
-##  6   -16 2.5           -6.4 
-##  7   -24 2.63          -9.11
-##  8    11 0.883         12.5 
-##  9     5 2.33           2.14
-## 10   -10 2.3           -4.35
-## # ... with 336,766 more rows</code></pre>
+<pre><code># A tibble: 336,776 x 3
+    gain hours gain_per_hour
+   &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;
+ 1    -9 3.78          -2.38
+ 2   -16 3.78          -4.23
+ 3   -31 2.67         -11.6 
+ 4    17 3.05           5.57
+ 5    19 1.93           9.83
+ 6   -16 2.5           -6.4 
+ 7   -24 2.63          -9.11
+ 8    11 0.883         12.5 
+ 9     5 2.33           2.14
+10   -10 2.3           -4.35
+# ... with 336,766 more rows</code></pre>
 </div>
 <div id="grouped-summaries" class="section level3" number="2.4.9">
 <h3><span class="header-section-number">2.4.9</span> Grouped summaries</h3>
 <p>Podemos agrupar variables de la siguiente forma:</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="introducción-a-tidyverse.html#cb53-1"></a><span class="kw">summarise</span>(flights, <span class="dt">delay =</span> <span class="kw">mean</span>(dep_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
-##   delay
-##   &lt;dbl&gt;
-## 1  12.6</code></pre>
+<pre><code># A tibble: 1 x 1
+  delay
+  &lt;dbl&gt;
+1  12.6</code></pre>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="introducción-a-tidyverse.html#cb55-1"></a>by_day &lt;-<span class="st"> </span><span class="kw">group_by</span>(flights, year, month, day)</span>
 <span id="cb55-2"><a href="introducción-a-tidyverse.html#cb55-2"></a><span class="kw">summarise</span>(by_day, <span class="dt">delay =</span> <span class="kw">mean</span>(dep_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 365 x 4
-## # Groups:   year, month [12]
-##     year month   day delay
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
-##  1  2013     1     1 11.5 
-##  2  2013     1     2 13.9 
-##  3  2013     1     3 11.0 
-##  4  2013     1     4  8.95
-##  5  2013     1     5  5.73
-##  6  2013     1     6  7.15
-##  7  2013     1     7  5.42
-##  8  2013     1     8  2.55
-##  9  2013     1     9  2.28
-## 10  2013     1    10  2.84
-## # ... with 355 more rows</code></pre>
+<pre><code># A tibble: 365 x 4
+# Groups:   year, month [12]
+    year month   day delay
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+ 1  2013     1     1 11.5 
+ 2  2013     1     2 13.9 
+ 3  2013     1     3 11.0 
+ 4  2013     1     4  8.95
+ 5  2013     1     5  5.73
+ 6  2013     1     6  7.15
+ 7  2013     1     7  5.42
+ 8  2013     1     8  2.55
+ 9  2013     1     9  2.28
+10  2013     1    10  2.84
+# ... with 355 more rows</code></pre>
 <p>También podemos agrupar según varios criterios</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="introducción-a-tidyverse.html#cb57-1"></a>flights <span class="op">%&gt;%</span></span>
 <span id="cb57-2"><a href="introducción-a-tidyverse.html#cb57-2"></a><span class="st">  </span><span class="kw">group_by</span>(year, month, day) <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -764,21 +807,21 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <span id="cb57-4"><a href="introducción-a-tidyverse.html#cb57-4"></a>    <span class="dt">avg_delay1 =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),</span>
 <span id="cb57-5"><a href="introducción-a-tidyverse.html#cb57-5"></a>    <span class="dt">avg_delay2 =</span> <span class="kw">mean</span>(arr_delay[arr_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>], <span class="dt">na.rm=</span><span class="ot">TRUE</span>) </span>
 <span id="cb57-6"><a href="introducción-a-tidyverse.html#cb57-6"></a>  )</span></code></pre></div>
-<pre><code>## # A tibble: 365 x 5
-## # Groups:   year, month [12]
-##     year month   day avg_delay1 avg_delay2
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1  2013     1     1     12.7         32.5
-##  2  2013     1     2     12.7         32.0
-##  3  2013     1     3      5.73        27.7
-##  4  2013     1     4     -1.93        28.3
-##  5  2013     1     5     -1.53        22.6
-##  6  2013     1     6      4.24        24.4
-##  7  2013     1     7     -4.95        27.8
-##  8  2013     1     8     -3.23        20.8
-##  9  2013     1     9     -0.264       25.6
-## 10  2013     1    10     -5.90        27.3
-## # ... with 355 more rows</code></pre>
+<pre><code># A tibble: 365 x 5
+# Groups:   year, month [12]
+    year month   day avg_delay1 avg_delay2
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+ 1  2013     1     1     12.7         32.5
+ 2  2013     1     2     12.7         32.0
+ 3  2013     1     3      5.73        27.7
+ 4  2013     1     4     -1.93        28.3
+ 5  2013     1     5     -1.53        22.6
+ 6  2013     1     6      4.24        24.4
+ 7  2013     1     7     -4.95        27.8
+ 8  2013     1     8     -3.23        20.8
+ 9  2013     1     9     -0.264       25.6
+10  2013     1    10     -5.90        27.3
+# ... with 355 more rows</code></pre>
 <p>Existen otras funciones útiles por las que nos podría interesar agrupar</p>
 <ul>
 <li><code>count()</code></li>
@@ -809,20 +852,20 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <span id="cb59-6"><a href="introducción-a-tidyverse.html#cb59-6"></a>)</span>
 <span id="cb59-7"><a href="introducción-a-tidyverse.html#cb59-7"></a>delay &lt;-<span class="st"> </span><span class="kw">filter</span>(delay, count <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>, dest <span class="op">!=</span><span class="st"> &quot;HNL&quot;</span>)</span>
 <span id="cb59-8"><a href="introducción-a-tidyverse.html#cb59-8"></a>delay</span></code></pre></div>
-<pre><code>## # A tibble: 96 x 4
-##    dest  count  dist delay
-##    &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 ABQ     254 1826   4.38
-##  2 ACK     265  199   4.85
-##  3 ALB     439  143  14.4 
-##  4 ATL   17215  757. 11.3 
-##  5 AUS    2439 1514.  6.02
-##  6 AVL     275  584.  8.00
-##  7 BDL     443  116   7.05
-##  8 BGR     375  378   8.03
-##  9 BHM     297  866. 16.9 
-## 10 BNA    6333  758. 11.8 
-## # ... with 86 more rows</code></pre>
+<pre><code># A tibble: 96 x 4
+   dest  count  dist delay
+   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 ABQ     254 1826   4.38
+ 2 ACK     265  199   4.85
+ 3 ALB     439  143  14.4 
+ 4 ATL   17215  757. 11.3 
+ 5 AUS    2439 1514.  6.02
+ 6 AVL     275  584.  8.00
+ 7 BDL     443  116   7.05
+ 8 BGR     375  378   8.03
+ 9 BHM     297  866. 16.9 
+10 BNA    6333  758. 11.8 
+# ... with 86 more rows</code></pre>
 <p>Y podríamos tener un gráfico de la siguiente forma (veremos cómo hacer esto en la siguiente sesión)</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="introducción-a-tidyverse.html#cb61-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> delay, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> dist, <span class="dt">y =</span> delay)) <span class="op">+</span></span>
 <span id="cb61-2"><a href="introducción-a-tidyverse.html#cb61-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">size =</span> count), <span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>) <span class="op">+</span></span>
@@ -838,20 +881,20 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <span id="cb62-7"><a href="introducción-a-tidyverse.html#cb62-7"></a>  ) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb62-8"><a href="introducción-a-tidyverse.html#cb62-8"></a><span class="st">  </span><span class="kw">filter</span>(count <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>, dest <span class="op">!=</span><span class="st"> &quot;HNL&quot;</span>)</span>
 <span id="cb62-9"><a href="introducción-a-tidyverse.html#cb62-9"></a>delays</span></code></pre></div>
-<pre><code>## # A tibble: 96 x 4
-##    dest  count  dist delay
-##    &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 ABQ     254 1826   4.38
-##  2 ACK     265  199   4.85
-##  3 ALB     439  143  14.4 
-##  4 ATL   17215  757. 11.3 
-##  5 AUS    2439 1514.  6.02
-##  6 AVL     275  584.  8.00
-##  7 BDL     443  116   7.05
-##  8 BGR     375  378   8.03
-##  9 BHM     297  866. 16.9 
-## 10 BNA    6333  758. 11.8 
-## # ... with 86 more rows</code></pre>
+<pre><code># A tibble: 96 x 4
+   dest  count  dist delay
+   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 ABQ     254 1826   4.38
+ 2 ACK     265  199   4.85
+ 3 ALB     439  143  14.4 
+ 4 ATL   17215  757. 11.3 
+ 5 AUS    2439 1514.  6.02
+ 6 AVL     275  584.  8.00
+ 7 BDL     443  116   7.05
+ 8 BGR     375  378   8.03
+ 9 BHM     297  866. 16.9 
+10 BNA    6333  758. 11.8 
+# ... with 86 more rows</code></pre>
 </div>
 <div id="ejercicios-manejo-de-datos" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Ejercicios (manejo de datos)</h2>
@@ -911,12 +954,12 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <p><strong>ggplot(datos, aes()) + geom_tipo()</strong></p>
 <p>Por ejemplo para hacer una gráfica que represente las millas por galón (mpg) en función del peso del coche, podemos hacer los siguiente:</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="introducción-a-tidyverse.html#cb64-1"></a>mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>]</span></code></pre></div>
-<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0</code></pre>
+<pre><code>                   mpg cyl disp  hp drat    wt  qsec vs
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0</code></pre>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="introducción-a-tidyverse.html#cb66-1"></a><span class="kw">ggplot</span>(mtcars) <span class="op">+</span><span class="st">         </span><span class="co"># data</span></span>
 <span id="cb66-2"><a href="introducción-a-tidyverse.html#cb66-2"></a><span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> mpg, <span class="dt">y=</span>wt) <span class="op">+</span><span class="st">   </span><span class="co"># Aesthetics</span></span>
 <span id="cb66-3"><a href="introducción-a-tidyverse.html#cb66-3"></a><span class="st">  </span><span class="kw">geom_point</span>()           <span class="co"># geometry (layer)  </span></span></code></pre></div>
@@ -943,29 +986,29 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <h3><span class="header-section-number">2.7.1</span> Distribución de datos categóricos</h3>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="introducción-a-tidyverse.html#cb69-1"></a><span class="kw">library</span>(tidyverse)</span>
 <span id="cb69-2"><a href="introducción-a-tidyverse.html#cb69-2"></a>diamonds</span></code></pre></div>
-<pre><code>## # A tibble: 53,940 x 10
-##    carat cut       color clarity depth table price     x     y     z
-##    &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
-##  2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
-##  3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31
-##  4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
-##  5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75
-##  6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
-##  7 0.24  Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
-##  8 0.26  Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
-##  9 0.22  Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
-## 10 0.23  Very Good H     VS1      59.4    61   338  4     4.05  2.39
-## # ... with 53,930 more rows</code></pre>
+<pre><code># A tibble: 53,940 x 10
+   carat cut       color clarity depth table price     x     y     z
+   &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+ 2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+ 3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+ 4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+ 5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+ 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+ 7 0.24  Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
+ 8 0.26  Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
+ 9 0.22  Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
+10 0.23  Very Good H     VS1      59.4    61   338  4     4.05  2.39
+# ... with 53,930 more rows</code></pre>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="introducción-a-tidyverse.html#cb71-1"></a><span class="kw">count</span>(diamonds, cut)</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 2
-##   cut           n
-##   &lt;ord&gt;     &lt;int&gt;
-## 1 Fair       1610
-## 2 Good       4906
-## 3 Very Good 12082
-## 4 Premium   13791
-## 5 Ideal     21551</code></pre>
+<pre><code># A tibble: 5 x 2
+  cut           n
+  &lt;ord&gt;     &lt;int&gt;
+1 Fair       1610
+2 Good       4906
+3 Very Good 12082
+4 Premium   13791
+5 Ideal     21551</code></pre>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="introducción-a-tidyverse.html#cb73-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds)</span></code></pre></div>
 <p><img src="fig/empty-1.png" width="672" /></p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="introducción-a-tidyverse.html#cb74-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span></span>
@@ -1027,20 +1070,20 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <p>Otra aproximación sería contar cuántos hay en una categoría con <code>dplyr</code>:</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="introducción-a-tidyverse.html#cb83-1"></a>diamonds <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb83-2"><a href="introducción-a-tidyverse.html#cb83-2"></a><span class="st">  </span><span class="kw">count</span>(color, cut)</span></code></pre></div>
-<pre><code>## # A tibble: 35 x 3
-##    color cut           n
-##    &lt;ord&gt; &lt;ord&gt;     &lt;int&gt;
-##  1 D     Fair        163
-##  2 D     Good        662
-##  3 D     Very Good  1513
-##  4 D     Premium    1603
-##  5 D     Ideal      2834
-##  6 E     Fair        224
-##  7 E     Good        933
-##  8 E     Very Good  2400
-##  9 E     Premium    2337
-## 10 E     Ideal      3903
-## # ... with 25 more rows</code></pre>
+<pre><code># A tibble: 35 x 3
+   color cut           n
+   &lt;ord&gt; &lt;ord&gt;     &lt;int&gt;
+ 1 D     Fair        163
+ 2 D     Good        662
+ 3 D     Very Good  1513
+ 4 D     Premium    1603
+ 5 D     Ideal      2834
+ 6 E     Fair        224
+ 7 E     Good        933
+ 8 E     Very Good  2400
+ 9 E     Premium    2337
+10 E     Ideal      3903
+# ... with 25 more rows</code></pre>
 <p>y luego visualizarlo con <code>geom_tile()</code> que nos daría un gráfico tipo heatmap</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="introducción-a-tidyverse.html#cb85-1"></a>diamonds <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb85-2"><a href="introducción-a-tidyverse.html#cb85-2"></a><span class="st">  </span><span class="kw">count</span>(color, cut) <span class="op">%&gt;%</span><span class="st">  </span></span>
@@ -1080,20 +1123,20 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <p>R tiene unas capacidades gráficas excelentes, pero el uso de <code>ggplot</code> hace que éstas sean aún más espectaculares. Imaginemos que queremos comparar la expresión génica según la tasa de crecimiento en 20 genes y seis condiciones<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="introducción-a-tidyverse.html#cb90-1"></a><span class="kw">load</span>(<span class="st">&quot;data/genes.Rdata&quot;</span>)</span>
 <span id="cb90-2"><a href="introducción-a-tidyverse.html#cb90-2"></a>genes</span></code></pre></div>
-<pre><code>## # A tibble: 711 x 7
-##    name    BP                              MF                                         systematic_name nutrient  rate expression
-##    &lt;chr&gt;   &lt;chr&gt;                           &lt;chr&gt;                                      &lt;chr&gt;           &lt;chr&gt;    &lt;dbl&gt;      &lt;dbl&gt;
-##  1 &quot;SUL1&quot;  sulfate transport               sulfate transporter activity               YBR294W         Glucose   0.05     -0.32 
-##  2 &quot;&quot;      biological process unknown      molecular function unknown                 YKL187C         Glucose   0.05      4.13 
-##  3 &quot;QDR2&quot;  multidrug transport             multidrug efflux pump activity             YIL121W         Glucose   0.05      1.07 
-##  4 &quot;LEU1&quot;  leucine biosynthesis            3-isopropylmalate dehydratase activity     YGL009C         Glucose   0.05     -1.12 
-##  5 &quot;PHO5&quot;  phosphate metabolism*           acid phosphatase activity                  YBR093C         Glucose   0.05      2.39 
-##  6 &quot;PHO12&quot; biological process unknown      acid phosphatase activity                  YHR215W         Glucose   0.05      0.9  
-##  7 &quot;PHO11&quot; phosphate metabolism            acid phosphatase activity                  YAR071W         Glucose   0.05      1.14 
-##  8 &quot;GIT1&quot;  glycerophosphodiester transport glycerophosphodiester transporter activity YCR098C         Glucose   0.05      0.77 
-##  9 &quot;AGP3&quot;  amino acid transport            amino acid transporter activity            YFL055W         Glucose   0.05      0.570
-## 10 &quot;&quot;      biological process unknown      molecular function unknown                 YOL164W         Glucose   0.05      0.53 
-## # ... with 701 more rows</code></pre>
+<pre><code># A tibble: 711 x 7
+   name   BP       MF         systematic_name nutrient  rate expression
+   &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+ 1 &quot;SUL1&quot; sulfate~ sulfate t~ YBR294W         Glucose   0.05     -0.32 
+ 2 &quot;&quot;     biologi~ molecular~ YKL187C         Glucose   0.05      4.13 
+ 3 &quot;QDR2&quot; multidr~ multidrug~ YIL121W         Glucose   0.05      1.07 
+ 4 &quot;LEU1&quot; leucine~ 3-isoprop~ YGL009C         Glucose   0.05     -1.12 
+ 5 &quot;PHO5&quot; phospha~ acid phos~ YBR093C         Glucose   0.05      2.39 
+ 6 &quot;PHO1~ biologi~ acid phos~ YHR215W         Glucose   0.05      0.9  
+ 7 &quot;PHO1~ phospha~ acid phos~ YAR071W         Glucose   0.05      1.14 
+ 8 &quot;GIT1&quot; glycero~ glyceroph~ YCR098C         Glucose   0.05      0.77 
+ 9 &quot;AGP3&quot; amino a~ amino aci~ YFL055W         Glucose   0.05      0.570
+10 &quot;&quot;     biologi~ molecular~ YOL164W         Glucose   0.05      0.53 
+# ... with 701 more rows</code></pre>
 <p>Este tendría que ser el (largo) código para hacer este gráfico usando funciones básicas de R (el aspecto del gráfico es mejorable y la sintaxis de R ilegible)</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="introducción-a-tidyverse.html#cb92-1"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">1.5</span>))</span>
 <span id="cb92-2"><a href="introducción-a-tidyverse.html#cb92-2"></a></span>
@@ -1134,13 +1177,13 @@ NOTA 2: El <code>rownames</code> desaparece</p>
 <p><em>Faceting</em> es el proceso que en el dividimos la ventana del gráfico en varias partes pequeñas (una cuadrícula) y muestra un gráfico similar en cada sección. Cada sección generalmente muestra el mismo gráfico para un grupo específico del conjunto de datos. Aquí podemos ver cómo llevar a cabo este tipo de gráficos. Utilizaremos una base de datos sobre propinas</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="introducción-a-tidyverse.html#cb94-1"></a><span class="kw">data</span>(tips, <span class="dt">package=</span><span class="st">&quot;reshape2&quot;</span>)</span>
 <span id="cb94-2"><a href="introducción-a-tidyverse.html#cb94-2"></a><span class="kw">head</span>(tips)</span></code></pre></div>
-<pre><code>##   total_bill  tip    sex smoker day   time size
-## 1      16.99 1.01 Female     No Sun Dinner    2
-## 2      10.34 1.66   Male     No Sun Dinner    3
-## 3      21.01 3.50   Male     No Sun Dinner    3
-## 4      23.68 3.31   Male     No Sun Dinner    2
-## 5      24.59 3.61 Female     No Sun Dinner    4
-## 6      25.29 4.71   Male     No Sun Dinner    4</code></pre>
+<pre><code>  total_bill  tip    sex smoker day   time size
+1      16.99 1.01 Female     No Sun Dinner    2
+2      10.34 1.66   Male     No Sun Dinner    3
+3      21.01 3.50   Male     No Sun Dinner    3
+4      23.68 3.31   Male     No Sun Dinner    2
+5      24.59 3.61 Female     No Sun Dinner    4
+6      25.29 4.71   Male     No Sun Dinner    4</code></pre>
 <p>Imaginemos que queremos representar qué propinas se dan en función del total de la cuenta</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="introducción-a-tidyverse.html#cb96-1"></a>sp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(tips, <span class="kw">aes</span>(<span class="dt">x=</span>total_bill, <span class="dt">y=</span>tip<span class="op">/</span>total_bill)) <span class="op">+</span></span>
 <span id="cb96-2"><a href="introducción-a-tidyverse.html#cb96-2"></a><span class="st">  </span><span class="kw">geom_point</span>()</span>

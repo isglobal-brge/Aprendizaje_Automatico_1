@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-10-19" />
+<meta name="date" content="2020-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -252,6 +252,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>7.4</b> Example: Linear regression for Big Data</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="la-librería-caret.html"><a href="la-librería-caret.html"><i class="fa fa-check"></i><b>8</b> La librería <code>caret</code></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="la-librería-caret.html"><a href="la-librería-caret.html#pre-procesado"><i class="fa fa-check"></i><b>8.1</b> Pre-procesado</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="la-librería-caret.html"><a href="la-librería-caret.html#creación-de-variables"><i class="fa fa-check"></i><b>8.1.1</b> Creación de variables</a></li>
+<li class="chapter" data-level="8.1.2" data-path="la-librería-caret.html"><a href="la-librería-caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>8.1.2</b> Predictores con poca variabilidad</a></li>
+<li class="chapter" data-level="8.1.3" data-path="la-librería-caret.html"><a href="la-librería-caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>8.1.3</b> Identificación de predictores correlacionados</a></li>
+<li class="chapter" data-level="8.1.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#centrado-y-escalado"><i class="fa fa-check"></i><b>8.1.4</b> Centrado y escalado</a></li>
+<li class="chapter" data-level="8.1.5" data-path="la-librería-caret.html"><a href="la-librería-caret.html#imputación"><i class="fa fa-check"></i><b>8.1.5</b> Imputación</a></li>
+<li class="chapter" data-level="8.1.6" data-path="la-librería-caret.html"><a href="la-librería-caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>8.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="la-librería-caret.html"><a href="la-librería-caret.html#visualización"><i class="fa fa-check"></i><b>8.2</b> Visualización</a></li>
+<li class="chapter" data-level="8.3" data-path="la-librería-caret.html"><a href="la-librería-caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>8.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
+<li class="chapter" data-level="8.4" data-path="la-librería-caret.html"><a href="la-librería-caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>8.4</b> Creación de un modelo predictivo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="k-vecinos-más-próximos-knn.html"><a href="k-vecinos-más-próximos-knn.html"><i class="fa fa-check"></i><b>9</b> K vecinos más próximos (KNN)</a></li>
+<li class="chapter" data-level="10" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>10</b> Análisis discriminante lineal (LDA)</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -325,91 +342,100 @@ donde <span class="math inline">\(\ln(L_{c})\)</span> es el logaritmo de la prob
 <div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="ajuste-de-modelos.html#cb252-1"></a><span class="kw">library</span>(ISLR)</span>
 <span id="cb252-2"><a href="ajuste-de-modelos.html#cb252-2"></a><span class="kw">data</span>(Hitters)</span>
 <span id="cb252-3"><a href="ajuste-de-modelos.html#cb252-3"></a><span class="kw">display</span>(null &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> Hitters))</span></code></pre></div>
-<pre><code>## lm(formula = Salary ~ 1, data = Hitters)
-##             coef.est coef.se
-## (Intercept) 535.93    27.82 
-## ---
-## n = 263, k = 1
-## residual sd = 451.12, R-Squared = 0.00</code></pre>
+<pre><code>lm(formula = Salary ~ 1, data = Hitters)
+            coef.est coef.se
+(Intercept) 535.93    27.82 
+---
+n = 263, k = 1
+residual sd = 451.12, R-Squared = 0.00</code></pre>
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="ajuste-de-modelos.html#cb254-1"></a><span class="kw">round</span>(<span class="kw">mean</span>(Hitters<span class="op">$</span>Salary, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),<span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 535.93</code></pre>
+<pre><code>[1] 535.93</code></pre>
 <p>Un modelo nulo consiste solo en una intersección, cuyo coeficiente, como podemos ver, es solo la media de Salario. La pregunta clave es si a medida que hacemos un modelo más complejo esa complejidad está justificada. Es decir, si agregar predictores no solo reduce el sesgo sino que lo hace sin aumentar indebidamente la varianza. Veámos qué ocurre si agreguamos más predictores.</p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="ajuste-de-modelos.html#cb256-1"></a><span class="kw">library</span>(lmtest)</span>
 <span id="cb256-2"><a href="ajuste-de-modelos.html#cb256-2"></a><span class="kw">display</span>(h1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>Hits, <span class="dt">data =</span> Hitters))</span></code></pre></div>
-<pre><code>## lm(formula = Salary ~ Hits, data = Hitters)
-##             coef.est coef.se
-## (Intercept) 63.05    64.98  
-## Hits         4.39     0.56  
-## ---
-## n = 263, k = 2
-## residual sd = 406.17, R-Squared = 0.19</code></pre>
+<pre><code>lm(formula = Salary ~ Hits, data = Hitters)
+            coef.est coef.se
+(Intercept) 63.05    64.98  
+Hits         4.39     0.56  
+---
+n = 263, k = 2
+residual sd = 406.17, R-Squared = 0.19</code></pre>
 <div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="ajuste-de-modelos.html#cb258-1"></a><span class="kw">lrtest</span>(null, h1)</span></code></pre></div>
-<pre><code>## 
-## Model 1: Salary ~ 1
-## Model 2: Salary ~ Hits
-## 
-## L.R. Chisq       d.f.          P 
-##         NA          1         NA</code></pre>
+<pre><code>Likelihood ratio test
+
+Model 1: Salary ~ 1
+Model 2: Salary ~ Hits
+  #Df  LogLik Df  Chisq Pr(&gt;Chisq)    
+1   2 -1980.1                         
+2   3 -1952.0  1 56.212  6.508e-14 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="ajuste-de-modelos.html#cb260-1"></a><span class="kw">anova</span>(null, h1)</span></code></pre></div>
-<pre><code>## Analysis of Variance Table
-## 
-## Model 1: Salary ~ 1
-## Model 2: Salary ~ Hits
-##   Res.Df      RSS Df Sum of Sq      F    Pr(&gt;F)    
-## 1    262 53319113                                  
-## 2    261 43058621  1  10260491 62.194 8.531e-14 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre><code>Analysis of Variance Table
+
+Model 1: Salary ~ 1
+Model 2: Salary ~ Hits
+  Res.Df      RSS Df Sum of Sq      F    Pr(&gt;F)    
+1    262 53319113                                  
+2    261 43058621  1  10260491 62.194 8.531e-14 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="ajuste-de-modelos.html#cb262-1"></a><span class="kw">as.matrix</span>(<span class="kw">AIC</span>(null, h1))</span></code></pre></div>
-<pre><code>##      df      AIC
-## null  2 3964.130
-## h1    3 3909.918</code></pre>
+<pre><code>     df      AIC
+null  2 3964.130
+h1    3 3909.918</code></pre>
 <p>La variable Hits es estadísticamente significativ, ya que el IC del 95% no incluye 0 (4,39 <span class="math inline">\(\pm\)</span> 2 x 0,56) (o el p-valor del test de Score es <span class="math inline">\(&lt;0.05\)</span>). Estos tres métodos coinciden en que el modelo con Hits es una mejora con respecto al modelo nulo. En el caso de <code>lrtest ()</code> y <code>anova ()</code>, el p-valor representa los resultados de una prueba estadística (prueba chi-cuadrado y prueba F, respectivamente) para determinar si el segundo modelo más complejo es un mejor ajuste a los datos. ¿Agregar un predictor adicional, AtBat, mejora aún más el modelo?</p>
 <div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="ajuste-de-modelos.html#cb264-1"></a><span class="kw">display</span>(h2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>Hits <span class="op">+</span><span class="st"> </span>AtBat, <span class="dt">data =</span> Hitters))</span></code></pre></div>
-<pre><code>## lm(formula = Salary ~ Hits + AtBat, data = Hitters)
-##             coef.est coef.se
-## (Intercept) 141.27    76.55 
-## Hits          8.21     2.08 
-## AtBat        -1.22     0.64 
-## ---
-## n = 263, k = 3
-## residual sd = 404.13, R-Squared = 0.20</code></pre>
+<pre><code>lm(formula = Salary ~ Hits + AtBat, data = Hitters)
+            coef.est coef.se
+(Intercept) 141.27    76.55 
+Hits          8.21     2.08 
+AtBat        -1.22     0.64 
+---
+n = 263, k = 3
+residual sd = 404.13, R-Squared = 0.20</code></pre>
 <div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="ajuste-de-modelos.html#cb266-1"></a><span class="kw">lrtest</span>(h1, h2)</span></code></pre></div>
-<pre><code>## 
-## Model 1: Salary ~ Hits
-## Model 2: Salary ~ Hits + AtBat
-## 
-## L.R. Chisq       d.f.          P 
-##         NA          1         NA</code></pre>
+<pre><code>Likelihood ratio test
+
+Model 1: Salary ~ Hits
+Model 2: Salary ~ Hits + AtBat
+  #Df  LogLik Df  Chisq Pr(&gt;Chisq)  
+1   3 -1952.0                       
+2   4 -1950.1  1 3.6588    0.05577 .
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="ajuste-de-modelos.html#cb268-1"></a><span class="kw">anova</span>(h1, h2)</span></code></pre></div>
-<pre><code>## Analysis of Variance Table
-## 
-## Model 1: Salary ~ Hits
-## Model 2: Salary ~ Hits + AtBat
-##   Res.Df      RSS Df Sum of Sq      F  Pr(&gt;F)  
-## 1    261 43058621                              
-## 2    260 42463750  1    594871 3.6423 0.05743 .
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre><code>Analysis of Variance Table
+
+Model 1: Salary ~ Hits
+Model 2: Salary ~ Hits + AtBat
+  Res.Df      RSS Df Sum of Sq      F  Pr(&gt;F)  
+1    261 43058621                              
+2    260 42463750  1    594871 3.6423 0.05743 .
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="ajuste-de-modelos.html#cb270-1"></a><span class="kw">as.matrix</span>(<span class="kw">AIC</span>(h1, h2))</span></code></pre></div>
-<pre><code>##    df      AIC
-## h1  3 3909.918
-## h2  4 3908.260</code></pre>
+<pre><code>   df      AIC
+h1  3 3909.918
+h2  4 3908.260</code></pre>
 <p>Los resultados son ambiguos. El <span class="math inline">\(R^2\)</span> aumenta, mientras que AIC, el logaritmo de la probabilidad y el RSS disminuyen, pero la disminución en los dos últimos casos no es estadísticamente significativa. (Este resultado es consistente con el hecho de que AtBat no es en sí mismo estadísticamente significativo, ya que el IC del 95% para AtBat incluye 0: -1.22 <span class="math inline">\(\pm\)</span> 2 x .64). ¿Deberíamos dejar AtBat en el modelo? No mejora mucho el ajuste, si es que lo hace, al tiempo que agrega complejidad. Entonces, deberíamos sacarlo. Desafortunadamente, estas opciones a menudo no son claras, razón por la cual el ajuste de modelos a veces parece más un arte que una ciencia.</p>
 <p>Para implementar el método de selección, seguiríamos agregando variables y comparando modelos usando <code>lrtest ()</code> o <code>anova ()</code> con el fin de encontrar el mejor ajuste posible. Sin embargo, un problema con este procedimiento es que el orden en el que recorremos los predictores afectará nuestras decisiones de selección porque el impacto de cada predictor en el ajuste del modelo depende de la presencia de los demás. Por ejemplo, supongamos que agregamos AtBat más adelante en el proceso de selección:</p>
 <div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="ajuste-de-modelos.html#cb272-1"></a>h3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>Hits <span class="op">+</span><span class="st"> </span>Years <span class="op">+</span><span class="st"> </span>HmRun <span class="op">+</span><span class="st"> </span>RBI <span class="op">+</span><span class="st"> </span>Walks <span class="op">+</span><span class="st"> </span>Assists, <span class="dt">data =</span> Hitters)</span>
 <span id="cb272-2"><a href="ajuste-de-modelos.html#cb272-2"></a>h4 &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>Hits <span class="op">+</span><span class="st"> </span>Years <span class="op">+</span><span class="st"> </span>HmRun <span class="op">+</span><span class="st"> </span>RBI <span class="op">+</span><span class="st"> </span>Walks <span class="op">+</span><span class="st"> </span>Assists <span class="op">+</span><span class="st"> </span>AtBat, <span class="dt">data =</span> Hitters)</span>
 <span id="cb272-3"><a href="ajuste-de-modelos.html#cb272-3"></a><span class="kw">lrtest</span>(h3, h4)</span></code></pre></div>
-<pre><code>## 
-## Model 1: Salary ~ Hits + Years + HmRun + RBI + Walks + Assists
-## Model 2: Salary ~ Hits + Years + HmRun + RBI + Walks + Assists + AtBat
-## 
-## L.R. Chisq       d.f.          P 
-##         NA          1         NA</code></pre>
+<pre><code>Likelihood ratio test
+
+Model 1: Salary ~ Hits + Years + HmRun + RBI + Walks + Assists
+Model 2: Salary ~ Hits + Years + HmRun + RBI + Walks + Assists + AtBat
+  #Df  LogLik Df  Chisq Pr(&gt;Chisq)    
+1   8 -1916.7                         
+2   9 -1911.1  1 11.114  0.0008569 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="ajuste-de-modelos.html#cb274-1"></a><span class="kw">as.matrix</span>(<span class="kw">AIC</span>(h3, h4))</span></code></pre></div>
-<pre><code>##    df      AIC
-## h3  8 3849.311
-## h4  9 3840.198</code></pre>
+<pre><code>   df      AIC
+h3  8 3849.311
+h4  9 3840.198</code></pre>
 <p>Ahora AtBat mejora claramente el ajuste, pero nunca lo hubiéramos descubierto si ya lo hubiéramos descartado. Esto es preocupante. ¿Existe una forma mejor de seleccionar variables? Quizás, veámoslo.</p>
 </div>
 <div id="métodos-de-selección-automática" class="section level2" number="5.4">
@@ -417,85 +443,85 @@ donde <span class="math inline">\(\ln(L_{c})\)</span> es el logaritmo de la prob
 <p>Se han desarrollado algoritmos para buscar en el espacio de modelos de manera eficiente el modelo óptimo. Sin embargo, desde el principio conviene tener cuidado con la selección automática de variables. <em>La elección de variables no debe ser un proceso mecánico.</em> Debemos, en cambio, buscar comprender el proceso de generación de datos. De hecho, el mayor beneficio de la selección manual por pasos consiste menos en producir un buen modelo que en la comprensión obtenida al ajustar muchos modelos y ver, mediante prueba y error, qué predictores son más reactivos con el resultado. Especialmente cuando se trata de descripción, los algoritmos de selección automática de variables son solo herramientas para explorar sus datos y pensar en modelos.</p>
 <p>La función <code>step ()</code> en R base automatiza la selección de variables paso a paso usando AIC.</p>
 <div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="ajuste-de-modelos.html#cb276-1"></a><span class="kw">display</span>(<span class="kw">step</span>(<span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters), <span class="dt">trace =</span> F, <span class="dt">direction =</span> <span class="st">&quot;forward&quot;</span>))</span></code></pre></div>
-<pre><code>## lm(formula = Salary ~ AtBat + Hits + HmRun + Runs + RBI + Walks + 
-##     Years + CAtBat + CHits + CHmRun + CRuns + CRBI + CWalks + 
-##     League + Division + PutOuts + Assists + Errors + NewLeague, 
-##     data = Hitters)
-##             coef.est coef.se
-## (Intercept)  163.10    90.78
-## AtBat         -1.98     0.63
-## Hits           7.50     2.38
-## HmRun          4.33     6.20
-## Runs          -2.38     2.98
-## RBI           -1.04     2.60
-## Walks          6.23     1.83
-## Years         -3.49    12.41
-## CAtBat        -0.17     0.14
-## CHits          0.13     0.67
-## CHmRun        -0.17     1.62
-## CRuns          1.45     0.75
-## CRBI           0.81     0.69
-## CWalks        -0.81     0.33
-## LeagueN       62.60    79.26
-## DivisionW   -116.85    40.37
-## PutOuts        0.28     0.08
-## Assists        0.37     0.22
-## Errors        -3.36     4.39
-## NewLeagueN   -24.76    79.00
-## ---
-## n = 263, k = 20
-## residual sd = 315.58, R-Squared = 0.55</code></pre>
+<pre><code>lm(formula = Salary ~ AtBat + Hits + HmRun + Runs + RBI + Walks + 
+    Years + CAtBat + CHits + CHmRun + CRuns + CRBI + CWalks + 
+    League + Division + PutOuts + Assists + Errors + NewLeague, 
+    data = Hitters)
+            coef.est coef.se
+(Intercept)  163.10    90.78
+AtBat         -1.98     0.63
+Hits           7.50     2.38
+HmRun          4.33     6.20
+Runs          -2.38     2.98
+RBI           -1.04     2.60
+Walks          6.23     1.83
+Years         -3.49    12.41
+CAtBat        -0.17     0.14
+CHits          0.13     0.67
+CHmRun        -0.17     1.62
+CRuns          1.45     0.75
+CRBI           0.81     0.69
+CWalks        -0.81     0.33
+LeagueN       62.60    79.26
+DivisionW   -116.85    40.37
+PutOuts        0.28     0.08
+Assists        0.37     0.22
+Errors        -3.36     4.39
+NewLeagueN   -24.76    79.00
+---
+n = 263, k = 20
+residual sd = 315.58, R-Squared = 0.55</code></pre>
 <p>La selección hacia adelante se estableció en 19 predictores con un <span class="math inline">\(R^2\)</span> de .55.</p>
 <div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="ajuste-de-modelos.html#cb278-1"></a><span class="kw">display</span>(<span class="kw">step</span>(<span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters), <span class="dt">trace =</span> F, <span class="dt">direction =</span> <span class="st">&quot;backward&quot;</span>))</span></code></pre></div>
-<pre><code>## lm(formula = Salary ~ AtBat + Hits + Walks + CAtBat + CRuns + 
-##     CRBI + CWalks + Division + PutOuts + Assists, data = Hitters)
-##             coef.est coef.se
-## (Intercept)  162.54    66.91
-## AtBat         -2.17     0.54
-## Hits           6.92     1.65
-## Walks          5.77     1.58
-## CAtBat        -0.13     0.06
-## CRuns          1.41     0.39
-## CRBI           0.77     0.21
-## CWalks        -0.83     0.26
-## DivisionW   -112.38    39.21
-## PutOuts        0.30     0.07
-## Assists        0.28     0.16
-## ---
-## n = 263, k = 11
-## residual sd = 311.81, R-Squared = 0.54</code></pre>
+<pre><code>lm(formula = Salary ~ AtBat + Hits + Walks + CAtBat + CRuns + 
+    CRBI + CWalks + Division + PutOuts + Assists, data = Hitters)
+            coef.est coef.se
+(Intercept)  162.54    66.91
+AtBat         -2.17     0.54
+Hits           6.92     1.65
+Walks          5.77     1.58
+CAtBat        -0.13     0.06
+CRuns          1.41     0.39
+CRBI           0.77     0.21
+CWalks        -0.83     0.26
+DivisionW   -112.38    39.21
+PutOuts        0.30     0.07
+Assists        0.28     0.16
+---
+n = 263, k = 11
+residual sd = 311.81, R-Squared = 0.54</code></pre>
 <p>La selección hacia detrás se estableció en 10 predictores con un <span class="math inline">\(R^2\)</span> de .54. Con muchas menos variables, somos capaces de explicar prácticamente la misma variabilidad.</p>
 <p>La función <code>regsubsets ()</code> en el paquete <code>leaps</code> realiza una búsqueda exhaustiva del espacio modelo utilizando el algoritmo de saltos (adelante y atrás) para la selección de variables.</p>
 <div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="ajuste-de-modelos.html#cb280-1"></a><span class="kw">library</span>(leaps)</span>
 <span id="cb280-2"><a href="ajuste-de-modelos.html#cb280-2"></a><span class="kw">plot</span>(<span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters, <span class="dt">method =</span> <span class="st">&quot;exhaustive&quot;</span>, <span class="dt">nbest =</span> <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-92-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-77-1.png" width="672" /></p>
 <p>El gráfico presenta diferentes modelos que pueden ser buenos candidatos organizados según el BIC (<span class="math inline">\(\mathrm{BIC} = {\ln(n) k - 2 \ ln ({L})}\)</span>, donde <span class="math inline">\(L\)</span> es el valor de máxima verosimilitud, <span class="math inline">\(n\)</span> es el número de observaciones, <span class="math inline">\(k\)</span> es el número de parámetros y <span class="math inline">\(ln\)</span> es el logaritmo natural). Como el AIC, el BIC penaliza por la complejidad del modelo. Un BIC más bajo es mejor. El modelo con el BIC más bajo es el bastante simple en la parte superior de la figura: <em>intercept</em>, AtBat, Hits, Walks, CRBI, DivisionW y PutOuts. Si reajustamos un modelo con estos predictores usando <code>lm ()</code> encontramos que tiene un <span class="math inline">\(R^2\)</span> de .51, que tampoco está muy lejos del valor obtenido con un método hacia adelante y con muchísimas menos variables (principio de parsimonia). Notemos que, además, todos los coefecientes de este modelo (a excepción del <em>intercept</em>, pero que es necesario introducir) son estadísticamente significativos según el test de score:</p>
 <div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="ajuste-de-modelos.html#cb281-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>AtBat <span class="op">+</span><span class="st"> </span>Hits <span class="op">+</span><span class="st"> </span>Walks <span class="op">+</span><span class="st"> </span>CRBI <span class="op">+</span><span class="st"> </span>Division <span class="op">+</span><span class="st"> </span>PutOuts, <span class="dt">data =</span> Hitters))</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = Salary ~ AtBat + Hits + Walks + CRBI + Division + 
-##     PutOuts, data = Hitters)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -873.11 -181.72  -25.91  141.77 2040.47 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   91.51180   65.00006   1.408 0.160382    
-## AtBat         -1.86859    0.52742  -3.543 0.000470 ***
-## Hits           7.60440    1.66254   4.574 7.46e-06 ***
-## Walks          3.69765    1.21036   3.055 0.002488 ** 
-## CRBI           0.64302    0.06443   9.979  &lt; 2e-16 ***
-## DivisionW   -122.95153   39.82029  -3.088 0.002239 ** 
-## PutOuts        0.26431    0.07477   3.535 0.000484 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 319.9 on 256 degrees of freedom
-##   (59 observations deleted due to missingness)
-## Multiple R-squared:  0.5087,	Adjusted R-squared:  0.4972 
-## F-statistic: 44.18 on 6 and 256 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>
+Call:
+lm(formula = Salary ~ AtBat + Hits + Walks + CRBI + Division + 
+    PutOuts, data = Hitters)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-873.11 -181.72  -25.91  141.77 2040.47 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   91.51180   65.00006   1.408 0.160382    
+AtBat         -1.86859    0.52742  -3.543 0.000470 ***
+Hits           7.60440    1.66254   4.574 7.46e-06 ***
+Walks          3.69765    1.21036   3.055 0.002488 ** 
+CRBI           0.64302    0.06443   9.979  &lt; 2e-16 ***
+DivisionW   -122.95153   39.82029  -3.088 0.002239 ** 
+PutOuts        0.26431    0.07477   3.535 0.000484 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 319.9 on 256 degrees of freedom
+  (59 observations deleted due to missingness)
+Multiple R-squared:  0.5087,	Adjusted R-squared:  0.4972 
+F-statistic: 44.18 on 6 and 256 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code>**IMPORTANTE:** ¿Es este modelo realmente mejor? El algoritmo hizo una búsqueda exhaustiva del espacio de modelos y, sin embargo, arrojó un modelo con $R^2$ un poco más bajo. ¿Cómo podría ser mejor? (probablemente lo sea). Si bien el sesgo en este modelo será mayor que en el modelo más grande seleccionado por la función `step ()`, la varianza probablemente sea menor. Recuerde: el sesgo se refiere al rendimiento del modelo dentro de la muestra y la varianza se refiere al rendimiento del modelo fuera de la muestra: cómo se comporta el modelo cuando encuentra nuevos datos. Si el modelo tiene un rendimiento deficiente en datos nuevos, con una gran discrepancia entre el rendimiento dentro y fuera de la muestra, entonces está sobreajustado. AIC, BIC y $R^2$ ajustado penalizan por la complejidad del modelo para evitar el sobreajuste y tenderán a seleccionar modelos con mayor sesgo y menor varianza.</code></pre>
 </div>
 <div id="validación-cruzada" class="section level2" number="5.5">
@@ -537,11 +563,11 @@ donde <span class="math inline">\(\ln(L_{c})\)</span> es el logaritmo de la prob
 <span id="cb286-7"><a href="ajuste-de-modelos.html#cb286-7"></a>                               <span class="kw">rmse</span>(<span class="kw">predict</span>(full_model, <span class="dt">newdata =</span> test), test<span class="op">$</span>Salary), </span>
 <span id="cb286-8"><a href="ajuste-de-modelos.html#cb286-8"></a>                               <span class="kw">rmse</span>(<span class="kw">predict</span>(select_model, <span class="dt">newdata =</span> test), test<span class="op">$</span>Salary)),<span class="dv">1</span>))</span>
 <span id="cb286-9"><a href="ajuste-de-modelos.html#cb286-9"></a>results</span></code></pre></div>
-<pre><code>##                                       Model  RMSE
-## 1     Modelo completo muestra entrenamiento 297.8
-## 2 Modelo seleccionado muestra entrenamiento 326.1
-## 3        Modelo completo muestra validación 368.2
-## 4    Modelo seleccionado muestra validación 306.4</code></pre>
+<pre><code>                                      Model  RMSE
+1     Modelo completo muestra entrenamiento 297.8
+2 Modelo seleccionado muestra entrenamiento 326.1
+3        Modelo completo muestra validación 368.2
+4    Modelo seleccionado muestra validación 306.4</code></pre>
 <p>Podemos ver que el modelo completo está sobreajustado — el RMSE dentro de la muestra es mejor que el RMSE fuera de muestra — mientras que el modelo seleccionado elegido por <code>regsubsets ()</code> usando BIC no está sobreajustado. De hecho, el modelo seleccionado funciona mucho mejor fuera de la muestra que dentro de la muestra, aunque este resultado en particular es probablemente una cuestión de azar, una función de división aleatoria que estamos usando. Sin embargo, en general, estos resultados ilustran el peligro de la complejidad del modelo y por qué tiene sentido elegir predictores utilizando medidas de ajuste del modelo que penalicen la complejidad. Los modelos simples tienden a generalizar mejor. Esta figura muestra estas relaciones:</p>
 <div class="figure">
 <img src="figures/overfit.png" alt="" />
@@ -675,44 +701,44 @@ y</p>
 <span id="cb288-6"><a href="ajuste-de-modelos.html#cb288-6"></a>carseats_missx &lt;-<span class="st"> </span><span class="kw">prodNA</span>(Carseats[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">noNA=</span>.<span class="dv">25</span>)</span>
 <span id="cb288-7"><a href="ajuste-de-modelos.html#cb288-7"></a>carseats_miss &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">Sales=</span>Carseats[, <span class="dv">1</span>], carseats_missx)</span>
 <span id="cb288-8"><a href="ajuste-de-modelos.html#cb288-8"></a><span class="kw">glimpse</span>(carseats_miss)</span></code></pre></div>
-<pre><code>## Rows: 400
-## Columns: 11
-## $ Sales       &lt;dbl&gt; 9.50, 11.22, 10.06, 7.40, 4.15, 10.81, 6.63,...
-## $ CompPrice   &lt;dbl&gt; 138, 111, 113, 117, 141, 124, 115, NA, NA, N...
-## $ Income      &lt;dbl&gt; 73, 48, 35, 100, 64, 113, NA, 81, 110, 113, ...
-## $ Advertising &lt;dbl&gt; 11, 16, NA, 4, 3, 13, NA, 15, 0, 0, 9, 4, 2,...
-## $ Population  &lt;dbl&gt; 276, 260, 269, NA, 340, 501, 45, 425, 108, 1...
-## $ Price       &lt;dbl&gt; 120, NA, NA, 97, 128, 72, 108, 120, NA, 124,...
-## $ ShelveLoc   &lt;fct&gt; Bad, NA, Good, NA, Bad, Bad, Good, NA, Good,...
-## $ Age         &lt;dbl&gt; 42, 65, NA, 55, 38, NA, 71, 67, 76, 76, 26, ...
-## $ Education   &lt;dbl&gt; NA, 10, 12, NA, 13, 16, 15, 10, 10, 17, 10, ...
-## $ Urban       &lt;fct&gt; NA, Yes, Yes, Yes, Yes, NA, NA, Yes, No, NA,...
-## $ US          &lt;fct&gt; Yes, Yes, Yes, Yes, No, Yes, No, Yes, NA, Ye...</code></pre>
+<pre><code>Rows: 400
+Columns: 11
+$ Sales       &lt;dbl&gt; 9.50, 11.22, 10.06, 7.40, 4.15, 10.81, 6.63, 1...
+$ CompPrice   &lt;dbl&gt; 138, 111, 113, 117, 141, 124, 115, NA, NA, NA,...
+$ Income      &lt;dbl&gt; 73, 48, 35, 100, 64, 113, NA, 81, 110, 113, 78...
+$ Advertising &lt;dbl&gt; 11, 16, NA, 4, 3, 13, NA, 15, 0, 0, 9, 4, 2, N...
+$ Population  &lt;dbl&gt; 276, 260, 269, NA, 340, 501, 45, 425, 108, 131...
+$ Price       &lt;dbl&gt; 120, NA, NA, 97, 128, 72, 108, 120, NA, 124, 1...
+$ ShelveLoc   &lt;fct&gt; Bad, NA, Good, NA, Bad, Bad, Good, NA, Good, G...
+$ Age         &lt;dbl&gt; 42, 65, NA, 55, 38, NA, 71, 67, 76, 76, 26, 50...
+$ Education   &lt;dbl&gt; NA, 10, 12, NA, 13, 16, 15, 10, 10, 17, 10, 13...
+$ Urban       &lt;fct&gt; NA, Yes, Yes, Yes, Yes, NA, NA, Yes, No, NA, N...
+$ US          &lt;fct&gt; Yes, Yes, Yes, Yes, No, Yes, No, Yes, NA, Yes,...</code></pre>
 <p>Ahora faltan muchas observaciones. Cuando ajustamos un modelo de regresión para la variable Sales observamos que <code>lm ()</code> analiza casos completos y se estima un modelo basado en un subconjunto muy pequeño de datos.</p>
 <div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="ajuste-de-modelos.html#cb290-1"></a><span class="kw">display</span>(<span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>CompPrice <span class="op">+</span><span class="st"> </span>Income <span class="op">+</span><span class="st"> </span>Advertising <span class="op">+</span><span class="st"> </span>Population <span class="op">+</span><span class="st"> </span>Price, <span class="dt">data =</span> carseats_miss))</span></code></pre></div>
-<pre><code>## lm(formula = Sales ~ CompPrice + Income + Advertising + Population + 
-##     Price, data = carseats_miss)
-##             coef.est coef.se
-## (Intercept)  6.24     1.99  
-## CompPrice    0.10     0.02  
-## Income       0.01     0.01  
-## Advertising  0.13     0.03  
-## Population   0.00     0.00  
-## Price       -0.11     0.01  
-## ---
-## n = 93, k = 6
-## residual sd = 2.06, R-Squared = 0.59</code></pre>
+<pre><code>lm(formula = Sales ~ CompPrice + Income + Advertising + Population + 
+    Price, data = carseats_miss)
+            coef.est coef.se
+(Intercept)  6.24     1.99  
+CompPrice    0.10     0.02  
+Income       0.01     0.01  
+Advertising  0.13     0.03  
+Population   0.00     0.00  
+Price       -0.11     0.01  
+---
+n = 93, k = 6
+residual sd = 2.06, R-Squared = 0.59</code></pre>
 <p>Sólo tenemos 93 observaciones de las 400 originales! Demostraremos la imputación múltiple usando la función <code>mice ()</code> de la librería <code>mice</code>.</p>
 <div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="ajuste-de-modelos.html#cb292-1"></a><span class="kw">library</span>(mice)</span>
 <span id="cb292-2"><a href="ajuste-de-modelos.html#cb292-2"></a><span class="kw">names</span>(Carseats)</span></code></pre></div>
-<pre><code>##  [1] &quot;Sales&quot;       &quot;CompPrice&quot;   &quot;Income&quot;      &quot;Advertising&quot;
-##  [5] &quot;Population&quot;  &quot;Price&quot;       &quot;ShelveLoc&quot;   &quot;Age&quot;        
-##  [9] &quot;Education&quot;   &quot;Urban&quot;       &quot;US&quot;</code></pre>
+<pre><code> [1] &quot;Sales&quot;       &quot;CompPrice&quot;   &quot;Income&quot;      &quot;Advertising&quot;
+ [5] &quot;Population&quot;  &quot;Price&quot;       &quot;ShelveLoc&quot;   &quot;Age&quot;        
+ [9] &quot;Education&quot;   &quot;Urban&quot;       &quot;US&quot;         </code></pre>
 <div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="ajuste-de-modelos.html#cb294-1"></a>carseats_imp &lt;-<span class="st"> </span><span class="kw">mice</span>(carseats_miss, <span class="dt">printFlag =</span> F)</span></code></pre></div>
 <p>El objeto <code>carseats_imp</code> incluye (entre muchas otras cosas) <span class="math inline">\(m\)</span> conjuntos de datos imputados (la configuración predeterminada es <span class="math inline">\(m\)</span> = 5). Los conjuntos de datos imputados difieren porque las imputaciones se extraen aleatoriamente de distribuciones de valores plausibles. Podemos visualizar la variabilidad de los predictores en estos conjuntos de datos imputados usando la función <code>densityplot ()</code>.</p>
 <div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="ajuste-de-modelos.html#cb295-1"></a><span class="kw">library</span>(lattice)</span>
 <span id="cb295-2"><a href="ajuste-de-modelos.html#cb295-2"></a><span class="kw">densityplot</span>(carseats_imp)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-100-1.png" width="672" /></p>
+<p><img src="fig/unnamed-chunk-85-1.png" width="672" /></p>
 <p>Las líneas azules continuas representan la distribución real de los predictores, mientras que las líneas rojas muestran las distribuciones imputadas. El siguiente paso es usar estos conjuntos de datos imputados para promediar los <span class="math inline">\(\beta\)</span>s y los SE utilizando la función <code>pool ()</code> de la librería <code>mice</code>.</p>
 <div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="ajuste-de-modelos.html#cb296-1"></a>carseats_model_imp &lt;-<span class="st"> </span><span class="kw">with</span>(<span class="dt">data =</span> carseats_imp, </span>
 <span id="cb296-2"><a href="ajuste-de-modelos.html#cb296-2"></a>     <span class="dt">exp =</span> <span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>CompPrice <span class="op">+</span><span class="st"> </span>Income <span class="op">+</span><span class="st"> </span>Advertising <span class="op">+</span><span class="st"> </span>Population <span class="op">+</span><span class="st"> </span>Price))</span>
@@ -730,7 +756,7 @@ y</p>
 <span id="cb297-7"><a href="ajuste-de-modelos.html#cb297-7"></a>  </span>
 <span id="cb297-8"><a href="ajuste-de-modelos.html#cb297-8"></a>   </span>
 <span id="cb297-9"><a href="ajuste-de-modelos.html#cb297-9"></a><span class="kw">head</span>(preds)</span></code></pre></div>
-<pre><code>## [1]  8.989509 10.150578  9.645498  8.405464  7.306136 12.735945</code></pre>
+<pre><code>[1]  8.989509 10.150578  9.645498  8.405464  7.306136 12.735945</code></pre>
 <ul>
 <li>Si los nuevos datos no están completos, entonces estos coeficientes imputados son inútiles para predecir en filas con observaciones faltantes. Esto, por ejemplo, es el resultado de intentar predecir utilizando los datos con observaciones faltantes.</li>
 </ul>
@@ -743,7 +769,7 @@ y</p>
 <span id="cb299-7"><a href="ajuste-de-modelos.html#cb299-7"></a>  </span>
 <span id="cb299-8"><a href="ajuste-de-modelos.html#cb299-8"></a>   </span>
 <span id="cb299-9"><a href="ajuste-de-modelos.html#cb299-9"></a><span class="kw">head</span>(preds)</span></code></pre></div>
-<pre><code>## [1]  8.989509        NA        NA        NA  7.306136 12.735945</code></pre>
+<pre><code>[1]  8.989509        NA        NA        NA  7.306136 12.735945</code></pre>
 <ul>
 <li><p>La imputación múltiple, por lo tanto, no resuelve el principal problema al que nos enfrentamos a menudo con los datos faltantes, que es que, aunque hayamos ajustado con éxito un modelo en nuestros datos, el conjunto de validación también puede tener observaciones faltantes, y nuestras predicciones utilizando esos datos puede no poder realizarse.</p></li>
 <li><p>Podríamos usar uno de los conjuntos de datos imputados, pero entonces ya no estamos haciendo imputación múltiple sino imputación simple. En ese momento, los métodos disponibles en el paquete <code>mice</code> ya no ofrecen ninguna ventaja especial sobre los de los paquetes <code>caret</code> y <code>missForest</code>. De hecho, podrían ser peores ya que la función <code>mice ()</code> no fue diseñado para producir la mejor imputación individual, sino más bien una gama de imputaciones plausibles.</p></li>
@@ -758,11 +784,11 @@ y</p>
 <span id="cb301-7"><a href="ajuste-de-modelos.html#cb301-7"></a>bag_imp &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">preProcess</span>(carseats_miss_num, <span class="dt">method =</span> <span class="kw">c</span>(<span class="st">&quot;bagImpute&quot;</span>)), carseats_miss_num)</span></code></pre></div>
 <p>El paquete <code>missForest</code> ofrece otra solución de imputación única, que es más simple que las funciones de <code>caret</code> porque maneja datos categóricos automáticamente. Si bien <code>missForest</code> funciona bien para conjuntos de datos pequeños y proporciona imputaciones de buena calidad, es muy lento en conjuntos de datos grandes. De hecho, lo mismo ocurrirá con la función <code>bagImpute ()</code> de <code>caret</code>. En tales casos, podría tener sentido usar la función <code>medianImpute ()</code> de <code>caret</code> en su lugar que es muy rápida.</p>
 <div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="ajuste-de-modelos.html#cb302-1"></a>mf_imp &lt;-<span class="st"> </span><span class="kw">missForest</span>(carseats_miss, <span class="dt">verbose =</span> F)</span></code></pre></div>
-<pre><code>##   missForest iteration 1 in progress...done!
-##   missForest iteration 2 in progress...done!
-##   missForest iteration 3 in progress...done!
-##   missForest iteration 4 in progress...done!
-##   missForest iteration 5 in progress...done!</code></pre>
+<pre><code>  missForest iteration 1 in progress...done!
+  missForest iteration 2 in progress...done!
+  missForest iteration 3 in progress...done!
+  missForest iteration 4 in progress...done!
+  missForest iteration 5 in progress...done!</code></pre>
 <p>Comparemos los errores asociados con estos diferentes métodos de imputación. Podemos hacer esto porque, habiendo creado las observaciones faltantes en primer lugar, podemos comparar las observaciones imputadas con las observaciones verdaderas calculando la suma de los cuadrados de la diferencia. Para las imputaciones usando <code>mice ()</code> calculamos los errores para cada uno de los 5 conjuntos de datos imputados. Los resultados de <code>knnImpute ()</code> no son comparables porque la función automáticamente centra y escala las variables y los hemos omitido.</p>
 <div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="ajuste-de-modelos.html#cb304-1"></a>comparison &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Method =</span> <span class="kw">c</span>(<span class="st">&quot;mice 1&quot;</span>, </span>
 <span id="cb304-2"><a href="ajuste-de-modelos.html#cb304-2"></a>                                    <span class="st">&quot;mice 2&quot;</span>, </span>
@@ -784,15 +810,15 @@ y</p>
 <span id="cb304-18"><a href="ajuste-de-modelos.html#cb304-18"></a>comparison <span class="op">%&gt;%</span></span>
 <span id="cb304-19"><a href="ajuste-de-modelos.html#cb304-19"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">RSS =</span> <span class="kw">round</span>(RSS)) <span class="op">%&gt;%</span></span>
 <span id="cb304-20"><a href="ajuste-de-modelos.html#cb304-20"></a><span class="st">  </span><span class="kw">arrange</span>(RSS)</span></code></pre></div>
-<pre><code>##         Method     RSS
-## 1   missForest 2489418
-## 2 medianImpute 2538059
-## 3    bagImpute 2714857
-## 4       mice 4 3752513
-## 5       mice 5 4389532
-## 6       mice 2 4399586
-## 7       mice 1 4564721
-## 8       mice 3 4791521</code></pre>
+<pre><code>        Method     RSS
+1   missForest 2489418
+2 medianImpute 2538059
+3    bagImpute 2714857
+4       mice 4 3752513
+5       mice 5 4389532
+6       mice 2 4399586
+7       mice 1 4564721
+8       mice 3 4791521</code></pre>
 <p><code>missforest</code> obtiene los mejores resultados, aunque medianImpute compara muy bien. Los resultados de <code>mice</code> no son muy buenos, probablemente por las razones mencionadas anteriormente: está diseñado para una imputación múltiple, no simple.</p>
 
 </div>

@@ -1,0 +1,106 @@
+# Análisis discriminante lineal (LDA)
+
+El análisis discriminante lineal (LDA por sus siglas en inglés) es una clasificación de aprendizaje automático supervisado (binario o multimonial) y un método de reducción de dimensiones. LDA encuentra combinaciones lineales de variables que mejor "discriminan" las clases de la variable respuesta.
+
+**Un enfoque (Welch)** de LDA supone que las variables predictoras son variables aleatorias continuas normalmente distribuidas y con la misma varianza. Paa que se cumpla esta condición, normalmente deberemos escalar los datos
+
+Para una variable respuesta de $k$ niveles, LDA produce $k-1$ (reglas) discriminantes utilizando el teorema de Bayes.
+
+$$Pr[Y = C_l | X] = \frac{P[Y = C_l] P[X | Y = C_l]}{\sum_{l=1}^C Pr[Y = C_l] Pr[X | Y = C_l]}$$
+
+donde $Y$ es la variable respuesta, $X$ son los predictores y $C_l$ es la clase $l$-ésima. Entonces, la probablidad de que $Y$ sea igual al nivel $C_l$ dados los predictores $X$ es igual a la probabilidad a *priori* de $Y$  multiplicado por la probabilidad de observar $X$ si $Y=C_l$ dividido por la suma de todas las probabilidades de $X$ data las priors. El valor predicho para cualquier $X$ es simplemente $C_l$ que tenga la probabilidad másxima.
+
+Una forma de calcular las probabilidades es asumir que $X$  tiene una distribución normal multivariante con medias $\mu_l$ y varianza común $\Sigma$. Entonces la función de discriminación lineal para el grupo $l$ es
+
+$$X'\Sigma^{-1}\mu_l - 0.5 \mu_l^{'}\Sigma^{-1}\mu_l + \log(Pr[Y = C_l])$$
+
+La media teórica y la matriz de covarianza se estiman mediante la media muestral
+$\mu=\bar{x}_l$ y la covarianza $\Sigma=S$, y los predictores $X$ se reemplazan con los predictores de muestra que denotamos $u$. 
+
+**Otro enfoque (Fisher)** para LDA es encontrar una combinación lineal de predictores que maximice la matriz de covarianza entre grupos, $B$, relativo a la matriz de covarianza dentro del grupo (intra-grupo) $W$.
+
+$$\frac{b'Bb}{b'Wb}$$
+
+
+La solución a este problema de optimización es el vector propio correspondiente al valor propio más grande de $W^{-1}B$. Este vector es un discriminante lineal (e.g. una variable). Resolver para la configuración para dos grupos la función discriminante $S^{-1}(\bar{x}_1 - \bar{x}_2)$ donde $S^{-1}$ es la inversa de la matriz de covarianza de los datos y $\bar{x}_1$ y $\bar{x}_2$ son las medias de cada predictor en los grupos de respuesta 1 y 2. En la práctica, una nueva muestra, $u$ se proyecta sobre la función discriminante como $uS^{-1}(\bar{x}_1 - \bar{x}_2)$, que devuelve una puntuación discriminante. Luego, una nueva muestra se clasifica en el grupo 1 si la muestra está más cerca de la media del grupo 1 que de la media del grupo 2 en la proyección:
+
+$$\left| b'(u - \bar{x}_1) \right| - \left| b'(u - \bar{x}_2) \right| < 0$$
+En general, el modelo requiere $CP + P(P + 1)/2$  parámetros con $P$ predictores y $C$ clases. El tener que estimar parámetros extra en los LDA es debido a que el modelo maneja explícitamente las correlaciones entre predictores. Esto debería **proporcionar alguna ventaja a LDA sobre la regresión logística cuando hay correlaciones importantes**, aunque ambos modelos no serán útiles cuando la multicolinealidad se vuelva extrema.
+
+**Take home message:** 
+
+- La formulación de Fisher es intuitiva, fácil de resolver matemáticamente y, a diferencia del enfoque de Welch, no implica suposiciones sobre las distribuciones subyacentes de los datos.
+
+- En la práctica, es mejor centrar y escalar los predictores y eliminar los predictores de varianza cercana a cero. Si la matriz aún no es invertible, deberíamos usar Penalized Least Squares o Regularización (se verán en otros cursos).
+
+
+Veamos cómo hacer este análisis para los datos de cáncer de mama vistos en el capítulo anterior. Podemos llevar a cabo los análisis con muchas librerías, aquí usarems `MASS`. Tal y como es recomendado, usaremos los datos centrados y escalados (e.g normalizados) y eliminados las variables con varianza cercana a 0 que habíamos obtenido con la librería `recipes`. Empezaremos usando 2 variables para que la visualización sea más clara.
+
+```{r}
+library(MASS)
+fit.lda <- lda(diagnosis ~ .,
+               data= breast_train_prep)
+fit.lda
+``` 
+
+Podemos observar cuánto vale la media para cada variable en cada uno de los grupos, y esto nos puede ayudar a saber qué variables son más importantes. Los coeficientes de los discriminantes lineales también nos pueden ayudar con la interpretación.
+
+Podemos representar el valor de cada grupo para el primer discriminante lineal (sólo hay 1 ya que tenemos 2 grupos).
+
+```{r}
+prd <- predict(fit.lda, breast_train_prep )
+ldahist(data = prd$x[,1], g = breast_train_prep$diagnosis)
+```
+
+Vemos que los grupos quedan bien separados según el primer discrimiante lineal. 
+
+
+Si tuviéramos 3 grupos también podríamos representar la misma clasificación para el primer y el segundo discriminate lineal. Para ello usaríamos la librería `ggord` que está en GitHub. Usaremos los datos iris para ilustrar este caso:
+
+```{r}
+# devtools::install_github("fawda123/ggord")
+library(ggord)
+
+lnr <- lda(Species~., iris)
+ggord(lnr, iris$Species, ylim = c(-5, 5 ))
+```
+
+Podemos evaluar de forma manual cómo predice nuestro modelo en la muestra test para nuestro ejemplo de cáncer de mama usando la matriz de confusión:
+
+```{r}
+p.train <- predict(fit.lda, breast_test_prep)$class
+tt <- table(predict=p.train, Actual=breast_test_prep$diagnosis)
+tt
+```
+
+Cuya precisión podemos calcular como:
+
+```{r}
+sum(diag(tt)/sum(tt))
+```
+
+
+También podemos evauar la capacidar de nuestro modelo usando, por ejemplo, 10-fold CV con la librería `caret`. En este caso bastaría con 
+
+```{r}
+fitControl <- trainControl(## 10-fold CV
+                           method = "repeatedcv",
+                           number = 10,
+                           ## repeated five times
+                           repeats = 5)
+
+train(diagnosis ~ ., 
+      data=breast_train_prep,
+      method="lda",
+      trControl = fitControl)
+```
+
+
+Vemos que la precisión estimada en la muestra test es bastante parecida a la predicha mediante 10-fold CV. 
+
+
+-------------------------------------------------------------------
+**EJERCICIO** (Entrega en Moodle: P2-LDA):
+
+Implementa una función (idealmente podrímo usar el padigma MapReduce) que nos devuelva la precisión del método LDA usando K-fold CV. Úsa esta función para reproducir los resultados del ejemplo anterior.
+-------------------------------------------------------------------
