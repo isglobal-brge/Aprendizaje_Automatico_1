@@ -2,7 +2,7 @@
 
 El análisis discriminante lineal (LDA por sus siglas en inglés) es una clasificación de aprendizaje automático supervisado (binario o multimonial) y un método de reducción de dimensiones. LDA encuentra combinaciones lineales de variables que mejor "discriminan" las clases de la variable respuesta.
 
-**Un enfoque (Welch)** de LDA supone que las variables predictoras son variables aleatorias continuas normalmente distribuidas y con la misma varianza. Paa que se cumpla esta condición, normalmente deberemos escalar los datos
+**Un enfoque (Welch)** de LDA supone que las variables predictoras son variables aleatorias continuas normalmente distribuidas y con la misma varianza. Para que se cumpla esta condición, normalmente deberemos escalar los datos
 
 Para una variable respuesta de $k$ niveles, LDA produce $k-1$ (reglas) discriminantes utilizando el teorema de Bayes.
 
