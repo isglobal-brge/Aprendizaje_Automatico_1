@@ -59,7 +59,7 @@ Comencemos por presentar brevemente el modelo lineal junto con algunos de los co
 
 Un modelo lineal es *paramétrico* porque asumimos que la relación entre dos variables es lineal y puede ser definida por los *parámetros* de una recta (el *intercept* y la pendiente). Comenzaremos considerando un modelo lineal simple. En la siguiente figura podemos observar cómo existe una relación lineal entre la dosis de chocolate consumida y el nivel de felicidad reportado por una muestra de individuos seleccionados al azar en una población de Barcelona. Los puntos negros muestran los datos observados para cada individuo y los blancos representan a la felicidad que tendría cada individuo según la dosis de chocolate que reporta tomar.
 
-![Regresión lineal simple](fig/reg_lin.png)
+![Regresión lineal simple](figures/reg_lin.png)
 
 ### Modelo lineal simple
 
@@ -189,7 +189,7 @@ rss(fitted(simple_model), mtcars$mpg)
 
  
 
-### Coeficientes de interpretación
+### Interpretación de coeficientes
 
  
 
@@ -211,7 +211,7 @@ Ahora el *intercept*, 20.09, es significativa y representa el valor predicho de 
 
  
 
-Hay dos formas de interpretar los coeficientes en un modelo lineal:
+Hay dos formas de interpretar los coeficientes de las variables en un modelo lineal:
 
  
 
@@ -1012,7 +1012,7 @@ Además de las estimaciones de coeficientes para cada variable predictora (inclu
 
  
 
-Recuerde que la inferencia estadística nos permite estimar las características de la población a partir de las propiedades de una muestra. Por lo general, queremos saber si una diferencia o una relación que observamos en una muestra es verdadera en la población --- es "estadísticamente significativa" --- o es probable que se deba al azar. En el contexto de la regresión, queremos saber específicamente si la pendiente de la recta de regresión, $\beta$, que resume la relación de una variable con el resultado es diferente de 0. ¿Existe una relación positiva o negativa? En el paradigma frecuentista, respondemos a esta pregunta utilizando pruebas estadísticas basadas en test de hipótesis.
+Recordemos que la inferencia estadística nos permite estimar las características de la población a partir de las propiedades de una muestra. Por lo general, queremos saber si una diferencia o una relación que observamos en una muestra es verdadera en la población --- es "estadísticamente significativa" --- o es probable que se deba al azar. En el contexto de la regresión, queremos saber específicamente si la pendiente de la recta de regresión, $\beta$, que resume la relación de una variable con el resultado es diferente de 0. ¿Existe una relación positiva o negativa? En el paradigma frecuentista, respondemos a esta pregunta utilizando pruebas estadísticas basadas en test de hipótesis.
 
  
 

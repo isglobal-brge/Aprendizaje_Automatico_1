@@ -359,6 +359,25 @@ objeto_recipe <- objeto_recipe %>% step_nzv(all_predictors())
 
 Si bien la eliminación de predictores no informativos podría considerarse un paso propio del proceso de selección de predictores, dado que consiste en un filtrado por varianza, tiene que realizarse antes de estandarizar los datos, ya que después, todos los predictores tienen varianza 1.
 
+
+#### Normalización de datos
+
+
+Como ya hemos mencionado anteriormente, también podemos transformar nuestros datos para garantizar normalidad utilizando transformaciones Box-Cox ("BoxCox") o Yeo-Johnson  ("YeoJohnson"). Esto se puede hacer de forma sencilla mediante
+
+```{r eval=FALSE}
+objeto_recipe <- objeto_recipe %>% step_BoxCox(all_numeric())
+```
+
+ó 
+
+```{r eval=FALSE}
+objeto_recipe <- objeto_recipe %>% step_YeoJohnson(all_numeric())
+```
+
+respectivamente.
+
+
 #### Estandarización y escalado
 
 Cuando los predictores son numéricos, la escala en la que se miden, así como la magnitud de su varianza pueden influir en gran medida en el modelo. Muchos algoritmos de machine learning (SVM, redes neuronales, lasso…) son sensibles a esto, de forma que, si no se igualan de alguna forma los predictores, aquellos que se midan en una escala mayor o que tengan más varianza, dominarán el modelo aunque no sean los que más relación tienen con la variable respuesta. Existen principalmente 2 estrategias para evitarlo:
@@ -385,6 +404,13 @@ Por defecto, la función `step_dummy(all_nominal())` binariza todas las variable
 ```{r}
 objeto_recipe <- objeto_recipe %>% step_dummy(all_nominal(), -all_outcomes())
 ```
+
+Finalmente, esto es lo que hemos preparado para pre-procesar nuestros datos:
+
+```{r}
+objecto_recipe
+```
+
 
 #### Obtención de datos para entrenar
 
@@ -531,7 +557,15 @@ Vemos que tampoco hay ninguna variable que tenga que ser eliminada por este moti
 objeto_recipe <- objeto_recipe %>% step_nzv(all_predictors())
 ```
 
-**Paso 6:** Ahora centraremos y normalizaremos los datos (esto último no tiene porqué sere necesario). Recordamos que también se pueden transformar los datos para garantizar normalidad usando `preProcess()` con el métodos Box-Cox o Yeo-Johnson de `caret()`. 
+
+**Paso 6:** El siguiente paso sería eliminar aquellas variables con correlación elevada. El argumento `threshold` nos permite elegir el grado de correlación que por defecto es 0.9. 
+
+```{r}
+objeto_recipe <- objeto_recipe %>% step_corr(all_predictors())
+```
+
+
+**Paso 7:** Ahora centraremos y normalizaremos los datos (esto último no tiene porqué sere necesario). Recordamos que también se pueden transformar los datos para garantizar normalidad usando `preProcess()` con el métodos Box-Cox o Yeo-Johnson de `caret()`. 
 
 ```{r}
 objeto_recipe <- objeto_recipe %>% step_center(all_numeric())
@@ -539,9 +573,9 @@ objeto_recipe <- objeto_recipe %>% step_scale(all_numeric())
 ```
 
 
-**Paso 7**: La binarización de variables no es necesario
+**Paso 8**: La binarización de variables no es necesario
 
-**Paso 8**: Aprendizaje de las transformaciones de pre-procesado y aplicación a nuestros conjuntos de datos. Empezamos con el entrenamiento
+**Paso 9**: Aprendizaje de las transformaciones de pre-procesado y aplicación a nuestros conjuntos de datos. Empezamos con el entrenamiento
 
 ```{r}
 trained_recipe <- prep(objeto_recipe, training = breast_train)
@@ -557,7 +591,7 @@ breast_test_prep  <- bake(trained_recipe, new_data = breast_test)
 glimpse(breast_train_prep)
 ```
 
-**Paso 9:** Visualización
+**Paso 10:** Visualización
 
 Hagamos algunos de los gráficos que hemos visto
 

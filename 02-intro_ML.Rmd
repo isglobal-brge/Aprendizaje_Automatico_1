@@ -2,7 +2,7 @@
 
 El aprendizaje automático (AA) (Machine Learning en inglés) es una disciplina científica que suele incluirse en el ámbito de la Inteligencia Artificial (IA) que crea sistemas que aprenden automáticamente. Aprender en este contexto quiere decir identificar patrones complejos en millones de datos. La máquina/ordenador que realmente aprende es un algoritmo que usando datos existentes es capaz de predecir comportamientos futuros. Automáticamente, también en este contexto, implica que estos sistemas se mejoran de forma autónoma con el tiempo, sin intervención humana. En esta figura podemos observar la conexión que hay entre estas áreas y una más reciente conocida como aprendizaje profundo (AP) (Deep Learning en inglés) que veréis en el curso de Aprendizaje Automático 2. 
 
-![Relación entre AA, AI y AP](slides/intro_curso/fig/intro_AA.png)
+![Relación entre AA, AI y AP](figures/intro_AA.png)
 
 La principal diferencia entre estas áreas radica en el objetivo (e.g pregunta científica) que queremos tratar. Así, la IA vendría a representar a un sistema no biológico que es inteligente basándose en reglas. El AA se basa en algoritmos que entrenan modelos usando datos existentes, y el AP se basa en algoritmos que parametriza redes neuronales de múltiples capas que representan los datos mediante diferentes niveles de abstracción.
 
@@ -10,7 +10,7 @@ La principal diferencia entre estas áreas radica en el objetivo (e.g pregunta c
 En la siguiente figura podemos ver la clasificación (de manera muy genérica) de los tipos de AA a los que podemos enfrentarnos
 
 
-![Tipos de Aprendizaje Automático](fig/aa_tipos.png)
+![Tipos de Aprendizaje Automático](figures/aa_tipos.png)
 
 
 En estadística, el AA se ha considerado como una ciencia independiente en la que se dispone de un conjunto de herramientas basadas en diferentes métodos y algoritmos que permiten clasificar individuos según una serie de variables. Concer estas técnicas estadísticas es de gran ayuda para la IA y el AP. En este curso estudiaremos estas metodologías en detalle que incluirán:
