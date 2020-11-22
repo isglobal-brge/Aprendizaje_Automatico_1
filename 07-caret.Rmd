@@ -1,4 +1,4 @@
-# La librería `caret`
+# La librería `caret` {#caret}
 
 R es uno de los lenguajes de programación que más se usa en muchas disciplinas como la biomedicina, la economía y por supuesto, la estadísica. Al tratarse de un software libre, innumerables usuarios han podido implementar sus algoritmos, dando lugar a un número muy elevado de librerías donde encontrar prácticamente todas las técnicas de machine learning existentes. Sin embargo, esto tiene un lado negativo, cada paquete tiene una sintaxis, estructura e implementación propia, lo que dificulta su aprendizaje. El paquete [caret](http://topepo.github.io/caret/index.html) (Classification And REgression Training ), desarrollado por Max Kuhn, es una interfaz que unifica bajo un único marco cientos de funciones de distintos paquetes, facilitando en gran medida todas las etapas de de preprocesado, entrenamiento, optimización y validación de modelos predictivos.
 
@@ -402,13 +402,14 @@ La binarización consiste en crear nuevas variables dummy con cada uno de los ni
 Por defecto, la función `step_dummy(all_nominal())` binariza todas las variables almacenadas como tipo factor o character. Además, elimina uno de los niveles para evitar redundancias. Volviendo al ejemplo anterior, no es necesario almacenar las tres variables, ya que, si color_rojo y color_verde toman el valor 0, la variable color_azul toma necesariamente el valor 1. Si color_rojo o color_verde toman el valor 1, entonces color_azul es necesariamente 0.
 
 ```{r}
-objeto_recipe <- objeto_recipe %>% step_dummy(all_nominal(), -all_outcomes())
+objeto_recipe <- objeto_recipe %>% step_dummy(all_nominal(),
+                                              -all_outcomes())
 ```
 
 Finalmente, esto es lo que hemos preparado para pre-procesar nuestros datos:
 
 ```{r}
-objecto_recipe
+objeto_recipe
 ```
 
 

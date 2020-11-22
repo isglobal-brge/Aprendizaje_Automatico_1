@@ -83,6 +83,11 @@ donde $\ln(L_{c})$ es el logaritmo de la probabilidad del modelo actual (o basal
 
 Vamos a ilustrar algunos de ejemplos de comparación de modelos usando los datos de Hitters del paquete ISLR que tiene información sobre bateadores de la Major League de USA entre los años 1986 y 1987. Estamos interesados en crear un modelo para predecir el salario de los bateadores (variable `Salary`). Partimos de un modelo nulo:
 
+```{r, echo=FALSE}
+gc()
+```
+
+
 ```{r}
 library(ISLR)
 data(Hitters)
@@ -116,8 +121,10 @@ Para implementar el método de selección, seguiríamos agregando variables y co
 
 
 ```{r}
-h3 <- lm(Salary ~ Hits + Years + HmRun + RBI + Walks + Assists, data = Hitters)
-h4 <- lm(Salary ~ Hits + Years + HmRun + RBI + Walks + Assists + AtBat, data = Hitters)
+h3 <- lm(Salary ~ Hits + Years + HmRun + RBI + Walks + Assists, 
+         data = Hitters)
+h4 <- lm(Salary ~ Hits + Years + HmRun + RBI + Walks + Assists + AtBat,
+         data = Hitters)
 lrtest(h3, h4)
 as.matrix(AIC(h3, h4))
 ```
@@ -132,14 +139,18 @@ La función `step ()` en R base automatiza la selección de variables paso a pas
 
 
 ```{r}
-display(step(lm(Salary ~ ., data = Hitters), trace = F, direction = "forward"))
+mod.fow <- step(lm(Salary ~ ., data = Hitters), trace = F, 
+                direction = "forward")
+mod.fow
 ```
 
 La selección hacia adelante se estableció en 19 predictores con un $R^2$ de .55.
 
 
 ```{r}
-display(step(lm(Salary ~ ., data = Hitters), trace = F, direction = "backward"))
+mod.back <- step(lm(Salary ~ ., data = Hitters), trace = F, 
+                 direction = "backward")
+mod.back
 ```
 
 La selección hacia detrás se estableció en 10 predictores con un $R^2$ de .54. Con muchas menos variables, somos capaces de explicar prácticamente la misma variabilidad.

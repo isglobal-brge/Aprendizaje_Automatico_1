@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 K vecinos más próximos (KNN) | Aprendizaje Automático 1</title>
+  <meta name="description" content="9 K vecinos más próximos (KNN) | Aprendizaje Automático 1" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 K vecinos más próximos (KNN) | Aprendizaje Automático 1" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 K vecinos más próximos (KNN) | Aprendizaje Automático 1" />
+  
+  
+  
+
+<meta name="author" content="Juan R González" />
+
+
+<meta name="date" content="2020-11-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="caret.html"/>
+<link rel="next" href="análisis-discriminante-lineal-lda.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Aprendizaje Automático 1</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html"><i class="fa fa-check"></i><b>2</b> Introducción a Tidyverse</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="index.html"><a href="index.html#introducción"><i class="fa fa-check"></i><b>2.1</b> Introducción</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#instalación"><i class="fa fa-check"></i><b>2.2</b> Instalación</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#librerías-básicas"><i class="fa fa-check"></i><b>2.3</b> Librerías básicas</a></li>
+<li class="chapter" data-level="2.4" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#manejo-de-datos"><i class="fa fa-check"></i><b>2.4</b> Manejo de datos</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#tibbles"><i class="fa fa-check"></i><b>2.4.1</b> Tibbles</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#importar-datos"><i class="fa fa-check"></i><b>2.4.2</b> Importar datos</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#transformación-de-datos"><i class="fa fa-check"></i><b>2.4.3</b> Transformación de datos</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#filtrar-filas"><i class="fa fa-check"></i><b>2.4.4</b> Filtrar filas</a></li>
+<li class="chapter" data-level="2.4.5" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#filtrado-lógico"><i class="fa fa-check"></i><b>2.4.5</b> Filtrado lógico</a></li>
+<li class="chapter" data-level="2.4.6" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#ordenar-filas"><i class="fa fa-check"></i><b>2.4.6</b> Ordenar filas</a></li>
+<li class="chapter" data-level="2.4.7" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#seleccionar-columnas-e.g.-variables"><i class="fa fa-check"></i><b>2.4.7</b> Seleccionar columnas (e.g. variables)</a></li>
+<li class="chapter" data-level="2.4.8" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#añadir-nuevas-variables"><i class="fa fa-check"></i><b>2.4.8</b> Añadir nuevas variables</a></li>
+<li class="chapter" data-level="2.4.9" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#grouped-summaries"><i class="fa fa-check"></i><b>2.4.9</b> Grouped summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#uso-del-pipe"><i class="fa fa-check"></i><b>2.5</b> Uso del pipe <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="2.6" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#ejercicios-manejo-de-datos"><i class="fa fa-check"></i><b>2.6</b> Ejercicios (manejo de datos)</a></li>
+<li class="chapter" data-level="2.7" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#visualización-de-datos"><i class="fa fa-check"></i><b>2.7</b> Visualización de datos</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#distribución-de-datos-categóricos"><i class="fa fa-check"></i><b>2.7.1</b> Distribución de datos categóricos</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#distribución-de-datos-continuos"><i class="fa fa-check"></i><b>2.7.2</b> Distribución de datos continuos</a></li>
+<li class="chapter" data-level="2.7.3" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#distribución-de-datos-continuos-según-una-variable-categórica"><i class="fa fa-check"></i><b>2.7.3</b> Distribución de datos continuos según una variable categórica</a></li>
+<li class="chapter" data-level="2.7.4" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#dos-variables-categóricas"><i class="fa fa-check"></i><b>2.7.4</b> Dos variables categóricas</a></li>
+<li class="chapter" data-level="2.7.5" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#dos-variables-continuas"><i class="fa fa-check"></i><b>2.7.5</b> Dos variables continuas</a></li>
+<li class="chapter" data-level="2.7.6" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#facets"><i class="fa fa-check"></i><b>2.7.6</b> Facets</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#ejercicios-visualización-de-datos"><i class="fa fa-check"></i><b>2.8</b> Ejercicios (Visualización de datos)</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introducción-al-aprendizaje-automático.html"><a href="introducción-al-aprendizaje-automático.html"><i class="fa fa-check"></i><b>3</b> Introducción al Aprendizaje Automático</a></li>
+<li class="chapter" data-level="4" data-path="regresión-lineal.html"><a href="regresión-lineal.html"><i class="fa fa-check"></i><b>4</b> Regresión lineal</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#preliminares"><i class="fa fa-check"></i><b>4.1</b> Preliminares</a></li>
+<li class="chapter" data-level="4.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#conceptos-básicos"><i class="fa fa-check"></i><b>4.2</b> Conceptos básicos</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#modelo-lineal-simple"><i class="fa fa-check"></i><b>4.2.1</b> Modelo lineal simple</a></li>
+<li class="chapter" data-level="4.2.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-lineal-multivariante"><i class="fa fa-check"></i><b>4.2.2</b> Regresión lineal multivariante</a></li>
+<li class="chapter" data-level="4.2.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#incertidumbre"><i class="fa fa-check"></i><b>4.2.3</b> Incertidumbre</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ajuste-de-un-modelo-lineal"><i class="fa fa-check"></i><b>4.3</b> Ajuste de un modelo lineal</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#residuos"><i class="fa fa-check"></i><b>4.3.1</b> Residuos</a></li>
+<li class="chapter" data-level="4.3.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interpretación-de-coeficientes"><i class="fa fa-check"></i><b>4.3.2</b> Interpretación de coeficientes</a></li>
+<li class="chapter" data-level="4.3.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interacciones"><i class="fa fa-check"></i><b>4.3.3</b> Interacciones</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-por-mínimos-cuadrados"><i class="fa fa-check"></i><b>4.4</b> Estimación por mínimos cuadrados</a></li>
+<li class="chapter" data-level="4.5" data-path="regresión-lineal.html"><a href="regresión-lineal.html#medidas-adicionales-de-ajuste-del-modelo"><i class="fa fa-check"></i><b>4.5</b> Medidas adicionales de ajuste del modelo</a></li>
+<li class="chapter" data-level="4.6" data-path="regresión-lineal.html"><a href="regresión-lineal.html#sesgo-variación-sobreajuste"><i class="fa fa-check"></i><b>4.6</b> Sesgo, variación, sobreajuste</a></li>
+<li class="chapter" data-level="4.7" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-como-estimación-de-una-media-condicional"><i class="fa fa-check"></i><b>4.7</b> Regresión como estimación de una media condicional</a></li>
+<li class="chapter" data-level="4.8" data-path="regresión-lineal.html"><a href="regresión-lineal.html#la-función-de-regresión"><i class="fa fa-check"></i><b>4.8</b> La función de regresión</a></li>
+<li class="chapter" data-level="4.9" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-no-paramétrica-de-la-función-de-regresión-regresión-knn"><i class="fa fa-check"></i><b>4.9</b> Estimación no paramétrica de la función de regresión: regresión KNN</a></li>
+<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a></li>
+<li class="chapter" data-level="4.11" data-path="regresión-lineal.html"><a href="regresión-lineal.html#predicción"><i class="fa fa-check"></i><b>4.11</b> Predicción</a></li>
+<li class="chapter" data-level="4.12" data-path="regresión-lineal.html"><a href="regresión-lineal.html#inferencia-en-el-contexto-de-regresión"><i class="fa fa-check"></i><b>4.12</b> Inferencia en el contexto de regresión</a></li>
+<li class="chapter" data-level="4.13" data-path="regresión-lineal.html"><a href="regresión-lineal.html#asunciones-de-un-modelo-de-regresión"><i class="fa fa-check"></i><b>4.13</b> Asunciones de un modelo de regresión</a></li>
+<li class="chapter" data-level="4.14" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ejemplos-adicionales-de-interpretación-de-modelos"><i class="fa fa-check"></i><b>4.14</b> Ejemplos adicionales de interpretación de modelos</a>
+<ul>
+<li class="chapter" data-level="4.14.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interpretación-del-intercept-y-los-coeficientes-beta-para-un-modelo-con-predictores-continuos"><i class="fa fa-check"></i><b>4.14.1</b> Interpretación del <em>intercept</em> y los coeficientes <span class="math inline">\(\beta\)</span> para un modelo con predictores continuos</a></li>
+<li class="chapter" data-level="4.14.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interpretación-del-intercept-y-los-coeficientes-beta-para-un-modelo-con-predictores-binarios-y-continuos"><i class="fa fa-check"></i><b>4.14.2</b> Interpretación del <em>intercept</em> y los coeficientes <span class="math inline">\(\beta\)</span> para un modelo con predictores binarios y continuos</a></li>
+<li class="chapter" data-level="4.14.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interpretación-del-intercept-y-los-coeficientes-beta-para-un-modelo-con-predictores-binarios-y-continuos-con-interacciones"><i class="fa fa-check"></i><b>4.14.3</b> Interpretación del <em>intercept</em> y los coeficientes <span class="math inline">\(\beta\)</span> para un modelo con predictores binarios y continuos, con interacciones</a></li>
+<li class="chapter" data-level="4.14.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interpretación-del-intercept-y-los-coeficientes-beta-para-un-modelo-con-predictores-continuos-con-interacciones"><i class="fa fa-check"></i><b>4.14.4</b> Interpretación del <em>intercept</em> y los coeficientes <span class="math inline">\(\beta\)</span> para un modelo con predictores continuos, con interacciones</a></li>
+</ul></li>
+<li class="chapter" data-level="4.15" data-path="regresión-lineal.html"><a href="regresión-lineal.html#centrado-y-escalado"><i class="fa fa-check"></i><b>4.15</b> Centrado y escalado</a></li>
+<li class="chapter" data-level="4.16" data-path="regresión-lineal.html"><a href="regresión-lineal.html#transformación-de-variables"><i class="fa fa-check"></i><b>4.16</b> Transformación de variables</a></li>
+<li class="chapter" data-level="4.17" data-path="regresión-lineal.html"><a href="regresión-lineal.html#colinealidad"><i class="fa fa-check"></i><b>4.17</b> Colinealidad</a></li>
+<li class="chapter" data-level="4.18" data-path="regresión-lineal.html"><a href="regresión-lineal.html#valores-atípicos"><i class="fa fa-check"></i><b>4.18</b> Valores atípicos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html"><i class="fa fa-check"></i><b>5</b> Ajuste de modelos</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#reglas-generales-para-la-selección-de-variables"><i class="fa fa-check"></i><b>5.1</b> Reglas generales para la selección de variables</a></li>
+<li class="chapter" data-level="5.2" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#selección-paso-a-paso-stepwise"><i class="fa fa-check"></i><b>5.2</b> Selección paso a paso (stepwise)</a></li>
+<li class="chapter" data-level="5.3" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#comparación-de-modelos"><i class="fa fa-check"></i><b>5.3</b> Comparación de modelos</a></li>
+<li class="chapter" data-level="5.4" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#métodos-de-selección-automática"><i class="fa fa-check"></i><b>5.4</b> Métodos de selección automática</a></li>
+<li class="chapter" data-level="5.5" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#validación-cruzada"><i class="fa fa-check"></i><b>5.5</b> Validación cruzada</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#validación-en-un-conjunto-de-datos-externo"><i class="fa fa-check"></i><b>5.5.1</b> Validación en un conjunto de datos externo</a></li>
+<li class="chapter" data-level="5.5.2" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#leave-one-out-cross-validation-loocv"><i class="fa fa-check"></i><b>5.5.2</b> Leave-one-out cross validation (LOOCV)</a></li>
+<li class="chapter" data-level="5.5.3" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#k-fold-cross-validation-k-fold-cv"><i class="fa fa-check"></i><b>5.5.3</b> K-fold cross validation (K-fold CV)</a></li>
+<li class="chapter" data-level="5.5.4" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#uso-de-cv-para-estimar-el-hiper-parámetro"><i class="fa fa-check"></i><b>5.5.4</b> Uso de CV para estimar el hiper-parámetro</a></li>
+<li class="chapter" data-level="5.5.5" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#uso-de-bootstrap"><i class="fa fa-check"></i><b>5.5.5</b> Uso de bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#imputación-de-datos-faltantes"><i class="fa fa-check"></i><b>5.6</b> Imputación de datos faltantes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regresión-logística.html"><a href="regresión-logística.html"><i class="fa fa-check"></i><b>6</b> Regresión logística</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regresión-logística.html"><a href="regresión-logística.html#la-función-logit-inversa"><i class="fa fa-check"></i><b>6.1</b> La función logit inversa</a></li>
+<li class="chapter" data-level="6.2" data-path="regresión-logística.html"><a href="regresión-logística.html#ejemplo-de-regresión-logística"><i class="fa fa-check"></i><b>6.2</b> Ejemplo de regresión logística</a></li>
+<li class="chapter" data-level="6.3" data-path="regresión-logística.html"><a href="regresión-logística.html#coeficientes-de-regresión-logística-como-probabilidades"><i class="fa fa-check"></i><b>6.3</b> Coeficientes de regresión logística como probabilidades</a></li>
+<li class="chapter" data-level="6.4" data-path="regresión-logística.html"><a href="regresión-logística.html#coeficientes-de-regresión-logística-como-razones-de-odds"><i class="fa fa-check"></i><b>6.4</b> Coeficientes de regresión logística como razones de odds</a></li>
+<li class="chapter" data-level="6.5" data-path="regresión-logística.html"><a href="regresión-logística.html#bondad-de-ajuste"><i class="fa fa-check"></i><b>6.5</b> Bondad de ajuste</a></li>
+<li class="chapter" data-level="6.6" data-path="regresión-logística.html"><a href="regresión-logística.html#ejemplo-de-regresión-logística-modelización-de-riesgo-diabetes"><i class="fa fa-check"></i><b>6.6</b> Ejemplo de regresión logística: modelización de riesgo diabetes</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="regresión-logística.html"><a href="regresión-logística.html#modelo-simple"><i class="fa fa-check"></i><b>6.6.1</b> Modelo simple</a></li>
+<li class="chapter" data-level="6.6.2" data-path="regresión-logística.html"><a href="regresión-logística.html#agregar-predictores-y-evaluar-el-ajuste"><i class="fa fa-check"></i><b>6.6.2</b> Agregar predictores y evaluar el ajuste</a></li>
+<li class="chapter" data-level="6.6.3" data-path="regresión-logística.html"><a href="regresión-logística.html#análisis-de-interacciones"><i class="fa fa-check"></i><b>6.6.3</b> Análisis de interacciones</a></li>
+<li class="chapter" data-level="6.6.4" data-path="regresión-logística.html"><a href="regresión-logística.html#gráfico-de-la-interacción"><i class="fa fa-check"></i><b>6.6.4</b> Gráfico de la interacción</a></li>
+<li class="chapter" data-level="6.6.5" data-path="regresión-logística.html"><a href="regresión-logística.html#uso-del-modelo-para-predecir-probabilidades"><i class="fa fa-check"></i><b>6.6.5</b> Uso del modelo para predecir probabilidades</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="regresión-logística.html"><a href="regresión-logística.html#creación-de-un-modelo-y-validación"><i class="fa fa-check"></i><b>6.7</b> Creación de un modelo y validación</a></li>
+<li class="chapter" data-level="6.8" data-path="regresión-logística.html"><a href="regresión-logística.html#nomogramas"><i class="fa fa-check"></i><b>6.8</b> Nomogramas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html"><i class="fa fa-check"></i><b>7</b> Dealing with Big Data in R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#nodes-cores-processes-and-threads"><i class="fa fa-check"></i><b>7.1</b> Nodes, cores, processes and threads</a></li>
+<li class="chapter" data-level="7.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#paralelización"><i class="fa fa-check"></i><b>7.2</b> Paralelización</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#shared-memory-programming"><i class="fa fa-check"></i><b>7.2.1</b> Shared Memory Programming</a></li>
+<li class="chapter" data-level="7.2.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#distributed-memory-programming"><i class="fa fa-check"></i><b>7.2.2</b> Distributed Memory Programming</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#mapreduce"><i class="fa fa-check"></i><b>7.3</b> MapReduce</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#map"><i class="fa fa-check"></i><b>7.3.1</b> Map</a></li>
+<li class="chapter" data-level="7.3.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#reduce"><i class="fa fa-check"></i><b>7.3.2</b> Reduce</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>7.4</b> Example: Linear regression for Big Data</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>8</b> La librería <code>caret</code></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="caret.html"><a href="caret.html#pre-procesado"><i class="fa fa-check"></i><b>8.1</b> Pre-procesado</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="caret.html"><a href="caret.html#creación-de-variables"><i class="fa fa-check"></i><b>8.1.1</b> Creación de variables</a></li>
+<li class="chapter" data-level="8.1.2" data-path="caret.html"><a href="caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>8.1.2</b> Predictores con poca variabilidad</a></li>
+<li class="chapter" data-level="8.1.3" data-path="caret.html"><a href="caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>8.1.3</b> Identificación de predictores correlacionados</a></li>
+<li class="chapter" data-level="8.1.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#centrado-y-escalado"><i class="fa fa-check"></i><b>8.1.4</b> Centrado y escalado</a></li>
+<li class="chapter" data-level="8.1.5" data-path="caret.html"><a href="caret.html#imputación"><i class="fa fa-check"></i><b>8.1.5</b> Imputación</a></li>
+<li class="chapter" data-level="8.1.6" data-path="caret.html"><a href="caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>8.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="caret.html"><a href="caret.html#visualización"><i class="fa fa-check"></i><b>8.2</b> Visualización</a></li>
+<li class="chapter" data-level="8.3" data-path="caret.html"><a href="caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>8.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
+<li class="chapter" data-level="8.4" data-path="caret.html"><a href="caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>8.4</b> Creación de un modelo predictivo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="KNN.html"><a href="KNN.html"><i class="fa fa-check"></i><b>9</b> K vecinos más próximos (KNN)</a></li>
+<li class="chapter" data-level="10" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>10</b> Análisis discriminante lineal (LDA)</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html#concurso-predicción-de-actividad-física-con-sensores"><i class="fa fa-check"></i><b>10.1</b> Concurso predicción de actividad física con sensores</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html"><i class="fa fa-check"></i><b>11</b> Máquinas de soporte vectorial</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-margen-máximo"><i class="fa fa-check"></i><b>11.1</b> Clasificador de margen máximo</a></li>
+<li class="chapter" data-level="11.2" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-soporte-vectorial"><i class="fa fa-check"></i><b>11.2</b> Clasificador de soporte vectorial</a></li>
+<li class="chapter" data-level="11.3" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#máquinas-de-soporte-vectorial-1"><i class="fa fa-check"></i><b>11.3</b> Máquinas de soporte vectorial</a></li>
+<li class="chapter" data-level="11.4" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-e1071"><i class="fa fa-check"></i><b>11.4</b> SVM con <code>e1071</code></a></li>
+<li class="chapter" data-level="11.5" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-caret"><i class="fa fa-check"></i><b>11.5</b> SVM con <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="respuesta-no-balanceada.html"><a href="respuesta-no-balanceada.html"><i class="fa fa-check"></i><b>12</b> Respuesta no balanceada</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Aprendizaje Automático 1</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="KNN" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> K vecinos más próximos (KNN)</h1>
+<p>La regresión de K veinos más próximos (KNN por sus siglas en inglés) es un <strong>método no paramétrico</strong> que, de manera intuitiva, aproxima la asociación entre las variables independientes y el resultado continuo promediando las observaciones en la misma vecindad. El usuario debe establecer el número de vecinos o puede elegirlo mediante validación cruzada (lo veremos más adelante) para seleccionar el tamaño que minimiza el error cuadrático medio.</p>
+<p>Si bien el método es bastante atractivo, rápidamente se vuelve poco práctico cuando aumenta la dimensión, es decir, cuando hay muchas variables independientes.</p>
+<p>Los métodos del vecino más cercano proporcionan una forma bastante diferente de construir clasificadores y tienen fortalezas (supuestos mínimos, límites de decisión flexibles) y debilidades (carga computacional, falta de interpretabilidad) en comparación con los modelos de regresión logística.</p>
+<p>En principio, la idea es sencilla. Recordemos que el conjunto de entrenamiento tendrá tanto predictores <span class="math inline">\(X\)</span> como una variable resultado <span class="math inline">\(Y\)</span> mientras que el conjunto de prueba sólo tendrá
+valores de <span class="math inline">\(X\)</span> conocidos. Ambos conjunto de datos son necesarios.</p>
+<p>Comenzamos eligiendo un número entero positivo <span class="math inline">\(k\)</span> que especificará el número de vecinos que se utilizarán en la clasificación. Para clasificar un punto
+<span class="math inline">\(x\)</span> en el conjunto test, se buscarán los <span class="math inline">\(k\)</span> puntos más cercanos en el conjunto de entrenamiento, y se elige la clase que tenga la representación más alta entre los <span class="math inline">\(k\)</span> puntos. De aquí que el algoritmo se llame KNN (“k vecinos más cercanos”).</p>
+<div class="figure">
+<img src="figures/knn.jpg" alt="" />
+<p class="caption">Algoritmo KNN</p>
+</div>
+<p>Por ejemplo, supongamos que <span class="math inline">\(k=10\)</span> y los 10 vecinos más cercanos a <span class="math inline">\(x\)</span> tienen clases 1,1,3,2,3,3,3,2,3,2. Como hay cinco 3, tres 2 y dos 1, el punto <span class="math inline">\(x\)</span> se asigna a la clase 3. Supongamos que para otro <span class="math inline">\(x\)</span> los 10 vecinos más cercanos tienen clases 1,1,1,2,3,1,3,3,3,2. En este caso hay cuatro 1s y cuatro 3s, por lo que hay un empate en el liderato. El algoritmo vecino más cercano elegirá entre 1 y 3 al azar.</p>
+<p>Aunque, en principio, KNN es sencillo, surgen algunos problemas. Primero, ¿cómo deberíamos elegir <span class="math inline">\(k\)</span>? No hay una respuesta fácil, pero puede ayudar pensar en los valores extremos para <span class="math inline">\(k\)</span>. Podemos seleccionar <span class="math inline">\(k\)</span> lo mas grande posible. Por ejemplo, supongamos que el conjunto de entrenamiento tiene 10 observaciones, con clases 1,1,1,2,2,2,3,3,3,3. Para cualquier punto del conjunto de prueba,
+<span class="math inline">\(k=10\)</span> los vecinos más cercanos incluirán TODOS los puntos del conjunto de entrenamiento y, por lo tanto, cada punto del conjunto de prueba se clasificará en la clase 3. Este clasificador tiene una varianza baja (cero), pero probablemente un sesgo alto.</p>
+<p>Si seleccionamos <span class="math inline">\(k\)</span> lo mas pequeño posible, estaríamos en el caso <span class="math inline">\(k=1\)</span>. En este caso, cada punto del conjunto de prueba se coloca en la misma clase que su vecino más cercano en el conjunto de entrenamiento. Esto puede conducir a un clasificador de alta varianza y muy irregular, pero el sesgo tenderá a ser pequeño.</p>
+<p>Un segundo tema que es relativamente fácil de abordar se refiere a las escalas en las que se miden los valores de <span class="math inline">\(x\)</span>. Si por ejemplo una variable <span class="math inline">\(x\)</span> tienen un rango de 2 a 4, mientras que otra tiene un rango de 2000 a 4000, la distancia estará dominada por la segunda variable. La solución que se suele utilizar es normalizar todas las variables (cambiar su escala para que su media sea 0 y su desviación estándar sea 1).</p>
+<p>Existen muchas liberías para llevar a cabo KNN. Nosotros usaremos la libería <code>class</code> para ilustrar el ejemplo de cáncer de mama visto anteriormente y para el que ya hemos normalizado nuestros predictores.</p>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="KNN.html#cb512-1"></a><span class="kw">library</span>(class)</span>
+<span id="cb512-2"><a href="KNN.html#cb512-2"></a><span class="co"># para asegurarnos que usamos knn de class</span></span>
+<span id="cb512-3"><a href="KNN.html#cb512-3"></a>fit.knn &lt;-<span class="st"> </span>class<span class="op">::</span><span class="kw">knn</span>(<span class="dt">train=</span><span class="kw">select</span>(breast_train_prep, <span class="op">!</span>diagnosis),</span>
+<span id="cb512-4"><a href="KNN.html#cb512-4"></a>                      <span class="dt">test=</span><span class="kw">select</span>(breast_test_prep, <span class="op">!</span>diagnosis),</span>
+<span id="cb512-5"><a href="KNN.html#cb512-5"></a>                      <span class="dt">cl=</span>breast_train_prep<span class="op">$</span>diagnosis,</span>
+<span id="cb512-6"><a href="KNN.html#cb512-6"></a>                      <span class="dt">k=</span><span class="dv">10</span>, <span class="dt">prob=</span><span class="ot">TRUE</span>)</span>
+<span id="cb512-7"><a href="KNN.html#cb512-7"></a><span class="kw">head</span>(fit.knn)</span></code></pre></div>
+<pre><code>[1] M M M M M M
+Levels: B M</code></pre>
+<p>La probabilidad que cada individuo de la muestra test pertenezca al grupo asignado la podemos obtener con</p>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="KNN.html#cb514-1"></a>prob &lt;-<span class="st"> </span><span class="kw">attr</span>(fit.knn, <span class="st">&quot;prob&quot;</span>)</span>
+<span id="cb514-2"><a href="KNN.html#cb514-2"></a><span class="kw">head</span>(prob)</span></code></pre></div>
+<pre><code>[1] 1.0 1.0 1.0 0.6 0.7 1.0</code></pre>
+<p>A continuación podemos crear un gráfico. Esto es algo complejo, ya que queremos representar los datos de la muestra test coloreados por la clase a la que fueron asignados por el clasificador kNN (como fondo de la imagen) con los datos de entrenamiento (usando un símbolo diferente) y el límite de decisión. Este gráfico sólo lo podemos hacer para dos variables predictoras. Por ejemplo <code>symmetry_worst</code> y <code>texture_se</code>.</p>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="KNN.html#cb516-1"></a>plot.df &lt;-<span class="st"> </span>breast_test_prep <span class="op">%&gt;%</span></span>
+<span id="cb516-2"><a href="KNN.html#cb516-2"></a><span class="st">  </span><span class="kw">select</span>(symmetry_worst, texture_se ) <span class="op">%&gt;%</span></span>
+<span id="cb516-3"><a href="KNN.html#cb516-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">predicted =</span> <span class="kw">as.factor</span>(fit.knn))</span>
+<span id="cb516-4"><a href="KNN.html#cb516-4"></a><span class="co"># Usamos un &#39;convex hull&#39; para determinar los puntos que determinan los límites</span></span>
+<span id="cb516-5"><a href="KNN.html#cb516-5"></a><span class="co"># de cada cluster</span></span>
+<span id="cb516-6"><a href="KNN.html#cb516-6"></a>  </span>
+<span id="cb516-7"><a href="KNN.html#cb516-7"></a>plot.df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> plot.df<span class="op">$</span>symmetry_worst, </span>
+<span id="cb516-8"><a href="KNN.html#cb516-8"></a>                      <span class="dt">y =</span> plot.df<span class="op">$</span>texture_se, </span>
+<span id="cb516-9"><a href="KNN.html#cb516-9"></a>                      <span class="dt">predicted =</span> plot.df<span class="op">$</span>predicted)</span>
+<span id="cb516-10"><a href="KNN.html#cb516-10"></a></span>
+<span id="cb516-11"><a href="KNN.html#cb516-11"></a>find_hull &lt;-<span class="st"> </span><span class="cf">function</span>(df) df[<span class="kw">chull</span>(df<span class="op">$</span>x, df<span class="op">$</span>y), ]</span>
+<span id="cb516-12"><a href="KNN.html#cb516-12"></a>boundary &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">ddply</span>(plot.df1, <span class="dt">.variables =</span> <span class="st">&quot;predicted&quot;</span>, <span class="dt">.fun =</span> find_hull)</span>
+<span id="cb516-13"><a href="KNN.html#cb516-13"></a></span>
+<span id="cb516-14"><a href="KNN.html#cb516-14"></a><span class="kw">ggplot</span>(plot.df1, <span class="kw">aes</span>(x, y, <span class="dt">color =</span> predicted, <span class="dt">fill =</span> predicted)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb516-15"><a href="KNN.html#cb516-15"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb516-16"><a href="KNN.html#cb516-16"></a><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> boundary, <span class="kw">aes</span>(x,y), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb516-17"><a href="KNN.html#cb516-17"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;symmetry_worst&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;texture_se&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-201-1.png" width="672" /></p>
+<p>Podemos ver la matriz de confusión</p>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="KNN.html#cb517-1"></a>tt &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">predict=</span>fit.knn, <span class="dt">Actual=</span>breast_test_prep<span class="op">$</span>diagnosis)</span>
+<span id="cb517-2"><a href="KNN.html#cb517-2"></a>tt</span></code></pre></div>
+<pre><code>       Actual
+predict   B   M
+      B 105   9
+      M   2  54</code></pre>
+<p>y la precisión es</p>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="KNN.html#cb519-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(tt)<span class="op">/</span><span class="kw">sum</span>(tt))</span></code></pre></div>
+<pre><code>[1] 0.9352941</code></pre>
+<p>Podemos repetir los mismos cálculos para <span class="math inline">\(k=15\)</span></p>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="KNN.html#cb521-1"></a>fit.knn2 &lt;-<span class="st"> </span>class<span class="op">::</span><span class="kw">knn</span>(<span class="dt">train=</span><span class="kw">select</span>(breast_train_prep, <span class="op">!</span>diagnosis),</span>
+<span id="cb521-2"><a href="KNN.html#cb521-2"></a>                      <span class="dt">test=</span><span class="kw">select</span>(breast_test_prep, <span class="op">!</span>diagnosis),</span>
+<span id="cb521-3"><a href="KNN.html#cb521-3"></a>                      <span class="dt">cl=</span>breast_train_prep<span class="op">$</span>diagnosis,</span>
+<span id="cb521-4"><a href="KNN.html#cb521-4"></a>                      <span class="dt">k=</span><span class="dv">10</span>)</span>
+<span id="cb521-5"><a href="KNN.html#cb521-5"></a>fit.knn </span></code></pre></div>
+<pre><code>  [1] M M M M M M B B M M M B B M B B M B B M B M M B M B B B B B B M B B M M B
+ [38] B B B B B B B M M B B M B B M B B M B M M B B M M B M B B M B B M B M M M
+ [75] M B B B M B B B M B B B B B B B B B B M M B M M M B B B B M B B B B B B B
+[112] M B B B B B B B B B B M B B B B M B M M B B B M B M B B B B B B B M M B B
+[149] B M B B B B B M B B B B B B B B B B M M M B
+attr(,&quot;prob&quot;)
+  [1] 1.0 1.0 1.0 0.6 0.7 1.0 0.5 1.0 1.0 0.9 0.6 1.0 1.0 1.0 1.0 1.0 0.9 1.0
+ [19] 0.6 1.0 1.0 1.0 0.8 0.8 0.5 1.0 1.0 0.6 1.0 1.0 0.9 0.9 0.6 1.0 0.8 0.8
+ [37] 0.8 1.0 1.0 1.0 1.0 1.0 0.6 1.0 1.0 1.0 0.9 1.0 1.0 0.7 1.0 1.0 1.0 1.0
+ [55] 0.8 1.0 0.9 0.9 1.0 0.6 0.7 1.0 0.7 1.0 0.5 1.0 1.0 1.0 0.8 1.0 0.7 1.0
+ [73] 1.0 1.0 1.0 1.0 1.0 0.9 0.5 1.0 1.0 0.9 0.5 1.0 0.6 1.0 1.0 1.0 1.0 0.9
+ [91] 1.0 1.0 0.7 0.7 0.7 1.0 0.9 1.0 1.0 0.9 0.9 1.0 1.0 1.0 1.0 1.0 1.0 0.8
+[109] 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.9 1.0 0.7 1.0 1.0 1.0 0.8 1.0 0.8
+[127] 1.0 0.6 1.0 1.0 0.9 0.8 0.7 0.9 1.0 1.0 0.5 0.9 1.0 0.8 1.0 0.9 1.0 0.6
+[145] 0.9 1.0 0.9 0.9 1.0 0.9 1.0 0.9 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.7 1.0 1.0
+[163] 1.0 0.7 0.8 0.9 1.0 1.0 1.0 1.0
+Levels: B M</code></pre>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="KNN.html#cb523-1"></a>tt &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">predict=</span>fit.knn2, <span class="dt">Actual=</span>breast_test_prep<span class="op">$</span>diagnosis)</span>
+<span id="cb523-2"><a href="KNN.html#cb523-2"></a>tt</span></code></pre></div>
+<pre><code>       Actual
+predict   B   M
+      B 106   9
+      M   1  54</code></pre>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="KNN.html#cb525-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(tt)<span class="op">/</span><span class="kw">sum</span>(tt))</span></code></pre></div>
+<pre><code>[1] 0.9411765</code></pre>
+<p>La precisión es peor. Entonces, parece que la precisión (entre otras medidas) nos puede ayudar a determinar cómo escoger <span class="math inline">\(k\)</span>.</p>
+<p>Este parámetro se conoce como <strong>hiper-parámetro</strong> del modelo de predicción, y aquí es donde los métodos de validación cruzada son muy útiles.</p>
+<p>Podemos usar la librería <code>caret</code> para realizar estos cálculos:</p>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="KNN.html#cb527-1"></a>fitControl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="co">## LOCCV</span></span>
+<span id="cb527-2"><a href="KNN.html#cb527-2"></a>                           <span class="dt">method =</span> <span class="st">&quot;loocv&quot;</span>)</span>
+<span id="cb527-3"><a href="KNN.html#cb527-3"></a></span>
+<span id="cb527-4"><a href="KNN.html#cb527-4"></a>fit.knn3 &lt;-<span class="st"> </span><span class="kw">train</span>(diagnosis <span class="op">~</span><span class="st"> </span>., </span>
+<span id="cb527-5"><a href="KNN.html#cb527-5"></a>                  <span class="dt">data=</span>breast_train_prep,</span>
+<span id="cb527-6"><a href="KNN.html#cb527-6"></a>                  <span class="dt">method=</span><span class="st">&quot;knn&quot;</span>,</span>
+<span id="cb527-7"><a href="KNN.html#cb527-7"></a>                  <span class="dt">trControl =</span> fitControl, </span>
+<span id="cb527-8"><a href="KNN.html#cb527-8"></a>                  <span class="dt">tuneLength=</span><span class="dv">10</span>)</span>
+<span id="cb527-9"><a href="KNN.html#cb527-9"></a>      <span class="co"># no necesario pero se podría poner</span></span>
+<span id="cb527-10"><a href="KNN.html#cb527-10"></a>      <span class="co"># preProcess = c(&quot;center, &quot;scale&quot;)</span></span>
+<span id="cb527-11"><a href="KNN.html#cb527-11"></a>fit.knn3</span></code></pre></div>
+<pre><code>k-Nearest Neighbors 
+
+399 samples
+ 19 predictor
+  2 classes: &#39;B&#39;, &#39;M&#39; 
+
+No pre-processing
+Resampling: Leave-One-Out Cross-Validation 
+Summary of sample sizes: 398, 398, 398, 398, 398, 398, ... 
+Resampling results across tuning parameters:
+
+  k   Accuracy   Kappa
+   5  0.9423559  0    
+   7  0.9448622  0    
+   9  0.9523810  0    
+  11  0.9448622  0    
+  13  0.9423559  0    
+  15  0.9373434  0    
+  17  0.9373434  0    
+  19  0.9373434  0    
+  21  0.9373434  0    
+  23  0.9373434  0    
+
+Accuracy was used to select the optimal model using the largest value.
+The final value used for the model was k = 9.</code></pre>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="KNN.html#cb529-1"></a><span class="kw">plot</span>(fit.knn3)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-206-1.png" width="672" /></p>
+<p>Podemos obtener otras medidas de capacidad predictiva de la siguiente manera:</p>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="KNN.html#cb530-1"></a>knnPredict &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.knn3, <span class="dt">newdata=</span>breast_train_prep) </span>
+<span id="cb530-2"><a href="KNN.html#cb530-2"></a><span class="kw">confusionMatrix</span>(knnPredict, breast_train_prep<span class="op">$</span>diagnosis)</span></code></pre></div>
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction   B   M
+         B 246  13
+         M   4 136
+                                         
+               Accuracy : 0.9574         
+                 95% CI : (0.9327, 0.975)
+    No Information Rate : 0.6266         
+    P-Value [Acc &gt; NIR] : &lt; 2e-16        
+                                         
+                  Kappa : 0.9078         
+                                         
+ Mcnemar&#39;s Test P-Value : 0.05235        
+                                         
+            Sensitivity : 0.9840         
+            Specificity : 0.9128         
+         Pos Pred Value : 0.9498         
+         Neg Pred Value : 0.9714         
+             Prevalence : 0.6266         
+         Detection Rate : 0.6165         
+   Detection Prevalence : 0.6491         
+      Balanced Accuracy : 0.9484         
+                                         
+       &#39;Positive&#39; Class : B              
+                                         </code></pre>
+<table style="width:94%;">
+<colgroup>
+<col width="94%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>EJERCICIO</strong> (Entrega en Moodle: P2-KNN):</td>
+</tr>
+<tr class="even">
+<td align="left">Implementa una función (idealmente podrímo usar el padigma MapReduce) que nos devuelva la precisión del método KNN usando LOOCV para un rango de <span class="math inline">\(k\)</span> que le de el usuario y que devuelva cuál es el <span class="math inline">\(k\)</span> óptimo. Úsa esta función para reproducir los resultados del ejemplo anterior (los de la función <code>train()</code>).</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="caret.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="análisis-discriminante-lineal-lda.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/isglobal-brge/Aprendizaje_Automatico_1/tree/master/docs08-knn.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

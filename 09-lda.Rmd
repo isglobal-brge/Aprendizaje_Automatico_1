@@ -111,7 +111,28 @@ Implementa una función (idealmente podrímo usar el padigma MapReduce) que nos 
 ## Concurso predicción de actividad física con sensores
 
 
-El uso de dispositivos portátiles comerciales se está convirtiendo en una herramienta extremadamente útil para medir la actividad física a nivel poblacional. Se han recopilado muchos datos para determinar si estos dispositivos pueden predecir con precisión el estar acostado, sentado y diferentes niveles de intensidad de la actividad física mediante estudios controlados en laboratorios. Tenéis a disposición una base de datos de entrenamiento donde se han recolectado información para 4384 momentos de tiempo en los que los participantes estaban andando en una cinta de correr a distintas intesidades (a su ritmo, 3, 5, y 7 METS) y otros momentos en los que estaban acostados o sentado. Se utilizó calorimetría indirecta para medir el gasto energético. La variable resultado del estudio fua la clase de actividad realizada (variable `activity`) que tiene estas categorías: Pace walk, Running 3 METs, Running 5 METs, Running 7 METs, Lying y Sitting. Se usaron dos tipos de dispositivos (apple watch y fitbit) para medir distintas variables. 
+El uso de dispositivos portátiles comerciales se está convirtiendo en una herramienta extremadamente útil para medir la actividad física a nivel poblacional. Se han recopilado muchos datos para determinar si estos dispositivos pueden predecir con precisión el estar acostado, sentado y diferentes niveles de intensidad de la actividad física mediante estudios controlados en laboratorios. Tenéis a disposición una base de datos de entrenamiento donde se han recolectado información para 4384 momentos de tiempo en los que los participantes estaban andando en una cinta de correr a distintas intesidades (a su ritmo, 3, 5, y 7 METS) y otros momentos en los que estaban acostados o sentado. Se utilizó calorimetría indirecta para medir el gasto energético. La variable resultado del estudio fua la clase de actividad realizada (variable `activity`) que tiene estas categorías: Pace walk, Running 3 METs, Running 5 METs, Running 7 METs, Lying y Sitting. Se usaron dos tipos de dispositivos (apple watch y fitbit) para medir distintas variables. Las variables son (a partir de "weight" están medidas con el dispositivo):
+
+     + **id:** Identificador del individuo y momento 
+     + **age:** edad
+     + **gender:** sexo del individuo
+     + **height:** altura del individuo
+     + **weight:** peso de individuo
+     + **steps:** número de pasos durante la actividad
+     + **hear_rate:** pulso durante la actividad
+     + **calories:** calorías consumidas en la actividad
+     + **distance:** distancia recorrida en la actividad
+     + **entropy_heart:** entropía del pulso (la entropía mide la incertidumbre de una fuente de información)
+     + **entropy_setps:** entropía del número de pasos en la actividad 
+     + **resting_heart:** pulso en reposo
+     + **corr_heart_steps:** correlación entre el pulso y los pasos de la actividad
+     + **norm_heart:** pulso centrado
+     + **intensity_karvonen:** intensidad de la actividad según el índice de Karnoven
+     + **sd_norm_heart:** pulso estandarizado
+     + **steps_times_distance:** pasos por tiempo y distancia
+     + **device:** dispositivo        
+
+
 
 **TAREA:** Debéis crear un modelo predictivo que use todas las variables que hay en el objeto `test` (obviamente except la variable `id`) usando la estrategia que creáis oportuna y usando como modelo de aprendijaze o bien KNN o LDA. Podéis hacer todas las cosas que queráis con los datos: estratificarlos, analizarlos todos juntos, usar cualquier método de valización cruzada para validar el modelo, crear nuevas variables, elminar datos, ... ya que el objetivo es que apliquéis vuestro modelo a los datos `test` que contiene la misma información para 1880 observaciones excepto el tipo de actividad que se estaba realizando y que es lo que debéis predecir.
 

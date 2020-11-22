@@ -24,19 +24,20 @@ Los contenidos incluyen los siguientes temas:
 - Introducción al aprendizaje automático
 - Regresión lineal y logística
 - Pasos previos a la creación de un modelo predictivo y medidas de validación
+- Datos no balanceados
 - Métodos de aprendizaje automático
     - Arboles de clasificación
     - K-vecinos más cercanos
-    - Random Forest
-    - Boosting
-    - Métodos de aprendizaje para datos n<<p
-    - Métodos de penalización (shrinkage)
-    - Métodos de regularización
-- La librería ‘caret’
-- Métodos de aprendizaje para datos grandes (big data)
-    - XGBoost
-    - Lasso
-    - La librería ‘H20’
+    - Árboles: clasificación, regresión, bagged
+             - Random Forest
+             - Boosting
+             - XGBoost 
+- La librería 'caret'
+- La librería 'H20'
+- Modelos no lineales
+    - Splines
+    - MARS
+    - GAM
 
 
 En el aula virtual de la asignatura (Moodle) se dispondrán de numerosas preguntas de autoevaluación para que el alumno pueda ver si adquiere los conocimientos descritos en cada sesión teórica, así como varias prácticas que permitirán formar al alumno en el análisis de datos mediante las principales técnicas de aprendizaje automático utilizando datos reales usando el software R.

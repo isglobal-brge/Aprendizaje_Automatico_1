@@ -24,15 +24,15 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-10-25" />
+<meta name="date" content="2020-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="k-vecinos-más-próximos-knn.html"/>
-
+<link rel="prev" href="KNN.html"/>
+<link rel="next" href="máquinas-de-soporte-vectorial.html"/>
 <script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -178,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ajuste-de-un-modelo-lineal"><i class="fa fa-check"></i><b>4.3</b> Ajuste de un modelo lineal</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#residuos"><i class="fa fa-check"></i><b>4.3.1</b> Residuos</a></li>
-<li class="chapter" data-level="4.3.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#coeficientes-de-interpretación"><i class="fa fa-check"></i><b>4.3.2</b> Coeficientes de interpretación</a></li>
+<li class="chapter" data-level="4.3.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interpretación-de-coeficientes"><i class="fa fa-check"></i><b>4.3.2</b> Interpretación de coeficientes</a></li>
 <li class="chapter" data-level="4.3.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interacciones"><i class="fa fa-check"></i><b>4.3.3</b> Interacciones</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-por-mínimos-cuadrados"><i class="fa fa-check"></i><b>4.4</b> Estimación por mínimos cuadrados</a></li>
@@ -252,23 +252,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>7.4</b> Example: Linear regression for Big Data</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="la-librería-caret.html"><a href="la-librería-caret.html"><i class="fa fa-check"></i><b>8</b> La librería <code>caret</code></a>
+<li class="chapter" data-level="8" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>8</b> La librería <code>caret</code></a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="la-librería-caret.html"><a href="la-librería-caret.html#pre-procesado"><i class="fa fa-check"></i><b>8.1</b> Pre-procesado</a>
+<li class="chapter" data-level="8.1" data-path="caret.html"><a href="caret.html#pre-procesado"><i class="fa fa-check"></i><b>8.1</b> Pre-procesado</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="la-librería-caret.html"><a href="la-librería-caret.html#creación-de-variables"><i class="fa fa-check"></i><b>8.1.1</b> Creación de variables</a></li>
-<li class="chapter" data-level="8.1.2" data-path="la-librería-caret.html"><a href="la-librería-caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>8.1.2</b> Predictores con poca variabilidad</a></li>
-<li class="chapter" data-level="8.1.3" data-path="la-librería-caret.html"><a href="la-librería-caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>8.1.3</b> Identificación de predictores correlacionados</a></li>
+<li class="chapter" data-level="8.1.1" data-path="caret.html"><a href="caret.html#creación-de-variables"><i class="fa fa-check"></i><b>8.1.1</b> Creación de variables</a></li>
+<li class="chapter" data-level="8.1.2" data-path="caret.html"><a href="caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>8.1.2</b> Predictores con poca variabilidad</a></li>
+<li class="chapter" data-level="8.1.3" data-path="caret.html"><a href="caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>8.1.3</b> Identificación de predictores correlacionados</a></li>
 <li class="chapter" data-level="8.1.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#centrado-y-escalado"><i class="fa fa-check"></i><b>8.1.4</b> Centrado y escalado</a></li>
-<li class="chapter" data-level="8.1.5" data-path="la-librería-caret.html"><a href="la-librería-caret.html#imputación"><i class="fa fa-check"></i><b>8.1.5</b> Imputación</a></li>
-<li class="chapter" data-level="8.1.6" data-path="la-librería-caret.html"><a href="la-librería-caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>8.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
+<li class="chapter" data-level="8.1.5" data-path="caret.html"><a href="caret.html#imputación"><i class="fa fa-check"></i><b>8.1.5</b> Imputación</a></li>
+<li class="chapter" data-level="8.1.6" data-path="caret.html"><a href="caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>8.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="la-librería-caret.html"><a href="la-librería-caret.html#visualización"><i class="fa fa-check"></i><b>8.2</b> Visualización</a></li>
-<li class="chapter" data-level="8.3" data-path="la-librería-caret.html"><a href="la-librería-caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>8.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
-<li class="chapter" data-level="8.4" data-path="la-librería-caret.html"><a href="la-librería-caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>8.4</b> Creación de un modelo predictivo</a></li>
+<li class="chapter" data-level="8.2" data-path="caret.html"><a href="caret.html#visualización"><i class="fa fa-check"></i><b>8.2</b> Visualización</a></li>
+<li class="chapter" data-level="8.3" data-path="caret.html"><a href="caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>8.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
+<li class="chapter" data-level="8.4" data-path="caret.html"><a href="caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>8.4</b> Creación de un modelo predictivo</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="k-vecinos-más-próximos-knn.html"><a href="k-vecinos-más-próximos-knn.html"><i class="fa fa-check"></i><b>9</b> K vecinos más próximos (KNN)</a></li>
-<li class="chapter" data-level="10" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>10</b> Análisis discriminante lineal (LDA)</a></li>
+<li class="chapter" data-level="9" data-path="KNN.html"><a href="KNN.html"><i class="fa fa-check"></i><b>9</b> K vecinos más próximos (KNN)</a></li>
+<li class="chapter" data-level="10" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>10</b> Análisis discriminante lineal (LDA)</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html#concurso-predicción-de-actividad-física-con-sensores"><i class="fa fa-check"></i><b>10.1</b> Concurso predicción de actividad física con sensores</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html"><i class="fa fa-check"></i><b>11</b> Máquinas de soporte vectorial</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-margen-máximo"><i class="fa fa-check"></i><b>11.1</b> Clasificador de margen máximo</a></li>
+<li class="chapter" data-level="11.2" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-soporte-vectorial"><i class="fa fa-check"></i><b>11.2</b> Clasificador de soporte vectorial</a></li>
+<li class="chapter" data-level="11.3" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#máquinas-de-soporte-vectorial-1"><i class="fa fa-check"></i><b>11.3</b> Máquinas de soporte vectorial</a></li>
+<li class="chapter" data-level="11.4" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-e1071"><i class="fa fa-check"></i><b>11.4</b> SVM con <code>e1071</code></a></li>
+<li class="chapter" data-level="11.5" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-caret"><i class="fa fa-check"></i><b>11.5</b> SVM con <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="respuesta-no-balanceada.html"><a href="respuesta-no-balanceada.html"><i class="fa fa-check"></i><b>12</b> Respuesta no balanceada</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -311,10 +323,10 @@ En general, el modelo requiere <span class="math inline">\(CP + P(P + 1)/2\)</sp
 <li><p>En la práctica, es mejor centrar y escalar los predictores y eliminar los predictores de varianza cercana a cero. Si la matriz aún no es invertible, deberíamos usar Penalized Least Squares o Regularización (se verán en otros cursos).</p></li>
 </ul>
 <p>Veamos cómo hacer este análisis para los datos de cáncer de mama vistos en el capítulo anterior. Podemos llevar a cabo los análisis con muchas librerías, aquí usarems <code>MASS</code>. Tal y como es recomendado, usaremos los datos centrados y escalados (e.g normalizados) y eliminados las variables con varianza cercana a 0 que habíamos obtenido con la librería <code>recipes</code>. Empezaremos usando 2 variables para que la visualización sea más clara.</p>
-<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="análisis-discriminante-lineal-lda.html#cb526-1"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb526-2"><a href="análisis-discriminante-lineal-lda.html#cb526-2"></a>fit.lda &lt;-<span class="st"> </span><span class="kw">lda</span>(diagnosis <span class="op">~</span><span class="st"> </span>.,</span>
-<span id="cb526-3"><a href="análisis-discriminante-lineal-lda.html#cb526-3"></a>               <span class="dt">data=</span> breast_train_prep)</span>
-<span id="cb526-4"><a href="análisis-discriminante-lineal-lda.html#cb526-4"></a>fit.lda</span></code></pre></div>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="análisis-discriminante-lineal-lda.html#cb532-1"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb532-2"><a href="análisis-discriminante-lineal-lda.html#cb532-2"></a>fit.lda &lt;-<span class="st"> </span><span class="kw">lda</span>(diagnosis <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb532-3"><a href="análisis-discriminante-lineal-lda.html#cb532-3"></a>               <span class="dt">data=</span> breast_train_prep)</span>
+<span id="cb532-4"><a href="análisis-discriminante-lineal-lda.html#cb532-4"></a>fit.lda</span></code></pre></div>
 <pre><code>Call:
 lda(diagnosis ~ ., data = breast_train_prep)
 
@@ -323,102 +335,82 @@ Prior probabilities of groups:
 0.6265664 0.3734336 
 
 Group means:
-  radius_mean texture_mean perimeter_mean  area_mean smoothness_mean
-B  -0.5664024   -0.3345955     -0.5770578 -0.5518490       -0.268585
-M   0.9503397    0.5614018      0.9682179  0.9259212        0.450646
-  compactness_mean concavity_mean `concave points_mean` symmetry_mean
-B       -0.4766017     -0.5636826             -0.603954    -0.2791966
-M        0.7996673      0.9457761              1.013346     0.4684507
-  fractal_dimension_mean  radius_se  texture_se perimeter_se
-B           -0.004083286 -0.4447273  0.01149947   -0.4299533
-M            0.006851150  0.7461867 -0.01929442    0.7213981
-     area_se smoothness_se compactness_se concavity_se
-B -0.4401372    0.03661085     -0.2657811   -0.2982358
-M  0.7384853   -0.06142761      0.4459414    0.5003956
-  `concave points_se` symmetry_se fractal_dimension_se radius_worst
-B          -0.3482647 -0.01040297           -0.1039087   -0.6048778
-M           0.5843367  0.01745464            0.1743434    1.0148956
-  texture_worst perimeter_worst area_worst smoothness_worst
-B    -0.3618505      -0.6108433  -0.579185       -0.3274326
-M     0.6071317       1.0249049   0.971787        0.5493836
-  compactness_worst concavity_worst `concave points_worst`
-B         -0.470998      -0.5448359             -0.6204192
-M          0.790265       0.9141541              1.0409719
-  symmetry_worst fractal_dimension_worst
-B     -0.3412650              -0.2666749
-M      0.5725924               0.4474411
+  texture_mean  area_mean smoothness_mean compactness_mean symmetry_mean
+B   -0.3345955 -0.5518490       -0.268585       -0.4766017    -0.2791966
+M    0.5614018  0.9259212        0.450646        0.7996673     0.4684507
+  fractal_dimension_mean  texture_se    area_se smoothness_se compactness_se
+B           -0.004083286  0.01149947 -0.4401372    0.03661085     -0.2657811
+M            0.006851150 -0.01929442  0.7384853   -0.06142761      0.4459414
+  concavity_se `concave points_se` symmetry_se fractal_dimension_se
+B   -0.2982358          -0.3482647 -0.01040297           -0.1039087
+M    0.5003956           0.5843367  0.01745464            0.1743434
+  smoothness_worst compactness_worst `concave points_worst` symmetry_worst
+B       -0.3274326         -0.470998             -0.6204192     -0.3412650
+M        0.5493836          0.790265              1.0409719      0.5725924
+  fractal_dimension_worst
+B              -0.2666749
+M               0.4474411
 
 Coefficients of linear discriminants:
-                                 LD1
-radius_mean             -3.519236589
-texture_mean            -0.058490416
-perimeter_mean           3.109779310
-area_mean                0.428021280
-smoothness_mean          0.052473510
-compactness_mean        -0.949822914
-concavity_mean           0.544892037
-`concave points_mean`    0.087020117
-symmetry_mean           -0.002584399
-fractal_dimension_mean  -0.010309957
-radius_se                1.383503849
-texture_se              -0.155362815
-perimeter_se            -0.994824973
-area_se                 -0.186606167
-smoothness_se            0.454403918
-compactness_se           0.036469307
-concavity_se            -0.432226708
-`concave points_se`      0.392940884
-symmetry_se              0.017801482
-fractal_dimension_se    -0.321447172
-radius_worst             2.894353152
-texture_worst            0.426975371
-perimeter_worst          0.435894836
-area_worst              -2.196976566
-smoothness_worst        -0.262348680
-compactness_worst       -0.072738404
-concavity_worst          0.539409429
-`concave points_worst`   0.212121460
-symmetry_worst           0.213536977
-fractal_dimension_worst  0.668105039</code></pre>
+                                LD1
+texture_mean             0.30931136
+area_mean                0.68624260
+smoothness_mean          0.13601919
+compactness_mean        -0.09120911
+symmetry_mean           -0.01090323
+fractal_dimension_mean  -0.54404616
+texture_se               0.03822818
+area_se                  0.14461685
+smoothness_se            0.33368817
+compactness_se          -0.38173259
+concavity_se             0.15241639
+`concave points_se`      0.22229600
+symmetry_se             -0.04340207
+fractal_dimension_se    -0.24056708
+smoothness_worst        -0.11356764
+compactness_worst        0.06356340
+`concave points_worst`   0.75475718
+symmetry_worst           0.35329884
+fractal_dimension_worst  0.83711669</code></pre>
 <p>Podemos observar cuánto vale la media para cada variable en cada uno de los grupos, y esto nos puede ayudar a saber qué variables son más importantes. Los coeficientes de los discriminantes lineales también nos pueden ayudar con la interpretación.</p>
 <p>Podemos representar el valor de cada grupo para el primer discriminante lineal (sólo hay 1 ya que tenemos 2 grupos).</p>
-<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="análisis-discriminante-lineal-lda.html#cb528-1"></a>prd &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.lda, breast_train_prep )</span>
-<span id="cb528-2"><a href="análisis-discriminante-lineal-lda.html#cb528-2"></a><span class="kw">ldahist</span>(<span class="dt">data =</span> prd<span class="op">$</span>x[,<span class="dv">1</span>], <span class="dt">g =</span> breast_train_prep<span class="op">$</span>diagnosis)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-204-1.png" width="672" /></p>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="análisis-discriminante-lineal-lda.html#cb534-1"></a>prd &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.lda, breast_train_prep )</span>
+<span id="cb534-2"><a href="análisis-discriminante-lineal-lda.html#cb534-2"></a><span class="kw">ldahist</span>(<span class="dt">data =</span> prd<span class="op">$</span>x[,<span class="dv">1</span>], <span class="dt">g =</span> breast_train_prep<span class="op">$</span>diagnosis)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-209-1.png" width="672" /></p>
 <p>Vemos que los grupos quedan bien separados según el primer discrimiante lineal.</p>
 <p>Si tuviéramos 3 grupos también podríamos representar la misma clasificación para el primer y el segundo discriminate lineal. Para ello usaríamos la librería <code>ggord</code> que está en GitHub. Usaremos los datos iris para ilustrar este caso:</p>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="análisis-discriminante-lineal-lda.html#cb529-1"></a><span class="co"># devtools::install_github(&quot;fawda123/ggord&quot;)</span></span>
-<span id="cb529-2"><a href="análisis-discriminante-lineal-lda.html#cb529-2"></a><span class="kw">library</span>(ggord)</span>
-<span id="cb529-3"><a href="análisis-discriminante-lineal-lda.html#cb529-3"></a></span>
-<span id="cb529-4"><a href="análisis-discriminante-lineal-lda.html#cb529-4"></a>lnr &lt;-<span class="st"> </span><span class="kw">lda</span>(Species<span class="op">~</span>., iris)</span>
-<span id="cb529-5"><a href="análisis-discriminante-lineal-lda.html#cb529-5"></a><span class="kw">ggord</span>(lnr, iris<span class="op">$</span>Species, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span> ))</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-205-1.png" width="672" /></p>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="análisis-discriminante-lineal-lda.html#cb535-1"></a><span class="co"># devtools::install_github(&quot;fawda123/ggord&quot;)</span></span>
+<span id="cb535-2"><a href="análisis-discriminante-lineal-lda.html#cb535-2"></a><span class="kw">library</span>(ggord)</span>
+<span id="cb535-3"><a href="análisis-discriminante-lineal-lda.html#cb535-3"></a></span>
+<span id="cb535-4"><a href="análisis-discriminante-lineal-lda.html#cb535-4"></a>lnr &lt;-<span class="st"> </span><span class="kw">lda</span>(Species<span class="op">~</span>., iris)</span>
+<span id="cb535-5"><a href="análisis-discriminante-lineal-lda.html#cb535-5"></a><span class="kw">ggord</span>(lnr, iris<span class="op">$</span>Species, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span> ))</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-210-1.png" width="672" /></p>
 <p>Podemos evaluar de forma manual cómo predice nuestro modelo en la muestra test para nuestro ejemplo de cáncer de mama usando la matriz de confusión:</p>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="análisis-discriminante-lineal-lda.html#cb530-1"></a>p.train &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.lda, breast_test_prep)<span class="op">$</span>class</span>
-<span id="cb530-2"><a href="análisis-discriminante-lineal-lda.html#cb530-2"></a>tt &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">predict=</span>p.train, <span class="dt">Actual=</span>breast_test_prep<span class="op">$</span>diagnosis)</span>
-<span id="cb530-3"><a href="análisis-discriminante-lineal-lda.html#cb530-3"></a>tt</span></code></pre></div>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="análisis-discriminante-lineal-lda.html#cb536-1"></a>p.train &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.lda, breast_test_prep)<span class="op">$</span>class</span>
+<span id="cb536-2"><a href="análisis-discriminante-lineal-lda.html#cb536-2"></a>tt &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">predict=</span>p.train, <span class="dt">Actual=</span>breast_test_prep<span class="op">$</span>diagnosis)</span>
+<span id="cb536-3"><a href="análisis-discriminante-lineal-lda.html#cb536-3"></a>tt</span></code></pre></div>
 <pre><code>       Actual
 predict   B   M
-      B 106   5
-      M   1  58</code></pre>
+      B 104   7
+      M   3  56</code></pre>
 <p>Cuya precisión podemos calcular como:</p>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="análisis-discriminante-lineal-lda.html#cb532-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(tt)<span class="op">/</span><span class="kw">sum</span>(tt))</span></code></pre></div>
-<pre><code>[1] 0.9647059</code></pre>
+<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="análisis-discriminante-lineal-lda.html#cb538-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(tt)<span class="op">/</span><span class="kw">sum</span>(tt))</span></code></pre></div>
+<pre><code>[1] 0.9411765</code></pre>
 <p>También podemos evauar la capacidar de nuestro modelo usando, por ejemplo, 10-fold CV con la librería <code>caret</code>. En este caso bastaría con</p>
-<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="análisis-discriminante-lineal-lda.html#cb534-1"></a>fitControl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="co">## 10-fold CV</span></span>
-<span id="cb534-2"><a href="análisis-discriminante-lineal-lda.html#cb534-2"></a>                           <span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
-<span id="cb534-3"><a href="análisis-discriminante-lineal-lda.html#cb534-3"></a>                           <span class="dt">number =</span> <span class="dv">10</span>,</span>
-<span id="cb534-4"><a href="análisis-discriminante-lineal-lda.html#cb534-4"></a>                           <span class="co">## repeated five times</span></span>
-<span id="cb534-5"><a href="análisis-discriminante-lineal-lda.html#cb534-5"></a>                           <span class="dt">repeats =</span> <span class="dv">5</span>)</span>
-<span id="cb534-6"><a href="análisis-discriminante-lineal-lda.html#cb534-6"></a></span>
-<span id="cb534-7"><a href="análisis-discriminante-lineal-lda.html#cb534-7"></a><span class="kw">train</span>(diagnosis <span class="op">~</span><span class="st"> </span>., </span>
-<span id="cb534-8"><a href="análisis-discriminante-lineal-lda.html#cb534-8"></a>      <span class="dt">data=</span>breast_train_prep,</span>
-<span id="cb534-9"><a href="análisis-discriminante-lineal-lda.html#cb534-9"></a>      <span class="dt">method=</span><span class="st">&quot;lda&quot;</span>,</span>
-<span id="cb534-10"><a href="análisis-discriminante-lineal-lda.html#cb534-10"></a>      <span class="dt">trControl =</span> fitControl)</span></code></pre></div>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="análisis-discriminante-lineal-lda.html#cb540-1"></a>fitControl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="co">## 10-fold CV</span></span>
+<span id="cb540-2"><a href="análisis-discriminante-lineal-lda.html#cb540-2"></a>                           <span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
+<span id="cb540-3"><a href="análisis-discriminante-lineal-lda.html#cb540-3"></a>                           <span class="dt">number =</span> <span class="dv">10</span>,</span>
+<span id="cb540-4"><a href="análisis-discriminante-lineal-lda.html#cb540-4"></a>                           <span class="co">## repeated five times</span></span>
+<span id="cb540-5"><a href="análisis-discriminante-lineal-lda.html#cb540-5"></a>                           <span class="dt">repeats =</span> <span class="dv">5</span>)</span>
+<span id="cb540-6"><a href="análisis-discriminante-lineal-lda.html#cb540-6"></a></span>
+<span id="cb540-7"><a href="análisis-discriminante-lineal-lda.html#cb540-7"></a><span class="kw">train</span>(diagnosis <span class="op">~</span><span class="st"> </span>., </span>
+<span id="cb540-8"><a href="análisis-discriminante-lineal-lda.html#cb540-8"></a>      <span class="dt">data=</span>breast_train_prep,</span>
+<span id="cb540-9"><a href="análisis-discriminante-lineal-lda.html#cb540-9"></a>      <span class="dt">method=</span><span class="st">&quot;lda&quot;</span>,</span>
+<span id="cb540-10"><a href="análisis-discriminante-lineal-lda.html#cb540-10"></a>      <span class="dt">trControl =</span> fitControl)</span></code></pre></div>
 <pre><code>Linear Discriminant Analysis 
 
 399 samples
- 30 predictor
+ 19 predictor
   2 classes: &#39;B&#39;, &#39;M&#39; 
 
 No pre-processing
@@ -427,7 +419,7 @@ Summary of sample sizes: 359, 359, 359, 359, 359, 359, ...
 Resampling results:
 
   Accuracy   Kappa    
-  0.9543205  0.8995674</code></pre>
+  0.9593974  0.9106868</code></pre>
 <p>Vemos que la precisión estimada en la muestra test es bastante parecida a la predicha mediante 10-fold CV.</p>
 <table style="width:94%;">
 <colgroup>
@@ -442,27 +434,42 @@ Resampling results:
 </tr>
 </tbody>
 </table>
+<div id="concurso-predicción-de-actividad-física-con-sensores" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Concurso predicción de actividad física con sensores</h2>
+<p>El uso de dispositivos portátiles comerciales se está convirtiendo en una herramienta extremadamente útil para medir la actividad física a nivel poblacional. Se han recopilado muchos datos para determinar si estos dispositivos pueden predecir con precisión el estar acostado, sentado y diferentes niveles de intensidad de la actividad física mediante estudios controlados en laboratorios. Tenéis a disposición una base de datos de entrenamiento donde se han recolectado información para 4384 momentos de tiempo en los que los participantes estaban andando en una cinta de correr a distintas intesidades (a su ritmo, 3, 5, y 7 METS) y otros momentos en los que estaban acostados o sentado. Se utilizó calorimetría indirecta para medir el gasto energético. La variable resultado del estudio fua la clase de actividad realizada (variable <code>activity</code>) que tiene estas categorías: Pace walk, Running 3 METs, Running 5 METs, Running 7 METs, Lying y Sitting. Se usaron dos tipos de dispositivos (apple watch y fitbit) para medir distintas variables. Las variables son (a partir de “weight” están medidas con el dispositivo):</p>
+<pre><code> + **id:** Identificador del individuo y momento 
+ + **age:** edad
+ + **gender:** sexo del individuo
+ + **height:** altura del individuo
+ + **weight:** peso de individuo
+ + **steps:** número de pasos durante la actividad
+ + **hear_rate:** pulso durante la actividad
+ + **calories:** calorías consumidas en la actividad
+ + **distance:** distancia recorrida en la actividad
+ + **entropy_heart:** entropía del pulso (la entropía mide la incertidumbre de una fuente de información)
+ + **entropy_setps:** entropía del número de pasos en la actividad 
+ + **resting_heart:** pulso en reposo
+ + **corr_heart_steps:** correlación entre el pulso y los pasos de la actividad
+ + **norm_heart:** pulso centrado
+ + **intensity_karvonen:** intensidad de la actividad según el índice de Karnoven
+ + **sd_norm_heart:** pulso estandarizado
+ + **steps_times_distance:** pasos por tiempo y distancia
+ + **device:** dispositivo        </code></pre>
+<p><strong>TAREA:</strong> Debéis crear un modelo predictivo que use todas las variables que hay en el objeto <code>test</code> (obviamente except la variable <code>id</code>) usando la estrategia que creáis oportuna y usando como modelo de aprendijaze o bien KNN o LDA. Podéis hacer todas las cosas que queráis con los datos: estratificarlos, analizarlos todos juntos, usar cualquier método de valización cruzada para validar el modelo, crear nuevas variables, elminar datos, … ya que el objetivo es que apliquéis vuestro modelo a los datos <code>test</code> que contiene la misma información para 1880 observaciones excepto el tipo de actividad que se estaba realizando y que es lo que debéis predecir.</p>
+<p><strong>ENTREGA:</strong> Debeis subir un fichero <code>NIU.txt</code> (NIU es vuestro identificador de la UAB) a la tarea que hay en Moodle llamada <strong>P-Concurso_Predicción</strong> con vuestras predicciones para la muestra <code>test</code>. Este fichero debe ser un fichero de texto delimitado por tabulaciones con dos columnas que se llamen “id” y “activity”. Obviamente la columna “id” corresponde a la variable <code>id</code> de la base de datos <code>test</code> y la otra columna debe contener vuestra predicción que debe ser un valor entre: Pace walk, Running 3 METs, Running 5 METs, Running 7 METs, Lying o Sitting. Este fichero se puede crear a partir de un objeto de R que tenga un data.frame con esas dos variables y usando la función <code>write.table()</code>. También debéis subir el archivo de R (con comentarios) o un R Markdown explicando la estrategia llevada a cabo en la tarea de Moodle llamada <strong>P-Concurso_Estrategia</strong>.</p>
+<p><strong>EVALUACIÓN</strong>: Yo evaluaré la capacidad predictiva de vuestro modelo ya que tengo el valor real para esa predicción que habéis hecho y a la cuál no tenéis acceso. La nota con la que os evaluaré esta práctica estará en función de vuestra capacidad de predicción y que básicamente será una nota que estableceré según el ranking obtenido por cada uno de vosotros.</p>
+<p><strong>ACCESO A DATOS:</strong> Los datos están en un fichero llamado <code>actividad_fisica.Rdata</code> que contiene los objectos <code>train</code> y <code>test</code> a los que he hecho referencia y que están en la carpeta datos del Moodle de la asignatura.</p>
+<p><strong>MUY IMPORTANTE:</strong> Aquel alumno que me entrege un fichero que no siga el formato indicado, tendrá un 4 en esta práctica como nota máxima.</p>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="k-vecinos-más-próximos-knn.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="KNN.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="máquinas-de-soporte-vectorial.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,4 +1,4 @@
-# K vecinos más próximos (KNN)
+# K vecinos más próximos (KNN) {#KNN}
 
 La regresión de K veinos más próximos (KNN por sus siglas en inglés) es un **método no paramétrico** que, de manera intuitiva, aproxima la asociación entre las variables independientes y el resultado continuo promediando las observaciones en la misma vecindad. El usuario debe establecer el número de vecinos o puede elegirlo mediante validación cruzada (lo veremos más adelante) para seleccionar el tamaño que minimiza el error cuadrático medio.
 
@@ -122,7 +122,7 @@ plot(fit.knn3)
 ```
 
 
-Podemos obtener otras medidas de capacidad preductiva de la siguiente manera:
+Podemos obtener otras medidas de capacidad predictiva de la siguiente manera:
 
 ```{r}
 knnPredict <- predict(fit.knn3, newdata=breast_train_prep) 
