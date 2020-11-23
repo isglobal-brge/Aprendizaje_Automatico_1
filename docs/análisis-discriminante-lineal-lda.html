@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-11-22" />
+<meta name="date" content="2020-11-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -322,7 +322,7 @@ En general, el modelo requiere <span class="math inline">\(CP + P(P + 1)/2\)</sp
 <li><p>La formulación de Fisher es intuitiva, fácil de resolver matemáticamente y, a diferencia del enfoque de Welch, no implica suposiciones sobre las distribuciones subyacentes de los datos.</p></li>
 <li><p>En la práctica, es mejor centrar y escalar los predictores y eliminar los predictores de varianza cercana a cero. Si la matriz aún no es invertible, deberíamos usar Penalized Least Squares o Regularización (se verán en otros cursos).</p></li>
 </ul>
-<p>Veamos cómo hacer este análisis para los datos de cáncer de mama vistos en el capítulo anterior. Podemos llevar a cabo los análisis con muchas librerías, aquí usarems <code>MASS</code>. Tal y como es recomendado, usaremos los datos centrados y escalados (e.g normalizados) y eliminados las variables con varianza cercana a 0 que habíamos obtenido con la librería <code>recipes</code>. Empezaremos usando 2 variables para que la visualización sea más clara.</p>
+<p>Veamos cómo hacer este análisis para los datos de cáncer de mama vistos en el capítulo anterior. Podemos llevar a cabo los análisis con muchas librerías, aquí usarems <code>MASS</code>. Tal y como es recomendado, usaremos los datos centrados y escalados (e.g normalizados) y eliminados las variables con varianza cercana a 0 que habíamos obtenido con la librería <code>recipes</code>. Usaremos el enfoque de Fisher que es el que más se usa en la actualida y que está implementado en la función <code>lda</code>.</p>
 <div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="análisis-discriminante-lineal-lda.html#cb532-1"></a><span class="kw">library</span>(MASS)</span>
 <span id="cb532-2"><a href="análisis-discriminante-lineal-lda.html#cb532-2"></a>fit.lda &lt;-<span class="st"> </span><span class="kw">lda</span>(diagnosis <span class="op">~</span><span class="st"> </span>.,</span>
 <span id="cb532-3"><a href="análisis-discriminante-lineal-lda.html#cb532-3"></a>               <span class="dt">data=</span> breast_train_prep)</span>
@@ -335,21 +335,15 @@ Prior probabilities of groups:
 0.6265664 0.3734336 
 
 Group means:
-  texture_mean  area_mean smoothness_mean compactness_mean symmetry_mean
-B   -0.3345955 -0.5518490       -0.268585       -0.4766017    -0.2791966
-M    0.5614018  0.9259212        0.450646        0.7996673     0.4684507
-  fractal_dimension_mean  texture_se    area_se smoothness_se compactness_se
-B           -0.004083286  0.01149947 -0.4401372    0.03661085     -0.2657811
-M            0.006851150 -0.01929442  0.7384853   -0.06142761      0.4459414
-  concavity_se `concave points_se` symmetry_se fractal_dimension_se
-B   -0.2982358          -0.3482647 -0.01040297           -0.1039087
-M    0.5003956           0.5843367  0.01745464            0.1743434
-  smoothness_worst compactness_worst `concave points_worst` symmetry_worst
-B       -0.3274326         -0.470998             -0.6204192     -0.3412650
-M        0.5493836          0.790265              1.0409719      0.5725924
-  fractal_dimension_worst
-B              -0.2666749
-M               0.4474411
+  texture_mean  area_mean smoothness_mean compactness_mean symmetry_mean fractal_dimension_mean  texture_se
+B   -0.3345955 -0.5518490       -0.268585       -0.4766017    -0.2791966           -0.004083286  0.01149947
+M    0.5614018  0.9259212        0.450646        0.7996673     0.4684507            0.006851150 -0.01929442
+     area_se smoothness_se compactness_se concavity_se `concave points_se` symmetry_se fractal_dimension_se
+B -0.4401372    0.03661085     -0.2657811   -0.2982358          -0.3482647 -0.01040297           -0.1039087
+M  0.7384853   -0.06142761      0.4459414    0.5003956           0.5843367  0.01745464            0.1743434
+  smoothness_worst compactness_worst `concave points_worst` symmetry_worst fractal_dimension_worst
+B       -0.3274326         -0.470998             -0.6204192     -0.3412650              -0.2666749
+M        0.5493836          0.790265              1.0409719      0.5725924               0.4474411
 
 Coefficients of linear discriminants:
                                 LD1

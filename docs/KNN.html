@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-11-22" />
+<meta name="date" content="2020-11-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -368,22 +368,18 @@ predict   B   M
 <span id="cb521-3"><a href="KNN.html#cb521-3"></a>                      <span class="dt">cl=</span>breast_train_prep<span class="op">$</span>diagnosis,</span>
 <span id="cb521-4"><a href="KNN.html#cb521-4"></a>                      <span class="dt">k=</span><span class="dv">10</span>)</span>
 <span id="cb521-5"><a href="KNN.html#cb521-5"></a>fit.knn </span></code></pre></div>
-<pre><code>  [1] M M M M M M B B M M M B B M B B M B B M B M M B M B B B B B B M B B M M B
- [38] B B B B B B B M M B B M B B M B B M B M M B B M M B M B B M B B M B M M M
- [75] M B B B M B B B M B B B B B B B B B B M M B M M M B B B B M B B B B B B B
-[112] M B B B B B B B B B B M B B B B M B M M B B B M B M B B B B B B B M M B B
-[149] B M B B B B B M B B B B B B B B B B M M M B
+<pre><code>  [1] M M M M M M B B M M M B B M B B M B B M B M M B M B B B B B B M B B M M B B B B B B B B M M B B M B B M B
+ [54] B M B M M B B M M B M B B M B B M B M M M M B B B M B B B M B B B B B B B B B B M M B M M M B B B B M B B
+[107] B B B B B M B B B B B B B B B B M B B B B M B M M B B B M B M B B B B B B B M M B B B M B B B B B M B B B
+[160] B B B B B B B M M M B
 attr(,&quot;prob&quot;)
-  [1] 1.0 1.0 1.0 0.6 0.7 1.0 0.5 1.0 1.0 0.9 0.6 1.0 1.0 1.0 1.0 1.0 0.9 1.0
- [19] 0.6 1.0 1.0 1.0 0.8 0.8 0.5 1.0 1.0 0.6 1.0 1.0 0.9 0.9 0.6 1.0 0.8 0.8
- [37] 0.8 1.0 1.0 1.0 1.0 1.0 0.6 1.0 1.0 1.0 0.9 1.0 1.0 0.7 1.0 1.0 1.0 1.0
- [55] 0.8 1.0 0.9 0.9 1.0 0.6 0.7 1.0 0.7 1.0 0.5 1.0 1.0 1.0 0.8 1.0 0.7 1.0
- [73] 1.0 1.0 1.0 1.0 1.0 0.9 0.5 1.0 1.0 0.9 0.5 1.0 0.6 1.0 1.0 1.0 1.0 0.9
- [91] 1.0 1.0 0.7 0.7 0.7 1.0 0.9 1.0 1.0 0.9 0.9 1.0 1.0 1.0 1.0 1.0 1.0 0.8
-[109] 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.9 1.0 0.7 1.0 1.0 1.0 0.8 1.0 0.8
-[127] 1.0 0.6 1.0 1.0 0.9 0.8 0.7 0.9 1.0 1.0 0.5 0.9 1.0 0.8 1.0 0.9 1.0 0.6
-[145] 0.9 1.0 0.9 0.9 1.0 0.9 1.0 0.9 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.7 1.0 1.0
-[163] 1.0 0.7 0.8 0.9 1.0 1.0 1.0 1.0
+  [1] 1.0 1.0 1.0 0.6 0.7 1.0 0.5 1.0 1.0 0.9 0.6 1.0 1.0 1.0 1.0 1.0 0.9 1.0 0.6 1.0 1.0 1.0 0.8 0.8 0.5 1.0
+ [27] 1.0 0.6 1.0 1.0 0.9 0.9 0.6 1.0 0.8 0.8 0.8 1.0 1.0 1.0 1.0 1.0 0.6 1.0 1.0 1.0 0.9 1.0 1.0 0.7 1.0 1.0
+ [53] 1.0 1.0 0.8 1.0 0.9 0.9 1.0 0.6 0.7 1.0 0.7 1.0 0.5 1.0 1.0 1.0 0.8 1.0 0.7 1.0 1.0 1.0 1.0 1.0 1.0 0.9
+ [79] 0.5 1.0 1.0 0.9 0.5 1.0 0.6 1.0 1.0 1.0 1.0 0.9 1.0 1.0 0.7 0.7 0.7 1.0 0.9 1.0 1.0 0.9 0.9 1.0 1.0 1.0
+[105] 1.0 1.0 1.0 0.8 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.9 1.0 0.7 1.0 1.0 1.0 0.8 1.0 0.8 1.0 0.6 1.0 1.0
+[131] 0.9 0.8 0.7 0.9 1.0 1.0 0.5 0.9 1.0 0.8 1.0 0.9 1.0 0.6 0.9 1.0 0.9 0.9 1.0 0.9 1.0 0.9 1.0 1.0 1.0 1.0
+[157] 1.0 1.0 1.0 0.7 1.0 1.0 1.0 0.7 0.8 0.9 1.0 1.0 1.0 1.0
 Levels: B M</code></pre>
 <div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="KNN.html#cb523-1"></a>tt &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">predict=</span>fit.knn2, <span class="dt">Actual=</span>breast_test_prep<span class="op">$</span>diagnosis)</span>
 <span id="cb523-2"><a href="KNN.html#cb523-2"></a>tt</span></code></pre></div>

@@ -13,6 +13,10 @@ Estas son algunas de las técnicas más populares para tratar con el desequilibr
 
 - Además del muestreo descendente y ascendente, existen métodos híbridos que combinan el muestreo descendente con la generación de datos adicionales. Dos de los más populares son [ROSE](https://journal.r-project.org/archive/2014/RJ-2014-008/RJ-2014-008.pdf) y [SMOTE](https://www.jair.org/index.php/jair/article/view/10302). El primer método necesita tener instalada la librería `ROSE` y el segundo la librería `DMwR`.
 
+
+![Clases desbalanceadas](figures/ImbalancedClasses.jpg)
+
+
 Si queréis podéis encontrar una descripción más detallada en esta publicación de blog de [Silicon Valley Data Science](https://www.svds.com/learning-imbalanced-classes/).
 
 Estos métodos también funcionan para los problemas multi-clase. En [este artículo](https://link.springer.com/article/10.1007/s13748-016-0094-0) tenéis más información general sobre el tema. 
@@ -138,12 +142,6 @@ O compararlas con otras métricas
 
 ```{r}
 library(dplyr)
-comparison <- data.frame(model = names(models),
-                         Sensitivity = rep(NA, length(models)),
-                         Specificity = rep(NA, length(models)),
-                         Precision = rep(NA, length(models)),
-                         Recall = rep(NA, length(models)),
-                         F1 = rep(NA, length(models)))
 
 select_measures <- c("Sensitivity", "Specificity", "Precision",
                      "Recall", "F1")
@@ -156,6 +154,8 @@ for (name in names(models)) {
 }
 comparison <- comparison %>% 
   add_column(model=names(models), .before=TRUE)
+
+comparison
 
 library(tidyr)
 comparison %>%
