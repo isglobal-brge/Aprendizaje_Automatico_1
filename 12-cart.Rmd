@@ -232,7 +232,7 @@ roc.car <- roc(oj_test$Purchase, pred2, print.auc=TRUE,
                plot=TRUE)
 ```
 
-## Entrenamiento con `caret`
+### Entrenamiento con `caret`
 
 También podemos ajustar el modelo con la función `caret::train ()`. Recordemo que hay dos formas de ajustar los hiperparámetros cuando usamos `train ()`:
 
@@ -722,7 +722,7 @@ Implementa una función que implemente el método "bagged tree". Aplícalo a los
 
 
 -------------------------------------------------------------------
-**EJERCICIO** (Entrega en Moodle: P-Bagged Breast cancer):
+**EJERCICIO** (Entrega en Moodle: P2-Bagged Breast cancer):
 
 Utiliza los datos de cáncer de mama que hemos trabajado en clase "breast_train_prep" y "breast_test_prep" (que puedes encontrar en el fichero "breast.Rdata" del Moodle) para crear un modelo predictivo usando CART y Bagged Trees. Compara los resultados con los obtenidos mediant KNN y LDA reportados en el bookdown del curso.
 -------------------------------------------------------------------

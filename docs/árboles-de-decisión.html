@@ -284,16 +284,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html"><i class="fa fa-check"></i><b>13</b> Árboles de decisión</a>
 <ul>
 <li class="chapter" data-level="13.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-clasificación"><i class="fa fa-check"></i><b>13.1</b> Árboles de clasificación</a></li>
-<li class="chapter" data-level="13.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#área-bajo-la-curva-roc"><i class="fa fa-check"></i><b>13.2</b> Área bajo la curva ROC</a></li>
-<li class="chapter" data-level="13.3" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret"><i class="fa fa-check"></i><b>13.3</b> Entrenamiento con <code>caret</code></a></li>
-<li class="chapter" data-level="13.4" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-regresión"><i class="fa fa-check"></i><b>13.4</b> Árboles de regresión</a>
+<li class="chapter" data-level="13.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#área-bajo-la-curva-roc"><i class="fa fa-check"></i><b>13.2</b> Área bajo la curva ROC</a>
 <ul>
-<li class="chapter" data-level="13.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret-1"><i class="fa fa-check"></i><b>13.4.1</b> Entrenamiento con <code>caret</code></a></li>
+<li class="chapter" data-level="13.2.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret"><i class="fa fa-check"></i><b>13.2.1</b> Entrenamiento con <code>caret</code></a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagged-trees"><i class="fa fa-check"></i><b>13.5</b> Bagged trees</a>
+<li class="chapter" data-level="13.3" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-regresión"><i class="fa fa-check"></i><b>13.3</b> Árboles de regresión</a>
 <ul>
-<li class="chapter" data-level="13.5.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>13.5.1</b> Bagging árboles de clasificación</a></li>
-<li class="chapter" data-level="13.5.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>13.5.2</b> Bagging árboles de regresión</a></li>
+<li class="chapter" data-level="13.3.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret-1"><i class="fa fa-check"></i><b>13.3.1</b> Entrenamiento con <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagged-trees"><i class="fa fa-check"></i><b>13.4</b> Bagged trees</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>13.4.1</b> Bagging árboles de clasificación</a></li>
+<li class="chapter" data-level="13.4.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>13.4.2</b> Bagging árboles de regresión</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -959,9 +961,8 @@ Prediction  CH  MM
 <span id="cb608-4"><a href="árboles-de-decisión.html#cb608-4"></a>               <span class="dt">ci=</span><span class="ot">TRUE</span>,</span>
 <span id="cb608-5"><a href="árboles-de-decisión.html#cb608-5"></a>               <span class="dt">plot=</span><span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="fig/unnamed-chunk-252-1.png" width="672" /></p>
-</div>
-<div id="entrenamiento-con-caret" class="section level2" number="13.3">
-<h2><span class="header-section-number">13.3</span> Entrenamiento con <code>caret</code></h2>
+<div id="entrenamiento-con-caret" class="section level3" number="13.2.1">
+<h3><span class="header-section-number">13.2.1</span> Entrenamiento con <code>caret</code></h3>
 <p>También podemos ajustar el modelo con la función <code>caret::train ()</code>. Recordemo que hay dos formas de ajustar los hiperparámetros cuando usamos <code>train ()</code>:</p>
 <ul>
 <li>establecer el número de valores de parámetros de ajuste a considerar utilizando <code>tuneLength</code>, o</li>
@@ -1157,8 +1158,9 @@ AUC of roc1 AUC of roc2
 </tbody>
 </table>
 </div>
-<div id="árboles-de-regresión" class="section level2" number="13.4">
-<h2><span class="header-section-number">13.4</span> Árboles de regresión</h2>
+</div>
+<div id="árboles-de-regresión" class="section level2" number="13.3">
+<h2><span class="header-section-number">13.3</span> Árboles de regresión</h2>
 <p>Un árbol de regresión simple se construye de manera similar a un árbol de clasificación simple y, al igual que el árbol de clasificación, rara vez se usan por sí solo (sobre todo en problemas complejos o de big data). De nuevo, basaremos el aprendizaje de esta metodología partiendo de un ejemplo real. Usaremos el conjunto de datos <code>ISLR::Carseats</code> que pretende predecir las ventas de sillitas de niños para coches (variable <code>Sales</code>) en 400 tiendas usando 10 variables que contienen información de las características de las sillas.</p>
 <div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="árboles-de-decisión.html#cb626-1"></a>cs_dat &lt;-<span class="st"> </span>ISLR<span class="op">::</span>Carseats</span>
 <span id="cb626-2"><a href="árboles-de-decisión.html#cb626-2"></a>skimr<span class="op">::</span><span class="kw">skim</span>(cs_dat)</span></code></pre></div>
@@ -1525,8 +1527,8 @@ n= 321
 <span id="cb642-5"><a href="árboles-de-decisión.html#cb642-5"></a><span class="st">   </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">linetype =</span> <span class="dv">2</span>) <span class="op">+</span></span>
 <span id="cb642-6"><a href="árboles-de-decisión.html#cb642-6"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Carseats CART, predichos vs observados&quot;</span>)</span></code></pre></div>
 <p><img src="fig/unnamed-chunk-276-1.png" width="672" /></p>
-<div id="entrenamiento-con-caret-1" class="section level3" number="13.4.1">
-<h3><span class="header-section-number">13.4.1</span> Entrenamiento con <code>caret</code></h3>
+<div id="entrenamiento-con-caret-1" class="section level3" number="13.3.1">
+<h3><span class="header-section-number">13.3.1</span> Entrenamiento con <code>caret</code></h3>
 <p>También podemos ajustar el modelo con <code>caret::train ()</code> especificando <code>method = "rpart"</code>. Construirmos el modelo usando 10-fold CV para optimizar el hiperparámetro CP.</p>
 <div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="árboles-de-decisión.html#cb643-1"></a>cs_trControl =<span class="st"> </span><span class="kw">trainControl</span>(</span>
 <span id="cb643-2"><a href="árboles-de-decisión.html#cb643-2"></a>   <span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>,</span>
@@ -1647,8 +1649,8 @@ The final value used for the model was cp = 0.</code></pre>
 </table>
 </div>
 </div>
-<div id="bagged-trees" class="section level2" number="13.5">
-<h2><span class="header-section-number">13.5</span> Bagged trees</h2>
+<div id="bagged-trees" class="section level2" number="13.4">
+<h2><span class="header-section-number">13.4</span> Bagged trees</h2>
 <p>Los CART tiene una capacidad predictiva moderada, es por ello que se han propuesto unos métodos que combinan varios árboles de decisión para producir un mejor rendimiento predictivo que utilizar un solo árbol de decisión. El principio fundamental detrás de estos modelos es que un grupo de predictores débiles puede conseguir un predictor con mejor capacidad predictiva.</p>
 <p>Tenemos dos tipos de estrategias:</p>
 <ul>
@@ -1675,8 +1677,8 @@ The final value used for the model was cp = 0.</code></pre>
 <p class="caption">Proceso para Bagged trees</p>
 </div>
 <p>Para un conjunto de entrenamiento de tamaño <span class="math inline">\(n\)</span>, cada árbol se compone de <span class="math inline">\(\sim (1 - e^{-1})n = .632n\)</span> observaciones únicas <em>in-bag</em> y <span class="math inline">\(.368n\)</span> <em>out-of-bag</em>. Las observaciones que no han sido seleccionadas en el re-muestreo se usan para evaluar la precisión del modelo. La capacidad glogal del método se obtiene promediando la capacidad de cada árbol. Esto tiene una <strong>desventaja obvia</strong> y es que si cada árbol tiene un rendimiento deficiente, el rendimiento promedio de muchos árboles seguirá siendo deficiente. Además, otra desventaja de este método es que no existe un árbol único con un conjunto de reglas para interpretar. En consecuencia, no queda claro qué variables son más importantes que otras y en algunos problemas (sobre todo biomédicos) esto puede ser una limitación importante.</p>
-<div id="bagging-árboles-de-clasificación" class="section level3" number="13.5.1">
-<h3><span class="header-section-number">13.5.1</span> Bagging árboles de clasificación</h3>
+<div id="bagging-árboles-de-clasificación" class="section level3" number="13.4.1">
+<h3><span class="header-section-number">13.4.1</span> Bagging árboles de clasificación</h3>
 <p>Veamos de nuevo con un ejemplo cómo trabajar con estos métodos. Usaremos de nuevo los datos de zumos de naranja <code>OJ</code>. Esta vez usaremos un método <em>bagging</em> especificando <code>method="treebag"</code>. Caret no tiene hiperparámetros para este modelo, por lo que no es necesario usar <code>tuneLegth</code> ni <code>tuneGrid</code>. El tamaño de conjunto predeterminado es <code>nbagg = 25</code> (a veces se puede tunear, pero en este caso lo dejaremos fijo).</p>
 <div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="árboles-de-decisión.html#cb656-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
 <span id="cb656-2"><a href="árboles-de-decisión.html#cb656-2"></a>oj_mdl_bag &lt;-<span class="st"> </span><span class="kw">train</span>(</span>
@@ -1763,8 +1765,8 @@ Prediction  CH  MM
 </tbody>
 </table>
 </div>
-<div id="bagging-árboles-de-regresión" class="section level3" number="13.5.2">
-<h3><span class="header-section-number">13.5.2</span> Bagging árboles de regresión</h3>
+<div id="bagging-árboles-de-regresión" class="section level3" number="13.4.2">
+<h3><span class="header-section-number">13.4.2</span> Bagging árboles de regresión</h3>
 <p>Usemos <em>bagging</em> para predecir las ventas en los datos <code>Carseats</code>:</p>
 <div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="árboles-de-decisión.html#cb663-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
 <span id="cb663-2"><a href="árboles-de-decisión.html#cb663-2"></a>cs_mdl_bag &lt;-<span class="st"> </span><span class="kw">train</span>(</span>
@@ -1849,7 +1851,7 @@ Resampling results:
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left"><strong>EJERCICIO</strong> (Entrega en Moodle: P-Bagged Breast cancer):</td>
+<td align="left"><strong>EJERCICIO</strong> (Entrega en Moodle: P2-Bagged Breast cancer):</td>
 </tr>
 <tr class="even">
 <td align="left">Utiliza los datos de cáncer de mama que hemos trabajado en clase “breast_train_prep” y “breast_test_prep” (que puedes encontrar en el fichero “breast.Rdata” del Moodle) para crear un modelo predictivo usando CART y Bagged Trees. Compara los resultados con los obtenidos mediant KNN y LDA reportados en el bookdown del curso.</td>
