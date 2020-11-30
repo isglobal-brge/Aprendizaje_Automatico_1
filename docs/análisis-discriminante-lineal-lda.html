@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-11-23" />
+<meta name="date" content="2020-11-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -281,6 +281,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.5" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-caret"><i class="fa fa-check"></i><b>11.5</b> SVM con <code>caret</code></a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="respuesta-no-balanceada.html"><a href="respuesta-no-balanceada.html"><i class="fa fa-check"></i><b>12</b> Respuesta no balanceada</a></li>
+<li class="chapter" data-level="13" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html"><i class="fa fa-check"></i><b>13</b> Árboles de decisión</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-clasificación"><i class="fa fa-check"></i><b>13.1</b> Árboles de clasificación</a></li>
+<li class="chapter" data-level="13.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#área-bajo-la-curva-roc"><i class="fa fa-check"></i><b>13.2</b> Área bajo la curva ROC</a></li>
+<li class="chapter" data-level="13.3" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret"><i class="fa fa-check"></i><b>13.3</b> Entrenamiento con <code>caret</code></a></li>
+<li class="chapter" data-level="13.4" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-regresión"><i class="fa fa-check"></i><b>13.4</b> Árboles de regresión</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret-1"><i class="fa fa-check"></i><b>13.4.1</b> Entrenamiento con <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagged-trees"><i class="fa fa-check"></i><b>13.5</b> Bagged trees</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>13.5.1</b> Bagging árboles de clasificación</a></li>
+<li class="chapter" data-level="13.5.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>13.5.2</b> Bagging árboles de regresión</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -335,15 +350,21 @@ Prior probabilities of groups:
 0.6265664 0.3734336 
 
 Group means:
-  texture_mean  area_mean smoothness_mean compactness_mean symmetry_mean fractal_dimension_mean  texture_se
-B   -0.3345955 -0.5518490       -0.268585       -0.4766017    -0.2791966           -0.004083286  0.01149947
-M    0.5614018  0.9259212        0.450646        0.7996673     0.4684507            0.006851150 -0.01929442
-     area_se smoothness_se compactness_se concavity_se `concave points_se` symmetry_se fractal_dimension_se
-B -0.4401372    0.03661085     -0.2657811   -0.2982358          -0.3482647 -0.01040297           -0.1039087
-M  0.7384853   -0.06142761      0.4459414    0.5003956           0.5843367  0.01745464            0.1743434
-  smoothness_worst compactness_worst `concave points_worst` symmetry_worst fractal_dimension_worst
-B       -0.3274326         -0.470998             -0.6204192     -0.3412650              -0.2666749
-M        0.5493836          0.790265              1.0409719      0.5725924               0.4474411
+  texture_mean  area_mean smoothness_mean compactness_mean symmetry_mean
+B   -0.3345955 -0.5518490       -0.268585       -0.4766017    -0.2791966
+M    0.5614018  0.9259212        0.450646        0.7996673     0.4684507
+  fractal_dimension_mean  texture_se    area_se smoothness_se compactness_se
+B           -0.004083286  0.01149947 -0.4401372    0.03661085     -0.2657811
+M            0.006851150 -0.01929442  0.7384853   -0.06142761      0.4459414
+  concavity_se `concave points_se` symmetry_se fractal_dimension_se
+B   -0.2982358          -0.3482647 -0.01040297           -0.1039087
+M    0.5003956           0.5843367  0.01745464            0.1743434
+  smoothness_worst compactness_worst `concave points_worst` symmetry_worst
+B       -0.3274326         -0.470998             -0.6204192     -0.3412650
+M        0.5493836          0.790265              1.0409719      0.5725924
+  fractal_dimension_worst
+B              -0.2666749
+M               0.4474411
 
 Coefficients of linear discriminants:
                                 LD1
@@ -450,7 +471,7 @@ Resampling results:
  + **steps_times_distance:** pasos por tiempo y distancia
  + **device:** dispositivo        </code></pre>
 <p><strong>TAREA:</strong> Debéis crear un modelo predictivo que use todas las variables que hay en el objeto <code>test</code> (obviamente except la variable <code>id</code>) usando la estrategia que creáis oportuna y usando como modelo de aprendijaze o bien KNN o LDA. Podéis hacer todas las cosas que queráis con los datos: estratificarlos, analizarlos todos juntos, usar cualquier método de valización cruzada para validar el modelo, crear nuevas variables, elminar datos, … ya que el objetivo es que apliquéis vuestro modelo a los datos <code>test</code> que contiene la misma información para 1880 observaciones excepto el tipo de actividad que se estaba realizando y que es lo que debéis predecir.</p>
-<p><strong>ENTREGA:</strong> Debeis subir un fichero <code>NIU.txt</code> (NIU es vuestro identificador de la UAB) a la tarea que hay en Moodle llamada <strong>P-Concurso_Predicción</strong> con vuestras predicciones para la muestra <code>test</code>. Este fichero debe ser un fichero de texto delimitado por tabulaciones con dos columnas que se llamen “id” y “activity”. Obviamente la columna “id” corresponde a la variable <code>id</code> de la base de datos <code>test</code> y la otra columna debe contener vuestra predicción que debe ser un valor entre: Pace walk, Running 3 METs, Running 5 METs, Running 7 METs, Lying o Sitting. Este fichero se puede crear a partir de un objeto de R que tenga un data.frame con esas dos variables y usando la función <code>write.table()</code>. También debéis subir el archivo de R (con comentarios) o un R Markdown explicando la estrategia llevada a cabo en la tarea de Moodle llamada <strong>P-Concurso_Estrategia</strong>.</p>
+<p><strong>ENTREGA:</strong> Debeis subir un fichero <code>NIU.txt</code> (NIU es vuestro identificador de la UAB) a la tarea que hay en Moodle llamada <strong>P-Concurso_Predicción</strong> con vuestras predicciones para la muestra <code>test</code>. Este fichero debe ser un fichero de texto delimitado por tabulaciones con dos columnas que se llamen “id” y “activity”. Obviamente la columna “id” corresponde a la variable <code>id</code> de la base de datos <code>test</code> y la otra columna debe contener vuestra predicción que debe ser un valor entre: Pace walk, Running 3 METs, Running 5 METs, Running 7 METs, Lying o Sitting. Este fichero se puede crear a partir de un objeto de R que tenga un data.frame con esas dos variables y usando la función <code>write.table()</code> y el argumento `sep=". También debéis subir el archivo de R (con comentarios) o un R Markdown explicando la estrategia llevada a cabo en la tarea de Moodle llamada <strong>P-Concurso_Estrategia</strong>.</p>
 <p><strong>EVALUACIÓN</strong>: Yo evaluaré la capacidad predictiva de vuestro modelo ya que tengo el valor real para esa predicción que habéis hecho y a la cuál no tenéis acceso. La nota con la que os evaluaré esta práctica estará en función de vuestra capacidad de predicción y que básicamente será una nota que estableceré según el ranking obtenido por cada uno de vosotros.</p>
 <p><strong>ACCESO A DATOS:</strong> Los datos están en un fichero llamado <code>actividad_fisica.Rdata</code> que contiene los objectos <code>train</code> y <code>test</code> a los que he hecho referencia y que están en la carpeta datos del Moodle de la asignatura.</p>
 <p><strong>MUY IMPORTANTE:</strong> Aquel alumno que me entrege un fichero que no siga el formato indicado, tendrá un 4 en esta práctica como nota máxima.</p>

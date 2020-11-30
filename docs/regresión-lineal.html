@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-11-23" />
+<meta name="date" content="2020-11-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -281,6 +281,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.5" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-caret"><i class="fa fa-check"></i><b>11.5</b> SVM con <code>caret</code></a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="respuesta-no-balanceada.html"><a href="respuesta-no-balanceada.html"><i class="fa fa-check"></i><b>12</b> Respuesta no balanceada</a></li>
+<li class="chapter" data-level="13" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html"><i class="fa fa-check"></i><b>13</b> Árboles de decisión</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-clasificación"><i class="fa fa-check"></i><b>13.1</b> Árboles de clasificación</a></li>
+<li class="chapter" data-level="13.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#área-bajo-la-curva-roc"><i class="fa fa-check"></i><b>13.2</b> Área bajo la curva ROC</a></li>
+<li class="chapter" data-level="13.3" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret"><i class="fa fa-check"></i><b>13.3</b> Entrenamiento con <code>caret</code></a></li>
+<li class="chapter" data-level="13.4" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-regresión"><i class="fa fa-check"></i><b>13.4</b> Árboles de regresión</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret-1"><i class="fa fa-check"></i><b>13.4.1</b> Entrenamiento con <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagged-trees"><i class="fa fa-check"></i><b>13.5</b> Bagged trees</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>13.5.1</b> Bagging árboles de clasificación</a></li>
+<li class="chapter" data-level="13.5.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>13.5.2</b> Bagging árboles de regresión</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -466,8 +481,10 @@ Call:
 lm(formula = mpg ~ wt_centered * hp_bin, data = mtcars)
 
 Coefficients:
-       (Intercept)         wt_centered              hp_bin  wt_centered:hp_bin  
-            20.276              -6.391              -3.163               3.953  </code></pre>
+       (Intercept)         wt_centered              hp_bin  
+            20.276              -6.391              -3.163  
+wt_centered:hp_bin  
+             3.953  </code></pre>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="regresión-lineal.html#cb119-1"></a><span class="kw">rss</span>(<span class="kw">fitted</span>(multivariable_model), mtcars<span class="op">$</span>mpg)</span></code></pre></div>
 <pre><code>[1] 170.3792</code></pre>
 <p>RSS mejora una vez más.</p>
@@ -486,13 +503,20 @@ Coefficients:
 </ul>
 <p>Puede resultar instructivo ver qué está haciendo <code>lm ()</code> en segundo plano para ajustarse a este modelo. El comando <code>model.matrix ()</code> muestra cómo se ha reformateado la matriz del predictor para la regresión:</p>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="regresión-lineal.html#cb122-1"></a><span class="kw">head</span>(<span class="kw">model.matrix</span>(multivariable_model))</span></code></pre></div>
-<pre><code>                  (Intercept) wt_centered hp_bin wt_centered:hp_bin
-Mazda RX4                   1    -0.59725      0            0.00000
-Mazda RX4 Wag               1    -0.34225      0            0.00000
-Datsun 710                  1    -0.89725      0            0.00000
-Hornet 4 Drive              1    -0.00225      0            0.00000
-Hornet Sportabout           1     0.22275      1            0.22275
-Valiant                     1     0.24275      0            0.00000</code></pre>
+<pre><code>                  (Intercept) wt_centered hp_bin
+Mazda RX4                   1    -0.59725      0
+Mazda RX4 Wag               1    -0.34225      0
+Datsun 710                  1    -0.89725      0
+Hornet 4 Drive              1    -0.00225      0
+Hornet Sportabout           1     0.22275      1
+Valiant                     1     0.24275      0
+                  wt_centered:hp_bin
+Mazda RX4                    0.00000
+Mazda RX4 Wag                0.00000
+Datsun 710                   0.00000
+Hornet 4 Drive               0.00000
+Hornet Sportabout            0.22275
+Valiant                      0.00000</code></pre>
 <p>El <em>intercept</em> es un vector de 1s. El vector para el término de interacción, wt_centered: hp_bin, consiste simplemente en el producto de los dos vectores con las componentes de cada variable</p>
 </div>
 </div>
@@ -639,16 +663,16 @@ F-statistic: 52.35 on 3 and 28 DF,  p-value: 1.324e-11</code></pre>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="regresión-lineal.html#cb136-1"></a><span class="kw">glimpse</span>(day)</span></code></pre></div>
 <pre><code>Rows: 731
 Columns: 10
-$ count       &lt;int&gt; 985, 801, 1349, 1562, 1600, 1606, 1510, 959, 822, 1321, 1263, 1162, 1406, 1421, 1248, ...
-$ season      &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
-$ year        &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-$ month       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
-$ holiday     &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-$ weekday     &lt;int&gt; 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6,...
-$ temperature &lt;dbl&gt; 0.3441670, 0.3634780, 0.1963640, 0.2000000, 0.2269570, 0.2043480, 0.1965220, 0.1650000...
-$ atemp       &lt;dbl&gt; 0.3636250, 0.3537390, 0.1894050, 0.2121220, 0.2292700, 0.2332090, 0.2088390, 0.1622540...
-$ humidity    &lt;dbl&gt; 0.805833, 0.696087, 0.437273, 0.590435, 0.436957, 0.518261, 0.498696, 0.535833, 0.4341...
-$ windspeed   &lt;dbl&gt; 0.1604460, 0.2485390, 0.2483090, 0.1602960, 0.1869000, 0.0895652, 0.1687260, 0.2668040...</code></pre>
+$ count       &lt;int&gt; 985, 801, 1349, 1562, 1600, 1606, 1510, 9...
+$ season      &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+$ year        &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+$ month       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+$ holiday     &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+$ weekday     &lt;int&gt; 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5,...
+$ temperature &lt;dbl&gt; 0.3441670, 0.3634780, 0.1963640, 0.200000...
+$ atemp       &lt;dbl&gt; 0.3636250, 0.3537390, 0.1894050, 0.212122...
+$ humidity    &lt;dbl&gt; 0.805833, 0.696087, 0.437273, 0.590435, 0...
+$ windspeed   &lt;dbl&gt; 0.1604460, 0.2485390, 0.2483090, 0.160296...</code></pre>
 <p>Una pregunta exploratoria inicial es: ¿cómo varía el uso de la bicicleta por año? Podemos responder a esta pregunta simplemente calculando un promedio para cada año:</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="regresión-lineal.html#cb138-1"></a>day <span class="op">%&gt;%</span></span>
 <span id="cb138-2"><a href="regresión-lineal.html#cb138-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> <span class="kw">ifelse</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">2011</span>, <span class="dv">2012</span>)) <span class="op">%&gt;%</span></span>
@@ -932,13 +956,20 @@ residual sd = 1406.35, R-Squared = 0.48</code></pre>
 <p>La regresión lineal a menudo tendrá un sesgo más alto que un método flexible como la regresión KNN, pero también tenderá a tener una varianza más baja. Exploraremos estas propiedades más a fondo cuando lleguemos a la validación cruzada.</p>
 <p>Echemos un vistazo a la matriz del modelo.</p>
 <div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="regresión-lineal.html#cb175-1"></a><span class="kw">head</span>(<span class="kw">model.matrix</span>(linear_fit3))</span></code></pre></div>
-<pre><code>  (Intercept) temperature factor(season)2 factor(season)3 factor(season)4 temperature:factor(season)2
-1           1    0.344167               0               0               0                           0
-2           1    0.363478               0               0               0                           0
-3           1    0.196364               0               0               0                           0
-4           1    0.200000               0               0               0                           0
-5           1    0.226957               0               0               0                           0
-6           1    0.204348               0               0               0                           0
+<pre><code>  (Intercept) temperature factor(season)2 factor(season)3
+1           1    0.344167               0               0
+2           1    0.363478               0               0
+3           1    0.196364               0               0
+4           1    0.200000               0               0
+5           1    0.226957               0               0
+6           1    0.204348               0               0
+  factor(season)4 temperature:factor(season)2
+1               0                           0
+2               0                           0
+3               0                           0
+4               0                           0
+5               0                           0
+6               0                           0
   temperature:factor(season)3 temperature:factor(season)4
 1                           0                           0
 2                           0                           0

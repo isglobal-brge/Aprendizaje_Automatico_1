@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-11-23" />
+<meta name="date" content="2020-11-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -281,6 +281,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.5" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-caret"><i class="fa fa-check"></i><b>11.5</b> SVM con <code>caret</code></a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="respuesta-no-balanceada.html"><a href="respuesta-no-balanceada.html"><i class="fa fa-check"></i><b>12</b> Respuesta no balanceada</a></li>
+<li class="chapter" data-level="13" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html"><i class="fa fa-check"></i><b>13</b> Árboles de decisión</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-clasificación"><i class="fa fa-check"></i><b>13.1</b> Árboles de clasificación</a></li>
+<li class="chapter" data-level="13.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#área-bajo-la-curva-roc"><i class="fa fa-check"></i><b>13.2</b> Área bajo la curva ROC</a></li>
+<li class="chapter" data-level="13.3" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret"><i class="fa fa-check"></i><b>13.3</b> Entrenamiento con <code>caret</code></a></li>
+<li class="chapter" data-level="13.4" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-regresión"><i class="fa fa-check"></i><b>13.4</b> Árboles de regresión</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret-1"><i class="fa fa-check"></i><b>13.4.1</b> Entrenamiento con <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagged-trees"><i class="fa fa-check"></i><b>13.5</b> Bagged trees</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>13.5.1</b> Bagging árboles de clasificación</a></li>
+<li class="chapter" data-level="13.5.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>13.5.2</b> Bagging árboles de regresión</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -352,8 +367,8 @@ prueba de razón de verosimilitud (LRT por sus siglas en inglés):</p>
 donde <span class="math inline">\(\ln(L_{c})\)</span> es el logaritmo de la probabilidad del modelo actual (o basal) y <span class="math inline">\(\ln (L_{a})\)</span> es el logaritmo de la probabilidad del modelo alternativo con predictores adicionales. La función <code>lrtest ()</code> en el paquete <code>lmtest</code> implementa el test LRT. La función <code>anova ()</code> en R base también comparará modelos usando una prueba F.</p>
 <p>Vamos a ilustrar algunos de ejemplos de comparación de modelos usando los datos de Hitters del paquete ISLR que tiene información sobre bateadores de la Major League de USA entre los años 1986 y 1987. Estamos interesados en crear un modelo para predecir el salario de los bateadores (variable <code>Salary</code>). Partimos de un modelo nulo:</p>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  3955509 211.3    9331115 498.4  9331115 498.4
-Vcells 22391346 170.9   45661460 348.4 45653920 348.4</code></pre>
+Ncells  3955986 211.3    9333761 498.5  9333761 498.5
+Vcells 22398537 170.9   40794677 311.3 40794677 311.3</code></pre>
 <div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="ajuste-de-modelos.html#cb253-1"></a><span class="kw">library</span>(ISLR)</span>
 <span id="cb253-2"><a href="ajuste-de-modelos.html#cb253-2"></a><span class="kw">data</span>(Hitters)</span>
 <span id="cb253-3"><a href="ajuste-de-modelos.html#cb253-3"></a><span class="kw">display</span>(null &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> Hitters))</span></code></pre></div>
@@ -470,12 +485,14 @@ lm(formula = Salary ~ AtBat + Hits + HmRun + Runs + RBI + Walks +
     data = Hitters)
 
 Coefficients:
-(Intercept)        AtBat         Hits        HmRun         Runs          RBI        Walks        Years  
-   163.1036      -1.9799       7.5008       4.3309      -2.3762      -1.0450       6.2313      -3.4891  
-     CAtBat        CHits       CHmRun        CRuns         CRBI       CWalks      LeagueN    DivisionW  
-    -0.1713       0.1340      -0.1729       1.4543       0.8077      -0.8116      62.5994    -116.8492  
-    PutOuts      Assists       Errors   NewLeagueN  
-     0.2819       0.3711      -3.3608     -24.7623  </code></pre>
+(Intercept)        AtBat         Hits        HmRun         Runs  
+   163.1036      -1.9799       7.5008       4.3309      -2.3762  
+        RBI        Walks        Years       CAtBat        CHits  
+    -1.0450       6.2313      -3.4891      -0.1713       0.1340  
+     CHmRun        CRuns         CRBI       CWalks      LeagueN  
+    -0.1729       1.4543       0.8077      -0.8116      62.5994  
+  DivisionW      PutOuts      Assists       Errors   NewLeagueN  
+  -116.8492       0.2819       0.3711      -3.3608     -24.7623  </code></pre>
 <p>La selección hacia adelante se estableció en 19 predictores con un <span class="math inline">\(R^2\)</span> de .55.</p>
 <div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="ajuste-de-modelos.html#cb279-1"></a>mod.back &lt;-<span class="st"> </span><span class="kw">step</span>(<span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters), <span class="dt">trace =</span> F, </span>
 <span id="cb279-2"><a href="ajuste-de-modelos.html#cb279-2"></a>                 <span class="dt">direction =</span> <span class="st">&quot;backward&quot;</span>)</span>
@@ -486,10 +503,12 @@ lm(formula = Salary ~ AtBat + Hits + Walks + CAtBat + CRuns +
     CRBI + CWalks + Division + PutOuts + Assists, data = Hitters)
 
 Coefficients:
-(Intercept)        AtBat         Hits        Walks       CAtBat        CRuns         CRBI       CWalks  
-   162.5354      -2.1687       6.9180       5.7732      -0.1301       1.4082       0.7743      -0.8308  
-  DivisionW      PutOuts      Assists  
-  -112.3801       0.2974       0.2832  </code></pre>
+(Intercept)        AtBat         Hits        Walks       CAtBat  
+   162.5354      -2.1687       6.9180       5.7732      -0.1301  
+      CRuns         CRBI       CWalks    DivisionW      PutOuts  
+     1.4082       0.7743      -0.8308    -112.3801       0.2974  
+    Assists  
+     0.2832  </code></pre>
 <p>La selección hacia detrás se estableció en 10 predictores con un <span class="math inline">\(R^2\)</span> de .54. Con muchas menos variables, somos capaces de explicar prácticamente la misma variabilidad.</p>
 <p>La función <code>regsubsets ()</code> en el paquete <code>leaps</code> realiza una búsqueda exhaustiva del espacio modelo utilizando el algoritmo de saltos (adelante y atrás) para la selección de variables.</p>
 <div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="ajuste-de-modelos.html#cb281-1"></a><span class="kw">library</span>(leaps)</span>
@@ -703,17 +722,17 @@ y</p>
 <span id="cb289-8"><a href="ajuste-de-modelos.html#cb289-8"></a><span class="kw">glimpse</span>(carseats_miss)</span></code></pre></div>
 <pre><code>Rows: 400
 Columns: 11
-$ Sales       &lt;dbl&gt; 9.50, 11.22, 10.06, 7.40, 4.15, 10.81, 6.63, 11.85, 6.54, 4.69, 9.01, 11.96, 3.98, 10....
-$ CompPrice   &lt;dbl&gt; 138, 111, 113, 117, 141, 124, 115, NA, NA, NA, 121, 117, NA, 115, 107, NA, 118, NA, 11...
-$ Income      &lt;dbl&gt; 73, 48, 35, 100, 64, 113, NA, 81, 110, 113, 78, 94, NA, 28, 117, 95, 32, 74, 110, 76, ...
-$ Advertising &lt;dbl&gt; 11, 16, NA, 4, 3, 13, NA, 15, 0, 0, 9, 4, 2, NA, 11, 5, NA, 13, 0, 16, 2, 12, 6, 0, 16...
-$ Population  &lt;dbl&gt; 276, 260, 269, NA, 340, 501, 45, 425, 108, 131, 150, 503, NA, 29, 148, 400, 284, 251, ...
-$ Price       &lt;dbl&gt; 120, NA, NA, 97, 128, 72, 108, 120, NA, 124, 100, NA, NA, NA, 118, 144, 110, 131, 68, ...
-$ ShelveLoc   &lt;fct&gt; Bad, NA, Good, NA, Bad, Bad, Good, NA, Good, Good, Bad, Medium, NA, Medium, Medium, Go...
-$ Age         &lt;dbl&gt; 42, 65, NA, 55, 38, NA, 71, 67, 76, 76, 26, 50, NA, 53, 52, 76, 63, 52, 46, 69, NA, NA...
-$ Education   &lt;dbl&gt; NA, 10, 12, NA, 13, 16, 15, 10, 10, 17, 10, 13, NA, NA, NA, 18, 13, 10, 17, 12, 18, NA...
-$ Urban       &lt;fct&gt; NA, Yes, Yes, Yes, Yes, NA, NA, Yes, No, NA, NA, Yes, Yes, Yes, Yes, No, Yes, Yes, No,...
-$ US          &lt;fct&gt; Yes, Yes, Yes, Yes, No, Yes, No, Yes, NA, Yes, Yes, Yes, No, Yes, Yes, No, No, NA, Yes...</code></pre>
+$ Sales       &lt;dbl&gt; 9.50, 11.22, 10.06, 7.40, 4.15, 10.81, 6....
+$ CompPrice   &lt;dbl&gt; 138, 111, 113, 117, 141, 124, 115, NA, NA...
+$ Income      &lt;dbl&gt; 73, 48, 35, 100, 64, 113, NA, 81, 110, 11...
+$ Advertising &lt;dbl&gt; 11, 16, NA, 4, 3, 13, NA, 15, 0, 0, 9, 4,...
+$ Population  &lt;dbl&gt; 276, 260, 269, NA, 340, 501, 45, 425, 108...
+$ Price       &lt;dbl&gt; 120, NA, NA, 97, 128, 72, 108, 120, NA, 1...
+$ ShelveLoc   &lt;fct&gt; Bad, NA, Good, NA, Bad, Bad, Good, NA, Go...
+$ Age         &lt;dbl&gt; 42, 65, NA, 55, 38, NA, 71, 67, 76, 76, 2...
+$ Education   &lt;dbl&gt; NA, 10, 12, NA, 13, 16, 15, 10, 10, 17, 1...
+$ Urban       &lt;fct&gt; NA, Yes, Yes, Yes, Yes, NA, NA, Yes, No, ...
+$ US          &lt;fct&gt; Yes, Yes, Yes, Yes, No, Yes, No, Yes, NA,...</code></pre>
 <p>Ahora faltan muchas observaciones. Cuando ajustamos un modelo de regresión para la variable Sales observamos que <code>lm ()</code> analiza casos completos y se estima un modelo basado en un subconjunto muy pequeño de datos.</p>
 <div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="ajuste-de-modelos.html#cb291-1"></a><span class="kw">display</span>(<span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>CompPrice <span class="op">+</span><span class="st"> </span>Income <span class="op">+</span><span class="st"> </span>Advertising <span class="op">+</span><span class="st"> </span>Population <span class="op">+</span><span class="st"> </span>Price, <span class="dt">data =</span> carseats_miss))</span></code></pre></div>
 <pre><code>lm(formula = Sales ~ CompPrice + Income + Advertising + Population + 
@@ -731,8 +750,9 @@ residual sd = 2.06, R-Squared = 0.59</code></pre>
 <p>Sólo tenemos 93 observaciones de las 400 originales! Demostraremos la imputación múltiple usando la función <code>mice ()</code> de la librería <code>mice</code>.</p>
 <div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="ajuste-de-modelos.html#cb293-1"></a><span class="kw">library</span>(mice)</span>
 <span id="cb293-2"><a href="ajuste-de-modelos.html#cb293-2"></a><span class="kw">names</span>(Carseats)</span></code></pre></div>
-<pre><code> [1] &quot;Sales&quot;       &quot;CompPrice&quot;   &quot;Income&quot;      &quot;Advertising&quot; &quot;Population&quot;  &quot;Price&quot;       &quot;ShelveLoc&quot;  
- [8] &quot;Age&quot;         &quot;Education&quot;   &quot;Urban&quot;       &quot;US&quot;         </code></pre>
+<pre><code> [1] &quot;Sales&quot;       &quot;CompPrice&quot;   &quot;Income&quot;      &quot;Advertising&quot;
+ [5] &quot;Population&quot;  &quot;Price&quot;       &quot;ShelveLoc&quot;   &quot;Age&quot;        
+ [9] &quot;Education&quot;   &quot;Urban&quot;       &quot;US&quot;         </code></pre>
 <div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="ajuste-de-modelos.html#cb295-1"></a>carseats_imp &lt;-<span class="st"> </span><span class="kw">mice</span>(carseats_miss, <span class="dt">printFlag =</span> F)</span></code></pre></div>
 <p>El objeto <code>carseats_imp</code> incluye (entre muchas otras cosas) <span class="math inline">\(m\)</span> conjuntos de datos imputados (la configuración predeterminada es <span class="math inline">\(m\)</span> = 5). Los conjuntos de datos imputados difieren porque las imputaciones se extraen aleatoriamente de distribuciones de valores plausibles. Podemos visualizar la variabilidad de los predictores en estos conjuntos de datos imputados usando la función <code>densityplot ()</code>.</p>
 <div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="ajuste-de-modelos.html#cb296-1"></a><span class="kw">library</span>(lattice)</span>

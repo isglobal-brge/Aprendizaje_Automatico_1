@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>13 Árboles de decisión | Aprendizaje Automático 1</title>
+  <meta name="description" content="13 Árboles de decisión | Aprendizaje Automático 1" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="13 Árboles de decisión | Aprendizaje Automático 1" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="13 Árboles de decisión | Aprendizaje Automático 1" />
+  
+  
+  
+
+<meta name="author" content="Juan R González" />
+
+
+<meta name="date" content="2020-11-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="respuesta-no-balanceada.html"/>
+
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Aprendizaje Automático 1</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html"><i class="fa fa-check"></i><b>2</b> Introducción a Tidyverse</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="index.html"><a href="index.html#introducción"><i class="fa fa-check"></i><b>2.1</b> Introducción</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#instalación"><i class="fa fa-check"></i><b>2.2</b> Instalación</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#librerías-básicas"><i class="fa fa-check"></i><b>2.3</b> Librerías básicas</a></li>
+<li class="chapter" data-level="2.4" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#manejo-de-datos"><i class="fa fa-check"></i><b>2.4</b> Manejo de datos</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#tibbles"><i class="fa fa-check"></i><b>2.4.1</b> Tibbles</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#importar-datos"><i class="fa fa-check"></i><b>2.4.2</b> Importar datos</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#transformación-de-datos"><i class="fa fa-check"></i><b>2.4.3</b> Transformación de datos</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#filtrar-filas"><i class="fa fa-check"></i><b>2.4.4</b> Filtrar filas</a></li>
+<li class="chapter" data-level="2.4.5" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#filtrado-lógico"><i class="fa fa-check"></i><b>2.4.5</b> Filtrado lógico</a></li>
+<li class="chapter" data-level="2.4.6" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#ordenar-filas"><i class="fa fa-check"></i><b>2.4.6</b> Ordenar filas</a></li>
+<li class="chapter" data-level="2.4.7" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#seleccionar-columnas-e.g.-variables"><i class="fa fa-check"></i><b>2.4.7</b> Seleccionar columnas (e.g. variables)</a></li>
+<li class="chapter" data-level="2.4.8" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#añadir-nuevas-variables"><i class="fa fa-check"></i><b>2.4.8</b> Añadir nuevas variables</a></li>
+<li class="chapter" data-level="2.4.9" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#grouped-summaries"><i class="fa fa-check"></i><b>2.4.9</b> Grouped summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#uso-del-pipe"><i class="fa fa-check"></i><b>2.5</b> Uso del pipe <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="2.6" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#ejercicios-manejo-de-datos"><i class="fa fa-check"></i><b>2.6</b> Ejercicios (manejo de datos)</a></li>
+<li class="chapter" data-level="2.7" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#visualización-de-datos"><i class="fa fa-check"></i><b>2.7</b> Visualización de datos</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#distribución-de-datos-categóricos"><i class="fa fa-check"></i><b>2.7.1</b> Distribución de datos categóricos</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#distribución-de-datos-continuos"><i class="fa fa-check"></i><b>2.7.2</b> Distribución de datos continuos</a></li>
+<li class="chapter" data-level="2.7.3" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#distribución-de-datos-continuos-según-una-variable-categórica"><i class="fa fa-check"></i><b>2.7.3</b> Distribución de datos continuos según una variable categórica</a></li>
+<li class="chapter" data-level="2.7.4" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#dos-variables-categóricas"><i class="fa fa-check"></i><b>2.7.4</b> Dos variables categóricas</a></li>
+<li class="chapter" data-level="2.7.5" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#dos-variables-continuas"><i class="fa fa-check"></i><b>2.7.5</b> Dos variables continuas</a></li>
+<li class="chapter" data-level="2.7.6" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#facets"><i class="fa fa-check"></i><b>2.7.6</b> Facets</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#ejercicios-visualización-de-datos"><i class="fa fa-check"></i><b>2.8</b> Ejercicios (Visualización de datos)</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introducción-al-aprendizaje-automático.html"><a href="introducción-al-aprendizaje-automático.html"><i class="fa fa-check"></i><b>3</b> Introducción al Aprendizaje Automático</a></li>
+<li class="chapter" data-level="4" data-path="regresión-lineal.html"><a href="regresión-lineal.html"><i class="fa fa-check"></i><b>4</b> Regresión lineal</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#preliminares"><i class="fa fa-check"></i><b>4.1</b> Preliminares</a></li>
+<li class="chapter" data-level="4.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#conceptos-básicos"><i class="fa fa-check"></i><b>4.2</b> Conceptos básicos</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#modelo-lineal-simple"><i class="fa fa-check"></i><b>4.2.1</b> Modelo lineal simple</a></li>
+<li class="chapter" data-level="4.2.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-lineal-multivariante"><i class="fa fa-check"></i><b>4.2.2</b> Regresión lineal multivariante</a></li>
+<li class="chapter" data-level="4.2.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#incertidumbre"><i class="fa fa-check"></i><b>4.2.3</b> Incertidumbre</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ajuste-de-un-modelo-lineal"><i class="fa fa-check"></i><b>4.3</b> Ajuste de un modelo lineal</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#residuos"><i class="fa fa-check"></i><b>4.3.1</b> Residuos</a></li>
+<li class="chapter" data-level="4.3.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interpretación-de-coeficientes"><i class="fa fa-check"></i><b>4.3.2</b> Interpretación de coeficientes</a></li>
+<li class="chapter" data-level="4.3.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interacciones"><i class="fa fa-check"></i><b>4.3.3</b> Interacciones</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-por-mínimos-cuadrados"><i class="fa fa-check"></i><b>4.4</b> Estimación por mínimos cuadrados</a></li>
+<li class="chapter" data-level="4.5" data-path="regresión-lineal.html"><a href="regresión-lineal.html#medidas-adicionales-de-ajuste-del-modelo"><i class="fa fa-check"></i><b>4.5</b> Medidas adicionales de ajuste del modelo</a></li>
+<li class="chapter" data-level="4.6" data-path="regresión-lineal.html"><a href="regresión-lineal.html#sesgo-variación-sobreajuste"><i class="fa fa-check"></i><b>4.6</b> Sesgo, variación, sobreajuste</a></li>
+<li class="chapter" data-level="4.7" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-como-estimación-de-una-media-condicional"><i class="fa fa-check"></i><b>4.7</b> Regresión como estimación de una media condicional</a></li>
+<li class="chapter" data-level="4.8" data-path="regresión-lineal.html"><a href="regresión-lineal.html#la-función-de-regresión"><i class="fa fa-check"></i><b>4.8</b> La función de regresión</a></li>
+<li class="chapter" data-level="4.9" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-no-paramétrica-de-la-función-de-regresión-regresión-knn"><i class="fa fa-check"></i><b>4.9</b> Estimación no paramétrica de la función de regresión: regresión KNN</a></li>
+<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a></li>
+<li class="chapter" data-level="4.11" data-path="regresión-lineal.html"><a href="regresión-lineal.html#predicción"><i class="fa fa-check"></i><b>4.11</b> Predicción</a></li>
+<li class="chapter" data-level="4.12" data-path="regresión-lineal.html"><a href="regresión-lineal.html#inferencia-en-el-contexto-de-regresión"><i class="fa fa-check"></i><b>4.12</b> Inferencia en el contexto de regresión</a></li>
+<li class="chapter" data-level="4.13" data-path="regresión-lineal.html"><a href="regresión-lineal.html#asunciones-de-un-modelo-de-regresión"><i class="fa fa-check"></i><b>4.13</b> Asunciones de un modelo de regresión</a></li>
+<li class="chapter" data-level="4.14" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ejemplos-adicionales-de-interpretación-de-modelos"><i class="fa fa-check"></i><b>4.14</b> Ejemplos adicionales de interpretación de modelos</a>
+<ul>
+<li class="chapter" data-level="4.14.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interpretación-del-intercept-y-los-coeficientes-beta-para-un-modelo-con-predictores-continuos"><i class="fa fa-check"></i><b>4.14.1</b> Interpretación del <em>intercept</em> y los coeficientes <span class="math inline">\(\beta\)</span> para un modelo con predictores continuos</a></li>
+<li class="chapter" data-level="4.14.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interpretación-del-intercept-y-los-coeficientes-beta-para-un-modelo-con-predictores-binarios-y-continuos"><i class="fa fa-check"></i><b>4.14.2</b> Interpretación del <em>intercept</em> y los coeficientes <span class="math inline">\(\beta\)</span> para un modelo con predictores binarios y continuos</a></li>
+<li class="chapter" data-level="4.14.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interpretación-del-intercept-y-los-coeficientes-beta-para-un-modelo-con-predictores-binarios-y-continuos-con-interacciones"><i class="fa fa-check"></i><b>4.14.3</b> Interpretación del <em>intercept</em> y los coeficientes <span class="math inline">\(\beta\)</span> para un modelo con predictores binarios y continuos, con interacciones</a></li>
+<li class="chapter" data-level="4.14.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#interpretación-del-intercept-y-los-coeficientes-beta-para-un-modelo-con-predictores-continuos-con-interacciones"><i class="fa fa-check"></i><b>4.14.4</b> Interpretación del <em>intercept</em> y los coeficientes <span class="math inline">\(\beta\)</span> para un modelo con predictores continuos, con interacciones</a></li>
+</ul></li>
+<li class="chapter" data-level="4.15" data-path="regresión-lineal.html"><a href="regresión-lineal.html#centrado-y-escalado"><i class="fa fa-check"></i><b>4.15</b> Centrado y escalado</a></li>
+<li class="chapter" data-level="4.16" data-path="regresión-lineal.html"><a href="regresión-lineal.html#transformación-de-variables"><i class="fa fa-check"></i><b>4.16</b> Transformación de variables</a></li>
+<li class="chapter" data-level="4.17" data-path="regresión-lineal.html"><a href="regresión-lineal.html#colinealidad"><i class="fa fa-check"></i><b>4.17</b> Colinealidad</a></li>
+<li class="chapter" data-level="4.18" data-path="regresión-lineal.html"><a href="regresión-lineal.html#valores-atípicos"><i class="fa fa-check"></i><b>4.18</b> Valores atípicos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html"><i class="fa fa-check"></i><b>5</b> Ajuste de modelos</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#reglas-generales-para-la-selección-de-variables"><i class="fa fa-check"></i><b>5.1</b> Reglas generales para la selección de variables</a></li>
+<li class="chapter" data-level="5.2" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#selección-paso-a-paso-stepwise"><i class="fa fa-check"></i><b>5.2</b> Selección paso a paso (stepwise)</a></li>
+<li class="chapter" data-level="5.3" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#comparación-de-modelos"><i class="fa fa-check"></i><b>5.3</b> Comparación de modelos</a></li>
+<li class="chapter" data-level="5.4" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#métodos-de-selección-automática"><i class="fa fa-check"></i><b>5.4</b> Métodos de selección automática</a></li>
+<li class="chapter" data-level="5.5" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#validación-cruzada"><i class="fa fa-check"></i><b>5.5</b> Validación cruzada</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#validación-en-un-conjunto-de-datos-externo"><i class="fa fa-check"></i><b>5.5.1</b> Validación en un conjunto de datos externo</a></li>
+<li class="chapter" data-level="5.5.2" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#leave-one-out-cross-validation-loocv"><i class="fa fa-check"></i><b>5.5.2</b> Leave-one-out cross validation (LOOCV)</a></li>
+<li class="chapter" data-level="5.5.3" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#k-fold-cross-validation-k-fold-cv"><i class="fa fa-check"></i><b>5.5.3</b> K-fold cross validation (K-fold CV)</a></li>
+<li class="chapter" data-level="5.5.4" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#uso-de-cv-para-estimar-el-hiper-parámetro"><i class="fa fa-check"></i><b>5.5.4</b> Uso de CV para estimar el hiper-parámetro</a></li>
+<li class="chapter" data-level="5.5.5" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#uso-de-bootstrap"><i class="fa fa-check"></i><b>5.5.5</b> Uso de bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="ajuste-de-modelos.html"><a href="ajuste-de-modelos.html#imputación-de-datos-faltantes"><i class="fa fa-check"></i><b>5.6</b> Imputación de datos faltantes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regresión-logística.html"><a href="regresión-logística.html"><i class="fa fa-check"></i><b>6</b> Regresión logística</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regresión-logística.html"><a href="regresión-logística.html#la-función-logit-inversa"><i class="fa fa-check"></i><b>6.1</b> La función logit inversa</a></li>
+<li class="chapter" data-level="6.2" data-path="regresión-logística.html"><a href="regresión-logística.html#ejemplo-de-regresión-logística"><i class="fa fa-check"></i><b>6.2</b> Ejemplo de regresión logística</a></li>
+<li class="chapter" data-level="6.3" data-path="regresión-logística.html"><a href="regresión-logística.html#coeficientes-de-regresión-logística-como-probabilidades"><i class="fa fa-check"></i><b>6.3</b> Coeficientes de regresión logística como probabilidades</a></li>
+<li class="chapter" data-level="6.4" data-path="regresión-logística.html"><a href="regresión-logística.html#coeficientes-de-regresión-logística-como-razones-de-odds"><i class="fa fa-check"></i><b>6.4</b> Coeficientes de regresión logística como razones de odds</a></li>
+<li class="chapter" data-level="6.5" data-path="regresión-logística.html"><a href="regresión-logística.html#bondad-de-ajuste"><i class="fa fa-check"></i><b>6.5</b> Bondad de ajuste</a></li>
+<li class="chapter" data-level="6.6" data-path="regresión-logística.html"><a href="regresión-logística.html#ejemplo-de-regresión-logística-modelización-de-riesgo-diabetes"><i class="fa fa-check"></i><b>6.6</b> Ejemplo de regresión logística: modelización de riesgo diabetes</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="regresión-logística.html"><a href="regresión-logística.html#modelo-simple"><i class="fa fa-check"></i><b>6.6.1</b> Modelo simple</a></li>
+<li class="chapter" data-level="6.6.2" data-path="regresión-logística.html"><a href="regresión-logística.html#agregar-predictores-y-evaluar-el-ajuste"><i class="fa fa-check"></i><b>6.6.2</b> Agregar predictores y evaluar el ajuste</a></li>
+<li class="chapter" data-level="6.6.3" data-path="regresión-logística.html"><a href="regresión-logística.html#análisis-de-interacciones"><i class="fa fa-check"></i><b>6.6.3</b> Análisis de interacciones</a></li>
+<li class="chapter" data-level="6.6.4" data-path="regresión-logística.html"><a href="regresión-logística.html#gráfico-de-la-interacción"><i class="fa fa-check"></i><b>6.6.4</b> Gráfico de la interacción</a></li>
+<li class="chapter" data-level="6.6.5" data-path="regresión-logística.html"><a href="regresión-logística.html#uso-del-modelo-para-predecir-probabilidades"><i class="fa fa-check"></i><b>6.6.5</b> Uso del modelo para predecir probabilidades</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="regresión-logística.html"><a href="regresión-logística.html#creación-de-un-modelo-y-validación"><i class="fa fa-check"></i><b>6.7</b> Creación de un modelo y validación</a></li>
+<li class="chapter" data-level="6.8" data-path="regresión-logística.html"><a href="regresión-logística.html#nomogramas"><i class="fa fa-check"></i><b>6.8</b> Nomogramas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html"><i class="fa fa-check"></i><b>7</b> Dealing with Big Data in R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#nodes-cores-processes-and-threads"><i class="fa fa-check"></i><b>7.1</b> Nodes, cores, processes and threads</a></li>
+<li class="chapter" data-level="7.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#paralelización"><i class="fa fa-check"></i><b>7.2</b> Paralelización</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#shared-memory-programming"><i class="fa fa-check"></i><b>7.2.1</b> Shared Memory Programming</a></li>
+<li class="chapter" data-level="7.2.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#distributed-memory-programming"><i class="fa fa-check"></i><b>7.2.2</b> Distributed Memory Programming</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#mapreduce"><i class="fa fa-check"></i><b>7.3</b> MapReduce</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#map"><i class="fa fa-check"></i><b>7.3.1</b> Map</a></li>
+<li class="chapter" data-level="7.3.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#reduce"><i class="fa fa-check"></i><b>7.3.2</b> Reduce</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>7.4</b> Example: Linear regression for Big Data</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>8</b> La librería <code>caret</code></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="caret.html"><a href="caret.html#pre-procesado"><i class="fa fa-check"></i><b>8.1</b> Pre-procesado</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="caret.html"><a href="caret.html#creación-de-variables"><i class="fa fa-check"></i><b>8.1.1</b> Creación de variables</a></li>
+<li class="chapter" data-level="8.1.2" data-path="caret.html"><a href="caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>8.1.2</b> Predictores con poca variabilidad</a></li>
+<li class="chapter" data-level="8.1.3" data-path="caret.html"><a href="caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>8.1.3</b> Identificación de predictores correlacionados</a></li>
+<li class="chapter" data-level="8.1.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#centrado-y-escalado"><i class="fa fa-check"></i><b>8.1.4</b> Centrado y escalado</a></li>
+<li class="chapter" data-level="8.1.5" data-path="caret.html"><a href="caret.html#imputación"><i class="fa fa-check"></i><b>8.1.5</b> Imputación</a></li>
+<li class="chapter" data-level="8.1.6" data-path="caret.html"><a href="caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>8.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="caret.html"><a href="caret.html#visualización"><i class="fa fa-check"></i><b>8.2</b> Visualización</a></li>
+<li class="chapter" data-level="8.3" data-path="caret.html"><a href="caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>8.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
+<li class="chapter" data-level="8.4" data-path="caret.html"><a href="caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>8.4</b> Creación de un modelo predictivo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="KNN.html"><a href="KNN.html"><i class="fa fa-check"></i><b>9</b> K vecinos más próximos (KNN)</a></li>
+<li class="chapter" data-level="10" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>10</b> Análisis discriminante lineal (LDA)</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html#concurso-predicción-de-actividad-física-con-sensores"><i class="fa fa-check"></i><b>10.1</b> Concurso predicción de actividad física con sensores</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html"><i class="fa fa-check"></i><b>11</b> Máquinas de soporte vectorial</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-margen-máximo"><i class="fa fa-check"></i><b>11.1</b> Clasificador de margen máximo</a></li>
+<li class="chapter" data-level="11.2" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-soporte-vectorial"><i class="fa fa-check"></i><b>11.2</b> Clasificador de soporte vectorial</a></li>
+<li class="chapter" data-level="11.3" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#máquinas-de-soporte-vectorial-1"><i class="fa fa-check"></i><b>11.3</b> Máquinas de soporte vectorial</a></li>
+<li class="chapter" data-level="11.4" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-e1071"><i class="fa fa-check"></i><b>11.4</b> SVM con <code>e1071</code></a></li>
+<li class="chapter" data-level="11.5" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-caret"><i class="fa fa-check"></i><b>11.5</b> SVM con <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="respuesta-no-balanceada.html"><a href="respuesta-no-balanceada.html"><i class="fa fa-check"></i><b>12</b> Respuesta no balanceada</a></li>
+<li class="chapter" data-level="13" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html"><i class="fa fa-check"></i><b>13</b> Árboles de decisión</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-clasificación"><i class="fa fa-check"></i><b>13.1</b> Árboles de clasificación</a></li>
+<li class="chapter" data-level="13.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#área-bajo-la-curva-roc"><i class="fa fa-check"></i><b>13.2</b> Área bajo la curva ROC</a></li>
+<li class="chapter" data-level="13.3" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret"><i class="fa fa-check"></i><b>13.3</b> Entrenamiento con <code>caret</code></a></li>
+<li class="chapter" data-level="13.4" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-regresión"><i class="fa fa-check"></i><b>13.4</b> Árboles de regresión</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret-1"><i class="fa fa-check"></i><b>13.4.1</b> Entrenamiento con <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagged-trees"><i class="fa fa-check"></i><b>13.5</b> Bagged trees</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>13.5.1</b> Bagging árboles de clasificación</a></li>
+<li class="chapter" data-level="13.5.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>13.5.2</b> Bagging árboles de regresión</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Aprendizaje Automático 1</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="árboles-de-decisión" class="section level1" number="13">
+<h1><span class="header-section-number">13</span> Árboles de decisión</h1>
+<p>Los árboles de decisión, también conocidos como modelos de árbol de clasificación y regresión (CART), son métodos basados en árboles para el aprendizaje automático supervisado. Los árboles de clasificación y de regresión simples son fáciles de usar e interpretar, pero no son competitivos con los mejores métodos de aprendizaje automático. Sin embargo, forman la base para el conjunto de modelos de ensamblaje como “bagged trees”, “random forest” y “boosted trees”, que aunque son menos interpretables, son muy precisos.</p>
+<p>Los modelos CART se puede definir en dos tipos de problemas</p>
+<ul>
+<li><p><strong>Árboles de clasificación:</strong> la variable resultado es categórica y el métodos se utiliza para identificar la “clase” dentro de la cual es más probable que caiga nuestra variable resultado. Un ejemplo de un problema de tipo clasificación sería determinar quién se suscribirá o no a una plataforma digital; o quién se graduará o no de la escuela secundaria; o si una persona tiene cáncer o no.</p></li>
+<li><p><strong>Árboles de regressión:</strong> la variable resultado es continua y el métodos se utiliza para predecir su valor. Un ejemplo de un problema de tipo regresión sería predecir los precios de venta de una casa residencial o el nivel de colesterol de una persona.</p></li>
+</ul>
+<p>Los modelos CART segmentan el espacio predictor en <span class="math inline">\(K\)</span> nodos terminales no superpuestos (hojas). Cada nodo se describe mediante un conjunto de reglas que se pueden utilizar para predecir nuevas respuestas. El valor predicho <span class="math inline">\(\hat{y}\)</span> para cada nodo es la moda (clasificación) o la media (regresión).</p>
+<p>Los modelos CART definen los nodos a través de un proceso <em>top-down greedy</em> llamado división binaria recursiva (<em>recursive binary splitting</em>). El proceso es de arriba hacia abajo porque comienza en la parte superior del árbol con todas las observaciones en una sola región y divide sucesivamente el espacio de predicción. Es <em>greedy</em> porque en cada paso de división, la mejor división se realiza en ese paso en particular sin tener en cuenta las divisiones posteriores. La siguiente figura muestra la idea general de esta metodología:</p>
+<div class="figure">
+<img src="figures/cart.png" style="width:70.0%" alt="" />
+<p class="caption">Diagrama árboles de decisión</p>
+</div>
+<p>Como vemos en el ejemplo una de las <strong>ventajas</strong> de los modelos CART es que consideran interacciones. En este curso no vamos a ver la <strong>regresión lógica</strong> pero es una metodología muy interesante que extiende CART cuando las variables predictoras son binarias y las interacciones que buscamos son del tipo AND y OR. Esta metodología se ha empleado con éxito para analizar <a href="https://academic.oup.com/biostatistics/article/9/1/187/254635">datos genéticos</a> donde el interés radica en saber cuál es el riesgo de desarrolar una enfermeda si te tiene por ejemplo: "una mutación en un punto A del genoma (SNP) y otra mutación en el punto B ó si se tiene una mutación en el punto C pero no se tiene en el punto D.</p>
+<p>También son interesantes porque permiten valores faltantes sin la necesidad de hacer imputaciones previas.</p>
+<p>La mejor división es la variable predictora y el punto de corte que minimiza una función de costo. La función de costo más común para los árboles de regresión es la suma de los residuos al cuadrado,</p>
+<p><span class="math display">\[RSS = \sum_{k=1}^K\sum_{i \in A_k}{\left(y_i - \hat{y}_{A_k} \right)^2}.\]</span>
+Para árboles de clasificación, es el índice de Gini,</p>
+<p><span class="math display">\[G = \sum_{c=1}^C{\hat{p}_{kc}(1 - \hat{p}_{kc})},\]</span></p>
+<p>y la entropía (aka información estadística)</p>
+<p><span class="math display">\[D = - \sum_{c=1}^C{\hat{p}_{kc} \log \hat{p}_{kc}}\]</span></p>
+<p>dónde <span class="math inline">\(\hat{p}_{kc}\)</span> es la proporción de observaciones de entrenamiento en el nodo <span class="math inline">\(k\)</span> que son de clase <span class="math inline">\(c\)</span>. Un nodo completamente puro en un árbol binario tendría <span class="math inline">\(\hat{p} \in \{ 0, 1 \}\)</span> y <span class="math inline">\(G=D=0\)</span>. Un nodo completamente impuro en un árbol binario tendría <span class="math inline">\(\hat{p}=0.5\)</span> y <span class="math inline">\(G=0.5^2 \cdot 2 = 0.25\)</span> y <span class="math inline">\(D = -(0.5 \log(0.5)) \cdot 2 = 0.69\)</span>.</p>
+<p>CART repite el proceso de división para cada nodo hijo hasta que se satisface un criterio de detención, generalmente cuando ningún tamaño de nodo supera un máximo predefinido o la división no mejora el modelo de manera significativa. CART también puede imponer un número mínimo de observaciones en cada nodo.</p>
+<p>Es probable que el árbol resultante esté sobre-entrenado (<em>over-fitting</em>) y, por lo tanto, no se generalice bien para los datos de prueba. Para evitar este problema CART <strong>poda el árbol</strong>, minimizando el error de predicción de validación cruzada. En este caso, el hiperparámetro que debermos seleccionar en este modelo es la profundidad del arbol (e.g. número de nodos).</p>
+<p>En lugar de realizar una validación cruzada de todos los subárboles posibles para encontrar el que tenga el mínimo de error, CART utiliza la poda de complejidad de costos (<em>cost-complexity pruning</em>). Costo-complejidad es la compensación entre error (costo) y tamaño del árbol (complejidad) donde la compensación se cuantifica con el parámetro costo-complejidad <span class="math inline">\(c_p\)</span>. El costo-complejidad del árbol, <span class="math inline">\(R_{c_p}(T)\)</span>, es la suma de su riesgo (error) más un factor de “complejidad de costos” <span class="math inline">\(c_p\)</span> multiplicado pro el tamaño del arbol <span class="math inline">\(|T|\)</span>.</p>
+<p><span class="math display">\[R_{c_p}(T) = R(T) + c_p|T|\]</span></p>
+<p><span class="math inline">\(c_p\)</span> puede tomar cualquier valor de <span class="math inline">\([0..\infty]\)</span>, pero resulta que hay un árbol óptimo para rangos de <span class="math inline">\(c_p\)</span>, por lo que solo hay un conjunto finito de valores interesantes para <span class="math inline">\(c_p\)</span> (ver <a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf">Therneau y Atkinson 2019</a>. CART utiliza validación cruzada para determinar qué <span class="math inline">\(c_p\)</span> es óptimo.</p>
+<div id="árboles-de-clasificación" class="section level2" number="13.1">
+<h2><span class="header-section-number">13.1</span> Árboles de clasificación</h2>
+<p>Veamos cómo crear árboles de clasificación usando el conjunto de datos <code>ISLR::OJ</code> que se usaron para predecir qué marca de zumo de naranja, Citrus Hill (CH) o Minute Maid = (MM) toman los clientes (variable `Purchase) a partir de 17 variables predictoras.</p>
+<p>Vamos a introducir la librería <code>skimr</code> que es interesante para hacer descriptivas. Con ella podremos saber, por ejemplo, cuántos tipos de variables tenemos o ver qué distribuciones tienen las variables continuas</p>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="árboles-de-decisión.html#cb585-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb585-2"><a href="árboles-de-decisión.html#cb585-2"></a><span class="kw">library</span>(caret)</span>
+<span id="cb585-3"><a href="árboles-de-decisión.html#cb585-3"></a><span class="kw">library</span>(rpart)  <span class="co"># classification and regression trees </span></span>
+<span id="cb585-4"><a href="árboles-de-decisión.html#cb585-4"></a><span class="kw">library</span>(rpart.plot)  <span class="co"># better formatted plots than the ones in rpart</span></span>
+<span id="cb585-5"><a href="árboles-de-decisión.html#cb585-5"></a></span>
+<span id="cb585-6"><a href="árboles-de-decisión.html#cb585-6"></a>oj_dat &lt;-<span class="st"> </span>ISLR<span class="op">::</span>OJ</span>
+<span id="cb585-7"><a href="árboles-de-decisión.html#cb585-7"></a>skimr<span class="op">::</span><span class="kw">skim</span>(oj_dat)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-237">Table 13.1: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">oj_dat</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">1070</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">18</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">16</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Purchase</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">CH: 653, MM: 417</td>
+</tr>
+<tr class="even">
+<td align="left">Store7</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">No: 714, Yes: 356</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">WeekofPurchase</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">254.38</td>
+<td align="right">15.56</td>
+<td align="right">227.00</td>
+<td align="right">240.00</td>
+<td align="right">257.00</td>
+<td align="right">268.00</td>
+<td align="right">278.00</td>
+<td align="left">▆▅▅▇▇</td>
+</tr>
+<tr class="even">
+<td align="left">StoreID</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.96</td>
+<td align="right">2.31</td>
+<td align="right">1.00</td>
+<td align="right">2.00</td>
+<td align="right">3.00</td>
+<td align="right">7.00</td>
+<td align="right">7.00</td>
+<td align="left">▇▅▃▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">PriceCH</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.87</td>
+<td align="right">0.10</td>
+<td align="right">1.69</td>
+<td align="right">1.79</td>
+<td align="right">1.86</td>
+<td align="right">1.99</td>
+<td align="right">2.09</td>
+<td align="left">▅▂▇▆▁</td>
+</tr>
+<tr class="even">
+<td align="left">PriceMM</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2.09</td>
+<td align="right">0.13</td>
+<td align="right">1.69</td>
+<td align="right">1.99</td>
+<td align="right">2.09</td>
+<td align="right">2.18</td>
+<td align="right">2.29</td>
+<td align="left">▂▁▃▇▆</td>
+</tr>
+<tr class="odd">
+<td align="left">DiscCH</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.05</td>
+<td align="right">0.12</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.50</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">DiscMM</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.12</td>
+<td align="right">0.21</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.23</td>
+<td align="right">0.80</td>
+<td align="left">▇▁▂▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">SpecialCH</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.15</td>
+<td align="right">0.35</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="left">▇▁▁▁▂</td>
+</tr>
+<tr class="even">
+<td align="left">SpecialMM</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.16</td>
+<td align="right">0.37</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="left">▇▁▁▁▂</td>
+</tr>
+<tr class="odd">
+<td align="left">LoyalCH</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.57</td>
+<td align="right">0.31</td>
+<td align="right">0.00</td>
+<td align="right">0.33</td>
+<td align="right">0.60</td>
+<td align="right">0.85</td>
+<td align="right">1.00</td>
+<td align="left">▅▃▆▆▇</td>
+</tr>
+<tr class="even">
+<td align="left">SalePriceMM</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.96</td>
+<td align="right">0.25</td>
+<td align="right">1.19</td>
+<td align="right">1.69</td>
+<td align="right">2.09</td>
+<td align="right">2.13</td>
+<td align="right">2.29</td>
+<td align="left">▁▂▂▂▇</td>
+</tr>
+<tr class="odd">
+<td align="left">SalePriceCH</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.82</td>
+<td align="right">0.14</td>
+<td align="right">1.39</td>
+<td align="right">1.75</td>
+<td align="right">1.86</td>
+<td align="right">1.89</td>
+<td align="right">2.09</td>
+<td align="left">▂▁▇▇▅</td>
+</tr>
+<tr class="even">
+<td align="left">PriceDiff</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.15</td>
+<td align="right">0.27</td>
+<td align="right">-0.67</td>
+<td align="right">0.00</td>
+<td align="right">0.23</td>
+<td align="right">0.32</td>
+<td align="right">0.64</td>
+<td align="left">▁▂▃▇▂</td>
+</tr>
+<tr class="odd">
+<td align="left">PctDiscMM</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.06</td>
+<td align="right">0.10</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.11</td>
+<td align="right">0.40</td>
+<td align="left">▇▁▂▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">PctDiscCH</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.03</td>
+<td align="right">0.06</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.25</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">ListPriceDiff</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.22</td>
+<td align="right">0.11</td>
+<td align="right">0.00</td>
+<td align="right">0.14</td>
+<td align="right">0.24</td>
+<td align="right">0.30</td>
+<td align="right">0.44</td>
+<td align="left">▂▃▆▇▁</td>
+</tr>
+<tr class="even">
+<td align="left">STORE</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.63</td>
+<td align="right">1.43</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">2.00</td>
+<td align="right">3.00</td>
+<td align="right">4.00</td>
+<td align="left">▇▃▅▅▃</td>
+</tr>
+</tbody>
+</table>
+<p>Dividiremos nuestra base de datos <code>oj_dat</code> (n = 1070) en <code>oj_train</code> (80%, n = 857) para estimar varios modelos, y <code>oj_test</code> (20%, n = 213) para comparar su rendimiento con datos nuevos.</p>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="árboles-de-decisión.html#cb586-1"></a><span class="kw">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb586-2"><a href="árboles-de-decisión.html#cb586-2"></a>partition &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> oj_dat<span class="op">$</span>Purchase, <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb586-3"><a href="árboles-de-decisión.html#cb586-3"></a>oj_train &lt;-<span class="st"> </span>oj_dat[partition, ]</span>
+<span id="cb586-4"><a href="árboles-de-decisión.html#cb586-4"></a>oj_test &lt;-<span class="st"> </span>oj_dat[<span class="op">-</span>partition, ]</span></code></pre></div>
+<p>La función <code>rpart::rpart()</code> construye un árbol completo, minimizando el índice de Gini <span class="math inline">\(G\)</span> por defecto (<code>parms = list (split = "gini")</code>), hasta que se cumpla el criterio de parada. El criterio de parada predeterminado es:</p>
+<ul>
+<li>solo intenta una división si el nodo actual tiene al menos <code>minsplit = 20</code> observaciones, y</li>
+<li>solo acepta una división si
+<ul>
+<li>los nodos resultantes tienen al menos <code>minbucket = round (minsplit / 3)</code> observaciones, y</li>
+<li>el ajuste general resultante mejora en <span class="math inline">\(cp = 0.01\)</span> (es decir, <span class="math inline">\(\Delta G &lt;= 0.01\)</span>).</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="árboles-de-decisión.html#cb587-1"></a><span class="co"># Usar method = &quot;class&quot; para clasificación y method = &quot;anova&quot; para regresión</span></span>
+<span id="cb587-2"><a href="árboles-de-decisión.html#cb587-2"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb587-3"><a href="árboles-de-decisión.html#cb587-3"></a>oj_mdl_cart_full &lt;-<span class="st"> </span><span class="kw">rpart</span>(<span class="dt">formula =</span> Purchase <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> oj_train, </span>
+<span id="cb587-4"><a href="árboles-de-decisión.html#cb587-4"></a>                          <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb587-5"><a href="árboles-de-decisión.html#cb587-5"></a>oj_mdl_cart_full</span></code></pre></div>
+<pre><code>n= 857 
+
+node), split, n, loss, yval, (yprob)
+      * denotes terminal node
+
+ 1) root 857 334 CH (0.61026838 0.38973162)  
+   2) LoyalCH&gt;=0.48285 537  94 CH (0.82495345 0.17504655)  
+     4) LoyalCH&gt;=0.7648795 271  13 CH (0.95202952 0.04797048) *
+     5) LoyalCH&lt; 0.7648795 266  81 CH (0.69548872 0.30451128)  
+      10) PriceDiff&gt;=-0.165 226  50 CH (0.77876106 0.22123894) *
+      11) PriceDiff&lt; -0.165 40   9 MM (0.22500000 0.77500000) *
+   3) LoyalCH&lt; 0.48285 320  80 MM (0.25000000 0.75000000)  
+     6) LoyalCH&gt;=0.2761415 146  58 MM (0.39726027 0.60273973)  
+      12) SalePriceMM&gt;=2.04 71  31 CH (0.56338028 0.43661972) *
+      13) SalePriceMM&lt; 2.04 75  18 MM (0.24000000 0.76000000) *
+     7) LoyalCH&lt; 0.2761415 174  22 MM (0.12643678 0.87356322) *</code></pre>
+<p>La salida comienza con el nodo raíz. La clase predicha en la raíz es <code>CH</code> y esta predicción produce 334 errores en las 857 observaciones para una tasa de éxito (precisión) del 61% y una tasa de error del 39%. Los nodos secundarios del nodo “x” están etiquetados como 2x) y 2x + 1), por lo que los nodos secundarios de 1) son 2) y 3), y los nodos secundarios de 2) son 4) y 5). Los nodos terminales están etiquetados con un asterisco (*).</p>
+<p>Sorprendentemente, solo 3 de las 17 variables se utilizaron en el árbol completo: LoyalCH (lealtad de marca del cliente para CH), PriceDiff (precio relativo de MM sobre CH) y SalePriceMM (precio absoluto de MM). La primera división está en LoyalCH = 0.48285. Aquí hay un diagrama del árbol completo (sin podar).</p>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="árboles-de-decisión.html#cb589-1"></a><span class="kw">rpart.plot</span>(oj_mdl_cart_full, <span class="dt">yesno =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-240-1.png" width="672" /></p>
+<p>Las cajas muestran la clasificación del nodo (según la moda), la proporción de observaciones que no son <code>CH</code> y la proporción de observaciones incluidas en el nodo.</p>
+<p><code>rpart ()</code> no solo hizo crecer el árbol completo, sino que identificó el conjunto de parámetros de complejidad de costos y midió el rendimiento del modelo de cada árbol correspondiente mediante validación cruzada. <code>printcp ()</code> muestra los posibles valores de <span class="math inline">\(c_p\)</span>. La siguiente tabla se puede utilizar esta tabla para decidir cómo podar el árbol.</p>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="árboles-de-decisión.html#cb590-1"></a><span class="kw">printcp</span>(oj_mdl_cart_full)</span></code></pre></div>
+<pre><code>
+Classification tree:
+rpart(formula = Purchase ~ ., data = oj_train, method = &quot;class&quot;)
+
+Variables actually used in tree construction:
+[1] LoyalCH     PriceDiff   SalePriceMM
+
+Root node error: 334/857 = 0.38973
+
+n= 857 
+
+        CP nsplit rel error  xerror     xstd
+1 0.479042      0   1.00000 1.00000 0.042745
+2 0.032934      1   0.52096 0.54192 0.035775
+3 0.013473      3   0.45509 0.47006 0.033905
+4 0.010000      5   0.42814 0.46407 0.033736</code></pre>
+<p>Hay 4 valores de <span class="math inline">\(c_p\)</span> en este modelo. El modelo con el parámetro de complejidad más pequeño permite la mayoría de las divisiones (<code>nsplit</code>). El parámetro de mayor complejidad corresponde a un árbol con solo un nodo raíz. <code>rel error</code> es la tasa de error relativa al nodo raíz. El error absoluto del nodo raíz es 0.38973162 (la proporción de MM), por lo que su <code>rel error</code> es 0.38973162 / 0.38973162 = 1.0. Eso significa que el error absoluto del árbol completo (en CP = 0.01) es 0.42814 * 0.38973162 = 0.1669. Podemos verificarlo calculando la tasa de error de los valores predichos:</p>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="árboles-de-decisión.html#cb592-1"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(oj_mdl_cart_full, <span class="dt">newdata =</span> oj_train, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb592-2"><a href="árboles-de-decisión.html#cb592-2"></a><span class="kw">mean</span>(oj_train<span class="op">$</span>Purchase <span class="op">!=</span><span class="st"> </span>pred)</span></code></pre></div>
+<pre><code>[1] 0.1668611</code></pre>
+<p>Para acaber de explicar toda la salida de la table CP, <code>xerror</code> es la tasa de error relativa con validación cruzada y <code>xstd</code> es su error estándar. Si se desea el error más bajo posible, debersmos podar el árbol con el error de CV relativo más pequeño, <span class="math inline">\(c_p=0.01\)</span>. Si deseamos equilibrar el poder predictivo con la simplicidad, podaremos al árbol más pequeño dentro de 1 SE del que tiene el error relativo más pequeño. La tabla CP no es muy útil para encontrar ese árbol, así que añadiremos una columna para encontrarlo.</p>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="árboles-de-decisión.html#cb594-1"></a>oj_mdl_cart_full<span class="op">$</span>cptable <span class="op">%&gt;%</span></span>
+<span id="cb594-2"><a href="árboles-de-decisión.html#cb594-2"></a><span class="st">   </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></span>
+<span id="cb594-3"><a href="árboles-de-decisión.html#cb594-3"></a><span class="st">   </span><span class="kw">mutate</span>(</span>
+<span id="cb594-4"><a href="árboles-de-decisión.html#cb594-4"></a>      <span class="dt">min_idx =</span> <span class="kw">which.min</span>(oj_mdl_cart_full<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>]),</span>
+<span id="cb594-5"><a href="árboles-de-decisión.html#cb594-5"></a>      <span class="dt">rownum =</span> <span class="kw">row_number</span>(),</span>
+<span id="cb594-6"><a href="árboles-de-decisión.html#cb594-6"></a>      <span class="dt">xerror_cap =</span> oj_mdl_cart_full<span class="op">$</span>cptable[min_idx, <span class="st">&quot;xerror&quot;</span>] <span class="op">+</span><span class="st"> </span></span>
+<span id="cb594-7"><a href="árboles-de-decisión.html#cb594-7"></a><span class="st">                   </span>oj_mdl_cart_full<span class="op">$</span>cptable[min_idx, <span class="st">&quot;xstd&quot;</span>],</span>
+<span id="cb594-8"><a href="árboles-de-decisión.html#cb594-8"></a>      <span class="dt">eval =</span> <span class="kw">case_when</span>(rownum <span class="op">==</span><span class="st"> </span>min_idx <span class="op">~</span><span class="st"> &quot;min xerror&quot;</span>,</span>
+<span id="cb594-9"><a href="árboles-de-decisión.html#cb594-9"></a>                       xerror <span class="op">&lt;</span><span class="st"> </span>xerror_cap <span class="op">~</span><span class="st"> &quot;under cap&quot;</span>,</span>
+<span id="cb594-10"><a href="árboles-de-decisión.html#cb594-10"></a>                       <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &quot;&quot;</span>)</span>
+<span id="cb594-11"><a href="árboles-de-decisión.html#cb594-11"></a>   ) <span class="op">%&gt;%</span></span>
+<span id="cb594-12"><a href="árboles-de-decisión.html#cb594-12"></a><span class="st">   </span><span class="kw">select</span>(<span class="op">-</span>rownum, <span class="op">-</span>min_idx) </span></code></pre></div>
+<pre><code>          CP nsplit rel.error    xerror       xstd xerror_cap       eval
+1 0.47904192      0 1.0000000 1.0000000 0.04274518  0.4978082           
+2 0.03293413      1 0.5209581 0.5419162 0.03577468  0.4978082           
+3 0.01347305      3 0.4550898 0.4700599 0.03390486  0.4978082  under cap
+4 0.01000000      5 0.4281437 0.4640719 0.03373631  0.4978082 min xerror</code></pre>
+<p>El árbol más simple que usa la regla 1-SE es <span class="math inline">\(c_p = 0.01347305\)</span> (error CV = 0.18). Afortunadamente, <code>plotcp ()</code> nos da una representación gráfica de la relación entre <code>xerror</code> y <code>cp</code>.</p>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="árboles-de-decisión.html#cb596-1"></a><span class="kw">plotcp</span>(oj_mdl_cart_full, <span class="dt">upper =</span> <span class="st">&quot;splits&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-244-1.png" width="672" /></p>
+<p>La línea discontinua se establece en el mínimo <code>xerror + xstd</code>. El eje superior muestra el número de divisiones en el árbol. NOTA: No estoy seguro de por qué los valores de CP no son los mismos que en la tabla (están cerca, pero no son los mismos). La figura sugiere que debería podar a 5 o 3 divisiones. Vemos que esta curva nunca llega al mínimo, sigue disminuyendo a 5 divisiones. El valor del parámetro de ajuste predeterminado <span class="math inline">\(cp = 0.01\)</span> puede ser demasiado grande, así que lo cambiaremos a <span class="math inline">\(cp = 0.001\)</span> y empezaremos de nuevo.</p>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="árboles-de-decisión.html#cb597-1"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb597-2"><a href="árboles-de-decisión.html#cb597-2"></a>oj_mdl_cart_full &lt;-<span class="st"> </span><span class="kw">rpart</span>(</span>
+<span id="cb597-3"><a href="árboles-de-decisión.html#cb597-3"></a>   <span class="dt">formula =</span> Purchase <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb597-4"><a href="árboles-de-decisión.html#cb597-4"></a>   <span class="dt">data =</span> oj_train,</span>
+<span id="cb597-5"><a href="árboles-de-decisión.html#cb597-5"></a>   <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>,</span>
+<span id="cb597-6"><a href="árboles-de-decisión.html#cb597-6"></a>   <span class="dt">cp =</span> <span class="fl">0.001</span></span>
+<span id="cb597-7"><a href="árboles-de-decisión.html#cb597-7"></a>   )</span>
+<span id="cb597-8"><a href="árboles-de-decisión.html#cb597-8"></a><span class="kw">print</span>(oj_mdl_cart_full)</span></code></pre></div>
+<pre><code>n= 857 
+
+node), split, n, loss, yval, (yprob)
+      * denotes terminal node
+
+  1) root 857 334 CH (0.61026838 0.38973162)  
+    2) LoyalCH&gt;=0.48285 537  94 CH (0.82495345 0.17504655)  
+      4) LoyalCH&gt;=0.7648795 271  13 CH (0.95202952 0.04797048) *
+      5) LoyalCH&lt; 0.7648795 266  81 CH (0.69548872 0.30451128)  
+       10) PriceDiff&gt;=-0.165 226  50 CH (0.77876106 0.22123894)  
+         20) ListPriceDiff&gt;=0.255 115  11 CH (0.90434783 0.09565217) *
+         21) ListPriceDiff&lt; 0.255 111  39 CH (0.64864865 0.35135135)  
+           42) PriceMM&gt;=2.155 19   2 CH (0.89473684 0.10526316) *
+           43) PriceMM&lt; 2.155 92  37 CH (0.59782609 0.40217391)  
+             86) DiscCH&gt;=0.115 7   0 CH (1.00000000 0.00000000) *
+             87) DiscCH&lt; 0.115 85  37 CH (0.56470588 0.43529412)  
+              174) ListPriceDiff&gt;=0.215 45  15 CH (0.66666667 0.33333333) *
+              175) ListPriceDiff&lt; 0.215 40  18 MM (0.45000000 0.55000000)  
+                350) LoyalCH&gt;=0.527571 28  13 CH (0.53571429 0.46428571)  
+                  700) WeekofPurchase&lt; 266.5 21   8 CH (0.61904762 0.38095238) *
+                  701) WeekofPurchase&gt;=266.5 7   2 MM (0.28571429 0.71428571) *
+                351) LoyalCH&lt; 0.527571 12   3 MM (0.25000000 0.75000000) *
+       11) PriceDiff&lt; -0.165 40   9 MM (0.22500000 0.77500000) *
+    3) LoyalCH&lt; 0.48285 320  80 MM (0.25000000 0.75000000)  
+      6) LoyalCH&gt;=0.2761415 146  58 MM (0.39726027 0.60273973)  
+       12) SalePriceMM&gt;=2.04 71  31 CH (0.56338028 0.43661972)  
+         24) LoyalCH&lt; 0.303104 7   0 CH (1.00000000 0.00000000) *
+         25) LoyalCH&gt;=0.303104 64  31 CH (0.51562500 0.48437500)  
+           50) WeekofPurchase&gt;=246.5 52  22 CH (0.57692308 0.42307692)  
+            100) PriceCH&lt; 1.94 35  11 CH (0.68571429 0.31428571)  
+              200) StoreID&lt; 1.5 9   1 CH (0.88888889 0.11111111) *
+              201) StoreID&gt;=1.5 26  10 CH (0.61538462 0.38461538)  
+                402) LoyalCH&lt; 0.410969 17   4 CH (0.76470588 0.23529412) *
+                403) LoyalCH&gt;=0.410969 9   3 MM (0.33333333 0.66666667) *
+            101) PriceCH&gt;=1.94 17   6 MM (0.35294118 0.64705882) *
+           51) WeekofPurchase&lt; 246.5 12   3 MM (0.25000000 0.75000000) *
+       13) SalePriceMM&lt; 2.04 75  18 MM (0.24000000 0.76000000)  
+         26) SpecialCH&gt;=0.5 14   6 CH (0.57142857 0.42857143) *
+         27) SpecialCH&lt; 0.5 61  10 MM (0.16393443 0.83606557) *
+      7) LoyalCH&lt; 0.2761415 174  22 MM (0.12643678 0.87356322)  
+       14) LoyalCH&gt;=0.035047 117  21 MM (0.17948718 0.82051282)  
+         28) WeekofPurchase&lt; 273.5 104  21 MM (0.20192308 0.79807692)  
+           56) PriceCH&gt;=1.875 20   9 MM (0.45000000 0.55000000)  
+            112) WeekofPurchase&gt;=252.5 12   5 CH (0.58333333 0.41666667) *
+            113) WeekofPurchase&lt; 252.5 8   2 MM (0.25000000 0.75000000) *
+           57) PriceCH&lt; 1.875 84  12 MM (0.14285714 0.85714286) *
+         29) WeekofPurchase&gt;=273.5 13   0 MM (0.00000000 1.00000000) *
+       15) LoyalCH&lt; 0.035047 57   1 MM (0.01754386 0.98245614) *</code></pre>
+<p>Este es un árbol mucho más grande. ¿Encontramo un valor cp que produce un mínimo local?</p>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="árboles-de-decisión.html#cb599-1"></a><span class="kw">plotcp</span>(oj_mdl_cart_full, <span class="dt">upper =</span> <span class="st">&quot;splits&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-246-1.png" width="672" /></p>
+<p>Sí, el mínimo está en CP = 0.011 con 5 divisiones. El mínimo + 1 SE está en CP = 0.021 con 3 divisiones. Podaremos entonces el árbol en 3.</p>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="árboles-de-decisión.html#cb600-1"></a>oj_mdl_cart &lt;-<span class="st"> </span><span class="kw">prune</span>(</span>
+<span id="cb600-2"><a href="árboles-de-decisión.html#cb600-2"></a>   oj_mdl_cart_full,</span>
+<span id="cb600-3"><a href="árboles-de-decisión.html#cb600-3"></a>   <span class="dt">cp =</span> oj_mdl_cart_full<span class="op">$</span>cptable[oj_mdl_cart_full<span class="op">$</span>cptable[, <span class="dv">2</span>] <span class="op">==</span><span class="st"> </span><span class="dv">3</span>, <span class="st">&quot;CP&quot;</span>]</span>
+<span id="cb600-4"><a href="árboles-de-decisión.html#cb600-4"></a>)</span>
+<span id="cb600-5"><a href="árboles-de-decisión.html#cb600-5"></a><span class="kw">rpart.plot</span>(oj_mdl_cart, <span class="dt">yesno =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-247-1.png" width="672" /></p>
+<p>El indicador de compra más “importante” parece ser <code>LoyalCH</code>. De la <a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf">vignette de rpart</a> (página 12) tenemos que:</p>
+<pre><code>An overall measure of variable importance is the sum of the goodness of split measures for each split for which it was the primary variable, plus goodness (adjusted agreement) for all splits in which it was a surrogate.</code></pre>
+<p>“Surrogate” (variable subrogada[^La FDA define una variable subrogada como “una medida de laboratorio o signo físico que se usa en ensayos terapéuticos como sustituto de una variable clínicamente significativa que es una medida directa sobre lo que siente un paciente, sus funciones o su supervivencia y que se espera que prediga el efecto de la terapia]) se refieren a características alternativas para que un nodo maneje los datos faltantes. Para cada división, CART evalúa una variedad de divisiones alternativas”sustitutas" para usar cuando el valor de la característica para la división principal es NA. Las divisiones sustitutas son divisiones que producen resultados similares a la división original.</p>
+<p>La importancia de una variable es la suma de la mejora en la medida general de Gini (o RMSE) producida por los nodos en los que aparece. En el siguiente gráfico podemos ver la importancia de cada variable para este modelo.</p>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="árboles-de-decisión.html#cb602-1"></a>oj_mdl_cart<span class="op">$</span>variable.importance <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb602-2"><a href="árboles-de-decisión.html#cb602-2"></a><span class="st">   </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></span>
+<span id="cb602-3"><a href="árboles-de-decisión.html#cb602-3"></a><span class="st">   </span><span class="kw">rownames_to_column</span>(<span class="dt">var =</span> <span class="st">&quot;Feature&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb602-4"><a href="árboles-de-decisión.html#cb602-4"></a><span class="st">   </span><span class="kw">rename</span>(<span class="dt">Overall =</span> <span class="st">&#39;.&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb602-5"><a href="árboles-de-decisión.html#cb602-5"></a><span class="st">   </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">fct_reorder</span>(Feature, Overall), <span class="dt">y =</span> Overall)) <span class="op">+</span></span>
+<span id="cb602-6"><a href="árboles-de-decisión.html#cb602-6"></a><span class="st">   </span><span class="kw">geom_pointrange</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> <span class="dv">0</span>, <span class="dt">ymax =</span> Overall), <span class="dt">color =</span> <span class="st">&quot;cadetblue&quot;</span>, <span class="dt">size =</span> <span class="fl">.3</span>) <span class="op">+</span></span>
+<span id="cb602-7"><a href="árboles-de-decisión.html#cb602-7"></a><span class="st">   </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
+<span id="cb602-8"><a href="árboles-de-decisión.html#cb602-8"></a><span class="st">   </span><span class="kw">coord_flip</span>() <span class="op">+</span></span>
+<span id="cb602-9"><a href="árboles-de-decisión.html#cb602-9"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Importancia mediante clasificación simple&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-248-1.png" width="672" /></p>
+<p><code>LoyalCH</code> es, con mucho, la variable más importante, como se esperaba de su posición en la parte superior del árbol así como en el siguiente nivel abajo.</p>
+<p>Podemos ver cómo aparecen los variables subrogadas en el modelo con la función <code>summary()</code>.</p>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="árboles-de-decisión.html#cb603-1"></a><span class="kw">summary</span>(oj_mdl_cart)</span></code></pre></div>
+<pre><code>Call:
+rpart(formula = Purchase ~ ., data = oj_train, method = &quot;class&quot;, 
+    cp = 0.001)
+  n= 857 
+
+          CP nsplit rel error    xerror       xstd
+1 0.47904192      0 1.0000000 1.0000000 0.04274518
+2 0.03293413      1 0.5209581 0.5419162 0.03577468
+3 0.01347305      3 0.4550898 0.4700599 0.03390486
+
+Variable importance
+       LoyalCH      PriceDiff    SalePriceMM        StoreID WeekofPurchase 
+            67              9              5              4              4 
+        DiscMM        PriceMM      PctDiscMM        PriceCH 
+             3              3              3              1 
+
+Node number 1: 857 observations,    complexity param=0.4790419
+  predicted class=CH  expected loss=0.3897316  P(node) =1
+    class counts:   523   334
+   probabilities: 0.610 0.390 
+  left son=2 (537 obs) right son=3 (320 obs)
+  Primary splits:
+      LoyalCH       &lt; 0.48285   to the right, improve=132.56800, (0 missing)
+      StoreID       &lt; 3.5       to the right, improve= 40.12097, (0 missing)
+      PriceDiff     &lt; 0.015     to the right, improve= 24.26552, (0 missing)
+      ListPriceDiff &lt; 0.255     to the right, improve= 22.79117, (0 missing)
+      SalePriceMM   &lt; 1.84      to the right, improve= 20.16447, (0 missing)
+  Surrogate splits:
+      StoreID        &lt; 3.5       to the right, agree=0.646, adj=0.053, (0 split)
+      PriceMM        &lt; 1.89      to the right, agree=0.638, adj=0.031, (0 split)
+      WeekofPurchase &lt; 229.5     to the right, agree=0.632, adj=0.016, (0 split)
+      DiscMM         &lt; 0.77      to the left,  agree=0.629, adj=0.006, (0 split)
+      SalePriceMM    &lt; 1.385     to the right, agree=0.629, adj=0.006, (0 split)
+
+Node number 2: 537 observations,    complexity param=0.03293413
+  predicted class=CH  expected loss=0.1750466  P(node) =0.6266044
+    class counts:   443    94
+   probabilities: 0.825 0.175 
+  left son=4 (271 obs) right son=5 (266 obs)
+  Primary splits:
+      LoyalCH       &lt; 0.7648795 to the right, improve=17.669310, (0 missing)
+      PriceDiff     &lt; 0.015     to the right, improve=15.475200, (0 missing)
+      SalePriceMM   &lt; 1.84      to the right, improve=13.951730, (0 missing)
+      ListPriceDiff &lt; 0.255     to the right, improve=11.407560, (0 missing)
+      DiscMM        &lt; 0.15      to the left,  improve= 7.795122, (0 missing)
+  Surrogate splits:
+      WeekofPurchase &lt; 257.5     to the right, agree=0.594, adj=0.180, (0 split)
+      PriceCH        &lt; 1.775     to the right, agree=0.590, adj=0.173, (0 split)
+      StoreID        &lt; 3.5       to the right, agree=0.587, adj=0.165, (0 split)
+      PriceMM        &lt; 2.04      to the right, agree=0.587, adj=0.165, (0 split)
+      SalePriceMM    &lt; 2.04      to the right, agree=0.587, adj=0.165, (0 split)
+
+Node number 3: 320 observations
+  predicted class=MM  expected loss=0.25  P(node) =0.3733956
+    class counts:    80   240
+   probabilities: 0.250 0.750 
+
+Node number 4: 271 observations
+  predicted class=CH  expected loss=0.04797048  P(node) =0.3162194
+    class counts:   258    13
+   probabilities: 0.952 0.048 
+
+Node number 5: 266 observations,    complexity param=0.03293413
+  predicted class=CH  expected loss=0.3045113  P(node) =0.3103851
+    class counts:   185    81
+   probabilities: 0.695 0.305 
+  left son=10 (226 obs) right son=11 (40 obs)
+  Primary splits:
+      PriceDiff     &lt; -0.165    to the right, improve=20.84307, (0 missing)
+      ListPriceDiff &lt; 0.235     to the right, improve=20.82404, (0 missing)
+      SalePriceMM   &lt; 1.84      to the right, improve=16.80587, (0 missing)
+      DiscMM        &lt; 0.15      to the left,  improve=10.05120, (0 missing)
+      PctDiscMM     &lt; 0.0729725 to the left,  improve=10.05120, (0 missing)
+  Surrogate splits:
+      SalePriceMM    &lt; 1.585     to the right, agree=0.906, adj=0.375, (0 split)
+      DiscMM         &lt; 0.57      to the left,  agree=0.895, adj=0.300, (0 split)
+      PctDiscMM      &lt; 0.264375  to the left,  agree=0.895, adj=0.300, (0 split)
+      WeekofPurchase &lt; 274.5     to the left,  agree=0.872, adj=0.150, (0 split)
+      SalePriceCH    &lt; 2.075     to the left,  agree=0.857, adj=0.050, (0 split)
+
+Node number 10: 226 observations
+  predicted class=CH  expected loss=0.2212389  P(node) =0.2637106
+    class counts:   176    50
+   probabilities: 0.779 0.221 
+
+Node number 11: 40 observations
+  predicted class=MM  expected loss=0.225  P(node) =0.04667445
+    class counts:     9    31
+   probabilities: 0.225 0.775 </code></pre>
+<p>Una vez tenemos un modelo (o varios) los podemos evaluar en la muestra test con las medidas estándard</p>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="árboles-de-decisión.html#cb605-1"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(oj_mdl_cart, <span class="dt">newdata =</span> oj_test, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>) </span>
+<span id="cb605-2"><a href="árboles-de-decisión.html#cb605-2"></a>oj_cm_cart &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(pred,  oj_test<span class="op">$</span>Purchase)</span>
+<span id="cb605-3"><a href="árboles-de-decisión.html#cb605-3"></a>oj_cm_cart</span></code></pre></div>
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  CH  MM
+        CH 113  13
+        MM  17  70
+                                          
+               Accuracy : 0.8592          
+                 95% CI : (0.8051, 0.9029)
+    No Information Rate : 0.6103          
+    P-Value [Acc &gt; NIR] : 1.265e-15       
+                                          
+                  Kappa : 0.7064          
+                                          
+ Mcnemar&#39;s Test P-Value : 0.5839          
+                                          
+            Sensitivity : 0.8692          
+            Specificity : 0.8434          
+         Pos Pred Value : 0.8968          
+         Neg Pred Value : 0.8046          
+             Prevalence : 0.6103          
+         Detection Rate : 0.5305          
+   Detection Prevalence : 0.5915          
+      Balanced Accuracy : 0.8563          
+                                          
+       &#39;Positive&#39; Class : CH              
+                                          </code></pre>
+<p>También podemos representar gráficamente la tabla de confusión</p>
+<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="árboles-de-decisión.html#cb607-1"></a><span class="kw">plot</span>(oj_test<span class="op">$</span>Purchase, pred, </span>
+<span id="cb607-2"><a href="árboles-de-decisión.html#cb607-2"></a>     <span class="dt">main =</span> <span class="st">&quot;Clasificación: Predicho vs. Observado&quot;</span>,</span>
+<span id="cb607-3"><a href="árboles-de-decisión.html#cb607-3"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Observado&quot;</span>,</span>
+<span id="cb607-4"><a href="árboles-de-decisión.html#cb607-4"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Predicho&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-251-1.png" width="672" /></p>
+</div>
+<div id="área-bajo-la-curva-roc" class="section level2" number="13.2">
+<h2><span class="header-section-number">13.2</span> Área bajo la curva ROC</h2>
+<p>También podemos calcular el área bajo la curva ROC. La curva ROC (características operativas del receptor) es otra medida de precisión. Corresponde a un gráfico de la tasa de verdaderos positivos (TPR, sensibilidad) versus la tasa de falsos positivos (FPR, 1 - especificidad) para un conjunto de umbrales. De forma predeterminada, el umbral para predecir la clasificación predeterminada es 0.50, pero podría ser cualquier umbral. La función <code>precrec::evalmod ()</code> calcula los valores de la matriz de confusión del modelo usando el conjunto de datos test. El AUC en el conjunto de datos test es 0.8848 y podemos calcularlo con varias funciones: <code>pROC::plot.roc ()</code>, <code>plotROC::geom_roc ()</code>, <code>yardstick::roc_curve ()</code> y <code>plotROC</code> para usar <code>ggplot()</code> [geometría <code>geom_roc ()</code>].</p>
+<p>Nosotros usaremos <code>pROC</code>. Para ello necesitamos tener las predicciones como probabilidades para la categoría de referencia. <strong>NOTA:</strong> El AUC es, pues, una medida útil para casos donde el predictor es binario.</p>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="árboles-de-decisión.html#cb608-1"></a><span class="kw">library</span>(pROC)</span>
+<span id="cb608-2"><a href="árboles-de-decisión.html#cb608-2"></a>pred2 &lt;-<span class="st">  </span><span class="kw">predict</span>(oj_mdl_cart, <span class="dt">newdata =</span> oj_test, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)[,<span class="st">&quot;CH&quot;</span>]</span>
+<span id="cb608-3"><a href="árboles-de-decisión.html#cb608-3"></a>roc.car &lt;-<span class="st"> </span><span class="kw">roc</span>(oj_test<span class="op">$</span>Purchase, pred2, <span class="dt">print.auc=</span><span class="ot">TRUE</span>, </span>
+<span id="cb608-4"><a href="árboles-de-decisión.html#cb608-4"></a>               <span class="dt">ci=</span><span class="ot">TRUE</span>,</span>
+<span id="cb608-5"><a href="árboles-de-decisión.html#cb608-5"></a>               <span class="dt">plot=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-252-1.png" width="672" /></p>
+</div>
+<div id="entrenamiento-con-caret" class="section level2" number="13.3">
+<h2><span class="header-section-number">13.3</span> Entrenamiento con <code>caret</code></h2>
+<p>También podemos ajustar el modelo con la función <code>caret::train ()</code>. Recordemo que hay dos formas de ajustar los hiperparámetros cuando usamos <code>train ()</code>:</p>
+<ul>
+<li>establecer el número de valores de parámetros de ajuste a considerar utilizando <code>tuneLength</code>, o</li>
+<li>establecer ciertos valores para cada parámetro utilizando <code>tuneGrid</code>.</li>
+</ul>
+<p><strong>ESTRATEGIA:</strong> Construiremos el modelo usando una validación cruzada de 10 veces para optimizar el hiperparámetro CP. Si no tenemos idea de cuál es el parámetro de ajuste óptimo, empezaremos con <code>tuneLength</code> para aproximarnos al valor óptimo y luego ajustaremos el valor con <code>tuneGrid</code>. Crearemos un objeto de control de entrenamiento que puedo reutilizar en otras compilaciones de modelos.</p>
+<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="árboles-de-decisión.html#cb609-1"></a>oj_trControl =<span class="st"> </span><span class="kw">trainControl</span> (<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>,</span>
+<span id="cb609-2"><a href="árboles-de-decisión.html#cb609-2"></a>   <span class="dt">number =</span> <span class="dv">10</span>,</span>
+<span id="cb609-3"><a href="árboles-de-decisión.html#cb609-3"></a>   <span class="dt">savePredictions =</span> <span class="st">&quot;final&quot;</span>,  <span class="co"># guardaremos preds para el valor óptimo del parámetro a tunear</span></span>
+<span id="cb609-4"><a href="árboles-de-decisión.html#cb609-4"></a>   <span class="dt">classProbs =</span> <span class="ot">TRUE</span>,  <span class="co"># probs para las clases además de preds</span></span>
+<span id="cb609-5"><a href="árboles-de-decisión.html#cb609-5"></a>   <span class="dt">summaryFunction =</span> twoClassSummary</span>
+<span id="cb609-6"><a href="árboles-de-decisión.html#cb609-6"></a>   )</span></code></pre></div>
+<p>Ahora estimamos el modelo con</p>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="árboles-de-decisión.html#cb610-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb610-2"><a href="árboles-de-decisión.html#cb610-2"></a>oj_mdl_cart2 &lt;-<span class="st"> </span><span class="kw">train</span>(</span>
+<span id="cb610-3"><a href="árboles-de-decisión.html#cb610-3"></a>   Purchase <span class="op">~</span><span class="st"> </span>., </span>
+<span id="cb610-4"><a href="árboles-de-decisión.html#cb610-4"></a>   <span class="dt">data =</span> oj_train, </span>
+<span id="cb610-5"><a href="árboles-de-decisión.html#cb610-5"></a>   <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>,</span>
+<span id="cb610-6"><a href="árboles-de-decisión.html#cb610-6"></a>   <span class="dt">tuneLength =</span> <span class="dv">5</span>,</span>
+<span id="cb610-7"><a href="árboles-de-decisión.html#cb610-7"></a>   <span class="dt">metric =</span> <span class="st">&quot;ROC&quot;</span>,</span>
+<span id="cb610-8"><a href="árboles-de-decisión.html#cb610-8"></a>   <span class="dt">trControl =</span> oj_trControl</span>
+<span id="cb610-9"><a href="árboles-de-decisión.html#cb610-9"></a>   )</span></code></pre></div>
+<p><code>caret</code> construye un árbol completo usando los parámetros predeterminados de <code>rpart</code> que son: índice de división de Gini, al menos 20 observaciones en un nodo para considerar dividirlo, y al menos 6 observaciones en cada nodo. Luego, <code>caret</code> calcula la precisión para cada valor candidato del hiperparámetro (CP). Estos son los resultados:</p>
+<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="árboles-de-decisión.html#cb611-1"></a>oj_mdl_cart2</span></code></pre></div>
+<pre><code>CART 
+
+857 samples
+ 17 predictor
+  2 classes: &#39;CH&#39;, &#39;MM&#39; 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 772, 772, 771, 770, 771, 771, ... 
+Resampling results across tuning parameters:
+
+  cp           ROC        Sens       Spec     
+  0.005988024  0.8539885  0.8605225  0.7274510
+  0.008982036  0.8502309  0.8568578  0.7334225
+  0.013473054  0.8459290  0.8473149  0.7397504
+  0.032934132  0.7776483  0.8509071  0.6796791
+  0.479041916  0.5878764  0.9201379  0.2556150
+
+ROC was used to select the optimal model using the largest value.
+The final value used for the model was cp = 0.005988024.</code></pre>
+<p>El segundo CP (0.008982036) produce la mayor precisión. Podemos profundizar en el mejor valor de CP usando un <em>tuning grid</em>.</p>
+<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb613-1"><a href="árboles-de-decisión.html#cb613-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb613-2"><a href="árboles-de-decisión.html#cb613-2"></a>oj_mdl_cart2 &lt;-<span class="st"> </span><span class="kw">train</span>(</span>
+<span id="cb613-3"><a href="árboles-de-decisión.html#cb613-3"></a>   Purchase <span class="op">~</span><span class="st"> </span>., </span>
+<span id="cb613-4"><a href="árboles-de-decisión.html#cb613-4"></a>   <span class="dt">data =</span> oj_train, </span>
+<span id="cb613-5"><a href="árboles-de-decisión.html#cb613-5"></a>   <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>,</span>
+<span id="cb613-6"><a href="árboles-de-decisión.html#cb613-6"></a>   <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">cp =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">0.001</span>, <span class="dt">to =</span> <span class="fl">0.010</span>, <span class="dt">length =</span> <span class="dv">11</span>)),  </span>
+<span id="cb613-7"><a href="árboles-de-decisión.html#cb613-7"></a>   <span class="dt">metric =</span> <span class="st">&quot;ROC&quot;</span>,</span>
+<span id="cb613-8"><a href="árboles-de-decisión.html#cb613-8"></a>   <span class="dt">trControl =</span> oj_trControl</span>
+<span id="cb613-9"><a href="árboles-de-decisión.html#cb613-9"></a>   )</span>
+<span id="cb613-10"><a href="árboles-de-decisión.html#cb613-10"></a><span class="kw">print</span>(oj_mdl_cart2)</span></code></pre></div>
+<pre><code>CART 
+
+857 samples
+ 17 predictor
+  2 classes: &#39;CH&#39;, &#39;MM&#39; 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 772, 772, 771, 770, 771, 771, ... 
+Resampling results across tuning parameters:
+
+  cp      ROC        Sens       Spec     
+  0.0010  0.8513056  0.8529390  0.7182709
+  0.0019  0.8528471  0.8529753  0.7213012
+  0.0028  0.8524435  0.8510522  0.7302139
+  0.0037  0.8533529  0.8510522  0.7421569
+  0.0046  0.8540042  0.8491292  0.7333333
+  0.0055  0.8543820  0.8567126  0.7334225
+  0.0064  0.8539885  0.8605225  0.7274510
+  0.0073  0.8521076  0.8625181  0.7335116
+  0.0082  0.8521076  0.8625181  0.7335116
+  0.0091  0.8502309  0.8568578  0.7334225
+  0.0100  0.8507262  0.8510885  0.7424242
+
+ROC was used to select the optimal model using the largest value.
+The final value used for the model was cp = 0.0055.</code></pre>
+<p>El mejor modelo se consigue con CP = 0.0082. A continuación podemos ver las precisiones de validación cruzada para los valores de CP candidatos.</p>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="árboles-de-decisión.html#cb615-1"></a><span class="kw">plot</span>(oj_mdl_cart2)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-257-1.png" width="672" /></p>
+<p>Estos son los resultados para el modelo final:</p>
+<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="árboles-de-decisión.html#cb616-1"></a>oj_mdl_cart2<span class="op">$</span>finalModel</span></code></pre></div>
+<pre><code>n= 857 
+
+node), split, n, loss, yval, (yprob)
+      * denotes terminal node
+
+  1) root 857 334 CH (0.61026838 0.38973162)  
+    2) LoyalCH&gt;=0.48285 537  94 CH (0.82495345 0.17504655)  
+      4) LoyalCH&gt;=0.7648795 271  13 CH (0.95202952 0.04797048) *
+      5) LoyalCH&lt; 0.7648795 266  81 CH (0.69548872 0.30451128)  
+       10) PriceDiff&gt;=-0.165 226  50 CH (0.77876106 0.22123894) *
+       11) PriceDiff&lt; -0.165 40   9 MM (0.22500000 0.77500000) *
+    3) LoyalCH&lt; 0.48285 320  80 MM (0.25000000 0.75000000)  
+      6) LoyalCH&gt;=0.2761415 146  58 MM (0.39726027 0.60273973)  
+       12) SalePriceMM&gt;=2.04 71  31 CH (0.56338028 0.43661972)  
+         24) LoyalCH&lt; 0.303104 7   0 CH (1.00000000 0.00000000) *
+         25) LoyalCH&gt;=0.303104 64  31 CH (0.51562500 0.48437500)  
+           50) WeekofPurchase&gt;=246.5 52  22 CH (0.57692308 0.42307692)  
+            100) PriceCH&lt; 1.94 35  11 CH (0.68571429 0.31428571) *
+            101) PriceCH&gt;=1.94 17   6 MM (0.35294118 0.64705882) *
+           51) WeekofPurchase&lt; 246.5 12   3 MM (0.25000000 0.75000000) *
+       13) SalePriceMM&lt; 2.04 75  18 MM (0.24000000 0.76000000)  
+         26) SpecialCH&gt;=0.5 14   6 CH (0.57142857 0.42857143) *
+         27) SpecialCH&lt; 0.5 61  10 MM (0.16393443 0.83606557) *
+      7) LoyalCH&lt; 0.2761415 174  22 MM (0.12643678 0.87356322) *</code></pre>
+<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="árboles-de-decisión.html#cb618-1"></a><span class="kw">rpart.plot</span>(oj_mdl_cart2<span class="op">$</span>finalModel)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-259-1.png" width="672" /></p>
+<p>Veamos el rendimiento en la muestra test:</p>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="árboles-de-decisión.html#cb619-1"></a>pred3 &lt;-<span class="st"> </span><span class="kw">predict</span>(oj_mdl_cart2, <span class="dt">newdata =</span> oj_test, <span class="dt">type =</span> <span class="st">&quot;raw&quot;</span>) </span>
+<span id="cb619-2"><a href="árboles-de-decisión.html#cb619-2"></a>oj_cm_cart2 &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(pred3,  oj_test<span class="op">$</span>Purchase)</span>
+<span id="cb619-3"><a href="árboles-de-decisión.html#cb619-3"></a>oj_cm_cart2</span></code></pre></div>
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  CH  MM
+        CH 117  18
+        MM  13  65
+                                          
+               Accuracy : 0.8545          
+                 95% CI : (0.7998, 0.8989)
+    No Information Rate : 0.6103          
+    P-Value [Acc &gt; NIR] : 4.83e-15        
+                                          
+                  Kappa : 0.6907          
+                                          
+ Mcnemar&#39;s Test P-Value : 0.4725          
+                                          
+            Sensitivity : 0.9000          
+            Specificity : 0.7831          
+         Pos Pred Value : 0.8667          
+         Neg Pred Value : 0.8333          
+             Prevalence : 0.6103          
+         Detection Rate : 0.5493          
+   Detection Prevalence : 0.6338          
+      Balanced Accuracy : 0.8416          
+                                          
+       &#39;Positive&#39; Class : CH              
+                                          </code></pre>
+<p>La precisión es 0.8545, un poco peor que la 0.8592 del método directo. El AUC es 0.916 que es mejor que el obtenido con el método directo.</p>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="árboles-de-decisión.html#cb621-1"></a>pred4 &lt;-<span class="st"> </span><span class="kw">predict</span>(oj_mdl_cart2, <span class="dt">newdata =</span> oj_test, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)[,<span class="st">&quot;CH&quot;</span>] </span>
+<span id="cb621-2"><a href="árboles-de-decisión.html#cb621-2"></a>roc.car2 &lt;-<span class="st"> </span><span class="kw">roc</span>(oj_test<span class="op">$</span>Purchase, pred4, <span class="dt">print.auc=</span><span class="ot">TRUE</span>, </span>
+<span id="cb621-3"><a href="árboles-de-decisión.html#cb621-3"></a>               <span class="dt">ci=</span><span class="ot">TRUE</span>,</span>
+<span id="cb621-4"><a href="árboles-de-decisión.html#cb621-4"></a>               <span class="dt">plot=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-261-1.png" width="672" /></p>
+<p>Podemos comparar ambas curvas ROC mediante el <a href="https://www.jstor.org/stable/pdf/2531595.pdf?seq=1">test de DeLong</a></p>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="árboles-de-decisión.html#cb622-1"></a><span class="kw">roc.test</span>(roc.car, roc.car2)</span></code></pre></div>
+<pre><code>
+	DeLong&#39;s test for two correlated ROC curves
+
+data:  roc.car and roc.car2
+Z = -2.4259, p-value = 0.01527
+alternative hypothesis: true difference in AUC is not equal to 0
+sample estimates:
+AUC of roc1 AUC of roc2 
+  0.8848471   0.9162651 </code></pre>
+<p>Finalmente, podemos crear fácilmente la gráfica de importancia de variables con la función <code>varImp ()</code>. La lealtad a la marca es lo más importante, seguida de la diferencia de precio.</p>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="árboles-de-decisión.html#cb624-1"></a><span class="kw">plot</span>(<span class="kw">varImp</span>(oj_mdl_cart2), <span class="dt">main=</span><span class="st">&quot;Importancia de variables con CART (caret)&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-263-1.png" width="672" /></p>
+<p>Parece que con la estrategia de <code>caret</code> hemos conseguido un mejor modelo predictivo gracias, sobre todo, a la posibilidad de buscar el mejor hiperparámetro haciend <em>fine tuning</em>.</p>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="árboles-de-decisión.html#cb625-1"></a>oj_scoreboard &lt;-<span class="st"> </span><span class="kw">rbind</span>(</span>
+<span id="cb625-2"><a href="árboles-de-decisión.html#cb625-2"></a>   <span class="kw">data.frame</span>(<span class="dt">Modelo =</span> <span class="st">&quot;Single Tree&quot;</span>, </span>
+<span id="cb625-3"><a href="árboles-de-decisión.html#cb625-3"></a>              <span class="dt">Accuracy =</span> oj_cm_cart<span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>],</span>
+<span id="cb625-4"><a href="árboles-de-decisión.html#cb625-4"></a>              <span class="dt">ROC =</span> roc.car<span class="op">$</span>auc),</span>
+<span id="cb625-5"><a href="árboles-de-decisión.html#cb625-5"></a>   <span class="kw">data.frame</span>(<span class="dt">Modelo =</span> <span class="st">&quot;Single Tree (caret)&quot;</span>, </span>
+<span id="cb625-6"><a href="árboles-de-decisión.html#cb625-6"></a>              <span class="dt">Accuracy =</span> oj_cm_cart2<span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>],</span>
+<span id="cb625-7"><a href="árboles-de-decisión.html#cb625-7"></a>              <span class="dt">ROC =</span> roc.car2<span class="op">$</span>auc)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb625-8"><a href="árboles-de-decisión.html#cb625-8"></a><span class="st">   </span><span class="kw">arrange</span>(<span class="kw">desc</span>(ROC))</span>
+<span id="cb625-9"><a href="árboles-de-decisión.html#cb625-9"></a>knitr<span class="op">::</span><span class="kw">kable</span>(oj_scoreboard, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Modelo</th>
+<th align="right">Accuracy</th>
+<th align="right">ROC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Single Tree (caret)</td>
+<td align="right">0.8544601</td>
+<td align="right">0.9162651</td>
+</tr>
+<tr class="even">
+<td align="left">Single Tree</td>
+<td align="right">0.8591549</td>
+<td align="right">0.8848471</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="árboles-de-regresión" class="section level2" number="13.4">
+<h2><span class="header-section-number">13.4</span> Árboles de regresión</h2>
+<p>Un árbol de regresión simple se construye de manera similar a un árbol de clasificación simple y, al igual que el árbol de clasificación, rara vez se usan por sí solo (sobre todo en problemas complejos o de big data). De nuevo, basaremos el aprendizaje de esta metodología partiendo de un ejemplo real. Usaremos el conjunto de datos <code>ISLR::Carseats</code> que pretende predecir las ventas de sillitas de niños para coches (variable <code>Sales</code>) en 400 tiendas usando 10 variables que contienen información de las características de las sillas.</p>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="árboles-de-decisión.html#cb626-1"></a>cs_dat &lt;-<span class="st"> </span>ISLR<span class="op">::</span>Carseats</span>
+<span id="cb626-2"><a href="árboles-de-decisión.html#cb626-2"></a>skimr<span class="op">::</span><span class="kw">skim</span>(cs_dat)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-265">Table 13.2: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">cs_dat</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">400</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">11</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">8</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ShelveLoc</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">3</td>
+<td align="left">Med: 219, Bad: 96, Goo: 85</td>
+</tr>
+<tr class="even">
+<td align="left">Urban</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Yes: 282, No: 118</td>
+</tr>
+<tr class="odd">
+<td align="left">US</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Yes: 258, No: 142</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sales</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">7.50</td>
+<td align="right">2.82</td>
+<td align="right">0</td>
+<td align="right">5.39</td>
+<td align="right">7.49</td>
+<td align="right">9.32</td>
+<td align="right">16.27</td>
+<td align="left">▁▆▇▃▁</td>
+</tr>
+<tr class="even">
+<td align="left">CompPrice</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">124.97</td>
+<td align="right">15.33</td>
+<td align="right">77</td>
+<td align="right">115.00</td>
+<td align="right">125.00</td>
+<td align="right">135.00</td>
+<td align="right">175.00</td>
+<td align="left">▁▅▇▃▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Income</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">68.66</td>
+<td align="right">27.99</td>
+<td align="right">21</td>
+<td align="right">42.75</td>
+<td align="right">69.00</td>
+<td align="right">91.00</td>
+<td align="right">120.00</td>
+<td align="left">▇▆▇▆▅</td>
+</tr>
+<tr class="even">
+<td align="left">Advertising</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6.64</td>
+<td align="right">6.65</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">5.00</td>
+<td align="right">12.00</td>
+<td align="right">29.00</td>
+<td align="left">▇▃▃▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Population</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">264.84</td>
+<td align="right">147.38</td>
+<td align="right">10</td>
+<td align="right">139.00</td>
+<td align="right">272.00</td>
+<td align="right">398.50</td>
+<td align="right">509.00</td>
+<td align="left">▇▇▇▇▇</td>
+</tr>
+<tr class="even">
+<td align="left">Price</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">115.80</td>
+<td align="right">23.68</td>
+<td align="right">24</td>
+<td align="right">100.00</td>
+<td align="right">117.00</td>
+<td align="right">131.00</td>
+<td align="right">191.00</td>
+<td align="left">▁▂▇▆▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Age</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">53.32</td>
+<td align="right">16.20</td>
+<td align="right">25</td>
+<td align="right">39.75</td>
+<td align="right">54.50</td>
+<td align="right">66.00</td>
+<td align="right">80.00</td>
+<td align="left">▇▆▇▇▇</td>
+</tr>
+<tr class="even">
+<td align="left">Education</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">13.90</td>
+<td align="right">2.62</td>
+<td align="right">10</td>
+<td align="right">12.00</td>
+<td align="right">14.00</td>
+<td align="right">16.00</td>
+<td align="right">18.00</td>
+<td align="left">▇▇▃▇▇</td>
+</tr>
+</tbody>
+</table>
+<p>De nuevo, partiremos nuestro conjunto de datos <code>cs_dat</code> (n = 400) en <code>cs_train</code> (80%, n = 321) y <code>cs_test</code> (20%, n = 79).</p>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="árboles-de-decisión.html#cb627-1"></a><span class="kw">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb627-2"><a href="árboles-de-decisión.html#cb627-2"></a>partition &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> cs_dat<span class="op">$</span>Sales, <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb627-3"><a href="árboles-de-decisión.html#cb627-3"></a>cs_train &lt;-<span class="st"> </span>cs_dat[partition, ]</span>
+<span id="cb627-4"><a href="árboles-de-decisión.html#cb627-4"></a>cs_test &lt;-<span class="st"> </span>cs_dat[<span class="op">-</span>partition, ]</span></code></pre></div>
+<p>El primer paso es construir un árbol completo y luego realizar una validación cruzada para ayudar a seleccionar la complejidad de costo óptima (cp). La única diferencia ahora es que usaremos <code>method = "anova"</code> en la función <code>rpart ()</code> para poder estimar un árbol de regresión.</p>
+<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="árboles-de-decisión.html#cb628-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb628-2"><a href="árboles-de-decisión.html#cb628-2"></a>cs_mdl_cart_full &lt;-<span class="st"> </span><span class="kw">rpart</span>(Sales <span class="op">~</span><span class="st"> </span>., cs_train, <span class="dt">method =</span> <span class="st">&quot;anova&quot;</span>)</span>
+<span id="cb628-3"><a href="árboles-de-decisión.html#cb628-3"></a>cs_mdl_cart_full</span></code></pre></div>
+<pre><code>n= 321 
+
+node), split, n, deviance, yval
+      * denotes terminal node
+
+ 1) root 321 2567.76800  7.535950  
+   2) ShelveLoc=Bad,Medium 251 1474.14100  6.770359  
+     4) Price&gt;=105.5 168  719.70630  5.987024  
+       8) ShelveLoc=Bad 50  165.70160  4.693600  
+        16) Population&lt; 201.5 20   48.35505  3.646500 *
+        17) Population&gt;=201.5 30   80.79922  5.391667 *
+       9) ShelveLoc=Medium 118  434.91370  6.535085  
+        18) Advertising&lt; 11.5 88  290.05490  6.113068  
+          36) CompPrice&lt; 142 69  193.86340  5.769420  
+            72) Price&gt;=132.5 16   50.75440  4.455000 *
+            73) Price&lt; 132.5 53  107.12060  6.166226 *
+          37) CompPrice&gt;=142 19   58.45118  7.361053 *
+        19) Advertising&gt;=11.5 30   83.21323  7.773000 *
+     5) Price&lt; 105.5 83  442.68920  8.355904  
+      10) Age&gt;=63.5 32  153.42300  6.922500  
+        20) Price&gt;=85 25   66.89398  6.160800  
+          40) ShelveLoc=Bad 9   18.39396  4.772222 *
+          41) ShelveLoc=Medium 16   21.38544  6.941875 *
+        21) Price&lt; 85 7   20.22194  9.642857 *
+      11) Age&lt; 63.5 51  182.26350  9.255294  
+        22) Income&lt; 57.5 12   28.03042  7.707500 *
+        23) Income&gt;=57.5 39  116.63950  9.731538  
+          46) Age&gt;=50.5 14   21.32597  8.451429 *
+          47) Age&lt; 50.5 25   59.52474 10.448400 *
+   3) ShelveLoc=Good 70  418.98290 10.281140  
+     6) Price&gt;=107.5 49  242.58730  9.441633  
+      12) Advertising&lt; 13.5 41  162.47820  8.926098  
+        24) Age&gt;=61 17   53.37051  7.757647 *
+        25) Age&lt; 61 24   69.45776  9.753750 *
+      13) Advertising&gt;=13.5 8   13.36599 12.083750 *
+     7) Price&lt; 107.5 21   61.28200 12.240000 *</code></pre>
+<p>Las ventas pronosticadas en la raíz son las ventas medias para el conjunto de datos de entrenamiento, 7.5 (los valores corresponden a miles de dolares). La primera división está en <code>ShelveLoc = [Bad, Medium]</code> vs <code>Good</code> (calidad). Aquí está el diagrama de árbol sin podar.</p>
+<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="árboles-de-decisión.html#cb630-1"></a><span class="kw">rpart.plot</span>(cs_mdl_cart_full, <span class="dt">yesno =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-268-1.png" width="672" /></p>
+<p>Cada caja muestra el valor predicho del nodo (media) y la proporción de observaciones que están en el nodo (o nodos secundarios).</p>
+<p><code>rpart ()</code> estima el árbol completo y utiliza validación cruzada para probar el rendimiento de los posibles hiperparámetros de complejidad. Como antes, <code>printcp ()</code> muestra los valores de cp candidatos que pueden verse en esta tabla. Estos datos pueden ser utilizados para decidir cómo podar el árbol.</p>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="árboles-de-decisión.html#cb631-1"></a><span class="kw">printcp</span>(cs_mdl_cart_full)</span></code></pre></div>
+<pre><code>
+Regression tree:
+rpart(formula = Sales ~ ., data = cs_train, method = &quot;anova&quot;)
+
+Variables actually used in tree construction:
+[1] Advertising Age         CompPrice   Income      Population  Price      
+[7] ShelveLoc  
+
+Root node error: 2567.8/321 = 7.9993
+
+n= 321 
+
+         CP nsplit rel error  xerror     xstd
+1  0.262736      0   1.00000 1.00635 0.076664
+2  0.121407      1   0.73726 0.74888 0.058981
+3  0.046379      2   0.61586 0.65278 0.050839
+4  0.044830      3   0.56948 0.67245 0.051638
+5  0.041671      4   0.52465 0.66230 0.051065
+6  0.025993      5   0.48298 0.62345 0.049368
+7  0.025823      6   0.45698 0.61980 0.048026
+8  0.024007      7   0.43116 0.62058 0.048213
+9  0.015441      8   0.40715 0.58061 0.041738
+10 0.014698      9   0.39171 0.56413 0.041368
+11 0.014641     10   0.37701 0.56277 0.041271
+12 0.014233     11   0.36237 0.56081 0.041097
+13 0.014015     12   0.34814 0.55647 0.038308
+14 0.013938     13   0.33413 0.55647 0.038308
+15 0.010560     14   0.32019 0.57110 0.038872
+16 0.010000     15   0.30963 0.56676 0.038090</code></pre>
+<p>Hay 16 posibles valores de cp en este modelo. El modelo con el parámetro de complejidad más pequeño permite la mayoría de las divisiones (nsplit). El parámetro de mayor complejidad corresponde a un árbol con solo un nodo raíz. <code>rel error</code> es el SSE relativo al nodo raíz. El SSE del nodo raíz es 2567.76800, por lo que su error rel es 2567.76800 / 2567.76800 = 1.0. Eso significa que el error absoluto del árbol completo (en CP = 0.01) es 0.30963 * 2567.76800 = 795.058. Podemos verificar estos resultados calculando el SSE de los valores predichos del modelo:</p>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="árboles-de-decisión.html#cb633-1"></a><span class="kw">data.frame</span>(<span class="dt">pred =</span> <span class="kw">predict</span>(cs_mdl_cart_full, <span class="dt">newdata =</span> cs_train)) <span class="op">%&gt;%</span></span>
+<span id="cb633-2"><a href="árboles-de-decisión.html#cb633-2"></a><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">obs =</span> cs_train<span class="op">$</span>Sales,</span>
+<span id="cb633-3"><a href="árboles-de-decisión.html#cb633-3"></a>          <span class="dt">sq_err =</span> (obs <span class="op">-</span><span class="st"> </span>pred)<span class="op">^</span><span class="dv">2</span>) <span class="op">%&gt;%</span></span>
+<span id="cb633-4"><a href="árboles-de-decisión.html#cb633-4"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">sse =</span> <span class="kw">sum</span>(sq_err))</span></code></pre></div>
+<pre><code>       sse
+1 795.0525</code></pre>
+<p>La tabla también muestra, <code>xerror</code> que corresponde al SSE con validación cruzada y <code>xstd</code> a su error estándar. Si deseamos el error más bajo posible, podaremos el árbol con el SSE relativo más pequeño (<code>xerror</code>). Si deseamos equilibrar el poder predictivo con la simplicidad, podaremos al árbol más pequeño que esté dentro de 1 SE para el SSE relativo más pequeño. Al igual que en la sección anterior, la tabla CP no es muy útil para encontrar ese árbol, por lo que debemos añadir una columna para visualizar dicha información:</p>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="árboles-de-decisión.html#cb635-1"></a>cs_mdl_cart_full<span class="op">$</span>cptable <span class="op">%&gt;%</span></span>
+<span id="cb635-2"><a href="árboles-de-decisión.html#cb635-2"></a><span class="st">   </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></span>
+<span id="cb635-3"><a href="árboles-de-decisión.html#cb635-3"></a><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">min_xerror_idx =</span> <span class="kw">which.min</span>(cs_mdl_cart_full<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>]),</span>
+<span id="cb635-4"><a href="árboles-de-decisión.html#cb635-4"></a>          <span class="dt">rownum =</span> <span class="kw">row_number</span>(),</span>
+<span id="cb635-5"><a href="árboles-de-decisión.html#cb635-5"></a>          <span class="dt">xerror_cap =</span> cs_mdl_cart_full<span class="op">$</span>cptable[min_xerror_idx, <span class="st">&quot;xerror&quot;</span>] <span class="op">+</span><span class="st"> </span></span>
+<span id="cb635-6"><a href="árboles-de-decisión.html#cb635-6"></a><span class="st">             </span>cs_mdl_cart_full<span class="op">$</span>cptable[min_xerror_idx, <span class="st">&quot;xstd&quot;</span>],</span>
+<span id="cb635-7"><a href="árboles-de-decisión.html#cb635-7"></a>          <span class="dt">eval =</span> <span class="kw">case_when</span>(rownum <span class="op">==</span><span class="st"> </span>min_xerror_idx <span class="op">~</span><span class="st"> &quot;min xerror&quot;</span>,</span>
+<span id="cb635-8"><a href="árboles-de-decisión.html#cb635-8"></a>                           xerror <span class="op">&lt;</span><span class="st"> </span>xerror_cap <span class="op">~</span><span class="st"> &quot;under cap&quot;</span>,</span>
+<span id="cb635-9"><a href="árboles-de-decisión.html#cb635-9"></a>                           <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &quot;&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb635-10"><a href="árboles-de-decisión.html#cb635-10"></a><span class="st">   </span><span class="kw">select</span>(<span class="op">-</span>rownum, <span class="op">-</span>min_xerror_idx) </span></code></pre></div>
+<pre><code>           CP nsplit rel.error    xerror       xstd xerror_cap       eval
+1  0.26273578      0 1.0000000 1.0063530 0.07666355  0.5947744           
+2  0.12140705      1 0.7372642 0.7488767 0.05898146  0.5947744           
+3  0.04637919      2 0.6158572 0.6527823 0.05083938  0.5947744           
+4  0.04483023      3 0.5694780 0.6724529 0.05163819  0.5947744           
+5  0.04167149      4 0.5246478 0.6623028 0.05106530  0.5947744           
+6  0.02599265      5 0.4829763 0.6234457 0.04936799  0.5947744           
+7  0.02582284      6 0.4569836 0.6198034 0.04802643  0.5947744           
+8  0.02400748      7 0.4311608 0.6205756 0.04821332  0.5947744           
+9  0.01544139      8 0.4071533 0.5806072 0.04173785  0.5947744  under cap
+10 0.01469771      9 0.3917119 0.5641331 0.04136793  0.5947744  under cap
+11 0.01464055     10 0.3770142 0.5627713 0.04127139  0.5947744  under cap
+12 0.01423309     11 0.3623736 0.5608073 0.04109662  0.5947744  under cap
+13 0.01401541     12 0.3481405 0.5564663 0.03830810  0.5947744 min xerror
+14 0.01393771     13 0.3341251 0.5564663 0.03830810  0.5947744  under cap
+15 0.01055959     14 0.3201874 0.5710951 0.03887227  0.5947744  under cap
+16 0.01000000     15 0.3096278 0.5667561 0.03808991  0.5947744  under cap</code></pre>
+<p>Bien, entonces el árbol más simple es el que tiene CP = 0.02599265 (5 divisiones). También podemos usar <code>plotcp () para visualizar la relación entre</code>xerror<code>y</code>cp`.</p>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="árboles-de-decisión.html#cb637-1"></a><span class="kw">plotcp</span>(cs_mdl_cart_full, <span class="dt">upper =</span> <span class="st">&quot;splits&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-272-1.png" width="672" /></p>
+<p>La línea discontinua se establece en el mínimo <code>xerror + xstd</code>. El eje superior muestra el número de divisiones en el árbol. El error relativo más pequeño está en CP = 0.01 (15 divisiones), pero el CP máximo debajo de la línea discontinua (una desviación estándar por encima del error mínimo) está en CP = 0.02599265 (5 divisiones). Utilizamos entonces la función <code>prune ()</code> para podar el árbol especificando el coste-complejidad asociado a este CP.</p>
+<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="árboles-de-decisión.html#cb638-1"></a>cs_mdl_cart &lt;-<span class="st"> </span><span class="kw">prune</span>(</span>
+<span id="cb638-2"><a href="árboles-de-decisión.html#cb638-2"></a>   cs_mdl_cart_full,</span>
+<span id="cb638-3"><a href="árboles-de-decisión.html#cb638-3"></a>   <span class="dt">cp =</span> cs_mdl_cart_full<span class="op">$</span>cptable[cs_mdl_cart_full<span class="op">$</span>cptable[, <span class="dv">2</span>] <span class="op">==</span><span class="st"> </span><span class="dv">5</span>, <span class="st">&quot;CP&quot;</span>]</span>
+<span id="cb638-4"><a href="árboles-de-decisión.html#cb638-4"></a>)</span>
+<span id="cb638-5"><a href="árboles-de-decisión.html#cb638-5"></a><span class="kw">rpart.plot</span>(cs_mdl_cart, <span class="dt">yesno =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-273-1.png" width="672" /></p>
+<p>El indicador más “importante” de ventas es <code>ShelveLoc</code>. Estos son los valores de importancia del modelo:</p>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="árboles-de-decisión.html#cb639-1"></a>cs_mdl_cart<span class="op">$</span>variable.importance <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb639-2"><a href="árboles-de-decisión.html#cb639-2"></a><span class="st">   </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></span>
+<span id="cb639-3"><a href="árboles-de-decisión.html#cb639-3"></a><span class="st">   </span><span class="kw">rownames_to_column</span>(<span class="dt">var =</span> <span class="st">&quot;Feature&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb639-4"><a href="árboles-de-decisión.html#cb639-4"></a><span class="st">   </span><span class="kw">rename</span>(<span class="dt">Overall =</span> <span class="st">&#39;.&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb639-5"><a href="árboles-de-decisión.html#cb639-5"></a><span class="st">   </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">fct_reorder</span>(Feature, Overall), <span class="dt">y =</span> Overall)) <span class="op">+</span></span>
+<span id="cb639-6"><a href="árboles-de-decisión.html#cb639-6"></a><span class="st">   </span><span class="kw">geom_pointrange</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> <span class="dv">0</span>, <span class="dt">ymax =</span> Overall), <span class="dt">color =</span> <span class="st">&quot;cadetblue&quot;</span>, <span class="dt">size =</span> <span class="fl">.3</span>) <span class="op">+</span></span>
+<span id="cb639-7"><a href="árboles-de-decisión.html#cb639-7"></a><span class="st">   </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
+<span id="cb639-8"><a href="árboles-de-decisión.html#cb639-8"></a><span class="st">   </span><span class="kw">coord_flip</span>() <span class="op">+</span></span>
+<span id="cb639-9"><a href="árboles-de-decisión.html#cb639-9"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Variable Importance with Simple Regression&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-274-1.png" width="672" /></p>
+<p>El indicador más importante de ventas es <code>ShelveLoc</code>, luego <code>Price</code>, luego <code>Age</code> (edad media de la población donde está la tienda). Todas estas variables aparecen en el modelo final. <code>CompPrice</code> (precio del competidor) también es relevante.</p>
+<p>El último paso es hacer predicciones sobre el conjunto de datos de validación. Cuando la variable respuesta es continua usamos:</p>
+<ul>
+<li><p>la raíz del error cuadrático medio <span class="math inline">\(RMSE = \sqrt{(1/2) \sum{(actual - pred)^2}})\)</span> y</p></li>
+<li><p>el errr absoluto medio <span class="math inline">\(MAE = (1/n) \sum{|actual - pred|}\)</span></p></li>
+</ul>
+<p>La diferencia entre ambos es que RMSE penaliza más los errores grandes. Para un árbol de regresión, basta con indicar <code>type="vector")  en la función</code>predict ()` (que es el valor por defecto).</p>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="árboles-de-decisión.html#cb640-1"></a>cs_preds_cart &lt;-<span class="st"> </span><span class="kw">predict</span>(cs_mdl_cart, cs_test, <span class="dt">type =</span> <span class="st">&quot;vector&quot;</span>)</span>
+<span id="cb640-2"><a href="árboles-de-decisión.html#cb640-2"></a></span>
+<span id="cb640-3"><a href="árboles-de-decisión.html#cb640-3"></a>cs_rmse_cart &lt;-<span class="st"> </span><span class="kw">RMSE</span>(</span>
+<span id="cb640-4"><a href="árboles-de-decisión.html#cb640-4"></a>   <span class="dt">pred =</span> cs_preds_cart,</span>
+<span id="cb640-5"><a href="árboles-de-decisión.html#cb640-5"></a>   <span class="dt">obs =</span> cs_test<span class="op">$</span>Sales</span>
+<span id="cb640-6"><a href="árboles-de-decisión.html#cb640-6"></a>)</span>
+<span id="cb640-7"><a href="árboles-de-decisión.html#cb640-7"></a>cs_rmse_cart</span></code></pre></div>
+<pre><code>[1] 2.363202</code></pre>
+<p>El proceso de poda conduce a un error de predicción promedio de 2.363 en el conjunto de datos de prueba. No está mal considerando que la desviación estándar de la variable <code>Sales</code> es 2.8. Podemos visualizar la relación entre los datos predichos y los observados mediante:</p>
+<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="árboles-de-decisión.html#cb642-1"></a><span class="kw">data.frame</span>(<span class="dt">Predichos =</span> cs_preds_cart, <span class="dt">Observados =</span> cs_test<span class="op">$</span>Sales) <span class="op">%&gt;%</span></span>
+<span id="cb642-2"><a href="árboles-de-decisión.html#cb642-2"></a><span class="st">   </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Observados, <span class="dt">y =</span> Predichos)) <span class="op">+</span></span>
+<span id="cb642-3"><a href="árboles-de-decisión.html#cb642-3"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.6</span>, <span class="dt">color =</span> <span class="st">&quot;cadetblue&quot;</span>) <span class="op">+</span></span>
+<span id="cb642-4"><a href="árboles-de-decisión.html#cb642-4"></a><span class="st">   </span><span class="kw">geom_smooth</span>() <span class="op">+</span></span>
+<span id="cb642-5"><a href="árboles-de-decisión.html#cb642-5"></a><span class="st">   </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">linetype =</span> <span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb642-6"><a href="árboles-de-decisión.html#cb642-6"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Carseats CART, predichos vs observados&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-276-1.png" width="672" /></p>
+<div id="entrenamiento-con-caret-1" class="section level3" number="13.4.1">
+<h3><span class="header-section-number">13.4.1</span> Entrenamiento con <code>caret</code></h3>
+<p>También podemos ajustar el modelo con <code>caret::train ()</code> especificando <code>method = "rpart"</code>. Construirmos el modelo usando 10-fold CV para optimizar el hiperparámetro CP.</p>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="árboles-de-decisión.html#cb643-1"></a>cs_trControl =<span class="st"> </span><span class="kw">trainControl</span>(</span>
+<span id="cb643-2"><a href="árboles-de-decisión.html#cb643-2"></a>   <span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>,</span>
+<span id="cb643-3"><a href="árboles-de-decisión.html#cb643-3"></a>   <span class="dt">number =</span> <span class="dv">10</span>,</span>
+<span id="cb643-4"><a href="árboles-de-decisión.html#cb643-4"></a>   <span class="dt">savePredictions =</span> <span class="st">&quot;final&quot;</span> </span>
+<span id="cb643-5"><a href="árboles-de-decisión.html#cb643-5"></a>)</span></code></pre></div>
+<p>Usaremos la misma estrategia que en el caso de los árboles de clasificación,
+dejaremos que el modelo busque el mejor parámetro de ajuste de CP con <code>tuneLength</code> y luego lo ajustaremos con <code>tuneGrid</code>.</p>
+<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="árboles-de-decisión.html#cb644-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb644-2"><a href="árboles-de-decisión.html#cb644-2"></a>cs_mdl_cart2 =<span class="st"> </span><span class="kw">train</span>(</span>
+<span id="cb644-3"><a href="árboles-de-decisión.html#cb644-3"></a>   Sales <span class="op">~</span><span class="st"> </span>., </span>
+<span id="cb644-4"><a href="árboles-de-decisión.html#cb644-4"></a>   <span class="dt">data =</span> cs_train, </span>
+<span id="cb644-5"><a href="árboles-de-decisión.html#cb644-5"></a>   <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>,</span>
+<span id="cb644-6"><a href="árboles-de-decisión.html#cb644-6"></a>   <span class="dt">tuneLength =</span> <span class="dv">5</span>,</span>
+<span id="cb644-7"><a href="árboles-de-decisión.html#cb644-7"></a>   <span class="dt">metric =</span> <span class="st">&quot;RMSE&quot;</span>,</span>
+<span id="cb644-8"><a href="árboles-de-decisión.html#cb644-8"></a>   <span class="dt">trControl =</span> cs_trControl</span>
+<span id="cb644-9"><a href="árboles-de-decisión.html#cb644-9"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="árboles-de-decisión.html#cb645-1"></a>cs_mdl_cart2</span></code></pre></div>
+<pre><code>CART 
+
+321 samples
+ 10 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 289, 289, 289, 289, 289, 289, ... 
+Resampling results across tuning parameters:
+
+  cp          RMSE      Rsquared   MAE     
+  0.04167149  2.209383  0.4065251  1.778797
+  0.04483023  2.243618  0.3849728  1.805027
+  0.04637919  2.275563  0.3684309  1.808814
+  0.12140705  2.400455  0.2942663  1.936927
+  0.26273578  2.692867  0.1898998  2.192774
+
+RMSE was used to select the optimal model using the smallest value.
+The final value used for the model was cp = 0.04167149.</code></pre>
+<p>El primer cp (0.04167149) presenta el RMSE más pequeño. Puedemos hacer una búsqueda más fina para mejorar el valor de cp usando un <em>grid</em>:</p>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="árboles-de-decisión.html#cb647-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb647-2"><a href="árboles-de-decisión.html#cb647-2"></a>cs_mdl_cart2 =<span class="st"> </span><span class="kw">train</span>(</span>
+<span id="cb647-3"><a href="árboles-de-decisión.html#cb647-3"></a>   Sales <span class="op">~</span><span class="st"> </span>., </span>
+<span id="cb647-4"><a href="árboles-de-decisión.html#cb647-4"></a>   <span class="dt">data =</span> cs_train, </span>
+<span id="cb647-5"><a href="árboles-de-decisión.html#cb647-5"></a>   <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>,</span>
+<span id="cb647-6"><a href="árboles-de-decisión.html#cb647-6"></a>   <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">cp =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="fl">0.1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)),</span>
+<span id="cb647-7"><a href="árboles-de-decisión.html#cb647-7"></a>   <span class="dt">metric =</span> <span class="st">&quot;RMSE&quot;</span>,</span>
+<span id="cb647-8"><a href="árboles-de-decisión.html#cb647-8"></a>   <span class="dt">trControl =</span> cs_trControl</span>
+<span id="cb647-9"><a href="árboles-de-decisión.html#cb647-9"></a>)</span>
+<span id="cb647-10"><a href="árboles-de-decisión.html#cb647-10"></a>cs_mdl_cart2</span></code></pre></div>
+<pre><code>CART 
+
+321 samples
+ 10 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 289, 289, 289, 289, 289, 289, ... 
+Resampling results across tuning parameters:
+
+  cp    RMSE      Rsquared   MAE     
+  0.00  2.055676  0.5027431  1.695453
+  0.01  2.135096  0.4642577  1.745937
+  0.02  2.095767  0.4733269  1.699235
+  0.03  2.131246  0.4534544  1.690453
+  0.04  2.146886  0.4411380  1.712705
+  0.05  2.284937  0.3614130  1.837782
+  0.06  2.265498  0.3709523  1.808319
+  0.07  2.282630  0.3597216  1.836227
+  0.08  2.282630  0.3597216  1.836227
+  0.09  2.282630  0.3597216  1.836227
+  0.10  2.282630  0.3597216  1.836227
+
+RMSE was used to select the optimal model using the smallest value.
+The final value used for the model was cp = 0.</code></pre>
+<p>En este ejemplo, parece que el árbol con mejor rendimiento es el que no ha sido podado.</p>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="árboles-de-decisión.html#cb649-1"></a><span class="kw">plot</span>(cs_mdl_cart2)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-281-1.png" width="672" /></p>
+<p>Este sería el modelo final</p>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="árboles-de-decisión.html#cb650-1"></a><span class="kw">rpart.plot</span>(cs_mdl_cart2<span class="op">$</span>finalModel)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-282-1.png" width="672" /></p>
+<p>y estas las variables más importantes</p>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="árboles-de-decisión.html#cb651-1"></a><span class="kw">plot</span>(<span class="kw">varImp</span>(cs_mdl_cart2), <span class="dt">main=</span><span class="st">&quot;Importancia de variables para Regresión&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-283-1.png" width="672" /></p>
+<p>Como siempre, debemos evaluar el modelo en nuestra muestra test:</p>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="árboles-de-decisión.html#cb652-1"></a>cs_preds_cart2 &lt;-<span class="st"> </span><span class="kw">predict</span>(cs_mdl_cart2, cs_test, <span class="dt">type =</span> <span class="st">&quot;raw&quot;</span>)</span>
+<span id="cb652-2"><a href="árboles-de-decisión.html#cb652-2"></a><span class="kw">data.frame</span>(<span class="dt">Actual =</span> cs_test<span class="op">$</span>Sales, <span class="dt">Predicted =</span> cs_preds_cart2) <span class="op">%&gt;%</span></span>
+<span id="cb652-3"><a href="árboles-de-decisión.html#cb652-3"></a><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Actual, <span class="dt">y =</span> Predicted)) <span class="op">+</span></span>
+<span id="cb652-4"><a href="árboles-de-decisión.html#cb652-4"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.6</span>, <span class="dt">color =</span> <span class="st">&quot;cadetblue&quot;</span>) <span class="op">+</span></span>
+<span id="cb652-5"><a href="árboles-de-decisión.html#cb652-5"></a><span class="st">   </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="dt">formula =</span> <span class="st">&quot;y ~ x&quot;</span>) <span class="op">+</span></span>
+<span id="cb652-6"><a href="árboles-de-decisión.html#cb652-6"></a><span class="st">   </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">linetype =</span> <span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb652-7"><a href="árboles-de-decisión.html#cb652-7"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Carseats CART, Predicted vs Actual (caret)&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-284-1.png" width="672" /></p>
+<p>Observamos como el modelo sobreestima en el extremo inferior y subestima en el extremo superior. Podemos calcular el RMSE para estos datos:</p>
+<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="árboles-de-decisión.html#cb653-1"></a>(cs_rmse_cart2 &lt;-<span class="st"> </span><span class="kw">RMSE</span>(<span class="dt">pred =</span> cs_preds_cart2, <span class="dt">obs =</span> cs_test<span class="op">$</span>Sales))</span></code></pre></div>
+<pre><code>[1] 2.298331</code></pre>
+<p>Caret mejora las predicciones:</p>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="árboles-de-decisión.html#cb655-1"></a>cs_scoreboard &lt;-<span class="st"> </span><span class="kw">rbind</span>(</span>
+<span id="cb655-2"><a href="árboles-de-decisión.html#cb655-2"></a>   <span class="kw">data.frame</span>(<span class="dt">Modelo =</span> <span class="st">&quot;Single Tree&quot;</span>, <span class="dt">RMSE =</span> cs_rmse_cart),</span>
+<span id="cb655-3"><a href="árboles-de-decisión.html#cb655-3"></a>   <span class="kw">data.frame</span>(<span class="dt">Modelo =</span> <span class="st">&quot;Single Tree (caret)&quot;</span>, <span class="dt">RMSE =</span> cs_rmse_cart2)</span>
+<span id="cb655-4"><a href="árboles-de-decisión.html#cb655-4"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(RMSE)</span>
+<span id="cb655-5"><a href="árboles-de-decisión.html#cb655-5"></a>knitr<span class="op">::</span><span class="kw">kable</span>(cs_scoreboard, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Modelo</th>
+<th align="right">RMSE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Single Tree (caret)</td>
+<td align="right">2.298331</td>
+</tr>
+<tr class="even">
+<td align="left">Single Tree</td>
+<td align="right">2.363202</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="bagged-trees" class="section level2" number="13.5">
+<h2><span class="header-section-number">13.5</span> Bagged trees</h2>
+<p>Los CART tiene una capacidad predictiva moderada, es por ello que se han propuesto unos métodos que combinan varios árboles de decisión para producir un mejor rendimiento predictivo que utilizar un solo árbol de decisión. El principio fundamental detrás de estos modelos es que un grupo de predictores débiles puede conseguir un predictor con mejor capacidad predictiva.</p>
+<p>Tenemos dos tipos de estrategias:</p>
+<ul>
+<li><em>Bagging</em></li>
+<li><em>Boosting</em></li>
+</ul>
+<blockquote>
+<p>Bagging (Bootstrap Aggregation) se utiliza cuando nuestro objetivo es reducir la varianza de un árbol de decisión. La idea es crear varios subconjuntos de datos a partir de la muestra de entrenamiento elegida al azar con reemplazamiento. Cada subconjunto de datos se utiliza para entrenar un árbol de decisión. Como resultado, terminamos con un conjunto de diferentes modelos. Se utiliza el promedio de todas las predicciones de diferentes árboles, que es más robusto que considerar un solo árbol de decisión.</p>
+</blockquote>
+<div class="figure">
+<img src="figures/bagged_tree.png" alt="" />
+<p class="caption">Bagged trees</p>
+</div>
+<blockquote>
+<p>En el Boosting se aprende de forma secuencial. Ajustamos árboles consecutivos (muestra aleatoria) y en cada paso, el objetivo es mejorar el error del árbol anterior.</p>
+</blockquote>
+<div class="figure">
+<img src="figures/boosting.png" style="width:70.0%" alt="" />
+<p class="caption">Boosted trees</p>
+</div>
+<p>Como hemos dicho anteriormente, el algoritmo <em>bagged</em> construye B árboles decisión usando conjuntos de entrenamiento obtenidos mediante remuestreo y promedia las predicciones resultantes. Estos árboles crecen profundamente y no se podan. Por tanto, cada árbol individual tiene una alta varianza, pero un bajo sesgo. Promediar los B árboles ayuda a reducir la varianza. El valor predicho para una observación es la moda (clasificación) o la media (regresión) de los árboles. B generalmente es igual a ~ 25.</p>
+<div class="figure">
+<img src="figures/bagged_tree_process.png" alt="" />
+<p class="caption">Proceso para Bagged trees</p>
+</div>
+<p>Para un conjunto de entrenamiento de tamaño <span class="math inline">\(n\)</span>, cada árbol se compone de <span class="math inline">\(\sim (1 - e^{-1})n = .632n\)</span> observaciones únicas <em>in-bag</em> y <span class="math inline">\(.368n\)</span> <em>out-of-bag</em>. Las observaciones que no han sido seleccionadas en el re-muestreo se usan para evaluar la precisión del modelo. La capacidad glogal del método se obtiene promediando la capacidad de cada árbol. Esto tiene una <strong>desventaja obvia</strong> y es que si cada árbol tiene un rendimiento deficiente, el rendimiento promedio de muchos árboles seguirá siendo deficiente. Además, otra desventaja de este método es que no existe un árbol único con un conjunto de reglas para interpretar. En consecuencia, no queda claro qué variables son más importantes que otras y en algunos problemas (sobre todo biomédicos) esto puede ser una limitación importante.</p>
+<div id="bagging-árboles-de-clasificación" class="section level3" number="13.5.1">
+<h3><span class="header-section-number">13.5.1</span> Bagging árboles de clasificación</h3>
+<p>Veamos de nuevo con un ejemplo cómo trabajar con estos métodos. Usaremos de nuevo los datos de zumos de naranja <code>OJ</code>. Esta vez usaremos un método <em>bagging</em> especificando <code>method="treebag"</code>. Caret no tiene hiperparámetros para este modelo, por lo que no es necesario usar <code>tuneLegth</code> ni <code>tuneGrid</code>. El tamaño de conjunto predeterminado es <code>nbagg = 25</code> (a veces se puede tunear, pero en este caso lo dejaremos fijo).</p>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="árboles-de-decisión.html#cb656-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb656-2"><a href="árboles-de-decisión.html#cb656-2"></a>oj_mdl_bag &lt;-<span class="st"> </span><span class="kw">train</span>(</span>
+<span id="cb656-3"><a href="árboles-de-decisión.html#cb656-3"></a>   Purchase <span class="op">~</span><span class="st"> </span>., </span>
+<span id="cb656-4"><a href="árboles-de-decisión.html#cb656-4"></a>   <span class="dt">data =</span> oj_train, </span>
+<span id="cb656-5"><a href="árboles-de-decisión.html#cb656-5"></a>   <span class="dt">method =</span> <span class="st">&quot;treebag&quot;</span>,</span>
+<span id="cb656-6"><a href="árboles-de-decisión.html#cb656-6"></a>   <span class="dt">trControl =</span> oj_trControl,</span>
+<span id="cb656-7"><a href="árboles-de-decisión.html#cb656-7"></a>   <span class="dt">metric =</span> <span class="st">&quot;ROC&quot;</span></span>
+<span id="cb656-8"><a href="árboles-de-decisión.html#cb656-8"></a>)</span>
+<span id="cb656-9"><a href="árboles-de-decisión.html#cb656-9"></a>oj_mdl_bag<span class="op">$</span>finalModel</span></code></pre></div>
+<pre><code>
+Bagging classification trees with 25 bootstrap replications </code></pre>
+<p>Veamos el rendimiento en el conjunto de datos test.</p>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="árboles-de-decisión.html#cb658-1"></a>pred_bag &lt;-<span class="st"> </span><span class="kw">predict</span>(oj_mdl_bag, <span class="dt">newdata =</span> oj_test, <span class="dt">type =</span> <span class="st">&quot;raw&quot;</span>)</span>
+<span id="cb658-2"><a href="árboles-de-decisión.html#cb658-2"></a>oj_cm_bag &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(pred_bag, oj_test<span class="op">$</span>Purchase)</span>
+<span id="cb658-3"><a href="árboles-de-decisión.html#cb658-3"></a>oj_cm_bag</span></code></pre></div>
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  CH  MM
+        CH 113  16
+        MM  17  67
+                                          
+               Accuracy : 0.8451          
+                 95% CI : (0.7894, 0.8909)
+    No Information Rate : 0.6103          
+    P-Value [Acc &gt; NIR] : 6.311e-14       
+                                          
+                  Kappa : 0.675           
+                                          
+ Mcnemar&#39;s Test P-Value : 1               
+                                          
+            Sensitivity : 0.8692          
+            Specificity : 0.8072          
+         Pos Pred Value : 0.8760          
+         Neg Pred Value : 0.7976          
+             Prevalence : 0.6103          
+         Detection Rate : 0.5305          
+   Detection Prevalence : 0.6056          
+      Balanced Accuracy : 0.8382          
+                                          
+       &#39;Positive&#39; Class : CH              
+                                          </code></pre>
+<p>La precisión es 0.8451, sorprendentemente peor que el 0.85915 del modelo de árbol único, pero esa es una diferencia que corresponde a tres predicciones en un conjunto de 213. Esta sería la curva ROC.</p>
+<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="árboles-de-decisión.html#cb660-1"></a>pred_bag2 &lt;-<span class="st"> </span><span class="kw">predict</span>(oj_mdl_bag, <span class="dt">newdata =</span> oj_test, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)[,<span class="st">&quot;CH&quot;</span>]</span>
+<span id="cb660-2"><a href="árboles-de-decisión.html#cb660-2"></a>roc.bag &lt;-<span class="st"> </span><span class="kw">roc</span>(oj_test<span class="op">$</span>Purchase, pred_bag2, <span class="dt">print.auc=</span><span class="ot">TRUE</span>, </span>
+<span id="cb660-3"><a href="árboles-de-decisión.html#cb660-3"></a>               <span class="dt">ci=</span><span class="ot">TRUE</span>,</span>
+<span id="cb660-4"><a href="árboles-de-decisión.html#cb660-4"></a>               <span class="dt">plot=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-289-1.png" width="672" /></p>
+<p>Veamos cuáles son las variables más importantes</p>
+<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="árboles-de-decisión.html#cb661-1"></a><span class="kw">plot</span>(<span class="kw">varImp</span>(oj_mdl_bag), <span class="dt">main=</span><span class="st">&quot;Importancia de variables con Bagging&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-290-1.png" width="672" /></p>
+<p>Esta es la comparación entre métodos</p>
+<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="árboles-de-decisión.html#cb662-1"></a>oj_scoreboard &lt;-<span class="st"> </span><span class="kw">rbind</span>(oj_scoreboard,</span>
+<span id="cb662-2"><a href="árboles-de-decisión.html#cb662-2"></a>   <span class="kw">data.frame</span>(<span class="dt">Modelo =</span> <span class="st">&quot;Bagging&quot;</span>, </span>
+<span id="cb662-3"><a href="árboles-de-decisión.html#cb662-3"></a>              <span class="dt">Accuracy =</span> oj_cm_bag<span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>],</span>
+<span id="cb662-4"><a href="árboles-de-decisión.html#cb662-4"></a>              <span class="dt">ROC =</span> roc.bag<span class="op">$</span>auc)</span>
+<span id="cb662-5"><a href="árboles-de-decisión.html#cb662-5"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(ROC))</span>
+<span id="cb662-6"><a href="árboles-de-decisión.html#cb662-6"></a>knitr<span class="op">::</span><span class="kw">kable</span>(oj_scoreboard, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Modelo</th>
+<th align="right">Accuracy</th>
+<th align="right">ROC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Single Tree (caret)</td>
+<td align="right">0.8544601</td>
+<td align="right">0.9162651</td>
+</tr>
+<tr class="even">
+<td align="left">Bagging</td>
+<td align="right">0.8450704</td>
+<td align="right">0.9099166</td>
+</tr>
+<tr class="odd">
+<td align="left">Single Tree</td>
+<td align="right">0.8591549</td>
+<td align="right">0.8848471</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="bagging-árboles-de-regresión" class="section level3" number="13.5.2">
+<h3><span class="header-section-number">13.5.2</span> Bagging árboles de regresión</h3>
+<p>Usemos <em>bagging</em> para predecir las ventas en los datos <code>Carseats</code>:</p>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="árboles-de-decisión.html#cb663-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb663-2"><a href="árboles-de-decisión.html#cb663-2"></a>cs_mdl_bag &lt;-<span class="st"> </span><span class="kw">train</span>(</span>
+<span id="cb663-3"><a href="árboles-de-decisión.html#cb663-3"></a>   Sales <span class="op">~</span><span class="st"> </span>., </span>
+<span id="cb663-4"><a href="árboles-de-decisión.html#cb663-4"></a>   <span class="dt">data =</span> cs_train, </span>
+<span id="cb663-5"><a href="árboles-de-decisión.html#cb663-5"></a>   <span class="dt">method =</span> <span class="st">&quot;treebag&quot;</span>,</span>
+<span id="cb663-6"><a href="árboles-de-decisión.html#cb663-6"></a>   <span class="dt">trControl =</span> cs_trControl</span>
+<span id="cb663-7"><a href="árboles-de-decisión.html#cb663-7"></a>)</span>
+<span id="cb663-8"><a href="árboles-de-decisión.html#cb663-8"></a>cs_mdl_bag</span></code></pre></div>
+<pre><code>Bagged CART 
+
+321 samples
+ 10 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 289, 289, 289, 289, 289, 289, ... 
+Resampling results:
+
+  RMSE      Rsquared  MAE     
+  1.681889  0.675239  1.343427</code></pre>
+<p>Veamos el rendimiento en el conjunto de datos test. El RMSE es 1.9185, pero el modelo predice en exceso en el extremo inferior de ventas y tampoco predice bien en el extremo superior (como un árbol simple).</p>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="árboles-de-decisión.html#cb665-1"></a>cs_preds_bag &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(</span>
+<span id="cb665-2"><a href="árboles-de-decisión.html#cb665-2"></a>   <span class="dt">Predicted =</span> <span class="kw">predict</span>(cs_mdl_bag, <span class="dt">newdata =</span> cs_test),</span>
+<span id="cb665-3"><a href="árboles-de-decisión.html#cb665-3"></a>   <span class="dt">Actual =</span> cs_test<span class="op">$</span>Sales</span>
+<span id="cb665-4"><a href="árboles-de-decisión.html#cb665-4"></a>)</span>
+<span id="cb665-5"><a href="árboles-de-decisión.html#cb665-5"></a>(cs_rmse_bag &lt;-<span class="st"> </span><span class="kw">RMSE</span>(<span class="dt">pred =</span> cs_preds_bag<span class="op">$</span>Predicted, <span class="dt">obs =</span> cs_preds_bag<span class="op">$</span>Actual))</span></code></pre></div>
+<pre><code>[1] 1.918473</code></pre>
+<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="árboles-de-decisión.html#cb667-1"></a>cs_preds_bag <span class="op">%&gt;%</span></span>
+<span id="cb667-2"><a href="árboles-de-decisión.html#cb667-2"></a><span class="st">   </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Actual, <span class="dt">y =</span> Predicted)) <span class="op">+</span></span>
+<span id="cb667-3"><a href="árboles-de-decisión.html#cb667-3"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.6</span>, <span class="dt">color =</span> <span class="st">&quot;cadetblue&quot;</span>) <span class="op">+</span></span>
+<span id="cb667-4"><a href="árboles-de-decisión.html#cb667-4"></a><span class="st">   </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="dt">formula =</span> <span class="st">&quot;y ~ x&quot;</span>) <span class="op">+</span></span>
+<span id="cb667-5"><a href="árboles-de-decisión.html#cb667-5"></a><span class="st">   </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">linetype =</span> <span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb667-6"><a href="árboles-de-decisión.html#cb667-6"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Carseats Bagging, Predicted vs Actual (caret)&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-294-1.png" width="672" /></p>
+<p>La importancia de las variables son:</p>
+<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="árboles-de-decisión.html#cb668-1"></a><span class="kw">plot</span>(<span class="kw">varImp</span>(cs_mdl_bag), <span class="dt">main=</span><span class="st">&quot;Importancia de variables con Bagging&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-295-1.png" width="672" /></p>
+<p>Y la comparación quedaría</p>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="árboles-de-decisión.html#cb669-1"></a>cs_scoreboard &lt;-<span class="st"> </span><span class="kw">rbind</span>(cs_scoreboard,</span>
+<span id="cb669-2"><a href="árboles-de-decisión.html#cb669-2"></a>   <span class="kw">data.frame</span>(<span class="dt">Modelo =</span> <span class="st">&quot;Bagging&quot;</span>, <span class="dt">RMSE =</span> cs_rmse_bag)</span>
+<span id="cb669-3"><a href="árboles-de-decisión.html#cb669-3"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(RMSE)</span>
+<span id="cb669-4"><a href="árboles-de-decisión.html#cb669-4"></a>knitr<span class="op">::</span><span class="kw">kable</span>(cs_scoreboard, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Modelo</th>
+<th align="right">RMSE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="right">1.918473</td>
+</tr>
+<tr class="even">
+<td align="left">Single Tree (caret)</td>
+<td align="right">2.298331</td>
+</tr>
+<tr class="odd">
+<td align="left">Single Tree</td>
+<td align="right">2.363202</td>
+</tr>
+</tbody>
+</table>
+<table style="width:94%;">
+<colgroup>
+<col width="94%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>EJERCICIO</strong> (Entrega en Moodle: P2-Bagged):</td>
+</tr>
+<tr class="even">
+<td align="left">Implementa una función que implemente el método “bagged tree”. Aplícalo a los datos “Carseats” y compara tus resultados con los que se obtienen usando caret.</td>
+</tr>
+</tbody>
+</table>
+<table style="width:94%;">
+<colgroup>
+<col width="94%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>EJERCICIO</strong> (Entrega en Moodle: P-Bagged Breast cancer):</td>
+</tr>
+<tr class="even">
+<td align="left">Utiliza los datos de cáncer de mama que hemos trabajado en clase “breast_train_prep” y “breast_test_prep” (que puedes encontrar en el fichero “breast.Rdata” del Moodle) para crear un modelo predictivo usando CART y Bagged Trees. Compara los resultados con los obtenidos mediant KNN y LDA reportados en el bookdown del curso.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="respuesta-no-balanceada.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/isglobal-brge/Aprendizaje_Automatico_1/tree/master/docs12-cart.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
