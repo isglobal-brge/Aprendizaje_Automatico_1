@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-12-20" />
+<meta name="date" content="2020-12-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -298,6 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>13.4.2</b> Bagging árboles de regresión</a></li>
 </ul></li>
 <li class="chapter" data-level="13.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest"><i class="fa fa-check"></i><b>13.5</b> Random Forest</a></li>
+<li class="chapter" data-level="13.6" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest-pn"><i class="fa fa-check"></i><b>13.6</b> Random Forest p&gt;&gt;n</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -2037,6 +2038,28 @@ Prediction  CH  MM
 </tr>
 </tbody>
 </table>
+</div>
+<div id="random-forest-pn" class="section level2" number="13.6">
+<h2><span class="header-section-number">13.6</span> Random Forest p&gt;&gt;n</h2>
+<p><strong>Problema</strong>: Aplicar Random Forest para conjunto de datos con muchas variables (caso p&gt;&gt;n)</p>
+<ul>
+<li><strong>Posible estrategia</strong>:</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Creamos K subconjuntos de variable</li>
+<li>Llevamos a cabo una selección de las variables más importantes y nos quedamos con una parte de ellas. Por ejemplo, las M más informativas</li>
+<li>Combinamos las K*M variables y repetimos los pasos 1 y 2</li>
+<li>Acabamos con M variables seleccionadas</li>
+<li>Aplicamos Random Forest</li>
+</ol>
+<p>Este enfoque podría causar la pérdida de algunas variables importantes, pero generalmente seleccionará las variables más informativas.</p>
+<p>Selección de K y M
+<a href="https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf">Breiman (2001)</a> recomienda <span class="math inline">\(m=p/3\)</span> en clasificación y <span class="math inline">\(m=\sqrt{p}\)</span> en regresión (mtry). ¿Puede servir esto de ayuda?</p>
+<ul>
+<li><p><a href="https://cran.r-project.org/web/packages/RRF/RRF.pdf">Reguralized Random Forest</a></p></li>
+<li><p><a href="thttps://www.sciencedirect.com/science/article/abs/pii/S0031320313002422">Guided Regularized Random Forest</a></p></li>
+<li><p><strong>Otra opción</strong>: Librería <a href="https://www.jstatsoft.org/article/view/v077i01">ranger</a></p></li>
+</ul>
 
 </div>
 </div>

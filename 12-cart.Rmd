@@ -843,3 +843,29 @@ Speiser JL et al. (2012). **A Comparison of Random Forest Variable Selection Met
 
 Utiliza los datos de cáncer de mama que hemos trabajado en clase "breast_train_prep" y "breast_test_prep" (que puedes encontrar en el fichero "breast.Rdata" del Moodle) para crear un modelo predictivo usando Random Forest. Compara los resultados con los obtenidos mediante KNN y LDA reportados en el bookdown del curso (y di si mejora los que obtuviste con CART y Bagged Trees).
 -------------------------------------------------------------------
+
+
+## Random Forest p>>n
+
+**Problema**: Aplicar Random Forest para conjunto de datos con muchas variables (caso p>>n)
+
+- **Posible estrategia**: 
+
+1. Creamos K subconjuntos de variable
+2. Llevamos a cabo una selección de las variables más importantes y nos quedamos con una parte de ellas. Por ejemplo, las M más informativas
+3. Combinamos las K*M variables y repetimos los pasos 1 y 2
+4. Acabamos con M variables seleccionadas
+5. Aplicamos Random Forest
+
+Este enfoque podría causar la pérdida de algunas variables importantes, pero generalmente seleccionará las variables más informativas. 
+
+Selección de K y M
+[Breiman (2001)](https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf) recomienda $m=p/3$ en clasificación y $m=\sqrt{p}$ en regresión (mtry). ¿Puede servir esto de ayuda?
+
+- [Reguralized Random Forest](https://cran.r-project.org/web/packages/RRF/RRF.pdf)
+
+- [Guided Regularized Random Forest](thttps://www.sciencedirect.com/science/article/abs/pii/S0031320313002422)
+
+- **Otra opción**: Librería [ranger](https://www.jstatsoft.org/article/view/v077i01)
+
+
