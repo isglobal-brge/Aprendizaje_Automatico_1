@@ -80,7 +80,7 @@ La función `rpart::rpart()` construye un árbol completo, minimizando el índic
 - solo intenta una división si el nodo actual tiene al menos `minsplit = 20` observaciones, y
 - solo acepta una división si
      + los nodos resultantes tienen al menos `minbucket = round (minsplit / 3)` observaciones, y
-     + el ajuste general resultante mejora en $cp = 0.01$ (es decir, $\Delta G <= 0.01$).
+     + el ajuste general resultante mejora en `cp = 0.01` (es decir, $\Delta G <= 0.01$).
 
 ```{r}
 # Usar method = "class" para clasificación y method = "anova" para regresión
@@ -116,7 +116,7 @@ pred <- predict(oj_mdl_cart_full, newdata = oj_train, type = "class")
 mean(oj_train$Purchase != pred)
 ```
 
-Para acaber de explicar toda la salida de la table CP, `xerror` es la tasa de error relativa con validación cruzada y `xstd` es su error estándar. Si se desea el error más bajo posible, debersmos podar el árbol con el error de CV relativo más pequeño, $c_p=0.01$. Si deseamos equilibrar el poder predictivo con la simplicidad, podaremos al árbol más pequeño dentro de 1 SE del que tiene el error relativo más pequeño. La tabla CP no es muy útil para encontrar ese árbol, así que añadiremos una columna para encontrarlo.
+Para acaber de explicar toda la salida de la table CP, `xerror` es la tasa de error relativa con validación cruzada y `xstd` es su error estándar. Si se desea el error más bajo posible, deberíamos podar el árbol con el error de CV relativo más pequeño, $c_p=0.01$. Si deseamos equilibrar el poder predictivo con la simplicidad, podaremos al árbol más pequeño dentro de 1 SE del que tiene el error relativo más pequeño. La tabla CP no es muy útil para encontrar ese árbol, así que añadiremos una columna para encontrarlo.
 
 ```{r}
 oj_mdl_cart_full$cptable %>%
@@ -139,7 +139,7 @@ El árbol más simple que usa la regla 1-SE es $c_p = 0.01347305$ (error CV = 0.
 plotcp(oj_mdl_cart_full, upper = "splits")
 ```
 
-La línea discontinua se establece en el mínimo `xerror + xstd`. El eje superior muestra el número de divisiones en el árbol. NOTA: No estoy seguro de por qué los valores de CP no son los mismos que en la tabla (están cerca, pero no son los mismos). La figura sugiere que debería podar a 5 o 3 divisiones. Vemos que esta curva nunca llega al mínimo, sigue disminuyendo a 5 divisiones. El valor del parámetro de ajuste predeterminado $cp = 0.01$ puede ser demasiado grande, así que lo cambiaremos a $cp = 0.001$ y empezaremos de nuevo.
+La línea discontinua se establece en el mínimo `xerror + xstd`. El eje superior muestra el número de divisiones en el árbol. NOTA: No estoy seguro de por qué los valores de CP no son los mismos que en la tabla (están cerca, pero no son los mismos). La figura sugiere que debería podar a 5 o 3 divisiones. Vemos que esta curva nunca llega al mínimo, sigue disminuyendo en 5 divisiones. El valor del parámetro de ajuste predeterminado `cp = 0.01` puede ser demasiado grande, así que lo cambiaremos a `cp = 0.001` y empezaremos de nuevo.
 
 ```{r}
 set.seed(123)
@@ -153,7 +153,7 @@ print(oj_mdl_cart_full)
 ```
 
 
-Este es un árbol mucho más grande. ¿Encontramo un valor cp que produce un mínimo local?
+Este es un árbol mucho más grande. ¿Encontramo un valor `cp` que produce un mínimo?
 
 ```{r}
 plotcp(oj_mdl_cart_full, upper = "splits")
@@ -727,4 +727,119 @@ Implementa una función que implemente el método "bagged tree". Aplícalo a los
 Utiliza los datos de cáncer de mama que hemos trabajado en clase "breast_train_prep" y "breast_test_prep" (que puedes encontrar en el fichero "breast.Rdata" del Moodle) para crear un modelo predictivo usando CART y Bagged Trees. Compara los resultados con los obtenidos mediant KNN y LDA reportados en el bookdown del curso.
 -------------------------------------------------------------------
 
+## Random Forest
 
+Los *Random Forest* (bosques aleatorios) también son un conjunto de árboles de decisión (*ensambladores*) que mejoran los *bagged trees* mediante la creación de un bosque no correlacionados de árboles que, de nuevo, mejora la capacidad predictiva de un único árbol. Al igual que en el *bagged* (*embolsado*), el algoritmo construye varios árboles de decisión sobre muestras de entrenamiento bootstrap. Sin embargo, al construir estos árboles de decisión, cada vez que se considera una división en un árbol, se elige una muestra aleatoria de predictores (hiperparámetro *m* o *mtry*) como candidatos de división del conjunto completo de predictores $p$. En cada división se toma una nueva muestra de predictores. Típicamente $m ~ \sqrt(p)$. En consecuencia, los árboles *bagged* son un caso especial de los *random forest* cuando $m = p$. 
+
+Cada árbol del modelo *random forest* se construye de la siguiente forma:
+
+- Si denotamos por $N$ el número de casos en el conjunto de entrenamiento, seleccionaremos una muestra de esos $N$ casos se forma aleatoria CON REEMPLAZAMIENTO. Esta muestra será el conjunto de entrenamiento para construir el árbol i-ésimo.
+
+- Si denotamos por $M$ el número total de varibles predictoras, seleccionaremos un número $m < M$ de variables y crearemos un árbol completo con esas variables. El valor $m$ se mantiene constante durante la generación de todo el bosque.
+
+- Cada árbol crece hasta su máxima extensión posible y NO hay proceso de poda.
+
+- La predicción para nuevos individuos se hace a partir de la información obtenida de las predicciones de los $B$ árboles (mayoría de votos para clasificación, promedio para regresión). La siguiente figura ilustra este proceso
+
+![Random Forest](figures/random_forest.png)
+
+Podemos estimar un *random forest* con `cart` indicando el argumento `method = "rf"`. El hiperparámetro `mtry` ($m$) puede tomar cualquier valor de 1 a 17 (el número de predictores) y se espera que el valor óptimo esté cerca de $\sqrt{17} \approx 4$. En cuanto al número de árboles (segundo hiperparámetro), hay estudios que demuestran que el rendimiento empeora cuando tenemos muchos árboles, sin embargo esto no está muy claro y por lo general se recomienda entrenar modelos con muchos árboles. Por defecto `method = "rf"` tiene 500 (argumento `num.trees`).  
+
+```{r}
+set.seed(1234)
+oj_mdl_rf <- train(
+   Purchase ~ ., 
+   data = oj_train, 
+   method = "rf",
+   metric = "ROC",
+   tuneGrid = expand.grid(mtry = 3:10),
+   trControl = oj_trControl,
+   num.trees = 500
+)
+oj_mdl_rf
+```
+
+
+
+El valor de ROC más alto se da en $m = 7$ que es más alto de lo que esperábamos, pero fijémosnos que es un valor de ROC muy similar al que se obtiene con $m=4$, por lo que por el principio de parsimonia podríamos usar dicho valor
+
+```{r}
+plot(oj_mdl_rf)
+```
+
+
+También podemos visualizar los resultados con:
+
+```{r}
+plot_rf <- function(model) {
+    theme_set(theme_minimal())
+    u <- model$results %>%
+        select(mtry, ROC, Sens, Spec) %>%
+        gather(a, b, -mtry)
+    
+    u %>% ggplot(aes(mtry, b)) + geom_line() + geom_point() + 
+        facet_wrap(~ a, scales = "free") + 
+        labs(x = "Número de predictores", y = NULL, 
+             title = "Relación entre el número de predictores y el comportamiento del modelo")
+}
+
+oj_mdl_rf %>% plot_rf()
+```
+
+
+-------------------------------------------------------------------
+**EJERCICIO** (Entrega en Moodle: P2-Plot RF):
+
+Si en el modelo `train` usamos `metric = "prSummary"` también podemos visualizar otras métricas para evaluar el comportamiento del modelo. En particular el AUC que puede ser interesante desde un punto de vista práctico. Crea una función que visualice dichas métricas y aplícalo a los datos `oj_train` (que obviamente tendrás que re-entrenar con esa nueva métrica).
+-------------------------------------------------------------------
+
+
+Podemos usar este modelo para hacer predicciones sobre la muestra test
+
+```{r}
+pred_rf <- predict(oj_mdl_rf, newdata = oj_test, type = "raw")
+oj_cm_rf <- confusionMatrix(pred_rf, oj_test$Purchase)
+oj_cm_rf
+```
+
+Y el área bajo la curva ROC sería:
+
+```{r}
+pred_rf2 <- predict(oj_mdl_rf, newdata = oj_test, type = "prob")[,"CH"]
+roc.rf <- roc(oj_test$Purchase, pred_bag2, print.auc=TRUE, 
+               ci=TRUE,
+               plot=TRUE)
+```
+
+que compara con los modelos anteriores de esta forma:
+
+Y la comparación quedaría
+
+```{r}
+oj_scoreboard <- rbind(oj_scoreboard,
+   data.frame(Modelo = "Random Forest", 
+              Accuracy = oj_cm_rf$overall["Accuracy"],
+              ROC = roc.rf$auc)
+) %>% arrange(desc(ROC))
+knitr::kable(oj_scoreboard, row.names = FALSE)
+```
+
+Recordemos que la importancia de las variables se puede ver con la función `varImp` al igual que cualquier otro modelo basado en àrboles de decisión. 
+
+**NOTA:** El ejemplo para Random Forest con árboles de regresión es igual que lo que vimos en la sección anterior. 
+
+
+**NOTA2:** [En este artículo](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7508310/) se hace un "benchmarking" muy interesante para saber qué método y libería de R usar en función de las características de nuestro conjunto de datos. 
+
+
+Speiser JL et al. (2012). **A Comparison of Random Forest Variable Selection Methods for Classification Prediction Modeling**
+
+> Random forest classification is a popular machine learning method for developing prediction models in many research settings. Often in prediction modeling, a goal is to reduce the number of variables needed to obtain a prediction in order to reduce the burden of data collection and improve efficiency. Several variable selection methods exist for the setting of random forest classification; however, there is a paucity of literature to guide users as to which method may be preferable for different types of datasets. Using 311 classification datasets freely available online, we evaluate the prediction error rates, number of variables, computation times and area under the receiver operating curve for many random forest variable selection methods. We compare random forest variable selection methods for different types of datasets (datasets with binary outcomes, datasets with many predictors, and datasets with imbalanced outcomes) and for different types of methods (standard random forest versus conditional random forest methods and test based versus performance based methods). Based on our study, the best variable selection methods for most datasets are Jiang’s method and the method implemented in the VSURF R package. For datasets with many predictors, the methods implemented in the R packages varSelRF and Boruta are preferable due to computational efficiency. A significant contribution of this study is the ability to assess different variable selection techniques in the setting of random forest classification in order to identify preferable methods based on applications in expert and intelligent systems.
+
+
+
+-------------------------------------------------------------------
+**EJERCICIO** (Entrega en Moodle: P2-RF Breast cancer):
+
+Utiliza los datos de cáncer de mama que hemos trabajado en clase "breast_train_prep" y "breast_test_prep" (que puedes encontrar en el fichero "breast.Rdata" del Moodle) para crear un modelo predictivo usando Random Forest. Compara los resultados con los obtenidos mediante KNN y LDA reportados en el bookdown del curso (y di si mejora los que obtuviste con CART y Bagged Trees).
+-------------------------------------------------------------------

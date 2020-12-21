@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2020-11-30" />
+<meta name="date" content="2020-12-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -297,6 +297,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>13.4.1</b> Bagging árboles de clasificación</a></li>
 <li class="chapter" data-level="13.4.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>13.4.2</b> Bagging árboles de regresión</a></li>
 </ul></li>
+<li class="chapter" data-level="13.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest"><i class="fa fa-check"></i><b>13.5</b> Random Forest</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -668,7 +669,7 @@ Para árboles de clasificación, es el índice de Gini,</p>
 <li>solo acepta una división si
 <ul>
 <li>los nodos resultantes tienen al menos <code>minbucket = round (minsplit / 3)</code> observaciones, y</li>
-<li>el ajuste general resultante mejora en <span class="math inline">\(cp = 0.01\)</span> (es decir, <span class="math inline">\(\Delta G &lt;= 0.01\)</span>).</li>
+<li>el ajuste general resultante mejora en <code>cp = 0.01</code> (es decir, <span class="math inline">\(\Delta G &lt;= 0.01\)</span>).</li>
 </ul></li>
 </ul>
 <div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="árboles-de-decisión.html#cb587-1"></a><span class="co"># Usar method = &quot;class&quot; para clasificación y method = &quot;anova&quot; para regresión</span></span>
@@ -719,7 +720,7 @@ n= 857
 <div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="árboles-de-decisión.html#cb592-1"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(oj_mdl_cart_full, <span class="dt">newdata =</span> oj_train, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
 <span id="cb592-2"><a href="árboles-de-decisión.html#cb592-2"></a><span class="kw">mean</span>(oj_train<span class="op">$</span>Purchase <span class="op">!=</span><span class="st"> </span>pred)</span></code></pre></div>
 <pre><code>[1] 0.1668611</code></pre>
-<p>Para acaber de explicar toda la salida de la table CP, <code>xerror</code> es la tasa de error relativa con validación cruzada y <code>xstd</code> es su error estándar. Si se desea el error más bajo posible, debersmos podar el árbol con el error de CV relativo más pequeño, <span class="math inline">\(c_p=0.01\)</span>. Si deseamos equilibrar el poder predictivo con la simplicidad, podaremos al árbol más pequeño dentro de 1 SE del que tiene el error relativo más pequeño. La tabla CP no es muy útil para encontrar ese árbol, así que añadiremos una columna para encontrarlo.</p>
+<p>Para acaber de explicar toda la salida de la table CP, <code>xerror</code> es la tasa de error relativa con validación cruzada y <code>xstd</code> es su error estándar. Si se desea el error más bajo posible, deberíamos podar el árbol con el error de CV relativo más pequeño, <span class="math inline">\(c_p=0.01\)</span>. Si deseamos equilibrar el poder predictivo con la simplicidad, podaremos al árbol más pequeño dentro de 1 SE del que tiene el error relativo más pequeño. La tabla CP no es muy útil para encontrar ese árbol, así que añadiremos una columna para encontrarlo.</p>
 <div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="árboles-de-decisión.html#cb594-1"></a>oj_mdl_cart_full<span class="op">$</span>cptable <span class="op">%&gt;%</span></span>
 <span id="cb594-2"><a href="árboles-de-decisión.html#cb594-2"></a><span class="st">   </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></span>
 <span id="cb594-3"><a href="árboles-de-decisión.html#cb594-3"></a><span class="st">   </span><span class="kw">mutate</span>(</span>
@@ -740,7 +741,7 @@ n= 857
 <p>El árbol más simple que usa la regla 1-SE es <span class="math inline">\(c_p = 0.01347305\)</span> (error CV = 0.18). Afortunadamente, <code>plotcp ()</code> nos da una representación gráfica de la relación entre <code>xerror</code> y <code>cp</code>.</p>
 <div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="árboles-de-decisión.html#cb596-1"></a><span class="kw">plotcp</span>(oj_mdl_cart_full, <span class="dt">upper =</span> <span class="st">&quot;splits&quot;</span>)</span></code></pre></div>
 <p><img src="fig/unnamed-chunk-244-1.png" width="672" /></p>
-<p>La línea discontinua se establece en el mínimo <code>xerror + xstd</code>. El eje superior muestra el número de divisiones en el árbol. NOTA: No estoy seguro de por qué los valores de CP no son los mismos que en la tabla (están cerca, pero no son los mismos). La figura sugiere que debería podar a 5 o 3 divisiones. Vemos que esta curva nunca llega al mínimo, sigue disminuyendo a 5 divisiones. El valor del parámetro de ajuste predeterminado <span class="math inline">\(cp = 0.01\)</span> puede ser demasiado grande, así que lo cambiaremos a <span class="math inline">\(cp = 0.001\)</span> y empezaremos de nuevo.</p>
+<p>La línea discontinua se establece en el mínimo <code>xerror + xstd</code>. El eje superior muestra el número de divisiones en el árbol. NOTA: No estoy seguro de por qué los valores de CP no son los mismos que en la tabla (están cerca, pero no son los mismos). La figura sugiere que debería podar a 5 o 3 divisiones. Vemos que esta curva nunca llega al mínimo, sigue disminuyendo en 5 divisiones. El valor del parámetro de ajuste predeterminado <code>cp = 0.01</code> puede ser demasiado grande, así que lo cambiaremos a <code>cp = 0.001</code> y empezaremos de nuevo.</p>
 <div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="árboles-de-decisión.html#cb597-1"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb597-2"><a href="árboles-de-decisión.html#cb597-2"></a>oj_mdl_cart_full &lt;-<span class="st"> </span><span class="kw">rpart</span>(</span>
 <span id="cb597-3"><a href="árboles-de-decisión.html#cb597-3"></a>   <span class="dt">formula =</span> Purchase <span class="op">~</span><span class="st"> </span>.,</span>
@@ -797,7 +798,7 @@ node), split, n, loss, yval, (yprob)
            57) PriceCH&lt; 1.875 84  12 MM (0.14285714 0.85714286) *
          29) WeekofPurchase&gt;=273.5 13   0 MM (0.00000000 1.00000000) *
        15) LoyalCH&lt; 0.035047 57   1 MM (0.01754386 0.98245614) *</code></pre>
-<p>Este es un árbol mucho más grande. ¿Encontramo un valor cp que produce un mínimo local?</p>
+<p>Este es un árbol mucho más grande. ¿Encontramo un valor <code>cp</code> que produce un mínimo?</p>
 <div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="árboles-de-decisión.html#cb599-1"></a><span class="kw">plotcp</span>(oj_mdl_cart_full, <span class="dt">upper =</span> <span class="st">&quot;splits&quot;</span>)</span></code></pre></div>
 <p><img src="fig/unnamed-chunk-246-1.png" width="672" /></p>
 <p>Sí, el mínimo está en CP = 0.011 con 5 divisiones. El mínimo + 1 SE está en CP = 0.021 con 3 divisiones. Podaremos entonces el árbol en 3.</p>
@@ -1858,8 +1859,185 @@ Resampling results:
 </tr>
 </tbody>
 </table>
-
 </div>
+</div>
+<div id="random-forest" class="section level2" number="13.5">
+<h2><span class="header-section-number">13.5</span> Random Forest</h2>
+<p>Los <em>Random Forest</em> (bosques aleatorios) también son un conjunto de árboles de decisión (<em>ensambladores</em>) que mejoran los <em>bagged trees</em> mediante la creación de un bosque no correlacionados de árboles que, de nuevo, mejora la capacidad predictiva de un único árbol. Al igual que en el <em>bagged</em> (<em>embolsado</em>), el algoritmo construye varios árboles de decisión sobre muestras de entrenamiento bootstrap. Sin embargo, al construir estos árboles de decisión, cada vez que se considera una división en un árbol, se elige una muestra aleatoria de predictores (hiperparámetro <em>m</em> o <em>mtry</em>) como candidatos de división del conjunto completo de predictores <span class="math inline">\(p\)</span>. En cada división se toma una nueva muestra de predictores. Típicamente <span class="math inline">\(m ~ \sqrt(p)\)</span>. En consecuencia, los árboles <em>bagged</em> son un caso especial de los <em>random forest</em> cuando <span class="math inline">\(m = p\)</span>.</p>
+<p>Cada árbol del modelo <em>random forest</em> se construye de la siguiente forma:</p>
+<ul>
+<li><p>Si denotamos por <span class="math inline">\(N\)</span> el número de casos en el conjunto de entrenamiento, seleccionaremos una muestra de esos <span class="math inline">\(N\)</span> casos se forma aleatoria CON REEMPLAZAMIENTO. Esta muestra será el conjunto de entrenamiento para construir el árbol i-ésimo.</p></li>
+<li><p>Si denotamos por <span class="math inline">\(M\)</span> el número total de varibles predictoras, seleccionaremos un número <span class="math inline">\(m &lt; M\)</span> de variables y crearemos un árbol completo con esas variables. El valor <span class="math inline">\(m\)</span> se mantiene constante durante la generación de todo el bosque.</p></li>
+<li><p>Cada árbol crece hasta su máxima extensión posible y NO hay proceso de poda.</p></li>
+<li><p>La predicción para nuevos individuos se hace a partir de la información obtenida de las predicciones de los <span class="math inline">\(B\)</span> árboles (mayoría de votos para clasificación, promedio para regresión). La siguiente figura ilustra este proceso</p></li>
+</ul>
+<div class="figure">
+<img src="figures/random_forest.png" alt="" />
+<p class="caption">Random Forest</p>
+</div>
+<p>Podemos estimar un <em>random forest</em> con <code>cart</code> indicando el argumento <code>method = "rf"</code>. El hiperparámetro <code>mtry</code> (<span class="math inline">\(m\)</span>) puede tomar cualquier valor de 1 a 17 (el número de predictores) y se espera que el valor óptimo esté cerca de <span class="math inline">\(\sqrt{17} \approx 4\)</span>. En cuanto al número de árboles (segundo hiperparámetro), hay estudios que demuestran que el rendimiento empeora cuando tenemos muchos árboles, sin embargo esto no está muy claro y por lo general se recomienda entrenar modelos con muchos árboles. Por defecto <code>method = "rf"</code> tiene 500 (argumento <code>num.trees</code>).</p>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb670-1"><a href="árboles-de-decisión.html#cb670-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb670-2"><a href="árboles-de-decisión.html#cb670-2"></a>oj_mdl_rf &lt;-<span class="st"> </span><span class="kw">train</span>(</span>
+<span id="cb670-3"><a href="árboles-de-decisión.html#cb670-3"></a>   Purchase <span class="op">~</span><span class="st"> </span>., </span>
+<span id="cb670-4"><a href="árboles-de-decisión.html#cb670-4"></a>   <span class="dt">data =</span> oj_train, </span>
+<span id="cb670-5"><a href="árboles-de-decisión.html#cb670-5"></a>   <span class="dt">method =</span> <span class="st">&quot;rf&quot;</span>,</span>
+<span id="cb670-6"><a href="árboles-de-decisión.html#cb670-6"></a>   <span class="dt">metric =</span> <span class="st">&quot;ROC&quot;</span>,</span>
+<span id="cb670-7"><a href="árboles-de-decisión.html#cb670-7"></a>   <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">mtry =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">10</span>),</span>
+<span id="cb670-8"><a href="árboles-de-decisión.html#cb670-8"></a>   <span class="dt">trControl =</span> oj_trControl,</span>
+<span id="cb670-9"><a href="árboles-de-decisión.html#cb670-9"></a>   <span class="dt">num.trees =</span> <span class="dv">500</span></span>
+<span id="cb670-10"><a href="árboles-de-decisión.html#cb670-10"></a>)</span>
+<span id="cb670-11"><a href="árboles-de-decisión.html#cb670-11"></a>oj_mdl_rf</span></code></pre></div>
+<pre><code>Random Forest 
+
+857 samples
+ 17 predictor
+  2 classes: &#39;CH&#39;, &#39;MM&#39; 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 772, 772, 771, 770, 771, 771, ... 
+Resampling results across tuning parameters:
+
+  mtry  ROC        Sens       Spec     
+   3    0.8655672  0.8565312  0.7185383
+   4    0.8685845  0.8641872  0.7122995
+   5    0.8682630  0.8470247  0.7183601
+   6    0.8672458  0.8412917  0.7124777
+   7    0.8695796  0.8412917  0.7183601
+   8    0.8668721  0.8393687  0.7213012
+   9    0.8652269  0.8432148  0.7153298
+  10    0.8671443  0.8413280  0.7152406
+
+ROC was used to select the optimal model using the largest value.
+The final value used for the model was mtry = 7.</code></pre>
+<p>El valor de ROC más alto se da en <span class="math inline">\(m = 7\)</span> que es más alto de lo que esperábamos, pero fijémosnos que es un valor de ROC muy similar al que se obtiene con <span class="math inline">\(m=4\)</span>, por lo que por el principio de parsimonia podríamos usar dicho valor</p>
+<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb672-1"><a href="árboles-de-decisión.html#cb672-1"></a><span class="kw">plot</span>(oj_mdl_rf)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-298-1.png" width="672" /></p>
+<p>También podemos visualizar los resultados con:</p>
+<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="árboles-de-decisión.html#cb673-1"></a>plot_rf &lt;-<span class="st"> </span><span class="cf">function</span>(model) {</span>
+<span id="cb673-2"><a href="árboles-de-decisión.html#cb673-2"></a>    <span class="kw">theme_set</span>(<span class="kw">theme_minimal</span>())</span>
+<span id="cb673-3"><a href="árboles-de-decisión.html#cb673-3"></a>    u &lt;-<span class="st"> </span>model<span class="op">$</span>results <span class="op">%&gt;%</span></span>
+<span id="cb673-4"><a href="árboles-de-decisión.html#cb673-4"></a><span class="st">        </span><span class="kw">select</span>(mtry, ROC, Sens, Spec) <span class="op">%&gt;%</span></span>
+<span id="cb673-5"><a href="árboles-de-decisión.html#cb673-5"></a><span class="st">        </span><span class="kw">gather</span>(a, b, <span class="op">-</span>mtry)</span>
+<span id="cb673-6"><a href="árboles-de-decisión.html#cb673-6"></a>    </span>
+<span id="cb673-7"><a href="árboles-de-decisión.html#cb673-7"></a>    u <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(mtry, b)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb673-8"><a href="árboles-de-decisión.html#cb673-8"></a><span class="st">        </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>a, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb673-9"><a href="árboles-de-decisión.html#cb673-9"></a><span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Número de predictores&quot;</span>, <span class="dt">y =</span> <span class="ot">NULL</span>, </span>
+<span id="cb673-10"><a href="árboles-de-decisión.html#cb673-10"></a>             <span class="dt">title =</span> <span class="st">&quot;Relación entre el número de predictores y el comportamiento del modelo&quot;</span>)</span>
+<span id="cb673-11"><a href="árboles-de-decisión.html#cb673-11"></a>}</span>
+<span id="cb673-12"><a href="árboles-de-decisión.html#cb673-12"></a></span>
+<span id="cb673-13"><a href="árboles-de-decisión.html#cb673-13"></a>oj_mdl_rf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot_rf</span>()</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-299-1.png" width="672" /></p>
+<table style="width:94%;">
+<colgroup>
+<col width="94%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>EJERCICIO</strong> (Entrega en Moodle: P2-Plot RF):</td>
+</tr>
+<tr class="even">
+<td align="left">Si en el modelo <code>train</code> usamos <code>metric = "prSummary"</code> también podemos visualizar otras métricas para evaluar el comportamiento del modelo. En particular el AUC que puede ser interesante desde un punto de vista práctico. Crea una función que visualice dichas métricas y aplícalo a los datos <code>oj_train</code> (que obviamente tendrás que re-entrenar con esa nueva métrica).</td>
+</tr>
+</tbody>
+</table>
+<p>Podemos usar este modelo para hacer predicciones sobre la muestra test</p>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="árboles-de-decisión.html#cb674-1"></a>pred_rf &lt;-<span class="st"> </span><span class="kw">predict</span>(oj_mdl_rf, <span class="dt">newdata =</span> oj_test, <span class="dt">type =</span> <span class="st">&quot;raw&quot;</span>)</span>
+<span id="cb674-2"><a href="árboles-de-decisión.html#cb674-2"></a>oj_cm_rf &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(pred_rf, oj_test<span class="op">$</span>Purchase)</span>
+<span id="cb674-3"><a href="árboles-de-decisión.html#cb674-3"></a>oj_cm_rf</span></code></pre></div>
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  CH  MM
+        CH 112  16
+        MM  18  67
+                                          
+               Accuracy : 0.8404          
+                 95% CI : (0.7841, 0.8869)
+    No Information Rate : 0.6103          
+    P-Value [Acc &gt; NIR] : 2.164e-13       
+                                          
+                  Kappa : 0.6659          
+                                          
+ Mcnemar&#39;s Test P-Value : 0.8638          
+                                          
+            Sensitivity : 0.8615          
+            Specificity : 0.8072          
+         Pos Pred Value : 0.8750          
+         Neg Pred Value : 0.7882          
+             Prevalence : 0.6103          
+         Detection Rate : 0.5258          
+   Detection Prevalence : 0.6009          
+      Balanced Accuracy : 0.8344          
+                                          
+       &#39;Positive&#39; Class : CH              
+                                          </code></pre>
+<p>Y el área bajo la curva ROC sería:</p>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="árboles-de-decisión.html#cb676-1"></a>pred_rf2 &lt;-<span class="st"> </span><span class="kw">predict</span>(oj_mdl_rf, <span class="dt">newdata =</span> oj_test, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)[,<span class="st">&quot;CH&quot;</span>]</span>
+<span id="cb676-2"><a href="árboles-de-decisión.html#cb676-2"></a>roc.rf &lt;-<span class="st"> </span><span class="kw">roc</span>(oj_test<span class="op">$</span>Purchase, pred_bag2, <span class="dt">print.auc=</span><span class="ot">TRUE</span>, </span>
+<span id="cb676-3"><a href="árboles-de-decisión.html#cb676-3"></a>               <span class="dt">ci=</span><span class="ot">TRUE</span>,</span>
+<span id="cb676-4"><a href="árboles-de-decisión.html#cb676-4"></a>               <span class="dt">plot=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-301-1.png" width="672" /></p>
+<p>que compara con los modelos anteriores de esta forma:</p>
+<p>Y la comparación quedaría</p>
+<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="árboles-de-decisión.html#cb677-1"></a>oj_scoreboard &lt;-<span class="st"> </span><span class="kw">rbind</span>(oj_scoreboard,</span>
+<span id="cb677-2"><a href="árboles-de-decisión.html#cb677-2"></a>   <span class="kw">data.frame</span>(<span class="dt">Modelo =</span> <span class="st">&quot;Random Forest&quot;</span>, </span>
+<span id="cb677-3"><a href="árboles-de-decisión.html#cb677-3"></a>              <span class="dt">Accuracy =</span> oj_cm_rf<span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>],</span>
+<span id="cb677-4"><a href="árboles-de-decisión.html#cb677-4"></a>              <span class="dt">ROC =</span> roc.rf<span class="op">$</span>auc)</span>
+<span id="cb677-5"><a href="árboles-de-decisión.html#cb677-5"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(ROC))</span>
+<span id="cb677-6"><a href="árboles-de-decisión.html#cb677-6"></a>knitr<span class="op">::</span><span class="kw">kable</span>(oj_scoreboard, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Modelo</th>
+<th align="right">Accuracy</th>
+<th align="right">ROC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Single Tree (caret)</td>
+<td align="right">0.8544601</td>
+<td align="right">0.9162651</td>
+</tr>
+<tr class="even">
+<td align="left">Bagging</td>
+<td align="right">0.8450704</td>
+<td align="right">0.9099166</td>
+</tr>
+<tr class="odd">
+<td align="left">Random Forest</td>
+<td align="right">0.8403756</td>
+<td align="right">0.9099166</td>
+</tr>
+<tr class="even">
+<td align="left">Single Tree</td>
+<td align="right">0.8591549</td>
+<td align="right">0.8848471</td>
+</tr>
+</tbody>
+</table>
+<p>Recordemos que la importancia de las variables se puede ver con la función <code>varImp</code> al igual que cualquier otro modelo basado en àrboles de decisión.</p>
+<p><strong>NOTA:</strong> El ejemplo para Random Forest con árboles de regresión es igual que lo que vimos en la sección anterior.</p>
+<p><strong>NOTA2:</strong> <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7508310/">En este artículo</a> se hace un “benchmarking” muy interesante para saber qué método y libería de R usar en función de las características de nuestro conjunto de datos.</p>
+<p>Speiser JL et al. (2012). <strong>A Comparison of Random Forest Variable Selection Methods for Classification Prediction Modeling</strong></p>
+<blockquote>
+<p>Random forest classification is a popular machine learning method for developing prediction models in many research settings. Often in prediction modeling, a goal is to reduce the number of variables needed to obtain a prediction in order to reduce the burden of data collection and improve efficiency. Several variable selection methods exist for the setting of random forest classification; however, there is a paucity of literature to guide users as to which method may be preferable for different types of datasets. Using 311 classification datasets freely available online, we evaluate the prediction error rates, number of variables, computation times and area under the receiver operating curve for many random forest variable selection methods. We compare random forest variable selection methods for different types of datasets (datasets with binary outcomes, datasets with many predictors, and datasets with imbalanced outcomes) and for different types of methods (standard random forest versus conditional random forest methods and test based versus performance based methods). Based on our study, the best variable selection methods for most datasets are Jiang’s method and the method implemented in the VSURF R package. For datasets with many predictors, the methods implemented in the R packages varSelRF and Boruta are preferable due to computational efficiency. A significant contribution of this study is the ability to assess different variable selection techniques in the setting of random forest classification in order to identify preferable methods based on applications in expert and intelligent systems.</p>
+</blockquote>
+<table style="width:94%;">
+<colgroup>
+<col width="94%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>EJERCICIO</strong> (Entrega en Moodle: P2-RF Breast cancer):</td>
+</tr>
+<tr class="even">
+<td align="left">Utiliza los datos de cáncer de mama que hemos trabajado en clase “breast_train_prep” y “breast_test_prep” (que puedes encontrar en el fichero “breast.Rdata” del Moodle) para crear un modelo predictivo usando Random Forest. Compara los resultados con los obtenidos mediante KNN y LDA reportados en el bookdown del curso (y di si mejora los que obtuviste con CART y Bagged Trees).</td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
 
