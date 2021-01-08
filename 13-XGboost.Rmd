@@ -5,12 +5,12 @@ Esta sección describe un método alternativo llamado **boosting**, que es simil
 Por ejemplo, dado un modelo de árbol de regresión actual, el procedimiento es el siguiente:
 
 1. Ajustamos un árbol de decisión utilizando los errores residuales del modelo como variable de resultado.
-2.  Agregamos este nuevo árbol de decisión, ajustado por un parámetro de "contracción" (shrinkage) `lambda`, en la función ajustada para actualizar los residuales. `lambda` es un pequeño valor positivo, normalmente comprendido entre 0.01 y 0.001 y tiene como objetivo controlar el sobreajuste.
+2. Agregamos este nuevo árbol de decisión, ajustado por un parámetro de "contracción" (shrinkage) `lambda`, en la función ajustada para actualizar los residuales. `lambda` es un pequeño valor positivo, normalmente comprendido entre 0.01 y 0.001 y tiene como objetivo controlar el sobreajuste.
 
 .
 Este enfoque da como resultado una mejora lenta y sucesiva del modelo ajustado, lo que resulta en un modelo de muy alto rendimiento. El **boosting** tiene diferentes parámetros de ajuste:
 
-- El número de árboles B
+- El número de árboles M
 - El parámetro de "contracción" `lambda`
 - El número de divisiones en cada árbol (pruning).
 
@@ -116,7 +116,7 @@ Implementa una función para el algoritmo AdaBoost que tenga como "predictor bas
 
 ## GBM básico 
 
-En 2000, Friedman relacionó AdaBoost con conceptos estadísticos importantes (por ejemplo, funciones de pérdida y modelado aditivo), lo que le permitió generalizar el marco de impulso a problemas de regresión y funciones de pérdida múltiple ([J. H. Friedman 2001](https://statweb.stanford.edu/~jhf/ftp/trebst.pdf)). Esto llevó al modelo típico de GBM que usamos hoy en día y en el que se basan la mayoría de las implementaciones modernas.
+En 1999, Friedman relacionó AdaBoost con conceptos estadísticos importantes (por ejemplo, funciones de pérdida y modelado aditivo), lo que le permitió generalizar el *boosting* a problemas de regresión y funciones de pérdida múltiple ([J. H. Friedman 2001 (modified)](https://statweb.stanford.edu/~jhf/ftp/trebst.pdf)). Esto llevó al modelo típico de GBM que usamos hoy en día y en el que se basan la mayoría de las implementaciones modernas.
      
 
 ### Hiperparámetros {#boostingHiperparam}
@@ -201,12 +201,12 @@ Que no es tan fino y se obtienen diferentes resultados
 
 A diferencia de los bosques aleatorios, los GBM pueden tener una alta variabilidad en la precisión dependiendo de la configuración de sus hiperparámetros ([Probst, Bischl y Boulesteix 2019](https://www.jmlr.org/papers/volume20/18-444/18-444.pdf)). Por lo tanto, el ajuste puede requerir mucha más estrategia que un modelo de bosque aleatorio. A menudo, un buen enfoque es:
 
-     1. Elegir una tasa de aprendizaje relativamente alta. Generalmente, el valor predeterminado de 0.1 funciona, pero valores entre 0.05 y 0.2 debería funcionar en una amplia gama de problemas.
-     2. Determinar el número óptimo de árboles para esta tasa de aprendizaje.
-     3. Corregir los hiperparámetros del árbol y ajuste la tasa de aprendizaje y evaluar la velocidad frente al rendimiento.
-     4. Ajustar los parámetros específicos del árbol para determinar la tasa de aprendizaje.
-     5. Una vez que se han encontrado los parámetros específicos del árbol, reducir la tasa de aprendizaje para evaluar cualquier mejora en la precisión.
-     6. Utilice la configuración de hiperparámetros finales y aumente los procedimientos de CV para obtener estimaciones más sólidas. A menudo, los pasos anteriores se realizan con un procedimiento de validación simple o un CV de 5 veces debido a restricciones computacionales. Si utilizó k-fold CV en los pasos 1 a 5, este paso no es necesario.
+1. Elegir una tasa de aprendizaje relativamente alta. Generalmente, el valor predeterminado de 0.1 funciona, pero valores entre 0.05 y 0.2 debería funcionar en una amplia gama de problemas.
+2. Determinar el número óptimo de árboles para esta tasa de aprendizaje.
+3. Corregir los hiperparámetros del árbol y ajuste la tasa de aprendizaje y evaluar la velocidad frente al rendimiento.
+4. Ajustar los parámetros específicos del árbol para determinar la tasa de aprendizaje.
+5. Una vez que se han encontrado los parámetros específicos del árbol, reducir la tasa de aprendizaje para evaluar cualquier mejora en la precisión.
+6. Utilizar la configuración de hiperparámetros finales y aumente los procedimientos de CV para obtener estimaciones más sólidas. A menudo, los pasos anteriores se realizan con un procedimiento de validación simple o un CV de 5 veces debido a restricciones computacionales. Si utilizó k-fold CV en los pasos 1 a 5, este paso no es necesario.
 
 Ya hemos hecho los pasos (1) - (2) en el ejemplo anterior con nuestro primer modelo de GBM. A continuación, haremos (3) y evaluaremos el rendimiento de varios valores de tasa de aprendizaje entre 0.005 y 0.3. Nuestros resultados indican que una tasa de aprendizaje de 0.05 minimiza suficientemente nuestra función de pérdida y requiere 260 árboles. 
 
@@ -427,12 +427,12 @@ Los tres hiperparámetros (`gamma`, `alpha`, `lambda`) funcionan para limitar la
 
 La estrategia de ajuste general para explorar los hiperparámetros de `xgboost` se basa en las estrategias de ajuste básicas y estocásticas de GBM:
 
-     1. Aumentar el número de árboles y ajustar la velocidad de aprendizaje con una parada temprana
-     2. Ajustar hiperparámetros específicos del árbol
-     3. Explorar los atributos estocásticos de GBM
-     4. Si se produce un sobreajuste sustancial (por ejemplo, grandes diferencias entre la muestra "train" y el error de CV), explorar los hiperparámetros de regularización
-     5. Si encuentramos valores de hiperparámetros que son sustancialmente diferentes de la configuración predeterminada, asegurarnos de volver a ajustar la tasa de aprendizaje.
-     6. Obtener el modelo "óptimo" final
+1. Aumentar el número de árboles y ajustar la velocidad de aprendizaje con una parada temprana
+2. Ajustar hiperparámetros específicos del árbol
+3. Explorar los atributos estocásticos de GBM
+4. Si se produce un sobreajuste sustancial (por ejemplo, grandes diferencias entre la muestra "train" y el error de CV), explorar los hiperparámetros de regularización
+5. Si encontramos valores de hiperparámetros que son sustancialmente diferentes de la configuración predeterminada, asegurarnos de volver a ajustar la tasa de aprendizaje.
+6. Obtener el modelo "óptimo" final
      
 La ejecución de un modelo XGBoost con `xgboost` requiere una preparación adicional de datos. `xgboost` requiere una entrada matricial de las variables predictoras y la respuesta. En consecuencia, para proporcionar una entrada matricial de las variables, necesitamos codificar nuestras variables categóricas numéricamente (es decir, hacer *dummies*). Como ya sabemos, esto se puede hacer fácilmente con la librería `recipies`
 

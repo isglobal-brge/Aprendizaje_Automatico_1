@@ -352,7 +352,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>.
 Este enfoque da como resultado una mejora lenta y sucesiva del modelo ajustado, lo que resulta en un modelo de muy alto rendimiento. El <strong>boosting</strong> tiene diferentes parámetros de ajuste:</p>
 <ul>
-<li>El número de árboles B</li>
+<li>El número de árboles M</li>
 <li>El parámetro de “contracción” <code>lambda</code></li>
 <li>El número de divisiones en cada árbol (pruning).</li>
 </ul>
@@ -447,7 +447,7 @@ Este enfoque da como resultado una mejora lenta y sucesiva del modelo ajustado, 
 </div>
 <div id="gbm-básico" class="section level2" number="14.3">
 <h2><span class="header-section-number">14.3</span> GBM básico</h2>
-<p>En 2000, Friedman relacionó AdaBoost con conceptos estadísticos importantes (por ejemplo, funciones de pérdida y modelado aditivo), lo que le permitió generalizar el marco de impulso a problemas de regresión y funciones de pérdida múltiple (<a href="https://statweb.stanford.edu/~jhf/ftp/trebst.pdf">J. H. Friedman 2001</a>). Esto llevó al modelo típico de GBM que usamos hoy en día y en el que se basan la mayoría de las implementaciones modernas.</p>
+<p>En 1999, Friedman relacionó AdaBoost con conceptos estadísticos importantes (por ejemplo, funciones de pérdida y modelado aditivo), lo que le permitió generalizar el <em>boosting</em> a problemas de regresión y funciones de pérdida múltiple (<a href="https://statweb.stanford.edu/~jhf/ftp/trebst.pdf">J. H. Friedman 2001 (modified)</a>). Esto llevó al modelo típico de GBM que usamos hoy en día y en el que se basan la mayoría de las implementaciones modernas.</p>
 <div id="boostingHiperparam" class="section level3" number="14.3.1">
 <h3><span class="header-section-number">14.3.1</span> Hiperparámetros</h3>
 <p>Un modelo de GBM simple contiene dos categorías de hiperparámetros: hiperparámetros <em>boosting</em> y los hiperparámetros específicos del árbol. Los dos principales tipos de hiperparámetros de <em>boosting</em> incluyen:</p>
@@ -558,49 +558,51 @@ The final values used for the model were n.trees =
 <div id="estrategia-general-de-tuning" class="section level3" number="14.3.3">
 <h3><span class="header-section-number">14.3.3</span> Estrategia general de <em>tuning</em></h3>
 <p>A diferencia de los bosques aleatorios, los GBM pueden tener una alta variabilidad en la precisión dependiendo de la configuración de sus hiperparámetros (<a href="https://www.jmlr.org/papers/volume20/18-444/18-444.pdf">Probst, Bischl y Boulesteix 2019</a>). Por lo tanto, el ajuste puede requerir mucha más estrategia que un modelo de bosque aleatorio. A menudo, un buen enfoque es:</p>
-<pre><code> 1. Elegir una tasa de aprendizaje relativamente alta. Generalmente, el valor predeterminado de 0.1 funciona, pero valores entre 0.05 y 0.2 debería funcionar en una amplia gama de problemas.
- 2. Determinar el número óptimo de árboles para esta tasa de aprendizaje.
- 3. Corregir los hiperparámetros del árbol y ajuste la tasa de aprendizaje y evaluar la velocidad frente al rendimiento.
- 4. Ajustar los parámetros específicos del árbol para determinar la tasa de aprendizaje.
- 5. Una vez que se han encontrado los parámetros específicos del árbol, reducir la tasa de aprendizaje para evaluar cualquier mejora en la precisión.
- 6. Utilice la configuración de hiperparámetros finales y aumente los procedimientos de CV para obtener estimaciones más sólidas. A menudo, los pasos anteriores se realizan con un procedimiento de validación simple o un CV de 5 veces debido a restricciones computacionales. Si utilizó k-fold CV en los pasos 1 a 5, este paso no es necesario.</code></pre>
+<ol style="list-style-type: decimal">
+<li>Elegir una tasa de aprendizaje relativamente alta. Generalmente, el valor predeterminado de 0.1 funciona, pero valores entre 0.05 y 0.2 debería funcionar en una amplia gama de problemas.</li>
+<li>Determinar el número óptimo de árboles para esta tasa de aprendizaje.</li>
+<li>Corregir los hiperparámetros del árbol y ajuste la tasa de aprendizaje y evaluar la velocidad frente al rendimiento.</li>
+<li>Ajustar los parámetros específicos del árbol para determinar la tasa de aprendizaje.</li>
+<li>Una vez que se han encontrado los parámetros específicos del árbol, reducir la tasa de aprendizaje para evaluar cualquier mejora en la precisión.</li>
+<li>Utilizar la configuración de hiperparámetros finales y aumente los procedimientos de CV para obtener estimaciones más sólidas. A menudo, los pasos anteriores se realizan con un procedimiento de validación simple o un CV de 5 veces debido a restricciones computacionales. Si utilizó k-fold CV en los pasos 1 a 5, este paso no es necesario.</li>
+</ol>
 <p>Ya hemos hecho los pasos (1) - (2) en el ejemplo anterior con nuestro primer modelo de GBM. A continuación, haremos (3) y evaluaremos el rendimiento de varios valores de tasa de aprendizaje entre 0.005 y 0.3. Nuestros resultados indican que una tasa de aprendizaje de 0.05 minimiza suficientemente nuestra función de pérdida y requiere 260 árboles.</p>
 <p>Todos nuestros modelos tardan un poco más de 3 segundos en entrenarse, por lo que no vemos ningún impacto significativo en el tiempo de entrenamiento según la tasa de aprendizaje.</p>
-<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb685-1"><a href="boosting.html#cb685-1"></a><span class="co"># create grid search</span></span>
-<span id="cb685-2"><a href="boosting.html#cb685-2"></a>hyper_grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</span>
-<span id="cb685-3"><a href="boosting.html#cb685-3"></a>  <span class="dt">learning_rate =</span> <span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>),</span>
-<span id="cb685-4"><a href="boosting.html#cb685-4"></a>  <span class="dt">RMSE =</span> <span class="ot">NA</span>,</span>
-<span id="cb685-5"><a href="boosting.html#cb685-5"></a>  <span class="dt">trees =</span> <span class="ot">NA</span>,</span>
-<span id="cb685-6"><a href="boosting.html#cb685-6"></a>  <span class="dt">Time =</span> <span class="ot">NA</span></span>
-<span id="cb685-7"><a href="boosting.html#cb685-7"></a>)</span>
-<span id="cb685-8"><a href="boosting.html#cb685-8"></a></span>
-<span id="cb685-9"><a href="boosting.html#cb685-9"></a><span class="co"># execute grid search</span></span>
-<span id="cb685-10"><a href="boosting.html#cb685-10"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(hyper_grid))) {</span>
-<span id="cb685-11"><a href="boosting.html#cb685-11"></a></span>
-<span id="cb685-12"><a href="boosting.html#cb685-12"></a><span class="co"># fit gbm</span></span>
-<span id="cb685-13"><a href="boosting.html#cb685-13"></a>  <span class="kw">set.seed</span>(<span class="dv">123</span>)  <span class="co"># for reproducibility</span></span>
-<span id="cb685-14"><a href="boosting.html#cb685-14"></a>  train_time &lt;-<span class="st"> </span><span class="kw">system.time</span>({</span>
-<span id="cb685-15"><a href="boosting.html#cb685-15"></a>    m &lt;-<span class="st"> </span><span class="kw">gbm</span>(</span>
-<span id="cb685-16"><a href="boosting.html#cb685-16"></a>      Sales <span class="op">~</span><span class="st"> </span>., </span>
-<span id="cb685-17"><a href="boosting.html#cb685-17"></a>      <span class="dt">data =</span> cs_train, </span>
-<span id="cb685-18"><a href="boosting.html#cb685-18"></a>      <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
-<span id="cb685-19"><a href="boosting.html#cb685-19"></a>      <span class="dt">n.trees =</span> <span class="dv">500</span>, </span>
-<span id="cb685-20"><a href="boosting.html#cb685-20"></a>      <span class="dt">shrinkage =</span> hyper_grid<span class="op">$</span>learning_rate[i], </span>
-<span id="cb685-21"><a href="boosting.html#cb685-21"></a>      <span class="dt">interaction.depth =</span> <span class="dv">3</span>, </span>
-<span id="cb685-22"><a href="boosting.html#cb685-22"></a>      <span class="dt">n.minobsinnode =</span> <span class="dv">10</span>,</span>
-<span id="cb685-23"><a href="boosting.html#cb685-23"></a>      <span class="dt">cv.folds =</span> <span class="dv">10</span> </span>
-<span id="cb685-24"><a href="boosting.html#cb685-24"></a>   )</span>
-<span id="cb685-25"><a href="boosting.html#cb685-25"></a>  })</span>
-<span id="cb685-26"><a href="boosting.html#cb685-26"></a>  </span>
-<span id="cb685-27"><a href="boosting.html#cb685-27"></a>  <span class="co"># add SSE, trees, and training time to results</span></span>
-<span id="cb685-28"><a href="boosting.html#cb685-28"></a>  hyper_grid<span class="op">$</span>RMSE[i]  &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">min</span>(m<span class="op">$</span>cv.error))</span>
-<span id="cb685-29"><a href="boosting.html#cb685-29"></a>  hyper_grid<span class="op">$</span>trees[i] &lt;-<span class="st"> </span><span class="kw">which.min</span>(m<span class="op">$</span>cv.error)</span>
-<span id="cb685-30"><a href="boosting.html#cb685-30"></a>  hyper_grid<span class="op">$</span>Time[i]  &lt;-<span class="st"> </span>train_time[[<span class="st">&quot;elapsed&quot;</span>]]</span>
-<span id="cb685-31"><a href="boosting.html#cb685-31"></a></span>
-<span id="cb685-32"><a href="boosting.html#cb685-32"></a>}</span>
-<span id="cb685-33"><a href="boosting.html#cb685-33"></a></span>
-<span id="cb685-34"><a href="boosting.html#cb685-34"></a><span class="co"># results</span></span>
-<span id="cb685-35"><a href="boosting.html#cb685-35"></a><span class="kw">arrange</span>(hyper_grid, RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="boosting.html#cb684-1"></a><span class="co"># create grid search</span></span>
+<span id="cb684-2"><a href="boosting.html#cb684-2"></a>hyper_grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</span>
+<span id="cb684-3"><a href="boosting.html#cb684-3"></a>  <span class="dt">learning_rate =</span> <span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>),</span>
+<span id="cb684-4"><a href="boosting.html#cb684-4"></a>  <span class="dt">RMSE =</span> <span class="ot">NA</span>,</span>
+<span id="cb684-5"><a href="boosting.html#cb684-5"></a>  <span class="dt">trees =</span> <span class="ot">NA</span>,</span>
+<span id="cb684-6"><a href="boosting.html#cb684-6"></a>  <span class="dt">Time =</span> <span class="ot">NA</span></span>
+<span id="cb684-7"><a href="boosting.html#cb684-7"></a>)</span>
+<span id="cb684-8"><a href="boosting.html#cb684-8"></a></span>
+<span id="cb684-9"><a href="boosting.html#cb684-9"></a><span class="co"># execute grid search</span></span>
+<span id="cb684-10"><a href="boosting.html#cb684-10"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(hyper_grid))) {</span>
+<span id="cb684-11"><a href="boosting.html#cb684-11"></a></span>
+<span id="cb684-12"><a href="boosting.html#cb684-12"></a><span class="co"># fit gbm</span></span>
+<span id="cb684-13"><a href="boosting.html#cb684-13"></a>  <span class="kw">set.seed</span>(<span class="dv">123</span>)  <span class="co"># for reproducibility</span></span>
+<span id="cb684-14"><a href="boosting.html#cb684-14"></a>  train_time &lt;-<span class="st"> </span><span class="kw">system.time</span>({</span>
+<span id="cb684-15"><a href="boosting.html#cb684-15"></a>    m &lt;-<span class="st"> </span><span class="kw">gbm</span>(</span>
+<span id="cb684-16"><a href="boosting.html#cb684-16"></a>      Sales <span class="op">~</span><span class="st"> </span>., </span>
+<span id="cb684-17"><a href="boosting.html#cb684-17"></a>      <span class="dt">data =</span> cs_train, </span>
+<span id="cb684-18"><a href="boosting.html#cb684-18"></a>      <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
+<span id="cb684-19"><a href="boosting.html#cb684-19"></a>      <span class="dt">n.trees =</span> <span class="dv">500</span>, </span>
+<span id="cb684-20"><a href="boosting.html#cb684-20"></a>      <span class="dt">shrinkage =</span> hyper_grid<span class="op">$</span>learning_rate[i], </span>
+<span id="cb684-21"><a href="boosting.html#cb684-21"></a>      <span class="dt">interaction.depth =</span> <span class="dv">3</span>, </span>
+<span id="cb684-22"><a href="boosting.html#cb684-22"></a>      <span class="dt">n.minobsinnode =</span> <span class="dv">10</span>,</span>
+<span id="cb684-23"><a href="boosting.html#cb684-23"></a>      <span class="dt">cv.folds =</span> <span class="dv">10</span> </span>
+<span id="cb684-24"><a href="boosting.html#cb684-24"></a>   )</span>
+<span id="cb684-25"><a href="boosting.html#cb684-25"></a>  })</span>
+<span id="cb684-26"><a href="boosting.html#cb684-26"></a>  </span>
+<span id="cb684-27"><a href="boosting.html#cb684-27"></a>  <span class="co"># add SSE, trees, and training time to results</span></span>
+<span id="cb684-28"><a href="boosting.html#cb684-28"></a>  hyper_grid<span class="op">$</span>RMSE[i]  &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">min</span>(m<span class="op">$</span>cv.error))</span>
+<span id="cb684-29"><a href="boosting.html#cb684-29"></a>  hyper_grid<span class="op">$</span>trees[i] &lt;-<span class="st"> </span><span class="kw">which.min</span>(m<span class="op">$</span>cv.error)</span>
+<span id="cb684-30"><a href="boosting.html#cb684-30"></a>  hyper_grid<span class="op">$</span>Time[i]  &lt;-<span class="st"> </span>train_time[[<span class="st">&quot;elapsed&quot;</span>]]</span>
+<span id="cb684-31"><a href="boosting.html#cb684-31"></a></span>
+<span id="cb684-32"><a href="boosting.html#cb684-32"></a>}</span>
+<span id="cb684-33"><a href="boosting.html#cb684-33"></a></span>
+<span id="cb684-34"><a href="boosting.html#cb684-34"></a><span class="co"># results</span></span>
+<span id="cb684-35"><a href="boosting.html#cb684-35"></a><span class="kw">arrange</span>(hyper_grid, RMSE)</span></code></pre></div>
 <pre><code>  learning_rate     RMSE trees Time
 1         0.050 1.217178   260 5.16
 2         0.100 1.229606    97 4.86
@@ -608,43 +610,43 @@ The final values used for the model were n.trees =
 4         0.010 1.380635   500 5.01
 5         0.005 1.717680   500 4.73</code></pre>
 <p>A continuación, estableceremos nuestra tasa de aprendizaje en el nivel óptimo (0.05) y el número de árboles a 260 para ajustar los hiperparámetros específicos del árbol (<code>interaction.depth</code> y <code>n.minobsinnode</code>). El ajuste de los parámetros específicos del árbol nos proporciona una reducción adicional del RMSE si consideramos <code>n.minobsinnode=5</code> (afinamos más en casos raros).</p>
-<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb687-1"><a href="boosting.html#cb687-1"></a>hyper_grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</span>
-<span id="cb687-2"><a href="boosting.html#cb687-2"></a>  <span class="dt">n.trees =</span> <span class="dv">250</span>,</span>
-<span id="cb687-3"><a href="boosting.html#cb687-3"></a>  <span class="dt">shrinkage =</span> <span class="fl">0.05</span>,</span>
-<span id="cb687-4"><a href="boosting.html#cb687-4"></a>  <span class="dt">interaction.depth =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>),</span>
-<span id="cb687-5"><a href="boosting.html#cb687-5"></a>  <span class="dt">n.minobsinnode =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>)</span>
-<span id="cb687-6"><a href="boosting.html#cb687-6"></a>)</span>
-<span id="cb687-7"><a href="boosting.html#cb687-7"></a></span>
-<span id="cb687-8"><a href="boosting.html#cb687-8"></a><span class="co"># create model fit function</span></span>
-<span id="cb687-9"><a href="boosting.html#cb687-9"></a>model_fit &lt;-<span class="st"> </span><span class="cf">function</span>(n.trees, shrinkage, interaction.depth, n.minobsinnode) {</span>
-<span id="cb687-10"><a href="boosting.html#cb687-10"></a>  <span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb687-11"><a href="boosting.html#cb687-11"></a>  m &lt;-<span class="st"> </span><span class="kw">gbm</span>(</span>
-<span id="cb687-12"><a href="boosting.html#cb687-12"></a>    Sales <span class="op">~</span><span class="st"> </span>., </span>
-<span id="cb687-13"><a href="boosting.html#cb687-13"></a>    <span class="dt">data =</span> cs_train, </span>
-<span id="cb687-14"><a href="boosting.html#cb687-14"></a>    <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
-<span id="cb687-15"><a href="boosting.html#cb687-15"></a>    <span class="dt">n.trees =</span> n.trees,</span>
-<span id="cb687-16"><a href="boosting.html#cb687-16"></a>    <span class="dt">shrinkage =</span> shrinkage,</span>
-<span id="cb687-17"><a href="boosting.html#cb687-17"></a>    <span class="dt">interaction.depth =</span> interaction.depth,</span>
-<span id="cb687-18"><a href="boosting.html#cb687-18"></a>    <span class="dt">n.minobsinnode =</span> n.minobsinnode,</span>
-<span id="cb687-19"><a href="boosting.html#cb687-19"></a>    <span class="dt">cv.folds =</span> <span class="dv">10</span></span>
-<span id="cb687-20"><a href="boosting.html#cb687-20"></a>  )</span>
-<span id="cb687-21"><a href="boosting.html#cb687-21"></a>  <span class="co"># compute RMSE</span></span>
-<span id="cb687-22"><a href="boosting.html#cb687-22"></a>  <span class="kw">sqrt</span>(<span class="kw">min</span>(m<span class="op">$</span>cv.error))</span>
-<span id="cb687-23"><a href="boosting.html#cb687-23"></a>}</span>
-<span id="cb687-24"><a href="boosting.html#cb687-24"></a></span>
-<span id="cb687-25"><a href="boosting.html#cb687-25"></a><span class="co"># perform search grid with functional programming</span></span>
-<span id="cb687-26"><a href="boosting.html#cb687-26"></a>hyper_grid<span class="op">$</span>rmse &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">pmap_dbl</span>(</span>
-<span id="cb687-27"><a href="boosting.html#cb687-27"></a>  hyper_grid,</span>
-<span id="cb687-28"><a href="boosting.html#cb687-28"></a>  <span class="op">~</span><span class="st"> </span><span class="kw">model_fit</span>(</span>
-<span id="cb687-29"><a href="boosting.html#cb687-29"></a>    <span class="dt">n.trees =</span> ..<span class="dv">1</span>,</span>
-<span id="cb687-30"><a href="boosting.html#cb687-30"></a>    <span class="dt">shrinkage =</span> ..<span class="dv">2</span>,</span>
-<span id="cb687-31"><a href="boosting.html#cb687-31"></a>    <span class="dt">interaction.depth =</span> ..<span class="dv">3</span>,</span>
-<span id="cb687-32"><a href="boosting.html#cb687-32"></a>    <span class="dt">n.minobsinnode =</span> ..<span class="dv">4</span></span>
-<span id="cb687-33"><a href="boosting.html#cb687-33"></a>    )</span>
-<span id="cb687-34"><a href="boosting.html#cb687-34"></a>)</span>
-<span id="cb687-35"><a href="boosting.html#cb687-35"></a></span>
-<span id="cb687-36"><a href="boosting.html#cb687-36"></a><span class="co"># results</span></span>
-<span id="cb687-37"><a href="boosting.html#cb687-37"></a><span class="kw">arrange</span>(hyper_grid, rmse)</span></code></pre></div>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="boosting.html#cb686-1"></a>hyper_grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</span>
+<span id="cb686-2"><a href="boosting.html#cb686-2"></a>  <span class="dt">n.trees =</span> <span class="dv">250</span>,</span>
+<span id="cb686-3"><a href="boosting.html#cb686-3"></a>  <span class="dt">shrinkage =</span> <span class="fl">0.05</span>,</span>
+<span id="cb686-4"><a href="boosting.html#cb686-4"></a>  <span class="dt">interaction.depth =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>),</span>
+<span id="cb686-5"><a href="boosting.html#cb686-5"></a>  <span class="dt">n.minobsinnode =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>)</span>
+<span id="cb686-6"><a href="boosting.html#cb686-6"></a>)</span>
+<span id="cb686-7"><a href="boosting.html#cb686-7"></a></span>
+<span id="cb686-8"><a href="boosting.html#cb686-8"></a><span class="co"># create model fit function</span></span>
+<span id="cb686-9"><a href="boosting.html#cb686-9"></a>model_fit &lt;-<span class="st"> </span><span class="cf">function</span>(n.trees, shrinkage, interaction.depth, n.minobsinnode) {</span>
+<span id="cb686-10"><a href="boosting.html#cb686-10"></a>  <span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb686-11"><a href="boosting.html#cb686-11"></a>  m &lt;-<span class="st"> </span><span class="kw">gbm</span>(</span>
+<span id="cb686-12"><a href="boosting.html#cb686-12"></a>    Sales <span class="op">~</span><span class="st"> </span>., </span>
+<span id="cb686-13"><a href="boosting.html#cb686-13"></a>    <span class="dt">data =</span> cs_train, </span>
+<span id="cb686-14"><a href="boosting.html#cb686-14"></a>    <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
+<span id="cb686-15"><a href="boosting.html#cb686-15"></a>    <span class="dt">n.trees =</span> n.trees,</span>
+<span id="cb686-16"><a href="boosting.html#cb686-16"></a>    <span class="dt">shrinkage =</span> shrinkage,</span>
+<span id="cb686-17"><a href="boosting.html#cb686-17"></a>    <span class="dt">interaction.depth =</span> interaction.depth,</span>
+<span id="cb686-18"><a href="boosting.html#cb686-18"></a>    <span class="dt">n.minobsinnode =</span> n.minobsinnode,</span>
+<span id="cb686-19"><a href="boosting.html#cb686-19"></a>    <span class="dt">cv.folds =</span> <span class="dv">10</span></span>
+<span id="cb686-20"><a href="boosting.html#cb686-20"></a>  )</span>
+<span id="cb686-21"><a href="boosting.html#cb686-21"></a>  <span class="co"># compute RMSE</span></span>
+<span id="cb686-22"><a href="boosting.html#cb686-22"></a>  <span class="kw">sqrt</span>(<span class="kw">min</span>(m<span class="op">$</span>cv.error))</span>
+<span id="cb686-23"><a href="boosting.html#cb686-23"></a>}</span>
+<span id="cb686-24"><a href="boosting.html#cb686-24"></a></span>
+<span id="cb686-25"><a href="boosting.html#cb686-25"></a><span class="co"># perform search grid with functional programming</span></span>
+<span id="cb686-26"><a href="boosting.html#cb686-26"></a>hyper_grid<span class="op">$</span>rmse &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">pmap_dbl</span>(</span>
+<span id="cb686-27"><a href="boosting.html#cb686-27"></a>  hyper_grid,</span>
+<span id="cb686-28"><a href="boosting.html#cb686-28"></a>  <span class="op">~</span><span class="st"> </span><span class="kw">model_fit</span>(</span>
+<span id="cb686-29"><a href="boosting.html#cb686-29"></a>    <span class="dt">n.trees =</span> ..<span class="dv">1</span>,</span>
+<span id="cb686-30"><a href="boosting.html#cb686-30"></a>    <span class="dt">shrinkage =</span> ..<span class="dv">2</span>,</span>
+<span id="cb686-31"><a href="boosting.html#cb686-31"></a>    <span class="dt">interaction.depth =</span> ..<span class="dv">3</span>,</span>
+<span id="cb686-32"><a href="boosting.html#cb686-32"></a>    <span class="dt">n.minobsinnode =</span> ..<span class="dv">4</span></span>
+<span id="cb686-33"><a href="boosting.html#cb686-33"></a>    )</span>
+<span id="cb686-34"><a href="boosting.html#cb686-34"></a>)</span>
+<span id="cb686-35"><a href="boosting.html#cb686-35"></a></span>
+<span id="cb686-36"><a href="boosting.html#cb686-36"></a><span class="co"># results</span></span>
+<span id="cb686-37"><a href="boosting.html#cb686-37"></a><span class="kw">arrange</span>(hyper_grid, rmse)</span></code></pre></div>
 <pre><code>  n.trees shrinkage interaction.depth n.minobsinnode     rmse
 1     250      0.05                 3              5 1.161167
 2     250      0.05                 5              5 1.208882
@@ -674,58 +676,58 @@ The final values used for the model were n.trees =
 </ul>
 <p>En general, el muestreo “agresivo” de filas, como la selección de solo el 50% o menos de los datos de entrenamiento, ha demostrado ser beneficioso y los valores típicos oscilan entre 0.5 y 0.8. El muestreo de columnas y el impacto en el rendimiento depende en gran medida de la naturaleza de los datos y de si existe una fuerte multicolinealidad o muchas características ruidosas. Similar a la selección de <code>mtry</code> en el <em>random forest</em>, si hay menos predictores relevantes (más datos ruidosos), los valores más altos de submuestreo de columnas tienden a funcionar mejor porque hace que sea más probable seleccionar aquellas características con la señal más fuerte. Cuando hay muchos predictores relevantes, los valores más bajos de submuestreo de columnas tienden a funcionar bien.</p>
 <p>Veamos cómo hacer este proceso con <code>h20</code> (no ejecutado, muy costoso computacionalmente)</p>
-<div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb689-1"><a href="boosting.html#cb689-1"></a><span class="kw">library</span>(h2o)</span>
-<span id="cb689-2"><a href="boosting.html#cb689-2"></a><span class="co"># refined hyperparameter grid</span></span>
-<span id="cb689-3"><a href="boosting.html#cb689-3"></a>hyper_grid &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
-<span id="cb689-4"><a href="boosting.html#cb689-4"></a>  <span class="dt">sample_rate =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>),              <span class="co"># row subsampling</span></span>
-<span id="cb689-5"><a href="boosting.html#cb689-5"></a>  <span class="dt">col_sample_rate =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>),          <span class="co"># col subsampling for each split</span></span>
-<span id="cb689-6"><a href="boosting.html#cb689-6"></a>  <span class="dt">col_sample_rate_per_tree =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>)  <span class="co"># col subsampling for each tree</span></span>
-<span id="cb689-7"><a href="boosting.html#cb689-7"></a>)</span>
-<span id="cb689-8"><a href="boosting.html#cb689-8"></a></span>
-<span id="cb689-9"><a href="boosting.html#cb689-9"></a><span class="co"># random grid search strategy</span></span>
-<span id="cb689-10"><a href="boosting.html#cb689-10"></a>search_criteria &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
-<span id="cb689-11"><a href="boosting.html#cb689-11"></a>  <span class="dt">strategy =</span> <span class="st">&quot;RandomDiscrete&quot;</span>,</span>
-<span id="cb689-12"><a href="boosting.html#cb689-12"></a>  <span class="dt">stopping_metric =</span> <span class="st">&quot;mse&quot;</span>,</span>
-<span id="cb689-13"><a href="boosting.html#cb689-13"></a>  <span class="dt">stopping_tolerance =</span> <span class="fl">0.001</span>,   </span>
-<span id="cb689-14"><a href="boosting.html#cb689-14"></a>  <span class="dt">stopping_rounds =</span> <span class="dv">10</span>,         </span>
-<span id="cb689-15"><a href="boosting.html#cb689-15"></a>  <span class="dt">max_runtime_secs =</span> <span class="dv">60</span><span class="op">*</span><span class="dv">60</span>      </span>
-<span id="cb689-16"><a href="boosting.html#cb689-16"></a>)</span>
-<span id="cb689-17"><a href="boosting.html#cb689-17"></a></span>
-<span id="cb689-18"><a href="boosting.html#cb689-18"></a><span class="co"># active connection to h2o (required)</span></span>
-<span id="cb689-19"><a href="boosting.html#cb689-19"></a><span class="kw">h2o.init</span>(<span class="dt">max_mem_size =</span> <span class="st">&quot;10g&quot;</span>)</span>
-<span id="cb689-20"><a href="boosting.html#cb689-20"></a></span>
-<span id="cb689-21"><a href="boosting.html#cb689-21"></a><span class="co"># define variables</span></span>
-<span id="cb689-22"><a href="boosting.html#cb689-22"></a>train_h2o &lt;-<span class="st"> </span><span class="kw">as.h2o</span>(cs_train)</span>
-<span id="cb689-23"><a href="boosting.html#cb689-23"></a>response &lt;-<span class="st"> &quot;Sales&quot;</span></span>
-<span id="cb689-24"><a href="boosting.html#cb689-24"></a>predictors &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="kw">colnames</span>(cs_train), response)</span>
-<span id="cb689-25"><a href="boosting.html#cb689-25"></a></span>
-<span id="cb689-26"><a href="boosting.html#cb689-26"></a><span class="co"># perform grid search </span></span>
-<span id="cb689-27"><a href="boosting.html#cb689-27"></a>grid &lt;-<span class="st"> </span><span class="kw">h2o.grid</span>(</span>
-<span id="cb689-28"><a href="boosting.html#cb689-28"></a>  <span class="dt">algorithm =</span> <span class="st">&quot;gbm&quot;</span>,</span>
-<span id="cb689-29"><a href="boosting.html#cb689-29"></a>  <span class="dt">grid_id =</span> <span class="st">&quot;gbm_grid&quot;</span>,</span>
-<span id="cb689-30"><a href="boosting.html#cb689-30"></a>  <span class="dt">x =</span> predictors, </span>
-<span id="cb689-31"><a href="boosting.html#cb689-31"></a>  <span class="dt">y =</span> response,</span>
-<span id="cb689-32"><a href="boosting.html#cb689-32"></a>  <span class="dt">training_frame =</span> train_h2o,</span>
-<span id="cb689-33"><a href="boosting.html#cb689-33"></a>  <span class="dt">hyper_params =</span> hyper_grid,</span>
-<span id="cb689-34"><a href="boosting.html#cb689-34"></a>  <span class="dt">ntrees =</span> <span class="dv">500</span>,</span>
-<span id="cb689-35"><a href="boosting.html#cb689-35"></a>  <span class="dt">learn_rate =</span> <span class="fl">0.01</span>,</span>
-<span id="cb689-36"><a href="boosting.html#cb689-36"></a>  <span class="dt">max_depth =</span> <span class="dv">7</span>,</span>
-<span id="cb689-37"><a href="boosting.html#cb689-37"></a>  <span class="dt">min_rows =</span> <span class="dv">5</span>,</span>
-<span id="cb689-38"><a href="boosting.html#cb689-38"></a>  <span class="dt">nfolds =</span> <span class="dv">10</span>,</span>
-<span id="cb689-39"><a href="boosting.html#cb689-39"></a>  <span class="dt">stopping_rounds =</span> <span class="dv">10</span>,</span>
-<span id="cb689-40"><a href="boosting.html#cb689-40"></a>  <span class="dt">stopping_tolerance =</span> <span class="dv">0</span>,</span>
-<span id="cb689-41"><a href="boosting.html#cb689-41"></a>  <span class="dt">search_criteria =</span> search_criteria,</span>
-<span id="cb689-42"><a href="boosting.html#cb689-42"></a>  <span class="dt">seed =</span> <span class="dv">123</span></span>
-<span id="cb689-43"><a href="boosting.html#cb689-43"></a>)</span>
-<span id="cb689-44"><a href="boosting.html#cb689-44"></a></span>
-<span id="cb689-45"><a href="boosting.html#cb689-45"></a><span class="co"># collect the results and sort by our model performance metric of choice</span></span>
-<span id="cb689-46"><a href="boosting.html#cb689-46"></a>grid_perf &lt;-<span class="st"> </span><span class="kw">h2o.getGrid</span>(</span>
-<span id="cb689-47"><a href="boosting.html#cb689-47"></a>  <span class="dt">grid_id =</span> <span class="st">&quot;gbm_grid&quot;</span>, </span>
-<span id="cb689-48"><a href="boosting.html#cb689-48"></a>  <span class="dt">sort_by =</span> <span class="st">&quot;mse&quot;</span>, </span>
-<span id="cb689-49"><a href="boosting.html#cb689-49"></a>  <span class="dt">decreasing =</span> <span class="ot">FALSE</span></span>
-<span id="cb689-50"><a href="boosting.html#cb689-50"></a>)</span>
-<span id="cb689-51"><a href="boosting.html#cb689-51"></a></span>
-<span id="cb689-52"><a href="boosting.html#cb689-52"></a>grid_perf</span></code></pre></div>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="boosting.html#cb688-1"></a><span class="kw">library</span>(h2o)</span>
+<span id="cb688-2"><a href="boosting.html#cb688-2"></a><span class="co"># refined hyperparameter grid</span></span>
+<span id="cb688-3"><a href="boosting.html#cb688-3"></a>hyper_grid &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb688-4"><a href="boosting.html#cb688-4"></a>  <span class="dt">sample_rate =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>),              <span class="co"># row subsampling</span></span>
+<span id="cb688-5"><a href="boosting.html#cb688-5"></a>  <span class="dt">col_sample_rate =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>),          <span class="co"># col subsampling for each split</span></span>
+<span id="cb688-6"><a href="boosting.html#cb688-6"></a>  <span class="dt">col_sample_rate_per_tree =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>)  <span class="co"># col subsampling for each tree</span></span>
+<span id="cb688-7"><a href="boosting.html#cb688-7"></a>)</span>
+<span id="cb688-8"><a href="boosting.html#cb688-8"></a></span>
+<span id="cb688-9"><a href="boosting.html#cb688-9"></a><span class="co"># random grid search strategy</span></span>
+<span id="cb688-10"><a href="boosting.html#cb688-10"></a>search_criteria &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb688-11"><a href="boosting.html#cb688-11"></a>  <span class="dt">strategy =</span> <span class="st">&quot;RandomDiscrete&quot;</span>,</span>
+<span id="cb688-12"><a href="boosting.html#cb688-12"></a>  <span class="dt">stopping_metric =</span> <span class="st">&quot;mse&quot;</span>,</span>
+<span id="cb688-13"><a href="boosting.html#cb688-13"></a>  <span class="dt">stopping_tolerance =</span> <span class="fl">0.001</span>,   </span>
+<span id="cb688-14"><a href="boosting.html#cb688-14"></a>  <span class="dt">stopping_rounds =</span> <span class="dv">10</span>,         </span>
+<span id="cb688-15"><a href="boosting.html#cb688-15"></a>  <span class="dt">max_runtime_secs =</span> <span class="dv">60</span><span class="op">*</span><span class="dv">60</span>      </span>
+<span id="cb688-16"><a href="boosting.html#cb688-16"></a>)</span>
+<span id="cb688-17"><a href="boosting.html#cb688-17"></a></span>
+<span id="cb688-18"><a href="boosting.html#cb688-18"></a><span class="co"># active connection to h2o (required)</span></span>
+<span id="cb688-19"><a href="boosting.html#cb688-19"></a><span class="kw">h2o.init</span>(<span class="dt">max_mem_size =</span> <span class="st">&quot;10g&quot;</span>)</span>
+<span id="cb688-20"><a href="boosting.html#cb688-20"></a></span>
+<span id="cb688-21"><a href="boosting.html#cb688-21"></a><span class="co"># define variables</span></span>
+<span id="cb688-22"><a href="boosting.html#cb688-22"></a>train_h2o &lt;-<span class="st"> </span><span class="kw">as.h2o</span>(cs_train)</span>
+<span id="cb688-23"><a href="boosting.html#cb688-23"></a>response &lt;-<span class="st"> &quot;Sales&quot;</span></span>
+<span id="cb688-24"><a href="boosting.html#cb688-24"></a>predictors &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="kw">colnames</span>(cs_train), response)</span>
+<span id="cb688-25"><a href="boosting.html#cb688-25"></a></span>
+<span id="cb688-26"><a href="boosting.html#cb688-26"></a><span class="co"># perform grid search </span></span>
+<span id="cb688-27"><a href="boosting.html#cb688-27"></a>grid &lt;-<span class="st"> </span><span class="kw">h2o.grid</span>(</span>
+<span id="cb688-28"><a href="boosting.html#cb688-28"></a>  <span class="dt">algorithm =</span> <span class="st">&quot;gbm&quot;</span>,</span>
+<span id="cb688-29"><a href="boosting.html#cb688-29"></a>  <span class="dt">grid_id =</span> <span class="st">&quot;gbm_grid&quot;</span>,</span>
+<span id="cb688-30"><a href="boosting.html#cb688-30"></a>  <span class="dt">x =</span> predictors, </span>
+<span id="cb688-31"><a href="boosting.html#cb688-31"></a>  <span class="dt">y =</span> response,</span>
+<span id="cb688-32"><a href="boosting.html#cb688-32"></a>  <span class="dt">training_frame =</span> train_h2o,</span>
+<span id="cb688-33"><a href="boosting.html#cb688-33"></a>  <span class="dt">hyper_params =</span> hyper_grid,</span>
+<span id="cb688-34"><a href="boosting.html#cb688-34"></a>  <span class="dt">ntrees =</span> <span class="dv">500</span>,</span>
+<span id="cb688-35"><a href="boosting.html#cb688-35"></a>  <span class="dt">learn_rate =</span> <span class="fl">0.01</span>,</span>
+<span id="cb688-36"><a href="boosting.html#cb688-36"></a>  <span class="dt">max_depth =</span> <span class="dv">7</span>,</span>
+<span id="cb688-37"><a href="boosting.html#cb688-37"></a>  <span class="dt">min_rows =</span> <span class="dv">5</span>,</span>
+<span id="cb688-38"><a href="boosting.html#cb688-38"></a>  <span class="dt">nfolds =</span> <span class="dv">10</span>,</span>
+<span id="cb688-39"><a href="boosting.html#cb688-39"></a>  <span class="dt">stopping_rounds =</span> <span class="dv">10</span>,</span>
+<span id="cb688-40"><a href="boosting.html#cb688-40"></a>  <span class="dt">stopping_tolerance =</span> <span class="dv">0</span>,</span>
+<span id="cb688-41"><a href="boosting.html#cb688-41"></a>  <span class="dt">search_criteria =</span> search_criteria,</span>
+<span id="cb688-42"><a href="boosting.html#cb688-42"></a>  <span class="dt">seed =</span> <span class="dv">123</span></span>
+<span id="cb688-43"><a href="boosting.html#cb688-43"></a>)</span>
+<span id="cb688-44"><a href="boosting.html#cb688-44"></a></span>
+<span id="cb688-45"><a href="boosting.html#cb688-45"></a><span class="co"># collect the results and sort by our model performance metric of choice</span></span>
+<span id="cb688-46"><a href="boosting.html#cb688-46"></a>grid_perf &lt;-<span class="st"> </span><span class="kw">h2o.getGrid</span>(</span>
+<span id="cb688-47"><a href="boosting.html#cb688-47"></a>  <span class="dt">grid_id =</span> <span class="st">&quot;gbm_grid&quot;</span>, </span>
+<span id="cb688-48"><a href="boosting.html#cb688-48"></a>  <span class="dt">sort_by =</span> <span class="st">&quot;mse&quot;</span>, </span>
+<span id="cb688-49"><a href="boosting.html#cb688-49"></a>  <span class="dt">decreasing =</span> <span class="ot">FALSE</span></span>
+<span id="cb688-50"><a href="boosting.html#cb688-50"></a>)</span>
+<span id="cb688-51"><a href="boosting.html#cb688-51"></a></span>
+<span id="cb688-52"><a href="boosting.html#cb688-52"></a>grid_perf</span></code></pre></div>
 </div>
 </div>
 <div id="xgboost" class="section level2" number="14.5">
@@ -741,20 +743,20 @@ The final values used for the model were n.trees =
 <li><strong>Múltiples lenguajes</strong>: XGBoost ofrece implementaciones en R, Python, Julia, Scala, Java y C ++.</li>
 </ul>
 <p>Además de estar implementado en distintos lenguajes, XGboost se puede llevar a cabo de varias formas dentro de R. La implementación principal de R es el paquete <code>xgboost</code>; sin embargo, también se puede usar <code>caret</code> (basta usar <code>method="xgbTree"</code>). Podríamos usar este código:</p>
-<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="boosting.html#cb690-1"></a>tune_grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">nrounds =</span> <span class="dv">200</span>,</span>
-<span id="cb690-2"><a href="boosting.html#cb690-2"></a>                        <span class="dt">max_depth =</span> <span class="dv">5</span>,</span>
-<span id="cb690-3"><a href="boosting.html#cb690-3"></a>                        <span class="dt">eta =</span> <span class="fl">0.05</span>,</span>
-<span id="cb690-4"><a href="boosting.html#cb690-4"></a>                        <span class="dt">gamma =</span> <span class="fl">0.01</span>,</span>
-<span id="cb690-5"><a href="boosting.html#cb690-5"></a>                        <span class="dt">colsample_bytree =</span> <span class="fl">0.75</span>,</span>
-<span id="cb690-6"><a href="boosting.html#cb690-6"></a>                        <span class="dt">min_child_weight =</span> <span class="dv">0</span>,</span>
-<span id="cb690-7"><a href="boosting.html#cb690-7"></a>                        <span class="dt">subsample =</span> <span class="fl">0.5</span>)</span>
-<span id="cb690-8"><a href="boosting.html#cb690-8"></a></span>
-<span id="cb690-9"><a href="boosting.html#cb690-9"></a>rf_fit &lt;-<span class="st"> </span><span class="kw">train</span>(Sales <span class="op">~</span>., </span>
-<span id="cb690-10"><a href="boosting.html#cb690-10"></a>                <span class="dt">data =</span> cs_train, </span>
-<span id="cb690-11"><a href="boosting.html#cb690-11"></a>                <span class="dt">method =</span> <span class="st">&quot;xgbTree&quot;</span>,</span>
-<span id="cb690-12"><a href="boosting.html#cb690-12"></a>                <span class="dt">trControl=</span>cs_trControl,</span>
-<span id="cb690-13"><a href="boosting.html#cb690-13"></a>                <span class="dt">tuneGrid =</span> tune_grid,</span>
-<span id="cb690-14"><a href="boosting.html#cb690-14"></a>                <span class="dt">tuneLength =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb689-1"><a href="boosting.html#cb689-1"></a>tune_grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">nrounds =</span> <span class="dv">200</span>,</span>
+<span id="cb689-2"><a href="boosting.html#cb689-2"></a>                        <span class="dt">max_depth =</span> <span class="dv">5</span>,</span>
+<span id="cb689-3"><a href="boosting.html#cb689-3"></a>                        <span class="dt">eta =</span> <span class="fl">0.05</span>,</span>
+<span id="cb689-4"><a href="boosting.html#cb689-4"></a>                        <span class="dt">gamma =</span> <span class="fl">0.01</span>,</span>
+<span id="cb689-5"><a href="boosting.html#cb689-5"></a>                        <span class="dt">colsample_bytree =</span> <span class="fl">0.75</span>,</span>
+<span id="cb689-6"><a href="boosting.html#cb689-6"></a>                        <span class="dt">min_child_weight =</span> <span class="dv">0</span>,</span>
+<span id="cb689-7"><a href="boosting.html#cb689-7"></a>                        <span class="dt">subsample =</span> <span class="fl">0.5</span>)</span>
+<span id="cb689-8"><a href="boosting.html#cb689-8"></a></span>
+<span id="cb689-9"><a href="boosting.html#cb689-9"></a>rf_fit &lt;-<span class="st"> </span><span class="kw">train</span>(Sales <span class="op">~</span>., </span>
+<span id="cb689-10"><a href="boosting.html#cb689-10"></a>                <span class="dt">data =</span> cs_train, </span>
+<span id="cb689-11"><a href="boosting.html#cb689-11"></a>                <span class="dt">method =</span> <span class="st">&quot;xgbTree&quot;</span>,</span>
+<span id="cb689-12"><a href="boosting.html#cb689-12"></a>                <span class="dt">trControl=</span>cs_trControl,</span>
+<span id="cb689-13"><a href="boosting.html#cb689-13"></a>                <span class="dt">tuneGrid =</span> tune_grid,</span>
+<span id="cb689-14"><a href="boosting.html#cb689-14"></a>                <span class="dt">tuneLength =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>[13:06:37] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
 [13:06:39] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
 [13:06:41] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
@@ -766,7 +768,7 @@ The final values used for the model were n.trees =
 [13:06:47] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
 [13:06:47] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
 [13:06:49] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.</code></pre>
-<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="boosting.html#cb692-1"></a>rf_fit</span></code></pre></div>
+<div class="sourceCode" id="cb691"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb691-1"><a href="boosting.html#cb691-1"></a>rf_fit</span></code></pre></div>
 <pre><code>eXtreme Gradient Boosting 
 
 321 samples
@@ -801,116 +803,117 @@ Tuning
 <div id="estrategia-de-tuning" class="section level3" number="14.5.2">
 <h3><span class="header-section-number">14.5.2</span> Estrategia de <em>tuning</em></h3>
 <p>La estrategia de ajuste general para explorar los hiperparámetros de <code>xgboost</code> se basa en las estrategias de ajuste básicas y estocásticas de GBM:</p>
-<pre><code> 1. Aumentar el número de árboles y ajustar la velocidad de aprendizaje con una parada temprana
- 2. Ajustar hiperparámetros específicos del árbol
- 3. Explorar los atributos estocásticos de GBM
- 4. Si se produce un sobreajuste sustancial (por ejemplo, grandes diferencias entre la muestra &quot;train&quot; y el error de CV), explorar los hiperparámetros de regularización
- 5. Si encuentramos valores de hiperparámetros que son sustancialmente diferentes de la configuración predeterminada, asegurarnos de volver a ajustar la tasa de aprendizaje.
- 6. Obtener el modelo &quot;óptimo&quot; final
- </code></pre>
+<ol style="list-style-type: decimal">
+<li>Aumentar el número de árboles y ajustar la velocidad de aprendizaje con una parada temprana</li>
+<li>Ajustar hiperparámetros específicos del árbol</li>
+<li>Explorar los atributos estocásticos de GBM</li>
+<li>Si se produce un sobreajuste sustancial (por ejemplo, grandes diferencias entre la muestra “train” y el error de CV), explorar los hiperparámetros de regularización</li>
+<li>Si encontramos valores de hiperparámetros que son sustancialmente diferentes de la configuración predeterminada, asegurarnos de volver a ajustar la tasa de aprendizaje.</li>
+<li>Obtener el modelo “óptimo” final</li>
+</ol>
 <p>La ejecución de un modelo XGBoost con <code>xgboost</code> requiere una preparación adicional de datos. <code>xgboost</code> requiere una entrada matricial de las variables predictoras y la respuesta. En consecuencia, para proporcionar una entrada matricial de las variables, necesitamos codificar nuestras variables categóricas numéricamente (es decir, hacer <em>dummies</em>). Como ya sabemos, esto se puede hacer fácilmente con la librería <code>recipies</code></p>
-<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb695-1"><a href="boosting.html#cb695-1"></a><span class="kw">library</span>(recipes)</span>
-<span id="cb695-2"><a href="boosting.html#cb695-2"></a>xgb_prep &lt;-<span class="st"> </span><span class="kw">recipe</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> cs_train) <span class="op">%&gt;%</span></span>
-<span id="cb695-3"><a href="boosting.html#cb695-3"></a><span class="st">  </span><span class="kw">step_integer</span>(<span class="kw">all_nominal</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb695-4"><a href="boosting.html#cb695-4"></a><span class="st">  </span><span class="kw">prep</span>(<span class="dt">training =</span> cs_train, <span class="dt">retain =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
-<span id="cb695-5"><a href="boosting.html#cb695-5"></a><span class="st">  </span><span class="kw">juice</span>()  <span class="co"># similar to bake</span></span>
-<span id="cb695-6"><a href="boosting.html#cb695-6"></a></span>
-<span id="cb695-7"><a href="boosting.html#cb695-7"></a>X &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(xgb_prep[<span class="kw">setdiff</span>(<span class="kw">names</span>(xgb_prep), <span class="st">&quot;Sales&quot;</span>)])</span>
-<span id="cb695-8"><a href="boosting.html#cb695-8"></a>Y &lt;-<span class="st"> </span>xgb_prep<span class="op">$</span>Sales</span></code></pre></div>
+<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb693-1"><a href="boosting.html#cb693-1"></a><span class="kw">library</span>(recipes)</span>
+<span id="cb693-2"><a href="boosting.html#cb693-2"></a>xgb_prep &lt;-<span class="st"> </span><span class="kw">recipe</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> cs_train) <span class="op">%&gt;%</span></span>
+<span id="cb693-3"><a href="boosting.html#cb693-3"></a><span class="st">  </span><span class="kw">step_integer</span>(<span class="kw">all_nominal</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb693-4"><a href="boosting.html#cb693-4"></a><span class="st">  </span><span class="kw">prep</span>(<span class="dt">training =</span> cs_train, <span class="dt">retain =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
+<span id="cb693-5"><a href="boosting.html#cb693-5"></a><span class="st">  </span><span class="kw">juice</span>()  <span class="co"># similar to bake</span></span>
+<span id="cb693-6"><a href="boosting.html#cb693-6"></a></span>
+<span id="cb693-7"><a href="boosting.html#cb693-7"></a>X &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(xgb_prep[<span class="kw">setdiff</span>(<span class="kw">names</span>(xgb_prep), <span class="st">&quot;Sales&quot;</span>)])</span>
+<span id="cb693-8"><a href="boosting.html#cb693-8"></a>Y &lt;-<span class="st"> </span>xgb_prep<span class="op">$</span>Sales</span></code></pre></div>
 <blockquote>
 <p><strong>NOTA</strong>: <code>xgboost</code> permite tres tipos diferentes de matrices para los predictores: matriz R ordinaria, matrices esparsas de la lilbrería <code>Matrix</code> u objetos internos <code>xgb.DMatrix</code> de <code>xgboost</code>. Consultar ?Xgboost::xgboost para obtener más detalles.</p>
 </blockquote>
 <p>A continuación, pasamos por una serie de búsquedas en cuadrículas (<em>grid search</em>) similares a las secciones anteriores y encontramos que los siguientes hiperparámetros del modelo (proporcionados a través del argumento <code>params</code>) funcionan bastante bien. Nuestro RMSE es ligeramente más bajo que los mejores modelos GBM regulares y estocásticos hasta ahora.</p>
-<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="boosting.html#cb696-1"></a><span class="kw">library</span>(xgboost)</span>
-<span id="cb696-2"><a href="boosting.html#cb696-2"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb696-3"><a href="boosting.html#cb696-3"></a>mod_xgb &lt;-<span class="st"> </span><span class="kw">xgb.cv</span>(</span>
-<span id="cb696-4"><a href="boosting.html#cb696-4"></a>  <span class="dt">data =</span> X,</span>
-<span id="cb696-5"><a href="boosting.html#cb696-5"></a>  <span class="dt">label =</span> Y,</span>
-<span id="cb696-6"><a href="boosting.html#cb696-6"></a>  <span class="dt">nrounds =</span> <span class="dv">500</span>,</span>
-<span id="cb696-7"><a href="boosting.html#cb696-7"></a>  <span class="dt">objective =</span> <span class="st">&quot;reg:squarederror&quot;</span>,</span>
-<span id="cb696-8"><a href="boosting.html#cb696-8"></a>  <span class="dt">early_stopping_rounds =</span> <span class="dv">50</span>, </span>
-<span id="cb696-9"><a href="boosting.html#cb696-9"></a>  <span class="dt">nfold =</span> <span class="dv">10</span>,</span>
-<span id="cb696-10"><a href="boosting.html#cb696-10"></a>  <span class="dt">params =</span> <span class="kw">list</span>(</span>
-<span id="cb696-11"><a href="boosting.html#cb696-11"></a>    <span class="dt">eta =</span> <span class="fl">0.1</span>,</span>
-<span id="cb696-12"><a href="boosting.html#cb696-12"></a>    <span class="dt">max_depth =</span> <span class="dv">5</span>,</span>
-<span id="cb696-13"><a href="boosting.html#cb696-13"></a>    <span class="dt">min_child_weight =</span> <span class="dv">0</span>,</span>
-<span id="cb696-14"><a href="boosting.html#cb696-14"></a>    <span class="dt">subsample =</span> <span class="fl">0.8</span>,</span>
-<span id="cb696-15"><a href="boosting.html#cb696-15"></a>    <span class="dt">colsample_bytree =</span> <span class="fl">0.75</span>),</span>
-<span id="cb696-16"><a href="boosting.html#cb696-16"></a>  <span class="dt">verbose =</span> <span class="dv">0</span></span>
-<span id="cb696-17"><a href="boosting.html#cb696-17"></a>)  </span>
-<span id="cb696-18"><a href="boosting.html#cb696-18"></a></span>
-<span id="cb696-19"><a href="boosting.html#cb696-19"></a></span>
-<span id="cb696-20"><a href="boosting.html#cb696-20"></a><span class="co"># minimum test CV RMSE</span></span>
-<span id="cb696-21"><a href="boosting.html#cb696-21"></a><span class="kw">min</span>(mod_xgb<span class="op">$</span>evaluation_log<span class="op">$</span>test_rmse_mean)</span></code></pre></div>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb694-1"><a href="boosting.html#cb694-1"></a><span class="kw">library</span>(xgboost)</span>
+<span id="cb694-2"><a href="boosting.html#cb694-2"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb694-3"><a href="boosting.html#cb694-3"></a>mod_xgb &lt;-<span class="st"> </span><span class="kw">xgb.cv</span>(</span>
+<span id="cb694-4"><a href="boosting.html#cb694-4"></a>  <span class="dt">data =</span> X,</span>
+<span id="cb694-5"><a href="boosting.html#cb694-5"></a>  <span class="dt">label =</span> Y,</span>
+<span id="cb694-6"><a href="boosting.html#cb694-6"></a>  <span class="dt">nrounds =</span> <span class="dv">500</span>,</span>
+<span id="cb694-7"><a href="boosting.html#cb694-7"></a>  <span class="dt">objective =</span> <span class="st">&quot;reg:squarederror&quot;</span>,</span>
+<span id="cb694-8"><a href="boosting.html#cb694-8"></a>  <span class="dt">early_stopping_rounds =</span> <span class="dv">50</span>, </span>
+<span id="cb694-9"><a href="boosting.html#cb694-9"></a>  <span class="dt">nfold =</span> <span class="dv">10</span>,</span>
+<span id="cb694-10"><a href="boosting.html#cb694-10"></a>  <span class="dt">params =</span> <span class="kw">list</span>(</span>
+<span id="cb694-11"><a href="boosting.html#cb694-11"></a>    <span class="dt">eta =</span> <span class="fl">0.1</span>,</span>
+<span id="cb694-12"><a href="boosting.html#cb694-12"></a>    <span class="dt">max_depth =</span> <span class="dv">5</span>,</span>
+<span id="cb694-13"><a href="boosting.html#cb694-13"></a>    <span class="dt">min_child_weight =</span> <span class="dv">0</span>,</span>
+<span id="cb694-14"><a href="boosting.html#cb694-14"></a>    <span class="dt">subsample =</span> <span class="fl">0.8</span>,</span>
+<span id="cb694-15"><a href="boosting.html#cb694-15"></a>    <span class="dt">colsample_bytree =</span> <span class="fl">0.75</span>),</span>
+<span id="cb694-16"><a href="boosting.html#cb694-16"></a>  <span class="dt">verbose =</span> <span class="dv">0</span></span>
+<span id="cb694-17"><a href="boosting.html#cb694-17"></a>)  </span>
+<span id="cb694-18"><a href="boosting.html#cb694-18"></a></span>
+<span id="cb694-19"><a href="boosting.html#cb694-19"></a></span>
+<span id="cb694-20"><a href="boosting.html#cb694-20"></a><span class="co"># minimum test CV RMSE</span></span>
+<span id="cb694-21"><a href="boosting.html#cb694-21"></a><span class="kw">min</span>(mod_xgb<span class="op">$</span>evaluation_log<span class="op">$</span>test_rmse_mean)</span></code></pre></div>
 <pre><code>[1] 1.42869</code></pre>
 <p>En este ejemplo no parece que mejoremos el RMSE, pero no suele ser lo habitual.</p>
 <p>A continuación, evaluamos si el sobreajuste está limitando el rendimiento de nuestro modelo al realizar una búsqueda en cuadrícula que examina varios parámetros de regularización (<code>gamma</code>, <code>lambda</code> y <code>alfa</code>). Dado el alto coste computacional, no ejecutamos este código, pero puede comprobarse que no mejoramos con la inclusión de hiperparámetros de reguralización.</p>
-<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="boosting.html#cb698-1"></a><span class="co"># hyperparameter grid</span></span>
-<span id="cb698-2"><a href="boosting.html#cb698-2"></a>hyper_grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</span>
-<span id="cb698-3"><a href="boosting.html#cb698-3"></a>  <span class="dt">eta =</span> <span class="fl">0.01</span>,</span>
-<span id="cb698-4"><a href="boosting.html#cb698-4"></a>  <span class="dt">max_depth =</span> <span class="dv">3</span>, </span>
-<span id="cb698-5"><a href="boosting.html#cb698-5"></a>  <span class="dt">min_child_weight =</span> <span class="dv">3</span>,</span>
-<span id="cb698-6"><a href="boosting.html#cb698-6"></a>  <span class="dt">subsample =</span> <span class="fl">0.5</span>, </span>
-<span id="cb698-7"><a href="boosting.html#cb698-7"></a>  <span class="dt">colsample_bytree =</span> <span class="fl">0.5</span>,</span>
-<span id="cb698-8"><a href="boosting.html#cb698-8"></a>  <span class="dt">gamma =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>),</span>
-<span id="cb698-9"><a href="boosting.html#cb698-9"></a>  <span class="dt">lambda =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">1e-2</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>),</span>
-<span id="cb698-10"><a href="boosting.html#cb698-10"></a>  <span class="dt">alpha =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">1e-2</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>),</span>
-<span id="cb698-11"><a href="boosting.html#cb698-11"></a>  <span class="dt">rmse =</span> <span class="dv">0</span>,          <span class="co"># a place to dump RMSE results</span></span>
-<span id="cb698-12"><a href="boosting.html#cb698-12"></a>  <span class="dt">trees =</span> <span class="dv">0</span>          <span class="co"># a place to dump required number of trees</span></span>
-<span id="cb698-13"><a href="boosting.html#cb698-13"></a>)</span>
-<span id="cb698-14"><a href="boosting.html#cb698-14"></a></span>
-<span id="cb698-15"><a href="boosting.html#cb698-15"></a><span class="co"># grid search</span></span>
-<span id="cb698-16"><a href="boosting.html#cb698-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(hyper_grid))) {</span>
-<span id="cb698-17"><a href="boosting.html#cb698-17"></a>  <span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb698-18"><a href="boosting.html#cb698-18"></a>  m &lt;-<span class="st"> </span><span class="kw">xgb.cv</span>(</span>
-<span id="cb698-19"><a href="boosting.html#cb698-19"></a>    <span class="dt">data =</span> X,</span>
-<span id="cb698-20"><a href="boosting.html#cb698-20"></a>    <span class="dt">label =</span> Y,</span>
-<span id="cb698-21"><a href="boosting.html#cb698-21"></a>    <span class="dt">nrounds =</span> <span class="dv">500</span>,</span>
-<span id="cb698-22"><a href="boosting.html#cb698-22"></a>    <span class="dt">objective =</span> <span class="st">&quot;reg:squarederror&quot;</span>,</span>
-<span id="cb698-23"><a href="boosting.html#cb698-23"></a>    <span class="dt">early_stopping_rounds =</span> <span class="dv">50</span>, </span>
-<span id="cb698-24"><a href="boosting.html#cb698-24"></a>    <span class="dt">nfold =</span> <span class="dv">10</span>,</span>
-<span id="cb698-25"><a href="boosting.html#cb698-25"></a>    <span class="dt">verbose =</span> <span class="dv">0</span>,</span>
-<span id="cb698-26"><a href="boosting.html#cb698-26"></a>    <span class="dt">params =</span> <span class="kw">list</span>( </span>
-<span id="cb698-27"><a href="boosting.html#cb698-27"></a>      <span class="dt">eta =</span> hyper_grid<span class="op">$</span>eta[i], </span>
-<span id="cb698-28"><a href="boosting.html#cb698-28"></a>      <span class="dt">max_depth =</span> hyper_grid<span class="op">$</span>max_depth[i],</span>
-<span id="cb698-29"><a href="boosting.html#cb698-29"></a>      <span class="dt">min_child_weight =</span> hyper_grid<span class="op">$</span>min_child_weight[i],</span>
-<span id="cb698-30"><a href="boosting.html#cb698-30"></a>      <span class="dt">subsample =</span> hyper_grid<span class="op">$</span>subsample[i],</span>
-<span id="cb698-31"><a href="boosting.html#cb698-31"></a>      <span class="dt">colsample_bytree =</span> hyper_grid<span class="op">$</span>colsample_bytree[i],</span>
-<span id="cb698-32"><a href="boosting.html#cb698-32"></a>      <span class="dt">gamma =</span> hyper_grid<span class="op">$</span>gamma[i], </span>
-<span id="cb698-33"><a href="boosting.html#cb698-33"></a>      <span class="dt">lambda =</span> hyper_grid<span class="op">$</span>lambda[i], </span>
-<span id="cb698-34"><a href="boosting.html#cb698-34"></a>      <span class="dt">alpha =</span> hyper_grid<span class="op">$</span>alpha[i]</span>
-<span id="cb698-35"><a href="boosting.html#cb698-35"></a>    ) </span>
-<span id="cb698-36"><a href="boosting.html#cb698-36"></a>  )</span>
-<span id="cb698-37"><a href="boosting.html#cb698-37"></a>  hyper_grid<span class="op">$</span>rmse[i] &lt;-<span class="st"> </span><span class="kw">min</span>(m<span class="op">$</span>evaluation_log<span class="op">$</span>test_rmse_mean)</span>
-<span id="cb698-38"><a href="boosting.html#cb698-38"></a>  hyper_grid<span class="op">$</span>trees[i] &lt;-<span class="st"> </span>m<span class="op">$</span>best_iteration</span>
-<span id="cb698-39"><a href="boosting.html#cb698-39"></a>}</span>
-<span id="cb698-40"><a href="boosting.html#cb698-40"></a></span>
-<span id="cb698-41"><a href="boosting.html#cb698-41"></a><span class="co"># results</span></span>
-<span id="cb698-42"><a href="boosting.html#cb698-42"></a>hyper_grid <span class="op">%&gt;%</span></span>
-<span id="cb698-43"><a href="boosting.html#cb698-43"></a><span class="st">  </span><span class="kw">filter</span>(rmse <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></span>
-<span id="cb698-44"><a href="boosting.html#cb698-44"></a><span class="st">  </span><span class="kw">arrange</span>(rmse) <span class="op">%&gt;%</span></span>
-<span id="cb698-45"><a href="boosting.html#cb698-45"></a><span class="st">  </span><span class="kw">glimpse</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="boosting.html#cb696-1"></a><span class="co"># hyperparameter grid</span></span>
+<span id="cb696-2"><a href="boosting.html#cb696-2"></a>hyper_grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</span>
+<span id="cb696-3"><a href="boosting.html#cb696-3"></a>  <span class="dt">eta =</span> <span class="fl">0.01</span>,</span>
+<span id="cb696-4"><a href="boosting.html#cb696-4"></a>  <span class="dt">max_depth =</span> <span class="dv">3</span>, </span>
+<span id="cb696-5"><a href="boosting.html#cb696-5"></a>  <span class="dt">min_child_weight =</span> <span class="dv">3</span>,</span>
+<span id="cb696-6"><a href="boosting.html#cb696-6"></a>  <span class="dt">subsample =</span> <span class="fl">0.5</span>, </span>
+<span id="cb696-7"><a href="boosting.html#cb696-7"></a>  <span class="dt">colsample_bytree =</span> <span class="fl">0.5</span>,</span>
+<span id="cb696-8"><a href="boosting.html#cb696-8"></a>  <span class="dt">gamma =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>),</span>
+<span id="cb696-9"><a href="boosting.html#cb696-9"></a>  <span class="dt">lambda =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">1e-2</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>),</span>
+<span id="cb696-10"><a href="boosting.html#cb696-10"></a>  <span class="dt">alpha =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">1e-2</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>),</span>
+<span id="cb696-11"><a href="boosting.html#cb696-11"></a>  <span class="dt">rmse =</span> <span class="dv">0</span>,          <span class="co"># a place to dump RMSE results</span></span>
+<span id="cb696-12"><a href="boosting.html#cb696-12"></a>  <span class="dt">trees =</span> <span class="dv">0</span>          <span class="co"># a place to dump required number of trees</span></span>
+<span id="cb696-13"><a href="boosting.html#cb696-13"></a>)</span>
+<span id="cb696-14"><a href="boosting.html#cb696-14"></a></span>
+<span id="cb696-15"><a href="boosting.html#cb696-15"></a><span class="co"># grid search</span></span>
+<span id="cb696-16"><a href="boosting.html#cb696-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(hyper_grid))) {</span>
+<span id="cb696-17"><a href="boosting.html#cb696-17"></a>  <span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb696-18"><a href="boosting.html#cb696-18"></a>  m &lt;-<span class="st"> </span><span class="kw">xgb.cv</span>(</span>
+<span id="cb696-19"><a href="boosting.html#cb696-19"></a>    <span class="dt">data =</span> X,</span>
+<span id="cb696-20"><a href="boosting.html#cb696-20"></a>    <span class="dt">label =</span> Y,</span>
+<span id="cb696-21"><a href="boosting.html#cb696-21"></a>    <span class="dt">nrounds =</span> <span class="dv">500</span>,</span>
+<span id="cb696-22"><a href="boosting.html#cb696-22"></a>    <span class="dt">objective =</span> <span class="st">&quot;reg:squarederror&quot;</span>,</span>
+<span id="cb696-23"><a href="boosting.html#cb696-23"></a>    <span class="dt">early_stopping_rounds =</span> <span class="dv">50</span>, </span>
+<span id="cb696-24"><a href="boosting.html#cb696-24"></a>    <span class="dt">nfold =</span> <span class="dv">10</span>,</span>
+<span id="cb696-25"><a href="boosting.html#cb696-25"></a>    <span class="dt">verbose =</span> <span class="dv">0</span>,</span>
+<span id="cb696-26"><a href="boosting.html#cb696-26"></a>    <span class="dt">params =</span> <span class="kw">list</span>( </span>
+<span id="cb696-27"><a href="boosting.html#cb696-27"></a>      <span class="dt">eta =</span> hyper_grid<span class="op">$</span>eta[i], </span>
+<span id="cb696-28"><a href="boosting.html#cb696-28"></a>      <span class="dt">max_depth =</span> hyper_grid<span class="op">$</span>max_depth[i],</span>
+<span id="cb696-29"><a href="boosting.html#cb696-29"></a>      <span class="dt">min_child_weight =</span> hyper_grid<span class="op">$</span>min_child_weight[i],</span>
+<span id="cb696-30"><a href="boosting.html#cb696-30"></a>      <span class="dt">subsample =</span> hyper_grid<span class="op">$</span>subsample[i],</span>
+<span id="cb696-31"><a href="boosting.html#cb696-31"></a>      <span class="dt">colsample_bytree =</span> hyper_grid<span class="op">$</span>colsample_bytree[i],</span>
+<span id="cb696-32"><a href="boosting.html#cb696-32"></a>      <span class="dt">gamma =</span> hyper_grid<span class="op">$</span>gamma[i], </span>
+<span id="cb696-33"><a href="boosting.html#cb696-33"></a>      <span class="dt">lambda =</span> hyper_grid<span class="op">$</span>lambda[i], </span>
+<span id="cb696-34"><a href="boosting.html#cb696-34"></a>      <span class="dt">alpha =</span> hyper_grid<span class="op">$</span>alpha[i]</span>
+<span id="cb696-35"><a href="boosting.html#cb696-35"></a>    ) </span>
+<span id="cb696-36"><a href="boosting.html#cb696-36"></a>  )</span>
+<span id="cb696-37"><a href="boosting.html#cb696-37"></a>  hyper_grid<span class="op">$</span>rmse[i] &lt;-<span class="st"> </span><span class="kw">min</span>(m<span class="op">$</span>evaluation_log<span class="op">$</span>test_rmse_mean)</span>
+<span id="cb696-38"><a href="boosting.html#cb696-38"></a>  hyper_grid<span class="op">$</span>trees[i] &lt;-<span class="st"> </span>m<span class="op">$</span>best_iteration</span>
+<span id="cb696-39"><a href="boosting.html#cb696-39"></a>}</span>
+<span id="cb696-40"><a href="boosting.html#cb696-40"></a></span>
+<span id="cb696-41"><a href="boosting.html#cb696-41"></a><span class="co"># results</span></span>
+<span id="cb696-42"><a href="boosting.html#cb696-42"></a>hyper_grid <span class="op">%&gt;%</span></span>
+<span id="cb696-43"><a href="boosting.html#cb696-43"></a><span class="st">  </span><span class="kw">filter</span>(rmse <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></span>
+<span id="cb696-44"><a href="boosting.html#cb696-44"></a><span class="st">  </span><span class="kw">arrange</span>(rmse) <span class="op">%&gt;%</span></span>
+<span id="cb696-45"><a href="boosting.html#cb696-45"></a><span class="st">  </span><span class="kw">glimpse</span>()</span></code></pre></div>
 <p>Una vez que hayamos encontrado los hiperparámetros óptimos, ajustaremos el modelo final con <code>xgb.train</code> o <code>xgboost</code>. Debemos asegurarnos de utilizar la cantidad óptima de árboles encontrados durante la validación cruzada. En nuestro ejemplo, agregar regularización no proporciona ninguna mejora, por lo que los excluimos en nuestro modelo final.</p>
-<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="boosting.html#cb699-1"></a><span class="co"># optimal parameter list  (not are the real ones)</span></span>
-<span id="cb699-2"><a href="boosting.html#cb699-2"></a>params &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
-<span id="cb699-3"><a href="boosting.html#cb699-3"></a>  <span class="dt">eta =</span> <span class="fl">0.01</span>,</span>
-<span id="cb699-4"><a href="boosting.html#cb699-4"></a>  <span class="dt">max_depth =</span> <span class="dv">3</span>,</span>
-<span id="cb699-5"><a href="boosting.html#cb699-5"></a>  <span class="dt">min_child_weight =</span> <span class="dv">3</span>,</span>
-<span id="cb699-6"><a href="boosting.html#cb699-6"></a>  <span class="dt">subsample =</span> <span class="fl">0.5</span>,</span>
-<span id="cb699-7"><a href="boosting.html#cb699-7"></a>  <span class="dt">colsample_bytree =</span> <span class="fl">0.5</span></span>
-<span id="cb699-8"><a href="boosting.html#cb699-8"></a>)</span>
-<span id="cb699-9"><a href="boosting.html#cb699-9"></a></span>
-<span id="cb699-10"><a href="boosting.html#cb699-10"></a><span class="co"># train final model</span></span>
-<span id="cb699-11"><a href="boosting.html#cb699-11"></a>xgb.fit.final &lt;-<span class="st"> </span><span class="kw">xgboost</span>(</span>
-<span id="cb699-12"><a href="boosting.html#cb699-12"></a>  <span class="dt">params =</span> params,</span>
-<span id="cb699-13"><a href="boosting.html#cb699-13"></a>  <span class="dt">data =</span> X,</span>
-<span id="cb699-14"><a href="boosting.html#cb699-14"></a>  <span class="dt">label =</span> Y,</span>
-<span id="cb699-15"><a href="boosting.html#cb699-15"></a>  <span class="dt">nrounds =</span> <span class="dv">3944</span>,</span>
-<span id="cb699-16"><a href="boosting.html#cb699-16"></a>  <span class="dt">objective =</span> <span class="st">&quot;reg:squarederror&quot;</span>,</span>
-<span id="cb699-17"><a href="boosting.html#cb699-17"></a>  <span class="dt">verbose =</span> <span class="dv">0</span></span>
-<span id="cb699-18"><a href="boosting.html#cb699-18"></a>)</span>
-<span id="cb699-19"><a href="boosting.html#cb699-19"></a></span>
-<span id="cb699-20"><a href="boosting.html#cb699-20"></a>xgb.fit.final</span></code></pre></div>
+<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb697-1"><a href="boosting.html#cb697-1"></a><span class="co"># optimal parameter list  (not are the real ones)</span></span>
+<span id="cb697-2"><a href="boosting.html#cb697-2"></a>params &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb697-3"><a href="boosting.html#cb697-3"></a>  <span class="dt">eta =</span> <span class="fl">0.01</span>,</span>
+<span id="cb697-4"><a href="boosting.html#cb697-4"></a>  <span class="dt">max_depth =</span> <span class="dv">3</span>,</span>
+<span id="cb697-5"><a href="boosting.html#cb697-5"></a>  <span class="dt">min_child_weight =</span> <span class="dv">3</span>,</span>
+<span id="cb697-6"><a href="boosting.html#cb697-6"></a>  <span class="dt">subsample =</span> <span class="fl">0.5</span>,</span>
+<span id="cb697-7"><a href="boosting.html#cb697-7"></a>  <span class="dt">colsample_bytree =</span> <span class="fl">0.5</span></span>
+<span id="cb697-8"><a href="boosting.html#cb697-8"></a>)</span>
+<span id="cb697-9"><a href="boosting.html#cb697-9"></a></span>
+<span id="cb697-10"><a href="boosting.html#cb697-10"></a><span class="co"># train final model</span></span>
+<span id="cb697-11"><a href="boosting.html#cb697-11"></a>xgb.fit.final &lt;-<span class="st"> </span><span class="kw">xgboost</span>(</span>
+<span id="cb697-12"><a href="boosting.html#cb697-12"></a>  <span class="dt">params =</span> params,</span>
+<span id="cb697-13"><a href="boosting.html#cb697-13"></a>  <span class="dt">data =</span> X,</span>
+<span id="cb697-14"><a href="boosting.html#cb697-14"></a>  <span class="dt">label =</span> Y,</span>
+<span id="cb697-15"><a href="boosting.html#cb697-15"></a>  <span class="dt">nrounds =</span> <span class="dv">3944</span>,</span>
+<span id="cb697-16"><a href="boosting.html#cb697-16"></a>  <span class="dt">objective =</span> <span class="st">&quot;reg:squarederror&quot;</span>,</span>
+<span id="cb697-17"><a href="boosting.html#cb697-17"></a>  <span class="dt">verbose =</span> <span class="dv">0</span></span>
+<span id="cb697-18"><a href="boosting.html#cb697-18"></a>)</span>
+<span id="cb697-19"><a href="boosting.html#cb697-19"></a></span>
+<span id="cb697-20"><a href="boosting.html#cb697-20"></a>xgb.fit.final</span></code></pre></div>
 <pre><code>##### xgb.Booster
 raw: 4.1 Mb 
 call:
@@ -936,7 +939,7 @@ evaluation_log:
     3943   0.276412
     3944   0.276352</code></pre>
 <p><strong>NOTA</strong>: Podemos obtener un ránking con la importancia de cada variable</p>
-<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb701-1"><a href="boosting.html#cb701-1"></a>vip<span class="op">::</span><span class="kw">vip</span>(xgb.fit.final) </span></code></pre></div>
+<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="boosting.html#cb699-1"></a>vip<span class="op">::</span><span class="kw">vip</span>(xgb.fit.final) </span></code></pre></div>
 <p><img src="fig/unnamed-chunk-314-1.png" width="672" /></p>
 </div>
 </div>
