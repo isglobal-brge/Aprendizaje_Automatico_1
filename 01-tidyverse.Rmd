@@ -811,7 +811,7 @@ En este [link](https://ggplot2.tidyverse.org/reference/) tenéis la referencia d
 
 2. Visualiza la distribución de la variabla carat según el precio en el dataset `diamonds`. 
 
-3. Carga los datos qe están en https://raw.githubusercontent.com/isglobal-brge/TeachingMaterials/master/Master_Modelling/data/genome.txt en tu sesión de RStudio utilizando la función `read_delim` (NOTA: los datos están delimitados por tabulaciones - no hace falta bajarlos al ordenador se cargan desde la URL). 
+3. Carga los datos qe están en https://raw.githubusercontent.com/isglobal-brge/Master_Modelling/main/data/genome.txt en tu sesión de RStudio utilizando la función `read_delim` (NOTA: los datos están delimitados por tabulaciones - no hace falta bajarlos al ordenador se cargan desde la URL). 
 
 El archivo contiene información sobre ~730K variantes genéticas en todo el genoma: 
 
