@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Ajuste de modelos | Aprendizaje Automático 1</title>
   <meta name="description" content="5 Ajuste de modelos | Aprendizaje Automático 1" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Ajuste de modelos | Aprendizaje Automático 1" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-02-23" />
+<meta name="date" content="2021-09-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="regresión-lineal.html"/>
 <link rel="next" href="regresión-logística.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -51,13 +51,15 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -118,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -137,7 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
 <li class="chapter" data-level="2" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html"><i class="fa fa-check"></i><b>2</b> Introducción a Tidyverse</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="index.html"><a href="index.html#introducción"><i class="fa fa-check"></i><b>2.1</b> Introducción</a></li>
+<li class="chapter" data-level="2.1" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#introducción-1"><i class="fa fa-check"></i><b>2.1</b> Introducción</a></li>
 <li class="chapter" data-level="2.2" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#instalación"><i class="fa fa-check"></i><b>2.2</b> Instalación</a></li>
 <li class="chapter" data-level="2.3" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#librerías-básicas"><i class="fa fa-check"></i><b>2.3</b> Librerías básicas</a></li>
 <li class="chapter" data-level="2.4" data-path="introducción-a-tidyverse.html"><a href="introducción-a-tidyverse.html#manejo-de-datos"><i class="fa fa-check"></i><b>2.4</b> Manejo de datos</a>
@@ -259,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.1" data-path="caret.html"><a href="caret.html#creación-de-variables"><i class="fa fa-check"></i><b>8.1.1</b> Creación de variables</a></li>
 <li class="chapter" data-level="8.1.2" data-path="caret.html"><a href="caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>8.1.2</b> Predictores con poca variabilidad</a></li>
 <li class="chapter" data-level="8.1.3" data-path="caret.html"><a href="caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>8.1.3</b> Identificación de predictores correlacionados</a></li>
-<li class="chapter" data-level="8.1.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#centrado-y-escalado"><i class="fa fa-check"></i><b>8.1.4</b> Centrado y escalado</a></li>
+<li class="chapter" data-level="8.1.4" data-path="caret.html"><a href="caret.html#centrado-y-escalado-1"><i class="fa fa-check"></i><b>8.1.4</b> Centrado y escalado</a></li>
 <li class="chapter" data-level="8.1.5" data-path="caret.html"><a href="caret.html#imputación"><i class="fa fa-check"></i><b>8.1.5</b> Imputación</a></li>
 <li class="chapter" data-level="8.1.6" data-path="caret.html"><a href="caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>8.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
 </ul></li>
@@ -394,20 +397,20 @@ donde <span class="math inline">\(\ln(L_{c})\)</span> es el logaritmo de la prob
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
 Ncells  3959239 211.5    9336884 498.7  9336884 498.7
 Vcells 22405247 171.0   40802698 311.3 40802698 311.3</code></pre>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="ajuste-de-modelos.html#cb253-1"></a><span class="kw">library</span>(ISLR)</span>
-<span id="cb253-2"><a href="ajuste-de-modelos.html#cb253-2"></a><span class="kw">data</span>(Hitters)</span>
-<span id="cb253-3"><a href="ajuste-de-modelos.html#cb253-3"></a><span class="kw">display</span>(null &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> Hitters))</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="ajuste-de-modelos.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
+<span id="cb253-2"><a href="ajuste-de-modelos.html#cb253-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Hitters)</span>
+<span id="cb253-3"><a href="ajuste-de-modelos.html#cb253-3" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(null <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> Hitters))</span></code></pre></div>
 <pre><code>lm(formula = Salary ~ 1, data = Hitters)
             coef.est coef.se
 (Intercept) 535.93    27.82 
 ---
 n = 263, k = 1
 residual sd = 451.12, R-Squared = 0.00</code></pre>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="ajuste-de-modelos.html#cb255-1"></a><span class="kw">round</span>(<span class="kw">mean</span>(Hitters<span class="op">$</span>Salary, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="ajuste-de-modelos.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(Hitters<span class="sc">$</span>Salary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>[1] 535.93</code></pre>
 <p>Un modelo nulo consiste solo en una intersección, cuyo coeficiente, como podemos ver, es solo la media de Salario. La pregunta clave es si a medida que hacemos un modelo más complejo esa complejidad está justificada. Es decir, si agregar predictores no solo reduce el sesgo sino que lo hace sin aumentar indebidamente la varianza. Veámos qué ocurre si agreguamos más predictores.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="ajuste-de-modelos.html#cb257-1"></a><span class="kw">library</span>(lmtest)</span>
-<span id="cb257-2"><a href="ajuste-de-modelos.html#cb257-2"></a><span class="kw">display</span>(h1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>Hits, <span class="dt">data =</span> Hitters))</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="ajuste-de-modelos.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb257-2"><a href="ajuste-de-modelos.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(h1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> Hits, <span class="at">data =</span> Hitters))</span></code></pre></div>
 <pre><code>lm(formula = Salary ~ Hits, data = Hitters)
             coef.est coef.se
 (Intercept) 63.05    64.98  
@@ -415,7 +418,7 @@ Hits         4.39     0.56
 ---
 n = 263, k = 2
 residual sd = 406.17, R-Squared = 0.19</code></pre>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="ajuste-de-modelos.html#cb259-1"></a><span class="kw">lrtest</span>(null, h1)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="ajuste-de-modelos.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lrtest</span>(null, h1)</span></code></pre></div>
 <pre><code>Likelihood ratio test
 
 Model 1: Salary ~ 1
@@ -425,7 +428,7 @@ Model 2: Salary ~ Hits
 2   3 -1952.0  1 56.212  6.508e-14 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="ajuste-de-modelos.html#cb261-1"></a><span class="kw">anova</span>(null, h1)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="ajuste-de-modelos.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(null, h1)</span></code></pre></div>
 <pre><code>Analysis of Variance Table
 
 Model 1: Salary ~ 1
@@ -435,12 +438,12 @@ Model 2: Salary ~ Hits
 2    261 43058621  1  10260491 62.194 8.531e-14 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="ajuste-de-modelos.html#cb263-1"></a><span class="kw">as.matrix</span>(<span class="kw">AIC</span>(null, h1))</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="ajuste-de-modelos.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(<span class="fu">AIC</span>(null, h1))</span></code></pre></div>
 <pre><code>     df      AIC
 null  2 3964.130
 h1    3 3909.918</code></pre>
 <p>La variable Hits es estadísticamente significativ, ya que el IC del 95% no incluye 0 (4,39 <span class="math inline">\(\pm\)</span> 2 x 0,56) (o el p-valor del test de Score es <span class="math inline">\(&lt;0.05\)</span>). Estos tres métodos coinciden en que el modelo con Hits es una mejora con respecto al modelo nulo. En el caso de <code>lrtest ()</code> y <code>anova ()</code>, el p-valor representa los resultados de una prueba estadística (prueba chi-cuadrado y prueba F, respectivamente) para determinar si el segundo modelo más complejo es un mejor ajuste a los datos. ¿Agregar un predictor adicional, AtBat, mejora aún más el modelo?</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="ajuste-de-modelos.html#cb265-1"></a><span class="kw">display</span>(h2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>Hits <span class="op">+</span><span class="st"> </span>AtBat, <span class="dt">data =</span> Hitters))</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="ajuste-de-modelos.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(h2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> Hits <span class="sc">+</span> AtBat, <span class="at">data =</span> Hitters))</span></code></pre></div>
 <pre><code>lm(formula = Salary ~ Hits + AtBat, data = Hitters)
             coef.est coef.se
 (Intercept) 141.27    76.55 
@@ -449,7 +452,7 @@ AtBat        -1.22     0.64
 ---
 n = 263, k = 3
 residual sd = 404.13, R-Squared = 0.20</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="ajuste-de-modelos.html#cb267-1"></a><span class="kw">lrtest</span>(h1, h2)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="ajuste-de-modelos.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lrtest</span>(h1, h2)</span></code></pre></div>
 <pre><code>Likelihood ratio test
 
 Model 1: Salary ~ Hits
@@ -459,7 +462,7 @@ Model 2: Salary ~ Hits + AtBat
 2   4 -1950.1  1 3.6588    0.05577 .
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="ajuste-de-modelos.html#cb269-1"></a><span class="kw">anova</span>(h1, h2)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="ajuste-de-modelos.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(h1, h2)</span></code></pre></div>
 <pre><code>Analysis of Variance Table
 
 Model 1: Salary ~ Hits
@@ -469,17 +472,17 @@ Model 2: Salary ~ Hits + AtBat
 2    260 42463750  1    594871 3.6423 0.05743 .
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="ajuste-de-modelos.html#cb271-1"></a><span class="kw">as.matrix</span>(<span class="kw">AIC</span>(h1, h2))</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="ajuste-de-modelos.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(<span class="fu">AIC</span>(h1, h2))</span></code></pre></div>
 <pre><code>   df      AIC
 h1  3 3909.918
 h2  4 3908.260</code></pre>
 <p>Los resultados son ambiguos. El <span class="math inline">\(R^2\)</span> aumenta, mientras que AIC, el logaritmo de la probabilidad y el RSS disminuyen, pero la disminución en los dos últimos casos no es estadísticamente significativa. (Este resultado es consistente con el hecho de que AtBat no es en sí mismo estadísticamente significativo, ya que el IC del 95% para AtBat incluye 0: -1.22 <span class="math inline">\(\pm\)</span> 2 x .64). ¿Deberíamos dejar AtBat en el modelo? No mejora mucho el ajuste, si es que lo hace, al tiempo que agrega complejidad. Entonces, deberíamos sacarlo. Desafortunadamente, estas opciones a menudo no son claras, razón por la cual el ajuste de modelos a veces parece más un arte que una ciencia.</p>
 <p>Para implementar el método de selección, seguiríamos agregando variables y comparando modelos usando <code>lrtest ()</code> o <code>anova ()</code> con el fin de encontrar el mejor ajuste posible. Sin embargo, un problema con este procedimiento es que el orden en el que recorremos los predictores afectará nuestras decisiones de selección porque el impacto de cada predictor en el ajuste del modelo depende de la presencia de los demás. Por ejemplo, supongamos que agregamos AtBat más adelante en el proceso de selección:</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="ajuste-de-modelos.html#cb273-1"></a>h3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>Hits <span class="op">+</span><span class="st"> </span>Years <span class="op">+</span><span class="st"> </span>HmRun <span class="op">+</span><span class="st"> </span>RBI <span class="op">+</span><span class="st"> </span>Walks <span class="op">+</span><span class="st"> </span>Assists, </span>
-<span id="cb273-2"><a href="ajuste-de-modelos.html#cb273-2"></a>         <span class="dt">data =</span> Hitters)</span>
-<span id="cb273-3"><a href="ajuste-de-modelos.html#cb273-3"></a>h4 &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>Hits <span class="op">+</span><span class="st"> </span>Years <span class="op">+</span><span class="st"> </span>HmRun <span class="op">+</span><span class="st"> </span>RBI <span class="op">+</span><span class="st"> </span>Walks <span class="op">+</span><span class="st"> </span>Assists <span class="op">+</span><span class="st"> </span>AtBat,</span>
-<span id="cb273-4"><a href="ajuste-de-modelos.html#cb273-4"></a>         <span class="dt">data =</span> Hitters)</span>
-<span id="cb273-5"><a href="ajuste-de-modelos.html#cb273-5"></a><span class="kw">lrtest</span>(h3, h4)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="ajuste-de-modelos.html#cb273-1" aria-hidden="true" tabindex="-1"></a>h3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> Hits <span class="sc">+</span> Years <span class="sc">+</span> HmRun <span class="sc">+</span> RBI <span class="sc">+</span> Walks <span class="sc">+</span> Assists, </span>
+<span id="cb273-2"><a href="ajuste-de-modelos.html#cb273-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> Hitters)</span>
+<span id="cb273-3"><a href="ajuste-de-modelos.html#cb273-3" aria-hidden="true" tabindex="-1"></a>h4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> Hits <span class="sc">+</span> Years <span class="sc">+</span> HmRun <span class="sc">+</span> RBI <span class="sc">+</span> Walks <span class="sc">+</span> Assists <span class="sc">+</span> AtBat,</span>
+<span id="cb273-4"><a href="ajuste-de-modelos.html#cb273-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> Hitters)</span>
+<span id="cb273-5"><a href="ajuste-de-modelos.html#cb273-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lrtest</span>(h3, h4)</span></code></pre></div>
 <pre><code>Likelihood ratio test
 
 Model 1: Salary ~ Hits + Years + HmRun + RBI + Walks + Assists
@@ -489,7 +492,7 @@ Model 2: Salary ~ Hits + Years + HmRun + RBI + Walks + Assists + AtBat
 2   9 -1911.1  1 11.114  0.0008569 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="ajuste-de-modelos.html#cb275-1"></a><span class="kw">as.matrix</span>(<span class="kw">AIC</span>(h3, h4))</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="ajuste-de-modelos.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(<span class="fu">AIC</span>(h3, h4))</span></code></pre></div>
 <pre><code>   df      AIC
 h3  8 3849.311
 h4  9 3840.198</code></pre>
@@ -499,9 +502,9 @@ h4  9 3840.198</code></pre>
 <h2><span class="header-section-number">5.4</span> Métodos de selección automática</h2>
 <p>Se han desarrollado algoritmos para buscar en el espacio de modelos de manera eficiente el modelo óptimo. Sin embargo, desde el principio conviene tener cuidado con la selección automática de variables. <em>La elección de variables no debe ser un proceso mecánico.</em> Debemos, en cambio, buscar comprender el proceso de generación de datos. De hecho, el mayor beneficio de la selección manual por pasos consiste menos en producir un buen modelo que en la comprensión obtenida al ajustar muchos modelos y ver, mediante prueba y error, qué predictores son más reactivos con el resultado. Especialmente cuando se trata de descripción, los algoritmos de selección automática de variables son solo herramientas para explorar sus datos y pensar en modelos.</p>
 <p>La función <code>step ()</code> en R base automatiza la selección de variables paso a paso usando AIC.</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="ajuste-de-modelos.html#cb277-1"></a>mod.fow &lt;-<span class="st"> </span><span class="kw">step</span>(<span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters), <span class="dt">trace =</span> F, </span>
-<span id="cb277-2"><a href="ajuste-de-modelos.html#cb277-2"></a>                <span class="dt">direction =</span> <span class="st">&quot;forward&quot;</span>)</span>
-<span id="cb277-3"><a href="ajuste-de-modelos.html#cb277-3"></a>mod.fow</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="ajuste-de-modelos.html#cb277-1" aria-hidden="true" tabindex="-1"></a>mod.fow <span class="ot">&lt;-</span> <span class="fu">step</span>(<span class="fu">lm</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> Hitters), <span class="at">trace =</span> F, </span>
+<span id="cb277-2"><a href="ajuste-de-modelos.html#cb277-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">direction =</span> <span class="st">&quot;forward&quot;</span>)</span>
+<span id="cb277-3"><a href="ajuste-de-modelos.html#cb277-3" aria-hidden="true" tabindex="-1"></a>mod.fow</span></code></pre></div>
 <pre><code>
 Call:
 lm(formula = Salary ~ AtBat + Hits + HmRun + Runs + RBI + Walks + 
@@ -519,9 +522,9 @@ Coefficients:
      Errors   NewLeagueN  
     -3.3608     -24.7623  </code></pre>
 <p>La selección hacia adelante se estableció en 19 predictores con un <span class="math inline">\(R^2\)</span> de .55.</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="ajuste-de-modelos.html#cb279-1"></a>mod.back &lt;-<span class="st"> </span><span class="kw">step</span>(<span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters), <span class="dt">trace =</span> F, </span>
-<span id="cb279-2"><a href="ajuste-de-modelos.html#cb279-2"></a>                 <span class="dt">direction =</span> <span class="st">&quot;backward&quot;</span>)</span>
-<span id="cb279-3"><a href="ajuste-de-modelos.html#cb279-3"></a>mod.back</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="ajuste-de-modelos.html#cb279-1" aria-hidden="true" tabindex="-1"></a>mod.back <span class="ot">&lt;-</span> <span class="fu">step</span>(<span class="fu">lm</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> Hitters), <span class="at">trace =</span> F, </span>
+<span id="cb279-2"><a href="ajuste-de-modelos.html#cb279-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">direction =</span> <span class="st">&quot;backward&quot;</span>)</span>
+<span id="cb279-3"><a href="ajuste-de-modelos.html#cb279-3" aria-hidden="true" tabindex="-1"></a>mod.back</span></code></pre></div>
 <pre><code>
 Call:
 lm(formula = Salary ~ AtBat + Hits + Walks + CAtBat + CRuns + 
@@ -534,11 +537,11 @@ Coefficients:
      0.7743      -0.8308    -112.3801       0.2974       0.2832  </code></pre>
 <p>La selección hacia detrás se estableció en 10 predictores con un <span class="math inline">\(R^2\)</span> de .54. Con muchas menos variables, somos capaces de explicar prácticamente la misma variabilidad.</p>
 <p>La función <code>regsubsets ()</code> en el paquete <code>leaps</code> realiza una búsqueda exhaustiva del espacio modelo utilizando el algoritmo de saltos (adelante y atrás) para la selección de variables.</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="ajuste-de-modelos.html#cb281-1"></a><span class="kw">library</span>(leaps)</span>
-<span id="cb281-2"><a href="ajuste-de-modelos.html#cb281-2"></a><span class="kw">plot</span>(<span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters, <span class="dt">method =</span> <span class="st">&quot;exhaustive&quot;</span>, <span class="dt">nbest =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="ajuste-de-modelos.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaps)</span>
+<span id="cb281-2"><a href="ajuste-de-modelos.html#cb281-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">regsubsets</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> Hitters, <span class="at">method =</span> <span class="st">&quot;exhaustive&quot;</span>, <span class="at">nbest =</span> <span class="dv">1</span>))</span></code></pre></div>
 <p><img src="fig/unnamed-chunk-78-1.png" width="672" /></p>
 <p>El gráfico presenta diferentes modelos que pueden ser buenos candidatos organizados según el BIC (<span class="math inline">\(\mathrm{BIC} = {\ln(n) k - 2 \ ln ({L})}\)</span>, donde <span class="math inline">\(L\)</span> es el valor de máxima verosimilitud, <span class="math inline">\(n\)</span> es el número de observaciones, <span class="math inline">\(k\)</span> es el número de parámetros y <span class="math inline">\(ln\)</span> es el logaritmo natural). Como el AIC, el BIC penaliza por la complejidad del modelo. Un BIC más bajo es mejor. El modelo con el BIC más bajo es el bastante simple en la parte superior de la figura: <em>intercept</em>, AtBat, Hits, Walks, CRBI, DivisionW y PutOuts. Si reajustamos un modelo con estos predictores usando <code>lm ()</code> encontramos que tiene un <span class="math inline">\(R^2\)</span> de .51, que tampoco está muy lejos del valor obtenido con un método hacia adelante y con muchísimas menos variables (principio de parsimonia). Notemos que, además, todos los coefecientes de este modelo (a excepción del <em>intercept</em>, pero que es necesario introducir) son estadísticamente significativos según el test de score:</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="ajuste-de-modelos.html#cb282-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>AtBat <span class="op">+</span><span class="st"> </span>Hits <span class="op">+</span><span class="st"> </span>Walks <span class="op">+</span><span class="st"> </span>CRBI <span class="op">+</span><span class="st"> </span>Division <span class="op">+</span><span class="st"> </span>PutOuts, <span class="dt">data =</span> Hitters))</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="ajuste-de-modelos.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(Salary <span class="sc">~</span> AtBat <span class="sc">+</span> Hits <span class="sc">+</span> Walks <span class="sc">+</span> CRBI <span class="sc">+</span> Division <span class="sc">+</span> PutOuts, <span class="at">data =</span> Hitters))</span></code></pre></div>
 <pre><code>
 Call:
 lm(formula = Salary ~ AtBat + Hits + Walks + CRBI + Division + 
@@ -562,7 +565,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 
 Residual standard error: 319.9 on 256 degrees of freedom
   (59 observations deleted due to missingness)
-Multiple R-squared:  0.5087,	Adjusted R-squared:  0.4972 
+Multiple R-squared:  0.5087,    Adjusted R-squared:  0.4972 
 F-statistic: 44.18 on 6 and 256 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code>**IMPORTANTE:** ¿Es este modelo realmente mejor? El algoritmo hizo una búsqueda exhaustiva del espacio de modelos y, sin embargo, arrojó un modelo con $R^2$ un poco más bajo. ¿Cómo podría ser mejor? (probablemente lo sea). Si bien el sesgo en este modelo será mayor que en el modelo más grande seleccionado por la función `step ()`, la varianza probablemente sea menor. Recuerde: el sesgo se refiere al rendimiento del modelo dentro de la muestra y la varianza se refiere al rendimiento del modelo fuera de la muestra: cómo se comporta el modelo cuando encuentra nuevos datos. Si el modelo tiene un rendimiento deficiente en datos nuevos, con una gran discrepancia entre el rendimiento dentro y fuera de la muestra, entonces está sobreajustado. AIC, BIC y $R^2$ ajustado penalizan por la complejidad del modelo para evitar el sobreajuste y tenderán a seleccionar modelos con mayor sesgo y menor varianza.</code></pre>
 </div>
@@ -583,28 +586,28 @@ F-statistic: 44.18 on 6 and 256 DF,  p-value: &lt; 2.2e-16</code></pre>
 <ol style="list-style-type: decimal">
 <li><em>Dividir los datos de la muestra en dos partes: un conjunto de entrenamiento y otro de validacións.</em> Los investigadores usan diferentes proporciones, pero es común seleccionar al azar el 70% de los datos como conjunto de entrenamiento y el 30% como conjunto de prueba o validación. . (Obviamente, debemos tener suficientes datos en la muestra para ajustar un modelo después de dividir los datos). Debido a que CV se basa en un muestreo aleatorio, nuestros resultados variarán a menos que usemos <code>set.seed ()</code>. Demostraremos usando los datos de Hitters, usando solo casos completos (esto es importante, no tener missings - veremos más adelante alguna forma de solucionar este problema).</li>
 </ol>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="ajuste-de-modelos.html#cb285-1"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb285-2"><a href="ajuste-de-modelos.html#cb285-2"></a>Hitters_complete &lt;-<span class="st"> </span>Hitters[<span class="kw">complete.cases</span>(Hitters), ]</span>
-<span id="cb285-3"><a href="ajuste-de-modelos.html#cb285-3"></a>rows &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Hitters_complete), <span class="fl">.7</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(Hitters_complete))</span>
-<span id="cb285-4"><a href="ajuste-de-modelos.html#cb285-4"></a>train &lt;-<span class="st"> </span>Hitters_complete[rows, ]</span>
-<span id="cb285-5"><a href="ajuste-de-modelos.html#cb285-5"></a>test &lt;-<span class="st"> </span>Hitters_complete[<span class="op">-</span>rows, ]</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="ajuste-de-modelos.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb285-2"><a href="ajuste-de-modelos.html#cb285-2" aria-hidden="true" tabindex="-1"></a>Hitters_complete <span class="ot">&lt;-</span> Hitters[<span class="fu">complete.cases</span>(Hitters), ]</span>
+<span id="cb285-3"><a href="ajuste-de-modelos.html#cb285-3" aria-hidden="true" tabindex="-1"></a>rows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(Hitters_complete), .<span class="dv">7</span> <span class="sc">*</span> <span class="fu">nrow</span>(Hitters_complete))</span>
+<span id="cb285-4"><a href="ajuste-de-modelos.html#cb285-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> Hitters_complete[rows, ]</span>
+<span id="cb285-5"><a href="ajuste-de-modelos.html#cb285-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> Hitters_complete[<span class="sc">-</span>rows, ]</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li><em>Ajustar un modelo en el conjunto de entrenamiento</em> usando un procedimiento de selección de variables apropiado. Crearemos dos modelos para comparar: uno con todas las variables, luego otro con solo las variables elegidas por <code>regsubsets ()</code>.</li>
 </ol>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="ajuste-de-modelos.html#cb286-1"></a>full_model &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span>., <span class="dt">data =</span> train)</span>
-<span id="cb286-2"><a href="ajuste-de-modelos.html#cb286-2"></a>select_model &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>AtBat <span class="op">+</span><span class="st"> </span>Hits <span class="op">+</span><span class="st"> </span>Walks <span class="op">+</span><span class="st"> </span>CRBI <span class="op">+</span><span class="st"> </span>Division <span class="op">+</span><span class="st"> </span>PutOuts, <span class="dt">data =</span> train)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="ajuste-de-modelos.html#cb286-1" aria-hidden="true" tabindex="-1"></a>full_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span>., <span class="at">data =</span> train)</span>
+<span id="cb286-2"><a href="ajuste-de-modelos.html#cb286-2" aria-hidden="true" tabindex="-1"></a>select_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> AtBat <span class="sc">+</span> Hits <span class="sc">+</span> Walks <span class="sc">+</span> CRBI <span class="sc">+</span> Division <span class="sc">+</span> PutOuts, <span class="at">data =</span> train)</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li><em>Utilizar ese modelo para predecir en el conjunto de prueba.</em> El rendimiento en el conjunto de prueba es la estimación de CV para el rendimiento fuera de la muestra del modelo.</li>
 </ol>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="ajuste-de-modelos.html#cb287-1"></a>results &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Model =</span> <span class="kw">c</span>(<span class="st">&quot;Modelo completo muestra entrenamiento&quot;</span>,</span>
-<span id="cb287-2"><a href="ajuste-de-modelos.html#cb287-2"></a>                                <span class="st">&quot;Modelo seleccionado muestra entrenamiento&quot;</span>,</span>
-<span id="cb287-3"><a href="ajuste-de-modelos.html#cb287-3"></a>                                <span class="st">&quot;Modelo completo muestra validación&quot;</span>,</span>
-<span id="cb287-4"><a href="ajuste-de-modelos.html#cb287-4"></a>                                <span class="st">&quot;Modelo seleccionado muestra validación&quot;</span>),</span>
-<span id="cb287-5"><a href="ajuste-de-modelos.html#cb287-5"></a>                      <span class="dt">RMSE =</span> <span class="kw">round</span>(<span class="kw">c</span>(<span class="kw">rmse</span>(<span class="kw">fitted</span>(full_model), train<span class="op">$</span>Salary),</span>
-<span id="cb287-6"><a href="ajuste-de-modelos.html#cb287-6"></a>                               <span class="kw">rmse</span>(<span class="kw">fitted</span>(select_model), train<span class="op">$</span>Salary),</span>
-<span id="cb287-7"><a href="ajuste-de-modelos.html#cb287-7"></a>                               <span class="kw">rmse</span>(<span class="kw">predict</span>(full_model, <span class="dt">newdata =</span> test), test<span class="op">$</span>Salary), </span>
-<span id="cb287-8"><a href="ajuste-de-modelos.html#cb287-8"></a>                               <span class="kw">rmse</span>(<span class="kw">predict</span>(select_model, <span class="dt">newdata =</span> test), test<span class="op">$</span>Salary)),<span class="dv">1</span>))</span>
-<span id="cb287-9"><a href="ajuste-de-modelos.html#cb287-9"></a>results</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="ajuste-de-modelos.html#cb287-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Model =</span> <span class="fu">c</span>(<span class="st">&quot;Modelo completo muestra entrenamiento&quot;</span>,</span>
+<span id="cb287-2"><a href="ajuste-de-modelos.html#cb287-2" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;Modelo seleccionado muestra entrenamiento&quot;</span>,</span>
+<span id="cb287-3"><a href="ajuste-de-modelos.html#cb287-3" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;Modelo completo muestra validación&quot;</span>,</span>
+<span id="cb287-4"><a href="ajuste-de-modelos.html#cb287-4" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;Modelo seleccionado muestra validación&quot;</span>),</span>
+<span id="cb287-5"><a href="ajuste-de-modelos.html#cb287-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">RMSE =</span> <span class="fu">round</span>(<span class="fu">c</span>(<span class="fu">rmse</span>(<span class="fu">fitted</span>(full_model), train<span class="sc">$</span>Salary),</span>
+<span id="cb287-6"><a href="ajuste-de-modelos.html#cb287-6" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">rmse</span>(<span class="fu">fitted</span>(select_model), train<span class="sc">$</span>Salary),</span>
+<span id="cb287-7"><a href="ajuste-de-modelos.html#cb287-7" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">rmse</span>(<span class="fu">predict</span>(full_model, <span class="at">newdata =</span> test), test<span class="sc">$</span>Salary), </span>
+<span id="cb287-8"><a href="ajuste-de-modelos.html#cb287-8" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">rmse</span>(<span class="fu">predict</span>(select_model, <span class="at">newdata =</span> test), test<span class="sc">$</span>Salary)),<span class="dv">1</span>))</span>
+<span id="cb287-9"><a href="ajuste-de-modelos.html#cb287-9" aria-hidden="true" tabindex="-1"></a>results</span></code></pre></div>
 <pre><code>                                      Model  RMSE
 1     Modelo completo muestra entrenamiento 297.8
 2 Modelo seleccionado muestra entrenamiento 326.1
@@ -735,14 +738,14 @@ y</p>
 <p>donde <span class="math inline">\(\hat \beta_{ij}\)</span> y <span class="math inline">\(s_{ij}\)</span> son las estimaciones y los errores estándar del resultado imputado <span class="math inline">\(i^{th}\)</span> para <span class="math inline">\(i=1, ..., m\)</span> y para el parámetro <span class="math inline">\(j^{th}\)</span>.</p>
 <p>La imputación múltiple funciona mejor para la descripción que para la predicción, y probablemente sea preferible a la imputación única si sólo queremos estimar coeficientes. Para la predicción (como es el caso del aprendizaje automático), normalmente bastará con utilizar imputación simple.</p>
 <p>Demostraremos métodos de imputación utilizando los datos de Carseats del paquete ISLR. Este es un conjunto de datos simulado de ventas de asientos de coche, del cual eliminaremos aleatoriamente el 25% de las observaciones usando la función <code>prodNA ()</code> en el paquete <code>missForest</code> (teniendo cuidado de dejar la variable de resultado, Sales, intacta).</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="ajuste-de-modelos.html#cb289-1"></a><span class="kw">library</span>(missForest)</span>
-<span id="cb289-2"><a href="ajuste-de-modelos.html#cb289-2"></a><span class="kw">data</span>(Carseats)</span>
-<span id="cb289-3"><a href="ajuste-de-modelos.html#cb289-3"></a><span class="kw">levels</span>(Carseats<span class="op">$</span>ShelveLoc) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Bad&quot;</span>,<span class="st">&quot;Medium&quot;</span>,<span class="st">&quot;Good&quot;</span>) <span class="co"># Reordenamos los niveles de la variable</span></span>
-<span id="cb289-4"><a href="ajuste-de-modelos.html#cb289-4"></a></span>
-<span id="cb289-5"><a href="ajuste-de-modelos.html#cb289-5"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb289-6"><a href="ajuste-de-modelos.html#cb289-6"></a>carseats_missx &lt;-<span class="st"> </span><span class="kw">prodNA</span>(Carseats[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">noNA=</span>.<span class="dv">25</span>)</span>
-<span id="cb289-7"><a href="ajuste-de-modelos.html#cb289-7"></a>carseats_miss &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">Sales=</span>Carseats[, <span class="dv">1</span>], carseats_missx)</span>
-<span id="cb289-8"><a href="ajuste-de-modelos.html#cb289-8"></a><span class="kw">glimpse</span>(carseats_miss)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="ajuste-de-modelos.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(missForest)</span>
+<span id="cb289-2"><a href="ajuste-de-modelos.html#cb289-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Carseats)</span>
+<span id="cb289-3"><a href="ajuste-de-modelos.html#cb289-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(Carseats<span class="sc">$</span>ShelveLoc) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Bad&quot;</span>,<span class="st">&quot;Medium&quot;</span>,<span class="st">&quot;Good&quot;</span>) <span class="co"># Reordenamos los niveles de la variable</span></span>
+<span id="cb289-4"><a href="ajuste-de-modelos.html#cb289-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb289-5"><a href="ajuste-de-modelos.html#cb289-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb289-6"><a href="ajuste-de-modelos.html#cb289-6" aria-hidden="true" tabindex="-1"></a>carseats_missx <span class="ot">&lt;-</span> <span class="fu">prodNA</span>(Carseats[,<span class="sc">-</span><span class="dv">1</span>], <span class="at">noNA=</span>.<span class="dv">25</span>)</span>
+<span id="cb289-7"><a href="ajuste-de-modelos.html#cb289-7" aria-hidden="true" tabindex="-1"></a>carseats_miss <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Sales=</span>Carseats[, <span class="dv">1</span>], carseats_missx)</span>
+<span id="cb289-8"><a href="ajuste-de-modelos.html#cb289-8" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(carseats_miss)</span></code></pre></div>
 <pre><code>Rows: 400
 Columns: 11
 $ Sales       &lt;dbl&gt; 9.50, 11.22, 10.06, 7.40, 4.15, 10.81, 6.63, 11.85, 6.54,...
@@ -757,7 +760,7 @@ $ Education   &lt;dbl&gt; NA, 10, 12, NA, 13, 16, 15, 10, 10, 17, 10, 13, NA, NA
 $ Urban       &lt;fct&gt; NA, Yes, Yes, Yes, Yes, NA, NA, Yes, No, NA, NA, Yes, Yes...
 $ US          &lt;fct&gt; Yes, Yes, Yes, Yes, No, Yes, No, Yes, NA, Yes, Yes, Yes, ...</code></pre>
 <p>Ahora faltan muchas observaciones. Cuando ajustamos un modelo de regresión para la variable Sales observamos que <code>lm ()</code> analiza casos completos y se estima un modelo basado en un subconjunto muy pequeño de datos.</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="ajuste-de-modelos.html#cb291-1"></a><span class="kw">display</span>(<span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>CompPrice <span class="op">+</span><span class="st"> </span>Income <span class="op">+</span><span class="st"> </span>Advertising <span class="op">+</span><span class="st"> </span>Population <span class="op">+</span><span class="st"> </span>Price, <span class="dt">data =</span> carseats_miss))</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="ajuste-de-modelos.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(<span class="fu">lm</span>(Sales <span class="sc">~</span> CompPrice <span class="sc">+</span> Income <span class="sc">+</span> Advertising <span class="sc">+</span> Population <span class="sc">+</span> Price, <span class="at">data =</span> carseats_miss))</span></code></pre></div>
 <pre><code>lm(formula = Sales ~ CompPrice + Income + Advertising + Population + 
     Price, data = carseats_miss)
             coef.est coef.se
@@ -771,87 +774,87 @@ Price       -0.11     0.01
 n = 93, k = 6
 residual sd = 2.06, R-Squared = 0.59</code></pre>
 <p>Sólo tenemos 93 observaciones de las 400 originales! Demostraremos la imputación múltiple usando la función <code>mice ()</code> de la librería <code>mice</code>.</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="ajuste-de-modelos.html#cb293-1"></a><span class="kw">library</span>(mice)</span>
-<span id="cb293-2"><a href="ajuste-de-modelos.html#cb293-2"></a><span class="kw">names</span>(Carseats)</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="ajuste-de-modelos.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
+<span id="cb293-2"><a href="ajuste-de-modelos.html#cb293-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Carseats)</span></code></pre></div>
 <pre><code> [1] &quot;Sales&quot;       &quot;CompPrice&quot;   &quot;Income&quot;      &quot;Advertising&quot; &quot;Population&quot; 
  [6] &quot;Price&quot;       &quot;ShelveLoc&quot;   &quot;Age&quot;         &quot;Education&quot;   &quot;Urban&quot;      
 [11] &quot;US&quot;         </code></pre>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="ajuste-de-modelos.html#cb295-1"></a>carseats_imp &lt;-<span class="st"> </span><span class="kw">mice</span>(carseats_miss, <span class="dt">printFlag =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="ajuste-de-modelos.html#cb295-1" aria-hidden="true" tabindex="-1"></a>carseats_imp <span class="ot">&lt;-</span> <span class="fu">mice</span>(carseats_miss, <span class="at">printFlag =</span> F)</span></code></pre></div>
 <p>El objeto <code>carseats_imp</code> incluye (entre muchas otras cosas) <span class="math inline">\(m\)</span> conjuntos de datos imputados (la configuración predeterminada es <span class="math inline">\(m\)</span> = 5). Los conjuntos de datos imputados difieren porque las imputaciones se extraen aleatoriamente de distribuciones de valores plausibles. Podemos visualizar la variabilidad de los predictores en estos conjuntos de datos imputados usando la función <code>densityplot ()</code>.</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="ajuste-de-modelos.html#cb296-1"></a><span class="kw">library</span>(lattice)</span>
-<span id="cb296-2"><a href="ajuste-de-modelos.html#cb296-2"></a><span class="kw">densityplot</span>(carseats_imp)</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="ajuste-de-modelos.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
+<span id="cb296-2"><a href="ajuste-de-modelos.html#cb296-2" aria-hidden="true" tabindex="-1"></a><span class="fu">densityplot</span>(carseats_imp)</span></code></pre></div>
 <p><img src="fig/unnamed-chunk-86-1.png" width="672" /></p>
 <p>Las líneas azules continuas representan la distribución real de los predictores, mientras que las líneas rojas muestran las distribuciones imputadas. El siguiente paso es usar estos conjuntos de datos imputados para promediar los <span class="math inline">\(\beta\)</span>s y los SE utilizando la función <code>pool ()</code> de la librería <code>mice</code>.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="ajuste-de-modelos.html#cb297-1"></a>carseats_model_imp &lt;-<span class="st"> </span><span class="kw">with</span>(<span class="dt">data =</span> carseats_imp, </span>
-<span id="cb297-2"><a href="ajuste-de-modelos.html#cb297-2"></a>     <span class="dt">exp =</span> <span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>CompPrice <span class="op">+</span><span class="st"> </span>Income <span class="op">+</span><span class="st"> </span>Advertising <span class="op">+</span><span class="st"> </span>Population <span class="op">+</span><span class="st"> </span>Price))</span>
-<span id="cb297-3"><a href="ajuste-de-modelos.html#cb297-3"></a>mi &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">pool</span>(carseats_model_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="ajuste-de-modelos.html#cb297-1" aria-hidden="true" tabindex="-1"></a>carseats_model_imp <span class="ot">&lt;-</span> <span class="fu">with</span>(<span class="at">data =</span> carseats_imp, </span>
+<span id="cb297-2"><a href="ajuste-de-modelos.html#cb297-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">exp =</span> <span class="fu">lm</span>(Sales <span class="sc">~</span> CompPrice <span class="sc">+</span> Income <span class="sc">+</span> Advertising <span class="sc">+</span> Population <span class="sc">+</span> Price))</span>
+<span id="cb297-3"><a href="ajuste-de-modelos.html#cb297-3" aria-hidden="true" tabindex="-1"></a>mi <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">pool</span>(carseats_model_imp))</span></code></pre></div>
 <p>Estos coeficientes son similares a los del modelo anterior ajustado utilizando los datos no imputados, pero deberían estar más cerca de los valores de la población porque, en lugar de simplemente eliminar los casos incompletos, utiliza información de distribución para hacer suposiciones fundamentadas sobre los datos faltantes. La imputación múltiple funciona mejor para fines de descripción — estimar coeficientes para informar en un artículo académico, por ejemplo — pero usarla para predecir nuevos datos es incómodo o imposible, por las siguientes razones:</p>
 <ul>
 <li>Si los nuevos datos están completos, podemos utilizar las estimaciones de coeficientes derivadas de la imputación múltiple en una ecuación de regresión para la predicción. Pero esto es difícil ya que hay que hacerlo manualmente. Usamos los datos originales de Carseats como ilustración.</li>
 </ul>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="ajuste-de-modelos.html#cb298-1"></a>preds &lt;-<span class="st"> </span>mi[<span class="dv">1</span>, <span class="dv">2</span>] <span class="op">+</span><span class="st"> </span></span>
-<span id="cb298-2"><a href="ajuste-de-modelos.html#cb298-2"></a><span class="st">  </span>mi[<span class="dv">2</span>, <span class="dv">2</span>]<span class="op">*</span>Carseats<span class="op">$</span>CompPrice <span class="op">+</span></span>
-<span id="cb298-3"><a href="ajuste-de-modelos.html#cb298-3"></a><span class="st">  </span>mi[<span class="dv">3</span>, <span class="dv">2</span>]<span class="op">*</span>Carseats<span class="op">$</span>Income <span class="op">+</span></span>
-<span id="cb298-4"><a href="ajuste-de-modelos.html#cb298-4"></a><span class="st">  </span>mi[<span class="dv">4</span>, <span class="dv">2</span>]<span class="op">*</span>Carseats<span class="op">$</span>Advertising <span class="op">+</span></span>
-<span id="cb298-5"><a href="ajuste-de-modelos.html#cb298-5"></a><span class="st">  </span>mi[<span class="dv">5</span>, <span class="dv">2</span>]<span class="op">*</span>Carseats<span class="op">$</span>Population <span class="op">+</span></span>
-<span id="cb298-6"><a href="ajuste-de-modelos.html#cb298-6"></a><span class="st">  </span>mi[<span class="dv">6</span>, <span class="dv">2</span>]<span class="op">*</span>Carseats<span class="op">$</span>Price</span>
-<span id="cb298-7"><a href="ajuste-de-modelos.html#cb298-7"></a>  </span>
-<span id="cb298-8"><a href="ajuste-de-modelos.html#cb298-8"></a>   </span>
-<span id="cb298-9"><a href="ajuste-de-modelos.html#cb298-9"></a><span class="kw">head</span>(preds)</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="ajuste-de-modelos.html#cb298-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> mi[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">+</span> </span>
+<span id="cb298-2"><a href="ajuste-de-modelos.html#cb298-2" aria-hidden="true" tabindex="-1"></a>  mi[<span class="dv">2</span>, <span class="dv">2</span>]<span class="sc">*</span>Carseats<span class="sc">$</span>CompPrice <span class="sc">+</span></span>
+<span id="cb298-3"><a href="ajuste-de-modelos.html#cb298-3" aria-hidden="true" tabindex="-1"></a>  mi[<span class="dv">3</span>, <span class="dv">2</span>]<span class="sc">*</span>Carseats<span class="sc">$</span>Income <span class="sc">+</span></span>
+<span id="cb298-4"><a href="ajuste-de-modelos.html#cb298-4" aria-hidden="true" tabindex="-1"></a>  mi[<span class="dv">4</span>, <span class="dv">2</span>]<span class="sc">*</span>Carseats<span class="sc">$</span>Advertising <span class="sc">+</span></span>
+<span id="cb298-5"><a href="ajuste-de-modelos.html#cb298-5" aria-hidden="true" tabindex="-1"></a>  mi[<span class="dv">5</span>, <span class="dv">2</span>]<span class="sc">*</span>Carseats<span class="sc">$</span>Population <span class="sc">+</span></span>
+<span id="cb298-6"><a href="ajuste-de-modelos.html#cb298-6" aria-hidden="true" tabindex="-1"></a>  mi[<span class="dv">6</span>, <span class="dv">2</span>]<span class="sc">*</span>Carseats<span class="sc">$</span>Price</span>
+<span id="cb298-7"><a href="ajuste-de-modelos.html#cb298-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb298-8"><a href="ajuste-de-modelos.html#cb298-8" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb298-9"><a href="ajuste-de-modelos.html#cb298-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(preds)</span></code></pre></div>
 <pre><code>[1]  8.989509 10.150578  9.645498  8.405464  7.306136 12.735945</code></pre>
 <ul>
 <li>Si los nuevos datos no están completos, entonces estos coeficientes imputados son inútiles para predecir en filas con observaciones faltantes. Esto, por ejemplo, es el resultado de intentar predecir utilizando los datos con observaciones faltantes.</li>
 </ul>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="ajuste-de-modelos.html#cb300-1"></a>preds &lt;-<span class="st"> </span>mi[<span class="dv">1</span>, <span class="dv">2</span>] <span class="op">+</span><span class="st"> </span></span>
-<span id="cb300-2"><a href="ajuste-de-modelos.html#cb300-2"></a><span class="st">  </span>mi[<span class="dv">2</span>, <span class="dv">2</span>]<span class="op">*</span>carseats_miss<span class="op">$</span>CompPrice <span class="op">+</span></span>
-<span id="cb300-3"><a href="ajuste-de-modelos.html#cb300-3"></a><span class="st">  </span>mi[<span class="dv">3</span>, <span class="dv">2</span>]<span class="op">*</span>carseats_miss<span class="op">$</span>Income <span class="op">+</span></span>
-<span id="cb300-4"><a href="ajuste-de-modelos.html#cb300-4"></a><span class="st">  </span>mi[<span class="dv">4</span>, <span class="dv">2</span>]<span class="op">*</span>carseats_miss<span class="op">$</span>Advertising <span class="op">+</span></span>
-<span id="cb300-5"><a href="ajuste-de-modelos.html#cb300-5"></a><span class="st">  </span>mi[<span class="dv">5</span>, <span class="dv">2</span>]<span class="op">*</span>carseats_miss<span class="op">$</span>Population <span class="op">+</span></span>
-<span id="cb300-6"><a href="ajuste-de-modelos.html#cb300-6"></a><span class="st">  </span>mi[<span class="dv">6</span>, <span class="dv">2</span>]<span class="op">*</span>carseats_miss<span class="op">$</span>Price</span>
-<span id="cb300-7"><a href="ajuste-de-modelos.html#cb300-7"></a>  </span>
-<span id="cb300-8"><a href="ajuste-de-modelos.html#cb300-8"></a>   </span>
-<span id="cb300-9"><a href="ajuste-de-modelos.html#cb300-9"></a><span class="kw">head</span>(preds)</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="ajuste-de-modelos.html#cb300-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> mi[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">+</span> </span>
+<span id="cb300-2"><a href="ajuste-de-modelos.html#cb300-2" aria-hidden="true" tabindex="-1"></a>  mi[<span class="dv">2</span>, <span class="dv">2</span>]<span class="sc">*</span>carseats_miss<span class="sc">$</span>CompPrice <span class="sc">+</span></span>
+<span id="cb300-3"><a href="ajuste-de-modelos.html#cb300-3" aria-hidden="true" tabindex="-1"></a>  mi[<span class="dv">3</span>, <span class="dv">2</span>]<span class="sc">*</span>carseats_miss<span class="sc">$</span>Income <span class="sc">+</span></span>
+<span id="cb300-4"><a href="ajuste-de-modelos.html#cb300-4" aria-hidden="true" tabindex="-1"></a>  mi[<span class="dv">4</span>, <span class="dv">2</span>]<span class="sc">*</span>carseats_miss<span class="sc">$</span>Advertising <span class="sc">+</span></span>
+<span id="cb300-5"><a href="ajuste-de-modelos.html#cb300-5" aria-hidden="true" tabindex="-1"></a>  mi[<span class="dv">5</span>, <span class="dv">2</span>]<span class="sc">*</span>carseats_miss<span class="sc">$</span>Population <span class="sc">+</span></span>
+<span id="cb300-6"><a href="ajuste-de-modelos.html#cb300-6" aria-hidden="true" tabindex="-1"></a>  mi[<span class="dv">6</span>, <span class="dv">2</span>]<span class="sc">*</span>carseats_miss<span class="sc">$</span>Price</span>
+<span id="cb300-7"><a href="ajuste-de-modelos.html#cb300-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb300-8"><a href="ajuste-de-modelos.html#cb300-8" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb300-9"><a href="ajuste-de-modelos.html#cb300-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(preds)</span></code></pre></div>
 <pre><code>[1]  8.989509        NA        NA        NA  7.306136 12.735945</code></pre>
 <ul>
 <li><p>La imputación múltiple, por lo tanto, no resuelve el principal problema al que nos enfrentamos a menudo con los datos faltantes, que es que, aunque hayamos ajustado con éxito un modelo en nuestros datos, el conjunto de validación también puede tener observaciones faltantes, y nuestras predicciones utilizando esos datos puede no poder realizarse.</p></li>
 <li><p>Podríamos usar uno de los conjuntos de datos imputados, pero entonces ya no estamos haciendo imputación múltiple sino imputación simple. En ese momento, los métodos disponibles en el paquete <code>mice</code> ya no ofrecen ninguna ventaja especial sobre los de los paquetes <code>caret</code> y <code>missForest</code>. De hecho, podrían ser peores ya que la función <code>mice ()</code> no fue diseñado para producir la mejor imputación individual, sino más bien una gama de imputaciones plausibles.</p></li>
 </ul>
 <p>Usando <code>caret</code>, podemos hacer una imputación simple usando knnImpute, medianImpute o bagImpute. Estos métodos solo funcionan para variables numéricas, por lo que crearemos una función personalizada para convertir los factores — Shelveloc, Urban y US — en números enteros. (Al usar el conjunto de datos imputados para la regresión, podríamos dejar estas variables como números enteros, siempre que los valores enteros correspondan a los niveles de los factores).</p>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="ajuste-de-modelos.html#cb302-1"></a>make_df_numeric &lt;-<span class="st"> </span><span class="cf">function</span>(df){</span>
-<span id="cb302-2"><a href="ajuste-de-modelos.html#cb302-2"></a>  <span class="kw">data.frame</span>(<span class="kw">sapply</span>(df, <span class="cf">function</span>(x) <span class="kw">as.numeric</span>(x)))</span>
-<span id="cb302-3"><a href="ajuste-de-modelos.html#cb302-3"></a>  }</span>
-<span id="cb302-4"><a href="ajuste-de-modelos.html#cb302-4"></a>carseats_miss_num &lt;-<span class="st"> </span><span class="kw">make_df_numeric</span>(carseats_miss)</span>
-<span id="cb302-5"><a href="ajuste-de-modelos.html#cb302-5"></a>med_imp &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">preProcess</span>(carseats_miss_num, <span class="dt">method =</span> <span class="kw">c</span>(<span class="st">&quot;medianImpute&quot;</span>)), carseats_miss_num)</span>
-<span id="cb302-6"><a href="ajuste-de-modelos.html#cb302-6"></a>knn_imp &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">preProcess</span>(carseats_miss_num, <span class="dt">method =</span> <span class="kw">c</span>(<span class="st">&quot;knnImpute&quot;</span>)), carseats_miss_num)</span>
-<span id="cb302-7"><a href="ajuste-de-modelos.html#cb302-7"></a>bag_imp &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">preProcess</span>(carseats_miss_num, <span class="dt">method =</span> <span class="kw">c</span>(<span class="st">&quot;bagImpute&quot;</span>)), carseats_miss_num)</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="ajuste-de-modelos.html#cb302-1" aria-hidden="true" tabindex="-1"></a>make_df_numeric <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb302-2"><a href="ajuste-de-modelos.html#cb302-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="fu">sapply</span>(df, <span class="cf">function</span>(x) <span class="fu">as.numeric</span>(x)))</span>
+<span id="cb302-3"><a href="ajuste-de-modelos.html#cb302-3" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb302-4"><a href="ajuste-de-modelos.html#cb302-4" aria-hidden="true" tabindex="-1"></a>carseats_miss_num <span class="ot">&lt;-</span> <span class="fu">make_df_numeric</span>(carseats_miss)</span>
+<span id="cb302-5"><a href="ajuste-de-modelos.html#cb302-5" aria-hidden="true" tabindex="-1"></a>med_imp <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="fu">preProcess</span>(carseats_miss_num, <span class="at">method =</span> <span class="fu">c</span>(<span class="st">&quot;medianImpute&quot;</span>)), carseats_miss_num)</span>
+<span id="cb302-6"><a href="ajuste-de-modelos.html#cb302-6" aria-hidden="true" tabindex="-1"></a>knn_imp <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="fu">preProcess</span>(carseats_miss_num, <span class="at">method =</span> <span class="fu">c</span>(<span class="st">&quot;knnImpute&quot;</span>)), carseats_miss_num)</span>
+<span id="cb302-7"><a href="ajuste-de-modelos.html#cb302-7" aria-hidden="true" tabindex="-1"></a>bag_imp <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="fu">preProcess</span>(carseats_miss_num, <span class="at">method =</span> <span class="fu">c</span>(<span class="st">&quot;bagImpute&quot;</span>)), carseats_miss_num)</span></code></pre></div>
 <p>El paquete <code>missForest</code> ofrece otra solución de imputación única, que es más simple que las funciones de <code>caret</code> porque maneja datos categóricos automáticamente. Si bien <code>missForest</code> funciona bien para conjuntos de datos pequeños y proporciona imputaciones de buena calidad, es muy lento en conjuntos de datos grandes. De hecho, lo mismo ocurrirá con la función <code>bagImpute ()</code> de <code>caret</code>. En tales casos, podría tener sentido usar la función <code>medianImpute ()</code> de <code>caret</code> en su lugar que es muy rápida.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="ajuste-de-modelos.html#cb303-1"></a>mf_imp &lt;-<span class="st"> </span><span class="kw">missForest</span>(carseats_miss, <span class="dt">verbose =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="ajuste-de-modelos.html#cb303-1" aria-hidden="true" tabindex="-1"></a>mf_imp <span class="ot">&lt;-</span> <span class="fu">missForest</span>(carseats_miss, <span class="at">verbose =</span> F)</span></code></pre></div>
 <pre><code>  missForest iteration 1 in progress...done!
   missForest iteration 2 in progress...done!
   missForest iteration 3 in progress...done!
   missForest iteration 4 in progress...done!
   missForest iteration 5 in progress...done!</code></pre>
 <p>Comparemos los errores asociados con estos diferentes métodos de imputación. Podemos hacer esto porque, habiendo creado las observaciones faltantes en primer lugar, podemos comparar las observaciones imputadas con las observaciones verdaderas calculando la suma de los cuadrados de la diferencia. Para las imputaciones usando <code>mice ()</code> calculamos los errores para cada uno de los 5 conjuntos de datos imputados. Los resultados de <code>knnImpute ()</code> no son comparables porque la función automáticamente centra y escala las variables y los hemos omitido.</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="ajuste-de-modelos.html#cb305-1"></a>comparison &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Method =</span> <span class="kw">c</span>(<span class="st">&quot;mice 1&quot;</span>, </span>
-<span id="cb305-2"><a href="ajuste-de-modelos.html#cb305-2"></a>                                    <span class="st">&quot;mice 2&quot;</span>, </span>
-<span id="cb305-3"><a href="ajuste-de-modelos.html#cb305-3"></a>                                    <span class="st">&quot;mice 3&quot;</span>, </span>
-<span id="cb305-4"><a href="ajuste-de-modelos.html#cb305-4"></a>                                    <span class="st">&quot;mice 4&quot;</span>, </span>
-<span id="cb305-5"><a href="ajuste-de-modelos.html#cb305-5"></a>                                    <span class="st">&quot;mice 5&quot;</span>, </span>
-<span id="cb305-6"><a href="ajuste-de-modelos.html#cb305-6"></a>                                    <span class="st">&quot;medianImpute&quot;</span>, </span>
-<span id="cb305-7"><a href="ajuste-de-modelos.html#cb305-7"></a>                                    <span class="st">&quot;bagImpute&quot;</span>, </span>
-<span id="cb305-8"><a href="ajuste-de-modelos.html#cb305-8"></a>                                    <span class="st">&quot;missForest&quot;</span>),</span>
-<span id="cb305-9"><a href="ajuste-de-modelos.html#cb305-9"></a>                         <span class="dt">RSS =</span> <span class="kw">c</span>(<span class="kw">rss</span>(<span class="kw">make_df_numeric</span>(<span class="kw">complete</span>(carseats_imp, <span class="dv">1</span>)), <span class="kw">make_df_numeric</span>(Carseats)),</span>
-<span id="cb305-10"><a href="ajuste-de-modelos.html#cb305-10"></a>                                 <span class="kw">rss</span>(<span class="kw">make_df_numeric</span>(<span class="kw">complete</span>(carseats_imp, <span class="dv">2</span>)), <span class="kw">make_df_numeric</span>(Carseats)),</span>
-<span id="cb305-11"><a href="ajuste-de-modelos.html#cb305-11"></a>                                 <span class="kw">rss</span>(<span class="kw">make_df_numeric</span>(<span class="kw">complete</span>(carseats_imp, <span class="dv">3</span>)), <span class="kw">make_df_numeric</span>(Carseats)),</span>
-<span id="cb305-12"><a href="ajuste-de-modelos.html#cb305-12"></a>                                 <span class="kw">rss</span>(<span class="kw">make_df_numeric</span>(<span class="kw">complete</span>(carseats_imp, <span class="dv">4</span>)), <span class="kw">make_df_numeric</span>(Carseats)),</span>
-<span id="cb305-13"><a href="ajuste-de-modelos.html#cb305-13"></a>                                 <span class="kw">rss</span>(<span class="kw">make_df_numeric</span>(<span class="kw">complete</span>(carseats_imp, <span class="dv">5</span>)), <span class="kw">make_df_numeric</span>(Carseats)),</span>
-<span id="cb305-14"><a href="ajuste-de-modelos.html#cb305-14"></a>                                 <span class="kw">rss</span>(med_imp, <span class="kw">make_df_numeric</span>(Carseats)),</span>
-<span id="cb305-15"><a href="ajuste-de-modelos.html#cb305-15"></a>                                 <span class="kw">rss</span>(bag_imp, <span class="kw">make_df_numeric</span>(Carseats)),</span>
-<span id="cb305-16"><a href="ajuste-de-modelos.html#cb305-16"></a>                                 <span class="kw">rss</span>(<span class="kw">make_df_numeric</span>(mf_imp<span class="op">$</span>ximp), <span class="kw">make_df_numeric</span>(Carseats))))</span>
-<span id="cb305-17"><a href="ajuste-de-modelos.html#cb305-17"></a>                         </span>
-<span id="cb305-18"><a href="ajuste-de-modelos.html#cb305-18"></a>comparison <span class="op">%&gt;%</span></span>
-<span id="cb305-19"><a href="ajuste-de-modelos.html#cb305-19"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">RSS =</span> <span class="kw">round</span>(RSS)) <span class="op">%&gt;%</span></span>
-<span id="cb305-20"><a href="ajuste-de-modelos.html#cb305-20"></a><span class="st">  </span><span class="kw">arrange</span>(RSS)</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="ajuste-de-modelos.html#cb305-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Method =</span> <span class="fu">c</span>(<span class="st">&quot;mice 1&quot;</span>, </span>
+<span id="cb305-2"><a href="ajuste-de-modelos.html#cb305-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;mice 2&quot;</span>, </span>
+<span id="cb305-3"><a href="ajuste-de-modelos.html#cb305-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;mice 3&quot;</span>, </span>
+<span id="cb305-4"><a href="ajuste-de-modelos.html#cb305-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;mice 4&quot;</span>, </span>
+<span id="cb305-5"><a href="ajuste-de-modelos.html#cb305-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;mice 5&quot;</span>, </span>
+<span id="cb305-6"><a href="ajuste-de-modelos.html#cb305-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;medianImpute&quot;</span>, </span>
+<span id="cb305-7"><a href="ajuste-de-modelos.html#cb305-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;bagImpute&quot;</span>, </span>
+<span id="cb305-8"><a href="ajuste-de-modelos.html#cb305-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;missForest&quot;</span>),</span>
+<span id="cb305-9"><a href="ajuste-de-modelos.html#cb305-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">RSS =</span> <span class="fu">c</span>(<span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">1</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb305-10"><a href="ajuste-de-modelos.html#cb305-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">2</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb305-11"><a href="ajuste-de-modelos.html#cb305-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">3</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb305-12"><a href="ajuste-de-modelos.html#cb305-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">4</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb305-13"><a href="ajuste-de-modelos.html#cb305-13" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">5</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb305-14"><a href="ajuste-de-modelos.html#cb305-14" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(med_imp, <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb305-15"><a href="ajuste-de-modelos.html#cb305-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(bag_imp, <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb305-16"><a href="ajuste-de-modelos.html#cb305-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(mf_imp<span class="sc">$</span>ximp), <span class="fu">make_df_numeric</span>(Carseats))))</span>
+<span id="cb305-17"><a href="ajuste-de-modelos.html#cb305-17" aria-hidden="true" tabindex="-1"></a>                         </span>
+<span id="cb305-18"><a href="ajuste-de-modelos.html#cb305-18" aria-hidden="true" tabindex="-1"></a>comparison <span class="sc">%&gt;%</span></span>
+<span id="cb305-19"><a href="ajuste-de-modelos.html#cb305-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">RSS =</span> <span class="fu">round</span>(RSS)) <span class="sc">%&gt;%</span></span>
+<span id="cb305-20"><a href="ajuste-de-modelos.html#cb305-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(RSS)</span></code></pre></div>
 <pre><code>        Method     RSS
 1   missForest 2489418
 2 medianImpute 2538059
@@ -900,6 +903,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -920,6 +924,10 @@ gitbook.start({
 "text": null
 },
 "download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

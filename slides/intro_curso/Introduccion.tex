@@ -1,0 +1,388 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Introducción al curso},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%% change fontsize of R code
+\let\oldShaded\Shaded
+\let\endoldShaded\endShaded
+\renewenvironment{Shaded}{\fontsize{10}{9}\oldShaded}{\endoldShaded}
+
+%% change fontsize of output
+\let\oldverbatim\verbatim
+\let\endoldverbatim\endverbatim
+%\renewenvironment{verbatim}{\tiny\oldverbatim}{\endoldverbatim}
+\renewenvironment{verbatim}{\fontsize{6.5}{7.5}\selectfont\oldverbatim}{\endoldverbatim}
+
+%% pages
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\usepackage{enumerate} 
+\usepackage{multicol} 
+\usepackage{lipsum}
+\usepackage{multirow}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Introducción al curso}
+\subtitle{Aprendizaje automático 1}
+\author{Juan R Gonzalez\\
+\href{mailto:juanr.gonzalez@isglobal.org}{\nolinkurl{juanr.gonzalez@isglobal.org}}}
+\date{}
+\institute{UAB - Department of Mathematics\\
+BRGE - Bioinformatics Research Group in Epidemiology\\
+ISGlobal - Barcelona Institute for Global Health\\
+\url{http://brge.isglobal.org}}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Introducción}
+\protect\hypertarget{introducciuxf3n}{}
+\includegraphics{fig/intro_AA}
+
+Sobre 2010 DL obtuvo una gran popularidad ya que ha permitido acercarse
+a sitemas de inteligencia artificial de forma más eficientge que ML. Los
+tres términos están ligados y cada uno forma una parte esencial de los
+otros. DL permite llevar a cabo ML, que en última instancia permite la
+AI.
+
+No obstante, es más fácil aprender ML como herramienta para AI. En el
+siguente curso (AA\_2) veréis cómo llevar a cabo técnicas de DL.
+\end{frame}
+
+\begin{frame}{Introducción}
+\protect\hypertarget{introducciuxf3n-1}{}
+\includegraphics{fig/ML_DL}
+\end{frame}
+
+\begin{frame}{Ejemplos}
+\protect\hypertarget{ejemplos}{}
+\includegraphics[width=0.5\textwidth,height=\textheight]{fig/ojos_rojos}
+
+\includegraphics{fig/deep_learning}
+\end{frame}
+
+\begin{frame}{Ejemplos}
+\protect\hypertarget{ejemplos-1}{}
+\includegraphics{fig/ML}
+\end{frame}
+
+\begin{frame}[fragile]{Temario}
+\protect\hypertarget{temario}{}
+\begin{itemize}
+\tightlist
+\item
+  Introducción a Tidyverse
+\item
+  Introducción al aprendizaje automático
+\item
+  Regresión lineal y logística (nomogramas)
+\item
+  Dealing with Big Data in R (MapReduce)
+\item
+  La librería \texttt{caret}
+\item
+  Pasos previos a la creación de un modelo predictivo y medidas de
+  validación
+\item
+  Métodos de aprendizaje automático
+
+  \begin{itemize}
+  \tightlist
+  \item
+    K-vecinos más cercanos (KNN)
+  \item
+    Análisis discriminante lineal (LDA)
+  \item
+    Máquinas de soporte vectorial (SVM)
+  \item
+    Árboles de decisión (clasificación, regresión, bagged trees, random
+    forest)
+  \item
+    Boosting (AdaBoost, GBM básico y estocástico, XGBoost)
+  \end{itemize}
+\item
+  Respuesta no balanceada
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Logística del curso}
+\protect\hypertarget{loguxedstica-del-curso}{}
+\begin{itemize}
+\item
+  Clases lunes de 15:00 a 17:00 (teoría) + 17:00 a 19:00 (prácticas)
+\item
+  Clases presenciales aula C3/028
+\item
+  Clases no presenciales (bookdown + algunas grabadas). Tendrá que
+  hacerse las preguntas de autoevaluación el mismo día antes de las
+  21:00 horas (no negociable)
+\item
+  Cada semana habrá una práctica similar a lo que se ha explicado en
+  clase, pero con otros datos reales. También habrán ``Data analysis
+  Challenges''
+\item
+  Cada semana se pondrá una noticia con lo que se va a hacer cada lunes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Material del curso}
+\protect\hypertarget{material-del-curso}{}
+\begin{itemize}
+\item
+  No seguiremos ningún libro de texto porque estamos tratando muchos
+  temas que están muy bien explicados en varios libros y, sobre todo, en
+  materiales públicos. He creado un bookdown accesible en
+  \url{https://isglobal-brge.github.io/Aprendizaje_Automatico_1/} que
+  describe el contenido del curso
+\item
+  Habrán presentaciones en diapositivas que estarán disponibles en el
+  Moodle de la asignatura
+\item
+  Habrán link a material opcional
+\item
+  Las actividades en el Moodle estarán clasificadas como:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    P: puntuable (se evaluará según el contenido)
+  \item
+    P2: puntuable (no se evaluará si está bien - se dará la solución: 10
+    entregado, 5 entregado no completo, 0 no entregado)\\
+  \item
+    I: información
+  \item
+    O: opcional
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Metodología}
+\protect\hypertarget{metodologuxeda}{}
+\begin{itemize}
+\item
+  Clase de teoria: se definen y se explican los diferentes métodos con
+  sus características particulares y se muestran ejemplos concretos.
+\item
+  Clase de prácticas: se trabajan los métodos explicados en clase de
+  teoria con diversos conjuntos de datos utilizando el lenguaje de
+  programación R.
+\end{itemize}
+
+Se considera que, para cada hora de teoria y prácticas, el alumno deberá
+dedicar una hora adicional para la preparación y/o finalización de la
+sesión.
+
+\begin{itemize}
+\tightlist
+\item
+  Preguntas de auto-evaluación que se llevarán a cabo en el Moodle que
+  servirá para consolidar los conocimientos aprendidos en las sesiones
+  teóricas y que en las sesiones no presenciales se tendrá que hacer el
+  mismo día antes de las 21:00.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Evaluación}
+\protect\hypertarget{evaluaciuxf3n}{}
+La nota final se basará en las siguientes notas ponderadas
+
+\begin{itemize}
+\tightlist
+\item
+  50\% Nota Examen final (tipo test - conceptos)
+\item
+  40\% Nota Prácticas (compuesta por prácticas semanales más una
+  práctica final)
+\item
+  10\% Nota preguntas de Auto-Evaluación
+\end{itemize}
+
+Se requerirá tener un 5 en el Examen final para aprobar la asignatura,
+en caso contrario el alumno deberá presentarse al examen de
+recuperación. Existe la posibilidad de aprobar el examen con un 4.5 si
+el alumno ha participado de forma activa en el foro de la asignatura.
+\end{frame}
+
+\begin{frame}{Fechas de Evaluación}
+\protect\hypertarget{fechas-de-evaluaciuxf3n}{}
+\begin{itemize}
+\tightlist
+\item
+  Examen parcial (no hay)
+\item
+  Examen final (fecha por saber)
+\item
+  Recuperación Examen 70\% (fecha por saber) + Notas de prácticas 30\%
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Session info}
+\protect\hypertarget{session-info}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sessionInfo}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+R version 4.0.2 (2020-06-22)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 18362)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=Spanish_Spain.1252  LC_CTYPE=Spanish_Spain.1252   
+[3] LC_MONETARY=Spanish_Spain.1252 LC_NUMERIC=C                  
+[5] LC_TIME=Spanish_Spain.1252    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+ [1] compiler_4.0.2  magrittr_1.5    tools_4.0.2     htmltools_0.5.0
+ [5] yaml_2.2.1      stringi_1.4.6   rmarkdown_2.3   knitr_1.29     
+ [9] stringr_1.4.0   xfun_0.16       digest_0.6.25   rlang_0.4.7    
+[13] evaluate_0.14  
+\end{verbatim}
+\end{frame}
+
+\end{document}
