@@ -99,7 +99,7 @@ También habrán "Data analysis Challenges"
 
 - Clase de teoria: se definen y se explican los diferentes métodos con sus características particulares y se muestran ejemplos concretos.
 
-- Clase de prácticas: se trabajan los métodos explicados en clase de teoria con diversos conjuntos de datos utilizando el lenguaje de programación R.
+- Clase de prácticas: se trabajan los métodos explicados en clase de teoria con diversos conjuntos de datos utilizando el lenguaje de programación R. Las resupuestas (R script) estarán disponibles una vez finalizado el plazo de entrega.
 
 Se considera que, para cada hora de teoria y prácticas, el alumno deberá dedicar una hora adicional para la preparación y/o finalización de la sesión. 
 
@@ -124,6 +124,11 @@ Se requerirá tener un 5 en el Examen final para aprobar la asignatura, en caso 
 * Examen parcial (no hay)
 * Examen final (fecha por saber)
 * Recuperación Examen 70% (fecha por saber) + Notas de prácticas 30% 
+
+
+## Cronograma
+
+![](fig/Cronograma_2021_2022.png)
 
 
 ## Session info
