@@ -430,7 +430,7 @@ Los siguientes ejercicios os ayudarán a trabajar con las tareas más básicas d
 
 - Selecciona al azar (y visualiza) la mitad de las observaciones de 'mycars' [PISTA: busca una función de `dplyr` que haga esto de forma sencilla (similar a `sample` en R tradicional).
 
-- Crea un objeto 'mycars_s' que contenga de la 10ª a la 35ª fila de mycars [PISTA: considera usar la función `slice()`].
+- Crea un objeto 'mycars_s' que contenga de la 10ª a la 32ª fila de mycars [PISTA: considera usar la función `slice()` o alguna similar].
 
 - Visualiza el objeto 'mycars_s' sin duplicados [PISTA: considera usar la función `distinct()`].
 
