@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-09-16" />
+<meta name="date" content="2021-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -190,7 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-como-estimación-de-una-media-condicional"><i class="fa fa-check"></i><b>4.7</b> Regresión como estimación de una media condicional</a></li>
 <li class="chapter" data-level="4.8" data-path="regresión-lineal.html"><a href="regresión-lineal.html#la-función-de-regresión"><i class="fa fa-check"></i><b>4.8</b> La función de regresión</a></li>
 <li class="chapter" data-level="4.9" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-no-paramétrica-de-la-función-de-regresión-regresión-knn"><i class="fa fa-check"></i><b>4.9</b> Estimación no paramétrica de la función de regresión: regresión KNN</a></li>
-<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a></li>
+<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ejercicio"><i class="fa fa-check"></i><b>4.10.1</b> Ejercicio</a></li>
+</ul></li>
 <li class="chapter" data-level="4.11" data-path="regresión-lineal.html"><a href="regresión-lineal.html#predicción"><i class="fa fa-check"></i><b>4.11</b> Predicción</a></li>
 <li class="chapter" data-level="4.12" data-path="regresión-lineal.html"><a href="regresión-lineal.html#inferencia-en-el-contexto-de-regresión"><i class="fa fa-check"></i><b>4.12</b> Inferencia en el contexto de regresión</a></li>
 <li class="chapter" data-level="4.13" data-path="regresión-lineal.html"><a href="regresión-lineal.html#asunciones-de-un-modelo-de-regresión"><i class="fa fa-check"></i><b>4.13</b> Asunciones de un modelo de regresión</a></li>
@@ -353,10 +356,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Otros proyectos similares a <code>caret</code> son: <a href="https://mlr3.mlr-org.com/">mlr3</a>, <a href="https://h2o-release.s3.amazonaws.com/h2o/rel-lambert/5/docs-website/index.html#">H20</a> que veremos en este curso y que está orientado a Big Data y <a href="https://www.tidymodels.org/">tidymodels</a> que forma parte del mundo <code>tydiverse</code>.</p>
 <p>Hay muchas funciones de modelado diferentes en R. Algunas tienen una sintaxis diferente para el entrenamiento y / o predicción de modelos. El paquete comenzó como una forma de proporcionar una interfaz uniforme para las funciones mismas, así como una forma de estandarizar las tareas comunes (como el ajuste de parámetros y la importancia de las variables).</p>
 <p>La instalación de <code>caret</code> puede ser muy pesada ya que tiene muchas dependencias (todos las librerías que implementan los métodos de aprendizaje automático que se quieran usar). Es por ello que se recomienda instalar la versión mínima y luego ir instalando aquellas librerías que se requieran en función del método que se pretenda usar.</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="caret.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;caret&quot;</span>, </span>
-<span id="cb437-2"><a href="caret.html#cb437-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dependencies =</span> <span class="fu">c</span>(<span class="st">&quot;Depends&quot;</span>, <span class="st">&quot;Suggests&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="caret.html#cb438-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;caret&quot;</span>, </span>
+<span id="cb438-2"><a href="caret.html#cb438-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dependencies =</span> <span class="fu">c</span>(<span class="st">&quot;Depends&quot;</span>, <span class="st">&quot;Suggests&quot;</span>))</span></code></pre></div>
 <p>Luego la librería se carga de la forma usual</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="caret.html#cb438-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="caret.html#cb439-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code></pre></div>
 <p>En este capítulo veremos como realizar:</p>
 <ul>
 <li>Preprocesamiento (con <code>caret</code> y con <code>recipes</code>)</li>
@@ -377,9 +380,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Además, se trata de unos datos cuyas variables pueden entenderse de forma sencilla. Es intuitivo comprender el impacto que puede tener la edad, el sexo, la localización del camarote… en la supervivencia de los pasajeros. Este aspecto es muy importante a al hora de crear buenos modelos predictivos, ya que, comprender a fondo el problema que se pretende modelar es lo más importante para lograr buenos resultados.</p>
 <p>La librería <code>titanic</code> contiene un conjunto de datos de entrenamiento y otros de test facilitados en la plataforma <a href="https://www.kaggle.com/c/titanic/data">Kaggle</a> que contiene muchos conjuntos de datos para trabajar con problemas de aprendizaje automático. Los datos test sólo sirven para tener otro conjunto de datos en los que evaluar el modelo, pero <em>no tienen la variable resultado</em> por lo que no se pueden usar para crear el modelo predictivo (Kaggle los usa para ver quién proponer el mejor modelo).</p>
 <p>Los datos se cargan de forma habitual</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="caret.html#cb439-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb439-2"><a href="caret.html#cb439-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(titanic)</span>
-<span id="cb439-3"><a href="caret.html#cb439-3" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> titanic_train</span></code></pre></div>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="caret.html#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb440-2"><a href="caret.html#cb440-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(titanic)</span>
+<span id="cb440-3"><a href="caret.html#cb440-3" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> titanic_train</span></code></pre></div>
 <div id="pre-procesado" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> Pre-procesado</h2>
 <div id="creación-de-variables" class="section level3" number="8.1.1">
@@ -406,48 +409,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Embarked: puerto en el que embarcó el pasajero.</p></li>
 </ul>
 <p>Por ello, empezaremos comprobando que cada variable se ha almacenado con el tipo de valor que le corresponde, es decir, que las variables numéricas sean números y las cualitativas factor, character o booleanas. Recordemos que en R, cuando la variable es cualitativa, conviene convertirla en variable factor para que las funciones que implementan muchos de los métodos estadísticos que queremos usar puedan analizarlas de forma conveniente (i.e. dummy variables).</p>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="caret.html#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(datos)</span></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="caret.html#cb441-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(datos)</span></code></pre></div>
 <pre><code>Rows: 891
 Columns: 12
-$ PassengerId &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17...
-$ Survived    &lt;int&gt; 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, ...
-$ Pclass      &lt;int&gt; 3, 1, 3, 1, 3, 3, 1, 3, 3, 2, 3, 1, 3, 3, 3, 2, 3, 2, 3, ...
-$ Name        &lt;chr&gt; &quot;Braund, Mr. Owen Harris&quot;, &quot;Cumings, Mrs. John Bradley (F...
-$ Sex         &lt;chr&gt; &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;ma...
-$ Age         &lt;dbl&gt; 22, 38, 26, 35, 35, NA, 54, 2, 27, 14, 4, 58, 20, 39, 14,...
-$ SibSp       &lt;int&gt; 1, 1, 0, 1, 0, 0, 0, 3, 0, 1, 1, 0, 0, 1, 0, 0, 4, 0, 1, ...
-$ Parch       &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 0, 0, 5, 0, 0, 1, 0, 0, ...
-$ Ticket      &lt;chr&gt; &quot;A/5 21171&quot;, &quot;PC 17599&quot;, &quot;STON/O2. 3101282&quot;, &quot;113803&quot;, &quot;3...
-$ Fare        &lt;dbl&gt; 7.2500, 71.2833, 7.9250, 53.1000, 8.0500, 8.4583, 51.8625...
-$ Cabin       &lt;chr&gt; &quot;&quot;, &quot;C85&quot;, &quot;&quot;, &quot;C123&quot;, &quot;&quot;, &quot;&quot;, &quot;E46&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;G6&quot;, &quot;...
-$ Embarked    &lt;chr&gt; &quot;S&quot;, &quot;C&quot;, &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, &quot;Q&quot;, &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, &quot;C&quot;, &quot;S&quot;, &quot;S...</code></pre>
+$ PassengerId &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 1~
+$ Survived    &lt;int&gt; 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, ~
+$ Pclass      &lt;int&gt; 3, 1, 3, 1, 3, 3, 1, 3, 3, 2, 3, 1, 3, 3, 3, 2, 3, 2, 3, 3, ~
+$ Name        &lt;chr&gt; &quot;Braund, Mr. Owen Harris&quot;, &quot;Cumings, Mrs. John Bradley (Flor~
+$ Sex         &lt;chr&gt; &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;~
+$ Age         &lt;dbl&gt; 22, 38, 26, 35, 35, NA, 54, 2, 27, 14, 4, 58, 20, 39, 14, 55~
+$ SibSp       &lt;int&gt; 1, 1, 0, 1, 0, 0, 0, 3, 0, 1, 1, 0, 0, 1, 0, 0, 4, 0, 1, 0, ~
+$ Parch       &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 0, 0, 5, 0, 0, 1, 0, 0, 0, ~
+$ Ticket      &lt;chr&gt; &quot;A/5 21171&quot;, &quot;PC 17599&quot;, &quot;STON/O2. 3101282&quot;, &quot;113803&quot;, &quot;3734~
+$ Fare        &lt;dbl&gt; 7.2500, 71.2833, 7.9250, 53.1000, 8.0500, 8.4583, 51.8625, 2~
+$ Cabin       &lt;chr&gt; &quot;&quot;, &quot;C85&quot;, &quot;&quot;, &quot;C123&quot;, &quot;&quot;, &quot;&quot;, &quot;E46&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;G6&quot;, &quot;C10~
+$ Embarked    &lt;chr&gt; &quot;S&quot;, &quot;C&quot;, &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, &quot;Q&quot;, &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, &quot;C&quot;, &quot;S&quot;, &quot;S&quot;, ~</code></pre>
 <p>Observamos que el único caso en el que el tipo de valor no se corresponde con la naturaleza de la variable es <code>Survived</code>. Aunque esta variable está codificada como 1 si el pasajero sobrevivió y 0 si murió, no conviene almacenarla en formato numérico, ya que esto puede llevar a errores como el de tratar de calcular su media. Para evitar este tipo de problemas, se recodifica la variable para que sus dos posibles niveles sean <code>Si/No</code> y se convierte a factor. Además, esta re-codificación también ayudará a que los resultados y gráficas se puedan leer fácilmente.</p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="caret.html#cb442-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos, <span class="at">Survived =</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(Survived <span class="sc">==</span> <span class="dv">1</span>, <span class="st">&quot;Si&quot;</span>, <span class="st">&quot;No&quot;</span>)))</span>
-<span id="cb442-2"><a href="caret.html#cb442-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>Survived)</span></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="caret.html#cb443-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos, <span class="at">Survived =</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(Survived <span class="sc">==</span> <span class="dv">1</span>, <span class="st">&quot;Si&quot;</span>, <span class="st">&quot;No&quot;</span>)))</span>
+<span id="cb443-2"><a href="caret.html#cb443-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>Survived)</span></code></pre></div>
 <pre><code>
  No  Si 
 549 342 </code></pre>
 <p>La variable Pclass es cualitativa ordinal, es decir, toma distintos valores cualitativos ordenados siguiendo una escala establecida, aunque no es necesario que el intervalo entre mediciones sea uniforme. Por ejemplo, se asume que la diferencia entre primera y segunda clase es menor que la diferencia entre primera y tercera, sin embargo, las diferencias entre primera-segunda y segunda-tercera no tiene por qué ser iguales. Es por ello que es preferible guardar esta variable como factor</p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="caret.html#cb444-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos, <span class="at">Pclass =</span> <span class="fu">as.factor</span>(Pclass))</span>
-<span id="cb444-2"><a href="caret.html#cb444-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>Pclass)</span></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="caret.html#cb445-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos, <span class="at">Pclass =</span> <span class="fu">as.factor</span>(Pclass))</span>
+<span id="cb445-2"><a href="caret.html#cb445-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>Pclass)</span></code></pre></div>
 <pre><code>
   1   2   3 
 216 184 491 </code></pre>
 <p>Las variables SibSp y Parch son cuantitativas discretas, pueden tomar únicamente determinados valores numéricos. En este caso, al tratarse de número de personas (familiares e hijos), solo pueden ser números enteros. No existe una norma clara sobre como almacenar estas variables. Para este estudio exploratorio, dado que solo toman unos pocos valores, se decide almacenarlas como factor.</p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="caret.html#cb446-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos, <span class="at">SibSp =</span> <span class="fu">as.factor</span>(SibSp))</span>
-<span id="cb446-2"><a href="caret.html#cb446-2" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos, <span class="at">Parch =</span> <span class="fu">as.factor</span>(Parch))</span></code></pre></div>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="caret.html#cb447-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos, <span class="at">SibSp =</span> <span class="fu">as.factor</span>(SibSp))</span>
+<span id="cb447-2"><a href="caret.html#cb447-2" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos, <span class="at">Parch =</span> <span class="fu">as.factor</span>(Parch))</span></code></pre></div>
 <p>Las variables Sex y Embarked también se convierten a tipo factor.</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="caret.html#cb447-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos, <span class="at">Sex =</span> <span class="fu">as.factor</span>(Sex))</span>
-<span id="cb447-2"><a href="caret.html#cb447-2" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos, <span class="at">Embarked =</span> <span class="fu">as.factor</span>(Embarked))</span></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="caret.html#cb448-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos, <span class="at">Sex =</span> <span class="fu">as.factor</span>(Sex))</span>
+<span id="cb448-2"><a href="caret.html#cb448-2" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos, <span class="at">Embarked =</span> <span class="fu">as.factor</span>(Embarked))</span></code></pre></div>
 <p>Las variables Cabin y Embarked contienen "". Esto consideraría a este valor como una categoría, por lo que habría que hacer</p>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="caret.html#cb448-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>Cabin[datos<span class="sc">$</span>Cabin<span class="sc">==</span><span class="st">&quot;&quot;</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb448-2"><a href="caret.html#cb448-2" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>Embarked[datos<span class="sc">$</span>Embarked<span class="sc">==</span><span class="st">&quot;&quot;</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="caret.html#cb449-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>Cabin[datos<span class="sc">$</span>Cabin<span class="sc">==</span><span class="st">&quot;&quot;</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb449-2"><a href="caret.html#cb449-2" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>Embarked[datos<span class="sc">$</span>Embarked<span class="sc">==</span><span class="st">&quot;&quot;</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
 </div>
 <div id="predictores-con-poca-variabilidad" class="section level3" number="8.1.2">
 <h3><span class="header-section-number">8.1.2</span> Predictores con poca variabilidad</h3>
 <p>En algunas situaciones, el mecanismo de generación de datos puede crear predictores que solo tienen un valor único (es decir, un “predictor de varianza cero”). Para la mayoría de modelos de aprendizaje automático esto puede provocar que el modelo se bloquee o que el ajuste sea inestable.</p>
 <p>De manera similar, los predictores categóricos pueden tener alguna categoría que ocurren con frecuencias muy bajas. Por ejemplo, esto ocurre con la variable número de hijos en el barco</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="caret.html#cb449-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>Parch)</span></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="caret.html#cb450-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>Parch)</span></code></pre></div>
 <pre><code>
   0   1   2   3   4   5   6 
 678 118  80   5   4   5   1 </code></pre>
@@ -460,8 +463,8 @@ $ Embarked    &lt;chr&gt; &quot;S&quot;, &quot;C&quot;, &quot;S&quot;, &quot;S&q
 <p>Si la relación de frecuencia es mayor que un umbral preestablecido y el porcentaje de valor único es menor que un umbral, podríamos considerar que un predictor tiene una varianza cercana a cero.</p>
 <p>No queremos identificar falsamente los datos que tienen baja granularidad pero están distribuidos de manera uniforme, como los datos de una distribución uniforme discreta. El uso de ambos criterios no debería detectar falsamente tales predictores.</p>
 <p>Para realizar estos cálculos podemos usar la función <code>nearZeroVar ()</code> (el argumento saveMetrics se puede usar para mostrar los detalles y - por defecto el valor predeterminado es FALSE):</p>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="caret.html#cb451-1" aria-hidden="true" tabindex="-1"></a>nzv <span class="ot">&lt;-</span> <span class="fu">nearZeroVar</span>(datos, <span class="at">saveMetrics=</span> <span class="cn">TRUE</span>)</span>
-<span id="cb451-2"><a href="caret.html#cb451-2" aria-hidden="true" tabindex="-1"></a>nzv</span></code></pre></div>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="caret.html#cb452-1" aria-hidden="true" tabindex="-1"></a>nzv <span class="ot">&lt;-</span> <span class="fu">nearZeroVar</span>(datos, <span class="at">saveMetrics=</span> <span class="cn">TRUE</span>)</span>
+<span id="cb452-2"><a href="caret.html#cb452-2" aria-hidden="true" tabindex="-1"></a>nzv</span></code></pre></div>
 <pre><code>            freqRatio percentUnique zeroVar   nzv
 PassengerId  1.000000   100.0000000   FALSE FALSE
 Survived     1.605263     0.2244669   FALSE FALSE
@@ -476,13 +479,13 @@ Fare         1.023810    27.8338945   FALSE FALSE
 Cabin        1.000000    16.4983165   FALSE FALSE
 Embarked     3.833333     0.3367003   FALSE FALSE</code></pre>
 <p>La función <code>nearZeroVar</code> devuelve las posiciones con las variables marcadas como problemáticas. Podríamos crear una base de datos sin variables problemáticas de las siguiente forma:</p>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="caret.html#cb453-1" aria-hidden="true" tabindex="-1"></a>nzv <span class="ot">&lt;-</span> <span class="fu">nearZeroVar</span>(datos)</span>
-<span id="cb453-2"><a href="caret.html#cb453-2" aria-hidden="true" tabindex="-1"></a>nzv</span></code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="caret.html#cb454-1" aria-hidden="true" tabindex="-1"></a>nzv <span class="ot">&lt;-</span> <span class="fu">nearZeroVar</span>(datos)</span>
+<span id="cb454-2"><a href="caret.html#cb454-2" aria-hidden="true" tabindex="-1"></a>nzv</span></code></pre></div>
 <pre><code>integer(0)</code></pre>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="caret.html#cb455-1" aria-hidden="true" tabindex="-1"></a>filteredDatos <span class="ot">&lt;-</span> <span class="fu">select</span>(datos, <span class="sc">-</span><span class="fu">all_of</span>(nzv))</span>
-<span id="cb455-2"><a href="caret.html#cb455-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(datos)</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="caret.html#cb456-1" aria-hidden="true" tabindex="-1"></a>filteredDatos <span class="ot">&lt;-</span> <span class="fu">select</span>(datos, <span class="sc">-</span><span class="fu">all_of</span>(nzv))</span>
+<span id="cb456-2"><a href="caret.html#cb456-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(datos)</span></code></pre></div>
 <pre><code>[1] 891  12</code></pre>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="caret.html#cb457-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(filteredDatos)</span></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="caret.html#cb458-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(filteredDatos)</span></code></pre></div>
 <pre><code>[1] 891  12</code></pre>
 <p>En este caso no hemos filtrado ninguna porque ninguna ha devuelto TRUE en las columnas <code>zeroVar</code> y <code>nzv</code> del objeto <code>nzv</code> cuando indicamos <code>saveMetrics= TRUE</code>.</p>
 </div>
@@ -490,15 +493,15 @@ Embarked     3.833333     0.3367003   FALSE FALSE</code></pre>
 <h3><span class="header-section-number">8.1.3</span> Identificación de predictores correlacionados</h3>
 <p>Algunos de los modelos que vamos a estudiar pueden tratar con predictores correlacionados (como pls). Sin embargo, otros modelos pueden beneficiarse al reducir el nivel de correlación entre los predictores.</p>
 <p>Dada una matriz de correlación, la función <code>findCorrelation()</code> es útil para marcar los predictores que deben ser eliminados por su alta correlación con otros:</p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="caret.html#cb459-1" aria-hidden="true" tabindex="-1"></a>descrCor <span class="ot">&lt;-</span>  <span class="fu">cor</span>(filteredDatos)</span>
-<span id="cb459-2"><a href="caret.html#cb459-2" aria-hidden="true" tabindex="-1"></a>highCorr <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">abs</span>(descrCor[<span class="fu">upper.tri</span>(descrCor)]) <span class="sc">&gt;</span> .<span class="dv">99</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="caret.html#cb460-1" aria-hidden="true" tabindex="-1"></a>descrCor <span class="ot">&lt;-</span>  <span class="fu">cor</span>(filteredDatos)</span>
+<span id="cb460-2"><a href="caret.html#cb460-2" aria-hidden="true" tabindex="-1"></a>highCorr <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">abs</span>(descrCor[<span class="fu">upper.tri</span>(descrCor)]) <span class="sc">&gt;</span> .<span class="dv">99</span>)</span></code></pre></div>
 <p>Dado que en nuestro caso la mayoría de variables son categóricas, no tiene mucho sentido llevar a cabo este pre-proceso. Además, la función <code>cor()</code> sólo puede aplicarse a datos continuos. Existen otras funciones para calcular las correlaciones entre variables categóricas, que deberían implementarse de forma manual.</p>
 </div>
 <div id="centrado-y-escalado-1" class="section level3" number="8.1.4">
 <h3><span class="header-section-number">8.1.4</span> Centrado y escalado</h3>
 <p>En ocasiones es recomendable centrar y escalar las variables continuas para evitar que aquellas vairables con rangos mayores tengan más importancia. Esto se puede hacer de forma sencilla con la función <code>preProcess</code> de la siguiente manera</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="caret.html#cb460-1" aria-hidden="true" tabindex="-1"></a>datosTransf <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(datos, <span class="at">method=</span><span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>))</span>
-<span id="cb460-2"><a href="caret.html#cb460-2" aria-hidden="true" tabindex="-1"></a>datosTransf</span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="caret.html#cb461-1" aria-hidden="true" tabindex="-1"></a>datosTransf <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(datos, <span class="at">method=</span><span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>))</span>
+<span id="cb461-2"><a href="caret.html#cb461-2" aria-hidden="true" tabindex="-1"></a>datosTransf</span></code></pre></div>
 <pre><code>Created from 183 samples and 12 variables
 
 Pre-processing:
@@ -507,8 +510,8 @@ Pre-processing:
   - scaled (3)</code></pre>
 <p>Vemos que este escalado y centrado no se ha aplicado a 7 de las 12 variables ya que no variables categóricas o carácter.</p>
 <p>También podemos transformar nuestros datos para garantizar normalidad utilizando transformacines exponenciales (“expoTrans”), Box-Cox (“BoxCox”) o Yeo-Johnson (“YeoJohnson”). Esto se puede hacer de forma sencilla mediante</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="caret.html#cb462-1" aria-hidden="true" tabindex="-1"></a>preProc <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(datos, <span class="at">method=</span><span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>, <span class="st">&quot;YeoJohnson&quot;</span>))</span>
-<span id="cb462-2"><a href="caret.html#cb462-2" aria-hidden="true" tabindex="-1"></a>preProc</span></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="caret.html#cb463-1" aria-hidden="true" tabindex="-1"></a>preProc <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(datos, <span class="at">method=</span><span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>, <span class="st">&quot;YeoJohnson&quot;</span>))</span>
+<span id="cb463-2"><a href="caret.html#cb463-2" aria-hidden="true" tabindex="-1"></a>preProc</span></code></pre></div>
 <pre><code>Created from 183 samples and 12 variables
 
 Pre-processing:
@@ -548,17 +551,17 @@ Lambda estimates for Yeo-Johnson transformation:
 <div id="imputación-de-valores-ausentes" class="section level4" number="8.1.6.1">
 <h4><span class="header-section-number">8.1.6.1</span> Imputación de valores ausentes</h4>
 <p>Para ver qué cantidad de datos faltantes hay podemos crear la siguiente figura:</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="caret.html#cb464-1" aria-hidden="true" tabindex="-1"></a>datos_long <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">value =</span> <span class="st">&quot;valor&quot;</span>, <span class="sc">-</span>PassengerId)</span>
-<span id="cb464-2"><a href="caret.html#cb464-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb464-3"><a href="caret.html#cb464-3" aria-hidden="true" tabindex="-1"></a>datos_long <span class="sc">%&gt;%</span></span>
-<span id="cb464-4"><a href="caret.html#cb464-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span> </span>
-<span id="cb464-5"><a href="caret.html#cb464-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">porcentaje_NA =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(valor)) <span class="sc">/</span> <span class="fu">length</span>(valor)) <span class="sc">%&gt;%</span></span>
-<span id="cb464-6"><a href="caret.html#cb464-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(variable, <span class="fu">desc</span>(porcentaje_NA)), <span class="at">y =</span> porcentaje_NA)) <span class="sc">+</span></span>
-<span id="cb464-7"><a href="caret.html#cb464-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb464-8"><a href="caret.html#cb464-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje valores ausentes por variable&quot;</span>,</span>
-<span id="cb464-9"><a href="caret.html#cb464-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">&quot;Variable&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Porcentaje NAs&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-10"><a href="caret.html#cb464-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-167-1.png" width="672" /></p>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="caret.html#cb465-1" aria-hidden="true" tabindex="-1"></a>datos_long <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">value =</span> <span class="st">&quot;valor&quot;</span>, <span class="sc">-</span>PassengerId)</span>
+<span id="cb465-2"><a href="caret.html#cb465-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb465-3"><a href="caret.html#cb465-3" aria-hidden="true" tabindex="-1"></a>datos_long <span class="sc">%&gt;%</span></span>
+<span id="cb465-4"><a href="caret.html#cb465-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span> </span>
+<span id="cb465-5"><a href="caret.html#cb465-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">porcentaje_NA =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(valor)) <span class="sc">/</span> <span class="fu">length</span>(valor)) <span class="sc">%&gt;%</span></span>
+<span id="cb465-6"><a href="caret.html#cb465-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(variable, <span class="fu">desc</span>(porcentaje_NA)), <span class="at">y =</span> porcentaje_NA)) <span class="sc">+</span></span>
+<span id="cb465-7"><a href="caret.html#cb465-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb465-8"><a href="caret.html#cb465-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje valores ausentes por variable&quot;</span>,</span>
+<span id="cb465-9"><a href="caret.html#cb465-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">&quot;Variable&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Porcentaje NAs&quot;</span>) <span class="sc">+</span></span>
+<span id="cb465-10"><a href="caret.html#cb465-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-166-1.png" width="672" /></p>
 <p>Podemos observar que las variables “Cabin,” “Age” y “Embarked” contienen valores ausentes. La gran mayoría de algoritmos no aceptan observaciones incompletas, por lo que, cuando el set de datos contiene valores ausentes, se puede:</p>
 <ul>
 <li><p>Eliminar aquellas observaciones que estén incompletas.</p></li>
@@ -568,9 +571,9 @@ Lambda estimates for Yeo-Johnson transformation:
 <p>Las primeras dos opciones, aunque sencillas, suponen perder información. La eliminación de observaciones solo puede aplicarse cuando se dispone de muchas y el porcentaje de registros incompletos es muy bajo. En el caso de eliminar variables, el impacto dependerá de cuanta información aporten dichas variables al modelo.</p>
 <p>Cuando se emplea imputación, es muy importante tener en cuenta el riesgo que se corre al introducir valores en predictores que tengan mucha influencia en el modelo. Supóngase un estudio médico en el que, cuando uno de los predictores es positivo, el modelo predice casi siempre que el paciente está sano. Para un paciente cuyo valor de este predictor se desconoce, el riesgo de que la imputación sea errónea es muy alto, por lo que es preferible obtener una predicción basada únicamente en la información disponible. Esta es otra muestra de la importancia que tiene que el analista conozca el problema al que se enfrenta y pueda así tomar la mejor decisión.</p>
 <p>En el conjunto de datos <code>Titanic</code>, si se eliminan las observaciones incompletas, se pasa de 891 observaciones a 714, por lo que esta no es una opción.</p>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="caret.html#cb465-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(datos)</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="caret.html#cb466-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(datos)</span></code></pre></div>
 <pre><code>[1] 891</code></pre>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="caret.html#cb467-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(datos[<span class="fu">complete.cases</span>(datos),])</span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="caret.html#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(datos[<span class="fu">complete.cases</span>(datos),])</span></code></pre></div>
 <pre><code>[1] 183</code></pre>
 <p>La variable Cabin está ausente para casi un 80% de las observaciones, con un porcentaje tan alto de valores ausentes, no es conveniente imputarla, se excluye directamente del modelo. Esto deja al modelo con dos variables que requieren de imputación: Age y Embarked.</p>
 <p>La imputación es un proceso complejo que debe de realizarse con detenimiento, identificando cuidadosamente qué variables son las adecuadas para cada imputación. La librería <code>recipes</code> permite 4 métodos de imputación distintos:</p>
@@ -582,20 +585,20 @@ Lambda estimates for Yeo-Johnson transformation:
 </ul>
 <p>Como ya vimos en su momento, las librerías <code>Hmisc</code>, <code>missForest</code> y <code>MICE</code> también permiten aplicar otros métodos.</p>
 <p>Se imputa la variable Embarked con el valor C (más frecuene). Como no existe una función <code>step()</code> que haga sustituciones por valores concretos, se realiza una sustitución de forma externa al <code>recipe</code>.</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="caret.html#cb469-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
-<span id="cb469-2"><a href="caret.html#cb469-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Embarked =</span> <span class="fu">replace</span>(Embarked, <span class="fu">is.na</span>(Embarked), <span class="st">&quot;C&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="caret.html#cb470-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
+<span id="cb470-2"><a href="caret.html#cb470-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Embarked =</span> <span class="fu">replace</span>(Embarked, <span class="fu">is.na</span>(Embarked), <span class="st">&quot;C&quot;</span>))</span></code></pre></div>
 <p>La variable Age se imputa con el método bagging empleando todos los otros predictores.</p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="caret.html#cb470-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span>
-<span id="cb470-2"><a href="caret.html#cb470-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Se crea un objeto recipe() con la variable respuesta y los predictores. </span></span>
-<span id="cb470-3"><a href="caret.html#cb470-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Las variables *PassengerId*, *Name*, *Ticket* no parecen aportar información</span></span>
-<span id="cb470-4"><a href="caret.html#cb470-4" aria-hidden="true" tabindex="-1"></a><span class="co"># relevante sobre la supervivencia de los pasajeros. Excluyendo todas estas</span></span>
-<span id="cb470-5"><a href="caret.html#cb470-5" aria-hidden="true" tabindex="-1"></a><span class="co"># variables, se propone como modelo inicial el formado por los predictores:</span></span>
-<span id="cb470-6"><a href="caret.html#cb470-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  Pclass + Sex + SibSp + Parch + Fare + Embarked + Age.</span></span>
-<span id="cb470-7"><a href="caret.html#cb470-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb470-8"><a href="caret.html#cb470-8" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> <span class="fu">recipe</span>(<span class="at">formula =</span> Survived <span class="sc">~</span> Pclass <span class="sc">+</span> Sex <span class="sc">+</span> SibSp <span class="sc">+</span> Parch <span class="sc">+</span></span>
-<span id="cb470-9"><a href="caret.html#cb470-9" aria-hidden="true" tabindex="-1"></a>                                  Fare <span class="sc">+</span> Embarked <span class="sc">+</span> Age,</span>
-<span id="cb470-10"><a href="caret.html#cb470-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span>  datos)</span>
-<span id="cb470-11"><a href="caret.html#cb470-11" aria-hidden="true" tabindex="-1"></a>objeto_recipe</span></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="caret.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span>
+<span id="cb471-2"><a href="caret.html#cb471-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Se crea un objeto recipe() con la variable respuesta y los predictores. </span></span>
+<span id="cb471-3"><a href="caret.html#cb471-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Las variables *PassengerId*, *Name*, *Ticket* no parecen aportar información</span></span>
+<span id="cb471-4"><a href="caret.html#cb471-4" aria-hidden="true" tabindex="-1"></a><span class="co"># relevante sobre la supervivencia de los pasajeros. Excluyendo todas estas</span></span>
+<span id="cb471-5"><a href="caret.html#cb471-5" aria-hidden="true" tabindex="-1"></a><span class="co"># variables, se propone como modelo inicial el formado por los predictores:</span></span>
+<span id="cb471-6"><a href="caret.html#cb471-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  Pclass + Sex + SibSp + Parch + Fare + Embarked + Age.</span></span>
+<span id="cb471-7"><a href="caret.html#cb471-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb471-8"><a href="caret.html#cb471-8" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> <span class="fu">recipe</span>(<span class="at">formula =</span> Survived <span class="sc">~</span> Pclass <span class="sc">+</span> Sex <span class="sc">+</span> SibSp <span class="sc">+</span> Parch <span class="sc">+</span></span>
+<span id="cb471-9"><a href="caret.html#cb471-9" aria-hidden="true" tabindex="-1"></a>                                  Fare <span class="sc">+</span> Embarked <span class="sc">+</span> Age,</span>
+<span id="cb471-10"><a href="caret.html#cb471-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span>  datos)</span>
+<span id="cb471-11"><a href="caret.html#cb471-11" aria-hidden="true" tabindex="-1"></a>objeto_recipe</span></code></pre></div>
 <pre><code>Data Recipe
 
 Inputs:
@@ -603,8 +606,8 @@ Inputs:
       role #variables
    outcome          1
  predictor          7</code></pre>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="caret.html#cb472-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_bagimpute</span>(Age)</span>
-<span id="cb472-2"><a href="caret.html#cb472-2" aria-hidden="true" tabindex="-1"></a>objeto_recipe</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="caret.html#cb473-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_bagimpute</span>(Age)</span>
+<span id="cb473-2"><a href="caret.html#cb473-2" aria-hidden="true" tabindex="-1"></a>objeto_recipe</span></code></pre></div>
 <pre><code>Data Recipe
 
 Inputs:
@@ -626,8 +629,8 @@ Bagged tree imputation for Age</code></pre>
 <li><p>Ratio de frecuencias: ratio entre la frecuencia del valor más común y la frecuencia del segundo valor más común. Este ratio tiende a 1 si las frecuencias están equidistribuidas y a valores grandes cuando la frecuencia del valor mayoritario supera por mucho al resto (el denominador es un número decimal pequeño). Valor por defecto freqCut = 95/5.</p></li>
 <li><p>Porcentaje de valores únicos: número de valores únicos dividido entre el total de muestras (multiplicado por 100). Este porcentaje se aproxima a cero cuanto mayor es la variedad de valores. Valor por defecto uniqueCut = 10.</p></li>
 </ul>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="caret.html#cb474-1" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> <span class="fu">select</span>(Pclass, Sex, SibSp, Parch, Fare, Embarked, Age) <span class="sc">%&gt;%</span></span>
-<span id="cb474-2"><a href="caret.html#cb474-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">nearZeroVar</span>(<span class="at">saveMetrics =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="caret.html#cb475-1" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> <span class="fu">select</span>(Pclass, Sex, SibSp, Parch, Fare, Embarked, Age) <span class="sc">%&gt;%</span></span>
+<span id="cb475-2"><a href="caret.html#cb475-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">nearZeroVar</span>(<span class="at">saveMetrics =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>         freqRatio percentUnique zeroVar   nzv
 Pclass    2.273148     0.3367003   FALSE FALSE
 Sex       1.837580     0.2244669   FALSE FALSE
@@ -637,15 +640,15 @@ Fare      1.023810    27.8338945   FALSE FALSE
 Embarked  3.788235     0.3367003   FALSE FALSE
 Age       1.111111     9.8765432   FALSE FALSE</code></pre>
 <p>Entre los predictores incluidos en el modelo, no se detecta ninguno con varianza cero o próxima a cero. Actualizamos nuestro objeto <code>recipe</code></p>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="caret.html#cb476-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_nzv</span>(<span class="fu">all_predictors</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="caret.html#cb477-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_nzv</span>(<span class="fu">all_predictors</span>())</span></code></pre></div>
 <p>Si bien la eliminación de predictores no informativos podría considerarse un paso propio del proceso de selección de predictores, dado que consiste en un filtrado por varianza, tiene que realizarse antes de estandarizar los datos, ya que después, todos los predictores tienen varianza 1.</p>
 </div>
 <div id="normalización-de-datos" class="section level4" number="8.1.6.3">
 <h4><span class="header-section-number">8.1.6.3</span> Normalización de datos</h4>
 <p>Como ya hemos mencionado anteriormente, también podemos transformar nuestros datos para garantizar normalidad utilizando transformaciones Box-Cox (“BoxCox”) o Yeo-Johnson (“YeoJohnson”). Esto se puede hacer de forma sencilla mediante</p>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="caret.html#cb477-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_BoxCox</span>(<span class="fu">all_numeric</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="caret.html#cb478-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_BoxCox</span>(<span class="fu">all_numeric</span>())</span></code></pre></div>
 <p>ó</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="caret.html#cb478-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_YeoJohnson</span>(<span class="fu">all_numeric</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="caret.html#cb479-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_YeoJohnson</span>(<span class="fu">all_numeric</span>())</span></code></pre></div>
 <p>respectivamente.</p>
 </div>
 <div id="estandarización-y-escalado" class="section level4" number="8.1.6.4">
@@ -656,18 +659,18 @@ Age       1.111111     9.8765432   FALSE FALSE</code></pre>
 <li><p><em>Normalización (estandarización)</em>: consiste en transformar los datos de forma que todos los predictores estén aproximadamente en la misma escala (centrado + escalado).</p></li>
 </ul>
 <p>Con este código se normalizan todas las variables numéricas.</p>
-<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="caret.html#cb479-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_center</span>(<span class="fu">all_numeric</span>())</span>
-<span id="cb479-2"><a href="caret.html#cb479-2" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_scale</span>(<span class="fu">all_numeric</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="caret.html#cb480-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_center</span>(<span class="fu">all_numeric</span>())</span>
+<span id="cb480-2"><a href="caret.html#cb480-2" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_scale</span>(<span class="fu">all_numeric</span>())</span></code></pre></div>
 <p>Nunca se debe estandarizar las variables después de ser binarizadas (ver siguiente sección).</p>
 </div>
 <div id="binarización-de-variables-cuantitativas" class="section level4" number="8.1.6.5">
 <h4><span class="header-section-number">8.1.6.5</span> Binarización de variables cuantitativas</h4>
 <p>La binarización consiste en crear nuevas variables dummy con cada uno de los niveles de las variables cualitativas. Por ejemplo, una variable llamada color que contenga los niveles rojo, verde y azul, se convertirá en tres nuevas variables (color_rojo, color_verde, color_azul), todas con el valor 0 excepto la que coincide con la observación, que toma el valor 1.</p>
 <p>Por defecto, la función <code>step_dummy(all_nominal())</code> binariza todas las variables almacenadas como tipo factor o character. Además, elimina uno de los niveles para evitar redundancias. Volviendo al ejemplo anterior, no es necesario almacenar las tres variables, ya que, si color_rojo y color_verde toman el valor 0, la variable color_azul toma necesariamente el valor 1. Si color_rojo o color_verde toman el valor 1, entonces color_azul es necesariamente 0.</p>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="caret.html#cb480-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_dummy</span>(<span class="fu">all_nominal</span>(),</span>
-<span id="cb480-2"><a href="caret.html#cb480-2" aria-hidden="true" tabindex="-1"></a>                                              <span class="sc">-</span><span class="fu">all_outcomes</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="caret.html#cb481-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_dummy</span>(<span class="fu">all_nominal</span>(),</span>
+<span id="cb481-2"><a href="caret.html#cb481-2" aria-hidden="true" tabindex="-1"></a>                                              <span class="sc">-</span><span class="fu">all_outcomes</span>())</span></code></pre></div>
 <p>Finalmente, esto es lo que hemos preparado para pre-procesar nuestros datos:</p>
-<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="caret.html#cb481-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe</span></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="caret.html#cb482-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe</span></code></pre></div>
 <pre><code>Data Recipe
 
 Inputs:
@@ -691,8 +694,8 @@ Dummy variables from all_nominal(), -all_outcomes()</code></pre>
 <ul>
 <li><em>Paso 1</em>: Se entrena el objeto <code>recipe</code></li>
 </ul>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="caret.html#cb483-1" aria-hidden="true" tabindex="-1"></a>trained_recipe <span class="ot">&lt;-</span> <span class="fu">prep</span>(objeto_recipe, <span class="at">training =</span> datos)</span>
-<span id="cb483-2"><a href="caret.html#cb483-2" aria-hidden="true" tabindex="-1"></a>trained_recipe</span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="caret.html#cb484-1" aria-hidden="true" tabindex="-1"></a>trained_recipe <span class="ot">&lt;-</span> <span class="fu">prep</span>(objeto_recipe, <span class="at">training =</span> datos)</span>
+<span id="cb484-2"><a href="caret.html#cb484-2" aria-hidden="true" tabindex="-1"></a>trained_recipe</span></code></pre></div>
 <pre><code>Data Recipe
 
 Inputs:
@@ -713,131 +716,131 @@ Dummy variables from Pclass, Sex, SibSp, Parch, Embarked [trained]</code></pre>
 <ul>
 <li><em>Paso 2</em>: Se aplican las transformaciones al conjunto de entrenamiento y de test (en nuestro caso sólo tenemos train)</li>
 </ul>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="caret.html#cb485-1" aria-hidden="true" tabindex="-1"></a>datos_train_transf <span class="ot">&lt;-</span> <span class="fu">bake</span>(trained_recipe, <span class="at">new_data =</span> datos)</span>
-<span id="cb485-2"><a href="caret.html#cb485-2" aria-hidden="true" tabindex="-1"></a><span class="co"># datos_test_prep  &lt;- bake(trained_recipe, new_data = datos_test)</span></span>
-<span id="cb485-3"><a href="caret.html#cb485-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb485-4"><a href="caret.html#cb485-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(datos_train_transf)</span></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="caret.html#cb486-1" aria-hidden="true" tabindex="-1"></a>datos_train_transf <span class="ot">&lt;-</span> <span class="fu">bake</span>(trained_recipe, <span class="at">new_data =</span> datos)</span>
+<span id="cb486-2"><a href="caret.html#cb486-2" aria-hidden="true" tabindex="-1"></a><span class="co"># datos_test_prep  &lt;- bake(trained_recipe, new_data = datos_test)</span></span>
+<span id="cb486-3"><a href="caret.html#cb486-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb486-4"><a href="caret.html#cb486-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(datos_train_transf)</span></code></pre></div>
 <pre><code>Rows: 891
 Columns: 21
-$ Fare       &lt;dbl&gt; -0.50216314, 0.78640362, -0.48857985, 0.42049407, -0.48606...
-$ Age        &lt;dbl&gt; -0.57161891, 0.62175764, -0.27327478, 0.39799954, 0.397999...
-$ Survived   &lt;fct&gt; No, Si, Si, Si, No, No, No, No, Si, Si, Si, Si, No, No, No...
-$ Pclass_X2  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0...
-$ Pclass_X3  &lt;dbl&gt; 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1...
-$ Sex_male   &lt;dbl&gt; 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0...
-$ SibSp_X1   &lt;dbl&gt; 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0...
-$ SibSp_X2   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
-$ SibSp_X3   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
-$ SibSp_X4   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0...
-$ SibSp_X5   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
-$ SibSp_X8   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
-$ Parch_X1   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0...
-$ Parch_X2   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
-$ Parch_X3   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
-$ Parch_X4   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
-$ Parch_X5   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0...
-$ Parch_X6   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
-$ Embarked_C &lt;dbl&gt; 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1...
-$ Embarked_Q &lt;dbl&gt; 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0...
-$ Embarked_S &lt;dbl&gt; 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0...</code></pre>
+$ Fare       &lt;dbl&gt; -0.50216314, 0.78640362, -0.48857985, 0.42049407, -0.48606443~
+$ Age        &lt;dbl&gt; -0.57161891, 0.62175764, -0.27327478, 0.39799954, 0.39799954,~
+$ Survived   &lt;fct&gt; No, Si, Si, Si, No, No, No, No, Si, Si, Si, Si, No, No, No, S~
+$ Pclass_X2  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1~
+$ Pclass_X3  &lt;dbl&gt; 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0~
+$ Sex_male   &lt;dbl&gt; 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1~
+$ SibSp_X1   &lt;dbl&gt; 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0~
+$ SibSp_X2   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+$ SibSp_X3   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+$ SibSp_X4   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0~
+$ SibSp_X5   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+$ SibSp_X8   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+$ Parch_X1   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0~
+$ Parch_X2   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+$ Parch_X3   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+$ Parch_X4   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+$ Parch_X5   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0~
+$ Parch_X6   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+$ Embarked_C &lt;dbl&gt; 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0~
+$ Embarked_Q &lt;dbl&gt; 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0~
+$ Embarked_S &lt;dbl&gt; 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1~</code></pre>
 </div>
 </div>
 </div>
 <div id="visualización" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> Visualización</h2>
 <p>Podemos empezar con unos gráficos para las variables continuas de la siguiente forma:</p>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="caret.html#cb487-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb487-2"><a href="caret.html#cb487-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AppliedPredictiveModeling)</span>
-<span id="cb487-3"><a href="caret.html#cb487-3" aria-hidden="true" tabindex="-1"></a><span class="fu">transparentTheme</span>(<span class="at">trans =</span> .<span class="dv">4</span>)</span>
-<span id="cb487-4"><a href="caret.html#cb487-4" aria-hidden="true" tabindex="-1"></a><span class="fu">featurePlot</span>(<span class="at">x =</span> <span class="fu">select</span>(datos_train_transf, <span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Fare&quot;</span>)), </span>
-<span id="cb487-5"><a href="caret.html#cb487-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> datos_train_transf<span class="sc">$</span>Survived, </span>
-<span id="cb487-6"><a href="caret.html#cb487-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="st">&quot;pairs&quot;</span>,</span>
-<span id="cb487-7"><a href="caret.html#cb487-7" aria-hidden="true" tabindex="-1"></a>            <span class="do">## Add a key at the top</span></span>
-<span id="cb487-8"><a href="caret.html#cb487-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">columns =</span> <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="caret.html#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb488-2"><a href="caret.html#cb488-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AppliedPredictiveModeling)</span>
+<span id="cb488-3"><a href="caret.html#cb488-3" aria-hidden="true" tabindex="-1"></a><span class="fu">transparentTheme</span>(<span class="at">trans =</span> .<span class="dv">4</span>)</span>
+<span id="cb488-4"><a href="caret.html#cb488-4" aria-hidden="true" tabindex="-1"></a><span class="fu">featurePlot</span>(<span class="at">x =</span> <span class="fu">select</span>(datos_train_transf, <span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Fare&quot;</span>)), </span>
+<span id="cb488-5"><a href="caret.html#cb488-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> datos_train_transf<span class="sc">$</span>Survived, </span>
+<span id="cb488-6"><a href="caret.html#cb488-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="st">&quot;pairs&quot;</span>,</span>
+<span id="cb488-7"><a href="caret.html#cb488-7" aria-hidden="true" tabindex="-1"></a>            <span class="do">## Add a key at the top</span></span>
+<span id="cb488-8"><a href="caret.html#cb488-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">columns =</span> <span class="dv">2</span>))</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-180-1.png" width="672" /></p>
+<p>ó</p>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="caret.html#cb489-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transparentTheme</span>(<span class="at">trans =</span> .<span class="dv">9</span>)</span>
+<span id="cb489-2"><a href="caret.html#cb489-2" aria-hidden="true" tabindex="-1"></a><span class="fu">featurePlot</span>(<span class="at">x =</span> <span class="fu">select</span>(datos_train_transf, <span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Fare&quot;</span>)), </span>
+<span id="cb489-3"><a href="caret.html#cb489-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> datos_train_transf<span class="sc">$</span>Survived,</span>
+<span id="cb489-4"><a href="caret.html#cb489-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="st">&quot;density&quot;</span>, </span>
+<span id="cb489-5"><a href="caret.html#cb489-5" aria-hidden="true" tabindex="-1"></a>            <span class="do">## Pass in options to xyplot() to </span></span>
+<span id="cb489-6"><a href="caret.html#cb489-6" aria-hidden="true" tabindex="-1"></a>            <span class="do">## make it prettier</span></span>
+<span id="cb489-7"><a href="caret.html#cb489-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">list</span>(<span class="at">relation=</span><span class="st">&quot;free&quot;</span>), </span>
+<span id="cb489-8"><a href="caret.html#cb489-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> <span class="fu">list</span>(<span class="at">relation=</span><span class="st">&quot;free&quot;</span>)), </span>
+<span id="cb489-9"><a href="caret.html#cb489-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">adjust =</span> <span class="fl">1.5</span>, </span>
+<span id="cb489-10"><a href="caret.html#cb489-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">pch =</span> <span class="st">&quot;|&quot;</span>, </span>
+<span id="cb489-11"><a href="caret.html#cb489-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">layout =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>), </span>
+<span id="cb489-12"><a href="caret.html#cb489-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">columns =</span> <span class="dv">2</span>))</span></code></pre></div>
 <p><img src="fig/unnamed-chunk-181-1.png" width="672" /></p>
 <p>ó</p>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="caret.html#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transparentTheme</span>(<span class="at">trans =</span> .<span class="dv">9</span>)</span>
-<span id="cb488-2"><a href="caret.html#cb488-2" aria-hidden="true" tabindex="-1"></a><span class="fu">featurePlot</span>(<span class="at">x =</span> <span class="fu">select</span>(datos_train_transf, <span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Fare&quot;</span>)), </span>
-<span id="cb488-3"><a href="caret.html#cb488-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> datos_train_transf<span class="sc">$</span>Survived,</span>
-<span id="cb488-4"><a href="caret.html#cb488-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="st">&quot;density&quot;</span>, </span>
-<span id="cb488-5"><a href="caret.html#cb488-5" aria-hidden="true" tabindex="-1"></a>            <span class="do">## Pass in options to xyplot() to </span></span>
-<span id="cb488-6"><a href="caret.html#cb488-6" aria-hidden="true" tabindex="-1"></a>            <span class="do">## make it prettier</span></span>
-<span id="cb488-7"><a href="caret.html#cb488-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">list</span>(<span class="at">relation=</span><span class="st">&quot;free&quot;</span>), </span>
-<span id="cb488-8"><a href="caret.html#cb488-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> <span class="fu">list</span>(<span class="at">relation=</span><span class="st">&quot;free&quot;</span>)), </span>
-<span id="cb488-9"><a href="caret.html#cb488-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">adjust =</span> <span class="fl">1.5</span>, </span>
-<span id="cb488-10"><a href="caret.html#cb488-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">pch =</span> <span class="st">&quot;|&quot;</span>, </span>
-<span id="cb488-11"><a href="caret.html#cb488-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">layout =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>), </span>
-<span id="cb488-12"><a href="caret.html#cb488-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">columns =</span> <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="caret.html#cb490-1" aria-hidden="true" tabindex="-1"></a><span class="fu">featurePlot</span>(<span class="at">x =</span> <span class="fu">select</span>(datos_train_transf, <span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Fare&quot;</span>)), </span>
+<span id="cb490-2"><a href="caret.html#cb490-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> datos_train_transf<span class="sc">$</span>Survived, </span>
+<span id="cb490-3"><a href="caret.html#cb490-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="st">&quot;box&quot;</span>, </span>
+<span id="cb490-4"><a href="caret.html#cb490-4" aria-hidden="true" tabindex="-1"></a>            <span class="do">## Pass in options to bwplot() </span></span>
+<span id="cb490-5"><a href="caret.html#cb490-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">y =</span> <span class="fu">list</span>(<span class="at">relation=</span><span class="st">&quot;free&quot;</span>),</span>
+<span id="cb490-6"><a href="caret.html#cb490-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">x =</span> <span class="fu">list</span>(<span class="at">rot =</span> <span class="dv">90</span>)),  </span>
+<span id="cb490-7"><a href="caret.html#cb490-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">layout =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>), </span>
+<span id="cb490-8"><a href="caret.html#cb490-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">columns =</span> <span class="dv">2</span>))</span></code></pre></div>
 <p><img src="fig/unnamed-chunk-182-1.png" width="672" /></p>
-<p>ó</p>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="caret.html#cb489-1" aria-hidden="true" tabindex="-1"></a><span class="fu">featurePlot</span>(<span class="at">x =</span> <span class="fu">select</span>(datos_train_transf, <span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Fare&quot;</span>)), </span>
-<span id="cb489-2"><a href="caret.html#cb489-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> datos_train_transf<span class="sc">$</span>Survived, </span>
-<span id="cb489-3"><a href="caret.html#cb489-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="st">&quot;box&quot;</span>, </span>
-<span id="cb489-4"><a href="caret.html#cb489-4" aria-hidden="true" tabindex="-1"></a>            <span class="do">## Pass in options to bwplot() </span></span>
-<span id="cb489-5"><a href="caret.html#cb489-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">y =</span> <span class="fu">list</span>(<span class="at">relation=</span><span class="st">&quot;free&quot;</span>),</span>
-<span id="cb489-6"><a href="caret.html#cb489-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">x =</span> <span class="fu">list</span>(<span class="at">rot =</span> <span class="dv">90</span>)),  </span>
-<span id="cb489-7"><a href="caret.html#cb489-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">layout =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>), </span>
-<span id="cb489-8"><a href="caret.html#cb489-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">columns =</span> <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-183-1.png" width="672" /></p>
 </div>
 <div id="ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama" class="section level2" number="8.3">
 <h2><span class="header-section-number">8.3</span> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</h2>
 <p>Para illustrar el uso de esta librería con datos reales, usaremos una base de datos que contiene datos de un estudio sobre diagnóstico del cáncer de mama por imagen. Mediante una punción con aguja fina se extrae una muestra del tejido sospechoso de la paciente. La muestra se tiñe para resaltar los núcleos de las células y se determinan los límites exactos de los núcleos. Las variables consideradas corresponden a distintos aspectos de la forma del núcleo. El fichero <code>breast.csv</code> accesible en el Moodle contiene 30 variables explicativas medidas en pacientes cuyos tumores fueron diagnosticados posteriormente como benignos o malignos (variable <code>diagnosis</code> considerada como la variable resultado). Hay 569 observaciones, de las que 357 corresponden a tumores benignos y 212 a tumores malignos. La primera variable (<code>id</code>) corresponde al identificador de paciente. Información adicional sobre estos datos se pueden encontrar <a href="http://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29">aquí</a>.</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="caret.html#cb490-1" aria-hidden="true" tabindex="-1"></a>breast <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">&quot;data/breast.csv&quot;</span>, <span class="at">delim=</span><span class="st">&quot;,&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="caret.html#cb491-1" aria-hidden="true" tabindex="-1"></a>breast <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">&quot;data/breast.csv&quot;</span>, <span class="at">delim=</span><span class="st">&quot;,&quot;</span>)</span></code></pre></div>
 <p>Podemos hacer servir <code>caret</code> o <code>recipes</code> para llevar a cabo todos estos pasos. Lo haremos con <code>recipes</code> que controlamos un poco más qué estamos llevando a cabo en cada momento.</p>
 <p><strong>Paso 1</strong>: Visualizar la información de la que disponemos y ver si las variables están en el formato que corresponde</p>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="caret.html#cb491-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(breast)</span></code></pre></div>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="caret.html#cb492-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(breast)</span></code></pre></div>
 <pre><code>Rows: 569
 Columns: 32
-$ id                      &lt;dbl&gt; 842302, 842517, 84300903, 84348301, 84358402,...
-$ diagnosis               &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, ...
-$ radius_mean             &lt;dbl&gt; 17.990, 20.570, 19.690, 11.420, 20.290, 12.45...
-$ texture_mean            &lt;dbl&gt; 10.38, 17.77, 21.25, 20.38, 14.34, 15.70, 19....
-$ perimeter_mean          &lt;dbl&gt; 122.80, 132.90, 130.00, 77.58, 135.10, 82.57,...
-$ area_mean               &lt;dbl&gt; 1001.0, 1326.0, 1203.0, 386.1, 1297.0, 477.1,...
-$ smoothness_mean         &lt;dbl&gt; 0.11840, 0.08474, 0.10960, 0.14250, 0.10030, ...
-$ compactness_mean        &lt;dbl&gt; 0.27760, 0.07864, 0.15990, 0.28390, 0.13280, ...
-$ concavity_mean          &lt;dbl&gt; 0.30010, 0.08690, 0.19740, 0.24140, 0.19800, ...
-$ `concave points_mean`   &lt;dbl&gt; 0.14710, 0.07017, 0.12790, 0.10520, 0.10430, ...
-$ symmetry_mean           &lt;dbl&gt; 0.2419, 0.1812, 0.2069, 0.2597, 0.1809, 0.208...
-$ fractal_dimension_mean  &lt;dbl&gt; 0.07871, 0.05667, 0.05999, 0.09744, 0.05883, ...
-$ radius_se               &lt;dbl&gt; 1.0950, 0.5435, 0.7456, 0.4956, 0.7572, 0.334...
-$ texture_se              &lt;dbl&gt; 0.9053, 0.7339, 0.7869, 1.1560, 0.7813, 0.890...
-$ perimeter_se            &lt;dbl&gt; 8.589, 3.398, 4.585, 3.445, 5.438, 2.217, 3.1...
-$ area_se                 &lt;dbl&gt; 153.40, 74.08, 94.03, 27.23, 94.44, 27.19, 53...
-$ smoothness_se           &lt;dbl&gt; 0.006399, 0.005225, 0.006150, 0.009110, 0.011...
-$ compactness_se          &lt;dbl&gt; 0.049040, 0.013080, 0.040060, 0.074580, 0.024...
-$ concavity_se            &lt;dbl&gt; 0.05373, 0.01860, 0.03832, 0.05661, 0.05688, ...
-$ `concave points_se`     &lt;dbl&gt; 0.015870, 0.013400, 0.020580, 0.018670, 0.018...
-$ symmetry_se             &lt;dbl&gt; 0.03003, 0.01389, 0.02250, 0.05963, 0.01756, ...
-$ fractal_dimension_se    &lt;dbl&gt; 0.006193, 0.003532, 0.004571, 0.009208, 0.005...
-$ radius_worst            &lt;dbl&gt; 25.38, 24.99, 23.57, 14.91, 22.54, 15.47, 22....
-$ texture_worst           &lt;dbl&gt; 17.33, 23.41, 25.53, 26.50, 16.67, 23.75, 27....
-$ perimeter_worst         &lt;dbl&gt; 184.60, 158.80, 152.50, 98.87, 152.20, 103.40...
-$ area_worst              &lt;dbl&gt; 2019.0, 1956.0, 1709.0, 567.7, 1575.0, 741.6,...
-$ smoothness_worst        &lt;dbl&gt; 0.1622, 0.1238, 0.1444, 0.2098, 0.1374, 0.179...
-$ compactness_worst       &lt;dbl&gt; 0.6656, 0.1866, 0.4245, 0.8663, 0.2050, 0.524...
-$ concavity_worst         &lt;dbl&gt; 0.71190, 0.24160, 0.45040, 0.68690, 0.40000, ...
-$ `concave points_worst`  &lt;dbl&gt; 0.26540, 0.18600, 0.24300, 0.25750, 0.16250, ...
-$ symmetry_worst          &lt;dbl&gt; 0.4601, 0.2750, 0.3613, 0.6638, 0.2364, 0.398...
-$ fractal_dimension_worst &lt;dbl&gt; 0.11890, 0.08902, 0.08758, 0.17300, 0.07678, ...</code></pre>
+$ id                      &lt;dbl&gt; 842302, 842517, 84300903, 84348301, 84358402, 84~
+$ diagnosis               &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;~
+$ radius_mean             &lt;dbl&gt; 17.990, 20.570, 19.690, 11.420, 20.290, 12.450, ~
+$ texture_mean            &lt;dbl&gt; 10.38, 17.77, 21.25, 20.38, 14.34, 15.70, 19.98,~
+$ perimeter_mean          &lt;dbl&gt; 122.80, 132.90, 130.00, 77.58, 135.10, 82.57, 11~
+$ area_mean               &lt;dbl&gt; 1001.0, 1326.0, 1203.0, 386.1, 1297.0, 477.1, 10~
+$ smoothness_mean         &lt;dbl&gt; 0.11840, 0.08474, 0.10960, 0.14250, 0.10030, 0.1~
+$ compactness_mean        &lt;dbl&gt; 0.27760, 0.07864, 0.15990, 0.28390, 0.13280, 0.1~
+$ concavity_mean          &lt;dbl&gt; 0.30010, 0.08690, 0.19740, 0.24140, 0.19800, 0.1~
+$ `concave points_mean`   &lt;dbl&gt; 0.14710, 0.07017, 0.12790, 0.10520, 0.10430, 0.0~
+$ symmetry_mean           &lt;dbl&gt; 0.2419, 0.1812, 0.2069, 0.2597, 0.1809, 0.2087, ~
+$ fractal_dimension_mean  &lt;dbl&gt; 0.07871, 0.05667, 0.05999, 0.09744, 0.05883, 0.0~
+$ radius_se               &lt;dbl&gt; 1.0950, 0.5435, 0.7456, 0.4956, 0.7572, 0.3345, ~
+$ texture_se              &lt;dbl&gt; 0.9053, 0.7339, 0.7869, 1.1560, 0.7813, 0.8902, ~
+$ perimeter_se            &lt;dbl&gt; 8.589, 3.398, 4.585, 3.445, 5.438, 2.217, 3.180,~
+$ area_se                 &lt;dbl&gt; 153.40, 74.08, 94.03, 27.23, 94.44, 27.19, 53.91~
+$ smoothness_se           &lt;dbl&gt; 0.006399, 0.005225, 0.006150, 0.009110, 0.011490~
+$ compactness_se          &lt;dbl&gt; 0.049040, 0.013080, 0.040060, 0.074580, 0.024610~
+$ concavity_se            &lt;dbl&gt; 0.05373, 0.01860, 0.03832, 0.05661, 0.05688, 0.0~
+$ `concave points_se`     &lt;dbl&gt; 0.015870, 0.013400, 0.020580, 0.018670, 0.018850~
+$ symmetry_se             &lt;dbl&gt; 0.03003, 0.01389, 0.02250, 0.05963, 0.01756, 0.0~
+$ fractal_dimension_se    &lt;dbl&gt; 0.006193, 0.003532, 0.004571, 0.009208, 0.005115~
+$ radius_worst            &lt;dbl&gt; 25.38, 24.99, 23.57, 14.91, 22.54, 15.47, 22.88,~
+$ texture_worst           &lt;dbl&gt; 17.33, 23.41, 25.53, 26.50, 16.67, 23.75, 27.66,~
+$ perimeter_worst         &lt;dbl&gt; 184.60, 158.80, 152.50, 98.87, 152.20, 103.40, 1~
+$ area_worst              &lt;dbl&gt; 2019.0, 1956.0, 1709.0, 567.7, 1575.0, 741.6, 16~
+$ smoothness_worst        &lt;dbl&gt; 0.1622, 0.1238, 0.1444, 0.2098, 0.1374, 0.1791, ~
+$ compactness_worst       &lt;dbl&gt; 0.6656, 0.1866, 0.4245, 0.8663, 0.2050, 0.5249, ~
+$ concavity_worst         &lt;dbl&gt; 0.71190, 0.24160, 0.45040, 0.68690, 0.40000, 0.5~
+$ `concave points_worst`  &lt;dbl&gt; 0.26540, 0.18600, 0.24300, 0.25750, 0.16250, 0.1~
+$ symmetry_worst          &lt;dbl&gt; 0.4601, 0.2750, 0.3613, 0.6638, 0.2364, 0.3985, ~
+$ fractal_dimension_worst &lt;dbl&gt; 0.11890, 0.08902, 0.08758, 0.17300, 0.07678, 0.1~</code></pre>
 <p>Vemos que todas las variables excepto nuestro resultado (diagnosis: tipo de tumor) son continuas. Como la variable resultado es character, es recomendable pasarla a factor</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="caret.html#cb493-1" aria-hidden="true" tabindex="-1"></a>breast <span class="ot">&lt;-</span> <span class="fu">mutate</span>(breast, <span class="at">diagnosis=</span><span class="fu">as.factor</span>(diagnosis))</span></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="caret.html#cb494-1" aria-hidden="true" tabindex="-1"></a>breast <span class="ot">&lt;-</span> <span class="fu">mutate</span>(breast, <span class="at">diagnosis=</span><span class="fu">as.factor</span>(diagnosis))</span></code></pre></div>
 <p><strong>Paso 2:</strong> Puesto que no tenemos datos de entrenamiento y test, lo crearemos nosotros</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="caret.html#cb494-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb494-2"><a href="caret.html#cb494-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb494-3"><a href="caret.html#cb494-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb494-4"><a href="caret.html#cb494-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> breast<span class="sc">$</span>diagnosis, <span class="at">p =</span> <span class="fl">0.7</span>, </span>
-<span id="cb494-5"><a href="caret.html#cb494-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">list =</span> <span class="cn">FALSE</span>, <span class="at">times =</span> <span class="dv">1</span>)</span>
-<span id="cb494-6"><a href="caret.html#cb494-6" aria-hidden="true" tabindex="-1"></a>breast_train <span class="ot">&lt;-</span> breast[train, ]</span>
-<span id="cb494-7"><a href="caret.html#cb494-7" aria-hidden="true" tabindex="-1"></a>breast_test  <span class="ot">&lt;-</span> breast[<span class="sc">-</span>train, ]</span></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="caret.html#cb495-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb495-2"><a href="caret.html#cb495-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb495-3"><a href="caret.html#cb495-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb495-4"><a href="caret.html#cb495-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> breast<span class="sc">$</span>diagnosis, <span class="at">p =</span> <span class="fl">0.7</span>, </span>
+<span id="cb495-5"><a href="caret.html#cb495-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">list =</span> <span class="cn">FALSE</span>, <span class="at">times =</span> <span class="dv">1</span>)</span>
+<span id="cb495-6"><a href="caret.html#cb495-6" aria-hidden="true" tabindex="-1"></a>breast_train <span class="ot">&lt;-</span> breast[train, ]</span>
+<span id="cb495-7"><a href="caret.html#cb495-7" aria-hidden="true" tabindex="-1"></a>breast_test  <span class="ot">&lt;-</span> breast[<span class="sc">-</span>train, ]</span></code></pre></div>
 <p><strong>Paso 3:</strong> Crear un objeto <code>recipe</code> con la variable respuesta y los predictores</p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="caret.html#cb495-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span>
-<span id="cb495-2"><a href="caret.html#cb495-2" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> <span class="fu">recipe</span>(<span class="at">formula =</span> diagnosis <span class="sc">~</span> . ,</span>
-<span id="cb495-3"><a href="caret.html#cb495-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span>  breast_train)</span>
-<span id="cb495-4"><a href="caret.html#cb495-4" aria-hidden="true" tabindex="-1"></a><span class="co"># debemos eliminar la variable id que irrelevante para predecir</span></span>
-<span id="cb495-5"><a href="caret.html#cb495-5" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_rm</span>(id)</span>
-<span id="cb495-6"><a href="caret.html#cb495-6" aria-hidden="true" tabindex="-1"></a>objeto_recipe</span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="caret.html#cb496-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span>
+<span id="cb496-2"><a href="caret.html#cb496-2" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> <span class="fu">recipe</span>(<span class="at">formula =</span> diagnosis <span class="sc">~</span> . ,</span>
+<span id="cb496-3"><a href="caret.html#cb496-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span>  breast_train)</span>
+<span id="cb496-4"><a href="caret.html#cb496-4" aria-hidden="true" tabindex="-1"></a><span class="co"># debemos eliminar la variable id que irrelevante para predecir</span></span>
+<span id="cb496-5"><a href="caret.html#cb496-5" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_rm</span>(id)</span>
+<span id="cb496-6"><a href="caret.html#cb496-6" aria-hidden="true" tabindex="-1"></a>objeto_recipe</span></code></pre></div>
 <pre><code>Data Recipe
 
 Inputs:
@@ -850,10 +853,10 @@ Operations:
 
 Delete terms id</code></pre>
 <p><strong>Paso 4:</strong> Veamos si tenemos datos faltantes</p>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="caret.html#cb497-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">is.na</span>(breast))</span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="caret.html#cb498-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">is.na</span>(breast))</span></code></pre></div>
 <pre><code>[1] FALSE</code></pre>
 <p><strong>Paso 5:</strong> Puesto que no hay, podemos pasar al siguiente paso que sería ver si hay que eliminar variablaes con varianza próxima a cero. Empecemos viendo si hay alguna. Puesto que todas son continuas, esto nos facilitará la escritura en R no teniendo que usar la función <code>select ()</code> para seleccionar las varaibles continuas</p>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="caret.html#cb499-1" aria-hidden="true" tabindex="-1"></a>breast_train <span class="sc">%&gt;%</span> <span class="fu">nearZeroVar</span>(<span class="at">saveMetrics =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="caret.html#cb500-1" aria-hidden="true" tabindex="-1"></a>breast_train <span class="sc">%&gt;%</span> <span class="fu">nearZeroVar</span>(<span class="at">saveMetrics =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>                        freqRatio percentUnique zeroVar   nzv
 id                       1.000000   100.0000000   FALSE FALSE
 diagnosis                1.677852     0.5012531   FALSE FALSE
@@ -888,16 +891,16 @@ concave points_worst     2.000000    89.9749373   FALSE FALSE
 symmetry_worst           1.500000    90.7268170   FALSE FALSE
 fractal_dimension_worst  1.000000    96.4912281   FALSE FALSE</code></pre>
 <p>Vemos que tampoco hay ninguna variable que tenga que ser eliminada por este motivo. Este paso no sería necesario realizarlo, pero lo dejamos para que sirva como ejemplo para otros casos</p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="caret.html#cb501-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_nzv</span>(<span class="fu">all_predictors</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="caret.html#cb502-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_nzv</span>(<span class="fu">all_predictors</span>())</span></code></pre></div>
 <p><strong>Paso 6:</strong> El siguiente paso sería eliminar aquellas variables con correlación elevada. El argumento <code>threshold</code> nos permite elegir el grado de correlación que por defecto es 0.9.</p>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="caret.html#cb502-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_corr</span>(<span class="fu">all_predictors</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="caret.html#cb503-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_corr</span>(<span class="fu">all_predictors</span>())</span></code></pre></div>
 <p><strong>Paso 7:</strong> Ahora centraremos y normalizaremos los datos (esto último no tiene porqué sere necesario). Recordamos que también se pueden transformar los datos para garantizar normalidad usando <code>preProcess()</code> con el métodos Box-Cox o Yeo-Johnson de <code>caret()</code>.</p>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="caret.html#cb503-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_center</span>(<span class="fu">all_numeric</span>())</span>
-<span id="cb503-2"><a href="caret.html#cb503-2" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_scale</span>(<span class="fu">all_numeric</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="caret.html#cb504-1" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_center</span>(<span class="fu">all_numeric</span>())</span>
+<span id="cb504-2"><a href="caret.html#cb504-2" aria-hidden="true" tabindex="-1"></a>objeto_recipe <span class="ot">&lt;-</span> objeto_recipe <span class="sc">%&gt;%</span> <span class="fu">step_scale</span>(<span class="fu">all_numeric</span>())</span></code></pre></div>
 <p><strong>Paso 8</strong>: La binarización de variables no es necesario</p>
 <p><strong>Paso 9</strong>: Aprendizaje de las transformaciones de pre-procesado y aplicación a nuestros conjuntos de datos. Empezamos con el entrenamiento</p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="caret.html#cb504-1" aria-hidden="true" tabindex="-1"></a>trained_recipe <span class="ot">&lt;-</span> <span class="fu">prep</span>(objeto_recipe, <span class="at">training =</span> breast_train)</span>
-<span id="cb504-2"><a href="caret.html#cb504-2" aria-hidden="true" tabindex="-1"></a>trained_recipe</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="caret.html#cb505-1" aria-hidden="true" tabindex="-1"></a>trained_recipe <span class="ot">&lt;-</span> <span class="fu">prep</span>(objeto_recipe, <span class="at">training =</span> breast_train)</span>
+<span id="cb505-2"><a href="caret.html#cb505-2" aria-hidden="true" tabindex="-1"></a>trained_recipe</span></code></pre></div>
 <pre><code>Data Recipe
 
 Inputs:
@@ -916,42 +919,42 @@ Correlation filter removed perimeter_mean, perimeter_se, ... [trained]
 Centering for texture_mean, area_mean, ... [trained]
 Scaling for texture_mean, area_mean, ... [trained]</code></pre>
 <p>y continuamos con la aplicación a nuestros datos test y train</p>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="caret.html#cb506-1" aria-hidden="true" tabindex="-1"></a>breast_train_prep <span class="ot">&lt;-</span> <span class="fu">bake</span>(trained_recipe, <span class="at">new_data =</span> breast_train)</span>
-<span id="cb506-2"><a href="caret.html#cb506-2" aria-hidden="true" tabindex="-1"></a>breast_test_prep  <span class="ot">&lt;-</span> <span class="fu">bake</span>(trained_recipe, <span class="at">new_data =</span> breast_test)</span>
-<span id="cb506-3"><a href="caret.html#cb506-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb506-4"><a href="caret.html#cb506-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(breast_train_prep)</span></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="caret.html#cb507-1" aria-hidden="true" tabindex="-1"></a>breast_train_prep <span class="ot">&lt;-</span> <span class="fu">bake</span>(trained_recipe, <span class="at">new_data =</span> breast_train)</span>
+<span id="cb507-2"><a href="caret.html#cb507-2" aria-hidden="true" tabindex="-1"></a>breast_test_prep  <span class="ot">&lt;-</span> <span class="fu">bake</span>(trained_recipe, <span class="at">new_data =</span> breast_test)</span>
+<span id="cb507-3"><a href="caret.html#cb507-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb507-4"><a href="caret.html#cb507-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(breast_train_prep)</span></code></pre></div>
 <pre><code>Rows: 399
 Columns: 20
-$ texture_mean            &lt;dbl&gt; 0.4958449, 0.2881680, -1.1536351, -0.8289907,...
-$ area_mean               &lt;dbl&gt; 1.57356630, -0.76566930, 1.84274018, -0.50508...
-$ smoothness_mean         &lt;dbl&gt; 0.86440333, 3.11247741, 0.22892950, 2.1080187...
-$ compactness_mean        &lt;dbl&gt; 1.04870954, 3.38781648, 0.53750149, 1.2392335...
-$ symmetry_mean           &lt;dbl&gt; 0.917687339, 2.799401020, -0.008914095, 0.981...
-$ fractal_dimension_mean  &lt;dbl&gt; -0.42639724, 4.98925612, -0.59414511, 1.90761...
-$ texture_se              &lt;dbl&gt; -0.80849714, -0.08080732, -0.81953767, -0.604...
-$ area_se                 &lt;dbl&gt; 1.31855202, -0.28815366, 1.32841354, -0.28911...
-$ smoothness_se           &lt;dbl&gt; -0.30223259, 0.65056583, 1.41666726, 0.135539...
-$ compactness_se          &lt;dbl&gt; 0.85265446, 2.83595905, -0.03500649, 0.472884...
-$ concavity_se            &lt;dbl&gt; 0.30900888, 1.07030125, 1.08153957, 0.2424114...
-$ `concave points_se`     &lt;dbl&gt; 1.630026033, 1.284095782, 1.316696538, -0.038...
-$ symmetry_se             &lt;dbl&gt; 0.24097383, 4.68326185, -0.35005507, 0.139278...
-$ fractal_dimension_se    &lt;dbl&gt; 0.392387187, 2.560158937, 0.646704166, 0.6312...
-$ smoothness_worst        &lt;dbl&gt; 0.47944015, 3.24454482, 0.18348094, 1.9465522...
-$ compactness_worst       &lt;dbl&gt; 1.05036897, 3.78488958, -0.30822603, 1.671794...
-$ `concave points_worst`  &lt;dbl&gt; 1.9634318, 2.1840781, 0.7384643, 0.9149814, 0...
-$ symmetry_worst          &lt;dbl&gt; 1.09719973, 5.76429394, -0.82980875, 1.671136...
-$ fractal_dimension_worst &lt;dbl&gt; 0.17926376, 4.82187666, -0.40772078, 2.180446...
-$ diagnosis               &lt;fct&gt; M, M, M, M, M, M, M, M, M, M, M, M, B, B, M, ...</code></pre>
+$ texture_mean            &lt;dbl&gt; 0.4958449, 0.2881680, -1.1536351, -0.8289907, 0.~
+$ area_mean               &lt;dbl&gt; 1.57356630, -0.76566930, 1.84274018, -0.50508607~
+$ smoothness_mean         &lt;dbl&gt; 0.86440333, 3.11247741, 0.22892950, 2.10801878, ~
+$ compactness_mean        &lt;dbl&gt; 1.04870954, 3.38781648, 0.53750149, 1.23923357, ~
+$ symmetry_mean           &lt;dbl&gt; 0.917687339, 2.799401020, -0.008914095, 0.981836~
+$ fractal_dimension_mean  &lt;dbl&gt; -0.42639724, 4.98925612, -0.59414511, 1.90761198~
+$ texture_se              &lt;dbl&gt; -0.80849714, -0.08080732, -0.81953767, -0.604838~
+$ area_se                 &lt;dbl&gt; 1.31855202, -0.28815366, 1.32841354, -0.28911575~
+$ smoothness_se           &lt;dbl&gt; -0.30223259, 0.65056583, 1.41666726, 0.13553966,~
+$ compactness_se          &lt;dbl&gt; 0.85265446, 2.83595905, -0.03500649, 0.47288495,~
+$ concavity_se            &lt;dbl&gt; 0.30900888, 1.07030125, 1.08153957, 0.24241140, ~
+$ `concave points_se`     &lt;dbl&gt; 1.630026033, 1.284095782, 1.316696538, -0.038046~
+$ symmetry_se             &lt;dbl&gt; 0.24097383, 4.68326185, -0.35005507, 0.13927857,~
+$ fractal_dimension_se    &lt;dbl&gt; 0.392387187, 2.560158937, 0.646704166, 0.6312768~
+$ smoothness_worst        &lt;dbl&gt; 0.47944015, 3.24454482, 0.18348094, 1.94655226, ~
+$ compactness_worst       &lt;dbl&gt; 1.05036897, 3.78488958, -0.30822603, 1.67179466,~
+$ `concave points_worst`  &lt;dbl&gt; 1.9634318, 2.1840781, 0.7384643, 0.9149814, 0.63~
+$ symmetry_worst          &lt;dbl&gt; 1.09719973, 5.76429394, -0.82980875, 1.67113661,~
+$ fractal_dimension_worst &lt;dbl&gt; 0.17926376, 4.82187666, -0.40772078, 2.18044624,~
+$ diagnosis               &lt;fct&gt; M, M, M, M, M, M, M, M, M, M, M, M, B, B, M, M, ~</code></pre>
 <p><strong>Paso 10:</strong> Visualización</p>
 <p>Hagamos algunos de los gráficos que hemos visto</p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="caret.html#cb508-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AppliedPredictiveModeling)</span>
-<span id="cb508-2"><a href="caret.html#cb508-2" aria-hidden="true" tabindex="-1"></a><span class="fu">transparentTheme</span>(<span class="at">trans =</span> .<span class="dv">4</span>)</span>
-<span id="cb508-3"><a href="caret.html#cb508-3" aria-hidden="true" tabindex="-1"></a><span class="fu">featurePlot</span>(<span class="at">x =</span> <span class="fu">select</span>(breast_train_prep, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), </span>
-<span id="cb508-4"><a href="caret.html#cb508-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> breast_train_prep<span class="sc">$</span>diagnosis, </span>
-<span id="cb508-5"><a href="caret.html#cb508-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="st">&quot;pairs&quot;</span>,</span>
-<span id="cb508-6"><a href="caret.html#cb508-6" aria-hidden="true" tabindex="-1"></a>            <span class="do">## Add a key at the top</span></span>
-<span id="cb508-7"><a href="caret.html#cb508-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">columns =</span> <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-196-1.png" width="672" /></p>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="caret.html#cb509-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AppliedPredictiveModeling)</span>
+<span id="cb509-2"><a href="caret.html#cb509-2" aria-hidden="true" tabindex="-1"></a><span class="fu">transparentTheme</span>(<span class="at">trans =</span> .<span class="dv">4</span>)</span>
+<span id="cb509-3"><a href="caret.html#cb509-3" aria-hidden="true" tabindex="-1"></a><span class="fu">featurePlot</span>(<span class="at">x =</span> <span class="fu">select</span>(breast_train_prep, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), </span>
+<span id="cb509-4"><a href="caret.html#cb509-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> breast_train_prep<span class="sc">$</span>diagnosis, </span>
+<span id="cb509-5"><a href="caret.html#cb509-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="st">&quot;pairs&quot;</span>,</span>
+<span id="cb509-6"><a href="caret.html#cb509-6" aria-hidden="true" tabindex="-1"></a>            <span class="do">## Add a key at the top</span></span>
+<span id="cb509-7"><a href="caret.html#cb509-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">columns =</span> <span class="dv">2</span>))</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-195-1.png" width="672" /></p>
 </div>
 <div id="creación-de-un-modelo-predictivo" class="section level2" number="8.4">
 <h2><span class="header-section-number">8.4</span> Creación de un modelo predictivo</h2>
@@ -970,18 +973,18 @@ $ diagnosis               &lt;fct&gt; M, M, M, M, M, M, M, M, M, M, M, M, B, B, 
 <p>Una vez que se han definido el modelo y los valores de los parámetros de ajuste, también se debe especificar el tipo de remuestreo. Actualmente, tiene implementado LOOCV, K-fold CV y Bootstrap. Después del remuestreo, se obtiene una medida de ajuste para cada remuestra que permite guiar al usuario sobre qué valores de parámetros de ajuste deben elegirse. De forma predeterminada, la función elige automáticamente los parámetros de ajuste asociados con el mejor valor, aunque se pueden utilizar diferentes métricas.</p>
 <p>Veamos cómo funcionaría en nuestro caso utilizando la regresión logística (dado que nuestro outcome es binario) como método de aprendizaje para la creación de un modelo predictivo.</p>
 <p>Partimos del hecho que ya hemos hecho un pre-procesado de datos tal y como hemos mostrado anteriormente y que nuestros datos de entrenamiento y validación se llaman <code>breast_train_prep</code> y <code>breast_test_prep</code>, respectivamente. Por defecto el método utiliza boostrap para evaluar la capacidad predictiva del modelo. La función <code>trainControl()</code> se puede utilizar para especificar el tipo de remuestreo. Podéis encontrar más información sobre esta función <a href="https://topepo.github.io/caret/model-training-and-tuning.html#control">aquí</a>:</p>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="caret.html#cb509-1" aria-hidden="true" tabindex="-1"></a>fitControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="do">## 10-fold CV</span></span>
-<span id="cb509-2"><a href="caret.html#cb509-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
-<span id="cb509-3"><a href="caret.html#cb509-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">number =</span> <span class="dv">10</span>,</span>
-<span id="cb509-4"><a href="caret.html#cb509-4" aria-hidden="true" tabindex="-1"></a>                           <span class="do">## repeated ten times</span></span>
-<span id="cb509-5"><a href="caret.html#cb509-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">repeats =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="caret.html#cb510-1" aria-hidden="true" tabindex="-1"></a>fitControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="do">## 10-fold CV</span></span>
+<span id="cb510-2"><a href="caret.html#cb510-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
+<span id="cb510-3"><a href="caret.html#cb510-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">number =</span> <span class="dv">10</span>,</span>
+<span id="cb510-4"><a href="caret.html#cb510-4" aria-hidden="true" tabindex="-1"></a>                           <span class="do">## repeated ten times</span></span>
+<span id="cb510-5"><a href="caret.html#cb510-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">repeats =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p>Estamos haciendo una estimación de la capacidad predictiva del modelo con un 10-fold CV (argumento <code>number</code>) y lo repetimos 10 veces para garantizar aleatoriedad.</p>
 <p>Despues usamos la función <code>train()</code></p>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="caret.html#cb510-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb510-2"><a href="caret.html#cb510-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(fit <span class="ot">&lt;-</span> <span class="fu">train</span>(diagnosis <span class="sc">~</span> ., <span class="at">data =</span> breast_train_prep, </span>
-<span id="cb510-3"><a href="caret.html#cb510-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">method =</span> <span class="st">&quot;glm&quot;</span>, </span>
-<span id="cb510-4"><a href="caret.html#cb510-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">trControl =</span> fitControl))</span>
-<span id="cb510-5"><a href="caret.html#cb510-5" aria-hidden="true" tabindex="-1"></a>fit</span></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="caret.html#cb511-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb511-2"><a href="caret.html#cb511-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(fit <span class="ot">&lt;-</span> <span class="fu">train</span>(diagnosis <span class="sc">~</span> ., <span class="at">data =</span> breast_train_prep, </span>
+<span id="cb511-3"><a href="caret.html#cb511-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">method =</span> <span class="st">&quot;glm&quot;</span>, </span>
+<span id="cb511-4"><a href="caret.html#cb511-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">trControl =</span> fitControl))</span>
+<span id="cb511-5"><a href="caret.html#cb511-5" aria-hidden="true" tabindex="-1"></a>fit</span></code></pre></div>
 <pre><code>Generalized Linear Model 
 
 399 samples

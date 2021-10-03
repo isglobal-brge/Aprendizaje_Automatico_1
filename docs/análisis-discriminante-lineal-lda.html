@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-09-16" />
+<meta name="date" content="2021-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -190,7 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-como-estimación-de-una-media-condicional"><i class="fa fa-check"></i><b>4.7</b> Regresión como estimación de una media condicional</a></li>
 <li class="chapter" data-level="4.8" data-path="regresión-lineal.html"><a href="regresión-lineal.html#la-función-de-regresión"><i class="fa fa-check"></i><b>4.8</b> La función de regresión</a></li>
 <li class="chapter" data-level="4.9" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-no-paramétrica-de-la-función-de-regresión-regresión-knn"><i class="fa fa-check"></i><b>4.9</b> Estimación no paramétrica de la función de regresión: regresión KNN</a></li>
-<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a></li>
+<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ejercicio"><i class="fa fa-check"></i><b>4.10.1</b> Ejercicio</a></li>
+</ul></li>
 <li class="chapter" data-level="4.11" data-path="regresión-lineal.html"><a href="regresión-lineal.html#predicción"><i class="fa fa-check"></i><b>4.11</b> Predicción</a></li>
 <li class="chapter" data-level="4.12" data-path="regresión-lineal.html"><a href="regresión-lineal.html#inferencia-en-el-contexto-de-regresión"><i class="fa fa-check"></i><b>4.12</b> Inferencia en el contexto de regresión</a></li>
 <li class="chapter" data-level="4.13" data-path="regresión-lineal.html"><a href="regresión-lineal.html#asunciones-de-un-modelo-de-regresión"><i class="fa fa-check"></i><b>4.13</b> Asunciones de un modelo de regresión</a></li>
@@ -366,10 +369,10 @@ En general, el modelo requiere <span class="math inline">\(CP + P(P + 1)/2\)</sp
 <li><p>En la práctica, es mejor centrar y escalar los predictores y eliminar los predictores de varianza cercana a cero. Si la matriz aún no es invertible, deberíamos usar Penalized Least Squares o Regularización (se verán en otros cursos).</p></li>
 </ul>
 <p>Veamos cómo hacer este análisis para los datos de cáncer de mama vistos en el capítulo anterior. Podemos llevar a cabo los análisis con muchas librerías, aquí usarems <code>MASS</code>. Tal y como es recomendado, usaremos los datos centrados y escalados (e.g normalizados) y eliminados las variables con varianza cercana a 0 que habíamos obtenido con la librería <code>recipes</code>. Usaremos el enfoque de Fisher que es el que más se usa en la actualida y que está implementado en la función <code>lda</code>.</p>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="análisis-discriminante-lineal-lda.html#cb532-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb532-2"><a href="análisis-discriminante-lineal-lda.html#cb532-2" aria-hidden="true" tabindex="-1"></a>fit.lda <span class="ot">&lt;-</span> <span class="fu">lda</span>(diagnosis <span class="sc">~</span> .,</span>
-<span id="cb532-3"><a href="análisis-discriminante-lineal-lda.html#cb532-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">data=</span> breast_train_prep)</span>
-<span id="cb532-4"><a href="análisis-discriminante-lineal-lda.html#cb532-4" aria-hidden="true" tabindex="-1"></a>fit.lda</span></code></pre></div>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="análisis-discriminante-lineal-lda.html#cb533-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb533-2"><a href="análisis-discriminante-lineal-lda.html#cb533-2" aria-hidden="true" tabindex="-1"></a>fit.lda <span class="ot">&lt;-</span> <span class="fu">lda</span>(diagnosis <span class="sc">~</span> .,</span>
+<span id="cb533-3"><a href="análisis-discriminante-lineal-lda.html#cb533-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">data=</span> breast_train_prep)</span>
+<span id="cb533-4"><a href="análisis-discriminante-lineal-lda.html#cb533-4" aria-hidden="true" tabindex="-1"></a>fit.lda</span></code></pre></div>
 <pre><code>Call:
 lda(diagnosis ~ ., data = breast_train_prep)
 
@@ -417,39 +420,39 @@ symmetry_worst           0.35329884
 fractal_dimension_worst  0.83711669</code></pre>
 <p>Podemos observar cuánto vale la media para cada variable en cada uno de los grupos, y esto nos puede ayudar a saber qué variables son más importantes. Los coeficientes de los discriminantes lineales también nos pueden ayudar con la interpretación.</p>
 <p>Podemos representar el valor de cada grupo para el primer discriminante lineal (sólo hay 1 ya que tenemos 2 grupos).</p>
-<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="análisis-discriminante-lineal-lda.html#cb534-1" aria-hidden="true" tabindex="-1"></a>prd <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit.lda, breast_train_prep )</span>
-<span id="cb534-2"><a href="análisis-discriminante-lineal-lda.html#cb534-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ldahist</span>(<span class="at">data =</span> prd<span class="sc">$</span>x[,<span class="dv">1</span>], <span class="at">g =</span> breast_train_prep<span class="sc">$</span>diagnosis)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-209-1.png" width="672" /></p>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="análisis-discriminante-lineal-lda.html#cb535-1" aria-hidden="true" tabindex="-1"></a>prd <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit.lda, breast_train_prep )</span>
+<span id="cb535-2"><a href="análisis-discriminante-lineal-lda.html#cb535-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ldahist</span>(<span class="at">data =</span> prd<span class="sc">$</span>x[,<span class="dv">1</span>], <span class="at">g =</span> breast_train_prep<span class="sc">$</span>diagnosis)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-208-1.png" width="672" /></p>
 <p>Vemos que los grupos quedan bien separados según el primer discrimiante lineal.</p>
 <p>Si tuviéramos 3 grupos también podríamos representar la misma clasificación para el primer y el segundo discriminate lineal. Para ello usaríamos la librería <code>ggord</code> que está en GitHub. Usaremos los datos iris para ilustrar este caso:</p>
-<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="análisis-discriminante-lineal-lda.html#cb535-1" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;fawda123/ggord&quot;)</span></span>
-<span id="cb535-2"><a href="análisis-discriminante-lineal-lda.html#cb535-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggord)</span>
-<span id="cb535-3"><a href="análisis-discriminante-lineal-lda.html#cb535-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb535-4"><a href="análisis-discriminante-lineal-lda.html#cb535-4" aria-hidden="true" tabindex="-1"></a>lnr <span class="ot">&lt;-</span> <span class="fu">lda</span>(Species<span class="sc">~</span>., iris)</span>
-<span id="cb535-5"><a href="análisis-discriminante-lineal-lda.html#cb535-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggord</span>(lnr, iris<span class="sc">$</span>Species, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span> ))</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-210-1.png" width="672" /></p>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="análisis-discriminante-lineal-lda.html#cb536-1" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;fawda123/ggord&quot;)</span></span>
+<span id="cb536-2"><a href="análisis-discriminante-lineal-lda.html#cb536-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggord)</span>
+<span id="cb536-3"><a href="análisis-discriminante-lineal-lda.html#cb536-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb536-4"><a href="análisis-discriminante-lineal-lda.html#cb536-4" aria-hidden="true" tabindex="-1"></a>lnr <span class="ot">&lt;-</span> <span class="fu">lda</span>(Species<span class="sc">~</span>., iris)</span>
+<span id="cb536-5"><a href="análisis-discriminante-lineal-lda.html#cb536-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggord</span>(lnr, iris<span class="sc">$</span>Species, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span> ))</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-209-1.png" width="672" /></p>
 <p>Podemos evaluar de forma manual cómo predice nuestro modelo en la muestra test para nuestro ejemplo de cáncer de mama usando la matriz de confusión:</p>
-<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="análisis-discriminante-lineal-lda.html#cb536-1" aria-hidden="true" tabindex="-1"></a>p.train <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit.lda, breast_test_prep)<span class="sc">$</span>class</span>
-<span id="cb536-2"><a href="análisis-discriminante-lineal-lda.html#cb536-2" aria-hidden="true" tabindex="-1"></a>tt <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">predict=</span>p.train, <span class="at">Actual=</span>breast_test_prep<span class="sc">$</span>diagnosis)</span>
-<span id="cb536-3"><a href="análisis-discriminante-lineal-lda.html#cb536-3" aria-hidden="true" tabindex="-1"></a>tt</span></code></pre></div>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="análisis-discriminante-lineal-lda.html#cb537-1" aria-hidden="true" tabindex="-1"></a>p.train <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit.lda, breast_test_prep)<span class="sc">$</span>class</span>
+<span id="cb537-2"><a href="análisis-discriminante-lineal-lda.html#cb537-2" aria-hidden="true" tabindex="-1"></a>tt <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">predict=</span>p.train, <span class="at">Actual=</span>breast_test_prep<span class="sc">$</span>diagnosis)</span>
+<span id="cb537-3"><a href="análisis-discriminante-lineal-lda.html#cb537-3" aria-hidden="true" tabindex="-1"></a>tt</span></code></pre></div>
 <pre><code>       Actual
 predict   B   M
       B 104   7
       M   3  56</code></pre>
 <p>Cuya precisión podemos calcular como:</p>
-<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="análisis-discriminante-lineal-lda.html#cb538-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(tt)<span class="sc">/</span><span class="fu">sum</span>(tt))</span></code></pre></div>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="análisis-discriminante-lineal-lda.html#cb539-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(tt)<span class="sc">/</span><span class="fu">sum</span>(tt))</span></code></pre></div>
 <pre><code>[1] 0.9411765</code></pre>
 <p>También podemos evauar la capacidar de nuestro modelo usando, por ejemplo, 10-fold CV con la librería <code>caret</code>. En este caso bastaría con</p>
-<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="análisis-discriminante-lineal-lda.html#cb540-1" aria-hidden="true" tabindex="-1"></a>fitControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="do">## 10-fold CV</span></span>
-<span id="cb540-2"><a href="análisis-discriminante-lineal-lda.html#cb540-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
-<span id="cb540-3"><a href="análisis-discriminante-lineal-lda.html#cb540-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">number =</span> <span class="dv">10</span>,</span>
-<span id="cb540-4"><a href="análisis-discriminante-lineal-lda.html#cb540-4" aria-hidden="true" tabindex="-1"></a>                           <span class="do">## repeated five times</span></span>
-<span id="cb540-5"><a href="análisis-discriminante-lineal-lda.html#cb540-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">repeats =</span> <span class="dv">5</span>)</span>
-<span id="cb540-6"><a href="análisis-discriminante-lineal-lda.html#cb540-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb540-7"><a href="análisis-discriminante-lineal-lda.html#cb540-7" aria-hidden="true" tabindex="-1"></a><span class="fu">train</span>(diagnosis <span class="sc">~</span> ., </span>
-<span id="cb540-8"><a href="análisis-discriminante-lineal-lda.html#cb540-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">data=</span>breast_train_prep,</span>
-<span id="cb540-9"><a href="análisis-discriminante-lineal-lda.html#cb540-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">method=</span><span class="st">&quot;lda&quot;</span>,</span>
-<span id="cb540-10"><a href="análisis-discriminante-lineal-lda.html#cb540-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">trControl =</span> fitControl)</span></code></pre></div>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="análisis-discriminante-lineal-lda.html#cb541-1" aria-hidden="true" tabindex="-1"></a>fitControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="do">## 10-fold CV</span></span>
+<span id="cb541-2"><a href="análisis-discriminante-lineal-lda.html#cb541-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
+<span id="cb541-3"><a href="análisis-discriminante-lineal-lda.html#cb541-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">number =</span> <span class="dv">10</span>,</span>
+<span id="cb541-4"><a href="análisis-discriminante-lineal-lda.html#cb541-4" aria-hidden="true" tabindex="-1"></a>                           <span class="do">## repeated five times</span></span>
+<span id="cb541-5"><a href="análisis-discriminante-lineal-lda.html#cb541-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">repeats =</span> <span class="dv">5</span>)</span>
+<span id="cb541-6"><a href="análisis-discriminante-lineal-lda.html#cb541-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb541-7"><a href="análisis-discriminante-lineal-lda.html#cb541-7" aria-hidden="true" tabindex="-1"></a><span class="fu">train</span>(diagnosis <span class="sc">~</span> ., </span>
+<span id="cb541-8"><a href="análisis-discriminante-lineal-lda.html#cb541-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">data=</span>breast_train_prep,</span>
+<span id="cb541-9"><a href="análisis-discriminante-lineal-lda.html#cb541-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">method=</span><span class="st">&quot;lda&quot;</span>,</span>
+<span id="cb541-10"><a href="análisis-discriminante-lineal-lda.html#cb541-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">trControl =</span> fitControl)</span></code></pre></div>
 <pre><code>Linear Discriminant Analysis 
 
 399 samples

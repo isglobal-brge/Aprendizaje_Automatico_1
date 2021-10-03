@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-09-16" />
+<meta name="date" content="2021-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -190,7 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-como-estimación-de-una-media-condicional"><i class="fa fa-check"></i><b>4.7</b> Regresión como estimación de una media condicional</a></li>
 <li class="chapter" data-level="4.8" data-path="regresión-lineal.html"><a href="regresión-lineal.html#la-función-de-regresión"><i class="fa fa-check"></i><b>4.8</b> La función de regresión</a></li>
 <li class="chapter" data-level="4.9" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-no-paramétrica-de-la-función-de-regresión-regresión-knn"><i class="fa fa-check"></i><b>4.9</b> Estimación no paramétrica de la función de regresión: regresión KNN</a></li>
-<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a></li>
+<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ejercicio"><i class="fa fa-check"></i><b>4.10.1</b> Ejercicio</a></li>
+</ul></li>
 <li class="chapter" data-level="4.11" data-path="regresión-lineal.html"><a href="regresión-lineal.html#predicción"><i class="fa fa-check"></i><b>4.11</b> Predicción</a></li>
 <li class="chapter" data-level="4.12" data-path="regresión-lineal.html"><a href="regresión-lineal.html#inferencia-en-el-contexto-de-regresión"><i class="fa fa-check"></i><b>4.12</b> Inferencia en el contexto de regresión</a></li>
 <li class="chapter" data-level="4.13" data-path="regresión-lineal.html"><a href="regresión-lineal.html#asunciones-de-un-modelo-de-regresión"><i class="fa fa-check"></i><b>4.13</b> Asunciones de un modelo de regresión</a></li>
@@ -363,54 +366,54 @@ valores de <span class="math inline">\(X\)</span> conocidos. Ambos conjunto de d
 <p>Si seleccionamos <span class="math inline">\(k\)</span> lo mas pequeño posible, estaríamos en el caso <span class="math inline">\(k=1\)</span>. En este caso, cada punto del conjunto de prueba se coloca en la misma clase que su vecino más cercano en el conjunto de entrenamiento. Esto puede conducir a un clasificador de alta varianza y muy irregular, pero el sesgo tenderá a ser pequeño.</p>
 <p>Un segundo tema que es relativamente fácil de abordar se refiere a las escalas en las que se miden los valores de <span class="math inline">\(x\)</span>. Si por ejemplo una variable <span class="math inline">\(x\)</span> tienen un rango de 2 a 4, mientras que otra tiene un rango de 2000 a 4000, la distancia estará dominada por la segunda variable. La solución que se suele utilizar es normalizar todas las variables (cambiar su escala para que su media sea 0 y su desviación estándar sea 1).</p>
 <p>Existen muchas liberías para llevar a cabo KNN. Nosotros usaremos la libería <code>class</code> para ilustrar el ejemplo de cáncer de mama visto anteriormente y para el que ya hemos normalizado nuestros predictores.</p>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="KNN.html#cb512-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(class)</span>
-<span id="cb512-2"><a href="KNN.html#cb512-2" aria-hidden="true" tabindex="-1"></a><span class="co"># para asegurarnos que usamos knn de class</span></span>
-<span id="cb512-3"><a href="KNN.html#cb512-3" aria-hidden="true" tabindex="-1"></a>fit.knn <span class="ot">&lt;-</span> class<span class="sc">::</span><span class="fu">knn</span>(<span class="at">train=</span><span class="fu">select</span>(breast_train_prep, <span class="sc">!</span>diagnosis),</span>
-<span id="cb512-4"><a href="KNN.html#cb512-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">test=</span><span class="fu">select</span>(breast_test_prep, <span class="sc">!</span>diagnosis),</span>
-<span id="cb512-5"><a href="KNN.html#cb512-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cl=</span>breast_train_prep<span class="sc">$</span>diagnosis,</span>
-<span id="cb512-6"><a href="KNN.html#cb512-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">k=</span><span class="dv">10</span>, <span class="at">prob=</span><span class="cn">TRUE</span>)</span>
-<span id="cb512-7"><a href="KNN.html#cb512-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fit.knn)</span></code></pre></div>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="KNN.html#cb513-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(class)</span>
+<span id="cb513-2"><a href="KNN.html#cb513-2" aria-hidden="true" tabindex="-1"></a><span class="co"># para asegurarnos que usamos knn de class</span></span>
+<span id="cb513-3"><a href="KNN.html#cb513-3" aria-hidden="true" tabindex="-1"></a>fit.knn <span class="ot">&lt;-</span> class<span class="sc">::</span><span class="fu">knn</span>(<span class="at">train=</span><span class="fu">select</span>(breast_train_prep, <span class="sc">!</span>diagnosis),</span>
+<span id="cb513-4"><a href="KNN.html#cb513-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">test=</span><span class="fu">select</span>(breast_test_prep, <span class="sc">!</span>diagnosis),</span>
+<span id="cb513-5"><a href="KNN.html#cb513-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cl=</span>breast_train_prep<span class="sc">$</span>diagnosis,</span>
+<span id="cb513-6"><a href="KNN.html#cb513-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">k=</span><span class="dv">10</span>, <span class="at">prob=</span><span class="cn">TRUE</span>)</span>
+<span id="cb513-7"><a href="KNN.html#cb513-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fit.knn)</span></code></pre></div>
 <pre><code>[1] M M M M M M
 Levels: B M</code></pre>
 <p>La probabilidad que cada individuo de la muestra test pertenezca al grupo asignado la podemos obtener con</p>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="KNN.html#cb514-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">attr</span>(fit.knn, <span class="st">&quot;prob&quot;</span>)</span>
-<span id="cb514-2"><a href="KNN.html#cb514-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(prob)</span></code></pre></div>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="KNN.html#cb515-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">attr</span>(fit.knn, <span class="st">&quot;prob&quot;</span>)</span>
+<span id="cb515-2"><a href="KNN.html#cb515-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(prob)</span></code></pre></div>
 <pre><code>[1] 1.0 1.0 1.0 0.6 0.7 1.0</code></pre>
 <p>A continuación podemos crear un gráfico. Esto es algo complejo, ya que queremos representar los datos de la muestra test coloreados por la clase a la que fueron asignados por el clasificador kNN (como fondo de la imagen) con los datos de entrenamiento (usando un símbolo diferente) y el límite de decisión. Este gráfico sólo lo podemos hacer para dos variables predictoras. Por ejemplo <code>symmetry_worst</code> y <code>texture_se</code>.</p>
-<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="KNN.html#cb516-1" aria-hidden="true" tabindex="-1"></a>plot.df <span class="ot">&lt;-</span> breast_test_prep <span class="sc">%&gt;%</span></span>
-<span id="cb516-2"><a href="KNN.html#cb516-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(symmetry_worst, texture_se ) <span class="sc">%&gt;%</span></span>
-<span id="cb516-3"><a href="KNN.html#cb516-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicted =</span> <span class="fu">as.factor</span>(fit.knn))</span>
-<span id="cb516-4"><a href="KNN.html#cb516-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Usamos un &#39;convex hull&#39; para determinar los puntos que determinan los límites</span></span>
-<span id="cb516-5"><a href="KNN.html#cb516-5" aria-hidden="true" tabindex="-1"></a><span class="co"># de cada cluster</span></span>
-<span id="cb516-6"><a href="KNN.html#cb516-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb516-7"><a href="KNN.html#cb516-7" aria-hidden="true" tabindex="-1"></a>plot.df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> plot.df<span class="sc">$</span>symmetry_worst, </span>
-<span id="cb516-8"><a href="KNN.html#cb516-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> plot.df<span class="sc">$</span>texture_se, </span>
-<span id="cb516-9"><a href="KNN.html#cb516-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">predicted =</span> plot.df<span class="sc">$</span>predicted)</span>
-<span id="cb516-10"><a href="KNN.html#cb516-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb516-11"><a href="KNN.html#cb516-11" aria-hidden="true" tabindex="-1"></a>find_hull <span class="ot">&lt;-</span> <span class="cf">function</span>(df) df[<span class="fu">chull</span>(df<span class="sc">$</span>x, df<span class="sc">$</span>y), ]</span>
-<span id="cb516-12"><a href="KNN.html#cb516-12" aria-hidden="true" tabindex="-1"></a>boundary <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ddply</span>(plot.df1, <span class="at">.variables =</span> <span class="st">&quot;predicted&quot;</span>, <span class="at">.fun =</span> find_hull)</span>
-<span id="cb516-13"><a href="KNN.html#cb516-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb516-14"><a href="KNN.html#cb516-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot.df1, <span class="fu">aes</span>(x, y, <span class="at">color =</span> predicted, <span class="at">fill =</span> predicted)) <span class="sc">+</span> </span>
-<span id="cb516-15"><a href="KNN.html#cb516-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb516-16"><a href="KNN.html#cb516-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> boundary, <span class="fu">aes</span>(x,y), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb516-17"><a href="KNN.html#cb516-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;symmetry_worst&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;texture_se&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-201-1.png" width="672" /></p>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="KNN.html#cb517-1" aria-hidden="true" tabindex="-1"></a>plot.df <span class="ot">&lt;-</span> breast_test_prep <span class="sc">%&gt;%</span></span>
+<span id="cb517-2"><a href="KNN.html#cb517-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(symmetry_worst, texture_se ) <span class="sc">%&gt;%</span></span>
+<span id="cb517-3"><a href="KNN.html#cb517-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicted =</span> <span class="fu">as.factor</span>(fit.knn))</span>
+<span id="cb517-4"><a href="KNN.html#cb517-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Usamos un &#39;convex hull&#39; para determinar los puntos que determinan los límites</span></span>
+<span id="cb517-5"><a href="KNN.html#cb517-5" aria-hidden="true" tabindex="-1"></a><span class="co"># de cada cluster</span></span>
+<span id="cb517-6"><a href="KNN.html#cb517-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb517-7"><a href="KNN.html#cb517-7" aria-hidden="true" tabindex="-1"></a>plot.df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> plot.df<span class="sc">$</span>symmetry_worst, </span>
+<span id="cb517-8"><a href="KNN.html#cb517-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> plot.df<span class="sc">$</span>texture_se, </span>
+<span id="cb517-9"><a href="KNN.html#cb517-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">predicted =</span> plot.df<span class="sc">$</span>predicted)</span>
+<span id="cb517-10"><a href="KNN.html#cb517-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb517-11"><a href="KNN.html#cb517-11" aria-hidden="true" tabindex="-1"></a>find_hull <span class="ot">&lt;-</span> <span class="cf">function</span>(df) df[<span class="fu">chull</span>(df<span class="sc">$</span>x, df<span class="sc">$</span>y), ]</span>
+<span id="cb517-12"><a href="KNN.html#cb517-12" aria-hidden="true" tabindex="-1"></a>boundary <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ddply</span>(plot.df1, <span class="at">.variables =</span> <span class="st">&quot;predicted&quot;</span>, <span class="at">.fun =</span> find_hull)</span>
+<span id="cb517-13"><a href="KNN.html#cb517-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb517-14"><a href="KNN.html#cb517-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot.df1, <span class="fu">aes</span>(x, y, <span class="at">color =</span> predicted, <span class="at">fill =</span> predicted)) <span class="sc">+</span> </span>
+<span id="cb517-15"><a href="KNN.html#cb517-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb517-16"><a href="KNN.html#cb517-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> boundary, <span class="fu">aes</span>(x,y), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb517-17"><a href="KNN.html#cb517-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;symmetry_worst&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;texture_se&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-200-1.png" width="672" /></p>
 <p>Podemos ver la matriz de confusión</p>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="KNN.html#cb517-1" aria-hidden="true" tabindex="-1"></a>tt <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">predict=</span>fit.knn, <span class="at">Actual=</span>breast_test_prep<span class="sc">$</span>diagnosis)</span>
-<span id="cb517-2"><a href="KNN.html#cb517-2" aria-hidden="true" tabindex="-1"></a>tt</span></code></pre></div>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="KNN.html#cb518-1" aria-hidden="true" tabindex="-1"></a>tt <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">predict=</span>fit.knn, <span class="at">Actual=</span>breast_test_prep<span class="sc">$</span>diagnosis)</span>
+<span id="cb518-2"><a href="KNN.html#cb518-2" aria-hidden="true" tabindex="-1"></a>tt</span></code></pre></div>
 <pre><code>       Actual
 predict   B   M
       B 105   9
       M   2  54</code></pre>
 <p>y la precisión es</p>
-<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="KNN.html#cb519-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(tt)<span class="sc">/</span><span class="fu">sum</span>(tt))</span></code></pre></div>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="KNN.html#cb520-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(tt)<span class="sc">/</span><span class="fu">sum</span>(tt))</span></code></pre></div>
 <pre><code>[1] 0.9352941</code></pre>
 <p>Podemos repetir los mismos cálculos para <span class="math inline">\(k=15\)</span></p>
-<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="KNN.html#cb521-1" aria-hidden="true" tabindex="-1"></a>fit.knn2 <span class="ot">&lt;-</span> class<span class="sc">::</span><span class="fu">knn</span>(<span class="at">train=</span><span class="fu">select</span>(breast_train_prep, <span class="sc">!</span>diagnosis),</span>
-<span id="cb521-2"><a href="KNN.html#cb521-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">test=</span><span class="fu">select</span>(breast_test_prep, <span class="sc">!</span>diagnosis),</span>
-<span id="cb521-3"><a href="KNN.html#cb521-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cl=</span>breast_train_prep<span class="sc">$</span>diagnosis,</span>
-<span id="cb521-4"><a href="KNN.html#cb521-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">k=</span><span class="dv">10</span>)</span>
-<span id="cb521-5"><a href="KNN.html#cb521-5" aria-hidden="true" tabindex="-1"></a>fit.knn </span></code></pre></div>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="KNN.html#cb522-1" aria-hidden="true" tabindex="-1"></a>fit.knn2 <span class="ot">&lt;-</span> class<span class="sc">::</span><span class="fu">knn</span>(<span class="at">train=</span><span class="fu">select</span>(breast_train_prep, <span class="sc">!</span>diagnosis),</span>
+<span id="cb522-2"><a href="KNN.html#cb522-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">test=</span><span class="fu">select</span>(breast_test_prep, <span class="sc">!</span>diagnosis),</span>
+<span id="cb522-3"><a href="KNN.html#cb522-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cl=</span>breast_train_prep<span class="sc">$</span>diagnosis,</span>
+<span id="cb522-4"><a href="KNN.html#cb522-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">k=</span><span class="dv">10</span>)</span>
+<span id="cb522-5"><a href="KNN.html#cb522-5" aria-hidden="true" tabindex="-1"></a>fit.knn </span></code></pre></div>
 <pre><code>  [1] M M M M M M B B M M M B B M B B M B B M B M M B M B B B B B B M B B M M B B
  [39] B B B B B B M M B B M B B M B B M B M M B B M M B M B B M B B M B M M M M B
  [77] B B M B B B M B B B B B B B B B B M M B M M M B B B B M B B B B B B B M B B
@@ -427,28 +430,28 @@ attr(,&quot;prob&quot;)
 [134] 0.9 1.0 1.0 0.5 0.9 1.0 0.8 1.0 0.9 1.0 0.6 0.9 1.0 0.9 0.9 1.0 0.9 1.0 0.9
 [153] 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.7 1.0 1.0 1.0 0.7 0.8 0.9 1.0 1.0 1.0 1.0
 Levels: B M</code></pre>
-<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="KNN.html#cb523-1" aria-hidden="true" tabindex="-1"></a>tt <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">predict=</span>fit.knn2, <span class="at">Actual=</span>breast_test_prep<span class="sc">$</span>diagnosis)</span>
-<span id="cb523-2"><a href="KNN.html#cb523-2" aria-hidden="true" tabindex="-1"></a>tt</span></code></pre></div>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="KNN.html#cb524-1" aria-hidden="true" tabindex="-1"></a>tt <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">predict=</span>fit.knn2, <span class="at">Actual=</span>breast_test_prep<span class="sc">$</span>diagnosis)</span>
+<span id="cb524-2"><a href="KNN.html#cb524-2" aria-hidden="true" tabindex="-1"></a>tt</span></code></pre></div>
 <pre><code>       Actual
 predict   B   M
       B 106   9
       M   1  54</code></pre>
-<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="KNN.html#cb525-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(tt)<span class="sc">/</span><span class="fu">sum</span>(tt))</span></code></pre></div>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="KNN.html#cb526-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(tt)<span class="sc">/</span><span class="fu">sum</span>(tt))</span></code></pre></div>
 <pre><code>[1] 0.9411765</code></pre>
 <p>La precisión es peor. Entonces, parece que la precisión (entre otras medidas) nos puede ayudar a determinar cómo escoger <span class="math inline">\(k\)</span>.</p>
 <p>Este parámetro se conoce como <strong>hiper-parámetro</strong> del modelo de predicción, y aquí es donde los métodos de validación cruzada son muy útiles.</p>
 <p>Podemos usar la librería <code>caret</code> para realizar estos cálculos:</p>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="KNN.html#cb527-1" aria-hidden="true" tabindex="-1"></a>fitControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="do">## LOCCV</span></span>
-<span id="cb527-2"><a href="KNN.html#cb527-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">&quot;loocv&quot;</span>)</span>
-<span id="cb527-3"><a href="KNN.html#cb527-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb527-4"><a href="KNN.html#cb527-4" aria-hidden="true" tabindex="-1"></a>fit.knn3 <span class="ot">&lt;-</span> <span class="fu">train</span>(diagnosis <span class="sc">~</span> ., </span>
-<span id="cb527-5"><a href="KNN.html#cb527-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data=</span>breast_train_prep,</span>
-<span id="cb527-6"><a href="KNN.html#cb527-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method=</span><span class="st">&quot;knn&quot;</span>,</span>
-<span id="cb527-7"><a href="KNN.html#cb527-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> fitControl, </span>
-<span id="cb527-8"><a href="KNN.html#cb527-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">tuneLength=</span><span class="dv">10</span>)</span>
-<span id="cb527-9"><a href="KNN.html#cb527-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># no necesario pero se podría poner</span></span>
-<span id="cb527-10"><a href="KNN.html#cb527-10" aria-hidden="true" tabindex="-1"></a>      <span class="co"># preProcess = c(&quot;center, &quot;scale&quot;)</span></span>
-<span id="cb527-11"><a href="KNN.html#cb527-11" aria-hidden="true" tabindex="-1"></a>fit.knn3</span></code></pre></div>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="KNN.html#cb528-1" aria-hidden="true" tabindex="-1"></a>fitControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="do">## LOCCV</span></span>
+<span id="cb528-2"><a href="KNN.html#cb528-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">&quot;loocv&quot;</span>)</span>
+<span id="cb528-3"><a href="KNN.html#cb528-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb528-4"><a href="KNN.html#cb528-4" aria-hidden="true" tabindex="-1"></a>fit.knn3 <span class="ot">&lt;-</span> <span class="fu">train</span>(diagnosis <span class="sc">~</span> ., </span>
+<span id="cb528-5"><a href="KNN.html#cb528-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data=</span>breast_train_prep,</span>
+<span id="cb528-6"><a href="KNN.html#cb528-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method=</span><span class="st">&quot;knn&quot;</span>,</span>
+<span id="cb528-7"><a href="KNN.html#cb528-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> fitControl, </span>
+<span id="cb528-8"><a href="KNN.html#cb528-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">tuneLength=</span><span class="dv">10</span>)</span>
+<span id="cb528-9"><a href="KNN.html#cb528-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># no necesario pero se podría poner</span></span>
+<span id="cb528-10"><a href="KNN.html#cb528-10" aria-hidden="true" tabindex="-1"></a>      <span class="co"># preProcess = c(&quot;center, &quot;scale&quot;)</span></span>
+<span id="cb528-11"><a href="KNN.html#cb528-11" aria-hidden="true" tabindex="-1"></a>fit.knn3</span></code></pre></div>
 <pre><code>k-Nearest Neighbors 
 
 399 samples
@@ -474,11 +477,11 @@ Resampling results across tuning parameters:
 
 Accuracy was used to select the optimal model using the largest value.
 The final value used for the model was k = 9.</code></pre>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="KNN.html#cb529-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit.knn3)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-206-1.png" width="672" /></p>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="KNN.html#cb530-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit.knn3)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-205-1.png" width="672" /></p>
 <p>Podemos obtener otras medidas de capacidad predictiva de la siguiente manera:</p>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="KNN.html#cb530-1" aria-hidden="true" tabindex="-1"></a>knnPredict <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit.knn3, <span class="at">newdata=</span>breast_train_prep) </span>
-<span id="cb530-2"><a href="KNN.html#cb530-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(knnPredict, breast_train_prep<span class="sc">$</span>diagnosis)</span></code></pre></div>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="KNN.html#cb531-1" aria-hidden="true" tabindex="-1"></a>knnPredict <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit.knn3, <span class="at">newdata=</span>breast_train_prep) </span>
+<span id="cb531-2"><a href="KNN.html#cb531-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(knnPredict, breast_train_prep<span class="sc">$</span>diagnosis)</span></code></pre></div>
 <pre><code>Confusion Matrix and Statistics
 
           Reference

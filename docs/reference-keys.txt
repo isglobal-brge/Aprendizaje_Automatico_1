@@ -1,6 +1,6 @@
 fig:flujo
-tab:unnamed-chunk-237
-tab:unnamed-chunk-265
+tab:unnamed-chunk-236
+tab:unnamed-chunk-264
 introducción
 introducción-a-tidyverse
 introducción-1
@@ -44,6 +44,7 @@ regresión-como-estimación-de-una-media-condicional
 la-función-de-regresión
 estimación-no-paramétrica-de-la-función-de-regresión-regresión-knn
 estimación-paramétrica-de-la-función-de-regresión-regresión-lineal
+ejercicio
 predicción
 inferencia-en-el-contexto-de-regresión
 asunciones-de-un-modelo-de-regresión

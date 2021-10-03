@@ -139,21 +139,24 @@ La función `step ()` en R base automatiza la selección de variables paso a pas
 
 
 ```{r}
-mod.fow <- step(lm(Salary ~ ., data = Hitters), trace = F, 
-                direction = "forward")
-mod.fow
+mod.fow <- stats::step(lm(Salary ~ ., data = Hitters), trace = FALSE,
+                       direction = "forward")
+summary(mod.fow)
 ```
 
-La selección hacia adelante se estableció en 19 predictores con un $R^2$ de .55.
+NOTE: Uso `stats::step()` en vez de `step()` para asegurar que usamos la función `step()` de la librería `stats` ya que la función `step()` también está en otra libería que también está carga a posteriori (`recipies`) y R siempre usa la función que tiene en el nivel más alto.
+
+
+La selección hacia adelante se estableció en 19 predictores con un $R^2$ de .55. Notamos que no todas las variables son significativas mediante el test de Score (ver columna `Pr(>|t|)`), ya que el criterio de entrada no es del 0.05 si no del 0.1
 
 
 ```{r}
-mod.back <- step(lm(Salary ~ ., data = Hitters), trace = F, 
-                 direction = "backward")
-mod.back
+mod.back <- stats::step(lm(Salary ~ ., data = Hitters), trace = FALSE, 
+                        direction = "backward")
+summary(mod.back)
 ```
 
-La selección hacia detrás se estableció en 10 predictores con un $R^2$ de .54. Con muchas menos variables, somos capaces de explicar prácticamente la misma variabilidad.
+La selección hacia detrás se estableció en 10 predictores con un $R^2$ de .54. Con muchas menos variables, somos capaces de explicar prácticamente la misma variabilidad. Además prácticamente todas las variables son significativas según el test de score. 
 
 
 La función `regsubsets ()` en el paquete `leaps` realiza una búsqueda exhaustiva del espacio modelo utilizando el algoritmo de saltos (adelante y atrás) para la selección de variables.
@@ -164,11 +167,13 @@ library(leaps)
 plot(regsubsets(Salary ~ ., data = Hitters, method = "exhaustive", nbest = 1))
 ```
 
-El gráfico presenta diferentes modelos que pueden ser buenos candidatos organizados según el BIC ($\mathrm{BIC} = {\ln(n) k - 2 \ ln ({L})}$, donde $L$ es el valor de máxima verosimilitud, $n$ es el número de observaciones, $k$ es el número de parámetros y $ln$ es el logaritmo natural). Como el AIC, el BIC penaliza por la complejidad del modelo. Un BIC más bajo es mejor. El modelo con el BIC más bajo es el bastante simple en la parte superior de la figura: *intercept*, AtBat, Hits, Walks, CRBI, DivisionW y PutOuts. Si reajustamos un modelo con estos predictores usando `lm ()` encontramos que tiene un $R^2$ de .51, que tampoco está muy lejos del valor obtenido con un método hacia adelante y con muchísimas menos variables (principio de parsimonia). Notemos que, además, todos los coefecientes de este modelo (a excepción del *intercept*, pero que es necesario introducir) son estadísticamente significativos según el test de score:
+El gráfico presenta diferentes modelos que pueden ser buenos candidatos organizados según el BIC ($\mathrm{BIC} = {\ln(n) k - 2 \ ln ({L})}$, donde $L$ es el valor de máxima verosimilitud, $n$ es el número de observaciones, $k$ es el número de parámetros y $ln$ es el logaritmo natural). Como el AIC, el BIC penaliza por la complejidad del modelo. Un BIC más bajo es mejor. El modelo con el BIC más bajo es el bastante simple en la parte superior de la figura: *intercept*, AtBat, Hits, Walks, CRBI, Division y PutOuts. Si reajustamos un modelo con estos predictores usando `lm ()` encontramos que tiene un $R^2$ de .4972 , que tampoco está muy lejos del valor obtenido con un método hacia adelante y con muchísimas menos variables (principio de parsimonia). Notemos que, además, todos los coefecientes de este modelo (a excepción del *intercept*, pero que es necesario introducir) son estadísticamente significativos según el test de score:
 
 
 ```{r}
-summary(lm(Salary ~ AtBat + Hits + Walks + CRBI + Division + PutOuts, data = Hitters))
+mod.regsub <- lm(Salary ~ AtBat + Hits + Walks + CRBI + Division + PutOuts,
+                 data = Hitters)
+summary(mod.regsub)
 ```
 
 
@@ -252,7 +257,7 @@ Veremos más adelante cómo hacer estos cálculos con una libería específica. 
 -----------------------------------------------------
 **EJERCICIO** (Entrega en Moodle: P2-LOOCV):
 
-Crea una función R que lleve a cabo el procedimiento de LOOCV y estima el valor de LOOCV para el modelo completo y el modelo seleccionado del ejemplo anterior.
+Crea una función R que lleve a cabo el procedimiento de LOOCV y estima el valor de LOOCV para el modelo completo (`full_model`) y el modelo seleccionado (`select_model`) del ejemplo anterior.
 -----------------------------------------------------
 
 
@@ -278,7 +283,7 @@ Al igual que en el caso anterior veremos unas liberías adecuadas para hacer est
 -----------------------------------------------------
 **EJERCICIO** (Entrega en Moodle: P2-Kfold):
 
-Crea una función R que lleve a cabo el procedimiento de K-fold CV y estima el valor de K-fold CV para el modelo completo y el modelo seleccionado del ejemplo anterior. Haz que la función tenga un parámetro que dependa de K, y da los resultados para K=5 y K=10.
+Crea una función R que lleve a cabo el procedimiento de K-fold CV y estima el valor de K-fold CV para el modelo completo (`full_model`) y el modelo seleccionado (`select_model`) del ejemplo anterior. Haz que la función tenga un parámetro que dependa de K, y da los resultados para K=5 y K=10.
 -----------------------------------------------------
 
 ### Uso de CV para estimar el hiper-parámetro
@@ -310,7 +315,7 @@ De manera que el procedimiento *bootstrap* aplicado a regresión sería:
 -----------------------------------------------------
 **EJERCICIO** (Entrega en Moodle: P2-bootstrap):
 
-Crea una función R que lleve a cabo el procedimiento *boostrap* y estima el valor de este método para el modelo completo y el modelo seleccionado del ejemplo anterior. Haz que la función tenga un parámetro que dependa de $B$, y da los resultados para B=25, B=50 y B=100. Comenta brevemente los resultados
+Crea una función R que lleve a cabo el procedimiento *boostrap* y estima el valor de este método para el modelo completo (`full_model`) y el modelo seleccionado (`select_model`) del ejemplo anterior. Haz que la función tenga un parámetro que dependa de $B$, y da los resultados para B=25, B=50 y B=100. Comenta brevemente los resultados
 -----------------------------------------------------
 
 

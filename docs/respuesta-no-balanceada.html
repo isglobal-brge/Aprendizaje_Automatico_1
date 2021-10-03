@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-09-16" />
+<meta name="date" content="2021-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -190,7 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-como-estimación-de-una-media-condicional"><i class="fa fa-check"></i><b>4.7</b> Regresión como estimación de una media condicional</a></li>
 <li class="chapter" data-level="4.8" data-path="regresión-lineal.html"><a href="regresión-lineal.html#la-función-de-regresión"><i class="fa fa-check"></i><b>4.8</b> La función de regresión</a></li>
 <li class="chapter" data-level="4.9" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-no-paramétrica-de-la-función-de-regresión-regresión-knn"><i class="fa fa-check"></i><b>4.9</b> Estimación no paramétrica de la función de regresión: regresión KNN</a></li>
-<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a></li>
+<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ejercicio"><i class="fa fa-check"></i><b>4.10.1</b> Ejercicio</a></li>
+</ul></li>
 <li class="chapter" data-level="4.11" data-path="regresión-lineal.html"><a href="regresión-lineal.html#predicción"><i class="fa fa-check"></i><b>4.11</b> Predicción</a></li>
 <li class="chapter" data-level="4.12" data-path="regresión-lineal.html"><a href="regresión-lineal.html#inferencia-en-el-contexto-de-regresión"><i class="fa fa-check"></i><b>4.12</b> Inferencia en el contexto de regresión</a></li>
 <li class="chapter" data-level="4.13" data-path="regresión-lineal.html"><a href="regresión-lineal.html#asunciones-de-un-modelo-de-regresión"><i class="fa fa-check"></i><b>4.13</b> Asunciones de un modelo de regresión</a></li>
@@ -363,23 +366,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Debemos tener en cuenta que, en realidad, no deberíamos simplemente realizar un muestreo descendente o ascendente en nuestros datos de entrenamiento y luego ejecutar el modelo. Debemos tener en cuenta la validación cruzada y realizar un muestreo descendente o ascendente en cada sub-muestra de forma independiente para obtener una estimación real del rendimiento del modelo.</p>
 <p>También es importante señalar que estas técnicas de ponderación y muestreo tienen mayor impacto en métricas de evaluación del modelo como la precisión, porque mueven artificialmente el umbral para estar más cerca de lo que podría considerarse como la ubicación “óptima” en una curva ROC. Otras métricas como el AUC o la tasa de falsos o verdaderos positivos no se ven tan afectadas.</p>
 <p>Ilustremos cómo llevar a cabo estas técnicas con nuestro ejemplo de cáncer de mama. Usaremos los datos que ya están preprocesados según se hizo en la Sección <a href="caret.html#caret">8</a> y que se encuentran en los objetos <code>breast_train_prep</code> y <code>breast_test_prep</code>. Efectivamente, los datos para este problema están desbalanceados respecto a la variable que queremos predecir</p>
-<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="respuesta-no-balanceada.html#cb571-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(breast_test_prep<span class="sc">$</span>diagnosis)</span></code></pre></div>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="respuesta-no-balanceada.html#cb572-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(breast_test_prep<span class="sc">$</span>diagnosis)</span></code></pre></div>
 <pre><code>
   B   M 
 107  63 </code></pre>
 <p>Afortunadamente, la librería <code>caret</code> hace que sea muy fácil incorporar técnicas de muestreo descendente y ascendente incluyendo validación cruzada. Simplemente basta con utilizar el argumento <code>sampling</code> en nuestro <code>trainControl()</code> y escoger el método “down” o “up” según nos convenga. El resto del proceso de creación de modelo permanece igual que los pasos llevados con cualquier otro método que hemos visto, por ejemlo KNN.</p>
-<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="respuesta-no-balanceada.html#cb573-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>, </span>
-<span id="cb573-2"><a href="respuesta-no-balanceada.html#cb573-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">number =</span> <span class="dv">10</span>, </span>
-<span id="cb573-3"><a href="respuesta-no-balanceada.html#cb573-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">repeats =</span> <span class="dv">5</span>, </span>
-<span id="cb573-4"><a href="respuesta-no-balanceada.html#cb573-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">verboseIter =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb573-5"><a href="respuesta-no-balanceada.html#cb573-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sampling =</span> <span class="st">&quot;down&quot;</span>)</span>
-<span id="cb573-6"><a href="respuesta-no-balanceada.html#cb573-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb573-7"><a href="respuesta-no-balanceada.html#cb573-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb573-8"><a href="respuesta-no-balanceada.html#cb573-8" aria-hidden="true" tabindex="-1"></a>model_knn_under <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(diagnosis <span class="sc">~</span> .,</span>
-<span id="cb573-9"><a href="respuesta-no-balanceada.html#cb573-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> breast_train_prep,</span>
-<span id="cb573-10"><a href="respuesta-no-balanceada.html#cb573-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
-<span id="cb573-11"><a href="respuesta-no-balanceada.html#cb573-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">trControl =</span> ctrl)</span>
-<span id="cb573-12"><a href="respuesta-no-balanceada.html#cb573-12" aria-hidden="true" tabindex="-1"></a>model_knn_under</span></code></pre></div>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="respuesta-no-balanceada.html#cb574-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>, </span>
+<span id="cb574-2"><a href="respuesta-no-balanceada.html#cb574-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">number =</span> <span class="dv">10</span>, </span>
+<span id="cb574-3"><a href="respuesta-no-balanceada.html#cb574-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">repeats =</span> <span class="dv">5</span>, </span>
+<span id="cb574-4"><a href="respuesta-no-balanceada.html#cb574-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">verboseIter =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb574-5"><a href="respuesta-no-balanceada.html#cb574-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sampling =</span> <span class="st">&quot;down&quot;</span>)</span>
+<span id="cb574-6"><a href="respuesta-no-balanceada.html#cb574-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb574-7"><a href="respuesta-no-balanceada.html#cb574-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb574-8"><a href="respuesta-no-balanceada.html#cb574-8" aria-hidden="true" tabindex="-1"></a>model_knn_under <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(diagnosis <span class="sc">~</span> .,</span>
+<span id="cb574-9"><a href="respuesta-no-balanceada.html#cb574-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> breast_train_prep,</span>
+<span id="cb574-10"><a href="respuesta-no-balanceada.html#cb574-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
+<span id="cb574-11"><a href="respuesta-no-balanceada.html#cb574-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">trControl =</span> ctrl)</span>
+<span id="cb574-12"><a href="respuesta-no-balanceada.html#cb574-12" aria-hidden="true" tabindex="-1"></a>model_knn_under</span></code></pre></div>
 <pre><code>k-Nearest Neighbors 
 
 399 samples
@@ -400,10 +403,10 @@ Resampling results across tuning parameters:
 
 Accuracy was used to select the optimal model using the largest value.
 The final value used for the model was k = 9.</code></pre>
-<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="respuesta-no-balanceada.html#cb575-1" aria-hidden="true" tabindex="-1"></a>cm_under <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(breast_test_prep<span class="sc">$</span>diagnosis,</span>
-<span id="cb575-2"><a href="respuesta-no-balanceada.html#cb575-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">predict</span>(model_knn_under, </span>
-<span id="cb575-3"><a href="respuesta-no-balanceada.html#cb575-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata =</span> breast_test_prep))</span>
-<span id="cb575-4"><a href="respuesta-no-balanceada.html#cb575-4" aria-hidden="true" tabindex="-1"></a>cm_under</span></code></pre></div>
+<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="respuesta-no-balanceada.html#cb576-1" aria-hidden="true" tabindex="-1"></a>cm_under <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(breast_test_prep<span class="sc">$</span>diagnosis,</span>
+<span id="cb576-2"><a href="respuesta-no-balanceada.html#cb576-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">predict</span>(model_knn_under, </span>
+<span id="cb576-3"><a href="respuesta-no-balanceada.html#cb576-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata =</span> breast_test_prep))</span>
+<span id="cb576-4"><a href="respuesta-no-balanceada.html#cb576-4" aria-hidden="true" tabindex="-1"></a>cm_under</span></code></pre></div>
 <pre><code>Confusion Matrix and Statistics
 
           Reference
@@ -432,18 +435,18 @@ Prediction   B   M
        &#39;Positive&#39; Class : B               
                                           </code></pre>
 <p>Podemos comparar esta capacidad predictiva con la que tiene el modelo obiviando el problema del desbalanceo y que se estimaría así:</p>
-<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="respuesta-no-balanceada.html#cb577-1" aria-hidden="true" tabindex="-1"></a>crtl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
-<span id="cb577-2"><a href="respuesta-no-balanceada.html#cb577-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">number =</span> <span class="dv">10</span>,  </span>
-<span id="cb577-3"><a href="respuesta-no-balanceada.html#cb577-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">repeats =</span> <span class="dv">10</span>,</span>
-<span id="cb577-4"><a href="respuesta-no-balanceada.html#cb577-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">verboseIter =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb577-5"><a href="respuesta-no-balanceada.html#cb577-5" aria-hidden="true" tabindex="-1"></a>model_knn <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(diagnosis <span class="sc">~</span> .,</span>
-<span id="cb577-6"><a href="respuesta-no-balanceada.html#cb577-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">data =</span> breast_train_prep,</span>
-<span id="cb577-7"><a href="respuesta-no-balanceada.html#cb577-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
-<span id="cb577-8"><a href="respuesta-no-balanceada.html#cb577-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">trControl =</span> ctrl)</span></code></pre></div>
-<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="respuesta-no-balanceada.html#cb578-1" aria-hidden="true" tabindex="-1"></a>cm_original <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(breast_test_prep<span class="sc">$</span>diagnosis,</span>
-<span id="cb578-2"><a href="respuesta-no-balanceada.html#cb578-2" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">predict</span>(model_knn, </span>
-<span id="cb578-3"><a href="respuesta-no-balanceada.html#cb578-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">newdata =</span> breast_test_prep))</span>
-<span id="cb578-4"><a href="respuesta-no-balanceada.html#cb578-4" aria-hidden="true" tabindex="-1"></a>cm_original</span></code></pre></div>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="respuesta-no-balanceada.html#cb578-1" aria-hidden="true" tabindex="-1"></a>crtl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
+<span id="cb578-2"><a href="respuesta-no-balanceada.html#cb578-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">number =</span> <span class="dv">10</span>,  </span>
+<span id="cb578-3"><a href="respuesta-no-balanceada.html#cb578-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">repeats =</span> <span class="dv">10</span>,</span>
+<span id="cb578-4"><a href="respuesta-no-balanceada.html#cb578-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">verboseIter =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb578-5"><a href="respuesta-no-balanceada.html#cb578-5" aria-hidden="true" tabindex="-1"></a>model_knn <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(diagnosis <span class="sc">~</span> .,</span>
+<span id="cb578-6"><a href="respuesta-no-balanceada.html#cb578-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">data =</span> breast_train_prep,</span>
+<span id="cb578-7"><a href="respuesta-no-balanceada.html#cb578-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
+<span id="cb578-8"><a href="respuesta-no-balanceada.html#cb578-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">trControl =</span> ctrl)</span></code></pre></div>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="respuesta-no-balanceada.html#cb579-1" aria-hidden="true" tabindex="-1"></a>cm_original <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(breast_test_prep<span class="sc">$</span>diagnosis,</span>
+<span id="cb579-2"><a href="respuesta-no-balanceada.html#cb579-2" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">predict</span>(model_knn, </span>
+<span id="cb579-3"><a href="respuesta-no-balanceada.html#cb579-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">newdata =</span> breast_test_prep))</span>
+<span id="cb579-4"><a href="respuesta-no-balanceada.html#cb579-4" aria-hidden="true" tabindex="-1"></a>cm_original</span></code></pre></div>
 <pre><code>Confusion Matrix and Statistics
 
           Reference
@@ -472,65 +475,65 @@ Prediction   B   M
        &#39;Positive&#39; Class : B               
                                           </code></pre>
 <p>Estimemos ahora el modelo con un muestreo ascendente y usando, por ejemplo SMOTE (ROSE sea haría igual usando <code>sampling="rose"</code>)</p>
-<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="respuesta-no-balanceada.html#cb580-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb580-2"><a href="respuesta-no-balanceada.html#cb580-2" aria-hidden="true" tabindex="-1"></a><span class="co"># OVER</span></span>
-<span id="cb580-3"><a href="respuesta-no-balanceada.html#cb580-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb580-4"><a href="respuesta-no-balanceada.html#cb580-4" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>, </span>
-<span id="cb580-5"><a href="respuesta-no-balanceada.html#cb580-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">number =</span> <span class="dv">10</span>, </span>
-<span id="cb580-6"><a href="respuesta-no-balanceada.html#cb580-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">repeats =</span> <span class="dv">5</span>, </span>
-<span id="cb580-7"><a href="respuesta-no-balanceada.html#cb580-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">verboseIter =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb580-8"><a href="respuesta-no-balanceada.html#cb580-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sampling =</span> <span class="st">&quot;up&quot;</span>)</span>
-<span id="cb580-9"><a href="respuesta-no-balanceada.html#cb580-9" aria-hidden="true" tabindex="-1"></a>model_knn_over <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(diagnosis <span class="sc">~</span> .,</span>
-<span id="cb580-10"><a href="respuesta-no-balanceada.html#cb580-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> breast_train_prep,</span>
-<span id="cb580-11"><a href="respuesta-no-balanceada.html#cb580-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
-<span id="cb580-12"><a href="respuesta-no-balanceada.html#cb580-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">trControl =</span> ctrl)</span>
-<span id="cb580-13"><a href="respuesta-no-balanceada.html#cb580-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb580-14"><a href="respuesta-no-balanceada.html#cb580-14" aria-hidden="true" tabindex="-1"></a>cm_over <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(breast_test_prep<span class="sc">$</span>diagnosis,</span>
-<span id="cb580-15"><a href="respuesta-no-balanceada.html#cb580-15" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">predict</span>(model_knn_over, </span>
-<span id="cb580-16"><a href="respuesta-no-balanceada.html#cb580-16" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata =</span> breast_test_prep))</span>
-<span id="cb580-17"><a href="respuesta-no-balanceada.html#cb580-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb580-18"><a href="respuesta-no-balanceada.html#cb580-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb580-19"><a href="respuesta-no-balanceada.html#cb580-19" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb580-20"><a href="respuesta-no-balanceada.html#cb580-20" aria-hidden="true" tabindex="-1"></a><span class="co"># SMOTE</span></span>
-<span id="cb580-21"><a href="respuesta-no-balanceada.html#cb580-21" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb580-22"><a href="respuesta-no-balanceada.html#cb580-22" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>, </span>
-<span id="cb580-23"><a href="respuesta-no-balanceada.html#cb580-23" aria-hidden="true" tabindex="-1"></a>                     <span class="at">number =</span> <span class="dv">10</span>, </span>
-<span id="cb580-24"><a href="respuesta-no-balanceada.html#cb580-24" aria-hidden="true" tabindex="-1"></a>                     <span class="at">repeats =</span> <span class="dv">5</span>, </span>
-<span id="cb580-25"><a href="respuesta-no-balanceada.html#cb580-25" aria-hidden="true" tabindex="-1"></a>                     <span class="at">verboseIter =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb580-26"><a href="respuesta-no-balanceada.html#cb580-26" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sampling =</span> <span class="st">&quot;smote&quot;</span>)</span>
-<span id="cb580-27"><a href="respuesta-no-balanceada.html#cb580-27" aria-hidden="true" tabindex="-1"></a>model_knn_smote <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(diagnosis <span class="sc">~</span> .,</span>
-<span id="cb580-28"><a href="respuesta-no-balanceada.html#cb580-28" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> breast_train_prep,</span>
-<span id="cb580-29"><a href="respuesta-no-balanceada.html#cb580-29" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
-<span id="cb580-30"><a href="respuesta-no-balanceada.html#cb580-30" aria-hidden="true" tabindex="-1"></a>                         <span class="at">trControl =</span> ctrl)</span>
-<span id="cb580-31"><a href="respuesta-no-balanceada.html#cb580-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb580-32"><a href="respuesta-no-balanceada.html#cb580-32" aria-hidden="true" tabindex="-1"></a>cm_smote <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(breast_test_prep<span class="sc">$</span>diagnosis,</span>
-<span id="cb580-33"><a href="respuesta-no-balanceada.html#cb580-33" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">predict</span>(model_knn_smote, </span>
-<span id="cb580-34"><a href="respuesta-no-balanceada.html#cb580-34" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata =</span> breast_test_prep))</span></code></pre></div>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="respuesta-no-balanceada.html#cb581-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb581-2"><a href="respuesta-no-balanceada.html#cb581-2" aria-hidden="true" tabindex="-1"></a><span class="co"># OVER</span></span>
+<span id="cb581-3"><a href="respuesta-no-balanceada.html#cb581-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb581-4"><a href="respuesta-no-balanceada.html#cb581-4" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>, </span>
+<span id="cb581-5"><a href="respuesta-no-balanceada.html#cb581-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">number =</span> <span class="dv">10</span>, </span>
+<span id="cb581-6"><a href="respuesta-no-balanceada.html#cb581-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">repeats =</span> <span class="dv">5</span>, </span>
+<span id="cb581-7"><a href="respuesta-no-balanceada.html#cb581-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">verboseIter =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb581-8"><a href="respuesta-no-balanceada.html#cb581-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sampling =</span> <span class="st">&quot;up&quot;</span>)</span>
+<span id="cb581-9"><a href="respuesta-no-balanceada.html#cb581-9" aria-hidden="true" tabindex="-1"></a>model_knn_over <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(diagnosis <span class="sc">~</span> .,</span>
+<span id="cb581-10"><a href="respuesta-no-balanceada.html#cb581-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> breast_train_prep,</span>
+<span id="cb581-11"><a href="respuesta-no-balanceada.html#cb581-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
+<span id="cb581-12"><a href="respuesta-no-balanceada.html#cb581-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">trControl =</span> ctrl)</span>
+<span id="cb581-13"><a href="respuesta-no-balanceada.html#cb581-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb581-14"><a href="respuesta-no-balanceada.html#cb581-14" aria-hidden="true" tabindex="-1"></a>cm_over <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(breast_test_prep<span class="sc">$</span>diagnosis,</span>
+<span id="cb581-15"><a href="respuesta-no-balanceada.html#cb581-15" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">predict</span>(model_knn_over, </span>
+<span id="cb581-16"><a href="respuesta-no-balanceada.html#cb581-16" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata =</span> breast_test_prep))</span>
+<span id="cb581-17"><a href="respuesta-no-balanceada.html#cb581-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb581-18"><a href="respuesta-no-balanceada.html#cb581-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb581-19"><a href="respuesta-no-balanceada.html#cb581-19" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb581-20"><a href="respuesta-no-balanceada.html#cb581-20" aria-hidden="true" tabindex="-1"></a><span class="co"># SMOTE</span></span>
+<span id="cb581-21"><a href="respuesta-no-balanceada.html#cb581-21" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb581-22"><a href="respuesta-no-balanceada.html#cb581-22" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>, </span>
+<span id="cb581-23"><a href="respuesta-no-balanceada.html#cb581-23" aria-hidden="true" tabindex="-1"></a>                     <span class="at">number =</span> <span class="dv">10</span>, </span>
+<span id="cb581-24"><a href="respuesta-no-balanceada.html#cb581-24" aria-hidden="true" tabindex="-1"></a>                     <span class="at">repeats =</span> <span class="dv">5</span>, </span>
+<span id="cb581-25"><a href="respuesta-no-balanceada.html#cb581-25" aria-hidden="true" tabindex="-1"></a>                     <span class="at">verboseIter =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb581-26"><a href="respuesta-no-balanceada.html#cb581-26" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sampling =</span> <span class="st">&quot;smote&quot;</span>)</span>
+<span id="cb581-27"><a href="respuesta-no-balanceada.html#cb581-27" aria-hidden="true" tabindex="-1"></a>model_knn_smote <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(diagnosis <span class="sc">~</span> .,</span>
+<span id="cb581-28"><a href="respuesta-no-balanceada.html#cb581-28" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> breast_train_prep,</span>
+<span id="cb581-29"><a href="respuesta-no-balanceada.html#cb581-29" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
+<span id="cb581-30"><a href="respuesta-no-balanceada.html#cb581-30" aria-hidden="true" tabindex="-1"></a>                         <span class="at">trControl =</span> ctrl)</span>
+<span id="cb581-31"><a href="respuesta-no-balanceada.html#cb581-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb581-32"><a href="respuesta-no-balanceada.html#cb581-32" aria-hidden="true" tabindex="-1"></a>cm_smote <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(breast_test_prep<span class="sc">$</span>diagnosis,</span>
+<span id="cb581-33"><a href="respuesta-no-balanceada.html#cb581-33" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">predict</span>(model_knn_smote, </span>
+<span id="cb581-34"><a href="respuesta-no-balanceada.html#cb581-34" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata =</span> breast_test_prep))</span></code></pre></div>
 <p>Y podemos comparar las predicciones con la función <code>resamples</code> (para introducir variabilidad)</p>
-<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="respuesta-no-balanceada.html#cb581-1" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">original =</span> model_knn,</span>
-<span id="cb581-2"><a href="respuesta-no-balanceada.html#cb581-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">under =</span> model_knn_under,</span>
-<span id="cb581-3"><a href="respuesta-no-balanceada.html#cb581-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">over =</span> model_knn_over,</span>
-<span id="cb581-4"><a href="respuesta-no-balanceada.html#cb581-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">smote =</span> model_knn_smote)</span>
-<span id="cb581-5"><a href="respuesta-no-balanceada.html#cb581-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb581-6"><a href="respuesta-no-balanceada.html#cb581-6" aria-hidden="true" tabindex="-1"></a>resampling <span class="ot">&lt;-</span> <span class="fu">resamples</span>(models)</span>
-<span id="cb581-7"><a href="respuesta-no-balanceada.html#cb581-7" aria-hidden="true" tabindex="-1"></a><span class="fu">bwplot</span>(resampling)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-235-1.png" width="672" /></p>
-<p>O compararlas con otras métricas</p>
-<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="respuesta-no-balanceada.html#cb582-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb582-2"><a href="respuesta-no-balanceada.html#cb582-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb582-3"><a href="respuesta-no-balanceada.html#cb582-3" aria-hidden="true" tabindex="-1"></a>select_measures <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sensitivity&quot;</span>, <span class="st">&quot;Specificity&quot;</span>, <span class="st">&quot;Precision&quot;</span>,</span>
-<span id="cb582-4"><a href="respuesta-no-balanceada.html#cb582-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Recall&quot;</span>, <span class="st">&quot;F1&quot;</span>)</span>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="respuesta-no-balanceada.html#cb582-1" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">original =</span> model_knn,</span>
+<span id="cb582-2"><a href="respuesta-no-balanceada.html#cb582-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">under =</span> model_knn_under,</span>
+<span id="cb582-3"><a href="respuesta-no-balanceada.html#cb582-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">over =</span> model_knn_over,</span>
+<span id="cb582-4"><a href="respuesta-no-balanceada.html#cb582-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">smote =</span> model_knn_smote)</span>
 <span id="cb582-5"><a href="respuesta-no-balanceada.html#cb582-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb582-6"><a href="respuesta-no-balanceada.html#cb582-6" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb582-7"><a href="respuesta-no-balanceada.html#cb582-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (name <span class="cf">in</span> <span class="fu">names</span>(models)) {</span>
-<span id="cb582-8"><a href="respuesta-no-balanceada.html#cb582-8" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">paste0</span>(<span class="st">&quot;cm_&quot;</span>, name))</span>
-<span id="cb582-9"><a href="respuesta-no-balanceada.html#cb582-9" aria-hidden="true" tabindex="-1"></a>  comparison.i <span class="ot">&lt;-</span> model<span class="sc">$</span>byClass[select_measures]</span>
-<span id="cb582-10"><a href="respuesta-no-balanceada.html#cb582-10" aria-hidden="true" tabindex="-1"></a>  comparison <span class="ot">&lt;-</span> <span class="fu">rbind</span>(comparison, comparison.i) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>()</span>
-<span id="cb582-11"><a href="respuesta-no-balanceada.html#cb582-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb582-12"><a href="respuesta-no-balanceada.html#cb582-12" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> comparison <span class="sc">%&gt;%</span> </span>
-<span id="cb582-13"><a href="respuesta-no-balanceada.html#cb582-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">model=</span><span class="fu">names</span>(models), <span class="at">.before=</span><span class="cn">TRUE</span>)</span>
-<span id="cb582-14"><a href="respuesta-no-balanceada.html#cb582-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb582-15"><a href="respuesta-no-balanceada.html#cb582-15" aria-hidden="true" tabindex="-1"></a>comparison</span></code></pre></div>
+<span id="cb582-6"><a href="respuesta-no-balanceada.html#cb582-6" aria-hidden="true" tabindex="-1"></a>resampling <span class="ot">&lt;-</span> <span class="fu">resamples</span>(models)</span>
+<span id="cb582-7"><a href="respuesta-no-balanceada.html#cb582-7" aria-hidden="true" tabindex="-1"></a><span class="fu">bwplot</span>(resampling)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-234-1.png" width="672" /></p>
+<p>O compararlas con otras métricas</p>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="respuesta-no-balanceada.html#cb583-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb583-2"><a href="respuesta-no-balanceada.html#cb583-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb583-3"><a href="respuesta-no-balanceada.html#cb583-3" aria-hidden="true" tabindex="-1"></a>select_measures <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sensitivity&quot;</span>, <span class="st">&quot;Specificity&quot;</span>, <span class="st">&quot;Precision&quot;</span>,</span>
+<span id="cb583-4"><a href="respuesta-no-balanceada.html#cb583-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Recall&quot;</span>, <span class="st">&quot;F1&quot;</span>)</span>
+<span id="cb583-5"><a href="respuesta-no-balanceada.html#cb583-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb583-6"><a href="respuesta-no-balanceada.html#cb583-6" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb583-7"><a href="respuesta-no-balanceada.html#cb583-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (name <span class="cf">in</span> <span class="fu">names</span>(models)) {</span>
+<span id="cb583-8"><a href="respuesta-no-balanceada.html#cb583-8" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">paste0</span>(<span class="st">&quot;cm_&quot;</span>, name))</span>
+<span id="cb583-9"><a href="respuesta-no-balanceada.html#cb583-9" aria-hidden="true" tabindex="-1"></a>  comparison.i <span class="ot">&lt;-</span> model<span class="sc">$</span>byClass[select_measures]</span>
+<span id="cb583-10"><a href="respuesta-no-balanceada.html#cb583-10" aria-hidden="true" tabindex="-1"></a>  comparison <span class="ot">&lt;-</span> <span class="fu">rbind</span>(comparison, comparison.i) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>()</span>
+<span id="cb583-11"><a href="respuesta-no-balanceada.html#cb583-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb583-12"><a href="respuesta-no-balanceada.html#cb583-12" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> comparison <span class="sc">%&gt;%</span> </span>
+<span id="cb583-13"><a href="respuesta-no-balanceada.html#cb583-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">model=</span><span class="fu">names</span>(models), <span class="at">.before=</span><span class="cn">TRUE</span>)</span>
+<span id="cb583-14"><a href="respuesta-no-balanceada.html#cb583-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb583-15"><a href="respuesta-no-balanceada.html#cb583-15" aria-hidden="true" tabindex="-1"></a>comparison</span></code></pre></div>
 <pre><code># A tibble: 4 x 6
   model    Sensitivity Specificity Precision Recall    F1
   &lt;chr&gt;          &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
@@ -538,12 +541,12 @@ Prediction   B   M
 2 under          0.944       0.919     0.953  0.944 0.949
 3 over           0.935       0.903     0.944  0.935 0.940
 4 smote          0.935       0.903     0.944  0.935 0.940</code></pre>
-<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="respuesta-no-balanceada.html#cb584-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb584-2"><a href="respuesta-no-balanceada.html#cb584-2" aria-hidden="true" tabindex="-1"></a>comparison <span class="sc">%&gt;%</span></span>
-<span id="cb584-3"><a href="respuesta-no-balanceada.html#cb584-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(x, y, Sensitivity<span class="sc">:</span>F1) <span class="sc">%&gt;%</span></span>
-<span id="cb584-4"><a href="respuesta-no-balanceada.html#cb584-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> model)) <span class="sc">+</span></span>
-<span id="cb584-5"><a href="respuesta-no-balanceada.html#cb584-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-236-1.png" width="672" /></p>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="respuesta-no-balanceada.html#cb585-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb585-2"><a href="respuesta-no-balanceada.html#cb585-2" aria-hidden="true" tabindex="-1"></a>comparison <span class="sc">%&gt;%</span></span>
+<span id="cb585-3"><a href="respuesta-no-balanceada.html#cb585-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(x, y, Sensitivity<span class="sc">:</span>F1) <span class="sc">%&gt;%</span></span>
+<span id="cb585-4"><a href="respuesta-no-balanceada.html#cb585-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> model)) <span class="sc">+</span></span>
+<span id="cb585-5"><a href="respuesta-no-balanceada.html#cb585-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-235-1.png" width="672" /></p>
 
 </div>
             </section>

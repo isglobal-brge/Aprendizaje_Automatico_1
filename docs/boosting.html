@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-09-16" />
+<meta name="date" content="2021-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -190,7 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-como-estimación-de-una-media-condicional"><i class="fa fa-check"></i><b>4.7</b> Regresión como estimación de una media condicional</a></li>
 <li class="chapter" data-level="4.8" data-path="regresión-lineal.html"><a href="regresión-lineal.html#la-función-de-regresión"><i class="fa fa-check"></i><b>4.8</b> La función de regresión</a></li>
 <li class="chapter" data-level="4.9" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-no-paramétrica-de-la-función-de-regresión-regresión-knn"><i class="fa fa-check"></i><b>4.9</b> Estimación no paramétrica de la función de regresión: regresión KNN</a></li>
-<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a></li>
+<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ejercicio"><i class="fa fa-check"></i><b>4.10.1</b> Ejercicio</a></li>
+</ul></li>
 <li class="chapter" data-level="4.11" data-path="regresión-lineal.html"><a href="regresión-lineal.html#predicción"><i class="fa fa-check"></i><b>4.11</b> Predicción</a></li>
 <li class="chapter" data-level="4.12" data-path="regresión-lineal.html"><a href="regresión-lineal.html#inferencia-en-el-contexto-de-regresión"><i class="fa fa-check"></i><b>4.12</b> Inferencia en el contexto de regresión</a></li>
 <li class="chapter" data-level="4.13" data-path="regresión-lineal.html"><a href="regresión-lineal.html#asunciones-de-un-modelo-de-regresión"><i class="fa fa-check"></i><b>4.13</b> Asunciones de un modelo de regresión</a></li>
@@ -474,42 +477,42 @@ Este enfoque da como resultado una mejora lenta y sucesiva del modelo ajustado, 
 <p><code>gbm</code> tiene dos funciones de entrenamiento: <code>gbm::gbm()</code> y <code>gbm::gbm.fit()</code>. La principal diferencia es que <code>gbm::gbm()</code> usa la interfaz de fórmulas para especificar su modelo, mientras que <code>gbm::gbm.fit()</code> requiere las matrices <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> separadas; <code>gbm::gbm.fit()</code> es más eficiente y su uso es recomendado para usuarios avanzados.</p>
 <p>La configuración predeterminada en <code>gbm</code> incluye una tasa de aprendizaje (constricción) de 0.001. Esta es una tasa de aprendizaje muy pequeña y normalmente requiere una gran cantidad de árboles para minimizar suficientemente la función de pérdida. Sin embargo, <code>gbm</code> usa un número predeterminado de árboles de 100, que rara vez es suficiente. En consecuencia, comenzamos con una tasa de aprendizaje de 0.1 y aumentamos la cantidad de árboles para entrenar. La profundidad predeterminada de cada árbol (profundidad de interacción) es 1, lo que significa que estamos agrupando un montón de elementos de decisión (es decir, no podemos capturar ningún efecto de interacción).</p>
 <p>Para el conjunto de datos de sillitas de coches, aumentamos la profundidad del árbol a 3 y usamos el valor predeterminado para el número mínimo de observaciones requeridas en los nodos terminales de los árboles (n.minobsinnode). Por último, establecemos <code>cv.folds = 10</code> para realizar un CV de 10 veces.</p>
-<div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb678-1"><a href="boosting.html#cb678-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
-<span id="cb678-2"><a href="boosting.html#cb678-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb678-3"><a href="boosting.html#cb678-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb678-4"><a href="boosting.html#cb678-4" aria-hidden="true" tabindex="-1"></a>md1_gbm <span class="ot">&lt;-</span> <span class="fu">gbm</span>(</span>
-<span id="cb678-5"><a href="boosting.html#cb678-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> Sales <span class="sc">~</span> .,</span>
-<span id="cb678-6"><a href="boosting.html#cb678-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> cs_train,</span>
-<span id="cb678-7"><a href="boosting.html#cb678-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,  <span class="co"># SSE loss function</span></span>
-<span id="cb678-8"><a href="boosting.html#cb678-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.trees =</span> <span class="dv">500</span>,</span>
-<span id="cb678-9"><a href="boosting.html#cb678-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">shrinkage =</span> <span class="fl">0.1</span>,</span>
-<span id="cb678-10"><a href="boosting.html#cb678-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">interaction.depth =</span> <span class="dv">3</span>,</span>
-<span id="cb678-11"><a href="boosting.html#cb678-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.minobsinnode =</span> <span class="dv">10</span>,</span>
-<span id="cb678-12"><a href="boosting.html#cb678-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">cv.folds =</span> <span class="dv">10</span></span>
-<span id="cb678-13"><a href="boosting.html#cb678-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb678-14"><a href="boosting.html#cb678-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb678-15"><a href="boosting.html#cb678-15" aria-hidden="true" tabindex="-1"></a><span class="co"># find index for number trees with minimum CV error</span></span>
-<span id="cb678-16"><a href="boosting.html#cb678-16" aria-hidden="true" tabindex="-1"></a>best <span class="ot">&lt;-</span> <span class="fu">which.min</span>(md1_gbm<span class="sc">$</span>cv.error)</span>
-<span id="cb678-17"><a href="boosting.html#cb678-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb678-18"><a href="boosting.html#cb678-18" aria-hidden="true" tabindex="-1"></a><span class="co"># get MSE and compute RMSE</span></span>
-<span id="cb678-19"><a href="boosting.html#cb678-19" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(md1_gbm<span class="sc">$</span>cv.error[best])</span></code></pre></div>
+<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="boosting.html#cb679-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
+<span id="cb679-2"><a href="boosting.html#cb679-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb679-3"><a href="boosting.html#cb679-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb679-4"><a href="boosting.html#cb679-4" aria-hidden="true" tabindex="-1"></a>md1_gbm <span class="ot">&lt;-</span> <span class="fu">gbm</span>(</span>
+<span id="cb679-5"><a href="boosting.html#cb679-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> Sales <span class="sc">~</span> .,</span>
+<span id="cb679-6"><a href="boosting.html#cb679-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> cs_train,</span>
+<span id="cb679-7"><a href="boosting.html#cb679-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,  <span class="co"># SSE loss function</span></span>
+<span id="cb679-8"><a href="boosting.html#cb679-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.trees =</span> <span class="dv">500</span>,</span>
+<span id="cb679-9"><a href="boosting.html#cb679-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">shrinkage =</span> <span class="fl">0.1</span>,</span>
+<span id="cb679-10"><a href="boosting.html#cb679-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">interaction.depth =</span> <span class="dv">3</span>,</span>
+<span id="cb679-11"><a href="boosting.html#cb679-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.minobsinnode =</span> <span class="dv">10</span>,</span>
+<span id="cb679-12"><a href="boosting.html#cb679-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">cv.folds =</span> <span class="dv">10</span></span>
+<span id="cb679-13"><a href="boosting.html#cb679-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb679-14"><a href="boosting.html#cb679-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb679-15"><a href="boosting.html#cb679-15" aria-hidden="true" tabindex="-1"></a><span class="co"># find index for number trees with minimum CV error</span></span>
+<span id="cb679-16"><a href="boosting.html#cb679-16" aria-hidden="true" tabindex="-1"></a>best <span class="ot">&lt;-</span> <span class="fu">which.min</span>(md1_gbm<span class="sc">$</span>cv.error)</span>
+<span id="cb679-17"><a href="boosting.html#cb679-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb679-18"><a href="boosting.html#cb679-18" aria-hidden="true" tabindex="-1"></a><span class="co"># get MSE and compute RMSE</span></span>
+<span id="cb679-19"><a href="boosting.html#cb679-19" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(md1_gbm<span class="sc">$</span>cv.error[best])</span></code></pre></div>
 <pre><code>[1] 1.281917</code></pre>
 <p>Nuestros resultados muestra un SSE obtenido mediante validación cruzada de 1.28 que se alcanza con 120 árboles.</p>
-<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb680-1"><a href="boosting.html#cb680-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot error curve</span></span>
-<span id="cb680-2"><a href="boosting.html#cb680-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gbm.perf</span>(md1_gbm, <span class="at">method =</span> <span class="st">&quot;cv&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-304-1.png" width="672" /></p>
+<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb681-1"><a href="boosting.html#cb681-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot error curve</span></span>
+<span id="cb681-2"><a href="boosting.html#cb681-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gbm.perf</span>(md1_gbm, <span class="at">method =</span> <span class="st">&quot;cv&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-303-1.png" width="672" /></p>
 <pre><code>[1] 120</code></pre>
 <p>También podemos hacer lo mismo con <code>caret</code></p>
-<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb682-1"><a href="boosting.html#cb682-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb682-2"><a href="boosting.html#cb682-2" aria-hidden="true" tabindex="-1"></a>garbage <span class="ot">&lt;-</span> <span class="fu">capture.output</span>(</span>
-<span id="cb682-3"><a href="boosting.html#cb682-3" aria-hidden="true" tabindex="-1"></a>cs_mdl_gbm <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
-<span id="cb682-4"><a href="boosting.html#cb682-4" aria-hidden="true" tabindex="-1"></a>   Sales <span class="sc">~</span> ., </span>
-<span id="cb682-5"><a href="boosting.html#cb682-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> cs_train, </span>
-<span id="cb682-6"><a href="boosting.html#cb682-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">method =</span> <span class="st">&quot;gbm&quot;</span>,</span>
-<span id="cb682-7"><a href="boosting.html#cb682-7" aria-hidden="true" tabindex="-1"></a>   <span class="at">tuneLength =</span> <span class="dv">5</span>,</span>
-<span id="cb682-8"><a href="boosting.html#cb682-8" aria-hidden="true" tabindex="-1"></a>   <span class="at">trControl =</span> cs_trControl</span>
-<span id="cb682-9"><a href="boosting.html#cb682-9" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb682-10"><a href="boosting.html#cb682-10" aria-hidden="true" tabindex="-1"></a>cs_mdl_gbm</span></code></pre></div>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="boosting.html#cb683-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb683-2"><a href="boosting.html#cb683-2" aria-hidden="true" tabindex="-1"></a>garbage <span class="ot">&lt;-</span> <span class="fu">capture.output</span>(</span>
+<span id="cb683-3"><a href="boosting.html#cb683-3" aria-hidden="true" tabindex="-1"></a>cs_mdl_gbm <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
+<span id="cb683-4"><a href="boosting.html#cb683-4" aria-hidden="true" tabindex="-1"></a>   Sales <span class="sc">~</span> ., </span>
+<span id="cb683-5"><a href="boosting.html#cb683-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> cs_train, </span>
+<span id="cb683-6"><a href="boosting.html#cb683-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">method =</span> <span class="st">&quot;gbm&quot;</span>,</span>
+<span id="cb683-7"><a href="boosting.html#cb683-7" aria-hidden="true" tabindex="-1"></a>   <span class="at">tuneLength =</span> <span class="dv">5</span>,</span>
+<span id="cb683-8"><a href="boosting.html#cb683-8" aria-hidden="true" tabindex="-1"></a>   <span class="at">trControl =</span> cs_trControl</span>
+<span id="cb683-9"><a href="boosting.html#cb683-9" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb683-10"><a href="boosting.html#cb683-10" aria-hidden="true" tabindex="-1"></a>cs_mdl_gbm</span></code></pre></div>
 <pre><code>Stochastic Gradient Boosting 
 
 321 samples
@@ -547,15 +550,12 @@ Resampling results across tuning parameters:
   5                  200      1.263445  0.8158033  1.0106345
   5                  250      1.273024  0.8124672  1.0213099
 
-Tuning parameter &#39;shrinkage&#39; was held constant at a value
- of 0.1
-Tuning parameter &#39;n.minobsinnode&#39; was held
- constant at a value of 10
-RMSE was used to select the optimal model using the
- smallest value.
-The final values used for the model were n.trees =
- 250, interaction.depth = 1, shrinkage = 0.1
- and n.minobsinnode = 10.</code></pre>
+Tuning parameter &#39;shrinkage&#39; was held constant at a value of 0.1
+Tuning
+ parameter &#39;n.minobsinnode&#39; was held constant at a value of 10
+RMSE was used to select the optimal model using the smallest value.
+The final values used for the model were n.trees = 250, interaction.depth =
+ 1, shrinkage = 0.1 and n.minobsinnode = 10.</code></pre>
 <p>Que no es tan fino y se obtienen diferentes resultados</p>
 </div>
 <div id="estrategia-general-de-tuning" class="section level3" number="14.3.3">
@@ -571,85 +571,85 @@ The final values used for the model were n.trees =
 </ol>
 <p>Ya hemos hecho los pasos (1) - (2) en el ejemplo anterior con nuestro primer modelo de GBM. A continuación, haremos (3) y evaluaremos el rendimiento de varios valores de tasa de aprendizaje entre 0.005 y 0.3. Nuestros resultados indican que una tasa de aprendizaje de 0.05 minimiza suficientemente nuestra función de pérdida y requiere 260 árboles.</p>
 <p>Todos nuestros modelos tardan un poco más de 3 segundos en entrenarse, por lo que no vemos ningún impacto significativo en el tiempo de entrenamiento según la tasa de aprendizaje.</p>
-<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="boosting.html#cb684-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create grid search</span></span>
-<span id="cb684-2"><a href="boosting.html#cb684-2" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb684-3"><a href="boosting.html#cb684-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">learning_rate =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>),</span>
-<span id="cb684-4"><a href="boosting.html#cb684-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">RMSE =</span> <span class="cn">NA</span>,</span>
-<span id="cb684-5"><a href="boosting.html#cb684-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">trees =</span> <span class="cn">NA</span>,</span>
-<span id="cb684-6"><a href="boosting.html#cb684-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Time =</span> <span class="cn">NA</span></span>
-<span id="cb684-7"><a href="boosting.html#cb684-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb684-8"><a href="boosting.html#cb684-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb684-9"><a href="boosting.html#cb684-9" aria-hidden="true" tabindex="-1"></a><span class="co"># execute grid search</span></span>
-<span id="cb684-10"><a href="boosting.html#cb684-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(hyper_grid))) {</span>
-<span id="cb684-11"><a href="boosting.html#cb684-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb684-12"><a href="boosting.html#cb684-12" aria-hidden="true" tabindex="-1"></a><span class="co"># fit gbm</span></span>
-<span id="cb684-13"><a href="boosting.html#cb684-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># for reproducibility</span></span>
-<span id="cb684-14"><a href="boosting.html#cb684-14" aria-hidden="true" tabindex="-1"></a>  train_time <span class="ot">&lt;-</span> <span class="fu">system.time</span>({</span>
-<span id="cb684-15"><a href="boosting.html#cb684-15" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">gbm</span>(</span>
-<span id="cb684-16"><a href="boosting.html#cb684-16" aria-hidden="true" tabindex="-1"></a>      Sales <span class="sc">~</span> ., </span>
-<span id="cb684-17"><a href="boosting.html#cb684-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> cs_train, </span>
-<span id="cb684-18"><a href="boosting.html#cb684-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
-<span id="cb684-19"><a href="boosting.html#cb684-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">n.trees =</span> <span class="dv">500</span>, </span>
-<span id="cb684-20"><a href="boosting.html#cb684-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">shrinkage =</span> hyper_grid<span class="sc">$</span>learning_rate[i], </span>
-<span id="cb684-21"><a href="boosting.html#cb684-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">interaction.depth =</span> <span class="dv">3</span>, </span>
-<span id="cb684-22"><a href="boosting.html#cb684-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">n.minobsinnode =</span> <span class="dv">10</span>,</span>
-<span id="cb684-23"><a href="boosting.html#cb684-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">cv.folds =</span> <span class="dv">10</span> </span>
-<span id="cb684-24"><a href="boosting.html#cb684-24" aria-hidden="true" tabindex="-1"></a>   )</span>
-<span id="cb684-25"><a href="boosting.html#cb684-25" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb684-26"><a href="boosting.html#cb684-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb684-27"><a href="boosting.html#cb684-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add SSE, trees, and training time to results</span></span>
-<span id="cb684-28"><a href="boosting.html#cb684-28" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>RMSE[i]  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">min</span>(m<span class="sc">$</span>cv.error))</span>
-<span id="cb684-29"><a href="boosting.html#cb684-29" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>trees[i] <span class="ot">&lt;-</span> <span class="fu">which.min</span>(m<span class="sc">$</span>cv.error)</span>
-<span id="cb684-30"><a href="boosting.html#cb684-30" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>Time[i]  <span class="ot">&lt;-</span> train_time[[<span class="st">&quot;elapsed&quot;</span>]]</span>
-<span id="cb684-31"><a href="boosting.html#cb684-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb684-32"><a href="boosting.html#cb684-32" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb684-33"><a href="boosting.html#cb684-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb684-34"><a href="boosting.html#cb684-34" aria-hidden="true" tabindex="-1"></a><span class="co"># results</span></span>
-<span id="cb684-35"><a href="boosting.html#cb684-35" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(hyper_grid, RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb685-1"><a href="boosting.html#cb685-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create grid search</span></span>
+<span id="cb685-2"><a href="boosting.html#cb685-2" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb685-3"><a href="boosting.html#cb685-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">learning_rate =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>),</span>
+<span id="cb685-4"><a href="boosting.html#cb685-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">RMSE =</span> <span class="cn">NA</span>,</span>
+<span id="cb685-5"><a href="boosting.html#cb685-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">trees =</span> <span class="cn">NA</span>,</span>
+<span id="cb685-6"><a href="boosting.html#cb685-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Time =</span> <span class="cn">NA</span></span>
+<span id="cb685-7"><a href="boosting.html#cb685-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb685-8"><a href="boosting.html#cb685-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb685-9"><a href="boosting.html#cb685-9" aria-hidden="true" tabindex="-1"></a><span class="co"># execute grid search</span></span>
+<span id="cb685-10"><a href="boosting.html#cb685-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(hyper_grid))) {</span>
+<span id="cb685-11"><a href="boosting.html#cb685-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb685-12"><a href="boosting.html#cb685-12" aria-hidden="true" tabindex="-1"></a><span class="co"># fit gbm</span></span>
+<span id="cb685-13"><a href="boosting.html#cb685-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># for reproducibility</span></span>
+<span id="cb685-14"><a href="boosting.html#cb685-14" aria-hidden="true" tabindex="-1"></a>  train_time <span class="ot">&lt;-</span> <span class="fu">system.time</span>({</span>
+<span id="cb685-15"><a href="boosting.html#cb685-15" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">gbm</span>(</span>
+<span id="cb685-16"><a href="boosting.html#cb685-16" aria-hidden="true" tabindex="-1"></a>      Sales <span class="sc">~</span> ., </span>
+<span id="cb685-17"><a href="boosting.html#cb685-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> cs_train, </span>
+<span id="cb685-18"><a href="boosting.html#cb685-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
+<span id="cb685-19"><a href="boosting.html#cb685-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">n.trees =</span> <span class="dv">500</span>, </span>
+<span id="cb685-20"><a href="boosting.html#cb685-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">shrinkage =</span> hyper_grid<span class="sc">$</span>learning_rate[i], </span>
+<span id="cb685-21"><a href="boosting.html#cb685-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">interaction.depth =</span> <span class="dv">3</span>, </span>
+<span id="cb685-22"><a href="boosting.html#cb685-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">n.minobsinnode =</span> <span class="dv">10</span>,</span>
+<span id="cb685-23"><a href="boosting.html#cb685-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">cv.folds =</span> <span class="dv">10</span> </span>
+<span id="cb685-24"><a href="boosting.html#cb685-24" aria-hidden="true" tabindex="-1"></a>   )</span>
+<span id="cb685-25"><a href="boosting.html#cb685-25" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb685-26"><a href="boosting.html#cb685-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb685-27"><a href="boosting.html#cb685-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add SSE, trees, and training time to results</span></span>
+<span id="cb685-28"><a href="boosting.html#cb685-28" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>RMSE[i]  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">min</span>(m<span class="sc">$</span>cv.error))</span>
+<span id="cb685-29"><a href="boosting.html#cb685-29" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>trees[i] <span class="ot">&lt;-</span> <span class="fu">which.min</span>(m<span class="sc">$</span>cv.error)</span>
+<span id="cb685-30"><a href="boosting.html#cb685-30" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>Time[i]  <span class="ot">&lt;-</span> train_time[[<span class="st">&quot;elapsed&quot;</span>]]</span>
+<span id="cb685-31"><a href="boosting.html#cb685-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb685-32"><a href="boosting.html#cb685-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb685-33"><a href="boosting.html#cb685-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb685-34"><a href="boosting.html#cb685-34" aria-hidden="true" tabindex="-1"></a><span class="co"># results</span></span>
+<span id="cb685-35"><a href="boosting.html#cb685-35" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(hyper_grid, RMSE)</span></code></pre></div>
 <pre><code>  learning_rate     RMSE trees Time
-1         0.050 1.217178   260 5.16
-2         0.100 1.229606    97 4.86
-3         0.300 1.324525    49 5.50
-4         0.010 1.380635   500 5.01
-5         0.005 1.717680   500 4.73</code></pre>
+1         0.050 1.217178   260 5.18
+2         0.100 1.229606    97 4.49
+3         0.300 1.324525    49 4.92
+4         0.010 1.380635   500 5.31
+5         0.005 1.717680   500 4.56</code></pre>
 <p>A continuación, estableceremos nuestra tasa de aprendizaje en el nivel óptimo (0.05) y el número de árboles a 260 para ajustar los hiperparámetros específicos del árbol (<code>interaction.depth</code> y <code>n.minobsinnode</code>). El ajuste de los parámetros específicos del árbol nos proporciona una reducción adicional del RMSE si consideramos <code>n.minobsinnode=5</code> (afinamos más en casos raros).</p>
-<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="boosting.html#cb686-1" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb686-2"><a href="boosting.html#cb686-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.trees =</span> <span class="dv">250</span>,</span>
-<span id="cb686-3"><a href="boosting.html#cb686-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">shrinkage =</span> <span class="fl">0.05</span>,</span>
-<span id="cb686-4"><a href="boosting.html#cb686-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">interaction.depth =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>),</span>
-<span id="cb686-5"><a href="boosting.html#cb686-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.minobsinnode =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>)</span>
-<span id="cb686-6"><a href="boosting.html#cb686-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb686-7"><a href="boosting.html#cb686-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb686-8"><a href="boosting.html#cb686-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create model fit function</span></span>
-<span id="cb686-9"><a href="boosting.html#cb686-9" aria-hidden="true" tabindex="-1"></a>model_fit <span class="ot">&lt;-</span> <span class="cf">function</span>(n.trees, shrinkage, interaction.depth, n.minobsinnode) {</span>
-<span id="cb686-10"><a href="boosting.html#cb686-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb686-11"><a href="boosting.html#cb686-11" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">gbm</span>(</span>
-<span id="cb686-12"><a href="boosting.html#cb686-12" aria-hidden="true" tabindex="-1"></a>    Sales <span class="sc">~</span> ., </span>
-<span id="cb686-13"><a href="boosting.html#cb686-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> cs_train, </span>
-<span id="cb686-14"><a href="boosting.html#cb686-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
-<span id="cb686-15"><a href="boosting.html#cb686-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.trees =</span> n.trees,</span>
-<span id="cb686-16"><a href="boosting.html#cb686-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">shrinkage =</span> shrinkage,</span>
-<span id="cb686-17"><a href="boosting.html#cb686-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">interaction.depth =</span> interaction.depth,</span>
-<span id="cb686-18"><a href="boosting.html#cb686-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.minobsinnode =</span> n.minobsinnode,</span>
-<span id="cb686-19"><a href="boosting.html#cb686-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">cv.folds =</span> <span class="dv">10</span></span>
-<span id="cb686-20"><a href="boosting.html#cb686-20" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb686-21"><a href="boosting.html#cb686-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># compute RMSE</span></span>
-<span id="cb686-22"><a href="boosting.html#cb686-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">min</span>(m<span class="sc">$</span>cv.error))</span>
-<span id="cb686-23"><a href="boosting.html#cb686-23" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb686-24"><a href="boosting.html#cb686-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb686-25"><a href="boosting.html#cb686-25" aria-hidden="true" tabindex="-1"></a><span class="co"># perform search grid with functional programming</span></span>
-<span id="cb686-26"><a href="boosting.html#cb686-26" aria-hidden="true" tabindex="-1"></a>hyper_grid<span class="sc">$</span>rmse <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">pmap_dbl</span>(</span>
-<span id="cb686-27"><a href="boosting.html#cb686-27" aria-hidden="true" tabindex="-1"></a>  hyper_grid,</span>
-<span id="cb686-28"><a href="boosting.html#cb686-28" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> <span class="fu">model_fit</span>(</span>
-<span id="cb686-29"><a href="boosting.html#cb686-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.trees =</span> ..<span class="dv">1</span>,</span>
-<span id="cb686-30"><a href="boosting.html#cb686-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">shrinkage =</span> ..<span class="dv">2</span>,</span>
-<span id="cb686-31"><a href="boosting.html#cb686-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">interaction.depth =</span> ..<span class="dv">3</span>,</span>
-<span id="cb686-32"><a href="boosting.html#cb686-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.minobsinnode =</span> ..<span class="dv">4</span></span>
-<span id="cb686-33"><a href="boosting.html#cb686-33" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb686-34"><a href="boosting.html#cb686-34" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb686-35"><a href="boosting.html#cb686-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb686-36"><a href="boosting.html#cb686-36" aria-hidden="true" tabindex="-1"></a><span class="co"># results</span></span>
-<span id="cb686-37"><a href="boosting.html#cb686-37" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(hyper_grid, rmse)</span></code></pre></div>
+<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb687-1"><a href="boosting.html#cb687-1" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb687-2"><a href="boosting.html#cb687-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.trees =</span> <span class="dv">250</span>,</span>
+<span id="cb687-3"><a href="boosting.html#cb687-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">shrinkage =</span> <span class="fl">0.05</span>,</span>
+<span id="cb687-4"><a href="boosting.html#cb687-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">interaction.depth =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>),</span>
+<span id="cb687-5"><a href="boosting.html#cb687-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.minobsinnode =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>)</span>
+<span id="cb687-6"><a href="boosting.html#cb687-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb687-7"><a href="boosting.html#cb687-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb687-8"><a href="boosting.html#cb687-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create model fit function</span></span>
+<span id="cb687-9"><a href="boosting.html#cb687-9" aria-hidden="true" tabindex="-1"></a>model_fit <span class="ot">&lt;-</span> <span class="cf">function</span>(n.trees, shrinkage, interaction.depth, n.minobsinnode) {</span>
+<span id="cb687-10"><a href="boosting.html#cb687-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb687-11"><a href="boosting.html#cb687-11" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">gbm</span>(</span>
+<span id="cb687-12"><a href="boosting.html#cb687-12" aria-hidden="true" tabindex="-1"></a>    Sales <span class="sc">~</span> ., </span>
+<span id="cb687-13"><a href="boosting.html#cb687-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> cs_train, </span>
+<span id="cb687-14"><a href="boosting.html#cb687-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
+<span id="cb687-15"><a href="boosting.html#cb687-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.trees =</span> n.trees,</span>
+<span id="cb687-16"><a href="boosting.html#cb687-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">shrinkage =</span> shrinkage,</span>
+<span id="cb687-17"><a href="boosting.html#cb687-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">interaction.depth =</span> interaction.depth,</span>
+<span id="cb687-18"><a href="boosting.html#cb687-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.minobsinnode =</span> n.minobsinnode,</span>
+<span id="cb687-19"><a href="boosting.html#cb687-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">cv.folds =</span> <span class="dv">10</span></span>
+<span id="cb687-20"><a href="boosting.html#cb687-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb687-21"><a href="boosting.html#cb687-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># compute RMSE</span></span>
+<span id="cb687-22"><a href="boosting.html#cb687-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">min</span>(m<span class="sc">$</span>cv.error))</span>
+<span id="cb687-23"><a href="boosting.html#cb687-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb687-24"><a href="boosting.html#cb687-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb687-25"><a href="boosting.html#cb687-25" aria-hidden="true" tabindex="-1"></a><span class="co"># perform search grid with functional programming</span></span>
+<span id="cb687-26"><a href="boosting.html#cb687-26" aria-hidden="true" tabindex="-1"></a>hyper_grid<span class="sc">$</span>rmse <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">pmap_dbl</span>(</span>
+<span id="cb687-27"><a href="boosting.html#cb687-27" aria-hidden="true" tabindex="-1"></a>  hyper_grid,</span>
+<span id="cb687-28"><a href="boosting.html#cb687-28" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> <span class="fu">model_fit</span>(</span>
+<span id="cb687-29"><a href="boosting.html#cb687-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.trees =</span> ..<span class="dv">1</span>,</span>
+<span id="cb687-30"><a href="boosting.html#cb687-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">shrinkage =</span> ..<span class="dv">2</span>,</span>
+<span id="cb687-31"><a href="boosting.html#cb687-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">interaction.depth =</span> ..<span class="dv">3</span>,</span>
+<span id="cb687-32"><a href="boosting.html#cb687-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.minobsinnode =</span> ..<span class="dv">4</span></span>
+<span id="cb687-33"><a href="boosting.html#cb687-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb687-34"><a href="boosting.html#cb687-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb687-35"><a href="boosting.html#cb687-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb687-36"><a href="boosting.html#cb687-36" aria-hidden="true" tabindex="-1"></a><span class="co"># results</span></span>
+<span id="cb687-37"><a href="boosting.html#cb687-37" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(hyper_grid, rmse)</span></code></pre></div>
 <pre><code>  n.trees shrinkage interaction.depth n.minobsinnode     rmse
 1     250      0.05                 3              5 1.161167
 2     250      0.05                 5              5 1.208882
@@ -679,58 +679,58 @@ The final values used for the model were n.trees =
 </ul>
 <p>En general, el muestreo “agresivo” de filas, como la selección de solo el 50% o menos de los datos de entrenamiento, ha demostrado ser beneficioso y los valores típicos oscilan entre 0.5 y 0.8. El muestreo de columnas y el impacto en el rendimiento depende en gran medida de la naturaleza de los datos y de si existe una fuerte multicolinealidad o muchas características ruidosas. Similar a la selección de <code>mtry</code> en el <em>random forest</em>, si hay menos predictores relevantes (más datos ruidosos), los valores más altos de submuestreo de columnas tienden a funcionar mejor porque hace que sea más probable seleccionar aquellas características con la señal más fuerte. Cuando hay muchos predictores relevantes, los valores más bajos de submuestreo de columnas tienden a funcionar bien.</p>
 <p>Veamos cómo hacer este proceso con <code>h20</code> (no ejecutado, muy costoso computacionalmente)</p>
-<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="boosting.html#cb688-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(h2o)</span>
-<span id="cb688-2"><a href="boosting.html#cb688-2" aria-hidden="true" tabindex="-1"></a><span class="co"># refined hyperparameter grid</span></span>
-<span id="cb688-3"><a href="boosting.html#cb688-3" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb688-4"><a href="boosting.html#cb688-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_rate =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>),              <span class="co"># row subsampling</span></span>
-<span id="cb688-5"><a href="boosting.html#cb688-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_sample_rate =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>),          <span class="co"># col subsampling for each split</span></span>
-<span id="cb688-6"><a href="boosting.html#cb688-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_sample_rate_per_tree =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>)  <span class="co"># col subsampling for each tree</span></span>
-<span id="cb688-7"><a href="boosting.html#cb688-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb688-8"><a href="boosting.html#cb688-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb688-9"><a href="boosting.html#cb688-9" aria-hidden="true" tabindex="-1"></a><span class="co"># random grid search strategy</span></span>
-<span id="cb688-10"><a href="boosting.html#cb688-10" aria-hidden="true" tabindex="-1"></a>search_criteria <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb688-11"><a href="boosting.html#cb688-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">strategy =</span> <span class="st">&quot;RandomDiscrete&quot;</span>,</span>
-<span id="cb688-12"><a href="boosting.html#cb688-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">stopping_metric =</span> <span class="st">&quot;mse&quot;</span>,</span>
-<span id="cb688-13"><a href="boosting.html#cb688-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">stopping_tolerance =</span> <span class="fl">0.001</span>,   </span>
-<span id="cb688-14"><a href="boosting.html#cb688-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">stopping_rounds =</span> <span class="dv">10</span>,         </span>
-<span id="cb688-15"><a href="boosting.html#cb688-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_runtime_secs =</span> <span class="dv">60</span><span class="sc">*</span><span class="dv">60</span>      </span>
-<span id="cb688-16"><a href="boosting.html#cb688-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb688-17"><a href="boosting.html#cb688-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb688-18"><a href="boosting.html#cb688-18" aria-hidden="true" tabindex="-1"></a><span class="co"># active connection to h2o (required)</span></span>
-<span id="cb688-19"><a href="boosting.html#cb688-19" aria-hidden="true" tabindex="-1"></a><span class="fu">h2o.init</span>(<span class="at">max_mem_size =</span> <span class="st">&quot;10g&quot;</span>)</span>
-<span id="cb688-20"><a href="boosting.html#cb688-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb688-21"><a href="boosting.html#cb688-21" aria-hidden="true" tabindex="-1"></a><span class="co"># define variables</span></span>
-<span id="cb688-22"><a href="boosting.html#cb688-22" aria-hidden="true" tabindex="-1"></a>train_h2o <span class="ot">&lt;-</span> <span class="fu">as.h2o</span>(cs_train)</span>
-<span id="cb688-23"><a href="boosting.html#cb688-23" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="st">&quot;Sales&quot;</span></span>
-<span id="cb688-24"><a href="boosting.html#cb688-24" aria-hidden="true" tabindex="-1"></a>predictors <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">colnames</span>(cs_train), response)</span>
-<span id="cb688-25"><a href="boosting.html#cb688-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb688-26"><a href="boosting.html#cb688-26" aria-hidden="true" tabindex="-1"></a><span class="co"># perform grid search </span></span>
-<span id="cb688-27"><a href="boosting.html#cb688-27" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">h2o.grid</span>(</span>
-<span id="cb688-28"><a href="boosting.html#cb688-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">algorithm =</span> <span class="st">&quot;gbm&quot;</span>,</span>
-<span id="cb688-29"><a href="boosting.html#cb688-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">grid_id =</span> <span class="st">&quot;gbm_grid&quot;</span>,</span>
-<span id="cb688-30"><a href="boosting.html#cb688-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> predictors, </span>
-<span id="cb688-31"><a href="boosting.html#cb688-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> response,</span>
-<span id="cb688-32"><a href="boosting.html#cb688-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">training_frame =</span> train_h2o,</span>
-<span id="cb688-33"><a href="boosting.html#cb688-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">hyper_params =</span> hyper_grid,</span>
-<span id="cb688-34"><a href="boosting.html#cb688-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">ntrees =</span> <span class="dv">500</span>,</span>
-<span id="cb688-35"><a href="boosting.html#cb688-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">learn_rate =</span> <span class="fl">0.01</span>,</span>
-<span id="cb688-36"><a href="boosting.html#cb688-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_depth =</span> <span class="dv">7</span>,</span>
-<span id="cb688-37"><a href="boosting.html#cb688-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_rows =</span> <span class="dv">5</span>,</span>
-<span id="cb688-38"><a href="boosting.html#cb688-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">nfolds =</span> <span class="dv">10</span>,</span>
-<span id="cb688-39"><a href="boosting.html#cb688-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">stopping_rounds =</span> <span class="dv">10</span>,</span>
-<span id="cb688-40"><a href="boosting.html#cb688-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">stopping_tolerance =</span> <span class="dv">0</span>,</span>
-<span id="cb688-41"><a href="boosting.html#cb688-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">search_criteria =</span> search_criteria,</span>
-<span id="cb688-42"><a href="boosting.html#cb688-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span></span>
-<span id="cb688-43"><a href="boosting.html#cb688-43" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb688-44"><a href="boosting.html#cb688-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb688-45"><a href="boosting.html#cb688-45" aria-hidden="true" tabindex="-1"></a><span class="co"># collect the results and sort by our model performance metric of choice</span></span>
-<span id="cb688-46"><a href="boosting.html#cb688-46" aria-hidden="true" tabindex="-1"></a>grid_perf <span class="ot">&lt;-</span> <span class="fu">h2o.getGrid</span>(</span>
-<span id="cb688-47"><a href="boosting.html#cb688-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">grid_id =</span> <span class="st">&quot;gbm_grid&quot;</span>, </span>
-<span id="cb688-48"><a href="boosting.html#cb688-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">sort_by =</span> <span class="st">&quot;mse&quot;</span>, </span>
-<span id="cb688-49"><a href="boosting.html#cb688-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">decreasing =</span> <span class="cn">FALSE</span></span>
-<span id="cb688-50"><a href="boosting.html#cb688-50" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb688-51"><a href="boosting.html#cb688-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb688-52"><a href="boosting.html#cb688-52" aria-hidden="true" tabindex="-1"></a>grid_perf</span></code></pre></div>
+<div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb689-1"><a href="boosting.html#cb689-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(h2o)</span>
+<span id="cb689-2"><a href="boosting.html#cb689-2" aria-hidden="true" tabindex="-1"></a><span class="co"># refined hyperparameter grid</span></span>
+<span id="cb689-3"><a href="boosting.html#cb689-3" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb689-4"><a href="boosting.html#cb689-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_rate =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>),              <span class="co"># row subsampling</span></span>
+<span id="cb689-5"><a href="boosting.html#cb689-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_sample_rate =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>),          <span class="co"># col subsampling for each split</span></span>
+<span id="cb689-6"><a href="boosting.html#cb689-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_sample_rate_per_tree =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>)  <span class="co"># col subsampling for each tree</span></span>
+<span id="cb689-7"><a href="boosting.html#cb689-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb689-8"><a href="boosting.html#cb689-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb689-9"><a href="boosting.html#cb689-9" aria-hidden="true" tabindex="-1"></a><span class="co"># random grid search strategy</span></span>
+<span id="cb689-10"><a href="boosting.html#cb689-10" aria-hidden="true" tabindex="-1"></a>search_criteria <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb689-11"><a href="boosting.html#cb689-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">strategy =</span> <span class="st">&quot;RandomDiscrete&quot;</span>,</span>
+<span id="cb689-12"><a href="boosting.html#cb689-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">stopping_metric =</span> <span class="st">&quot;mse&quot;</span>,</span>
+<span id="cb689-13"><a href="boosting.html#cb689-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">stopping_tolerance =</span> <span class="fl">0.001</span>,   </span>
+<span id="cb689-14"><a href="boosting.html#cb689-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">stopping_rounds =</span> <span class="dv">10</span>,         </span>
+<span id="cb689-15"><a href="boosting.html#cb689-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_runtime_secs =</span> <span class="dv">60</span><span class="sc">*</span><span class="dv">60</span>      </span>
+<span id="cb689-16"><a href="boosting.html#cb689-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb689-17"><a href="boosting.html#cb689-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb689-18"><a href="boosting.html#cb689-18" aria-hidden="true" tabindex="-1"></a><span class="co"># active connection to h2o (required)</span></span>
+<span id="cb689-19"><a href="boosting.html#cb689-19" aria-hidden="true" tabindex="-1"></a><span class="fu">h2o.init</span>(<span class="at">max_mem_size =</span> <span class="st">&quot;10g&quot;</span>)</span>
+<span id="cb689-20"><a href="boosting.html#cb689-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb689-21"><a href="boosting.html#cb689-21" aria-hidden="true" tabindex="-1"></a><span class="co"># define variables</span></span>
+<span id="cb689-22"><a href="boosting.html#cb689-22" aria-hidden="true" tabindex="-1"></a>train_h2o <span class="ot">&lt;-</span> <span class="fu">as.h2o</span>(cs_train)</span>
+<span id="cb689-23"><a href="boosting.html#cb689-23" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="st">&quot;Sales&quot;</span></span>
+<span id="cb689-24"><a href="boosting.html#cb689-24" aria-hidden="true" tabindex="-1"></a>predictors <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">colnames</span>(cs_train), response)</span>
+<span id="cb689-25"><a href="boosting.html#cb689-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb689-26"><a href="boosting.html#cb689-26" aria-hidden="true" tabindex="-1"></a><span class="co"># perform grid search </span></span>
+<span id="cb689-27"><a href="boosting.html#cb689-27" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">h2o.grid</span>(</span>
+<span id="cb689-28"><a href="boosting.html#cb689-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">algorithm =</span> <span class="st">&quot;gbm&quot;</span>,</span>
+<span id="cb689-29"><a href="boosting.html#cb689-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">grid_id =</span> <span class="st">&quot;gbm_grid&quot;</span>,</span>
+<span id="cb689-30"><a href="boosting.html#cb689-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> predictors, </span>
+<span id="cb689-31"><a href="boosting.html#cb689-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> response,</span>
+<span id="cb689-32"><a href="boosting.html#cb689-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">training_frame =</span> train_h2o,</span>
+<span id="cb689-33"><a href="boosting.html#cb689-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">hyper_params =</span> hyper_grid,</span>
+<span id="cb689-34"><a href="boosting.html#cb689-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">ntrees =</span> <span class="dv">500</span>,</span>
+<span id="cb689-35"><a href="boosting.html#cb689-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">learn_rate =</span> <span class="fl">0.01</span>,</span>
+<span id="cb689-36"><a href="boosting.html#cb689-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_depth =</span> <span class="dv">7</span>,</span>
+<span id="cb689-37"><a href="boosting.html#cb689-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_rows =</span> <span class="dv">5</span>,</span>
+<span id="cb689-38"><a href="boosting.html#cb689-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">nfolds =</span> <span class="dv">10</span>,</span>
+<span id="cb689-39"><a href="boosting.html#cb689-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">stopping_rounds =</span> <span class="dv">10</span>,</span>
+<span id="cb689-40"><a href="boosting.html#cb689-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">stopping_tolerance =</span> <span class="dv">0</span>,</span>
+<span id="cb689-41"><a href="boosting.html#cb689-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">search_criteria =</span> search_criteria,</span>
+<span id="cb689-42"><a href="boosting.html#cb689-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span></span>
+<span id="cb689-43"><a href="boosting.html#cb689-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb689-44"><a href="boosting.html#cb689-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb689-45"><a href="boosting.html#cb689-45" aria-hidden="true" tabindex="-1"></a><span class="co"># collect the results and sort by our model performance metric of choice</span></span>
+<span id="cb689-46"><a href="boosting.html#cb689-46" aria-hidden="true" tabindex="-1"></a>grid_perf <span class="ot">&lt;-</span> <span class="fu">h2o.getGrid</span>(</span>
+<span id="cb689-47"><a href="boosting.html#cb689-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">grid_id =</span> <span class="st">&quot;gbm_grid&quot;</span>, </span>
+<span id="cb689-48"><a href="boosting.html#cb689-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">sort_by =</span> <span class="st">&quot;mse&quot;</span>, </span>
+<span id="cb689-49"><a href="boosting.html#cb689-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">decreasing =</span> <span class="cn">FALSE</span></span>
+<span id="cb689-50"><a href="boosting.html#cb689-50" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb689-51"><a href="boosting.html#cb689-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb689-52"><a href="boosting.html#cb689-52" aria-hidden="true" tabindex="-1"></a>grid_perf</span></code></pre></div>
 </div>
 </div>
 <div id="xgboost" class="section level2" number="14.5">
@@ -746,32 +746,21 @@ The final values used for the model were n.trees =
 <li><strong>Múltiples lenguajes</strong>: XGBoost ofrece implementaciones en R, Python, Julia, Scala, Java y C ++.</li>
 </ul>
 <p>Además de estar implementado en distintos lenguajes, XGboost se puede llevar a cabo de varias formas dentro de R. La implementación principal de R es el paquete <code>xgboost</code>; sin embargo, también se puede usar <code>caret</code> (basta usar <code>method="xgbTree"</code>). Podríamos usar este código:</p>
-<div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb689-1"><a href="boosting.html#cb689-1" aria-hidden="true" tabindex="-1"></a>tune_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">nrounds =</span> <span class="dv">200</span>,</span>
-<span id="cb689-2"><a href="boosting.html#cb689-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">max_depth =</span> <span class="dv">5</span>,</span>
-<span id="cb689-3"><a href="boosting.html#cb689-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">eta =</span> <span class="fl">0.05</span>,</span>
-<span id="cb689-4"><a href="boosting.html#cb689-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">gamma =</span> <span class="fl">0.01</span>,</span>
-<span id="cb689-5"><a href="boosting.html#cb689-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">colsample_bytree =</span> <span class="fl">0.75</span>,</span>
-<span id="cb689-6"><a href="boosting.html#cb689-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">min_child_weight =</span> <span class="dv">0</span>,</span>
-<span id="cb689-7"><a href="boosting.html#cb689-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">subsample =</span> <span class="fl">0.5</span>)</span>
-<span id="cb689-8"><a href="boosting.html#cb689-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb689-9"><a href="boosting.html#cb689-9" aria-hidden="true" tabindex="-1"></a>rf_fit <span class="ot">&lt;-</span> <span class="fu">train</span>(Sales <span class="sc">~</span>., </span>
-<span id="cb689-10"><a href="boosting.html#cb689-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> cs_train, </span>
-<span id="cb689-11"><a href="boosting.html#cb689-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">method =</span> <span class="st">&quot;xgbTree&quot;</span>,</span>
-<span id="cb689-12"><a href="boosting.html#cb689-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">trControl=</span>cs_trControl,</span>
-<span id="cb689-13"><a href="boosting.html#cb689-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">tuneGrid =</span> tune_grid,</span>
-<span id="cb689-14"><a href="boosting.html#cb689-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">tuneLength =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>[13:06:37] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
-[13:06:39] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
-[13:06:41] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
-[13:06:41] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
-[13:06:42] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
-[13:06:43] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
-[13:06:46] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
-[13:06:46] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
-[13:06:47] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
-[13:06:47] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.
-[13:06:49] WARNING: amalgamation/../src/objective/regression_obj.cu:170: reg:linear is now deprecated in favor of reg:squarederror.</code></pre>
-<div class="sourceCode" id="cb691"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb691-1"><a href="boosting.html#cb691-1" aria-hidden="true" tabindex="-1"></a>rf_fit</span></code></pre></div>
+<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="boosting.html#cb690-1" aria-hidden="true" tabindex="-1"></a>tune_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">nrounds =</span> <span class="dv">200</span>,</span>
+<span id="cb690-2"><a href="boosting.html#cb690-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">max_depth =</span> <span class="dv">5</span>,</span>
+<span id="cb690-3"><a href="boosting.html#cb690-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">eta =</span> <span class="fl">0.05</span>,</span>
+<span id="cb690-4"><a href="boosting.html#cb690-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">gamma =</span> <span class="fl">0.01</span>,</span>
+<span id="cb690-5"><a href="boosting.html#cb690-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">colsample_bytree =</span> <span class="fl">0.75</span>,</span>
+<span id="cb690-6"><a href="boosting.html#cb690-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">min_child_weight =</span> <span class="dv">0</span>,</span>
+<span id="cb690-7"><a href="boosting.html#cb690-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">subsample =</span> <span class="fl">0.5</span>)</span>
+<span id="cb690-8"><a href="boosting.html#cb690-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb690-9"><a href="boosting.html#cb690-9" aria-hidden="true" tabindex="-1"></a>rf_fit <span class="ot">&lt;-</span> <span class="fu">train</span>(Sales <span class="sc">~</span>., </span>
+<span id="cb690-10"><a href="boosting.html#cb690-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> cs_train, </span>
+<span id="cb690-11"><a href="boosting.html#cb690-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">method =</span> <span class="st">&quot;xgbTree&quot;</span>,</span>
+<span id="cb690-12"><a href="boosting.html#cb690-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">trControl=</span>cs_trControl,</span>
+<span id="cb690-13"><a href="boosting.html#cb690-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">tuneGrid =</span> tune_grid,</span>
+<span id="cb690-14"><a href="boosting.html#cb690-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb690-15"><a href="boosting.html#cb690-15" aria-hidden="true" tabindex="-1"></a>rf_fit</span></code></pre></div>
 <pre><code>eXtreme Gradient Boosting 
 
 321 samples
@@ -786,11 +775,10 @@ Resampling results:
   1.344485  0.7888624  1.059424
 
 Tuning parameter &#39;nrounds&#39; was held constant at a value of 200
-Tuning parameter &#39;max_depth&#39; was held
- value of 0.75
-Tuning parameter &#39;min_child_weight&#39; was held constant at a value of 0
 Tuning
- parameter &#39;subsample&#39; was held constant at a value of 0.5</code></pre>
+ held constant at a value of 0
+Tuning parameter &#39;subsample&#39; was held constant
+ at a value of 0.5</code></pre>
 <p>El paquete <code>h2o</code> también ofrece una implementación de XGBoost. Mostraremos cómo usar <code>xgboost</code>.</p>
 <p>Como se mencionó anteriormente, <code>xgboost</code> permite los hiperparámetros tradicionales para <em>boosting</em> y árboles de decisión que discutimos hemos descrito en la Sección @ref{boostingHiperparam} . Sin embargo, <code>xgboost</code> también proporciona hiperparámetros adicionales que pueden ayudar a reducir las posibilidades de sobreajuste, lo que genera menos variabilidad de predicción y, por lo tanto, una mayor precisión.</p>
 <div id="reguralización" class="section level3" number="14.5.1">
@@ -815,108 +803,108 @@ Tuning
 <li>Obtener el modelo “óptimo” final</li>
 </ol>
 <p>La ejecución de un modelo XGBoost con <code>xgboost</code> requiere una preparación adicional de datos. <code>xgboost</code> requiere una entrada matricial de las variables predictoras y la respuesta. En consecuencia, para proporcionar una entrada matricial de las variables, necesitamos codificar nuestras variables categóricas numéricamente (es decir, hacer <em>dummies</em>). Como ya sabemos, esto se puede hacer fácilmente con la librería <code>recipies</code></p>
-<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb693-1"><a href="boosting.html#cb693-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span>
-<span id="cb693-2"><a href="boosting.html#cb693-2" aria-hidden="true" tabindex="-1"></a>xgb_prep <span class="ot">&lt;-</span> <span class="fu">recipe</span>(Sales <span class="sc">~</span> ., <span class="at">data =</span> cs_train) <span class="sc">%&gt;%</span></span>
-<span id="cb693-3"><a href="boosting.html#cb693-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_integer</span>(<span class="fu">all_nominal</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb693-4"><a href="boosting.html#cb693-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prep</span>(<span class="at">training =</span> cs_train, <span class="at">retain =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb693-5"><a href="boosting.html#cb693-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">juice</span>()  <span class="co"># similar to bake</span></span>
-<span id="cb693-6"><a href="boosting.html#cb693-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb693-7"><a href="boosting.html#cb693-7" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(xgb_prep[<span class="fu">setdiff</span>(<span class="fu">names</span>(xgb_prep), <span class="st">&quot;Sales&quot;</span>)])</span>
-<span id="cb693-8"><a href="boosting.html#cb693-8" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> xgb_prep<span class="sc">$</span>Sales</span></code></pre></div>
+<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="boosting.html#cb692-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span>
+<span id="cb692-2"><a href="boosting.html#cb692-2" aria-hidden="true" tabindex="-1"></a>xgb_prep <span class="ot">&lt;-</span> <span class="fu">recipe</span>(Sales <span class="sc">~</span> ., <span class="at">data =</span> cs_train) <span class="sc">%&gt;%</span></span>
+<span id="cb692-3"><a href="boosting.html#cb692-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_integer</span>(<span class="fu">all_nominal</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb692-4"><a href="boosting.html#cb692-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prep</span>(<span class="at">training =</span> cs_train, <span class="at">retain =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb692-5"><a href="boosting.html#cb692-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">juice</span>()  <span class="co"># similar to bake</span></span>
+<span id="cb692-6"><a href="boosting.html#cb692-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb692-7"><a href="boosting.html#cb692-7" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(xgb_prep[<span class="fu">setdiff</span>(<span class="fu">names</span>(xgb_prep), <span class="st">&quot;Sales&quot;</span>)])</span>
+<span id="cb692-8"><a href="boosting.html#cb692-8" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> xgb_prep<span class="sc">$</span>Sales</span></code></pre></div>
 <blockquote>
 <p><strong>NOTA</strong>: <code>xgboost</code> permite tres tipos diferentes de matrices para los predictores: matriz R ordinaria, matrices esparsas de la lilbrería <code>Matrix</code> u objetos internos <code>xgb.DMatrix</code> de <code>xgboost</code>. Consultar ?Xgboost::xgboost para obtener más detalles.</p>
 </blockquote>
 <p>A continuación, pasamos por una serie de búsquedas en cuadrículas (<em>grid search</em>) similares a las secciones anteriores y encontramos que los siguientes hiperparámetros del modelo (proporcionados a través del argumento <code>params</code>) funcionan bastante bien. Nuestro RMSE es ligeramente más bajo que los mejores modelos GBM regulares y estocásticos hasta ahora.</p>
-<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb694-1"><a href="boosting.html#cb694-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xgboost)</span>
-<span id="cb694-2"><a href="boosting.html#cb694-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb694-3"><a href="boosting.html#cb694-3" aria-hidden="true" tabindex="-1"></a>mod_xgb <span class="ot">&lt;-</span> <span class="fu">xgb.cv</span>(</span>
-<span id="cb694-4"><a href="boosting.html#cb694-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> X,</span>
-<span id="cb694-5"><a href="boosting.html#cb694-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> Y,</span>
-<span id="cb694-6"><a href="boosting.html#cb694-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrounds =</span> <span class="dv">500</span>,</span>
-<span id="cb694-7"><a href="boosting.html#cb694-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">objective =</span> <span class="st">&quot;reg:squarederror&quot;</span>,</span>
-<span id="cb694-8"><a href="boosting.html#cb694-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">early_stopping_rounds =</span> <span class="dv">50</span>, </span>
-<span id="cb694-9"><a href="boosting.html#cb694-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">nfold =</span> <span class="dv">10</span>,</span>
-<span id="cb694-10"><a href="boosting.html#cb694-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">params =</span> <span class="fu">list</span>(</span>
-<span id="cb694-11"><a href="boosting.html#cb694-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">eta =</span> <span class="fl">0.1</span>,</span>
-<span id="cb694-12"><a href="boosting.html#cb694-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_depth =</span> <span class="dv">5</span>,</span>
-<span id="cb694-13"><a href="boosting.html#cb694-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_child_weight =</span> <span class="dv">0</span>,</span>
-<span id="cb694-14"><a href="boosting.html#cb694-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">subsample =</span> <span class="fl">0.8</span>,</span>
-<span id="cb694-15"><a href="boosting.html#cb694-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">colsample_bytree =</span> <span class="fl">0.75</span>),</span>
-<span id="cb694-16"><a href="boosting.html#cb694-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="dv">0</span></span>
-<span id="cb694-17"><a href="boosting.html#cb694-17" aria-hidden="true" tabindex="-1"></a>)  </span>
-<span id="cb694-18"><a href="boosting.html#cb694-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb694-19"><a href="boosting.html#cb694-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb694-20"><a href="boosting.html#cb694-20" aria-hidden="true" tabindex="-1"></a><span class="co"># minimum test CV RMSE</span></span>
-<span id="cb694-21"><a href="boosting.html#cb694-21" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(mod_xgb<span class="sc">$</span>evaluation_log<span class="sc">$</span>test_rmse_mean)</span></code></pre></div>
+<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb693-1"><a href="boosting.html#cb693-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xgboost)</span>
+<span id="cb693-2"><a href="boosting.html#cb693-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb693-3"><a href="boosting.html#cb693-3" aria-hidden="true" tabindex="-1"></a>mod_xgb <span class="ot">&lt;-</span> <span class="fu">xgb.cv</span>(</span>
+<span id="cb693-4"><a href="boosting.html#cb693-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> X,</span>
+<span id="cb693-5"><a href="boosting.html#cb693-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> Y,</span>
+<span id="cb693-6"><a href="boosting.html#cb693-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrounds =</span> <span class="dv">500</span>,</span>
+<span id="cb693-7"><a href="boosting.html#cb693-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">objective =</span> <span class="st">&quot;reg:squarederror&quot;</span>,</span>
+<span id="cb693-8"><a href="boosting.html#cb693-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">early_stopping_rounds =</span> <span class="dv">50</span>, </span>
+<span id="cb693-9"><a href="boosting.html#cb693-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">nfold =</span> <span class="dv">10</span>,</span>
+<span id="cb693-10"><a href="boosting.html#cb693-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">params =</span> <span class="fu">list</span>(</span>
+<span id="cb693-11"><a href="boosting.html#cb693-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">eta =</span> <span class="fl">0.1</span>,</span>
+<span id="cb693-12"><a href="boosting.html#cb693-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_depth =</span> <span class="dv">5</span>,</span>
+<span id="cb693-13"><a href="boosting.html#cb693-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_child_weight =</span> <span class="dv">0</span>,</span>
+<span id="cb693-14"><a href="boosting.html#cb693-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">subsample =</span> <span class="fl">0.8</span>,</span>
+<span id="cb693-15"><a href="boosting.html#cb693-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">colsample_bytree =</span> <span class="fl">0.75</span>),</span>
+<span id="cb693-16"><a href="boosting.html#cb693-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="dv">0</span></span>
+<span id="cb693-17"><a href="boosting.html#cb693-17" aria-hidden="true" tabindex="-1"></a>)  </span>
+<span id="cb693-18"><a href="boosting.html#cb693-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb693-19"><a href="boosting.html#cb693-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb693-20"><a href="boosting.html#cb693-20" aria-hidden="true" tabindex="-1"></a><span class="co"># minimum test CV RMSE</span></span>
+<span id="cb693-21"><a href="boosting.html#cb693-21" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(mod_xgb<span class="sc">$</span>evaluation_log<span class="sc">$</span>test_rmse_mean)</span></code></pre></div>
 <pre><code>[1] 1.42869</code></pre>
 <p>En este ejemplo no parece que mejoremos el RMSE, pero no suele ser lo habitual.</p>
 <p>A continuación, evaluamos si el sobreajuste está limitando el rendimiento de nuestro modelo al realizar una búsqueda en cuadrícula que examina varios parámetros de regularización (<code>gamma</code>, <code>lambda</code> y <code>alfa</code>). Dado el alto coste computacional, no ejecutamos este código, pero puede comprobarse que no mejoramos con la inclusión de hiperparámetros de reguralización.</p>
-<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="boosting.html#cb696-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hyperparameter grid</span></span>
-<span id="cb696-2"><a href="boosting.html#cb696-2" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb696-3"><a href="boosting.html#cb696-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">eta =</span> <span class="fl">0.01</span>,</span>
-<span id="cb696-4"><a href="boosting.html#cb696-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_depth =</span> <span class="dv">3</span>, </span>
-<span id="cb696-5"><a href="boosting.html#cb696-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_child_weight =</span> <span class="dv">3</span>,</span>
-<span id="cb696-6"><a href="boosting.html#cb696-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">subsample =</span> <span class="fl">0.5</span>, </span>
-<span id="cb696-7"><a href="boosting.html#cb696-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">colsample_bytree =</span> <span class="fl">0.5</span>,</span>
-<span id="cb696-8"><a href="boosting.html#cb696-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">gamma =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>),</span>
-<span id="cb696-9"><a href="boosting.html#cb696-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1e-2</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>),</span>
-<span id="cb696-10"><a href="boosting.html#cb696-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1e-2</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>),</span>
-<span id="cb696-11"><a href="boosting.html#cb696-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">rmse =</span> <span class="dv">0</span>,          <span class="co"># a place to dump RMSE results</span></span>
-<span id="cb696-12"><a href="boosting.html#cb696-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">trees =</span> <span class="dv">0</span>          <span class="co"># a place to dump required number of trees</span></span>
-<span id="cb696-13"><a href="boosting.html#cb696-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb696-14"><a href="boosting.html#cb696-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb696-15"><a href="boosting.html#cb696-15" aria-hidden="true" tabindex="-1"></a><span class="co"># grid search</span></span>
-<span id="cb696-16"><a href="boosting.html#cb696-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(hyper_grid))) {</span>
-<span id="cb696-17"><a href="boosting.html#cb696-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb696-18"><a href="boosting.html#cb696-18" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">xgb.cv</span>(</span>
-<span id="cb696-19"><a href="boosting.html#cb696-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> X,</span>
-<span id="cb696-20"><a href="boosting.html#cb696-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> Y,</span>
-<span id="cb696-21"><a href="boosting.html#cb696-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrounds =</span> <span class="dv">500</span>,</span>
-<span id="cb696-22"><a href="boosting.html#cb696-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">objective =</span> <span class="st">&quot;reg:squarederror&quot;</span>,</span>
-<span id="cb696-23"><a href="boosting.html#cb696-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">early_stopping_rounds =</span> <span class="dv">50</span>, </span>
-<span id="cb696-24"><a href="boosting.html#cb696-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">nfold =</span> <span class="dv">10</span>,</span>
-<span id="cb696-25"><a href="boosting.html#cb696-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="dv">0</span>,</span>
-<span id="cb696-26"><a href="boosting.html#cb696-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">params =</span> <span class="fu">list</span>( </span>
-<span id="cb696-27"><a href="boosting.html#cb696-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">eta =</span> hyper_grid<span class="sc">$</span>eta[i], </span>
-<span id="cb696-28"><a href="boosting.html#cb696-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">max_depth =</span> hyper_grid<span class="sc">$</span>max_depth[i],</span>
-<span id="cb696-29"><a href="boosting.html#cb696-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">min_child_weight =</span> hyper_grid<span class="sc">$</span>min_child_weight[i],</span>
-<span id="cb696-30"><a href="boosting.html#cb696-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">subsample =</span> hyper_grid<span class="sc">$</span>subsample[i],</span>
-<span id="cb696-31"><a href="boosting.html#cb696-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">colsample_bytree =</span> hyper_grid<span class="sc">$</span>colsample_bytree[i],</span>
-<span id="cb696-32"><a href="boosting.html#cb696-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">gamma =</span> hyper_grid<span class="sc">$</span>gamma[i], </span>
-<span id="cb696-33"><a href="boosting.html#cb696-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">lambda =</span> hyper_grid<span class="sc">$</span>lambda[i], </span>
-<span id="cb696-34"><a href="boosting.html#cb696-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">alpha =</span> hyper_grid<span class="sc">$</span>alpha[i]</span>
-<span id="cb696-35"><a href="boosting.html#cb696-35" aria-hidden="true" tabindex="-1"></a>    ) </span>
-<span id="cb696-36"><a href="boosting.html#cb696-36" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb696-37"><a href="boosting.html#cb696-37" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>rmse[i] <span class="ot">&lt;-</span> <span class="fu">min</span>(m<span class="sc">$</span>evaluation_log<span class="sc">$</span>test_rmse_mean)</span>
-<span id="cb696-38"><a href="boosting.html#cb696-38" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>trees[i] <span class="ot">&lt;-</span> m<span class="sc">$</span>best_iteration</span>
-<span id="cb696-39"><a href="boosting.html#cb696-39" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb696-40"><a href="boosting.html#cb696-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb696-41"><a href="boosting.html#cb696-41" aria-hidden="true" tabindex="-1"></a><span class="co"># results</span></span>
-<span id="cb696-42"><a href="boosting.html#cb696-42" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="sc">%&gt;%</span></span>
-<span id="cb696-43"><a href="boosting.html#cb696-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rmse <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb696-44"><a href="boosting.html#cb696-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(rmse) <span class="sc">%&gt;%</span></span>
-<span id="cb696-45"><a href="boosting.html#cb696-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb695-1"><a href="boosting.html#cb695-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hyperparameter grid</span></span>
+<span id="cb695-2"><a href="boosting.html#cb695-2" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb695-3"><a href="boosting.html#cb695-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">eta =</span> <span class="fl">0.01</span>,</span>
+<span id="cb695-4"><a href="boosting.html#cb695-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_depth =</span> <span class="dv">3</span>, </span>
+<span id="cb695-5"><a href="boosting.html#cb695-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_child_weight =</span> <span class="dv">3</span>,</span>
+<span id="cb695-6"><a href="boosting.html#cb695-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">subsample =</span> <span class="fl">0.5</span>, </span>
+<span id="cb695-7"><a href="boosting.html#cb695-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">colsample_bytree =</span> <span class="fl">0.5</span>,</span>
+<span id="cb695-8"><a href="boosting.html#cb695-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">gamma =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>),</span>
+<span id="cb695-9"><a href="boosting.html#cb695-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1e-2</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>),</span>
+<span id="cb695-10"><a href="boosting.html#cb695-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1e-2</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>),</span>
+<span id="cb695-11"><a href="boosting.html#cb695-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">rmse =</span> <span class="dv">0</span>,          <span class="co"># a place to dump RMSE results</span></span>
+<span id="cb695-12"><a href="boosting.html#cb695-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">trees =</span> <span class="dv">0</span>          <span class="co"># a place to dump required number of trees</span></span>
+<span id="cb695-13"><a href="boosting.html#cb695-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb695-14"><a href="boosting.html#cb695-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb695-15"><a href="boosting.html#cb695-15" aria-hidden="true" tabindex="-1"></a><span class="co"># grid search</span></span>
+<span id="cb695-16"><a href="boosting.html#cb695-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(hyper_grid))) {</span>
+<span id="cb695-17"><a href="boosting.html#cb695-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb695-18"><a href="boosting.html#cb695-18" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">xgb.cv</span>(</span>
+<span id="cb695-19"><a href="boosting.html#cb695-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> X,</span>
+<span id="cb695-20"><a href="boosting.html#cb695-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> Y,</span>
+<span id="cb695-21"><a href="boosting.html#cb695-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrounds =</span> <span class="dv">500</span>,</span>
+<span id="cb695-22"><a href="boosting.html#cb695-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">objective =</span> <span class="st">&quot;reg:squarederror&quot;</span>,</span>
+<span id="cb695-23"><a href="boosting.html#cb695-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">early_stopping_rounds =</span> <span class="dv">50</span>, </span>
+<span id="cb695-24"><a href="boosting.html#cb695-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">nfold =</span> <span class="dv">10</span>,</span>
+<span id="cb695-25"><a href="boosting.html#cb695-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="dv">0</span>,</span>
+<span id="cb695-26"><a href="boosting.html#cb695-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">params =</span> <span class="fu">list</span>( </span>
+<span id="cb695-27"><a href="boosting.html#cb695-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">eta =</span> hyper_grid<span class="sc">$</span>eta[i], </span>
+<span id="cb695-28"><a href="boosting.html#cb695-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">max_depth =</span> hyper_grid<span class="sc">$</span>max_depth[i],</span>
+<span id="cb695-29"><a href="boosting.html#cb695-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">min_child_weight =</span> hyper_grid<span class="sc">$</span>min_child_weight[i],</span>
+<span id="cb695-30"><a href="boosting.html#cb695-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">subsample =</span> hyper_grid<span class="sc">$</span>subsample[i],</span>
+<span id="cb695-31"><a href="boosting.html#cb695-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">colsample_bytree =</span> hyper_grid<span class="sc">$</span>colsample_bytree[i],</span>
+<span id="cb695-32"><a href="boosting.html#cb695-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">gamma =</span> hyper_grid<span class="sc">$</span>gamma[i], </span>
+<span id="cb695-33"><a href="boosting.html#cb695-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">lambda =</span> hyper_grid<span class="sc">$</span>lambda[i], </span>
+<span id="cb695-34"><a href="boosting.html#cb695-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">alpha =</span> hyper_grid<span class="sc">$</span>alpha[i]</span>
+<span id="cb695-35"><a href="boosting.html#cb695-35" aria-hidden="true" tabindex="-1"></a>    ) </span>
+<span id="cb695-36"><a href="boosting.html#cb695-36" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb695-37"><a href="boosting.html#cb695-37" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>rmse[i] <span class="ot">&lt;-</span> <span class="fu">min</span>(m<span class="sc">$</span>evaluation_log<span class="sc">$</span>test_rmse_mean)</span>
+<span id="cb695-38"><a href="boosting.html#cb695-38" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>trees[i] <span class="ot">&lt;-</span> m<span class="sc">$</span>best_iteration</span>
+<span id="cb695-39"><a href="boosting.html#cb695-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb695-40"><a href="boosting.html#cb695-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb695-41"><a href="boosting.html#cb695-41" aria-hidden="true" tabindex="-1"></a><span class="co"># results</span></span>
+<span id="cb695-42"><a href="boosting.html#cb695-42" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="sc">%&gt;%</span></span>
+<span id="cb695-43"><a href="boosting.html#cb695-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rmse <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb695-44"><a href="boosting.html#cb695-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(rmse) <span class="sc">%&gt;%</span></span>
+<span id="cb695-45"><a href="boosting.html#cb695-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
 <p>Una vez que hayamos encontrado los hiperparámetros óptimos, ajustaremos el modelo final con <code>xgb.train</code> o <code>xgboost</code>. Debemos asegurarnos de utilizar la cantidad óptima de árboles encontrados durante la validación cruzada. En nuestro ejemplo, agregar regularización no proporciona ninguna mejora, por lo que los excluimos en nuestro modelo final.</p>
-<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb697-1"><a href="boosting.html#cb697-1" aria-hidden="true" tabindex="-1"></a><span class="co"># optimal parameter list  (not are the real ones)</span></span>
-<span id="cb697-2"><a href="boosting.html#cb697-2" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb697-3"><a href="boosting.html#cb697-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">eta =</span> <span class="fl">0.01</span>,</span>
-<span id="cb697-4"><a href="boosting.html#cb697-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_depth =</span> <span class="dv">3</span>,</span>
-<span id="cb697-5"><a href="boosting.html#cb697-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_child_weight =</span> <span class="dv">3</span>,</span>
-<span id="cb697-6"><a href="boosting.html#cb697-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">subsample =</span> <span class="fl">0.5</span>,</span>
-<span id="cb697-7"><a href="boosting.html#cb697-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">colsample_bytree =</span> <span class="fl">0.5</span></span>
-<span id="cb697-8"><a href="boosting.html#cb697-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb697-9"><a href="boosting.html#cb697-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb697-10"><a href="boosting.html#cb697-10" aria-hidden="true" tabindex="-1"></a><span class="co"># train final model</span></span>
-<span id="cb697-11"><a href="boosting.html#cb697-11" aria-hidden="true" tabindex="-1"></a>xgb.fit.final <span class="ot">&lt;-</span> <span class="fu">xgboost</span>(</span>
-<span id="cb697-12"><a href="boosting.html#cb697-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">params =</span> params,</span>
-<span id="cb697-13"><a href="boosting.html#cb697-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> X,</span>
-<span id="cb697-14"><a href="boosting.html#cb697-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> Y,</span>
-<span id="cb697-15"><a href="boosting.html#cb697-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrounds =</span> <span class="dv">3944</span>,</span>
-<span id="cb697-16"><a href="boosting.html#cb697-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">objective =</span> <span class="st">&quot;reg:squarederror&quot;</span>,</span>
-<span id="cb697-17"><a href="boosting.html#cb697-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="dv">0</span></span>
-<span id="cb697-18"><a href="boosting.html#cb697-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb697-19"><a href="boosting.html#cb697-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb697-20"><a href="boosting.html#cb697-20" aria-hidden="true" tabindex="-1"></a>xgb.fit.final</span></code></pre></div>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="boosting.html#cb696-1" aria-hidden="true" tabindex="-1"></a><span class="co"># optimal parameter list  (not are the real ones)</span></span>
+<span id="cb696-2"><a href="boosting.html#cb696-2" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb696-3"><a href="boosting.html#cb696-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">eta =</span> <span class="fl">0.01</span>,</span>
+<span id="cb696-4"><a href="boosting.html#cb696-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_depth =</span> <span class="dv">3</span>,</span>
+<span id="cb696-5"><a href="boosting.html#cb696-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_child_weight =</span> <span class="dv">3</span>,</span>
+<span id="cb696-6"><a href="boosting.html#cb696-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">subsample =</span> <span class="fl">0.5</span>,</span>
+<span id="cb696-7"><a href="boosting.html#cb696-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">colsample_bytree =</span> <span class="fl">0.5</span></span>
+<span id="cb696-8"><a href="boosting.html#cb696-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb696-9"><a href="boosting.html#cb696-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb696-10"><a href="boosting.html#cb696-10" aria-hidden="true" tabindex="-1"></a><span class="co"># train final model</span></span>
+<span id="cb696-11"><a href="boosting.html#cb696-11" aria-hidden="true" tabindex="-1"></a>xgb.fit.final <span class="ot">&lt;-</span> <span class="fu">xgboost</span>(</span>
+<span id="cb696-12"><a href="boosting.html#cb696-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">params =</span> params,</span>
+<span id="cb696-13"><a href="boosting.html#cb696-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> X,</span>
+<span id="cb696-14"><a href="boosting.html#cb696-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> Y,</span>
+<span id="cb696-15"><a href="boosting.html#cb696-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrounds =</span> <span class="dv">3944</span>,</span>
+<span id="cb696-16"><a href="boosting.html#cb696-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">objective =</span> <span class="st">&quot;reg:squarederror&quot;</span>,</span>
+<span id="cb696-17"><a href="boosting.html#cb696-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="dv">0</span></span>
+<span id="cb696-18"><a href="boosting.html#cb696-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb696-19"><a href="boosting.html#cb696-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb696-20"><a href="boosting.html#cb696-20" aria-hidden="true" tabindex="-1"></a>xgb.fit.final</span></code></pre></div>
 <pre><code>##### xgb.Booster
 raw: 4.1 Mb 
 call:
@@ -942,8 +930,8 @@ evaluation_log:
     3943   0.276412
     3944   0.276352</code></pre>
 <p><strong>NOTA</strong>: Podemos obtener un ránking con la importancia de cada variable</p>
-<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="boosting.html#cb699-1" aria-hidden="true" tabindex="-1"></a>vip<span class="sc">::</span><span class="fu">vip</span>(xgb.fit.final) </span></code></pre></div>
-<p><img src="fig/unnamed-chunk-314-1.png" width="672" /></p>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="boosting.html#cb698-1" aria-hidden="true" tabindex="-1"></a>vip<span class="sc">::</span><span class="fu">vip</span>(xgb.fit.final) </span></code></pre></div>
+<p><img src="fig/unnamed-chunk-313-1.png" width="672" /></p>
 </div>
 </div>
 <div id="otros-algoritmos-gbm" class="section level2" number="14.6">

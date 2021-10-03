@@ -4,7 +4,7 @@ Este capítulo introduce la regresión logística como el método más sencillo 
 
 - Conocer la función logística
 - Cómo interpretar los coeficientes de los modelos 
-- Cómo evaluar la bondad de ajuste
+- Cómo evaluar la capacidad predictiva de un modelo
 - Cómo interpretar variables
 - Ilustrar un ejemplo de análisis completo
 - Aprender a hacer nomogramas fijos y dinámicos
@@ -188,9 +188,9 @@ Podemos interpretar estos ORs como el porcentaje o cambio multiplicativo en las 
 Cuando las variables predictoras son categóricas (como en biomedicina: sexo, estadío tumoral, fumar, beber, ...) la interpretación se hace más sencilla porque el cambio de 1 unidad en estas variables, supone el cambio de una categoría respecto a la basal (ya que se usan *dummy variables*). Así, por ejemplo, si nuestro outcomes tener cáncer de pulmón o no, y nuestro predictor es ser fumanor o no, si nuestros análisis nos dan una OR de 6 asociado a ser fumador, la interpretación sería: "La odds (probabilidad, abusando de lenguaje - también riesgo si el outcome es poco frecuente) de sufrir cáncer de pulmón es 6 veces mayor en los fumadores que en los no fumadores. 
 
 
-## Bondad de ajuste
+## Capacidad predictiva de un modelo de clasificación
 
-Podemos evaluar el rendimiento del modelo logístico utilizando el AIC, así como mediante el uso de otras medidas como: la desviación (*deviance*) residual, la precisión, la sensibilidad, la especificidad y el área bajo la curva (AUC).
+Podemos evaluar el rendimiento (es decir, la capacidad predictiva) del modelo logístico utilizando el AIC, así como mediante el uso de otras medidas como: la desviación (*deviance*) residual, la precisión, la sensibilidad, la especificidad y el área bajo la curva (AUC).
 
 Al igual que AIC, la *deviance* es una medida de error, por lo que una *deviance* más baja significa un mejor ajuste a los datos. Esperamos que la desviación disminuya en 1 para cada predictor, por lo que con un predictor informativo (e.g. variable imporante para el modleo), la *deviance* disminuirá en más de 1. Deviance = $-2ln(L)$, donde $ln$ es el logaritmo natural y $L$ es la función de verosimilitud . Veámoslo con nuestro ejemplo:
 
@@ -480,7 +480,7 @@ Empecemos seleccionando el mejor modelo en los datos de entrenamiento con un ste
 
 ```{r}
 mod.all <- glm(type ~ ., data=Pima.tr, family="binomial")
-mod <- step(mod.all, trace=FALSE, direction="backward")
+mod <- stats::step(mod.all, trace=FALSE, direction="backward")
 summary(mod)
 ```
 

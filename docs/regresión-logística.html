@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-09-16" />
+<meta name="date" content="2021-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -190,7 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-como-estimación-de-una-media-condicional"><i class="fa fa-check"></i><b>4.7</b> Regresión como estimación de una media condicional</a></li>
 <li class="chapter" data-level="4.8" data-path="regresión-lineal.html"><a href="regresión-lineal.html#la-función-de-regresión"><i class="fa fa-check"></i><b>4.8</b> La función de regresión</a></li>
 <li class="chapter" data-level="4.9" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-no-paramétrica-de-la-función-de-regresión-regresión-knn"><i class="fa fa-check"></i><b>4.9</b> Estimación no paramétrica de la función de regresión: regresión KNN</a></li>
-<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a></li>
+<li class="chapter" data-level="4.10" data-path="regresión-lineal.html"><a href="regresión-lineal.html#estimación-paramétrica-de-la-función-de-regresión-regresión-lineal"><i class="fa fa-check"></i><b>4.10</b> Estimación paramétrica de la función de regresión: regresión lineal</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ejercicio"><i class="fa fa-check"></i><b>4.10.1</b> Ejercicio</a></li>
+</ul></li>
 <li class="chapter" data-level="4.11" data-path="regresión-lineal.html"><a href="regresión-lineal.html#predicción"><i class="fa fa-check"></i><b>4.11</b> Predicción</a></li>
 <li class="chapter" data-level="4.12" data-path="regresión-lineal.html"><a href="regresión-lineal.html#inferencia-en-el-contexto-de-regresión"><i class="fa fa-check"></i><b>4.12</b> Inferencia en el contexto de regresión</a></li>
 <li class="chapter" data-level="4.13" data-path="regresión-lineal.html"><a href="regresión-lineal.html#asunciones-de-un-modelo-de-regresión"><i class="fa fa-check"></i><b>4.13</b> Asunciones de un modelo de regresión</a></li>
@@ -374,48 +377,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[\operatorname{logit}^{-1}(x) = \frac{e^{x}}{1 + e^{x}}\]</span></p>
 <p>donde <span class="math inline">\(e\)</span> es la función exponencial.</p>
 <p>Podemos tener una idea de cómo la función logit inversa transforma el predictor lineal mediante una gráfica. Aquí usamos un rango arbitrario de valores de x en (-6, 6) para demostrar la transformación.</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="regresión-logística.html#cb307-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, .<span class="dv">01</span>)</span>
-<span id="cb307-2"><a href="regresión-logística.html#cb307-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">exp</span>(x)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(x))</span>
-<span id="cb307-3"><a href="regresión-logística.html#cb307-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
-<span id="cb307-4"><a href="regresión-logística.html#cb307-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb307-5"><a href="regresión-logística.html#cb307-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(logit<span class="sc">^-</span><span class="dv">1</span>,<span class="st">&quot;(x)&quot;</span>))) <span class="sc">+</span></span>
-<span id="cb307-6"><a href="regresión-logística.html#cb307-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;y = &quot;</span>, logit<span class="sc">^-</span><span class="dv">1</span>,<span class="st">&quot;(x)&quot;</span>)))</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-93-1.png" width="672" /></p>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="regresión-logística.html#cb308-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, .<span class="dv">01</span>)</span>
+<span id="cb308-2"><a href="regresión-logística.html#cb308-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">exp</span>(x)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(x))</span>
+<span id="cb308-3"><a href="regresión-logística.html#cb308-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb308-4"><a href="regresión-logística.html#cb308-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb308-5"><a href="regresión-logística.html#cb308-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(logit<span class="sc">^-</span><span class="dv">1</span>,<span class="st">&quot;(x)&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb308-6"><a href="regresión-logística.html#cb308-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;y = &quot;</span>, logit<span class="sc">^-</span><span class="dv">1</span>,<span class="st">&quot;(x)&quot;</span>)))</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-92-1.png" width="672" /></p>
 <p>Los valores <span class="math inline">\(x\)</span>, que van de -6 a 6, son comprimidos por la función logit inversa en el rango 0-1. El logit inverso es curvo, por lo que la diferencia esperada en <span class="math inline">\(y\)</span> correspondiente a una diferencia fija en <span class="math inline">\(x\)</span> no es constante. A valores bajos y valores altos de <span class="math inline">\(x\)</span>, un cambio de unidad corresponde a un cambio muy pequeño en <span class="math inline">\(y\)</span>, mientras que en la mitad de la curva un pequeño cambio en <span class="math inline">\(x\)</span> corresponde a un cambio relativamente grande en <span class="math inline">\(y\)</span>. En la regresión lineal, la diferencia esperada en <span class="math inline">\(y\)</span> correspondiente a una diferencia fija en <span class="math inline">\(x\)</span> es, por el contrario, constante. <em>Por lo tanto, cuando interpretamos los resultados logísticos debemos elegir en qué parte de la curva queremos evaluar la probabilidad del resultado, dado el modelo.</em></p>
 </div>
 <div id="ejemplo-de-regresión-logística" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Ejemplo de regresión logística</h2>
 <p>Ilustremos estos conceptos utilizando el conjunto de datos “Default” del ISLR. Este conjunto de datos simulado contiene una variable binaria que representa el incumplimiento en los pagos de la tarjeta de crédito (variable “default”), que modelaremos como una función de la variable “balance” (la cantidad de deuda que tiene la tarjeta) y la variable “income” (ingresos). Primero visualizaremos cómo es esta relación.</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="regresión-logística.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
-<span id="cb308-2"><a href="regresión-logística.html#cb308-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Default)</span>
-<span id="cb308-3"><a href="regresión-logística.html#cb308-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Default)</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="regresión-logística.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
+<span id="cb309-2"><a href="regresión-logística.html#cb309-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Default)</span>
+<span id="cb309-3"><a href="regresión-logística.html#cb309-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Default)</span></code></pre></div>
 <pre><code>&#39;data.frame&#39;:   10000 obs. of  4 variables:
  $ default: Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
  $ student: Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 2 1 1 1 2 1 2 1 1 ...
  $ balance: num  730 817 1074 529 786 ...
  $ income : num  44362 12106 31767 35704 38463 ...</code></pre>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="regresión-logística.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Default, <span class="fu">aes</span>(<span class="at">x =</span> balance, <span class="at">y =</span> income, <span class="at">col =</span> default)) <span class="sc">+</span></span>
-<span id="cb310-2"><a href="regresión-logística.html#cb310-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb310-3"><a href="regresión-logística.html#cb310-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Balance vs. Income by Default&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-94-1.png" width="672" /></p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="regresión-logística.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(</span>
-<span id="cb311-2"><a href="regresión-logística.html#cb311-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Default, <span class="fu">aes</span>(default, balance)) <span class="sc">+</span> </span>
-<span id="cb311-3"><a href="regresión-logística.html#cb311-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb311-4"><a href="regresión-logística.html#cb311-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Balance by Default&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb311-5"><a href="regresión-logística.html#cb311-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;balance&quot;</span>),</span>
-<span id="cb311-6"><a href="regresión-logística.html#cb311-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Default, <span class="fu">aes</span>(default, income)) <span class="sc">+</span> </span>
-<span id="cb311-7"><a href="regresión-logística.html#cb311-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb311-8"><a href="regresión-logística.html#cb311-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Income by Default&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb311-9"><a href="regresión-logística.html#cb311-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;income&quot;</span>),</span>
-<span id="cb311-10"><a href="regresión-logística.html#cb311-10" aria-hidden="true" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-94-2.png" width="672" /></p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="regresión-logística.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Default, <span class="fu">aes</span>(<span class="at">x =</span> balance, <span class="at">y =</span> income, <span class="at">col =</span> default)) <span class="sc">+</span></span>
+<span id="cb311-2"><a href="regresión-logística.html#cb311-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb311-3"><a href="regresión-logística.html#cb311-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Balance vs. Income by Default&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-93-1.png" width="672" /></p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="regresión-logística.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(</span>
+<span id="cb312-2"><a href="regresión-logística.html#cb312-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Default, <span class="fu">aes</span>(default, balance)) <span class="sc">+</span> </span>
+<span id="cb312-3"><a href="regresión-logística.html#cb312-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb312-4"><a href="regresión-logística.html#cb312-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Balance by Default&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb312-5"><a href="regresión-logística.html#cb312-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;balance&quot;</span>),</span>
+<span id="cb312-6"><a href="regresión-logística.html#cb312-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Default, <span class="fu">aes</span>(default, income)) <span class="sc">+</span> </span>
+<span id="cb312-7"><a href="regresión-logística.html#cb312-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb312-8"><a href="regresión-logística.html#cb312-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Income by Default&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb312-9"><a href="regresión-logística.html#cb312-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;income&quot;</span>),</span>
+<span id="cb312-10"><a href="regresión-logística.html#cb312-10" aria-hidden="true" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-93-2.png" width="672" /></p>
 <p>Claramente, los valores altos de saldo están asociados con el incumplimiento en todos los niveles de ingresos. Esto sugiere que los ingresos en realidad no son un fuerte predictor de incumplimiento, en comparación con el saldo, que es exactamente lo que vemos en los diagramas de cajas.</p>
 <p>Exploremos estas relaciones usando la regresión logística. En R ajustamos un modelo logístico usando la función <code>glm ()</code> con <code>family = binomial</code>.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> Centraremos y escalaremos las variables para facilitar la interpretación.</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="regresión-logística.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(default <span class="sc">~</span> balance <span class="sc">+</span> income, </span>
-<span id="cb312-2"><a href="regresión-logística.html#cb312-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> Default, </span>
-<span id="cb312-3"><a href="regresión-logística.html#cb312-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial) <span class="sc">%&gt;%</span></span>
-<span id="cb312-4"><a href="regresión-logística.html#cb312-4" aria-hidden="true" tabindex="-1"></a>    standardize <span class="sc">%&gt;%</span></span>
-<span id="cb312-5"><a href="regresión-logística.html#cb312-5" aria-hidden="true" tabindex="-1"></a>    display</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="regresión-logística.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(default <span class="sc">~</span> balance <span class="sc">+</span> income, </span>
+<span id="cb313-2"><a href="regresión-logística.html#cb313-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> Default, </span>
+<span id="cb313-3"><a href="regresión-logística.html#cb313-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial) <span class="sc">%&gt;%</span></span>
+<span id="cb313-4"><a href="regresión-logística.html#cb313-4" aria-hidden="true" tabindex="-1"></a>    standardize <span class="sc">%&gt;%</span></span>
+<span id="cb313-5"><a href="regresión-logística.html#cb313-5" aria-hidden="true" tabindex="-1"></a>    display</span></code></pre></div>
 <pre><code>glm(formula = default ~ z.balance + z.income, family = binomial, 
     data = Default)
             coef.est coef.se
@@ -437,11 +440,11 @@ z.income     0.56     0.13
 <div id="coeficientes-de-regresión-logística-como-probabilidades" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Coeficientes de regresión logística como probabilidades</h2>
 <p>Podemos dar una interpretación más específica de la regresión logística más allá del efecto y magnitud. Para ello, podemos usar la función logit inversa para convertir las probabilidades logarítmicas (log-odds) de incumplimiento de pago en las tarjetas (cuando el saldo y los ingresos son promedio) en una probabilidad:</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="regresión-logística.html#cb314-1" aria-hidden="true" tabindex="-1"></a>invlogit <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">exp</span>(x)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(x))</span>
-<span id="cb314-2"><a href="regresión-logística.html#cb314-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">invlogit</span>(<span class="sc">-</span><span class="fl">6.13</span> <span class="sc">+</span> <span class="fl">5.46</span> <span class="sc">*</span> <span class="dv">0</span> <span class="sc">+</span> .<span class="dv">56</span> <span class="sc">*</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="regresión-logística.html#cb315-1" aria-hidden="true" tabindex="-1"></a>invlogit <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">exp</span>(x)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(x))</span>
+<span id="cb315-2"><a href="regresión-logística.html#cb315-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">invlogit</span>(<span class="sc">-</span><span class="fl">6.13</span> <span class="sc">+</span> <span class="fl">5.46</span> <span class="sc">*</span> <span class="dv">0</span> <span class="sc">+</span> .<span class="dv">56</span> <span class="sc">*</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>[1] 0.002171854</code></pre>
 <p>La probabilidad de incumplimiento para aquellos con un saldo promedio de tarjeta de crédito de (835.37) y un ingreso promedio de (3.351698^{4}) es de hecho bastante bajo: solo 0.002. Asimismo, podemos calcular el cambio en la probabilidad de incumplimiento en el pago asociado con un aumento de 1 unidad en el saldo, manteniendo el ingreso constante en el promedio (z.ingreso=0). Esto equivaldría a aumentar el saldo en casi 1000$, de 835.37 a 1802.8.</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="regresión-logística.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">invlogit</span>(<span class="sc">-</span><span class="fl">6.13</span> <span class="sc">+</span> <span class="fl">5.46</span> <span class="sc">*</span> <span class="dv">1</span>) <span class="sc">-</span> <span class="fu">invlogit</span>(<span class="sc">-</span><span class="fl">6.13</span> <span class="sc">+</span> <span class="fl">5.46</span> <span class="sc">*</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="regresión-logística.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">invlogit</span>(<span class="sc">-</span><span class="fl">6.13</span> <span class="sc">+</span> <span class="fl">5.46</span> <span class="sc">*</span> <span class="dv">1</span>) <span class="sc">-</span> <span class="fu">invlogit</span>(<span class="sc">-</span><span class="fl">6.13</span> <span class="sc">+</span> <span class="fl">5.46</span> <span class="sc">*</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>[1] 0.336325</code></pre>
 </div>
 <div id="coeficientes-de-regresión-logística-como-razones-de-odds" class="section level2" number="6.4">
@@ -472,9 +475,9 @@ e^{\text{log} \left(\frac{p}{1-p}\right) + \beta} = \frac{p}{1-p} *e^ \beta
 \]</span></p>
 <p>Por lo tanto, <span class="math inline">\(e^\beta\)</span> se puede interpretar como el cambio en las probabilidades asociadas con un aumento de 1 unidad en <span class="math inline">\(x\)</span>, expresado en términos porcentuales. En el caso de OR = <span class="math inline">\(\frac{1}{. 5} = 2\)</span>, el porcentaje de aumento en las probabilidades del resultado es del 100%. Cuando la OR es <span class="math inline">\(&gt;2\)</span> se suele expresar como x-veces más (OR=3.5, hay 3.5 veces más probabilidad de observar el evento que no observarlo cuando se cambia <span class="math inline">\(x\)</span> en 1 unidad), y cuando la OR es <span class="math inline">\(&lt;1\)</span> se suele hablar de protección a no tener el evento y el porcentaje se calcula como 1-OR.</p>
 <p>Apliquemos esta información a nuestro modelo anterior de aplicando la exponencial a los coeficientes de saldo e ingresos:</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="regresión-logística.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">5.46</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="regresión-logística.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">5.46</span>)</span></code></pre></div>
 <pre><code>[1] 235.0974</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="regresión-logística.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(.<span class="dv">56</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="regresión-logística.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(.<span class="dv">56</span>)</span></code></pre></div>
 <pre><code>[1] 1.750673</code></pre>
 <p>Podemos interpretar estos ORs como el porcentaje o cambio multiplicativo en las probabilidades asociadas con un aumento de 1 unidad en el predictor (mientras se mantienen constantes los demás), de 1 a 235 (un aumento de 23,400%) en el caso de balance, y de 1 a 1,75 (un aumento del 75%) para los ingresos. Por ejemplo, podemos decir que la probabilidad de incumplimiento es un 75% mayor cuando los ingresos aumentan en 1 unidad.</p>
 <p>Cuando las variables predictoras son categóricas (como en biomedicina: sexo, estadío tumoral, fumar, beber, …) la interpretación se hace más sencilla porque el cambio de 1 unidad en estas variables, supone el cambio de una categoría respecto a la basal (ya que se usan <em>dummy variables</em>). Así, por ejemplo, si nuestro outcomes tener cáncer de pulmón o no, y nuestro predictor es ser fumanor o no, si nuestros análisis nos dan una OR de 6 asociado a ser fumador, la interpretación sería: "La odds (probabilidad, abusando de lenguaje - también riesgo si el outcome es poco frecuente) de sufrir cáncer de pulmón es 6 veces mayor en los fumadores que en los no fumadores.</p>
@@ -483,32 +486,29 @@ e^{\text{log} \left(\frac{p}{1-p}\right) + \beta} = \frac{p}{1-p} *e^ \beta
 <h2><span class="header-section-number">6.5</span> Bondad de ajuste</h2>
 <p>Podemos evaluar el rendimiento del modelo logístico utilizando el AIC, así como mediante el uso de otras medidas como: la desviación (<em>deviance</em>) residual, la precisión, la sensibilidad, la especificidad y el área bajo la curva (AUC).</p>
 <p>Al igual que AIC, la <em>deviance</em> es una medida de error, por lo que una <em>deviance</em> más baja significa un mejor ajuste a los datos. Esperamos que la desviación disminuya en 1 para cada predictor, por lo que con un predictor informativo (e.g. variable imporante para el modleo), la <em>deviance</em> disminuirá en más de 1. Deviance = <span class="math inline">\(-2ln(L)\)</span>, donde <span class="math inline">\(ln\)</span> es el logaritmo natural y <span class="math inline">\(L\)</span> es la función de verosimilitud . Veámoslo con nuestro ejemplo:</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="regresión-logística.html#cb322-1" aria-hidden="true" tabindex="-1"></a>logistic_model1 <span class="ot">&lt;-</span> </span>
-<span id="cb322-2"><a href="regresión-logística.html#cb322-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(default <span class="sc">~</span> balance, </span>
-<span id="cb322-3"><a href="regresión-logística.html#cb322-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> Default, </span>
-<span id="cb322-4"><a href="regresión-logística.html#cb322-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial)</span>
-<span id="cb322-5"><a href="regresión-logística.html#cb322-5" aria-hidden="true" tabindex="-1"></a>logistic_model1<span class="sc">$</span>deviance</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="regresión-logística.html#cb323-1" aria-hidden="true" tabindex="-1"></a>logistic_model1 <span class="ot">&lt;-</span> </span>
+<span id="cb323-2"><a href="regresión-logística.html#cb323-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(default <span class="sc">~</span> balance, </span>
+<span id="cb323-3"><a href="regresión-logística.html#cb323-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> Default, </span>
+<span id="cb323-4"><a href="regresión-logística.html#cb323-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial)</span>
+<span id="cb323-5"><a href="regresión-logística.html#cb323-5" aria-hidden="true" tabindex="-1"></a>logistic_model1<span class="sc">$</span>deviance</span></code></pre></div>
 <pre><code>[1] 1596.452</code></pre>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="regresión-logística.html#cb324-1" aria-hidden="true" tabindex="-1"></a>logistic_model2 <span class="ot">&lt;-</span> </span>
-<span id="cb324-2"><a href="regresión-logística.html#cb324-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(default <span class="sc">~</span> balance <span class="sc">+</span> income, </span>
-<span id="cb324-3"><a href="regresión-logística.html#cb324-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> Default, </span>
-<span id="cb324-4"><a href="regresión-logística.html#cb324-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial)</span>
-<span id="cb324-5"><a href="regresión-logística.html#cb324-5" aria-hidden="true" tabindex="-1"></a>logistic_model2<span class="sc">$</span>deviance</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="regresión-logística.html#cb325-1" aria-hidden="true" tabindex="-1"></a>logistic_model2 <span class="ot">&lt;-</span> </span>
+<span id="cb325-2"><a href="regresión-logística.html#cb325-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(default <span class="sc">~</span> balance <span class="sc">+</span> income, </span>
+<span id="cb325-3"><a href="regresión-logística.html#cb325-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> Default, </span>
+<span id="cb325-4"><a href="regresión-logística.html#cb325-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial)</span>
+<span id="cb325-5"><a href="regresión-logística.html#cb325-5" aria-hidden="true" tabindex="-1"></a>logistic_model2<span class="sc">$</span>deviance</span></code></pre></div>
 <pre><code>[1] 1578.966</code></pre>
 <p>En este caso, la <em>deviance</em> se redujo en más de 1, lo que indica que los ingresos mejoran el ajuste del modelo. Podemos hacer una prueba formal de la diferencia usando, como para los modelos lineales, la prueba de razón de verosimilitud:</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="regresión-logística.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lrtest</span>(logistic_model1, logistic_model2)</span></code></pre></div>
-<pre><code>Likelihood ratio test
-
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="regresión-logística.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lrtest</span>(logistic_model1, logistic_model2)</span></code></pre></div>
+<pre><code>
 Model 1: default ~ balance
 Model 2: default ~ balance + income
-  #Df  LogLik Df  Chisq Pr(&gt;Chisq)    
-1   2 -798.23                         
-2   3 -789.48  1 17.485  2.895e-05 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+
+  L.R. Chisq         d.f.            P 
+1.748541e+01 1.000000e+00 2.895205e-05 </code></pre>
 <p>También podemos traducir las probabilidades de un modelo logístico para el incumplimiento del pago en predicciones de clase asignando “Sí” (predeterminado) a probabilidades mayores o iguales a .5 y “No” (sin valor predeterminado) a probabilidades menores que .5, y luego contar el número de veces que el modelo asigna la clase predeterminada correcta. Si dividimos este número por el total de observaciones, habremos calculado la “precisión.” La precisión se utiliza a menudo como medida del rendimiento del modelo.</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="regresión-logística.html#cb328-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">fitted</span>(logistic_model2) <span class="sc">&gt;=</span> .<span class="dv">5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>) </span>
-<span id="cb328-2"><a href="regresión-logística.html#cb328-2" aria-hidden="true" tabindex="-1"></a>(<span class="fu">length</span>(<span class="fu">which</span>(preds <span class="sc">==</span> Default<span class="sc">$</span>default)) <span class="sc">/</span> <span class="fu">nrow</span>(Default))<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="regresión-logística.html#cb329-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">fitted</span>(logistic_model2) <span class="sc">&gt;=</span> .<span class="dv">5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>) </span>
+<span id="cb329-2"><a href="regresión-logística.html#cb329-2" aria-hidden="true" tabindex="-1"></a>(<span class="fu">length</span>(<span class="fu">which</span>(preds <span class="sc">==</span> Default<span class="sc">$</span>default)) <span class="sc">/</span> <span class="fu">nrow</span>(Default))<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>[1] 97.37</code></pre>
 <p>El modelo es 97.37% preciso. Valores superirores al 50% mostrarían una mejora en la predicción ya que por azar, se espera que el modelo tenga una precisión del 50%.</p>
 <table>
@@ -523,7 +523,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </table>
 <p>Una forma sencilla de obtener un buen modelo de clasificación sería asignar a todos la categoría más frecuente. Por ejemplo, en nuestros datos, la clase mayoritaria es “No” para la variable incimpliminto por un amplio margen (9667 a 333). La mayoría de las personas no incumplen. ¿Cuál es nuestra precisión, entonces, si simplemente predecimos “No” para todos los casos? La proporción de “No” en los datos es 96.67%, por lo que si siempre predijimos “No” esa sería nuestra precisión (9667 / (9667 + 333) = .9667). El modelo logístico, sorprendentemente, ofrece solo una ligera mejora.</p>
 <p>Sin embargo, al evaluar el rendimiento del clasificador, debemos reconocer que no todos los errores son iguales y que la precisión tiene limitaciones como métrica de rendimiento. En algunos casos, el modelo puede haber predicho el incumplimiento cuando no lo había. Esto se conoce como “falso positivo.” En otros casos, el modelo puede haber predicho que no hubo incumplimiento cuando hubo incumplimiento. Esto se conoce como “falso negativo.” En la clasificación, utilizamos lo que se conoce como matriz de confusión para resumir estos diferentes tipos de errores del modelo, denominados así porque la matriz resume cómo se confunde el modelo. Usaremos la función <code>confusionMatrix ()</code> de la librería <code>caret</code> para calcular rápidamente estos valores:</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="regresión-logística.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(preds), Default<span class="sc">$</span>default, <span class="at">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="regresión-logística.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(preds), Default<span class="sc">$</span>default, <span class="at">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
 <pre><code>Confusion Matrix and Statistics
 
           Reference
@@ -587,33 +587,33 @@ Prediction   No  Yes
 <ul>
 <li><em>Precisión</em> = 1 - (FP + FN) / Total:</li>
 </ul>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="regresión-logística.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> (<span class="dv">38</span> <span class="sc">+</span> <span class="dv">225</span>) <span class="sc">/</span> <span class="dv">10000</span></span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="regresión-logística.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> (<span class="dv">38</span> <span class="sc">+</span> <span class="dv">225</span>) <span class="sc">/</span> <span class="dv">10000</span></span></code></pre></div>
 <pre><code>[1] 0.9737</code></pre>
 <ul>
 <li><em>Sensibilidad</em> (o la tasa de verdaderos positivos): TP / (TP + FN). En este caso, la sensibilidad mide la proporción de incumplimientos que se clasificaron correctamente como tales.</li>
 </ul>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="regresión-logística.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="dv">108</span> <span class="sc">/</span> (<span class="dv">108</span> <span class="sc">+</span> <span class="dv">225</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="regresión-logística.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="dv">108</span> <span class="sc">/</span> (<span class="dv">108</span> <span class="sc">+</span> <span class="dv">225</span>) </span></code></pre></div>
 <pre><code>[1] 0.3243243</code></pre>
 <ul>
 <li><em>Especificidad</em> (o la tasa de verdaderos negativos): TN / (TN + FP). En este caso, la especificidad mide la proporción de no incumplimientos que se clasificaron correctamente como tales.</li>
 </ul>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="regresión-logística.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="dv">9629</span> <span class="sc">/</span> (<span class="dv">9629</span> <span class="sc">+</span> <span class="dv">38</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="regresión-logística.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="dv">9629</span> <span class="sc">/</span> (<span class="dv">9629</span> <span class="sc">+</span> <span class="dv">38</span>) </span></code></pre></div>
 <pre><code>[1] 0.9960691</code></pre>
 <p>¿Por qué deberíamos considerar estos errores específicos de clase? Todos los modelos tienen errores, pero no todos los errores del modelo son igualmente importantes. Por ejemplo, un falso negativo — prediciendo incorrectamente que un prestatario no incurrirá en incumplimiento — puede ser un error costoso para un banco, si el incumplimiento se hubiera podido prevenir mediante la intervención. Pero, por otro lado, un falso positivo, que predice incorrectamente que un prestatario incurrirá en incumplimiento, puede desencadenar una advertencia innecesaria que irrita a los clientes. Los errores que comete un modelo se pueden controlar ajustando el umbral de decisión utilizado para asignar probabilidades predichas a las clases. Usamos un umbral de probabilidad de .5 para clasificar los incumplimientos en los pagos. Si el umbral se establece en .1, por el contrario, la precisión general disminuiría, pero también lo haría el número de falsos negativos, lo que podría ser deseable. El modelo luego atraparía a más morosos, lo que ahorraría dinero al banco, pero eso tendría un costo: más falsos positivos (clientes potencialmente irritados).</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="regresión-logística.html#cb338-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">fitted</span>(logistic_model2) <span class="sc">&gt;=</span> .<span class="dv">1</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
-<span id="cb338-2"><a href="regresión-logística.html#cb338-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(preds, Default<span class="sc">$</span>default)<span class="sc">$</span>table</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="regresión-logística.html#cb339-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">fitted</span>(logistic_model2) <span class="sc">&gt;=</span> .<span class="dv">1</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb339-2"><a href="regresión-logística.html#cb339-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(preds, Default<span class="sc">$</span>default)<span class="sc">$</span>table</span></code></pre></div>
 <pre><code>          Reference
 Prediction   No  Yes
        No  9105   90
        Yes  562  243</code></pre>
 <p>La pregunta de cómo establecer el umbral de decisión —. 5, .1 o algo más — debe responderse con referencia al contexto empresarial.</p>
 <p>Una curva de característica operativa del receptor (ROC por sus siglas en ingles) visualiza las compensaciones entre los tipos de errores trazando la especificidad frente a la sensibilidad. El cálculo del área bajo la curva ROC (AUC) nos permite, además, resumir el rendimiento del modelo y comparar modelos. La curva en sí muestra los tipos de errores que cometería el modelo en diferentes umbrales de decisión. Para crear una curva ROC usamos la función <code>roc ()</code> del paquete pROC, y mostramos los valores de sensibilidad / especificidad asociados con los umbrales de decisión de .1 y .5:</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="regresión-logística.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
-<span id="cb340-2"><a href="regresión-logística.html#cb340-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotROC)</span>
-<span id="cb340-3"><a href="regresión-logística.html#cb340-3" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">plot</span>(<span class="fu">roc</span>(<span class="fu">factor</span>(<span class="fu">ifelse</span>(Default<span class="sc">$</span>default <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)), </span>
-<span id="cb340-4"><a href="regresión-logística.html#cb340-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">fitted</span>(logistic_model2)), <span class="at">print.thres =</span> <span class="fu">c</span>(.<span class="dv">1</span>, .<span class="dv">5</span>), </span>
-<span id="cb340-5"><a href="regresión-logística.html#cb340-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">print.auc =</span> T))</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-108-1.png" width="672" /></p>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="regresión-logística.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb341-2"><a href="regresión-logística.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotROC)</span>
+<span id="cb341-3"><a href="regresión-logística.html#cb341-3" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">plot</span>(<span class="fu">roc</span>(<span class="fu">factor</span>(<span class="fu">ifelse</span>(Default<span class="sc">$</span>default <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)), </span>
+<span id="cb341-4"><a href="regresión-logística.html#cb341-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">fitted</span>(logistic_model2)), <span class="at">print.thres =</span> <span class="fu">c</span>(.<span class="dv">1</span>, .<span class="dv">5</span>), </span>
+<span id="cb341-5"><a href="regresión-logística.html#cb341-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">print.auc =</span> T))</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-107-1.png" width="672" /></p>
 <p>Un modelo con una precisión del 50%, es decir, un clasificador aleatorio, tendría una curva ROC que siguiera la línea de referencia diagonal. Un modelo con una precisión del 100%, un clasificador perfecto, tendría una curva ROC siguiendo los márgenes del triángulo superior. Cada punto de la curva ROC representa un par de sensibilidad / especificidad correspondiente a un umbral de decisión particular. Cuando establecimos el umbral de decisión en .1, la sensibilidad fue .73 (243 / (243 + 90)) y la especificidad fue .94 (9105 / (9105 + 562)). Ese punto se muestra en la curva. Del mismo modo, cuando establecimos el umbral de decisión en .5, la sensibilidad fue .32 y la especificidad fue .996. Ese punto también está en la curva. ¿Qué umbral de decisión es óptimo? Nuevamente, depende del problema (pensad en cáncer o en este ejemplo de dinero). Las curvas ROC nos permiten elegir los errores específicos de clase que podemos cometer.</p>
 <p>El AUC es el resumen de cómo funciona el modelo en cada umbral de decisión. En general, los modelos con AUC más altos son mejores. Esta medida nos servirá para comparar métodos de aprendizaje automático que iremos aprendiendo durante el curso.</p>
 </div>
@@ -635,11 +635,11 @@ Prediction   No  Yes
 <li>type: Sí o No (diabetes)</li>
 </ol>
 <p>La variable resultado es “type,” que indica si una persona tiene diabetes. Los datos están divididos en un conjunto de entrenamiento y otro test que combinaremos para ilustrar este ejemplo.</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="regresión-logística.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb341-2"><a href="regresión-logística.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;Pima.tr&quot;</span>)</span>
-<span id="cb341-3"><a href="regresión-logística.html#cb341-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;Pima.te&quot;</span>)</span>
-<span id="cb341-4"><a href="regresión-logística.html#cb341-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">rbind</span>(Pima.te, Pima.tr)</span>
-<span id="cb341-5"><a href="regresión-logística.html#cb341-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d)</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="regresión-logística.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb342-2"><a href="regresión-logística.html#cb342-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;Pima.tr&quot;</span>)</span>
+<span id="cb342-3"><a href="regresión-logística.html#cb342-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;Pima.te&quot;</span>)</span>
+<span id="cb342-4"><a href="regresión-logística.html#cb342-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">rbind</span>(Pima.te, Pima.tr)</span>
+<span id="cb342-5"><a href="regresión-logística.html#cb342-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d)</span></code></pre></div>
 <pre><code>&#39;data.frame&#39;:   532 obs. of  8 variables:
  $ npreg: int  6 1 1 3 2 5 0 1 3 9 ...
  $ glu  : int  148 85 89 78 197 166 118 103 126 119 ...
@@ -653,11 +653,11 @@ Prediction   No  Yes
 <div id="modelo-simple" class="section level3" number="6.6.1">
 <h3><span class="header-section-number">6.6.1</span> Modelo simple</h3>
 <p>Comencemos con un modelo simple.</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="regresión-logística.html#cb343-1" aria-hidden="true" tabindex="-1"></a>bin_model1 <span class="ot">&lt;-</span> </span>
-<span id="cb343-2"><a href="regresión-logística.html#cb343-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(type <span class="sc">~</span> bmi <span class="sc">+</span> age, </span>
-<span id="cb343-3"><a href="regresión-logística.html#cb343-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> d, </span>
-<span id="cb343-4"><a href="regresión-logística.html#cb343-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial)</span>
-<span id="cb343-5"><a href="regresión-logística.html#cb343-5" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(bin_model1)</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="regresión-logística.html#cb344-1" aria-hidden="true" tabindex="-1"></a>bin_model1 <span class="ot">&lt;-</span> </span>
+<span id="cb344-2"><a href="regresión-logística.html#cb344-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(type <span class="sc">~</span> bmi <span class="sc">+</span> age, </span>
+<span id="cb344-3"><a href="regresión-logística.html#cb344-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> d, </span>
+<span id="cb344-4"><a href="regresión-logística.html#cb344-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial)</span>
+<span id="cb344-5"><a href="regresión-logística.html#cb344-5" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(bin_model1)</span></code></pre></div>
 <pre><code>glm(formula = type ~ bmi + age, family = binomial, data = d)
             coef.est coef.se
 (Intercept) -6.26     0.67  
@@ -675,11 +675,11 @@ age          0.06     0.01
 <div id="agregar-predictores-y-evaluar-el-ajuste" class="section level3" number="6.6.2">
 <h3><span class="header-section-number">6.6.2</span> Agregar predictores y evaluar el ajuste</h3>
 <p>Ahora ajustaremos un modelo completo (excluyendo “skin,” ya que parece medir casi lo mismo que bmi). ¿Mejora el ajuste?</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="regresión-logística.html#cb345-1" aria-hidden="true" tabindex="-1"></a>bin_model2 <span class="ot">&lt;-</span> </span>
-<span id="cb345-2"><a href="regresión-logística.html#cb345-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(type <span class="sc">~</span> bmi <span class="sc">+</span> age <span class="sc">+</span> ped <span class="sc">+</span> glu <span class="sc">+</span> npreg <span class="sc">+</span> bp , </span>
-<span id="cb345-3"><a href="regresión-logística.html#cb345-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> d, </span>
-<span id="cb345-4"><a href="regresión-logística.html#cb345-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial) </span>
-<span id="cb345-5"><a href="regresión-logística.html#cb345-5" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(bin_model2)</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="regresión-logística.html#cb346-1" aria-hidden="true" tabindex="-1"></a>bin_model2 <span class="ot">&lt;-</span> </span>
+<span id="cb346-2"><a href="regresión-logística.html#cb346-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(type <span class="sc">~</span> bmi <span class="sc">+</span> age <span class="sc">+</span> ped <span class="sc">+</span> glu <span class="sc">+</span> npreg <span class="sc">+</span> bp , </span>
+<span id="cb346-3"><a href="regresión-logística.html#cb346-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> d, </span>
+<span id="cb346-4"><a href="regresión-logística.html#cb346-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial) </span>
+<span id="cb346-5"><a href="regresión-logística.html#cb346-5" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(bin_model2)</span></code></pre></div>
 <pre><code>glm(formula = type ~ bmi + age + ped + glu + npreg + bp, family = binomial, 
     data = d)
             coef.est coef.se
@@ -694,50 +694,47 @@ bp          -0.01     0.01
   n = 532, k = 7
   residual deviance = 466.5, null deviance = 676.8 (difference = 210.3)</code></pre>
 <p>La <em>deviance</em> disminuye de 577 en el modelo anterior a 466.5 en este modelo, muy por encima de los 4 puntos que debería bajar simplemente al incluir 4 predictores adicionales. Además, el LRT nos indica que estas diferencias son estadísticamente significativas:</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="regresión-logística.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lrtest</span>(bin_model1, bin_model2)</span></code></pre></div>
-<pre><code>Likelihood ratio test
-
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="regresión-logística.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lrtest</span>(bin_model1, bin_model2)</span></code></pre></div>
+<pre><code>
 Model 1: type ~ bmi + age
 Model 2: type ~ bmi + age + ped + glu + npreg + bp
-  #Df  LogLik Df  Chisq Pr(&gt;Chisq)    
-1   3 -288.60                         
-2   7 -233.27  4 110.67  &lt; 2.2e-16 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+
+L.R. Chisq       d.f.          P 
+  110.6664     4.0000     0.0000 </code></pre>
 <p>El segundo modelo es mucho mejor que el primero, lo que también es evidente cuando observamos las matrices de confusión (con el umbral de decisión establecido en .5)</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="regresión-logística.html#cb349-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">fitted</span>(bin_model1) <span class="sc">&gt;</span> .<span class="dv">5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
-<span id="cb349-2"><a href="regresión-logística.html#cb349-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(preds, d<span class="sc">$</span>type)<span class="sc">$</span>table</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="regresión-logística.html#cb350-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">fitted</span>(bin_model1) <span class="sc">&gt;</span> .<span class="dv">5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb350-2"><a href="regresión-logística.html#cb350-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(preds, d<span class="sc">$</span>type)<span class="sc">$</span>table</span></code></pre></div>
 <pre><code>          Reference
 Prediction  No Yes
        No  312 112
        Yes  43  65</code></pre>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="regresión-logística.html#cb351-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">fitted</span>(bin_model2) <span class="sc">&gt;</span> .<span class="dv">5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
-<span id="cb351-2"><a href="regresión-logística.html#cb351-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(preds, d<span class="sc">$</span>type)<span class="sc">$</span>table</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="regresión-logística.html#cb352-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(<span class="fu">fitted</span>(bin_model2) <span class="sc">&gt;</span> .<span class="dv">5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb352-2"><a href="regresión-logística.html#cb352-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(preds, d<span class="sc">$</span>type)<span class="sc">$</span>table</span></code></pre></div>
 <pre><code>          Reference
 Prediction  No Yes
        No  318  73
        Yes  37 104</code></pre>
 <p>Como era de esperar, el modelo completo comete menos errores. Podemos formalizar esta impresión calculando y comparando la precisión del modelo: 1 - (112 + 43) / (112 + 43 + 312 + 65) = 0.71 para el primer modelo, en comparación con 1 - (73 + 37) / (73 + 37 + 318 + 104) =<code>r round (1 - (73 + 37) / (73 + 37 + 318 + 104 ), 2)</code> para el segundo modelo más grande. Los números de verdaderos negativos son cercanos, pero el modelo más grande aumenta sustancialmente el número de verdaderos positivos y reduce el número de falsos negativos, prediciendo incorrectamente que una persona no tiene diabetes (aunque esta sigue siendo la clase de error más grande). Deberíamos comprobar para ver que estos modelos mejoran la precisión sobre un modelo que siempre predice la clase mayoritaria. En este conjunto de datos, “No” es la categoría mayoritaria con 66,7%. Entonces, si siempre predijimos “No,” estaríamos en lo correcto el 66.7% de las veces, que es una precisión menor que cualquiera de los modelos. Las curvas ROC proporcionan una descripción más sistemática del rendimiento del modelo en términos de errores de clasificación errónea.</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="regresión-logística.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">plot</span>(<span class="fu">roc</span>(d<span class="sc">$</span>type,</span>
-<span id="cb353-2"><a href="regresión-logística.html#cb353-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">fitted</span>(bin_model1)),</span>
-<span id="cb353-3"><a href="regresión-logística.html#cb353-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, </span>
-<span id="cb353-4"><a href="regresión-logística.html#cb353-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">main =</span> <span class="st">&quot;ROC curves: logistic model 1 (red) vs. logistic model 2 (blue)&quot;</span>))</span>
-<span id="cb353-5"><a href="regresión-logística.html#cb353-5" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">plot</span>(<span class="fu">roc</span>(d<span class="sc">$</span>type,</span>
-<span id="cb353-6"><a href="regresión-logística.html#cb353-6" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">fitted</span>(bin_model2)),</span>
-<span id="cb353-7"><a href="regresión-logística.html#cb353-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">print.auc =</span> T, </span>
-<span id="cb353-8"><a href="regresión-logística.html#cb353-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, </span>
-<span id="cb353-9"><a href="regresión-logística.html#cb353-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">add =</span> T))</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-115-1.png" width="672" /></p>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="regresión-logística.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">plot</span>(<span class="fu">roc</span>(d<span class="sc">$</span>type,</span>
+<span id="cb354-2"><a href="regresión-logística.html#cb354-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">fitted</span>(bin_model1)),</span>
+<span id="cb354-3"><a href="regresión-logística.html#cb354-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, </span>
+<span id="cb354-4"><a href="regresión-logística.html#cb354-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">main =</span> <span class="st">&quot;ROC curves: logistic model 1 (red) vs. logistic model 2 (blue)&quot;</span>))</span>
+<span id="cb354-5"><a href="regresión-logística.html#cb354-5" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">plot</span>(<span class="fu">roc</span>(d<span class="sc">$</span>type,</span>
+<span id="cb354-6"><a href="regresión-logística.html#cb354-6" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">fitted</span>(bin_model2)),</span>
+<span id="cb354-7"><a href="regresión-logística.html#cb354-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">print.auc =</span> T, </span>
+<span id="cb354-8"><a href="regresión-logística.html#cb354-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, </span>
+<span id="cb354-9"><a href="regresión-logística.html#cb354-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">add =</span> T))</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-114-1.png" width="672" /></p>
 <p>El modelo más grande es claramente mejor: el AUC es más alto.</p>
 </div>
 <div id="análisis-de-interacciones" class="section level3" number="6.6.3">
 <h3><span class="header-section-number">6.6.3</span> Análisis de interacciones</h3>
 <p>Agreguemos una interacción entre dos predictores continuos, ped y glu. Centraremos y escalaremos las entradas para que el coeficiente de la interacción sea interpretable.</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="regresión-logística.html#cb354-1" aria-hidden="true" tabindex="-1"></a>bin_model3 <span class="ot">&lt;-</span> </span>
-<span id="cb354-2"><a href="regresión-logística.html#cb354-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">standardize</span>(<span class="fu">glm</span>(type <span class="sc">~</span> bmi  <span class="sc">+</span> ped <span class="sc">*</span> glu <span class="sc">+</span>  age <span class="sc">+</span> npreg <span class="sc">+</span> bp , </span>
-<span id="cb354-3"><a href="regresión-logística.html#cb354-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> d, </span>
-<span id="cb354-4"><a href="regresión-logística.html#cb354-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial)) </span>
-<span id="cb354-5"><a href="regresión-logística.html#cb354-5" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(bin_model3)</span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="regresión-logística.html#cb355-1" aria-hidden="true" tabindex="-1"></a>bin_model3 <span class="ot">&lt;-</span> </span>
+<span id="cb355-2"><a href="regresión-logística.html#cb355-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">standardize</span>(<span class="fu">glm</span>(type <span class="sc">~</span> bmi  <span class="sc">+</span> ped <span class="sc">*</span> glu <span class="sc">+</span>  age <span class="sc">+</span> npreg <span class="sc">+</span> bp , </span>
+<span id="cb355-3"><a href="regresión-logística.html#cb355-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> d, </span>
+<span id="cb355-4"><a href="regresión-logística.html#cb355-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> binomial)) </span>
+<span id="cb355-5"><a href="regresión-logística.html#cb355-5" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(bin_model3)</span></code></pre></div>
 <pre><code>glm(formula = type ~ z.bmi + z.ped * z.glu + z.age + z.npreg + 
     z.bp, family = binomial, data = d)
             coef.est coef.se
@@ -766,31 +763,31 @@ z.ped:z.glu -1.15     0.41
 <div id="gráfico-de-la-interacción" class="section level3" number="6.6.4">
 <h3><span class="header-section-number">6.6.4</span> Gráfico de la interacción</h3>
 <p>Como siempre, debemos visualizar la interacción para comprenderla. Esto es especialmente necesario cuando las relaciones se expresan en términos de probabilidades logarítmicas y razones de probabilidades. Como hemos hecho anteriormente para fines de visualización, dicotomizaremos los predictores en la interacción y, en este caso, para facilitar la interpretación, presentaremos las relaciones en términos de probabilidades. El propósito de los gráficos es la comprensión y la ilustración, por lo que no nos preocupa demasiado la precisión estadística. Resumiremos las relaciones usando una curva loess (estimación no paramétrica de la regresión) para capturar la no linealidad del efecto del predictor (<span class="math inline">\(\pm \infty\)</span>) al rango del resultado binario (0, 1).</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="regresión-logística.html#cb356-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>ped_bin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(d<span class="sc">$</span>ped <span class="sc">&gt;</span> <span class="fu">mean</span>(d<span class="sc">$</span>ped), <span class="st">&quot;above avg&quot;</span>,<span class="st">&quot;below avg&quot;</span>)</span>
-<span id="cb356-2"><a href="regresión-logística.html#cb356-2" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>glu_bin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(d<span class="sc">$</span>glu <span class="sc">&gt;</span> <span class="fu">mean</span>(d<span class="sc">$</span>glu), <span class="st">&quot;above avg&quot;</span>,<span class="st">&quot;below avg&quot;</span>)</span>
-<span id="cb356-3"><a href="regresión-logística.html#cb356-3" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>prob <span class="ot">&lt;-</span> <span class="fu">fitted</span>(bin_model3)</span>
-<span id="cb356-4"><a href="regresión-logística.html#cb356-4" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>type_num <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(d<span class="sc">$</span>type <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb356-5"><a href="regresión-logística.html#cb356-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(glu, type_num)) <span class="sc">+</span></span>
-<span id="cb356-6"><a href="regresión-logística.html#cb356-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb356-7"><a href="regresión-logística.html#cb356-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="fu">aes</span>(glu, prob, <span class="at">col =</span> ped_bin), <span class="at">se =</span> F) <span class="sc">+</span></span>
-<span id="cb356-8"><a href="regresión-logística.html#cb356-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Pr(diabetes)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Diabetes ~ glu varying by ped_bin&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-117-1.png" width="672" /></p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="regresión-logística.html#cb357-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>ped_bin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(d<span class="sc">$</span>ped <span class="sc">&gt;</span> <span class="fu">mean</span>(d<span class="sc">$</span>ped), <span class="st">&quot;above avg&quot;</span>,<span class="st">&quot;below avg&quot;</span>)</span>
+<span id="cb357-2"><a href="regresión-logística.html#cb357-2" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>glu_bin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(d<span class="sc">$</span>glu <span class="sc">&gt;</span> <span class="fu">mean</span>(d<span class="sc">$</span>glu), <span class="st">&quot;above avg&quot;</span>,<span class="st">&quot;below avg&quot;</span>)</span>
+<span id="cb357-3"><a href="regresión-logística.html#cb357-3" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>prob <span class="ot">&lt;-</span> <span class="fu">fitted</span>(bin_model3)</span>
+<span id="cb357-4"><a href="regresión-logística.html#cb357-4" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>type_num <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(d<span class="sc">$</span>type <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb357-5"><a href="regresión-logística.html#cb357-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(glu, type_num)) <span class="sc">+</span></span>
+<span id="cb357-6"><a href="regresión-logística.html#cb357-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb357-7"><a href="regresión-logística.html#cb357-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="fu">aes</span>(glu, prob, <span class="at">col =</span> ped_bin), <span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb357-8"><a href="regresión-logística.html#cb357-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Pr(diabetes)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Diabetes ~ glu varying by ped_bin&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-116-1.png" width="672" /></p>
 <p>La relación entre glu y diabetes depende claramente de los niveles de ped. Como en el caso lineal, las líneas no paralelas indican una interacción. El coeficiente de <em>log-odds</em> negativo para la interacción del modelo indica que a medida que ped aumenta, la fuerza de la relación entre glu y type (diabetes) disminuye. Esto es exactamente lo que vemos en este gráfico:</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="regresión-logística.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(ped, type_num)) <span class="sc">+</span></span>
-<span id="cb357-2"><a href="regresión-logística.html#cb357-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb357-3"><a href="regresión-logística.html#cb357-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="fu">aes</span>(ped, prob, <span class="at">col =</span> glu_bin), <span class="at">se =</span> F) <span class="sc">+</span></span>
-<span id="cb357-4"><a href="regresión-logística.html#cb357-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Pr(diabetes)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Diabetes ~ ped varying by glu_bin&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-118-1.png" width="672" /></p>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="regresión-logística.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(ped, type_num)) <span class="sc">+</span></span>
+<span id="cb358-2"><a href="regresión-logística.html#cb358-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb358-3"><a href="regresión-logística.html#cb358-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="fu">aes</span>(ped, prob, <span class="at">col =</span> glu_bin), <span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb358-4"><a href="regresión-logística.html#cb358-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Pr(diabetes)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Diabetes ~ ped varying by glu_bin&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-117-1.png" width="672" /></p>
 <p>La interacción es más difícil de ver aquí porque la escala de ped está comprimida, con la mayoría de las observaciones cercanas a 0. Sin embargo, podemos ver que a medida que glu aumenta, la fuerza de la relación entre ped y diabetes disminuye. Nuevamente, las líneas no paralelas indican la presencia de una interacción.</p>
 </div>
 <div id="uso-del-modelo-para-predecir-probabilidades" class="section level3" number="6.6.5">
 <h3><span class="header-section-number">6.6.5</span> Uso del modelo para predecir probabilidades</h3>
 <p>El tamaño del efecto más grande en el modelo anterior con la interacción, con mucho, es z.glu. Por tanto, para comunicar los resultados de este modelo deberíamos concentrarnos en glu. Pero los coeficientes expresados como logaritmos de probabilidades son algo confusos y, lamentablemente, las razones de probabilidades no ayudan a aclarar mucho las cosas. Deberíamos ir al trabajo adicional de traducir los coeficientes del modelo en probabilidades, pero para hacerlo debemos identificar en qué parte de la curva de probabilidad nos gustaría evaluar glu. Escogeremos la región cercana al promedio de z.glu — 0 — y examinaremos el efecto de aumentar z.glu en 1 unidad (que es igual a 2 desviaciones estándar de glu) cuando los otros predictores son promedio. La forma más sencilla de hacer esto es crear una base de datos con los valores de predicción deseados para usar con la función <code>predict ()</code>.</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="regresión-logística.html#cb358-1" aria-hidden="true" tabindex="-1"></a>basal <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">z.bmi =</span> <span class="dv">0</span>, <span class="at">z.ped =</span> <span class="dv">0</span>, <span class="at">z.glu =</span> <span class="dv">0</span>, <span class="at">z.age =</span> <span class="dv">0</span>, <span class="at">z.npreg =</span> <span class="dv">0</span>, <span class="at">z.bp =</span> <span class="dv">0</span>)</span>
-<span id="cb358-2"><a href="regresión-logística.html#cb358-2" aria-hidden="true" tabindex="-1"></a>glucosa <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">z.bmi =</span> <span class="dv">0</span>, <span class="at">z.ped =</span> <span class="dv">0</span>, <span class="at">z.glu =</span> <span class="dv">1</span>, <span class="at">z.age =</span> <span class="dv">0</span>, <span class="at">z.npreg =</span> <span class="dv">0</span>, <span class="at">z.bp =</span> <span class="dv">0</span>)</span>
-<span id="cb358-3"><a href="regresión-logística.html#cb358-3" aria-hidden="true" tabindex="-1"></a>(lo <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">invlogit</span>(<span class="fu">predict</span>(bin_model3, <span class="at">newdata =</span> basal))))</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="regresión-logística.html#cb359-1" aria-hidden="true" tabindex="-1"></a>basal <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">z.bmi =</span> <span class="dv">0</span>, <span class="at">z.ped =</span> <span class="dv">0</span>, <span class="at">z.glu =</span> <span class="dv">0</span>, <span class="at">z.age =</span> <span class="dv">0</span>, <span class="at">z.npreg =</span> <span class="dv">0</span>, <span class="at">z.bp =</span> <span class="dv">0</span>)</span>
+<span id="cb359-2"><a href="regresión-logística.html#cb359-2" aria-hidden="true" tabindex="-1"></a>glucosa <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">z.bmi =</span> <span class="dv">0</span>, <span class="at">z.ped =</span> <span class="dv">0</span>, <span class="at">z.glu =</span> <span class="dv">1</span>, <span class="at">z.age =</span> <span class="dv">0</span>, <span class="at">z.npreg =</span> <span class="dv">0</span>, <span class="at">z.bp =</span> <span class="dv">0</span>)</span>
+<span id="cb359-3"><a href="regresión-logística.html#cb359-3" aria-hidden="true" tabindex="-1"></a>(lo <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">invlogit</span>(<span class="fu">predict</span>(bin_model3, <span class="at">newdata =</span> basal))))</span></code></pre></div>
 <pre><code>[1] 0.2652028</code></pre>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="regresión-logística.html#cb360-1" aria-hidden="true" tabindex="-1"></a>(hi <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">invlogit</span>(<span class="fu">predict</span>(bin_model3, <span class="at">newdata =</span> ))))</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="regresión-logística.html#cb361-1" aria-hidden="true" tabindex="-1"></a>(hi <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">invlogit</span>(<span class="fu">predict</span>(bin_model3, <span class="at">newdata =</span> ))))</span></code></pre></div>
 <pre><code>  [1] 0.716146591 0.025911688 0.017983270 0.029013744 0.893018807 0.665405710
   [7] 0.395033985 0.211066662 0.431695033 0.225375587 0.032840692 0.443676401
  [13] 0.022607120 0.418795847 0.194085484 0.411388311 0.122928759 0.771984610
@@ -880,7 +877,7 @@ z.ped:z.glu -1.15     0.41
 [517] 0.458485256 0.303064449 0.512265744 0.935001789 0.011659745 0.243551235
 [523] 0.234201771 0.733582682 0.439827183 0.132566837 0.200183137 0.254534757
 [529] 0.620459940 0.187218540 0.128750723 0.801532793</code></pre>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="regresión-logística.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(hi <span class="sc">-</span> lo, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="regresión-logística.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(hi <span class="sc">-</span> lo, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>  [1]  0.45 -0.24 -0.25 -0.24  0.63  0.40  0.13 -0.05  0.17 -0.04 -0.23  0.18
  [13] -0.24  0.15 -0.07  0.15 -0.14  0.51  0.50 -0.18  0.69  0.52 -0.24 -0.24
  [25] -0.21 -0.23  0.49 -0.26 -0.15 -0.20 -0.05 -0.25  0.03 -0.05 -0.02 -0.12
@@ -933,9 +930,9 @@ z.ped:z.glu -1.15     0.41
 <p>Todo lo explicado en la sección de selección de variables para un modelo lineal, aplica para el caso de la regresión logística. Las funciones reconocen que el objeto es un glm con familia binomial y realiza los cálculos requeridos para este tipo de regresión (progamación orientada a objetos). El tema de validación cruzada para evaluar un modelo también aplica. Veámoslo con un ejemplo.</p>
 <p>Supongamos que queremos elegir el mejor modelo para predecir el riesgo de diabetes y queremos validarlo con valización cruzada. Todos los pasos y métodos que hemos aprendido en las lecciones anteriores, podemos realizarlos de la siguiente manera. Usaremos los datos train y test que hay por defecto (Pima.tr y Pima.te). Para la validación cruzada usaremos la librería <code>caret</code> que veremos en detalle más adelante.</p>
 <p>Empecemos seleccionando el mejor modelo en los datos de entrenamiento con un stepwise hacia atrás</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="regresión-logística.html#cb364-1" aria-hidden="true" tabindex="-1"></a>mod.all <span class="ot">&lt;-</span> <span class="fu">glm</span>(type <span class="sc">~</span> ., <span class="at">data=</span>Pima.tr, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb364-2"><a href="regresión-logística.html#cb364-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">step</span>(mod.all, <span class="at">trace=</span><span class="cn">FALSE</span>, <span class="at">direction=</span><span class="st">&quot;backward&quot;</span>)</span>
-<span id="cb364-3"><a href="regresión-logística.html#cb364-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="regresión-logística.html#cb365-1" aria-hidden="true" tabindex="-1"></a>mod.all <span class="ot">&lt;-</span> <span class="fu">glm</span>(type <span class="sc">~</span> ., <span class="at">data=</span>Pima.tr, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb365-2"><a href="regresión-logística.html#cb365-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">step</span>(mod.all, <span class="at">trace=</span><span class="cn">FALSE</span>, <span class="at">direction=</span><span class="st">&quot;backward&quot;</span>)</span>
+<span id="cb365-3"><a href="regresión-logística.html#cb365-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
 <pre><code>
 Call:
 glm(formula = type ~ npreg + glu + bmi + ped + age, family = &quot;binomial&quot;, 
@@ -964,9 +961,9 @@ AIC: 190.47
 
 Number of Fisher Scoring iterations: 5</code></pre>
 <p>Podemos evaluar la capacidad predictiva en la muestra test mediante</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="regresión-logística.html#cb366-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, <span class="at">newdata =</span> Pima.te, <span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb366-2"><a href="regresión-logística.html#cb366-2" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(preds <span class="sc">&gt;=</span> .<span class="dv">5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>) )</span>
-<span id="cb366-3"><a href="regresión-logística.html#cb366-3" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(preds, Pima.te<span class="sc">$</span>type)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="regresión-logística.html#cb367-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, <span class="at">newdata =</span> Pima.te, <span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb367-2"><a href="regresión-logística.html#cb367-2" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(preds <span class="sc">&gt;=</span> .<span class="dv">5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>) )</span>
+<span id="cb367-3"><a href="regresión-logística.html#cb367-3" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(preds, Pima.te<span class="sc">$</span>type)</span></code></pre></div>
 <pre><code>Confusion Matrix and Statistics
 
           Reference
@@ -995,11 +992,11 @@ Prediction  No Yes
        &#39;Positive&#39; Class : No              
                                           </code></pre>
 <p>y calcular la capacidad predictiva en la muestra train utilizando un método de 5-fold cross-validation con:</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="regresión-logística.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb368-2"><a href="regresión-logística.html#cb368-2" aria-hidden="true" tabindex="-1"></a>mod.test <span class="ot">&lt;-</span> <span class="fu">train</span>(type <span class="sc">~</span> ., <span class="at">data=</span>Pima.tr, </span>
-<span id="cb368-3"><a href="regresión-logística.html#cb368-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method=</span><span class="st">&quot;cv&quot;</span>, <span class="at">number=</span><span class="dv">5</span>),</span>
-<span id="cb368-4"><a href="regresión-logística.html#cb368-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">&quot;glm&quot;</span>, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb368-5"><a href="regresión-logística.html#cb368-5" aria-hidden="true" tabindex="-1"></a>mod.test</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="regresión-logística.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb369-2"><a href="regresión-logística.html#cb369-2" aria-hidden="true" tabindex="-1"></a>mod.test <span class="ot">&lt;-</span> <span class="fu">train</span>(type <span class="sc">~</span> ., <span class="at">data=</span>Pima.tr, </span>
+<span id="cb369-3"><a href="regresión-logística.html#cb369-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method=</span><span class="st">&quot;cv&quot;</span>, <span class="at">number=</span><span class="dv">5</span>),</span>
+<span id="cb369-4"><a href="regresión-logística.html#cb369-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">&quot;glm&quot;</span>, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb369-5"><a href="regresión-logística.html#cb369-5" aria-hidden="true" tabindex="-1"></a>mod.test</span></code></pre></div>
 <pre><code>Generalized Linear Model 
 
 200 samples
@@ -1012,7 +1009,7 @@ Summary of sample sizes: 160, 160, 159, 160, 161
 Resampling results:
 
   Accuracy   Kappa    
-  0.7394246  0.3961653</code></pre>
+  0.7553283  0.4381235</code></pre>
 </div>
 <div id="nomogramas" class="section level2" number="6.8">
 <h2><span class="header-section-number">6.8</span> Nomogramas</h2>
@@ -1020,28 +1017,28 @@ Resampling results:
 <p>Un nomograma es una representación gráfica que permite realizar con rapidez cálculos numéricos aproximados. Dentro del campo de la medicina, es frecuente que este tipo de gráficos este asociado al calculo de probabilidades de ocurrencia de un evento o una característica asociada a una enfermedad. Es lo que se conoce como <strong>Medicina Translacional</strong>.</p>
 <p>Aunque existen otro tipo de herramientas de cálculo vía web para estas probabilidades (Shiny), el uso de nomogramas esta muy extendido en el campo de la biomedicina como por ejemplo en el calculo de probabilidades de recurrencia en distintos tipos de cáncer, la probabilidad de supervivencia a un mes tras un infarto, o el pronóstico tras un diagnóstico de cáncer a cierto tiempo (en ese caso se usan modelos de supervivencia. Así pues, la regresión logística será una de las herramientas con una aplicación más directa y sencilla en el aprendizaje automático, donde el uso de los modelos predictivos suelen tener un aplicabilidad directa en la población.</p>
 <p>Existen numerosas herramientas para crear nomogramas en R, empecemos con la creación de nomogramas sencillos. Para ello usaremos los datos del ejemplo de diabetes con el modelo que hemos obtenido y validado anteriormente. Para usar la librería <code>rms</code> necesitamos que el modelo esté estimado con la función <code>lrm ()</code></p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="regresión-logística.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rms)</span>
-<span id="cb370-2"><a href="regresión-logística.html#cb370-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb370-3"><a href="regresión-logística.html#cb370-3" aria-hidden="true" tabindex="-1"></a>t.data <span class="ot">&lt;-</span> <span class="fu">datadist</span>(Pima.tr)</span>
-<span id="cb370-4"><a href="regresión-logística.html#cb370-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">datadist =</span> <span class="st">&#39;t.data&#39;</span>)</span>
-<span id="cb370-5"><a href="regresión-logística.html#cb370-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb370-6"><a href="regresión-logística.html#cb370-6" aria-hidden="true" tabindex="-1"></a>mod.lrm <span class="ot">&lt;-</span> <span class="fu">lrm</span>(type <span class="sc">~</span> npreg <span class="sc">+</span> glu <span class="sc">+</span> bmi <span class="sc">+</span> ped <span class="sc">+</span> age, <span class="at">data=</span>Pima.tr)</span>
-<span id="cb370-7"><a href="regresión-logística.html#cb370-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb370-8"><a href="regresión-logística.html#cb370-8" aria-hidden="true" tabindex="-1"></a>nom <span class="ot">&lt;-</span> <span class="fu">nomogram</span>(mod.lrm, <span class="at">fun =</span> plogis, <span class="at">funlabel=</span><span class="st">&quot;Risk of diabetes&quot;</span>)</span>
-<span id="cb370-9"><a href="regresión-logística.html#cb370-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nom)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-123-1.png" width="768" /></p>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="regresión-logística.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rms)</span>
+<span id="cb371-2"><a href="regresión-logística.html#cb371-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb371-3"><a href="regresión-logística.html#cb371-3" aria-hidden="true" tabindex="-1"></a>t.data <span class="ot">&lt;-</span> <span class="fu">datadist</span>(Pima.tr)</span>
+<span id="cb371-4"><a href="regresión-logística.html#cb371-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">datadist =</span> <span class="st">&#39;t.data&#39;</span>)</span>
+<span id="cb371-5"><a href="regresión-logística.html#cb371-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb371-6"><a href="regresión-logística.html#cb371-6" aria-hidden="true" tabindex="-1"></a>mod.lrm <span class="ot">&lt;-</span> <span class="fu">lrm</span>(type <span class="sc">~</span> npreg <span class="sc">+</span> glu <span class="sc">+</span> bmi <span class="sc">+</span> ped <span class="sc">+</span> age, <span class="at">data=</span>Pima.tr)</span>
+<span id="cb371-7"><a href="regresión-logística.html#cb371-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb371-8"><a href="regresión-logística.html#cb371-8" aria-hidden="true" tabindex="-1"></a>nom <span class="ot">&lt;-</span> <span class="fu">nomogram</span>(mod.lrm, <span class="at">fun =</span> plogis, <span class="at">funlabel=</span><span class="st">&quot;Risk of diabetes&quot;</span>)</span>
+<span id="cb371-9"><a href="regresión-logística.html#cb371-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nom)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-122-1.png" width="768" /></p>
 <p>Supongamos que llega a la consulta una persona con un bmi de 35. Eso sumaría 30 puntos (basta con subir hacia arriba y ver qué valor de ‘Points’ corresponde a un bmi de 35). Una edad de 50 años (~22 puntos), una función del pedigrí de la diabetes de 1.8 (~62 puntos), una glucosa de 120 (~50 puntos) y 0 embarazos que sumaría 0 puntos. En total, el paciente suma un total de 164 puntos. Si ahora vamos a la línea de ‘Total Points’ y proyectamos sobre el predictor lineal de aproximadamente ~1.9 que se asocia con un riesgo de diabetes ligeramente superior al 80% (proyectar sobre ‘Risk of diabetes’).</p>
 <p>Obviamente estos cálculos se pueden hacer de forma más directa calculando la predicción sobre este individuo con el objeto de R</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="regresión-logística.html#cb371-1" aria-hidden="true" tabindex="-1"></a>indiv <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">bmi=</span><span class="dv">35</span>, <span class="at">age=</span><span class="dv">50</span>, <span class="at">ped=</span><span class="fl">1.8</span>, <span class="at">glu=</span><span class="dv">120</span>, <span class="at">npreg=</span><span class="dv">0</span>)</span>
-<span id="cb371-2"><a href="regresión-logística.html#cb371-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(mod.lrm, <span class="at">newdata =</span> indiv, <span class="at">type=</span><span class="st">&quot;lp&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="regresión-logística.html#cb372-1" aria-hidden="true" tabindex="-1"></a>indiv <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">bmi=</span><span class="dv">35</span>, <span class="at">age=</span><span class="dv">50</span>, <span class="at">ped=</span><span class="fl">1.8</span>, <span class="at">glu=</span><span class="dv">120</span>, <span class="at">npreg=</span><span class="dv">0</span>)</span>
+<span id="cb372-2"><a href="regresión-logística.html#cb372-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(mod.lrm, <span class="at">newdata =</span> indiv, <span class="at">type=</span><span class="st">&quot;lp&quot;</span>)</span></code></pre></div>
 <pre><code>       1 
 1.892376 </code></pre>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="regresión-logística.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(mod.lrm, <span class="at">newdata =</span> indiv, <span class="at">type =</span> <span class="st">&quot;fitted&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="regresión-logística.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(mod.lrm, <span class="at">newdata =</span> indiv, <span class="at">type =</span> <span class="st">&quot;fitted&quot;</span>)</span></code></pre></div>
 <pre><code>        1 
 0.8690262 </code></pre>
 <p>Estos cálculos se pueden programar en R y hace una función, o también una aplicación Shiny para aquellos médicos que no sepan usar R (los nomogramas se siguen utilizando). Otra opción es que hagamos uso de una librería para hacer nomogramas dinámicos (crea Shiny app) de forma sencilla con la librería <code>DynNom</code></p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="regresión-logística.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DynNom)</span>
-<span id="cb375-2"><a href="regresión-logística.html#cb375-2" aria-hidden="true" tabindex="-1"></a><span class="fu">DynNom</span>(mod, Pima.tr)</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="regresión-logística.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DynNom)</span>
+<span id="cb376-2"><a href="regresión-logística.html#cb376-2" aria-hidden="true" tabindex="-1"></a><span class="fu">DynNom</span>(mod, Pima.tr)</span></code></pre></div>
 <p>Con estas simples instrucciones obtendríamos esta aplicación Shiny (Figura abajo) donde cada intervalo de confianza corresponde a un cálculo obtenido variando alguna de las variables predictoras</p>
 <div class="figure">
 <img src="figures/nomograma.png" alt="" />
