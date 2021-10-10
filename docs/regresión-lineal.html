@@ -24,7 +24,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-10-02" />
+<meta name="date" content="2021-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -231,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="regresión-logística.html"><a href="regresión-logística.html#ejemplo-de-regresión-logística"><i class="fa fa-check"></i><b>6.2</b> Ejemplo de regresión logística</a></li>
 <li class="chapter" data-level="6.3" data-path="regresión-logística.html"><a href="regresión-logística.html#coeficientes-de-regresión-logística-como-probabilidades"><i class="fa fa-check"></i><b>6.3</b> Coeficientes de regresión logística como probabilidades</a></li>
 <li class="chapter" data-level="6.4" data-path="regresión-logística.html"><a href="regresión-logística.html#coeficientes-de-regresión-logística-como-razones-de-odds"><i class="fa fa-check"></i><b>6.4</b> Coeficientes de regresión logística como razones de odds</a></li>
-<li class="chapter" data-level="6.5" data-path="regresión-logística.html"><a href="regresión-logística.html#bondad-de-ajuste"><i class="fa fa-check"></i><b>6.5</b> Bondad de ajuste</a></li>
+<li class="chapter" data-level="6.5" data-path="regresión-logística.html"><a href="regresión-logística.html#capacidad-predictiva-de-un-modelo-de-clasificación"><i class="fa fa-check"></i><b>6.5</b> Capacidad predictiva de un modelo de clasificación</a></li>
 <li class="chapter" data-level="6.6" data-path="regresión-logística.html"><a href="regresión-logística.html#ejemplo-de-regresión-logística-modelización-de-riesgo-diabetes"><i class="fa fa-check"></i><b>6.6</b> Ejemplo de regresión logística: modelización de riesgo diabetes</a>
 <ul>
 <li class="chapter" data-level="6.6.1" data-path="regresión-logística.html"><a href="regresión-logística.html#modelo-simple"><i class="fa fa-check"></i><b>6.6.1</b> Modelo simple</a></li>
@@ -512,8 +512,10 @@ Call:
 lm(formula = mpg ~ wt_centered * hp_bin, data = mtcars)
 
 Coefficients:
-       (Intercept)         wt_centered              hp_bin  wt_centered:hp_bin  
-            20.276              -6.391              -3.163               3.953  </code></pre>
+       (Intercept)         wt_centered              hp_bin  
+            20.276              -6.391              -3.163  
+wt_centered:hp_bin  
+             3.953  </code></pre>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="regresión-lineal.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rss</span>(<span class="fu">fitted</span>(multivariable_model), mtcars<span class="sc">$</span>mpg)</span></code></pre></div>
 <pre><code>[1] 170.3792</code></pre>
 <p>RSS mejora una vez más.</p>
@@ -685,16 +687,16 @@ F-statistic: 52.35 on 3 and 28 DF,  p-value: 1.324e-11</code></pre>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="regresión-lineal.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(day)</span></code></pre></div>
 <pre><code>Rows: 731
 Columns: 10
-$ count       &lt;int&gt; 985, 801, 1349, 1562, 1600, 1606, 1510, 959, 822, 1321, 1263~
-$ season      &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ~
-$ year        &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
-$ month       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ~
-$ holiday     &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, ~
-$ weekday     &lt;int&gt; 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, ~
-$ temperature &lt;dbl&gt; 0.3441670, 0.3634780, 0.1963640, 0.2000000, 0.2269570, 0.204~
-$ atemp       &lt;dbl&gt; 0.3636250, 0.3537390, 0.1894050, 0.2121220, 0.2292700, 0.233~
-$ humidity    &lt;dbl&gt; 0.805833, 0.696087, 0.437273, 0.590435, 0.436957, 0.518261, ~
-$ windspeed   &lt;dbl&gt; 0.1604460, 0.2485390, 0.2483090, 0.1602960, 0.1869000, 0.089~</code></pre>
+$ count       &lt;int&gt; 985, 801, 1349, 1562, 1600, 1606, 1510, 959, 822, 1~
+$ season      &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ~
+$ year        &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
+$ month       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ~
+$ holiday     &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, ~
+$ weekday     &lt;int&gt; 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, ~
+$ temperature &lt;dbl&gt; 0.3441670, 0.3634780, 0.1963640, 0.2000000, 0.22695~
+$ atemp       &lt;dbl&gt; 0.3636250, 0.3537390, 0.1894050, 0.2121220, 0.22927~
+$ humidity    &lt;dbl&gt; 0.805833, 0.696087, 0.437273, 0.590435, 0.436957, 0~
+$ windspeed   &lt;dbl&gt; 0.1604460, 0.2485390, 0.2483090, 0.1602960, 0.18690~</code></pre>
 <p>Una pregunta exploratoria inicial es: ¿cómo varía el uso de la bicicleta por año? Podemos responder a esta pregunta simplemente calculando un promedio para cada año:</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="regresión-lineal.html#cb138-1" aria-hidden="true" tabindex="-1"></a>day <span class="sc">%&gt;%</span></span>
 <span id="cb138-2"><a href="regresión-lineal.html#cb138-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">ifelse</span>(year <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">2011</span>, <span class="dv">2012</span>)) <span class="sc">%&gt;%</span></span>
@@ -963,27 +965,27 @@ residual sd = 1406.35, R-Squared = 0.48</code></pre>
 <p>La regresión lineal a menudo tendrá un sesgo más alto que un método flexible como la regresión KNN, pero también tenderá a tener una varianza más baja. Exploraremos estas propiedades más a fondo cuando lleguemos a la validación cruzada.</p>
 <p>Echemos un vistazo a la matriz del modelo.</p>
 <div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="regresión-lineal.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">model.matrix</span>(linear_fit3))</span></code></pre></div>
-<pre><code>  (Intercept) temperature factor(season)2 factor(season)3 factor(season)4
-1           1    0.344167               0               0               0
-2           1    0.363478               0               0               0
-3           1    0.196364               0               0               0
-4           1    0.200000               0               0               0
-5           1    0.226957               0               0               0
-6           1    0.204348               0               0               0
-  temperature:factor(season)2 temperature:factor(season)3
+<pre><code>  (Intercept) temperature factor(season)2 factor(season)3
+1           1    0.344167               0               0
+2           1    0.363478               0               0
+3           1    0.196364               0               0
+4           1    0.200000               0               0
+5           1    0.226957               0               0
+6           1    0.204348               0               0
+  factor(season)4 temperature:factor(season)2
+1               0                           0
+2               0                           0
+3               0                           0
+4               0                           0
+5               0                           0
+6               0                           0
+  temperature:factor(season)3 temperature:factor(season)4
 1                           0                           0
 2                           0                           0
 3                           0                           0
 4                           0                           0
 5                           0                           0
-6                           0                           0
-  temperature:factor(season)4
-1                           0
-2                           0
-3                           0
-4                           0
-5                           0
-6                           0</code></pre>
+6                           0                           0</code></pre>
 <p>Podemos ver que <code>lm()</code> ha convertido la variable de temporada en 3 vectores variables ficticias: factor (temporada) 2, factor (temporada) 3 y factor (temporada) 4. (Si un factor tiene niveles de $k $, entonces una variable ficticia para ese factor codifica $k - 1 $de esos niveles como variables binarias, con los valores 0 o 1 indicando la ausencia o presencia de ese nivel). Los términos de interacción consisten en los productos de los vectores componentes.</p>
 </div>
 </div>

@@ -130,7 +130,7 @@ oj_mdl_cart_full$cptable %>%
                        xerror < xerror_cap ~ "under cap",
                        TRUE ~ "")
    ) %>%
-   select(-rownum, -min_idx) 
+   dplyr::select(-rownum, -min_idx) 
 ```
 
 El árbol más simple que usa la regla 1-SE es $c_p = 0.01347305$ (error CV = 0.18). Afortunadamente, `plotcp ()` nos da una representación gráfica de la relación entre `xerror` y `cp`.
@@ -411,7 +411,7 @@ cs_mdl_cart_full$cptable %>%
           eval = case_when(rownum == min_xerror_idx ~ "min xerror",
                            xerror < xerror_cap ~ "under cap",
                            TRUE ~ "")) %>%
-   select(-rownum, -min_xerror_idx) 
+   dplyr::select(-rownum, -min_xerror_idx) 
 ```
 
 
@@ -774,7 +774,7 @@ También podemos visualizar los resultados con:
 plot_rf <- function(model) {
     theme_set(theme_minimal())
     u <- model$results %>%
-        select(mtry, ROC, Sens, Spec) %>%
+        dplyr::select(mtry, ROC, Sens, Spec) %>%
         gather(a, b, -mtry)
     
     u %>% ggplot(aes(mtry, b)) + geom_line() + geom_point() + 

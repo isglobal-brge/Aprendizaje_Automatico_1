@@ -1,6 +1,7 @@
 fig:flujo
-tab:unnamed-chunk-236
-tab:unnamed-chunk-264
+tab:unnamed-chunk-83
+tab:unnamed-chunk-239
+tab:unnamed-chunk-267
 introducción
 introducción-a-tidyverse
 introducción-1
@@ -74,7 +75,7 @@ la-función-logit-inversa
 ejemplo-de-regresión-logística
 coeficientes-de-regresión-logística-como-probabilidades
 coeficientes-de-regresión-logística-como-razones-de-odds
-bondad-de-ajuste
+capacidad-predictiva-de-un-modelo-de-clasificación
 ejemplo-de-regresión-logística-modelización-de-riesgo-diabetes
 modelo-simple
 agregar-predictores-y-evaluar-el-ajuste

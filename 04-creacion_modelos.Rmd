@@ -364,7 +364,7 @@ Demostraremos métodos de imputación utilizando los datos de Carseats del paque
 
 ```{r}
 library(missForest)
-data(Carseats)
+data(Carseats, package="ISLR")
 levels(Carseats$ShelveLoc) <- c("Bad","Medium","Good") # Reordenamos los niveles de la variable
 
 set.seed(123)
@@ -372,6 +372,33 @@ carseats_missx <- prodNA(Carseats[,-1], noNA=.25)
 carseats_miss <- cbind(Sales=Carseats[, 1], carseats_missx)
 glimpse(carseats_miss)
 ```
+
+Observamos que hay datos faltantes. Podemos tener una estadística global de la falta de información que hay en nuestros tanto de forma numérica mediante la librería `skimr`: 
+
+```{r}
+skimr::skim(carseats_miss)
+```
+
+Comprobamos como la falta de información en las variables (excepto 'Sales') es de aproximadamente el 25% (columna `complete_rate` ~ 75%). Pero si tuviéramos que analizar datos de dos o más covariables, el porcentaje de datos completos disminuiría radicalmente. 
+
+```{r}
+# Total de individuos
+nrow(carseats_miss)
+
+# Total de individuos con casos completos
+carseats_miss %>% complete.cases() %>% sum()
+```
+
+Es decir, si tuviéramos que estimar un modelo con todas las variables de nuestra base de datos sólo dispondríamos de información efectiva para 23 individuos del total de 400. 
+
+La librería `VIM` nos puede ayudar a tener esta información de forma gráfica:
+
+```{r}
+library(VIM)
+aggr(carseats_miss)
+```
+
+
 
 Ahora faltan muchas observaciones. Cuando ajustamos un modelo de regresión para la variable Sales observamos que `lm ()` analiza casos completos y se estima un modelo basado en un subconjunto muy pequeño de datos.
 

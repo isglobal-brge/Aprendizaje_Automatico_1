@@ -176,7 +176,7 @@ La función `nearZeroVar` devuelve las posiciones con las variables marcadas com
 ```{r }
 nzv <- nearZeroVar(datos)
 nzv
-filteredDatos <- select(datos, -all_of(nzv))
+filteredDatos <- dplyr::select(datos, -all_of(nzv))
 dim(datos)
 dim(filteredDatos)
 ```
@@ -347,7 +347,7 @@ La función `nearZeroVar()` del paquete `caret` y `step_nzv()` del paquete `reci
 - Porcentaje de valores únicos: número de valores únicos dividido entre el total de muestras (multiplicado por 100). Este porcentaje se aproxima a cero cuanto mayor es la variedad de valores. Valor por defecto uniqueCut = 10.
 
 ```{r}
-datos %>% select(Pclass, Sex, SibSp, Parch, Fare, Embarked, Age) %>%
+datos %>% dplyr::select(Pclass, Sex, SibSp, Parch, Fare, Embarked, Age) %>%
           nearZeroVar(saveMetrics = TRUE)
 ``` 
 
