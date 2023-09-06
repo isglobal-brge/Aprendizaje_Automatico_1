@@ -1000,7 +1000,7 @@ Lo más simple de todo es definir un marco de datos con nuestros valores deseado
 
  
 
- ```{r}
+```{r}
 predict(linear_fit3, newdata = data.frame(season = 2, temperature = .85))
 ```
 

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Ajuste de modelos | Aprendizaje Automático 1</title>
   <meta name="description" content="5 Ajuste de modelos | Aprendizaje Automático 1" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Ajuste de modelos | Aprendizaje Automático 1" />
   <meta property="og:type" content="book" />
-  
   
   
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-11-22" />
+<meta name="date" content="2023-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="regresión-lineal.html"/>
 <link rel="next" href="regresión-logística.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,9 +49,9 @@
 
 
 
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -243,89 +242,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7" data-path="regresión-logística.html"><a href="regresión-logística.html#creación-de-un-modelo-y-validación"><i class="fa fa-check"></i><b>6.7</b> Creación de un modelo y validación</a></li>
 <li class="chapter" data-level="6.8" data-path="regresión-logística.html"><a href="regresión-logística.html#nomogramas"><i class="fa fa-check"></i><b>6.8</b> Nomogramas</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html"><i class="fa fa-check"></i><b>7</b> Dealing with Big Data in R</a>
+<li class="chapter" data-level="7" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html"><i class="fa fa-check"></i><b>7</b> Modelos de regularización</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#nodes-cores-processes-and-threads"><i class="fa fa-check"></i><b>7.1</b> Nodes, cores, processes and threads</a></li>
-<li class="chapter" data-level="7.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#paralelización"><i class="fa fa-check"></i><b>7.2</b> Paralelización</a>
+<li class="chapter" data-level="7.1" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
+<li class="chapter" data-level="7.2" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#cómo-regularizar"><i class="fa fa-check"></i><b>7.2</b> Cómo regularizar</a></li>
+<li class="chapter" data-level="7.3" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#implementación-en-r"><i class="fa fa-check"></i><b>7.3</b> Implementación en R</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#shared-memory-programming"><i class="fa fa-check"></i><b>7.2.1</b> Shared Memory Programming</a></li>
-<li class="chapter" data-level="7.2.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#distributed-memory-programming"><i class="fa fa-check"></i><b>7.2.2</b> Distributed Memory Programming</a></li>
+<li class="chapter" data-level="7.3.1" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#ejemplo-ridge-regression"><i class="fa fa-check"></i><b>7.3.1</b> Ejemplo: Ridge Regression</a></li>
+<li class="chapter" data-level="7.3.2" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#ejemplo-lasso"><i class="fa fa-check"></i><b>7.3.2</b> Ejemplo: Lasso</a></li>
+<li class="chapter" data-level="7.3.3" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#ejemplo-elastic-net"><i class="fa fa-check"></i><b>7.3.3</b> Ejemplo: Elastic Net</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#mapreduce"><i class="fa fa-check"></i><b>7.3</b> MapReduce</a>
-<ul>
-<li class="chapter" data-level="7.3.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#map"><i class="fa fa-check"></i><b>7.3.1</b> Map</a></li>
-<li class="chapter" data-level="7.3.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#reduce"><i class="fa fa-check"></i><b>7.3.2</b> Reduce</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>7.4</b> Example: Linear regression for Big Data</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>8</b> La librería <code>caret</code></a>
+<li class="chapter" data-level="8" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html"><i class="fa fa-check"></i><b>8</b> Dealing with Big Data in R</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="caret.html"><a href="caret.html#pre-procesado"><i class="fa fa-check"></i><b>8.1</b> Pre-procesado</a>
+<li class="chapter" data-level="8.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#nodes-cores-processes-and-threads"><i class="fa fa-check"></i><b>8.1</b> Nodes, cores, processes and threads</a></li>
+<li class="chapter" data-level="8.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#paralelización"><i class="fa fa-check"></i><b>8.2</b> Paralelización</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="caret.html"><a href="caret.html#creación-de-variables"><i class="fa fa-check"></i><b>8.1.1</b> Creación de variables</a></li>
-<li class="chapter" data-level="8.1.2" data-path="caret.html"><a href="caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>8.1.2</b> Predictores con poca variabilidad</a></li>
-<li class="chapter" data-level="8.1.3" data-path="caret.html"><a href="caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>8.1.3</b> Identificación de predictores correlacionados</a></li>
-<li class="chapter" data-level="8.1.4" data-path="caret.html"><a href="caret.html#centrado-y-escalado-1"><i class="fa fa-check"></i><b>8.1.4</b> Centrado y escalado</a></li>
-<li class="chapter" data-level="8.1.5" data-path="caret.html"><a href="caret.html#imputación"><i class="fa fa-check"></i><b>8.1.5</b> Imputación</a></li>
-<li class="chapter" data-level="8.1.6" data-path="caret.html"><a href="caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>8.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
+<li class="chapter" data-level="8.2.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#shared-memory-programming"><i class="fa fa-check"></i><b>8.2.1</b> Shared Memory Programming</a></li>
+<li class="chapter" data-level="8.2.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#distributed-memory-programming"><i class="fa fa-check"></i><b>8.2.2</b> Distributed Memory Programming</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="caret.html"><a href="caret.html#visualización"><i class="fa fa-check"></i><b>8.2</b> Visualización</a></li>
-<li class="chapter" data-level="8.3" data-path="caret.html"><a href="caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>8.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
-<li class="chapter" data-level="8.4" data-path="caret.html"><a href="caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>8.4</b> Creación de un modelo predictivo</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="KNN.html"><a href="KNN.html"><i class="fa fa-check"></i><b>9</b> K vecinos más próximos (KNN)</a></li>
-<li class="chapter" data-level="10" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>10</b> Análisis discriminante lineal (LDA)</a>
+<li class="chapter" data-level="8.3" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#mapreduce"><i class="fa fa-check"></i><b>8.3</b> MapReduce</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html#concurso-predicción-de-actividad-física-con-sensores"><i class="fa fa-check"></i><b>10.1</b> Concurso predicción de actividad física con sensores</a></li>
+<li class="chapter" data-level="8.3.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#map"><i class="fa fa-check"></i><b>8.3.1</b> Map</a></li>
+<li class="chapter" data-level="8.3.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#reduce"><i class="fa fa-check"></i><b>8.3.2</b> Reduce</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html"><i class="fa fa-check"></i><b>11</b> Máquinas de soporte vectorial</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-margen-máximo"><i class="fa fa-check"></i><b>11.1</b> Clasificador de margen máximo</a></li>
-<li class="chapter" data-level="11.2" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-soporte-vectorial"><i class="fa fa-check"></i><b>11.2</b> Clasificador de soporte vectorial</a></li>
-<li class="chapter" data-level="11.3" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#máquinas-de-soporte-vectorial-1"><i class="fa fa-check"></i><b>11.3</b> Máquinas de soporte vectorial</a></li>
-<li class="chapter" data-level="11.4" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-e1071"><i class="fa fa-check"></i><b>11.4</b> SVM con <code>e1071</code></a></li>
-<li class="chapter" data-level="11.5" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-caret"><i class="fa fa-check"></i><b>11.5</b> SVM con <code>caret</code></a></li>
+<li class="chapter" data-level="8.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>8.4</b> Example: Linear regression for Big Data</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="respuesta-no-balanceada.html"><a href="respuesta-no-balanceada.html"><i class="fa fa-check"></i><b>12</b> Respuesta no balanceada</a></li>
-<li class="chapter" data-level="13" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html"><i class="fa fa-check"></i><b>13</b> Árboles de decisión</a>
+<li class="chapter" data-level="9" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>9</b> La librería <code>caret</code></a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-clasificación"><i class="fa fa-check"></i><b>13.1</b> Árboles de clasificación</a></li>
-<li class="chapter" data-level="13.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#área-bajo-la-curva-roc"><i class="fa fa-check"></i><b>13.2</b> Área bajo la curva ROC</a>
+<li class="chapter" data-level="9.1" data-path="caret.html"><a href="caret.html#pre-procesado"><i class="fa fa-check"></i><b>9.1</b> Pre-procesado</a>
 <ul>
-<li class="chapter" data-level="13.2.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret"><i class="fa fa-check"></i><b>13.2.1</b> Entrenamiento con <code>caret</code></a></li>
+<li class="chapter" data-level="9.1.1" data-path="caret.html"><a href="caret.html#creación-de-variables"><i class="fa fa-check"></i><b>9.1.1</b> Creación de variables</a></li>
+<li class="chapter" data-level="9.1.2" data-path="caret.html"><a href="caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>9.1.2</b> Predictores con poca variabilidad</a></li>
+<li class="chapter" data-level="9.1.3" data-path="caret.html"><a href="caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>9.1.3</b> Identificación de predictores correlacionados</a></li>
+<li class="chapter" data-level="9.1.4" data-path="caret.html"><a href="caret.html#centrado-y-escalado-1"><i class="fa fa-check"></i><b>9.1.4</b> Centrado y escalado</a></li>
+<li class="chapter" data-level="9.1.5" data-path="caret.html"><a href="caret.html#imputación"><i class="fa fa-check"></i><b>9.1.5</b> Imputación</a></li>
+<li class="chapter" data-level="9.1.6" data-path="caret.html"><a href="caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>9.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-regresión"><i class="fa fa-check"></i><b>13.3</b> Árboles de regresión</a>
-<ul>
-<li class="chapter" data-level="13.3.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret-1"><i class="fa fa-check"></i><b>13.3.1</b> Entrenamiento con <code>caret</code></a></li>
+<li class="chapter" data-level="9.2" data-path="caret.html"><a href="caret.html#visualización"><i class="fa fa-check"></i><b>9.2</b> Visualización</a></li>
+<li class="chapter" data-level="9.3" data-path="caret.html"><a href="caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>9.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
+<li class="chapter" data-level="9.4" data-path="caret.html"><a href="caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>9.4</b> Creación de un modelo predictivo</a></li>
 </ul></li>
-<li class="chapter" data-level="13.4" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagged-trees"><i class="fa fa-check"></i><b>13.4</b> Bagged trees</a>
+<li class="chapter" data-level="10" data-path="KNN.html"><a href="KNN.html"><i class="fa fa-check"></i><b>10</b> K vecinos más próximos (KNN)</a></li>
+<li class="chapter" data-level="11" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>11</b> Análisis discriminante lineal (LDA)</a>
 <ul>
-<li class="chapter" data-level="13.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>13.4.1</b> Bagging árboles de clasificación</a></li>
-<li class="chapter" data-level="13.4.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>13.4.2</b> Bagging árboles de regresión</a></li>
+<li class="chapter" data-level="11.1" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html#concurso-predicción-de-actividad-física-con-sensores"><i class="fa fa-check"></i><b>11.1</b> Concurso predicción de actividad física con sensores</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest"><i class="fa fa-check"></i><b>13.5</b> Random Forest</a></li>
-<li class="chapter" data-level="13.6" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest-pn"><i class="fa fa-check"></i><b>13.6</b> Random Forest p&gt;&gt;n</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="boosting.html"><a href="boosting.html"><i class="fa fa-check"></i><b>14</b> Boosting</a>
+<li class="chapter" data-level="12" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html"><i class="fa fa-check"></i><b>12</b> Máquinas de soporte vectorial</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="boosting.html"><a href="boosting.html#cómo-funciona-el-boosting"><i class="fa fa-check"></i><b>14.1</b> Cómo funciona el <em>boosting</em></a></li>
-<li class="chapter" data-level="14.2" data-path="boosting.html"><a href="boosting.html#adaboost"><i class="fa fa-check"></i><b>14.2</b> AdaBoost</a></li>
-<li class="chapter" data-level="14.3" data-path="boosting.html"><a href="boosting.html#gbm-básico"><i class="fa fa-check"></i><b>14.3</b> GBM básico</a>
-<ul>
-<li class="chapter" data-level="14.3.1" data-path="boosting.html"><a href="boosting.html#boostingHiperparam"><i class="fa fa-check"></i><b>14.3.1</b> Hiperparámetros</a></li>
-<li class="chapter" data-level="14.3.2" data-path="boosting.html"><a href="boosting.html#implementación"><i class="fa fa-check"></i><b>14.3.2</b> Implementación</a></li>
-<li class="chapter" data-level="14.3.3" data-path="boosting.html"><a href="boosting.html#estrategia-general-de-tuning"><i class="fa fa-check"></i><b>14.3.3</b> Estrategia general de <em>tuning</em></a></li>
+<li class="chapter" data-level="12.1" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-margen-máximo"><i class="fa fa-check"></i><b>12.1</b> Clasificador de margen máximo</a></li>
+<li class="chapter" data-level="12.2" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-soporte-vectorial"><i class="fa fa-check"></i><b>12.2</b> Clasificador de soporte vectorial</a></li>
+<li class="chapter" data-level="12.3" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#máquinas-de-soporte-vectorial-1"><i class="fa fa-check"></i><b>12.3</b> Máquinas de soporte vectorial</a></li>
+<li class="chapter" data-level="12.4" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-e1071"><i class="fa fa-check"></i><b>12.4</b> SVM con <code>e1071</code></a></li>
+<li class="chapter" data-level="12.5" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-caret"><i class="fa fa-check"></i><b>12.5</b> SVM con <code>caret</code></a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="boosting.html"><a href="boosting.html#gbms-estocásticos"><i class="fa fa-check"></i><b>14.4</b> GBMs estocásticos</a>
+<li class="chapter" data-level="13" data-path="respuesta-no-balanceada.html"><a href="respuesta-no-balanceada.html"><i class="fa fa-check"></i><b>13</b> Respuesta no balanceada</a></li>
+<li class="chapter" data-level="14" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html"><i class="fa fa-check"></i><b>14</b> Árboles de decisión</a>
 <ul>
-<li class="chapter" data-level="14.4.1" data-path="boosting.html"><a href="boosting.html#hiperparámetros-estocásticos"><i class="fa fa-check"></i><b>14.4.1</b> Hiperparámetros estocásticos</a></li>
-</ul></li>
-<li class="chapter" data-level="14.5" data-path="boosting.html"><a href="boosting.html#xgboost"><i class="fa fa-check"></i><b>14.5</b> XGBoost</a>
+<li class="chapter" data-level="14.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-clasificación"><i class="fa fa-check"></i><b>14.1</b> Árboles de clasificación</a></li>
+<li class="chapter" data-level="14.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#área-bajo-la-curva-roc"><i class="fa fa-check"></i><b>14.2</b> Área bajo la curva ROC</a>
 <ul>
-<li class="chapter" data-level="14.5.1" data-path="boosting.html"><a href="boosting.html#reguralización"><i class="fa fa-check"></i><b>14.5.1</b> Reguralización</a></li>
-<li class="chapter" data-level="14.5.2" data-path="boosting.html"><a href="boosting.html#estrategia-de-tuning"><i class="fa fa-check"></i><b>14.5.2</b> Estrategia de <em>tuning</em></a></li>
+<li class="chapter" data-level="14.2.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret"><i class="fa fa-check"></i><b>14.2.1</b> Entrenamiento con <code>caret</code></a></li>
 </ul></li>
-<li class="chapter" data-level="14.6" data-path="boosting.html"><a href="boosting.html#otros-algoritmos-gbm"><i class="fa fa-check"></i><b>14.6</b> Otros algoritmos GBM</a></li>
+<li class="chapter" data-level="14.3" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-regresión"><i class="fa fa-check"></i><b>14.3</b> Árboles de regresión</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret-1"><i class="fa fa-check"></i><b>14.3.1</b> Entrenamiento con <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagged-trees"><i class="fa fa-check"></i><b>14.4</b> Bagged trees</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>14.4.1</b> Bagging árboles de clasificación</a></li>
+<li class="chapter" data-level="14.4.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>14.4.2</b> Bagging árboles de regresión</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest"><i class="fa fa-check"></i><b>14.5</b> Random Forest</a></li>
+<li class="chapter" data-level="14.6" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest-pn"><i class="fa fa-check"></i><b>14.6</b> Random Forest p&gt;&gt;n</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="boosting.html"><a href="boosting.html"><i class="fa fa-check"></i><b>15</b> Boosting</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="boosting.html"><a href="boosting.html#cómo-funciona-el-boosting"><i class="fa fa-check"></i><b>15.1</b> Cómo funciona el <em>boosting</em></a></li>
+<li class="chapter" data-level="15.2" data-path="boosting.html"><a href="boosting.html#adaboost"><i class="fa fa-check"></i><b>15.2</b> AdaBoost</a></li>
+<li class="chapter" data-level="15.3" data-path="boosting.html"><a href="boosting.html#gbm-básico"><i class="fa fa-check"></i><b>15.3</b> GBM básico</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="boosting.html"><a href="boosting.html#boostingHiperparam"><i class="fa fa-check"></i><b>15.3.1</b> Hiperparámetros</a></li>
+<li class="chapter" data-level="15.3.2" data-path="boosting.html"><a href="boosting.html#implementación"><i class="fa fa-check"></i><b>15.3.2</b> Implementación</a></li>
+<li class="chapter" data-level="15.3.3" data-path="boosting.html"><a href="boosting.html#estrategia-general-de-tuning"><i class="fa fa-check"></i><b>15.3.3</b> Estrategia general de <em>tuning</em></a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="boosting.html"><a href="boosting.html#gbms-estocásticos"><i class="fa fa-check"></i><b>15.4</b> GBMs estocásticos</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="boosting.html"><a href="boosting.html#hiperparámetros-estocásticos"><i class="fa fa-check"></i><b>15.4.1</b> Hiperparámetros estocásticos</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="boosting.html"><a href="boosting.html#xgboost"><i class="fa fa-check"></i><b>15.5</b> XGBoost</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="boosting.html"><a href="boosting.html#reguralización"><i class="fa fa-check"></i><b>15.5.1</b> Reguralización</a></li>
+<li class="chapter" data-level="15.5.2" data-path="boosting.html"><a href="boosting.html#estrategia-de-tuning"><i class="fa fa-check"></i><b>15.5.2</b> Estrategia de <em>tuning</em></a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="boosting.html"><a href="boosting.html#otros-algoritmos-gbm"><i class="fa fa-check"></i><b>15.6</b> Otros algoritmos GBM</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -347,8 +357,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ajuste-de-modelos" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Ajuste de modelos</h1>
+<div id="ajuste-de-modelos" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Ajuste de modelos<a href="ajuste-de-modelos.html#ajuste-de-modelos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Este capítulo cubre varios temas adicionales relacionados con el ajuste de modelos, como la selección de variables, la comparación de modelos, la validación cruzada y la imputación de datos faltantes. Los conceptos y métodos discutidos aquí se aplican tanto a la regresión lineal como a la logística.</p>
 <p>Qué pretendemos aprender en este capítulo:</p>
 <ul>
@@ -358,8 +368,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Cómo determinar si un modelo tiene sobre-ajuste (overfitting)</li>
 <li>Dar una pequeña idea a qué hacer cuando tenemos datos faltantes (missing data)</li>
 </ul>
-<div id="reglas-generales-para-la-selección-de-variables" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Reglas generales para la selección de variables</h2>
+<div id="reglas-generales-para-la-selección-de-variables" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Reglas generales para la selección de variables<a href="ajuste-de-modelos.html#reglas-generales-para-la-selección-de-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>¿Cómo sabemos qué variables (independientes) deben incluirse en un modelo? La respuesta sencilla es: a menudo no lo sabemos. Aquí hay algunas reglas generales cuando se piensa en la selección de variables:</p>
 <ul>
 <li><p><em>Piensa en los datos</em>. ¿Qué variables tiene sentido incluir dada la situación? ¿Alguna literatura publicada ofrece orientación? Si estamos en modo descriptivo, es posible que solo nos interesen determinadas variables y utilicemos las demás como controles. Si estamos en modo predictivo, incluimos todas las variables que, por razones aditivas, podrían ser importantes para predecir el resultado. Sin embargo, esta es una guía muy general, ya que diferentes contextos exigen diferentes enfoques para el ajuste del modelo.</p></li>
@@ -369,8 +379,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><em>Simplicidad.</em> Los modelos sencillos son casi siempre mejores — son más interpretables y tienden a tener menor variación (<em>principio de parsimonia</em>).</p></li>
 </ul>
 </div>
-<div id="selección-paso-a-paso-stepwise" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Selección paso a paso (stepwise)</h2>
+<div id="selección-paso-a-paso-stepwise" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Selección paso a paso (stepwise)<a href="ajuste-de-modelos.html#selección-paso-a-paso-stepwise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La técnica tradicional en estadística para seleccionar variables es <em>selección paso a paso</em> (o <em>stepwise</em> en inglés).</p>
 <p>Con <em>selección hacia adelante</em> comenzamos con un modelo nulo (solo contiene el <em>intercept</em>) y agregamos una variable a la vez. Si la variable agregada mejora el modelo, la mantenemos y agregamos otra. Continuamos hasta que se hayan probado todas las variables como podemos ver en la siguiente figura:</p>
 <div class="figure">
@@ -385,8 +395,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Selección hacia adelante seguida de selección hacia atrás (saltos)</em>. Consiste en ir realizando en cada paso una selección hacia adelante o hacia atrás en función del mejor paso que podamos hacer.</p>
 <p>Desafortunadamente, estos procedimientos de ajuste manual son defectuosos. Dependen del orden en el que se agregan o excluyen las variables y, a menudo, no seleccionarán el mejor modelo. Además, por ejemplo, supongamos que tenemos una base de datos con <span class="math inline">\(k\)</span> = 13 variables predictoras, lo que significa que hay <span class="math inline">\(2^k\)</span> o 8192 modelos posibles que podríamos ajustar y eso sin tener encuenta la posible introducción de interacciones o términos polinómicos. Este es un espacio extremadamente grande para buscar el mejor modelo, y la búsqueda es computacionalmente costosa y requiere mucho tiempo. Realizar tal búsqueda manualmente sería prácticamente imposible.</p>
 </div>
-<div id="comparación-de-modelos" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Comparación de modelos</h2>
+<div id="comparación-de-modelos" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Comparación de modelos<a href="ajuste-de-modelos.html#comparación-de-modelos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Ya estamos familiarizados con los términos <span class="math inline">\(R^2\)</span>, RMSE y RSS. Éstos nos servirán como herramientas para comparar modelos. En general, si agregamos una variable y <span class="math inline">\(R ^2\)</span> sube y RMSE / RSS baja, entonces el modelo con la variable adicional siempre es mejor. La cantidad de variación explicada ha aumentado. Sin embargo, como siempre en estadística debemos preguntarnos ¿es este aumento estadísticamente significativo?. Este hecho también introduce un nuevo problema: el sobreajuste. Sabemos que el, <span class="math inline">\(R^2\)</span> ajustado penaliza el ajuste teniendo en cuenta el número de predictores y podría ser una solución. También tenemos otra posibilidad para penalizar la complejidad de los modelos usando métodos de criterio de información como el AIC (Akaike Information Criterion).</p>
 <p><span class="math display">\[\mathrm {AIC} = - 2 \ln(L) + 2k\]</span></p>
 <p>donde <span class="math inline">\(k\)</span> es el número de parámetros estimados en el modelo, <span class="math inline">\(L\)</span> es el valor maximizado de la función de verosimilitud del modelo y <span class="math inline">\(ln\)</span> es el logaritmo natural. Dado un conjunto de modelos candidatos para los datos, el modelo preferido es el que tiene el valor de AIC más bajo. Al penalizar por <span class="math inline">\(k\)</span> más grandes (garantizados por el término final, <span class="math inline">\(+ 2k\)</span>), AIC intenta protegerse contra el sobreajuste. Es posible, entonces, observar <span class="math inline">\(R^2\)</span> aumentar con la adición de predictores, mientras que AIC baja.</p>
@@ -398,8 +408,8 @@ prueba de razón de verosimilitud (LRT por sus siglas en inglés):</p>
 donde <span class="math inline">\(\ln(L_{c})\)</span> es el logaritmo de la probabilidad del modelo actual (o basal) y <span class="math inline">\(\ln (L_{a})\)</span> es el logaritmo de la probabilidad del modelo alternativo con predictores adicionales. La función <code>lrtest ()</code> en el paquete <code>lmtest</code> implementa el test LRT. La función <code>anova ()</code> en R base también comparará modelos usando una prueba F.</p>
 <p>Vamos a ilustrar algunos de ejemplos de comparación de modelos usando los datos de Hitters del paquete ISLR que tiene información sobre bateadores de la Major League de USA entre los años 1986 y 1987. Estamos interesados en crear un modelo para predecir el salario de los bateadores (variable <code>Salary</code>). Partimos de un modelo nulo:</p>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  4432455 236.8    9120092 487.1  9120092 487.1
-Vcells 22016577 168.0   39736026 303.2 39735943 303.2</code></pre>
+Ncells  5517107 294.7   10345047 552.5 10345047 552.5
+Vcells 25832435 197.1   55254244 421.6 55239624 421.5</code></pre>
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="ajuste-de-modelos.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
 <span id="cb254-2"><a href="ajuste-de-modelos.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Hitters)</span>
 <span id="cb254-3"><a href="ajuste-de-modelos.html#cb254-3" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(null <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> Hitters))</span></code></pre></div>
@@ -422,15 +432,12 @@ Hits         4.39     0.56
 n = 263, k = 2
 residual sd = 406.17, R-Squared = 0.19</code></pre>
 <div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="ajuste-de-modelos.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lrtest</span>(null, h1)</span></code></pre></div>
-<pre><code>Likelihood ratio test
-
+<pre><code>
 Model 1: Salary ~ 1
 Model 2: Salary ~ Hits
-  #Df  LogLik Df  Chisq Pr(&gt;Chisq)    
-1   2 -1980.1                         
-2   3 -1952.0  1 56.212  6.508e-14 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+
+L.R. Chisq       d.f.          P 
+        NA          1         NA </code></pre>
 <div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="ajuste-de-modelos.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(null, h1)</span></code></pre></div>
 <pre><code>Analysis of Variance Table
 
@@ -456,15 +463,12 @@ AtBat        -1.22     0.64
 n = 263, k = 3
 residual sd = 404.13, R-Squared = 0.20</code></pre>
 <div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="ajuste-de-modelos.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lrtest</span>(h1, h2)</span></code></pre></div>
-<pre><code>Likelihood ratio test
-
+<pre><code>
 Model 1: Salary ~ Hits
 Model 2: Salary ~ Hits + AtBat
-  #Df  LogLik Df  Chisq Pr(&gt;Chisq)  
-1   3 -1952.0                       
-2   4 -1950.1  1 3.6588    0.05577 .
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+
+L.R. Chisq       d.f.          P 
+        NA          1         NA </code></pre>
 <div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="ajuste-de-modelos.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(h1, h2)</span></code></pre></div>
 <pre><code>Analysis of Variance Table
 
@@ -486,23 +490,20 @@ h2  4 3908.260</code></pre>
 <span id="cb274-3"><a href="ajuste-de-modelos.html#cb274-3" aria-hidden="true" tabindex="-1"></a>h4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> Hits <span class="sc">+</span> Years <span class="sc">+</span> HmRun <span class="sc">+</span> RBI <span class="sc">+</span> Walks <span class="sc">+</span> Assists <span class="sc">+</span> AtBat,</span>
 <span id="cb274-4"><a href="ajuste-de-modelos.html#cb274-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> Hitters)</span>
 <span id="cb274-5"><a href="ajuste-de-modelos.html#cb274-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lrtest</span>(h3, h4)</span></code></pre></div>
-<pre><code>Likelihood ratio test
-
+<pre><code>
 Model 1: Salary ~ Hits + Years + HmRun + RBI + Walks + Assists
 Model 2: Salary ~ Hits + Years + HmRun + RBI + Walks + Assists + AtBat
-  #Df  LogLik Df  Chisq Pr(&gt;Chisq)    
-1   8 -1916.7                         
-2   9 -1911.1  1 11.114  0.0008569 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+
+L.R. Chisq       d.f.          P 
+        NA          1         NA </code></pre>
 <div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="ajuste-de-modelos.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(<span class="fu">AIC</span>(h3, h4))</span></code></pre></div>
 <pre><code>   df      AIC
 h3  8 3849.311
 h4  9 3840.198</code></pre>
 <p>Ahora AtBat mejora claramente el ajuste, pero nunca lo hubiéramos descubierto si ya lo hubiéramos descartado. Esto es preocupante. ¿Existe una forma mejor de seleccionar variables? Quizás, veámoslo.</p>
 </div>
-<div id="métodos-de-selección-automática" class="section level2" number="5.4">
-<h2><span class="header-section-number">5.4</span> Métodos de selección automática</h2>
+<div id="métodos-de-selección-automática" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Métodos de selección automática<a href="ajuste-de-modelos.html#métodos-de-selección-automática" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se han desarrollado algoritmos para buscar en el espacio de modelos de manera eficiente el modelo óptimo. Sin embargo, desde el principio conviene tener cuidado con la selección automática de variables. <em>La elección de variables no debe ser un proceso mecánico.</em> Debemos, en cambio, buscar comprender el proceso de generación de datos. De hecho, el mayor beneficio de la selección manual por pasos consiste menos en producir un buen modelo que en la comprensión obtenida al ajustar muchos modelos y ver, mediante prueba y error, qué predictores son más reactivos con el resultado. Especialmente cuando se trata de descripción, los algoritmos de selección automática de variables son solo herramientas para explorar sus datos y pensar en modelos.</p>
 <p>La función <code>step ()</code> en R base automatiza la selección de variables paso a paso usando AIC.</p>
 <div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="ajuste-de-modelos.html#cb278-1" aria-hidden="true" tabindex="-1"></a>mod.fow <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">step</span>(<span class="fu">lm</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> Hitters), <span class="at">trace =</span> <span class="cn">FALSE</span>,</span>
@@ -618,8 +619,8 @@ Multiple R-squared:  0.5087,    Adjusted R-squared:  0.4972
 F-statistic: 44.18 on 6 and 256 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code>**IMPORTANTE:** ¿Es este modelo realmente mejor? El algoritmo hizo una búsqueda exhaustiva del espacio de modelos y, sin embargo, arrojó un modelo con $R^2$ un poco más bajo. ¿Cómo podría ser mejor? (probablemente lo sea). Si bien el sesgo en este modelo será mayor que en el modelo más grande seleccionado por la función `step ()`, la varianza probablemente sea menor. Recuerde: el sesgo se refiere al rendimiento del modelo dentro de la muestra y la varianza se refiere al rendimiento del modelo fuera de la muestra: cómo se comporta el modelo cuando encuentra nuevos datos. Si el modelo tiene un rendimiento deficiente en datos nuevos, con una gran discrepancia entre el rendimiento dentro y fuera de la muestra, entonces está sobreajustado. AIC, BIC y $R^2$ ajustado penalizan por la complejidad del modelo para evitar el sobreajuste y tenderán a seleccionar modelos con mayor sesgo y menor varianza.</code></pre>
 </div>
-<div id="validación-cruzada" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> Validación cruzada</h2>
+<div id="validación-cruzada" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Validación cruzada<a href="ajuste-de-modelos.html#validación-cruzada" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La validación cruzada (CV por sus siglas en inglés) es la técnica que usamos para evaluar si un modelo está sobreajustado y para estimar cómo funcionará con nuevos datos.</p>
 <p>El sobreajuste es un peligro importante en el análisis predictivo, especialmente cuando se utilizan algoritmos de aprendizaje automático que, sin el ajuste adecuado, puede aprender datos de nuestra muestra casi a la perfección, esencialmente ajustando el ruido (o variabilidad). Cuando se utiliza un modelo de este tipo para predecir nuevos datos, con un ruido (o variabilidad) diferente, el rendimiento del modelo puede ser sorprendentemente malo. Usamos CV para ayudarnos a identificar y evitar tales situaciones. ¿Cómo podemos hacer esto? Muchos algoritmos de aprendizaje automático requieren que el usuario especifique ciertos parámetros (hiper-parámetros). Veremos más adelante que, por ejemplo, necesitaremos especificar un valor para <span class="math inline">\(m\)</span> que corresponde al número de predictores elegidos al azar que se utilizarán en cada división de árbol cuando usemos “random forest” como algoritmo de aprendizaje. Cuanto menor sea <span class="math inline">\(m\)</span>, más simple será el árbol. Podemos usar CV para elegir el valor de <span class="math inline">\(m\)</span> que minimiza la variación y reduce el sobreajuste. La regresión lineal no tiene parámetros que debe especificar el usuario, pero la CV aún nos ayuda a evaluar cuánto podría sobreajustarse un modelo a los datos de muestra.</p>
 <p>De manera breve, los algoritmos de cross-validation se pueden resumir como:</p>
@@ -629,8 +630,8 @@ F-statistic: 44.18 on 6 and 256 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>Testa el modelo en los datos reservados.</li>
 </ul>
 <p>A continuación se describen algunas de las distintas técnicas de validación cruzada que existen.</p>
-<div id="validación-en-un-conjunto-de-datos-externo" class="section level3" number="5.5.1">
-<h3><span class="header-section-number">5.5.1</span> Validación en un conjunto de datos externo</h3>
+<div id="validación-en-un-conjunto-de-datos-externo" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Validación en un conjunto de datos externo<a href="ajuste-de-modelos.html#validación-en-un-conjunto-de-datos-externo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La versión más simple de CV es el llamado método de conjunto de validación, que consta de los siguientes pasos:</p>
 <ol style="list-style-type: decimal">
 <li><em>Dividir los datos de la muestra en dos partes: un conjunto de entrenamiento y otro de validacións.</em> Los investigadores usan diferentes proporciones, pero es común seleccionar al azar el 70% de los datos como conjunto de entrenamiento y el 30% como conjunto de prueba o validación. . (Obviamente, debemos tener suficientes datos en la muestra para ajustar un modelo después de dividir los datos). Debido a que CV se basa en un muestreo aleatorio, nuestros resultados variarán a menos que usemos <code>set.seed ()</code>. Demostraremos usando los datos de Hitters, usando solo casos completos (esto es importante, no tener missings - veremos más adelante alguna forma de solucionar este problema).</li>
@@ -668,8 +669,8 @@ F-statistic: 44.18 on 6 and 256 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p class="caption">Sobreajuste</p>
 </div>
 </div>
-<div id="leave-one-out-cross-validation-loocv" class="section level3" number="5.5.2">
-<h3><span class="header-section-number">5.5.2</span> Leave-one-out cross validation (LOOCV)</h3>
+<div id="leave-one-out-cross-validation-loocv" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Leave-one-out cross validation (LOOCV)<a href="ajuste-de-modelos.html#leave-one-out-cross-validation-loocv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Este método funciona de la siguiente manera:</p>
 <ul>
 <li>Extrae una observación de los datos y usa el resto para entrenar el modelo</li>
@@ -692,8 +693,8 @@ F-statistic: 44.18 on 6 and 256 DF,  p-value: &lt; 2.2e-16</code></pre>
 </tbody>
 </table>
 </div>
-<div id="k-fold-cross-validation-k-fold-cv" class="section level3" number="5.5.3">
-<h3><span class="header-section-number">5.5.3</span> K-fold cross validation (K-fold CV)</h3>
+<div id="k-fold-cross-validation-k-fold-cv" class="section level3 hasAnchor" number="5.5.3">
+<h3><span class="header-section-number">5.5.3</span> K-fold cross validation (K-fold CV)<a href="ajuste-de-modelos.html#k-fold-cross-validation-k-fold-cv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La diferencia con LOOCV es que este método evalúa el comportamiento del modelo en un conjunto de datos de distingo tamaño (K). El algoritmo es el siguiente:</p>
 <ul>
 <li>Separa los datos en k-subconjuntos (k-fold) de forma aleatoria</li>
@@ -719,8 +720,8 @@ F-statistic: 44.18 on 6 and 256 DF,  p-value: &lt; 2.2e-16</code></pre>
 </tbody>
 </table>
 </div>
-<div id="uso-de-cv-para-estimar-el-hiper-parámetro" class="section level3" number="5.5.4">
-<h3><span class="header-section-number">5.5.4</span> Uso de CV para estimar el hiper-parámetro</h3>
+<div id="uso-de-cv-para-estimar-el-hiper-parámetro" class="section level3 hasAnchor" number="5.5.4">
+<h3><span class="header-section-number">5.5.4</span> Uso de CV para estimar el hiper-parámetro<a href="ajuste-de-modelos.html#uso-de-cv-para-estimar-el-hiper-parámetro" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Si el algoritmo de aprendizaje automático que vamos a utilizar para realizar predicciones tiene un parámetro que controla el comportamiento (por ejemplo grado de polinomio en regresión no lineal, o el número de nodos en árboles de clasificación) éste podría elegirse de forma que minimizara el error de clasificación. Esta selección también puede dar problemas de sobre ajuste ya que podríamos seleccionar de forma que ajustara perféctamente a nuestros datos.</p>
 <p>Para evitar el problema, se puede utilizar cualquiera de las técnicas vistas con anterioridad. Aquí tenemos un ejemplo donde se ha usado un modelo de aprendizaje que se basa en introducir términos polinómicos de varaibles para realizar una mejor predicción mediante regresión lineal usando sólo términos lineales.</p>
 <div class="figure">
@@ -728,8 +729,8 @@ F-statistic: 44.18 on 6 and 256 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p class="caption">Sobreajuste según un hiper-parámetro</p>
 </div>
 </div>
-<div id="uso-de-bootstrap" class="section level3" number="5.5.5">
-<h3><span class="header-section-number">5.5.5</span> Uso de bootstrap</h3>
+<div id="uso-de-bootstrap" class="section level3 hasAnchor" number="5.5.5">
+<h3><span class="header-section-number">5.5.5</span> Uso de bootstrap<a href="ajuste-de-modelos.html#uso-de-bootstrap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Si en vez de partir nuestra muestra en <span class="math inline">\(K\)</span> submuestras, realizamos una selección aleatoria de muestras con reemplazamiento, nos encontraremos ante una aproximación de tipo <em>bootstrap</em> que es una técnica muy usada en estadística para hacer inferencia cuando la distribución del estadístico es desconocida basada en el remuestreo [<a href="https://biocosas.github.io/R/100_bootstrap.html">aquí</a> tenéis una descripción sencilla de esta metodología].</p>
 <div class="figure">
 <img src="figures/bootstrap_1.jpg" style="width:60.0%" alt="" />
@@ -763,8 +764,8 @@ F-statistic: 44.18 on 6 and 256 DF,  p-value: &lt; 2.2e-16</code></pre>
 </table>
 </div>
 </div>
-<div id="imputación-de-datos-faltantes" class="section level2" number="5.6">
-<h2><span class="header-section-number">5.6</span> Imputación de datos faltantes</h2>
+<div id="imputación-de-datos-faltantes" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Imputación de datos faltantes<a href="ajuste-de-modelos.html#imputación-de-datos-faltantes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La mayoría de métodos para aprendizaje automático requiren casos completos. Sin embargo, los datos reales a menudo tienen observaciones faltantes. La función <code>lm ()</code>, analiza casos completos sin indicar nada al usuario, pero … ¿Deberíamos eliminar estas filas o imputar las observaciones que faltan? Casi siempre es mejor imputar, aunque, en la práctica puede que no valga la pena imputar algunas observaciones faltantes, ya que eliminarlas no suele cambiar el ajuste en absoluto. La imputación de datos faltantes es un tema extenso y complicado; aquí haremos una breve introducción y discutiremos los principales temas a tener en cuenta.</p>
 <p>Tipos de valores perdidos:</p>
 <ul>
@@ -797,17 +798,17 @@ y</p>
 <span id="cb290-8"><a href="ajuste-de-modelos.html#cb290-8" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(carseats_miss)</span></code></pre></div>
 <pre><code>Rows: 400
 Columns: 11
-$ Sales       &lt;dbl&gt; 9.50, 11.22, 10.06, 7.40, 4.15, 10.81, 6.63, 11.85,~
-$ CompPrice   &lt;dbl&gt; 138, 111, 113, 117, 141, 124, 115, NA, NA, NA, 121,~
-$ Income      &lt;dbl&gt; 73, 48, 35, 100, 64, 113, NA, 81, 110, 113, 78, 94,~
-$ Advertising &lt;dbl&gt; 11, 16, NA, 4, 3, 13, NA, 15, 0, 0, 9, 4, 2, NA, 11~
-$ Population  &lt;dbl&gt; 276, 260, 269, NA, 340, 501, 45, 425, 108, 131, 150~
-$ Price       &lt;dbl&gt; 120, NA, NA, 97, 128, 72, 108, 120, NA, 124, 100, N~
-$ ShelveLoc   &lt;fct&gt; Bad, NA, Good, NA, Bad, Bad, Good, NA, Good, Good, ~
-$ Age         &lt;dbl&gt; 42, 65, NA, 55, 38, NA, 71, 67, 76, 76, 26, 50, NA,~
-$ Education   &lt;dbl&gt; NA, 10, 12, NA, 13, 16, 15, 10, 10, 17, 10, 13, NA,~
-$ Urban       &lt;fct&gt; NA, Yes, Yes, Yes, Yes, NA, NA, Yes, No, NA, NA, Ye~
-$ US          &lt;fct&gt; Yes, Yes, Yes, Yes, No, Yes, No, Yes, NA, Yes, Yes,~</code></pre>
+$ Sales       &lt;dbl&gt; 9.50, 11.22, 10.06, 7.40, 4.15, 10.81, 6.63, 11.85, 6.54, 4.69, 9.01, 11.96, 3.98…
+$ CompPrice   &lt;dbl&gt; 138, 111, 113, 117, 141, 124, 115, NA, NA, NA, 121, 117, NA, 115, 107, NA, 118, N…
+$ Income      &lt;dbl&gt; 73, 48, 35, 100, 64, 113, NA, 81, 110, 113, 78, 94, NA, 28, 117, 95, 32, 74, 110,…
+$ Advertising &lt;dbl&gt; 11, 16, NA, 4, 3, 13, NA, 15, 0, 0, 9, 4, 2, NA, 11, 5, NA, 13, 0, 16, 2, 12, 6, …
+$ Population  &lt;dbl&gt; 276, 260, 269, NA, 340, 501, 45, 425, 108, 131, 150, 503, NA, 29, 148, 400, 284, …
+$ Price       &lt;dbl&gt; 120, NA, NA, 97, 128, 72, 108, 120, NA, 124, 100, NA, NA, NA, 118, 144, 110, 131,…
+$ ShelveLoc   &lt;fct&gt; Bad, NA, Good, NA, Bad, Bad, Good, NA, Good, Good, Bad, Medium, NA, Medium, Mediu…
+$ Age         &lt;dbl&gt; 42, 65, NA, 55, 38, NA, 71, 67, 76, 76, 26, 50, NA, 53, 52, 76, 63, 52, 46, 69, N…
+$ Education   &lt;dbl&gt; NA, 10, 12, NA, 13, 16, 15, 10, 10, 17, 10, 13, NA, NA, NA, 18, 13, 10, 17, 12, 1…
+$ Urban       &lt;fct&gt; NA, Yes, Yes, Yes, Yes, NA, NA, Yes, No, NA, NA, Yes, Yes, Yes, Yes, No, Yes, Yes…
+$ US          &lt;fct&gt; Yes, Yes, Yes, Yes, No, Yes, No, Yes, NA, Yes, Yes, Yes, No, Yes, Yes, No, No, NA…</code></pre>
 <p>Observamos que hay datos faltantes. Podemos tener una estadística global de la falta de información que hay en nuestros tanto de forma numérica mediante la librería <code>skimr</code>:</p>
 <div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="ajuste-de-modelos.html#cb292-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(carseats_miss)</span></code></pre></div>
 <table>
@@ -853,6 +854,14 @@ $ US          &lt;fct&gt; Yes, Yes, Yes, Yes, No, Yes, No, Yes, NA, Yes, Yes,~</
 </table>
 <p><strong>Variable type: factor</strong></p>
 <table>
+<colgroup>
+<col width="17%" />
+<col width="12%" />
+<col width="17%" />
+<col width="9%" />
+<col width="10%" />
+<col width="32%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">skim_variable</th>
@@ -891,7 +900,20 @@ $ US          &lt;fct&gt; Yes, Yes, Yes, Yes, No, Yes, No, Yes, NA, Yes, Yes,~</
 </tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="15%" />
+<col width="11%" />
+<col width="15%" />
+<col width="7%" />
+<col width="7%" />
+<col width="3%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="6%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">skim_variable</th>
@@ -1043,9 +1065,8 @@ residual sd = 2.06, R-Squared = 0.59</code></pre>
 <p>Sólo tenemos 93 observaciones de las 400 originales! Demostraremos la imputación múltiple usando la función <code>mice ()</code> de la librería <code>mice</code>.</p>
 <div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="ajuste-de-modelos.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
 <span id="cb300-2"><a href="ajuste-de-modelos.html#cb300-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Carseats)</span></code></pre></div>
-<pre><code> [1] &quot;Sales&quot;       &quot;CompPrice&quot;   &quot;Income&quot;      &quot;Advertising&quot;
- [5] &quot;Population&quot;  &quot;Price&quot;       &quot;ShelveLoc&quot;   &quot;Age&quot;        
- [9] &quot;Education&quot;   &quot;Urban&quot;       &quot;US&quot;         </code></pre>
+<pre><code> [1] &quot;Sales&quot;       &quot;CompPrice&quot;   &quot;Income&quot;      &quot;Advertising&quot; &quot;Population&quot;  &quot;Price&quot;       &quot;ShelveLoc&quot;  
+ [8] &quot;Age&quot;         &quot;Education&quot;   &quot;Urban&quot;       &quot;US&quot;         </code></pre>
 <div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="ajuste-de-modelos.html#cb302-1" aria-hidden="true" tabindex="-1"></a>carseats_imp <span class="ot">&lt;-</span> <span class="fu">mice</span>(carseats_miss, <span class="at">printFlag =</span> F)</span></code></pre></div>
 <p>El objeto <code>carseats_imp</code> incluye (entre muchas otras cosas) <span class="math inline">\(m\)</span> conjuntos de datos imputados (la configuración predeterminada es <span class="math inline">\(m\)</span> = 5). Los conjuntos de datos imputados difieren porque las imputaciones se extraen aleatoriamente de distribuciones de valores plausibles. Podemos visualizar la variabilidad de los predictores en estos conjuntos de datos imputados usando la función <code>densityplot ()</code>.</p>
 <div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="ajuste-de-modelos.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
@@ -1096,34 +1117,27 @@ residual sd = 2.06, R-Squared = 0.59</code></pre>
 <span id="cb309-7"><a href="ajuste-de-modelos.html#cb309-7" aria-hidden="true" tabindex="-1"></a>bag_imp <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="fu">preProcess</span>(carseats_miss_num, <span class="at">method =</span> <span class="fu">c</span>(<span class="st">&quot;bagImpute&quot;</span>)), carseats_miss_num)</span></code></pre></div>
 <p>El paquete <code>missForest</code> ofrece otra solución de imputación única, que es más simple que las funciones de <code>caret</code> porque maneja datos categóricos automáticamente. Si bien <code>missForest</code> funciona bien para conjuntos de datos pequeños y proporciona imputaciones de buena calidad, es muy lento en conjuntos de datos grandes. De hecho, lo mismo ocurrirá con la función <code>bagImpute ()</code> de <code>caret</code>. En tales casos, podría tener sentido usar la función <code>medianImpute ()</code> de <code>caret</code> en su lugar que es muy rápida.</p>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="ajuste-de-modelos.html#cb310-1" aria-hidden="true" tabindex="-1"></a>mf_imp <span class="ot">&lt;-</span> <span class="fu">missForest</span>(carseats_miss, <span class="at">verbose =</span> F)</span></code></pre></div>
-<pre><code>  missForest iteration 1 in progress...done!
-  missForest iteration 2 in progress...done!
-  missForest iteration 3 in progress...done!
-  missForest iteration 4 in progress...done!
-  missForest iteration 5 in progress...done!
-  missForest iteration 6 in progress...done!
-  missForest iteration 7 in progress...done!</code></pre>
 <p>Comparemos los errores asociados con estos diferentes métodos de imputación. Podemos hacer esto porque, habiendo creado las observaciones faltantes en primer lugar, podemos comparar las observaciones imputadas con las observaciones verdaderas calculando la suma de los cuadrados de la diferencia. Para las imputaciones usando <code>mice ()</code> calculamos los errores para cada uno de los 5 conjuntos de datos imputados. Los resultados de <code>knnImpute ()</code> no son comparables porque la función automáticamente centra y escala las variables y los hemos omitido.</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="ajuste-de-modelos.html#cb312-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Method =</span> <span class="fu">c</span>(<span class="st">&quot;mice 1&quot;</span>, </span>
-<span id="cb312-2"><a href="ajuste-de-modelos.html#cb312-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;mice 2&quot;</span>, </span>
-<span id="cb312-3"><a href="ajuste-de-modelos.html#cb312-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;mice 3&quot;</span>, </span>
-<span id="cb312-4"><a href="ajuste-de-modelos.html#cb312-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;mice 4&quot;</span>, </span>
-<span id="cb312-5"><a href="ajuste-de-modelos.html#cb312-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;mice 5&quot;</span>, </span>
-<span id="cb312-6"><a href="ajuste-de-modelos.html#cb312-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;medianImpute&quot;</span>, </span>
-<span id="cb312-7"><a href="ajuste-de-modelos.html#cb312-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;bagImpute&quot;</span>, </span>
-<span id="cb312-8"><a href="ajuste-de-modelos.html#cb312-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;missForest&quot;</span>),</span>
-<span id="cb312-9"><a href="ajuste-de-modelos.html#cb312-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">RSS =</span> <span class="fu">c</span>(<span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">1</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
-<span id="cb312-10"><a href="ajuste-de-modelos.html#cb312-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">2</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
-<span id="cb312-11"><a href="ajuste-de-modelos.html#cb312-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">3</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
-<span id="cb312-12"><a href="ajuste-de-modelos.html#cb312-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">4</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
-<span id="cb312-13"><a href="ajuste-de-modelos.html#cb312-13" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">5</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
-<span id="cb312-14"><a href="ajuste-de-modelos.html#cb312-14" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(med_imp, <span class="fu">make_df_numeric</span>(Carseats)),</span>
-<span id="cb312-15"><a href="ajuste-de-modelos.html#cb312-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(bag_imp, <span class="fu">make_df_numeric</span>(Carseats)),</span>
-<span id="cb312-16"><a href="ajuste-de-modelos.html#cb312-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(mf_imp<span class="sc">$</span>ximp), <span class="fu">make_df_numeric</span>(Carseats))))</span>
-<span id="cb312-17"><a href="ajuste-de-modelos.html#cb312-17" aria-hidden="true" tabindex="-1"></a>                         </span>
-<span id="cb312-18"><a href="ajuste-de-modelos.html#cb312-18" aria-hidden="true" tabindex="-1"></a>comparison <span class="sc">%&gt;%</span></span>
-<span id="cb312-19"><a href="ajuste-de-modelos.html#cb312-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">RSS =</span> <span class="fu">round</span>(RSS)) <span class="sc">%&gt;%</span></span>
-<span id="cb312-20"><a href="ajuste-de-modelos.html#cb312-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(RSS)</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="ajuste-de-modelos.html#cb311-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Method =</span> <span class="fu">c</span>(<span class="st">&quot;mice 1&quot;</span>, </span>
+<span id="cb311-2"><a href="ajuste-de-modelos.html#cb311-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;mice 2&quot;</span>, </span>
+<span id="cb311-3"><a href="ajuste-de-modelos.html#cb311-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;mice 3&quot;</span>, </span>
+<span id="cb311-4"><a href="ajuste-de-modelos.html#cb311-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;mice 4&quot;</span>, </span>
+<span id="cb311-5"><a href="ajuste-de-modelos.html#cb311-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;mice 5&quot;</span>, </span>
+<span id="cb311-6"><a href="ajuste-de-modelos.html#cb311-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;medianImpute&quot;</span>, </span>
+<span id="cb311-7"><a href="ajuste-de-modelos.html#cb311-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;bagImpute&quot;</span>, </span>
+<span id="cb311-8"><a href="ajuste-de-modelos.html#cb311-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;missForest&quot;</span>),</span>
+<span id="cb311-9"><a href="ajuste-de-modelos.html#cb311-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">RSS =</span> <span class="fu">c</span>(<span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">1</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb311-10"><a href="ajuste-de-modelos.html#cb311-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">2</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb311-11"><a href="ajuste-de-modelos.html#cb311-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">3</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb311-12"><a href="ajuste-de-modelos.html#cb311-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">4</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb311-13"><a href="ajuste-de-modelos.html#cb311-13" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(<span class="fu">complete</span>(carseats_imp, <span class="dv">5</span>)), <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb311-14"><a href="ajuste-de-modelos.html#cb311-14" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(med_imp, <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb311-15"><a href="ajuste-de-modelos.html#cb311-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(bag_imp, <span class="fu">make_df_numeric</span>(Carseats)),</span>
+<span id="cb311-16"><a href="ajuste-de-modelos.html#cb311-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">rss</span>(<span class="fu">make_df_numeric</span>(mf_imp<span class="sc">$</span>ximp), <span class="fu">make_df_numeric</span>(Carseats))))</span>
+<span id="cb311-17"><a href="ajuste-de-modelos.html#cb311-17" aria-hidden="true" tabindex="-1"></a>                         </span>
+<span id="cb311-18"><a href="ajuste-de-modelos.html#cb311-18" aria-hidden="true" tabindex="-1"></a>comparison <span class="sc">%&gt;%</span></span>
+<span id="cb311-19"><a href="ajuste-de-modelos.html#cb311-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">RSS =</span> <span class="fu">round</span>(RSS)) <span class="sc">%&gt;%</span></span>
+<span id="cb311-20"><a href="ajuste-de-modelos.html#cb311-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(RSS)</span></code></pre></div>
 <pre><code>        Method     RSS
 1   missForest 2371284
 2 medianImpute 2538059
@@ -1153,7 +1167,6 @@ residual sd = 2.06, R-Squared = 0.59</code></pre>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1194,7 +1207,7 @@ gitbook.start({
 },
 "download": ["_main.pdf", "_main.epub"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {
@@ -1210,7 +1223,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

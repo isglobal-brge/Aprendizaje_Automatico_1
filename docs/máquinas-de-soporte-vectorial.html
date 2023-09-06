@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11 Máquinas de soporte vectorial | Aprendizaje Automático 1</title>
-  <meta name="description" content="11 Máquinas de soporte vectorial | Aprendizaje Automático 1" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <title>12 Máquinas de soporte vectorial | Aprendizaje Automático 1</title>
+  <meta name="description" content="12 Máquinas de soporte vectorial | Aprendizaje Automático 1" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11 Máquinas de soporte vectorial | Aprendizaje Automático 1" />
+  <meta property="og:title" content="12 Máquinas de soporte vectorial | Aprendizaje Automático 1" />
   <meta property="og:type" content="book" />
-  
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11 Máquinas de soporte vectorial | Aprendizaje Automático 1" />
+  <meta name="twitter:title" content="12 Máquinas de soporte vectorial | Aprendizaje Automático 1" />
   
   
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-11-22" />
+<meta name="date" content="2023-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="análisis-discriminante-lineal-lda.html"/>
 <link rel="next" href="respuesta-no-balanceada.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,9 +49,9 @@
 
 
 
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -243,89 +242,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7" data-path="regresión-logística.html"><a href="regresión-logística.html#creación-de-un-modelo-y-validación"><i class="fa fa-check"></i><b>6.7</b> Creación de un modelo y validación</a></li>
 <li class="chapter" data-level="6.8" data-path="regresión-logística.html"><a href="regresión-logística.html#nomogramas"><i class="fa fa-check"></i><b>6.8</b> Nomogramas</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html"><i class="fa fa-check"></i><b>7</b> Dealing with Big Data in R</a>
+<li class="chapter" data-level="7" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html"><i class="fa fa-check"></i><b>7</b> Modelos de regularización</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#nodes-cores-processes-and-threads"><i class="fa fa-check"></i><b>7.1</b> Nodes, cores, processes and threads</a></li>
-<li class="chapter" data-level="7.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#paralelización"><i class="fa fa-check"></i><b>7.2</b> Paralelización</a>
+<li class="chapter" data-level="7.1" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
+<li class="chapter" data-level="7.2" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#cómo-regularizar"><i class="fa fa-check"></i><b>7.2</b> Cómo regularizar</a></li>
+<li class="chapter" data-level="7.3" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#implementación-en-r"><i class="fa fa-check"></i><b>7.3</b> Implementación en R</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#shared-memory-programming"><i class="fa fa-check"></i><b>7.2.1</b> Shared Memory Programming</a></li>
-<li class="chapter" data-level="7.2.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#distributed-memory-programming"><i class="fa fa-check"></i><b>7.2.2</b> Distributed Memory Programming</a></li>
+<li class="chapter" data-level="7.3.1" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#ejemplo-ridge-regression"><i class="fa fa-check"></i><b>7.3.1</b> Ejemplo: Ridge Regression</a></li>
+<li class="chapter" data-level="7.3.2" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#ejemplo-lasso"><i class="fa fa-check"></i><b>7.3.2</b> Ejemplo: Lasso</a></li>
+<li class="chapter" data-level="7.3.3" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#ejemplo-elastic-net"><i class="fa fa-check"></i><b>7.3.3</b> Ejemplo: Elastic Net</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#mapreduce"><i class="fa fa-check"></i><b>7.3</b> MapReduce</a>
-<ul>
-<li class="chapter" data-level="7.3.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#map"><i class="fa fa-check"></i><b>7.3.1</b> Map</a></li>
-<li class="chapter" data-level="7.3.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#reduce"><i class="fa fa-check"></i><b>7.3.2</b> Reduce</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>7.4</b> Example: Linear regression for Big Data</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>8</b> La librería <code>caret</code></a>
+<li class="chapter" data-level="8" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html"><i class="fa fa-check"></i><b>8</b> Dealing with Big Data in R</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="caret.html"><a href="caret.html#pre-procesado"><i class="fa fa-check"></i><b>8.1</b> Pre-procesado</a>
+<li class="chapter" data-level="8.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#nodes-cores-processes-and-threads"><i class="fa fa-check"></i><b>8.1</b> Nodes, cores, processes and threads</a></li>
+<li class="chapter" data-level="8.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#paralelización"><i class="fa fa-check"></i><b>8.2</b> Paralelización</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="caret.html"><a href="caret.html#creación-de-variables"><i class="fa fa-check"></i><b>8.1.1</b> Creación de variables</a></li>
-<li class="chapter" data-level="8.1.2" data-path="caret.html"><a href="caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>8.1.2</b> Predictores con poca variabilidad</a></li>
-<li class="chapter" data-level="8.1.3" data-path="caret.html"><a href="caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>8.1.3</b> Identificación de predictores correlacionados</a></li>
-<li class="chapter" data-level="8.1.4" data-path="caret.html"><a href="caret.html#centrado-y-escalado-1"><i class="fa fa-check"></i><b>8.1.4</b> Centrado y escalado</a></li>
-<li class="chapter" data-level="8.1.5" data-path="caret.html"><a href="caret.html#imputación"><i class="fa fa-check"></i><b>8.1.5</b> Imputación</a></li>
-<li class="chapter" data-level="8.1.6" data-path="caret.html"><a href="caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>8.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
+<li class="chapter" data-level="8.2.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#shared-memory-programming"><i class="fa fa-check"></i><b>8.2.1</b> Shared Memory Programming</a></li>
+<li class="chapter" data-level="8.2.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#distributed-memory-programming"><i class="fa fa-check"></i><b>8.2.2</b> Distributed Memory Programming</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="caret.html"><a href="caret.html#visualización"><i class="fa fa-check"></i><b>8.2</b> Visualización</a></li>
-<li class="chapter" data-level="8.3" data-path="caret.html"><a href="caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>8.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
-<li class="chapter" data-level="8.4" data-path="caret.html"><a href="caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>8.4</b> Creación de un modelo predictivo</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="KNN.html"><a href="KNN.html"><i class="fa fa-check"></i><b>9</b> K vecinos más próximos (KNN)</a></li>
-<li class="chapter" data-level="10" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>10</b> Análisis discriminante lineal (LDA)</a>
+<li class="chapter" data-level="8.3" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#mapreduce"><i class="fa fa-check"></i><b>8.3</b> MapReduce</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html#concurso-predicción-de-actividad-física-con-sensores"><i class="fa fa-check"></i><b>10.1</b> Concurso predicción de actividad física con sensores</a></li>
+<li class="chapter" data-level="8.3.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#map"><i class="fa fa-check"></i><b>8.3.1</b> Map</a></li>
+<li class="chapter" data-level="8.3.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#reduce"><i class="fa fa-check"></i><b>8.3.2</b> Reduce</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html"><i class="fa fa-check"></i><b>11</b> Máquinas de soporte vectorial</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-margen-máximo"><i class="fa fa-check"></i><b>11.1</b> Clasificador de margen máximo</a></li>
-<li class="chapter" data-level="11.2" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-soporte-vectorial"><i class="fa fa-check"></i><b>11.2</b> Clasificador de soporte vectorial</a></li>
-<li class="chapter" data-level="11.3" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#máquinas-de-soporte-vectorial-1"><i class="fa fa-check"></i><b>11.3</b> Máquinas de soporte vectorial</a></li>
-<li class="chapter" data-level="11.4" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-e1071"><i class="fa fa-check"></i><b>11.4</b> SVM con <code>e1071</code></a></li>
-<li class="chapter" data-level="11.5" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-caret"><i class="fa fa-check"></i><b>11.5</b> SVM con <code>caret</code></a></li>
+<li class="chapter" data-level="8.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>8.4</b> Example: Linear regression for Big Data</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="respuesta-no-balanceada.html"><a href="respuesta-no-balanceada.html"><i class="fa fa-check"></i><b>12</b> Respuesta no balanceada</a></li>
-<li class="chapter" data-level="13" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html"><i class="fa fa-check"></i><b>13</b> Árboles de decisión</a>
+<li class="chapter" data-level="9" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>9</b> La librería <code>caret</code></a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-clasificación"><i class="fa fa-check"></i><b>13.1</b> Árboles de clasificación</a></li>
-<li class="chapter" data-level="13.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#área-bajo-la-curva-roc"><i class="fa fa-check"></i><b>13.2</b> Área bajo la curva ROC</a>
+<li class="chapter" data-level="9.1" data-path="caret.html"><a href="caret.html#pre-procesado"><i class="fa fa-check"></i><b>9.1</b> Pre-procesado</a>
 <ul>
-<li class="chapter" data-level="13.2.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret"><i class="fa fa-check"></i><b>13.2.1</b> Entrenamiento con <code>caret</code></a></li>
+<li class="chapter" data-level="9.1.1" data-path="caret.html"><a href="caret.html#creación-de-variables"><i class="fa fa-check"></i><b>9.1.1</b> Creación de variables</a></li>
+<li class="chapter" data-level="9.1.2" data-path="caret.html"><a href="caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>9.1.2</b> Predictores con poca variabilidad</a></li>
+<li class="chapter" data-level="9.1.3" data-path="caret.html"><a href="caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>9.1.3</b> Identificación de predictores correlacionados</a></li>
+<li class="chapter" data-level="9.1.4" data-path="caret.html"><a href="caret.html#centrado-y-escalado-1"><i class="fa fa-check"></i><b>9.1.4</b> Centrado y escalado</a></li>
+<li class="chapter" data-level="9.1.5" data-path="caret.html"><a href="caret.html#imputación"><i class="fa fa-check"></i><b>9.1.5</b> Imputación</a></li>
+<li class="chapter" data-level="9.1.6" data-path="caret.html"><a href="caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>9.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-regresión"><i class="fa fa-check"></i><b>13.3</b> Árboles de regresión</a>
-<ul>
-<li class="chapter" data-level="13.3.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret-1"><i class="fa fa-check"></i><b>13.3.1</b> Entrenamiento con <code>caret</code></a></li>
+<li class="chapter" data-level="9.2" data-path="caret.html"><a href="caret.html#visualización"><i class="fa fa-check"></i><b>9.2</b> Visualización</a></li>
+<li class="chapter" data-level="9.3" data-path="caret.html"><a href="caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>9.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
+<li class="chapter" data-level="9.4" data-path="caret.html"><a href="caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>9.4</b> Creación de un modelo predictivo</a></li>
 </ul></li>
-<li class="chapter" data-level="13.4" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagged-trees"><i class="fa fa-check"></i><b>13.4</b> Bagged trees</a>
+<li class="chapter" data-level="10" data-path="KNN.html"><a href="KNN.html"><i class="fa fa-check"></i><b>10</b> K vecinos más próximos (KNN)</a></li>
+<li class="chapter" data-level="11" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>11</b> Análisis discriminante lineal (LDA)</a>
 <ul>
-<li class="chapter" data-level="13.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>13.4.1</b> Bagging árboles de clasificación</a></li>
-<li class="chapter" data-level="13.4.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>13.4.2</b> Bagging árboles de regresión</a></li>
+<li class="chapter" data-level="11.1" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html#concurso-predicción-de-actividad-física-con-sensores"><i class="fa fa-check"></i><b>11.1</b> Concurso predicción de actividad física con sensores</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest"><i class="fa fa-check"></i><b>13.5</b> Random Forest</a></li>
-<li class="chapter" data-level="13.6" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest-pn"><i class="fa fa-check"></i><b>13.6</b> Random Forest p&gt;&gt;n</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="boosting.html"><a href="boosting.html"><i class="fa fa-check"></i><b>14</b> Boosting</a>
+<li class="chapter" data-level="12" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html"><i class="fa fa-check"></i><b>12</b> Máquinas de soporte vectorial</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="boosting.html"><a href="boosting.html#cómo-funciona-el-boosting"><i class="fa fa-check"></i><b>14.1</b> Cómo funciona el <em>boosting</em></a></li>
-<li class="chapter" data-level="14.2" data-path="boosting.html"><a href="boosting.html#adaboost"><i class="fa fa-check"></i><b>14.2</b> AdaBoost</a></li>
-<li class="chapter" data-level="14.3" data-path="boosting.html"><a href="boosting.html#gbm-básico"><i class="fa fa-check"></i><b>14.3</b> GBM básico</a>
-<ul>
-<li class="chapter" data-level="14.3.1" data-path="boosting.html"><a href="boosting.html#boostingHiperparam"><i class="fa fa-check"></i><b>14.3.1</b> Hiperparámetros</a></li>
-<li class="chapter" data-level="14.3.2" data-path="boosting.html"><a href="boosting.html#implementación"><i class="fa fa-check"></i><b>14.3.2</b> Implementación</a></li>
-<li class="chapter" data-level="14.3.3" data-path="boosting.html"><a href="boosting.html#estrategia-general-de-tuning"><i class="fa fa-check"></i><b>14.3.3</b> Estrategia general de <em>tuning</em></a></li>
+<li class="chapter" data-level="12.1" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-margen-máximo"><i class="fa fa-check"></i><b>12.1</b> Clasificador de margen máximo</a></li>
+<li class="chapter" data-level="12.2" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-soporte-vectorial"><i class="fa fa-check"></i><b>12.2</b> Clasificador de soporte vectorial</a></li>
+<li class="chapter" data-level="12.3" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#máquinas-de-soporte-vectorial-1"><i class="fa fa-check"></i><b>12.3</b> Máquinas de soporte vectorial</a></li>
+<li class="chapter" data-level="12.4" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-e1071"><i class="fa fa-check"></i><b>12.4</b> SVM con <code>e1071</code></a></li>
+<li class="chapter" data-level="12.5" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-caret"><i class="fa fa-check"></i><b>12.5</b> SVM con <code>caret</code></a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="boosting.html"><a href="boosting.html#gbms-estocásticos"><i class="fa fa-check"></i><b>14.4</b> GBMs estocásticos</a>
+<li class="chapter" data-level="13" data-path="respuesta-no-balanceada.html"><a href="respuesta-no-balanceada.html"><i class="fa fa-check"></i><b>13</b> Respuesta no balanceada</a></li>
+<li class="chapter" data-level="14" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html"><i class="fa fa-check"></i><b>14</b> Árboles de decisión</a>
 <ul>
-<li class="chapter" data-level="14.4.1" data-path="boosting.html"><a href="boosting.html#hiperparámetros-estocásticos"><i class="fa fa-check"></i><b>14.4.1</b> Hiperparámetros estocásticos</a></li>
-</ul></li>
-<li class="chapter" data-level="14.5" data-path="boosting.html"><a href="boosting.html#xgboost"><i class="fa fa-check"></i><b>14.5</b> XGBoost</a>
+<li class="chapter" data-level="14.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-clasificación"><i class="fa fa-check"></i><b>14.1</b> Árboles de clasificación</a></li>
+<li class="chapter" data-level="14.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#área-bajo-la-curva-roc"><i class="fa fa-check"></i><b>14.2</b> Área bajo la curva ROC</a>
 <ul>
-<li class="chapter" data-level="14.5.1" data-path="boosting.html"><a href="boosting.html#reguralización"><i class="fa fa-check"></i><b>14.5.1</b> Reguralización</a></li>
-<li class="chapter" data-level="14.5.2" data-path="boosting.html"><a href="boosting.html#estrategia-de-tuning"><i class="fa fa-check"></i><b>14.5.2</b> Estrategia de <em>tuning</em></a></li>
+<li class="chapter" data-level="14.2.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret"><i class="fa fa-check"></i><b>14.2.1</b> Entrenamiento con <code>caret</code></a></li>
 </ul></li>
-<li class="chapter" data-level="14.6" data-path="boosting.html"><a href="boosting.html#otros-algoritmos-gbm"><i class="fa fa-check"></i><b>14.6</b> Otros algoritmos GBM</a></li>
+<li class="chapter" data-level="14.3" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-regresión"><i class="fa fa-check"></i><b>14.3</b> Árboles de regresión</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret-1"><i class="fa fa-check"></i><b>14.3.1</b> Entrenamiento con <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagged-trees"><i class="fa fa-check"></i><b>14.4</b> Bagged trees</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>14.4.1</b> Bagging árboles de clasificación</a></li>
+<li class="chapter" data-level="14.4.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>14.4.2</b> Bagging árboles de regresión</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest"><i class="fa fa-check"></i><b>14.5</b> Random Forest</a></li>
+<li class="chapter" data-level="14.6" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest-pn"><i class="fa fa-check"></i><b>14.6</b> Random Forest p&gt;&gt;n</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="boosting.html"><a href="boosting.html"><i class="fa fa-check"></i><b>15</b> Boosting</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="boosting.html"><a href="boosting.html#cómo-funciona-el-boosting"><i class="fa fa-check"></i><b>15.1</b> Cómo funciona el <em>boosting</em></a></li>
+<li class="chapter" data-level="15.2" data-path="boosting.html"><a href="boosting.html#adaboost"><i class="fa fa-check"></i><b>15.2</b> AdaBoost</a></li>
+<li class="chapter" data-level="15.3" data-path="boosting.html"><a href="boosting.html#gbm-básico"><i class="fa fa-check"></i><b>15.3</b> GBM básico</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="boosting.html"><a href="boosting.html#boostingHiperparam"><i class="fa fa-check"></i><b>15.3.1</b> Hiperparámetros</a></li>
+<li class="chapter" data-level="15.3.2" data-path="boosting.html"><a href="boosting.html#implementación"><i class="fa fa-check"></i><b>15.3.2</b> Implementación</a></li>
+<li class="chapter" data-level="15.3.3" data-path="boosting.html"><a href="boosting.html#estrategia-general-de-tuning"><i class="fa fa-check"></i><b>15.3.3</b> Estrategia general de <em>tuning</em></a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="boosting.html"><a href="boosting.html#gbms-estocásticos"><i class="fa fa-check"></i><b>15.4</b> GBMs estocásticos</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="boosting.html"><a href="boosting.html#hiperparámetros-estocásticos"><i class="fa fa-check"></i><b>15.4.1</b> Hiperparámetros estocásticos</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="boosting.html"><a href="boosting.html#xgboost"><i class="fa fa-check"></i><b>15.5</b> XGBoost</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="boosting.html"><a href="boosting.html#reguralización"><i class="fa fa-check"></i><b>15.5.1</b> Reguralización</a></li>
+<li class="chapter" data-level="15.5.2" data-path="boosting.html"><a href="boosting.html#estrategia-de-tuning"><i class="fa fa-check"></i><b>15.5.2</b> Estrategia de <em>tuning</em></a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="boosting.html"><a href="boosting.html#otros-algoritmos-gbm"><i class="fa fa-check"></i><b>15.6</b> Otros algoritmos GBM</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -347,11 +357,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="máquinas-de-soporte-vectorial" class="section level1" number="11">
-<h1><span class="header-section-number">11</span> Máquinas de soporte vectorial</h1>
+<div id="máquinas-de-soporte-vectorial" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">12</span> Máquinas de soporte vectorial<a href="máquinas-de-soporte-vectorial.html#máquinas-de-soporte-vectorial" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Las máquinas de soporte vectorial (SVM por sus siglas en inglés) se fundamentan en el <em>Maximal Margin Classifier</em>, que está basado en el concepto de hiperplano. SVM es un modelo de clasificación que mapea las observaciones como puntos en el espacio para que las categorías se dividan por dichos hiperplanos. Luego, las nuevas observaciones se pueden mapear en el espacio para la predicción. El algoritmo SVM encuentra el hiperplano de separación óptimo utilizando un mapeo no lineal a una dimensión suficientemente alta. El hiperplano se define por las observaciones que se encuentran dentro de un margen optimizado por un hiperparámetro a los que se les asigna un coste (error). Estas observaciones se denominan vectores de soporte.</p>
-<div id="clasificador-de-margen-máximo" class="section level2" number="11.1">
-<h2><span class="header-section-number">11.1</span> Clasificador de margen máximo</h2>
+<div id="clasificador-de-margen-máximo" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">12.1</span> Clasificador de margen máximo<a href="máquinas-de-soporte-vectorial.html#clasificador-de-margen-máximo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El clasificador de margen máximo es el hiperplano óptimo definido en el caso (no muy habitual) en el que dos clases son linealmente separables. Dada una matriz <span class="math inline">\(X\)</span> con dimensión <span class="math inline">\(n \times p\)</span> y una variable respuesta binaria definida como <span class="math inline">\(y \in [-1, 1]\)</span> es posible definir un hiperplano <span class="math inline">\(h(X) = \beta_0 + \beta_1X_1 + \beta_2X_2 \dots + \beta_pX_p = x_i^T \beta + \beta_0 = 0\)</span> tal que todas las observaciones de cada clase caen en un lado opuesto de dicho hiperplano. Este <em>hiperplano de separación</em> tiene la propiedad de que si <span class="math inline">\(\beta\)</span> está restringido al vector unidad, <span class="math inline">\(||\beta|| = \sum\beta^2 = 1\)</span>, entonces el producto del hiperplano y la variable respuesta son distancias positivas perpendiculares al hiperplano, y la menor de ellas se denomina hiperplano marginal, <span class="math inline">\(M\)</span></p>
 <p><span class="math display">\[y_i (x_i^{&#39;} \beta + \beta_0) \ge M.\]</span></p>
 <p>El clasificador de margen máximo es el hiperplano cuyo margen es máximo <span class="math inline">\(\max \{M\}\)</span> sujeto a <span class="math inline">\(||\beta|| = 1\)</span>. Estos hiperplano separadores raras veces existen. De hecho, incluso si existe un hiperplano separador, su margen resultante es probablemente indeseablemente estrecho. Aquí vemos un ejemplo de clasificador de margen máximo</p>
@@ -365,8 +375,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="caption">Ejemplo clasificador</p>
 </div>
 </div>
-<div id="clasificador-de-soporte-vectorial" class="section level2" number="11.2">
-<h2><span class="header-section-number">11.2</span> Clasificador de soporte vectorial</h2>
+<div id="clasificador-de-soporte-vectorial" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">12.2</span> Clasificador de soporte vectorial<a href="máquinas-de-soporte-vectorial.html#clasificador-de-soporte-vectorial" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El clasificador de margen máximo se puede generalizar a casos no separables utilizando el llamado margen blando. La generalización se denomina clasificador de vectores de soporte. El margen blando permite alguna clasificación errónea en aras de una mayor solidez de las observaciones individuales (es lo que se usa en la práctica). Aquí tenemos la diferencia entre ambos tipos de márgenes que es bastante intuitiva</p>
 <div class="figure">
 <img src="figures/svm_hard_soft.png" alt="" />
@@ -377,14 +387,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>donde <span class="math inline">\(\xi_i\)</span> son variables de holgura positivas cuya suma está limitada por algún parámetro de ajuste constante <span class="math inline">\(\sum{\xi_i} \le \Xi\)</span>. Los valores de la variable de holgura indican dónde se encuentra la observación: si <span class="math inline">\(\xi_i = 0\)</span> la observacione se encuentran en el lado correcto del margen; si <span class="math inline">\(\xi_i &gt; 0\)</span> la observación se encuentra en el lado equivocado del margen; si <span class="math inline">\(\xi_i &gt; 1\)</span> la observación se encuentra en el lado equivocado del hiperplano. <span class="math inline">\(\Xi\)</span> establece la tolerancia para la violación del margen. Si <span class="math inline">\(\Xi = 0\)</span> entonces todas las observaciones deben residir en el lado correcto del margen, como en el clasificador de margen máximo. <span class="math inline">\(\Xi\)</span> también controla la relación sesgo-varianza. Si <span class="math inline">\(\Xi\)</span> aumenta, el margen se ensancha y permite más violaciones, aumentando el sesgo y disminuyendo la varianza.</p>
 <p>El clasificador de vectores de soporte generalmente se define eliminando la restricción <span class="math inline">\(||\beta|| = 1\)</span>, y definiendo <span class="math inline">\(M = 1 / ||\beta||\)</span>. El problema de optimización se convierte en</p>
 <p><span class="math display">\[\min ||\beta|| \hspace{2mm} s.t. \hspace{2mm}  
-  \begin{cases} 
+  \begin{cases}
    y_i(x_i^T\beta + \beta_0) \ge 1 - \xi_i, \hspace{2mm} \forall i &amp;  \\
    \xi_i \ge 0, \hspace{2mm} \sum \xi_i \le \Xi.      
   \end{cases}\]</span></p>
 <p>Esta es una ecuación cuadrática con restricciones de desigualdad lineal, por lo que es un problema de optimización convexa que se puede resolver usando multiplicadores de Lagrange. Vuelva a expresar el problema de optimización como</p>
 <p><span class="math display">\[\min_{\beta_0, \beta} \frac{1}{2}||\beta||^2 = C\sum_{i = 1}^N \xi_i \\
 s.t. \xi_i \ge 0, \hspace{2mm} y_i(x_i^T\beta + \beta_0) \ge 1 - \xi_i, \hspace{2mm} \forall i\]</span></p>
-<p>donde el parámetro “coste,” <span class="math inline">\(C\)</span> reemplaza la constante y penaliza los residuos grandes. Este problema de optimización es equivalente a otro problema de optimización, con la fórmula típica de <em>pérdida + penalización</em>:</p>
+<p>donde el parámetro “coste”, <span class="math inline">\(C\)</span> reemplaza la constante y penaliza los residuos grandes. Este problema de optimización es equivalente a otro problema de optimización, con la fórmula típica de <em>pérdida + penalización</em>:</p>
 <p><span class="math display">\[\min_{\beta_0, \beta} \sum_{i=1}^N{[1 - y_if(x_i)]_+} + \frac{\lambda}{2} ||\beta||^2\]</span></p>
 <p>donde <span class="math inline">\(\lambda = 1 / C\)</span> y <span class="math inline">\([1 - y_if(x_i)]_+\)</span> es una función de pérdida de “bisagra” con <span class="math inline">\(f(x_i) = sign[Pr(Y = +1|x) - 1 / 2].\)</span></p>
 <p>Las estimaciones de los parámetros se pueden escribir como funciones de un conjunto de parámetros desconocidos <span class="math inline">\((\alpha_i)\)</span> y los puntos de datos. La solución al problema de optimización requiere solo los productos internos de las observaciones, representados como <span class="math inline">\(\langle x_i, x_j \rangle\)</span>,</p>
@@ -393,8 +403,8 @@ s.t. \xi_i \ge 0, \hspace{2mm} y_i(x_i^T\beta + \beta_0) \ge 1 - \xi_i, \hspace{
 <p>Los estimadores de los parámetros <span class="math inline">\(\alpha_i\)</span> son distintos de cero solo para los vectores de soporte en la solución, es decir, si una observación de entrenamiento no es un vector de soporte, entonces su <span class="math inline">\(\alpha_i\)</span> es 0.</p>
 <p>El único defecto del algoritmo es que presupone un límite de decisión lineal.</p>
 </div>
-<div id="máquinas-de-soporte-vectorial-1" class="section level2" number="11.3">
-<h2><span class="header-section-number">11.3</span> Máquinas de soporte vectorial</h2>
+<div id="máquinas-de-soporte-vectorial-1" class="section level2 hasAnchor" number="12.3">
+<h2><span class="header-section-number">12.3</span> Máquinas de soporte vectorial<a href="máquinas-de-soporte-vectorial.html#máquinas-de-soporte-vectorial-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Para solventar este problema, se puede ampliar el espacio de características del clasificador de vectores de soporte a relaciones no lineales. Las máquinas de vectores de soporte hacen esto de una manera específica, utilizando <a href="https://jllopisperez.com/2012/12/13/estimacion-no-parametrica-de-funciones-de-densidad-metodo-kernel/">kernels</a>. El kernel es una generalización del producto interno con forma <span class="math inline">\(K(x_i, x_i^{&#39;})\)</span>. Entonces, el kernel lineal es simplemente</p>
 <p><span class="math display">\[K(x_i, x_i^{&#39;}) = \langle x, x_i \rangle\]</span></p>
 <p>y la solución es</p>
@@ -410,44 +420,44 @@ Cuando se emplea <span class="math inline">\(\gamma=1\)</span>, <span class="mat
 <p><span class="math display">\[K(x, x&#39;) = \exp\{-\gamma ||x - x&#39;||^2\}.\]</span>
 <img src="figures/svm_kernel_rad.png" alt="SVM con kernel radial" /></p>
 </div>
-<div id="svm-con-e1071" class="section level2" number="11.4">
-<h2><span class="header-section-number">11.4</span> SVM con <code>e1071</code></h2>
+<div id="svm-con-e1071" class="section level2 hasAnchor" number="12.4">
+<h2><span class="header-section-number">12.4</span> SVM con <code>e1071</code><a href="máquinas-de-soporte-vectorial.html#svm-con-e1071" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Veamos un ejemplo donde reproduciremos todos los pasos que nos ayudarán a entender cómo funciona este método. Supongamos que tenemos un conjunto de datos con una variable respuesta <span class="math inline">\(y \in [-1, 1]\)</span> que pretendemos describir según dos variables <span class="math inline">\(X1\)</span> y <span class="math inline">\(X2\)</span> (o que queremos predecir con dos variables).</p>
-<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="máquinas-de-soporte-vectorial.html#cb550-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb550-2"><a href="máquinas-de-soporte-vectorial.html#cb550-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb550-3"><a href="máquinas-de-soporte-vectorial.html#cb550-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span> (<span class="dv">20</span><span class="sc">*</span><span class="dv">2</span>), <span class="at">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb550-4"><a href="máquinas-de-soporte-vectorial.html#cb550-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">10</span>), <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>))</span>
-<span id="cb550-5"><a href="máquinas-de-soporte-vectorial.html#cb550-5" aria-hidden="true" tabindex="-1"></a>x[y<span class="sc">==</span><span class="dv">1</span>, ] <span class="ot">&lt;-</span> x[y<span class="sc">==</span><span class="dv">1</span>, ] <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb550-6"><a href="máquinas-de-soporte-vectorial.html#cb550-6" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
-<span id="cb550-7"><a href="máquinas-de-soporte-vectorial.html#cb550-7" aria-hidden="true" tabindex="-1"></a>train_data<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="máquinas-de-soporte-vectorial.html#cb583-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb583-2"><a href="máquinas-de-soporte-vectorial.html#cb583-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb583-3"><a href="máquinas-de-soporte-vectorial.html#cb583-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span> (<span class="dv">20</span><span class="sc">*</span><span class="dv">2</span>), <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb583-4"><a href="máquinas-de-soporte-vectorial.html#cb583-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">10</span>), <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>))</span>
+<span id="cb583-5"><a href="máquinas-de-soporte-vectorial.html#cb583-5" aria-hidden="true" tabindex="-1"></a>x[y<span class="sc">==</span><span class="dv">1</span>, ] <span class="ot">&lt;-</span> x[y<span class="sc">==</span><span class="dv">1</span>, ] <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb583-6"><a href="máquinas-de-soporte-vectorial.html#cb583-6" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
+<span id="cb583-7"><a href="máquinas-de-soporte-vectorial.html#cb583-7" aria-hidden="true" tabindex="-1"></a>train_data<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(y)</span></code></pre></div>
 <p>El siguiente gráfico nos ilustra si las dos clases son linealmente separables</p>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="máquinas-de-soporte-vectorial.html#cb551-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(train_data, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2, <span class="at">color =</span> y)) <span class="sc">+</span></span>
-<span id="cb551-2"><a href="máquinas-de-soporte-vectorial.html#cb551-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb551-3"><a href="máquinas-de-soporte-vectorial.html#cb551-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Respuesta binaria con dos clases&quot;</span>) <span class="sc">+</span></span>
-<span id="cb551-4"><a href="máquinas-de-soporte-vectorial.html#cb551-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-216-1.png" width="672" /></p>
-<p>La respuesta es no, no se pueden separar linealmente. Ahora estimaremos una máquina de soporte vectorial. Para ello utilizaremos la librería <code>e1071</code> que implementa el algoritmo SVM mediante <code>svm(..., kernel="linear")</code>. Podemos cambiar el kernel a `c(“polynomial,” “radial”) y el coste a 10. Por ejemplo,</p>
-<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="máquinas-de-soporte-vectorial.html#cb552-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)</span>
-<span id="cb552-2"><a href="máquinas-de-soporte-vectorial.html#cb552-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">svm</span>(</span>
-<span id="cb552-3"><a href="máquinas-de-soporte-vectorial.html#cb552-3" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> ., </span>
-<span id="cb552-4"><a href="máquinas-de-soporte-vectorial.html#cb552-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train_data,</span>
-<span id="cb552-5"><a href="máquinas-de-soporte-vectorial.html#cb552-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel =</span> <span class="st">&quot;linear&quot;</span>,</span>
-<span id="cb552-6"><a href="máquinas-de-soporte-vectorial.html#cb552-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;C-classification&quot;</span>,  <span class="co"># (default) for classification</span></span>
-<span id="cb552-7"><a href="máquinas-de-soporte-vectorial.html#cb552-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">cost =</span> <span class="dv">10</span>,  <span class="co"># default is 1</span></span>
-<span id="cb552-8"><a href="máquinas-de-soporte-vectorial.html#cb552-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="cn">FALSE</span>  <span class="co"># do not standardize features</span></span>
-<span id="cb552-9"><a href="máquinas-de-soporte-vectorial.html#cb552-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb552-10"><a href="máquinas-de-soporte-vectorial.html#cb552-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb552-11"><a href="máquinas-de-soporte-vectorial.html#cb552-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, train_data)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-217-1.png" width="672" /></p>
-<p>Los vectores de soporte se grafican como “x’s.” En nuestro caso hay 7</p>
-<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="máquinas-de-soporte-vectorial.html#cb553-1" aria-hidden="true" tabindex="-1"></a>m<span class="sc">$</span>index</span></code></pre></div>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="máquinas-de-soporte-vectorial.html#cb584-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(train_data, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2, <span class="at">color =</span> y)) <span class="sc">+</span></span>
+<span id="cb584-2"><a href="máquinas-de-soporte-vectorial.html#cb584-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb584-3"><a href="máquinas-de-soporte-vectorial.html#cb584-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Respuesta binaria con dos clases&quot;</span>) <span class="sc">+</span></span>
+<span id="cb584-4"><a href="máquinas-de-soporte-vectorial.html#cb584-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-234-1.png" width="672" /></p>
+<p>La respuesta es no, no se pueden separar linealmente. Ahora estimaremos una máquina de soporte vectorial. Para ello utilizaremos la librería <code>e1071</code> que implementa el algoritmo SVM mediante <code>svm(..., kernel="linear")</code>. Podemos cambiar el kernel a `c(“polynomial”, “radial”) y el coste a 10. Por ejemplo,</p>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="máquinas-de-soporte-vectorial.html#cb585-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)</span>
+<span id="cb585-2"><a href="máquinas-de-soporte-vectorial.html#cb585-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">svm</span>(</span>
+<span id="cb585-3"><a href="máquinas-de-soporte-vectorial.html#cb585-3" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> ., </span>
+<span id="cb585-4"><a href="máquinas-de-soporte-vectorial.html#cb585-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train_data,</span>
+<span id="cb585-5"><a href="máquinas-de-soporte-vectorial.html#cb585-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel =</span> <span class="st">&quot;linear&quot;</span>,</span>
+<span id="cb585-6"><a href="máquinas-de-soporte-vectorial.html#cb585-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;C-classification&quot;</span>,  <span class="co"># (default) for classification</span></span>
+<span id="cb585-7"><a href="máquinas-de-soporte-vectorial.html#cb585-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">cost =</span> <span class="dv">10</span>,  <span class="co"># default is 1</span></span>
+<span id="cb585-8"><a href="máquinas-de-soporte-vectorial.html#cb585-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="cn">FALSE</span>  <span class="co"># do not standardize features</span></span>
+<span id="cb585-9"><a href="máquinas-de-soporte-vectorial.html#cb585-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb585-10"><a href="máquinas-de-soporte-vectorial.html#cb585-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb585-11"><a href="máquinas-de-soporte-vectorial.html#cb585-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, train_data)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-235-1.png" width="672" /></p>
+<p>Los vectores de soporte se grafican como “x’s”. En nuestro caso hay 7</p>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="máquinas-de-soporte-vectorial.html#cb586-1" aria-hidden="true" tabindex="-1"></a>m<span class="sc">$</span>index</span></code></pre></div>
 <pre><code>[1]  1  2  5  7 14 16 17</code></pre>
 <p>La función <code>summary()</code> muestra información adicional, incluida la distribución de los vectores de soporte en las clases (4 en la -1 y 3 en la 1).</p>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="máquinas-de-soporte-vectorial.html#cb555-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="máquinas-de-soporte-vectorial.html#cb588-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
 <pre><code>
 Call:
-svm(formula = y ~ ., data = train_data, kernel = &quot;linear&quot;, 
-    type = &quot;C-classification&quot;, cost = 10, scale = FALSE)
+svm(formula = y ~ ., data = train_data, kernel = &quot;linear&quot;, type = &quot;C-classification&quot;, 
+    cost = 10, scale = FALSE)
 
 
 Parameters:
@@ -465,27 +475,27 @@ Number of Classes:  2
 Levels: 
  -1 1</code></pre>
 <p>Los siete vectores de soporte se componen de cuatro en una clase, tres en la otra. ¿Qué pasa si reducimos el costo de las violaciones de márgenes? Esto aumentará el sesgo y reducirá la varianza.</p>
-<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="máquinas-de-soporte-vectorial.html#cb557-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">svm</span>(</span>
-<span id="cb557-2"><a href="máquinas-de-soporte-vectorial.html#cb557-2" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> ., </span>
-<span id="cb557-3"><a href="máquinas-de-soporte-vectorial.html#cb557-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train_data,</span>
-<span id="cb557-4"><a href="máquinas-de-soporte-vectorial.html#cb557-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel =</span> <span class="st">&quot;linear&quot;</span>,</span>
-<span id="cb557-5"><a href="máquinas-de-soporte-vectorial.html#cb557-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;C-classification&quot;</span>,  </span>
-<span id="cb557-6"><a href="máquinas-de-soporte-vectorial.html#cb557-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cost =</span> <span class="fl">0.1</span>,</span>
-<span id="cb557-7"><a href="máquinas-de-soporte-vectorial.html#cb557-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="cn">FALSE</span></span>
-<span id="cb557-8"><a href="máquinas-de-soporte-vectorial.html#cb557-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb557-9"><a href="máquinas-de-soporte-vectorial.html#cb557-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, train_data)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-220-1.png" width="672" /></p>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="máquinas-de-soporte-vectorial.html#cb590-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">svm</span>(</span>
+<span id="cb590-2"><a href="máquinas-de-soporte-vectorial.html#cb590-2" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> ., </span>
+<span id="cb590-3"><a href="máquinas-de-soporte-vectorial.html#cb590-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train_data,</span>
+<span id="cb590-4"><a href="máquinas-de-soporte-vectorial.html#cb590-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel =</span> <span class="st">&quot;linear&quot;</span>,</span>
+<span id="cb590-5"><a href="máquinas-de-soporte-vectorial.html#cb590-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;C-classification&quot;</span>,  </span>
+<span id="cb590-6"><a href="máquinas-de-soporte-vectorial.html#cb590-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cost =</span> <span class="fl">0.1</span>,</span>
+<span id="cb590-7"><a href="máquinas-de-soporte-vectorial.html#cb590-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="cn">FALSE</span></span>
+<span id="cb590-8"><a href="máquinas-de-soporte-vectorial.html#cb590-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb590-9"><a href="máquinas-de-soporte-vectorial.html#cb590-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, train_data)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-238-1.png" width="672" /></p>
 <p>Ahora hay muchos más vectores de soporte. (En caso de que esperara ver la formulación del límite de decisión lineal, o al menos una representación gráfica de los márgenes, siga esperando. El modelo está generalizado más allá de dos características, por lo que evidentemente no se preocupa demasiado por admitir demostraciones de dos características saneadas. )</p>
 <p>¿Qué nivel de coste produce el mejor rendimiento predictivo ? Recordemos que para contestar a esta pregunta, utilizando los mismos datos, podemos utilizar validación cruzada. SVM tiene por defecto implementado 10-fold CV. Probaremo siete valores candidatos para el coste (argumento <code>cost</code>). NOTA: Para SVM el coste es el hiperparámetro que debemos estimar.</p>
-<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="máquinas-de-soporte-vectorial.html#cb558-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb558-2"><a href="máquinas-de-soporte-vectorial.html#cb558-2" aria-hidden="true" tabindex="-1"></a>m_tune <span class="ot">&lt;-</span> <span class="fu">tune</span>(</span>
-<span id="cb558-3"><a href="máquinas-de-soporte-vectorial.html#cb558-3" aria-hidden="true" tabindex="-1"></a>  svm,</span>
-<span id="cb558-4"><a href="máquinas-de-soporte-vectorial.html#cb558-4" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> .,</span>
-<span id="cb558-5"><a href="máquinas-de-soporte-vectorial.html#cb558-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train_data,</span>
-<span id="cb558-6"><a href="máquinas-de-soporte-vectorial.html#cb558-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel =</span><span class="st">&quot;linear&quot;</span>,</span>
-<span id="cb558-7"><a href="máquinas-de-soporte-vectorial.html#cb558-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> <span class="fu">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">100</span>))</span>
-<span id="cb558-8"><a href="máquinas-de-soporte-vectorial.html#cb558-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb558-9"><a href="máquinas-de-soporte-vectorial.html#cb558-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_tune)</span></code></pre></div>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="máquinas-de-soporte-vectorial.html#cb591-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb591-2"><a href="máquinas-de-soporte-vectorial.html#cb591-2" aria-hidden="true" tabindex="-1"></a>m_tune <span class="ot">&lt;-</span> <span class="fu">tune</span>(</span>
+<span id="cb591-3"><a href="máquinas-de-soporte-vectorial.html#cb591-3" aria-hidden="true" tabindex="-1"></a>  svm,</span>
+<span id="cb591-4"><a href="máquinas-de-soporte-vectorial.html#cb591-4" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> .,</span>
+<span id="cb591-5"><a href="máquinas-de-soporte-vectorial.html#cb591-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train_data,</span>
+<span id="cb591-6"><a href="máquinas-de-soporte-vectorial.html#cb591-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel =</span><span class="st">&quot;linear&quot;</span>,</span>
+<span id="cb591-7"><a href="máquinas-de-soporte-vectorial.html#cb591-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> <span class="fu">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">100</span>))</span>
+<span id="cb591-8"><a href="máquinas-de-soporte-vectorial.html#cb591-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb591-9"><a href="máquinas-de-soporte-vectorial.html#cb591-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_tune)</span></code></pre></div>
 <pre><code>
 Parameter tuning of &#39;svm&#39;:
 
@@ -507,13 +517,12 @@ Parameter tuning of &#39;svm&#39;:
 6 1e+01  0.15  0.2415229
 7 1e+02  0.15  0.2415229</code></pre>
 <p>El error más bajo de valización cruzada es de 0.05 para <code>cost=0.1</code>. La función <code>tune()</code> guarda el valor del mejor mejor “tuning parameter”</p>
-<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="máquinas-de-soporte-vectorial.html#cb560-1" aria-hidden="true" tabindex="-1"></a>m_best <span class="ot">&lt;-</span> m_tune<span class="sc">$</span>best.model</span>
-<span id="cb560-2"><a href="máquinas-de-soporte-vectorial.html#cb560-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_best)</span></code></pre></div>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="máquinas-de-soporte-vectorial.html#cb593-1" aria-hidden="true" tabindex="-1"></a>m_best <span class="ot">&lt;-</span> m_tune<span class="sc">$</span>best.model</span>
+<span id="cb593-2"><a href="máquinas-de-soporte-vectorial.html#cb593-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_best)</span></code></pre></div>
 <pre><code>
 Call:
-best.tune(method = svm, train.x = y ~ ., data = train_data, 
-    ranges = list(cost = c(0.001, 0.01, 0.1, 1, 5, 10, 100)), 
-    kernel = &quot;linear&quot;)
+best.tune(METHOD = svm, train.x = y ~ ., data = train_data, ranges = list(cost = c(0.001, 
+    0.01, 0.1, 1, 5, 10, 100)), kernel = &quot;linear&quot;)
 
 
 Parameters:
@@ -531,21 +540,21 @@ Number of Classes:  2
 Levels: 
  -1 1</code></pre>
 <p>Ahora tenemos 16 vectores de soporte, 8 en cada clase. Esto supone un margen bastante amplio.</p>
-<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="máquinas-de-soporte-vectorial.html#cb562-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_best, train_data)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-223-1.png" width="672" /></p>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="máquinas-de-soporte-vectorial.html#cb595-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_best, train_data)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-241-1.png" width="672" /></p>
 <p>Estimemos ahora un modelo SVM usando otro kernel. En ese caso necesitaremos otros hiperparámetros. Por ejmplo, para el modelo poinomial, necesitaremos estimar el mejor grado del polinomio.</p>
-<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="máquinas-de-soporte-vectorial.html#cb563-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb563-2"><a href="máquinas-de-soporte-vectorial.html#cb563-2" aria-hidden="true" tabindex="-1"></a>m3_tune <span class="ot">&lt;-</span> <span class="fu">tune</span>(</span>
-<span id="cb563-3"><a href="máquinas-de-soporte-vectorial.html#cb563-3" aria-hidden="true" tabindex="-1"></a>  svm,</span>
-<span id="cb563-4"><a href="máquinas-de-soporte-vectorial.html#cb563-4" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> .,</span>
-<span id="cb563-5"><a href="máquinas-de-soporte-vectorial.html#cb563-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train_data,</span>
-<span id="cb563-6"><a href="máquinas-de-soporte-vectorial.html#cb563-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel =</span><span class="st">&quot;polynomial&quot;</span>,</span>
-<span id="cb563-7"><a href="máquinas-de-soporte-vectorial.html#cb563-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(</span>
-<span id="cb563-8"><a href="máquinas-de-soporte-vectorial.html#cb563-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cost =</span> <span class="fu">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">100</span>),</span>
-<span id="cb563-9"><a href="máquinas-de-soporte-vectorial.html#cb563-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">degree =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb563-10"><a href="máquinas-de-soporte-vectorial.html#cb563-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb563-11"><a href="máquinas-de-soporte-vectorial.html#cb563-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb563-12"><a href="máquinas-de-soporte-vectorial.html#cb563-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m3_tune)</span></code></pre></div>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="máquinas-de-soporte-vectorial.html#cb596-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb596-2"><a href="máquinas-de-soporte-vectorial.html#cb596-2" aria-hidden="true" tabindex="-1"></a>m3_tune <span class="ot">&lt;-</span> <span class="fu">tune</span>(</span>
+<span id="cb596-3"><a href="máquinas-de-soporte-vectorial.html#cb596-3" aria-hidden="true" tabindex="-1"></a>  svm,</span>
+<span id="cb596-4"><a href="máquinas-de-soporte-vectorial.html#cb596-4" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> .,</span>
+<span id="cb596-5"><a href="máquinas-de-soporte-vectorial.html#cb596-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train_data,</span>
+<span id="cb596-6"><a href="máquinas-de-soporte-vectorial.html#cb596-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel =</span><span class="st">&quot;polynomial&quot;</span>,</span>
+<span id="cb596-7"><a href="máquinas-de-soporte-vectorial.html#cb596-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(</span>
+<span id="cb596-8"><a href="máquinas-de-soporte-vectorial.html#cb596-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cost =</span> <span class="fu">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">100</span>),</span>
+<span id="cb596-9"><a href="máquinas-de-soporte-vectorial.html#cb596-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">degree =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb596-10"><a href="máquinas-de-soporte-vectorial.html#cb596-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb596-11"><a href="máquinas-de-soporte-vectorial.html#cb596-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb596-12"><a href="máquinas-de-soporte-vectorial.html#cb596-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m3_tune)</span></code></pre></div>
 <pre><code>
 Parameter tuning of &#39;svm&#39;:
 
@@ -581,13 +590,12 @@ Parameter tuning of &#39;svm&#39;:
 20 1e+01      3  0.35  0.4116363
 21 1e+02      3  0.35  0.3374743</code></pre>
 <p>El error más bajo de valización cruzada es de 0.1 para <code>cost=1</code> y grado de polinomio 1.</p>
-<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="máquinas-de-soporte-vectorial.html#cb565-1" aria-hidden="true" tabindex="-1"></a>m3_best <span class="ot">&lt;-</span> m3_tune<span class="sc">$</span>best.model</span>
-<span id="cb565-2"><a href="máquinas-de-soporte-vectorial.html#cb565-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m3_best)</span></code></pre></div>
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="máquinas-de-soporte-vectorial.html#cb598-1" aria-hidden="true" tabindex="-1"></a>m3_best <span class="ot">&lt;-</span> m3_tune<span class="sc">$</span>best.model</span>
+<span id="cb598-2"><a href="máquinas-de-soporte-vectorial.html#cb598-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m3_best)</span></code></pre></div>
 <pre><code>
 Call:
-best.tune(method = svm, train.x = y ~ ., data = train_data, 
-    ranges = list(cost = c(0.001, 0.01, 0.1, 1, 5, 10, 100), 
-        degree = c(1, 2, 3)), kernel = &quot;polynomial&quot;)
+best.tune(METHOD = svm, train.x = y ~ ., data = train_data, ranges = list(cost = c(0.001, 
+    0.01, 0.1, 1, 5, 10, 100), degree = c(1, 2, 3)), kernel = &quot;polynomial&quot;)
 
 
 Parameters:
@@ -607,46 +615,46 @@ Number of Classes:  2
 Levels: 
  -1 1</code></pre>
 <p>Ahora tenemos 12 vectores de soporte, 6 en cada clase. Esto supone un margen bastante amplio.</p>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="máquinas-de-soporte-vectorial.html#cb567-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m3_best, train_data)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-226-1.png" width="672" /></p>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="máquinas-de-soporte-vectorial.html#cb600-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m3_best, train_data)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-244-1.png" width="672" /></p>
 <p>Para un kernel radial, tenemos que incluir el valor de <code>gamma</code>.</p>
 </div>
-<div id="svm-con-caret" class="section level2" number="11.5">
-<h2><span class="header-section-number">11.5</span> SVM con <code>caret</code></h2>
+<div id="svm-con-caret" class="section level2 hasAnchor" number="12.5">
+<h2><span class="header-section-number">12.5</span> SVM con <code>caret</code><a href="máquinas-de-soporte-vectorial.html#svm-con-caret" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El modelo también se puede ajustar usando la librería <code>caret</code>. Usaremos LOOCV ya que el conjunto de datos es muy pequeño. Normalizaremos las variables para que su escala sea comparable. Esta librería requiere que la variable respuesta sea factor y le pondremos etiquetas para saber cuál es cada clase. Usaremos SVM polinomial como kernel (<code>svmPoly</code>) .</p>
-<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="máquinas-de-soporte-vectorial.html#cb568-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb568-2"><a href="máquinas-de-soporte-vectorial.html#cb568-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kernlab)</span>
-<span id="cb568-3"><a href="máquinas-de-soporte-vectorial.html#cb568-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb568-4"><a href="máquinas-de-soporte-vectorial.html#cb568-4" aria-hidden="true" tabindex="-1"></a>train_data_3 <span class="ot">&lt;-</span> train_data <span class="sc">%&gt;%</span></span>
-<span id="cb568-5"><a href="máquinas-de-soporte-vectorial.html#cb568-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> <span class="fu">factor</span>(y, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)))</span>
-<span id="cb568-6"><a href="máquinas-de-soporte-vectorial.html#cb568-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb568-7"><a href="máquinas-de-soporte-vectorial.html#cb568-7" aria-hidden="true" tabindex="-1"></a>m4 <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
-<span id="cb568-8"><a href="máquinas-de-soporte-vectorial.html#cb568-8" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> .,</span>
-<span id="cb568-9"><a href="máquinas-de-soporte-vectorial.html#cb568-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train_data_3,</span>
-<span id="cb568-10"><a href="máquinas-de-soporte-vectorial.html#cb568-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;svmPoly&quot;</span>,</span>
-<span id="cb568-11"><a href="máquinas-de-soporte-vectorial.html#cb568-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>),</span>
-<span id="cb568-12"><a href="máquinas-de-soporte-vectorial.html#cb568-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">trControl =</span> <span class="fu">trainControl</span>(</span>
-<span id="cb568-13"><a href="máquinas-de-soporte-vectorial.html#cb568-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;cv&quot;</span>,</span>
-<span id="cb568-14"><a href="máquinas-de-soporte-vectorial.html#cb568-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">number =</span> <span class="dv">5</span>,</span>
-<span id="cb568-15"><a href="máquinas-de-soporte-vectorial.html#cb568-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">summaryFunction =</span> twoClassSummary,  <span class="co"># Usaremos AUC para seleccionar el mejor modelo</span></span>
-<span id="cb568-16"><a href="máquinas-de-soporte-vectorial.html#cb568-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">classProbs=</span><span class="cn">TRUE</span></span>
-<span id="cb568-17"><a href="máquinas-de-soporte-vectorial.html#cb568-17" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb568-18"><a href="máquinas-de-soporte-vectorial.html#cb568-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb568-19"><a href="máquinas-de-soporte-vectorial.html#cb568-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb568-20"><a href="máquinas-de-soporte-vectorial.html#cb568-20" aria-hidden="true" tabindex="-1"></a>m4<span class="sc">$</span>bestTune</span></code></pre></div>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="máquinas-de-soporte-vectorial.html#cb601-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb601-2"><a href="máquinas-de-soporte-vectorial.html#cb601-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kernlab)</span>
+<span id="cb601-3"><a href="máquinas-de-soporte-vectorial.html#cb601-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb601-4"><a href="máquinas-de-soporte-vectorial.html#cb601-4" aria-hidden="true" tabindex="-1"></a>train_data_3 <span class="ot">&lt;-</span> train_data <span class="sc">%&gt;%</span></span>
+<span id="cb601-5"><a href="máquinas-de-soporte-vectorial.html#cb601-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> <span class="fu">factor</span>(y, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)))</span>
+<span id="cb601-6"><a href="máquinas-de-soporte-vectorial.html#cb601-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb601-7"><a href="máquinas-de-soporte-vectorial.html#cb601-7" aria-hidden="true" tabindex="-1"></a>m4 <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
+<span id="cb601-8"><a href="máquinas-de-soporte-vectorial.html#cb601-8" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> .,</span>
+<span id="cb601-9"><a href="máquinas-de-soporte-vectorial.html#cb601-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train_data_3,</span>
+<span id="cb601-10"><a href="máquinas-de-soporte-vectorial.html#cb601-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;svmPoly&quot;</span>,</span>
+<span id="cb601-11"><a href="máquinas-de-soporte-vectorial.html#cb601-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>),</span>
+<span id="cb601-12"><a href="máquinas-de-soporte-vectorial.html#cb601-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">trControl =</span> <span class="fu">trainControl</span>(</span>
+<span id="cb601-13"><a href="máquinas-de-soporte-vectorial.html#cb601-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;cv&quot;</span>,</span>
+<span id="cb601-14"><a href="máquinas-de-soporte-vectorial.html#cb601-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">number =</span> <span class="dv">5</span>,</span>
+<span id="cb601-15"><a href="máquinas-de-soporte-vectorial.html#cb601-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">summaryFunction =</span> twoClassSummary,  <span class="co"># Usaremos AUC para seleccionar el mejor modelo</span></span>
+<span id="cb601-16"><a href="máquinas-de-soporte-vectorial.html#cb601-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">classProbs=</span><span class="cn">TRUE</span></span>
+<span id="cb601-17"><a href="máquinas-de-soporte-vectorial.html#cb601-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb601-18"><a href="máquinas-de-soporte-vectorial.html#cb601-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb601-19"><a href="máquinas-de-soporte-vectorial.html#cb601-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb601-20"><a href="máquinas-de-soporte-vectorial.html#cb601-20" aria-hidden="true" tabindex="-1"></a>m4<span class="sc">$</span>bestTune</span></code></pre></div>
 <pre><code>  degree scale    C
 7      1   0.1 0.25</code></pre>
-<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="máquinas-de-soporte-vectorial.html#cb570-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m4)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-228-1.png" width="672" /></p>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="máquinas-de-soporte-vectorial.html#cb603-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m4)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-246-1.png" width="672" /></p>
 <p>Ahora podríamos comprobar qué modelo predice mejor en los datos test (que también generamos aleatoriamente:</p>
-<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="máquinas-de-soporte-vectorial.html#cb571-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb571-2"><a href="máquinas-de-soporte-vectorial.html#cb571-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span> (<span class="dv">20</span><span class="sc">*</span><span class="dv">2</span>), <span class="at">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb571-3"><a href="máquinas-de-soporte-vectorial.html#cb571-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">10</span>), <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>))</span>
-<span id="cb571-4"><a href="máquinas-de-soporte-vectorial.html#cb571-4" aria-hidden="true" tabindex="-1"></a>x[y<span class="sc">==</span><span class="dv">1</span>, ] <span class="ot">&lt;-</span> x[y<span class="sc">==</span><span class="dv">1</span>, ] <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb571-5"><a href="máquinas-de-soporte-vectorial.html#cb571-5" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
-<span id="cb571-6"><a href="máquinas-de-soporte-vectorial.html#cb571-6" aria-hidden="true" tabindex="-1"></a>test_data<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(y)</span>
-<span id="cb571-7"><a href="máquinas-de-soporte-vectorial.html#cb571-7" aria-hidden="true" tabindex="-1"></a>test_data<span class="sc">$</span>yFac <span class="ot">&lt;-</span> <span class="fu">factor</span>(test_data<span class="sc">$</span>y, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="máquinas-de-soporte-vectorial.html#cb572-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(m_best, test_data), test_data<span class="sc">$</span>y)</span></code></pre></div>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="máquinas-de-soporte-vectorial.html#cb604-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb604-2"><a href="máquinas-de-soporte-vectorial.html#cb604-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span> (<span class="dv">20</span><span class="sc">*</span><span class="dv">2</span>), <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb604-3"><a href="máquinas-de-soporte-vectorial.html#cb604-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">10</span>), <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>))</span>
+<span id="cb604-4"><a href="máquinas-de-soporte-vectorial.html#cb604-4" aria-hidden="true" tabindex="-1"></a>x[y<span class="sc">==</span><span class="dv">1</span>, ] <span class="ot">&lt;-</span> x[y<span class="sc">==</span><span class="dv">1</span>, ] <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb604-5"><a href="máquinas-de-soporte-vectorial.html#cb604-5" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
+<span id="cb604-6"><a href="máquinas-de-soporte-vectorial.html#cb604-6" aria-hidden="true" tabindex="-1"></a>test_data<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(y)</span>
+<span id="cb604-7"><a href="máquinas-de-soporte-vectorial.html#cb604-7" aria-hidden="true" tabindex="-1"></a>test_data<span class="sc">$</span>yFac <span class="ot">&lt;-</span> <span class="fu">factor</span>(test_data<span class="sc">$</span>y, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="máquinas-de-soporte-vectorial.html#cb605-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(m_best, test_data), test_data<span class="sc">$</span>y)</span></code></pre></div>
 <pre><code>Confusion Matrix and Statistics
 
           Reference
@@ -674,7 +682,7 @@ Prediction -1  1
                                           
        &#39;Positive&#39; Class : -1              
                                           </code></pre>
-<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="máquinas-de-soporte-vectorial.html#cb574-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(m3_best, test_data), test_data<span class="sc">$</span>y)</span></code></pre></div>
+<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="máquinas-de-soporte-vectorial.html#cb607-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(m3_best, test_data), test_data<span class="sc">$</span>y)</span></code></pre></div>
 <pre><code>Confusion Matrix and Statistics
 
           Reference
@@ -702,7 +710,7 @@ Prediction -1  1
                                           
        &#39;Positive&#39; Class : -1              
                                           </code></pre>
-<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="máquinas-de-soporte-vectorial.html#cb576-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(m4, test_data), test_data<span class="sc">$</span>yFac)</span></code></pre></div>
+<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="máquinas-de-soporte-vectorial.html#cb609-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(m4, test_data), test_data<span class="sc">$</span>yFac)</span></code></pre></div>
 <pre><code>Confusion Matrix and Statistics
 
           Reference
@@ -743,7 +751,6 @@ Prediction  A  B
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -784,7 +791,7 @@ gitbook.start({
 },
 "download": ["_main.pdf", "_main.epub"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {
@@ -800,7 +807,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

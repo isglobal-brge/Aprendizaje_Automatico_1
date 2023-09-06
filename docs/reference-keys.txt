@@ -1,7 +1,7 @@
 fig:flujo
 tab:unnamed-chunk-83
-tab:unnamed-chunk-239
-tab:unnamed-chunk-267
+tab:unnamed-chunk-257
+tab:unnamed-chunk-285
 introducción
 introducción-a-tidyverse
 introducción-1
@@ -84,6 +84,13 @@ gráfico-de-la-interacción
 uso-del-modelo-para-predecir-probabilidades
 creación-de-un-modelo-y-validación
 nomogramas
+modelos-de-regularización
+introducción-2
+cómo-regularizar
+implementación-en-r
+ejemplo-ridge-regression
+ejemplo-lasso
+ejemplo-elastic-net
 dealing-with-big-data-in-r
 nodes-cores-processes-and-threads
 paralelización

@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Dealing with Big Data in R | Aprendizaje Automático 1</title>
-  <meta name="description" content="7 Dealing with Big Data in R | Aprendizaje Automático 1" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <title>8 Dealing with Big Data in R | Aprendizaje Automático 1</title>
+  <meta name="description" content="8 Dealing with Big Data in R | Aprendizaje Automático 1" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Dealing with Big Data in R | Aprendizaje Automático 1" />
+  <meta property="og:title" content="8 Dealing with Big Data in R | Aprendizaje Automático 1" />
   <meta property="og:type" content="book" />
-  
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Dealing with Big Data in R | Aprendizaje Automático 1" />
+  <meta name="twitter:title" content="8 Dealing with Big Data in R | Aprendizaje Automático 1" />
   
   
   
@@ -24,17 +23,17 @@
 <meta name="author" content="Juan R González" />
 
 
-<meta name="date" content="2021-11-22" />
+<meta name="date" content="2023-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="regresión-logística.html"/>
+<link rel="prev" href="modelos-de-regularización.html"/>
 <link rel="next" href="caret.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,9 +49,9 @@
 
 
 
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -243,89 +242,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7" data-path="regresión-logística.html"><a href="regresión-logística.html#creación-de-un-modelo-y-validación"><i class="fa fa-check"></i><b>6.7</b> Creación de un modelo y validación</a></li>
 <li class="chapter" data-level="6.8" data-path="regresión-logística.html"><a href="regresión-logística.html#nomogramas"><i class="fa fa-check"></i><b>6.8</b> Nomogramas</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html"><i class="fa fa-check"></i><b>7</b> Dealing with Big Data in R</a>
+<li class="chapter" data-level="7" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html"><i class="fa fa-check"></i><b>7</b> Modelos de regularización</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#nodes-cores-processes-and-threads"><i class="fa fa-check"></i><b>7.1</b> Nodes, cores, processes and threads</a></li>
-<li class="chapter" data-level="7.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#paralelización"><i class="fa fa-check"></i><b>7.2</b> Paralelización</a>
+<li class="chapter" data-level="7.1" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
+<li class="chapter" data-level="7.2" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#cómo-regularizar"><i class="fa fa-check"></i><b>7.2</b> Cómo regularizar</a></li>
+<li class="chapter" data-level="7.3" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#implementación-en-r"><i class="fa fa-check"></i><b>7.3</b> Implementación en R</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#shared-memory-programming"><i class="fa fa-check"></i><b>7.2.1</b> Shared Memory Programming</a></li>
-<li class="chapter" data-level="7.2.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#distributed-memory-programming"><i class="fa fa-check"></i><b>7.2.2</b> Distributed Memory Programming</a></li>
+<li class="chapter" data-level="7.3.1" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#ejemplo-ridge-regression"><i class="fa fa-check"></i><b>7.3.1</b> Ejemplo: Ridge Regression</a></li>
+<li class="chapter" data-level="7.3.2" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#ejemplo-lasso"><i class="fa fa-check"></i><b>7.3.2</b> Ejemplo: Lasso</a></li>
+<li class="chapter" data-level="7.3.3" data-path="modelos-de-regularización.html"><a href="modelos-de-regularización.html#ejemplo-elastic-net"><i class="fa fa-check"></i><b>7.3.3</b> Ejemplo: Elastic Net</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#mapreduce"><i class="fa fa-check"></i><b>7.3</b> MapReduce</a>
-<ul>
-<li class="chapter" data-level="7.3.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#map"><i class="fa fa-check"></i><b>7.3.1</b> Map</a></li>
-<li class="chapter" data-level="7.3.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#reduce"><i class="fa fa-check"></i><b>7.3.2</b> Reduce</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>7.4</b> Example: Linear regression for Big Data</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>8</b> La librería <code>caret</code></a>
+<li class="chapter" data-level="8" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html"><i class="fa fa-check"></i><b>8</b> Dealing with Big Data in R</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="caret.html"><a href="caret.html#pre-procesado"><i class="fa fa-check"></i><b>8.1</b> Pre-procesado</a>
+<li class="chapter" data-level="8.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#nodes-cores-processes-and-threads"><i class="fa fa-check"></i><b>8.1</b> Nodes, cores, processes and threads</a></li>
+<li class="chapter" data-level="8.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#paralelización"><i class="fa fa-check"></i><b>8.2</b> Paralelización</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="caret.html"><a href="caret.html#creación-de-variables"><i class="fa fa-check"></i><b>8.1.1</b> Creación de variables</a></li>
-<li class="chapter" data-level="8.1.2" data-path="caret.html"><a href="caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>8.1.2</b> Predictores con poca variabilidad</a></li>
-<li class="chapter" data-level="8.1.3" data-path="caret.html"><a href="caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>8.1.3</b> Identificación de predictores correlacionados</a></li>
-<li class="chapter" data-level="8.1.4" data-path="caret.html"><a href="caret.html#centrado-y-escalado-1"><i class="fa fa-check"></i><b>8.1.4</b> Centrado y escalado</a></li>
-<li class="chapter" data-level="8.1.5" data-path="caret.html"><a href="caret.html#imputación"><i class="fa fa-check"></i><b>8.1.5</b> Imputación</a></li>
-<li class="chapter" data-level="8.1.6" data-path="caret.html"><a href="caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>8.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
+<li class="chapter" data-level="8.2.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#shared-memory-programming"><i class="fa fa-check"></i><b>8.2.1</b> Shared Memory Programming</a></li>
+<li class="chapter" data-level="8.2.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#distributed-memory-programming"><i class="fa fa-check"></i><b>8.2.2</b> Distributed Memory Programming</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="caret.html"><a href="caret.html#visualización"><i class="fa fa-check"></i><b>8.2</b> Visualización</a></li>
-<li class="chapter" data-level="8.3" data-path="caret.html"><a href="caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>8.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
-<li class="chapter" data-level="8.4" data-path="caret.html"><a href="caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>8.4</b> Creación de un modelo predictivo</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="KNN.html"><a href="KNN.html"><i class="fa fa-check"></i><b>9</b> K vecinos más próximos (KNN)</a></li>
-<li class="chapter" data-level="10" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>10</b> Análisis discriminante lineal (LDA)</a>
+<li class="chapter" data-level="8.3" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#mapreduce"><i class="fa fa-check"></i><b>8.3</b> MapReduce</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html#concurso-predicción-de-actividad-física-con-sensores"><i class="fa fa-check"></i><b>10.1</b> Concurso predicción de actividad física con sensores</a></li>
+<li class="chapter" data-level="8.3.1" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#map"><i class="fa fa-check"></i><b>8.3.1</b> Map</a></li>
+<li class="chapter" data-level="8.3.2" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#reduce"><i class="fa fa-check"></i><b>8.3.2</b> Reduce</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html"><i class="fa fa-check"></i><b>11</b> Máquinas de soporte vectorial</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-margen-máximo"><i class="fa fa-check"></i><b>11.1</b> Clasificador de margen máximo</a></li>
-<li class="chapter" data-level="11.2" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-soporte-vectorial"><i class="fa fa-check"></i><b>11.2</b> Clasificador de soporte vectorial</a></li>
-<li class="chapter" data-level="11.3" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#máquinas-de-soporte-vectorial-1"><i class="fa fa-check"></i><b>11.3</b> Máquinas de soporte vectorial</a></li>
-<li class="chapter" data-level="11.4" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-e1071"><i class="fa fa-check"></i><b>11.4</b> SVM con <code>e1071</code></a></li>
-<li class="chapter" data-level="11.5" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-caret"><i class="fa fa-check"></i><b>11.5</b> SVM con <code>caret</code></a></li>
+<li class="chapter" data-level="8.4" data-path="dealing-with-big-data-in-r.html"><a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data"><i class="fa fa-check"></i><b>8.4</b> Example: Linear regression for Big Data</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="respuesta-no-balanceada.html"><a href="respuesta-no-balanceada.html"><i class="fa fa-check"></i><b>12</b> Respuesta no balanceada</a></li>
-<li class="chapter" data-level="13" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html"><i class="fa fa-check"></i><b>13</b> Árboles de decisión</a>
+<li class="chapter" data-level="9" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>9</b> La librería <code>caret</code></a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-clasificación"><i class="fa fa-check"></i><b>13.1</b> Árboles de clasificación</a></li>
-<li class="chapter" data-level="13.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#área-bajo-la-curva-roc"><i class="fa fa-check"></i><b>13.2</b> Área bajo la curva ROC</a>
+<li class="chapter" data-level="9.1" data-path="caret.html"><a href="caret.html#pre-procesado"><i class="fa fa-check"></i><b>9.1</b> Pre-procesado</a>
 <ul>
-<li class="chapter" data-level="13.2.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret"><i class="fa fa-check"></i><b>13.2.1</b> Entrenamiento con <code>caret</code></a></li>
+<li class="chapter" data-level="9.1.1" data-path="caret.html"><a href="caret.html#creación-de-variables"><i class="fa fa-check"></i><b>9.1.1</b> Creación de variables</a></li>
+<li class="chapter" data-level="9.1.2" data-path="caret.html"><a href="caret.html#predictores-con-poca-variabilidad"><i class="fa fa-check"></i><b>9.1.2</b> Predictores con poca variabilidad</a></li>
+<li class="chapter" data-level="9.1.3" data-path="caret.html"><a href="caret.html#identificación-de-predictores-correlacionados"><i class="fa fa-check"></i><b>9.1.3</b> Identificación de predictores correlacionados</a></li>
+<li class="chapter" data-level="9.1.4" data-path="caret.html"><a href="caret.html#centrado-y-escalado-1"><i class="fa fa-check"></i><b>9.1.4</b> Centrado y escalado</a></li>
+<li class="chapter" data-level="9.1.5" data-path="caret.html"><a href="caret.html#imputación"><i class="fa fa-check"></i><b>9.1.5</b> Imputación</a></li>
+<li class="chapter" data-level="9.1.6" data-path="caret.html"><a href="caret.html#pre-procesado-con-la-librería-recipes"><i class="fa fa-check"></i><b>9.1.6</b> Pre-procesado con la librería <code>recipes</code></a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-regresión"><i class="fa fa-check"></i><b>13.3</b> Árboles de regresión</a>
-<ul>
-<li class="chapter" data-level="13.3.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret-1"><i class="fa fa-check"></i><b>13.3.1</b> Entrenamiento con <code>caret</code></a></li>
+<li class="chapter" data-level="9.2" data-path="caret.html"><a href="caret.html#visualización"><i class="fa fa-check"></i><b>9.2</b> Visualización</a></li>
+<li class="chapter" data-level="9.3" data-path="caret.html"><a href="caret.html#ejemplo-completo-creación-de-modelo-diagnóstico-para-cáncer-de-mama"><i class="fa fa-check"></i><b>9.3</b> Ejemplo completo: creación de modelo diagnóstico para cáncer de mama</a></li>
+<li class="chapter" data-level="9.4" data-path="caret.html"><a href="caret.html#creación-de-un-modelo-predictivo"><i class="fa fa-check"></i><b>9.4</b> Creación de un modelo predictivo</a></li>
 </ul></li>
-<li class="chapter" data-level="13.4" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagged-trees"><i class="fa fa-check"></i><b>13.4</b> Bagged trees</a>
+<li class="chapter" data-level="10" data-path="KNN.html"><a href="KNN.html"><i class="fa fa-check"></i><b>10</b> K vecinos más próximos (KNN)</a></li>
+<li class="chapter" data-level="11" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html"><i class="fa fa-check"></i><b>11</b> Análisis discriminante lineal (LDA)</a>
 <ul>
-<li class="chapter" data-level="13.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>13.4.1</b> Bagging árboles de clasificación</a></li>
-<li class="chapter" data-level="13.4.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>13.4.2</b> Bagging árboles de regresión</a></li>
+<li class="chapter" data-level="11.1" data-path="análisis-discriminante-lineal-lda.html"><a href="análisis-discriminante-lineal-lda.html#concurso-predicción-de-actividad-física-con-sensores"><i class="fa fa-check"></i><b>11.1</b> Concurso predicción de actividad física con sensores</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest"><i class="fa fa-check"></i><b>13.5</b> Random Forest</a></li>
-<li class="chapter" data-level="13.6" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest-pn"><i class="fa fa-check"></i><b>13.6</b> Random Forest p&gt;&gt;n</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="boosting.html"><a href="boosting.html"><i class="fa fa-check"></i><b>14</b> Boosting</a>
+<li class="chapter" data-level="12" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html"><i class="fa fa-check"></i><b>12</b> Máquinas de soporte vectorial</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="boosting.html"><a href="boosting.html#cómo-funciona-el-boosting"><i class="fa fa-check"></i><b>14.1</b> Cómo funciona el <em>boosting</em></a></li>
-<li class="chapter" data-level="14.2" data-path="boosting.html"><a href="boosting.html#adaboost"><i class="fa fa-check"></i><b>14.2</b> AdaBoost</a></li>
-<li class="chapter" data-level="14.3" data-path="boosting.html"><a href="boosting.html#gbm-básico"><i class="fa fa-check"></i><b>14.3</b> GBM básico</a>
-<ul>
-<li class="chapter" data-level="14.3.1" data-path="boosting.html"><a href="boosting.html#boostingHiperparam"><i class="fa fa-check"></i><b>14.3.1</b> Hiperparámetros</a></li>
-<li class="chapter" data-level="14.3.2" data-path="boosting.html"><a href="boosting.html#implementación"><i class="fa fa-check"></i><b>14.3.2</b> Implementación</a></li>
-<li class="chapter" data-level="14.3.3" data-path="boosting.html"><a href="boosting.html#estrategia-general-de-tuning"><i class="fa fa-check"></i><b>14.3.3</b> Estrategia general de <em>tuning</em></a></li>
+<li class="chapter" data-level="12.1" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-margen-máximo"><i class="fa fa-check"></i><b>12.1</b> Clasificador de margen máximo</a></li>
+<li class="chapter" data-level="12.2" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#clasificador-de-soporte-vectorial"><i class="fa fa-check"></i><b>12.2</b> Clasificador de soporte vectorial</a></li>
+<li class="chapter" data-level="12.3" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#máquinas-de-soporte-vectorial-1"><i class="fa fa-check"></i><b>12.3</b> Máquinas de soporte vectorial</a></li>
+<li class="chapter" data-level="12.4" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-e1071"><i class="fa fa-check"></i><b>12.4</b> SVM con <code>e1071</code></a></li>
+<li class="chapter" data-level="12.5" data-path="máquinas-de-soporte-vectorial.html"><a href="máquinas-de-soporte-vectorial.html#svm-con-caret"><i class="fa fa-check"></i><b>12.5</b> SVM con <code>caret</code></a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="boosting.html"><a href="boosting.html#gbms-estocásticos"><i class="fa fa-check"></i><b>14.4</b> GBMs estocásticos</a>
+<li class="chapter" data-level="13" data-path="respuesta-no-balanceada.html"><a href="respuesta-no-balanceada.html"><i class="fa fa-check"></i><b>13</b> Respuesta no balanceada</a></li>
+<li class="chapter" data-level="14" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html"><i class="fa fa-check"></i><b>14</b> Árboles de decisión</a>
 <ul>
-<li class="chapter" data-level="14.4.1" data-path="boosting.html"><a href="boosting.html#hiperparámetros-estocásticos"><i class="fa fa-check"></i><b>14.4.1</b> Hiperparámetros estocásticos</a></li>
-</ul></li>
-<li class="chapter" data-level="14.5" data-path="boosting.html"><a href="boosting.html#xgboost"><i class="fa fa-check"></i><b>14.5</b> XGBoost</a>
+<li class="chapter" data-level="14.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-clasificación"><i class="fa fa-check"></i><b>14.1</b> Árboles de clasificación</a></li>
+<li class="chapter" data-level="14.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#área-bajo-la-curva-roc"><i class="fa fa-check"></i><b>14.2</b> Área bajo la curva ROC</a>
 <ul>
-<li class="chapter" data-level="14.5.1" data-path="boosting.html"><a href="boosting.html#reguralización"><i class="fa fa-check"></i><b>14.5.1</b> Reguralización</a></li>
-<li class="chapter" data-level="14.5.2" data-path="boosting.html"><a href="boosting.html#estrategia-de-tuning"><i class="fa fa-check"></i><b>14.5.2</b> Estrategia de <em>tuning</em></a></li>
+<li class="chapter" data-level="14.2.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret"><i class="fa fa-check"></i><b>14.2.1</b> Entrenamiento con <code>caret</code></a></li>
 </ul></li>
-<li class="chapter" data-level="14.6" data-path="boosting.html"><a href="boosting.html#otros-algoritmos-gbm"><i class="fa fa-check"></i><b>14.6</b> Otros algoritmos GBM</a></li>
+<li class="chapter" data-level="14.3" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#árboles-de-regresión"><i class="fa fa-check"></i><b>14.3</b> Árboles de regresión</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#entrenamiento-con-caret-1"><i class="fa fa-check"></i><b>14.3.1</b> Entrenamiento con <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagged-trees"><i class="fa fa-check"></i><b>14.4</b> Bagged trees</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-clasificación"><i class="fa fa-check"></i><b>14.4.1</b> Bagging árboles de clasificación</a></li>
+<li class="chapter" data-level="14.4.2" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#bagging-árboles-de-regresión"><i class="fa fa-check"></i><b>14.4.2</b> Bagging árboles de regresión</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest"><i class="fa fa-check"></i><b>14.5</b> Random Forest</a></li>
+<li class="chapter" data-level="14.6" data-path="árboles-de-decisión.html"><a href="árboles-de-decisión.html#random-forest-pn"><i class="fa fa-check"></i><b>14.6</b> Random Forest p&gt;&gt;n</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="boosting.html"><a href="boosting.html"><i class="fa fa-check"></i><b>15</b> Boosting</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="boosting.html"><a href="boosting.html#cómo-funciona-el-boosting"><i class="fa fa-check"></i><b>15.1</b> Cómo funciona el <em>boosting</em></a></li>
+<li class="chapter" data-level="15.2" data-path="boosting.html"><a href="boosting.html#adaboost"><i class="fa fa-check"></i><b>15.2</b> AdaBoost</a></li>
+<li class="chapter" data-level="15.3" data-path="boosting.html"><a href="boosting.html#gbm-básico"><i class="fa fa-check"></i><b>15.3</b> GBM básico</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="boosting.html"><a href="boosting.html#boostingHiperparam"><i class="fa fa-check"></i><b>15.3.1</b> Hiperparámetros</a></li>
+<li class="chapter" data-level="15.3.2" data-path="boosting.html"><a href="boosting.html#implementación"><i class="fa fa-check"></i><b>15.3.2</b> Implementación</a></li>
+<li class="chapter" data-level="15.3.3" data-path="boosting.html"><a href="boosting.html#estrategia-general-de-tuning"><i class="fa fa-check"></i><b>15.3.3</b> Estrategia general de <em>tuning</em></a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="boosting.html"><a href="boosting.html#gbms-estocásticos"><i class="fa fa-check"></i><b>15.4</b> GBMs estocásticos</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="boosting.html"><a href="boosting.html#hiperparámetros-estocásticos"><i class="fa fa-check"></i><b>15.4.1</b> Hiperparámetros estocásticos</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="boosting.html"><a href="boosting.html#xgboost"><i class="fa fa-check"></i><b>15.5</b> XGBoost</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="boosting.html"><a href="boosting.html#reguralización"><i class="fa fa-check"></i><b>15.5.1</b> Reguralización</a></li>
+<li class="chapter" data-level="15.5.2" data-path="boosting.html"><a href="boosting.html#estrategia-de-tuning"><i class="fa fa-check"></i><b>15.5.2</b> Estrategia de <em>tuning</em></a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="boosting.html"><a href="boosting.html#otros-algoritmos-gbm"><i class="fa fa-check"></i><b>15.6</b> Otros algoritmos GBM</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -347,16 +357,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dealing-with-big-data-in-r" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> Dealing with Big Data in R</h1>
+<div id="dealing-with-big-data-in-r" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> Dealing with Big Data in R<a href="dealing-with-big-data-in-r.html#dealing-with-big-data-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>In the era of big data, we can have access to large volumes of data obtained from our population of interest. Traditional algorithms implemented for even the simplest statistical methods (descriptive, linear regression, …) require a lot of computing time. To address this issue, one of the approaches we have is to divide our data into smaller sets that do not require as much computational cost and to combine these results in a clever way that allows us to solve the largest problem. This can be done by parallelizing the calculations since even laptops already have multiple computing cores, and/or combining the calculations with paradigms such as <em>MapReduce</em> that has been designed to deal with Big Data efficiently. In this section we will learn how to:</p>
 <ul>
 <li>Parallelize in R</li>
 <li>Use MapReduce</li>
 <li>Implement multiple linear regression in a distributed system using MapReduce paradigm</li>
 </ul>
-<div id="nodes-cores-processes-and-threads" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Nodes, cores, processes and threads</h2>
+<div id="nodes-cores-processes-and-threads" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Nodes, cores, processes and threads<a href="dealing-with-big-data-in-r.html#nodes-cores-processes-and-threads" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The terminology of nodes, cores, processes and threads is not universal. Depending on the computer, software (etc.), they can have various meanings. Typical examples: socket instead of node; cpu instead of core; task instead of process. Supercomputers have complex architectures, mainly due to their processors capability to work together on the same memory space. More precisely, the smallest computing units, called cores, are grouped in nodes. All the cores in one node share the same memory space. In other terms, the cores of the same node can operate on the same data, at the same time; no need for sending the data back and forth. This hardware architecture is summarized in this figure that shows a simple schematic of a 16-core node. The node contains two CPUs and each CPU consists of 8 cores. The schematic also shows the attached memory and the connections between the CPUs and memory.</p>
 <div class="figure">
 <img src="figures/hpc_node-cpu-core.png" style="width:50.0%" alt="" />
@@ -367,8 +377,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Cores</strong>: Refers to the basic computation unit of the CPU. This is unit that carries out the actual computations.</p>
 <p>So in essence, each compute node contains one or more processors/CPUs and each CPU will typically consist of one or more cores.</p>
 </div>
-<div id="paralelización" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Paralelización</h2>
+<div id="paralelización" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Paralelización<a href="dealing-with-big-data-in-r.html#paralelización" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When using a single CPU, or serial computing, the problem size is limited by the available memory and performance. As data sizes become larger and systems become more complex, programs/applications rapidly run out of resources. Effectively utilising parallel computing can overcome these limitations. Parallel computing has become essential to solving big problems (high resolution, lots of timesteps, etc.) in science and engineering.</p>
 <p>Parallel computing can be simply defined as the simultaneous use of multiple processors/computers, i.e. parallel computers, to solve a computational problem. The general pattern is:</p>
 <ul>
@@ -377,12 +387,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Processors exchange information with other processors, when required.</li>
 </ul>
 <p>It allows leveraging the resources of multiple processors/computers, increasing the resources available to the application/software. This enables the execution of tasks that do not fit on a single CPU and the completion of the tasks in a reasonable time. This has many benefits. For instance, we can add more data points which can translate to the use of bigger domains, improved spatial resolution or the inclusion of more particles in a simulation. Faster execution time can translate to increased number of solutions in a given time or a faster time to solution.</p>
-<div id="shared-memory-programming" class="section level3" number="7.2.1">
-<h3><span class="header-section-number">7.2.1</span> Shared Memory Programming</h3>
+<div id="shared-memory-programming" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Shared Memory Programming<a href="dealing-with-big-data-in-r.html#shared-memory-programming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Parallel programming for shared memory machines is easier since the all cores have access to the same memory address space and so all have access to the same data structures. This greatly simplifies the task of parallelisation. Use can be made of auto-parallelisation via compiler options, loop-level parallelism through compiler directives or OpenMP. On the other hand, speedup and scalability are limited by the number of cores in the shared memory machine, and this is generally a relatively small number. In addition, code can only be used on a shared memory machine.</p>
 </div>
-<div id="distributed-memory-programming" class="section level3" number="7.2.2">
-<h3><span class="header-section-number">7.2.2</span> Distributed Memory Programming</h3>
+<div id="distributed-memory-programming" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Distributed Memory Programming<a href="dealing-with-big-data-in-r.html#distributed-memory-programming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Programming for distributed memory machines provides a means to take advantage of more resources than those available on a shared memory machine. In addition, code developed for distributed memory machines can be used on shared memory machines. However, this type of programming is generally more difficult than shared memory programming. Since each processor only has access to its local memory, the programmer is responsible for mapping data structures across the separate nodes. In addition, there is a need to coordinate the communications between nodes, i.e. message passing, to ensure that a node can access remote data when it is needed for a local computation. The standard library used for this is MPI.</p>
 <p>Next figure illustrate the difference between both approaches</p>
 <div class="figure">
@@ -391,131 +401,131 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Doing these tasks in R without strong knowledge in informatics can be hard. However, there are several R packages to perform parallel computing. The reason for using <code>doParallel</code> package, and not <code>parallel</code>, is that the <code>parallel</code> package is not working entirely on Windows and you had to write different code for it to work. The <code>doParallel</code> package is trying to make it happen on all platforms: UNIX, LINUX and WINDOWS, so it’s a pretty decent wrapper. To me, the most simple way of doing parallelization is to use <code>mclapply()</code> function from <code>parallel</code> but this cannot be used in Window.</p>
 <p>Let us assume we want to compute <span class="math inline">\(f(x)=x^2 + x\)</span> of 10 numbers stored in a vector called <code>vec</code>.</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="dealing-with-big-data-in-r.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb383-2"><a href="dealing-with-big-data-in-r.html#cb383-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> x</span>
-<span id="cb383-3"><a href="dealing-with-big-data-in-r.html#cb383-3" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">10</span>, <span class="at">lambda=</span><span class="dv">200</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="dealing-with-big-data-in-r.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb416-2"><a href="dealing-with-big-data-in-r.html#cb416-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> x</span>
+<span id="cb416-3"><a href="dealing-with-big-data-in-r.html#cb416-3" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">10</span>, <span class="at">lambda=</span><span class="dv">200</span>)</span></code></pre></div>
 <p>We can do the following strategies:</p>
 <ol style="list-style-type: decimal">
 <li>Looping</li>
 </ol>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="dealing-with-big-data-in-r.html#cb384-1" aria-hidden="true" tabindex="-1"></a>forFunction <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {  </span>
-<span id="cb384-2"><a href="dealing-with-big-data-in-r.html#cb384-2" aria-hidden="true" tabindex="-1"></a>  ans <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(x))</span>
-<span id="cb384-3"><a href="dealing-with-big-data-in-r.html#cb384-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> vec)</span>
-<span id="cb384-4"><a href="dealing-with-big-data-in-r.html#cb384-4" aria-hidden="true" tabindex="-1"></a>   {</span>
-<span id="cb384-5"><a href="dealing-with-big-data-in-r.html#cb384-5" aria-hidden="true" tabindex="-1"></a>    ans[i] <span class="ot">&lt;-</span> <span class="fu">f</span>(i)</span>
-<span id="cb384-6"><a href="dealing-with-big-data-in-r.html#cb384-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb384-7"><a href="dealing-with-big-data-in-r.html#cb384-7" aria-hidden="true" tabindex="-1"></a>  ans</span>
-<span id="cb384-8"><a href="dealing-with-big-data-in-r.html#cb384-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="dealing-with-big-data-in-r.html#cb417-1" aria-hidden="true" tabindex="-1"></a>forFunction <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {  </span>
+<span id="cb417-2"><a href="dealing-with-big-data-in-r.html#cb417-2" aria-hidden="true" tabindex="-1"></a>  ans <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(x))</span>
+<span id="cb417-3"><a href="dealing-with-big-data-in-r.html#cb417-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> vec)</span>
+<span id="cb417-4"><a href="dealing-with-big-data-in-r.html#cb417-4" aria-hidden="true" tabindex="-1"></a>   {</span>
+<span id="cb417-5"><a href="dealing-with-big-data-in-r.html#cb417-5" aria-hidden="true" tabindex="-1"></a>    ans[i] <span class="ot">&lt;-</span> <span class="fu">f</span>(i)</span>
+<span id="cb417-6"><a href="dealing-with-big-data-in-r.html#cb417-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb417-7"><a href="dealing-with-big-data-in-r.html#cb417-7" aria-hidden="true" tabindex="-1"></a>  ans</span>
+<span id="cb417-8"><a href="dealing-with-big-data-in-r.html#cb417-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Using <code>lapply ()</code> or <code>sapply ()</code> function</li>
 </ol>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="dealing-with-big-data-in-r.html#cb385-1" aria-hidden="true" tabindex="-1"></a>lapplyFunction <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb385-2"><a href="dealing-with-big-data-in-r.html#cb385-2" aria-hidden="true" tabindex="-1"></a>  ans <span class="ot">&lt;-</span> <span class="fu">sapply</span>(x, f)</span>
-<span id="cb385-3"><a href="dealing-with-big-data-in-r.html#cb385-3" aria-hidden="true" tabindex="-1"></a>  ans</span>
-<span id="cb385-4"><a href="dealing-with-big-data-in-r.html#cb385-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="dealing-with-big-data-in-r.html#cb418-1" aria-hidden="true" tabindex="-1"></a>lapplyFunction <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb418-2"><a href="dealing-with-big-data-in-r.html#cb418-2" aria-hidden="true" tabindex="-1"></a>  ans <span class="ot">&lt;-</span> <span class="fu">sapply</span>(x, f)</span>
+<span id="cb418-3"><a href="dealing-with-big-data-in-r.html#cb418-3" aria-hidden="true" tabindex="-1"></a>  ans</span>
+<span id="cb418-4"><a href="dealing-with-big-data-in-r.html#cb418-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Using <code>doParallel::parLapply()</code> function</li>
 </ol>
 <p>We need first to create the cluster</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="dealing-with-big-data-in-r.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span>
-<span id="cb386-2"><a href="dealing-with-big-data-in-r.html#cb386-2" aria-hidden="true" tabindex="-1"></a>ncores <span class="ot">&lt;-</span> <span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">1</span>  </span>
-<span id="cb386-3"><a href="dealing-with-big-data-in-r.html#cb386-3" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(<span class="at">cores=</span>ncores)  </span>
-<span id="cb386-4"><a href="dealing-with-big-data-in-r.html#cb386-4" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(ncores) </span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="dealing-with-big-data-in-r.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span>
+<span id="cb419-2"><a href="dealing-with-big-data-in-r.html#cb419-2" aria-hidden="true" tabindex="-1"></a>ncores <span class="ot">&lt;-</span> <span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">1</span>  </span>
+<span id="cb419-3"><a href="dealing-with-big-data-in-r.html#cb419-3" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(<span class="at">cores=</span>ncores)  </span>
+<span id="cb419-4"><a href="dealing-with-big-data-in-r.html#cb419-4" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(ncores) </span></code></pre></div>
 <p>Then, we can use the parallel implementation of <code>lapply</code></p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="dealing-with-big-data-in-r.html#cb387-1" aria-hidden="true" tabindex="-1"></a>parLapplyFunction <span class="ot">&lt;-</span> <span class="cf">function</span>(cl, x, f){</span>
-<span id="cb387-2"><a href="dealing-with-big-data-in-r.html#cb387-2" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">parLapply</span>(<span class="at">cl=</span>cl, <span class="at">X=</span>x, <span class="at">fun=</span>f)  </span>
-<span id="cb387-3"><a href="dealing-with-big-data-in-r.html#cb387-3" aria-hidden="true" tabindex="-1"></a>  result</span>
-<span id="cb387-4"><a href="dealing-with-big-data-in-r.html#cb387-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="dealing-with-big-data-in-r.html#cb420-1" aria-hidden="true" tabindex="-1"></a>parLapplyFunction <span class="ot">&lt;-</span> <span class="cf">function</span>(cl, x, f){</span>
+<span id="cb420-2"><a href="dealing-with-big-data-in-r.html#cb420-2" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">parLapply</span>(<span class="at">cl=</span>cl, <span class="at">X=</span>x, <span class="at">fun=</span>f)  </span>
+<span id="cb420-3"><a href="dealing-with-big-data-in-r.html#cb420-3" aria-hidden="true" tabindex="-1"></a>  result</span>
+<span id="cb420-4"><a href="dealing-with-big-data-in-r.html#cb420-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Using <code>doParallel::foreach()</code> function</li>
 </ol>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="dealing-with-big-data-in-r.html#cb388-1" aria-hidden="true" tabindex="-1"></a>foreachDoParFunction <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb388-2"><a href="dealing-with-big-data-in-r.html#cb388-2" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">i=</span>x, <span class="at">.export=</span><span class="st">&quot;f&quot;</span>) <span class="sc">%dopar%</span> <span class="fu">f</span>(i)</span>
-<span id="cb388-3"><a href="dealing-with-big-data-in-r.html#cb388-3" aria-hidden="true" tabindex="-1"></a>  result</span>
-<span id="cb388-4"><a href="dealing-with-big-data-in-r.html#cb388-4" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="dealing-with-big-data-in-r.html#cb389-1" aria-hidden="true" tabindex="-1"></a>foreachDoFunction <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb389-2"><a href="dealing-with-big-data-in-r.html#cb389-2" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">i=</span>x, <span class="at">.export=</span><span class="st">&quot;f&quot;</span>) <span class="sc">%do%</span> <span class="fu">f</span>(i)</span>
-<span id="cb389-3"><a href="dealing-with-big-data-in-r.html#cb389-3" aria-hidden="true" tabindex="-1"></a>  result</span>
-<span id="cb389-4"><a href="dealing-with-big-data-in-r.html#cb389-4" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="dealing-with-big-data-in-r.html#cb421-1" aria-hidden="true" tabindex="-1"></a>foreachDoParFunction <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb421-2"><a href="dealing-with-big-data-in-r.html#cb421-2" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">i=</span>x, <span class="at">.export=</span><span class="st">&quot;f&quot;</span>) <span class="sc">%dopar%</span> <span class="fu">f</span>(i)</span>
+<span id="cb421-3"><a href="dealing-with-big-data-in-r.html#cb421-3" aria-hidden="true" tabindex="-1"></a>  result</span>
+<span id="cb421-4"><a href="dealing-with-big-data-in-r.html#cb421-4" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="dealing-with-big-data-in-r.html#cb422-1" aria-hidden="true" tabindex="-1"></a>foreachDoFunction <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb422-2"><a href="dealing-with-big-data-in-r.html#cb422-2" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">i=</span>x, <span class="at">.export=</span><span class="st">&quot;f&quot;</span>) <span class="sc">%do%</span> <span class="fu">f</span>(i)</span>
+<span id="cb422-3"><a href="dealing-with-big-data-in-r.html#cb422-3" aria-hidden="true" tabindex="-1"></a>  result</span>
+<span id="cb422-4"><a href="dealing-with-big-data-in-r.html#cb422-4" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Using <code>parallel::mclapply()</code> function</li>
 </ol>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="dealing-with-big-data-in-r.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Only works in Linux (Windows ncores must be set equal to 1)</span></span>
-<span id="cb390-2"><a href="dealing-with-big-data-in-r.html#cb390-2" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">mclapply</span>(x, f, <span class="at">mc.cores=</span>ncores)</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="dealing-with-big-data-in-r.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Only works in Linux (Windows ncores must be set equal to 1)</span></span>
+<span id="cb423-2"><a href="dealing-with-big-data-in-r.html#cb423-2" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">mclapply</span>(x, f, <span class="at">mc.cores=</span>ncores)</span></code></pre></div>
 <p>In order to compare computation time, we can run</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="dealing-with-big-data-in-r.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(result <span class="ot">&lt;-</span> <span class="fu">lapply</span>(vec, f))</span></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="dealing-with-big-data-in-r.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(result <span class="ot">&lt;-</span> <span class="fu">lapply</span>(vec, f))</span></code></pre></div>
 <pre><code>   user  system elapsed 
-   0.02    0.00    0.02 </code></pre>
+      0       0       0 </code></pre>
 <p>Nonetheless, <code>rbenchmark</code> function serves as a more accurate replacement of the often seen <code>system.time()</code> function and the more sophisticated <code>system.time(replicate(1000, expr))</code> expression (that incorporates variability). It tries hard to accurately measure only the time it takes to evaluate expr. To achieved this, the sub-millisecond (supposedly nanosecond) accurate timing functions most modern operating systems provide are used. Additionally all evaluations of the expressions are done in C code to minimize any overhead. In our example:</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="dealing-with-big-data-in-r.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rbenchmark)</span>
-<span id="cb393-2"><a href="dealing-with-big-data-in-r.html#cb393-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span>
-<span id="cb393-3"><a href="dealing-with-big-data-in-r.html#cb393-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb393-4"><a href="dealing-with-big-data-in-r.html#cb393-4" aria-hidden="true" tabindex="-1"></a>ncores <span class="ot">&lt;-</span> <span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">1</span>  </span>
-<span id="cb393-5"><a href="dealing-with-big-data-in-r.html#cb393-5" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(<span class="at">cores=</span>ncores)  </span>
-<span id="cb393-6"><a href="dealing-with-big-data-in-r.html#cb393-6" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(ncores) </span>
-<span id="cb393-7"><a href="dealing-with-big-data-in-r.html#cb393-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb393-8"><a href="dealing-with-big-data-in-r.html#cb393-8" aria-hidden="true" tabindex="-1"></a>testdata1 <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="st">&quot;For loop&quot;</span> <span class="ot">=</span> <span class="fu">forFunction</span>(vec),</span>
-<span id="cb393-9"><a href="dealing-with-big-data-in-r.html#cb393-9" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;lapply&quot;</span> <span class="ot">=</span> <span class="fu">lapplyFunction</span>(vec),</span>
-<span id="cb393-10"><a href="dealing-with-big-data-in-r.html#cb393-10" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;Foreach dopar&quot;</span> <span class="ot">=</span> <span class="fu">foreachDoParFunction</span>(vec),</span>
-<span id="cb393-11"><a href="dealing-with-big-data-in-r.html#cb393-11" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;Foreach do&quot;</span> <span class="ot">=</span> <span class="fu">foreachDoFunction</span>(vec),</span>
-<span id="cb393-12"><a href="dealing-with-big-data-in-r.html#cb393-12" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;parLapply&quot;</span> <span class="ot">=</span> <span class="fu">parLapplyFunction</span>(<span class="at">cl=</span>cl, <span class="at">x=</span>vec, <span class="at">f=</span>f),</span>
-<span id="cb393-13"><a href="dealing-with-big-data-in-r.html#cb393-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">columns=</span><span class="fu">c</span>(<span class="st">&#39;test&#39;</span>, <span class="st">&#39;elapsed&#39;</span>, <span class="st">&#39;replications&#39;</span>),</span>
-<span id="cb393-14"><a href="dealing-with-big-data-in-r.html#cb393-14" aria-hidden="true" tabindex="-1"></a>                      <span class="at">replications =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>, <span class="dv">500</span>))</span>
-<span id="cb393-15"><a href="dealing-with-big-data-in-r.html#cb393-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb393-16"><a href="dealing-with-big-data-in-r.html#cb393-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb393-17"><a href="dealing-with-big-data-in-r.html#cb393-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb393-18"><a href="dealing-with-big-data-in-r.html#cb393-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb393-19"><a href="dealing-with-big-data-in-r.html#cb393-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb393-20"><a href="dealing-with-big-data-in-r.html#cb393-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> replications, <span class="at">y =</span> elapsed, <span class="at">colour =</span> test), <span class="at">data =</span> testdata1)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-129-1.png" width="672" /></p>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="dealing-with-big-data-in-r.html#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rbenchmark)</span>
+<span id="cb426-2"><a href="dealing-with-big-data-in-r.html#cb426-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span>
+<span id="cb426-3"><a href="dealing-with-big-data-in-r.html#cb426-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb426-4"><a href="dealing-with-big-data-in-r.html#cb426-4" aria-hidden="true" tabindex="-1"></a>ncores <span class="ot">&lt;-</span> <span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">1</span>  </span>
+<span id="cb426-5"><a href="dealing-with-big-data-in-r.html#cb426-5" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(<span class="at">cores=</span>ncores)  </span>
+<span id="cb426-6"><a href="dealing-with-big-data-in-r.html#cb426-6" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(ncores) </span>
+<span id="cb426-7"><a href="dealing-with-big-data-in-r.html#cb426-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb426-8"><a href="dealing-with-big-data-in-r.html#cb426-8" aria-hidden="true" tabindex="-1"></a>testdata1 <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="st">&quot;For loop&quot;</span> <span class="ot">=</span> <span class="fu">forFunction</span>(vec),</span>
+<span id="cb426-9"><a href="dealing-with-big-data-in-r.html#cb426-9" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;lapply&quot;</span> <span class="ot">=</span> <span class="fu">lapplyFunction</span>(vec),</span>
+<span id="cb426-10"><a href="dealing-with-big-data-in-r.html#cb426-10" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;Foreach dopar&quot;</span> <span class="ot">=</span> <span class="fu">foreachDoParFunction</span>(vec),</span>
+<span id="cb426-11"><a href="dealing-with-big-data-in-r.html#cb426-11" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;Foreach do&quot;</span> <span class="ot">=</span> <span class="fu">foreachDoFunction</span>(vec),</span>
+<span id="cb426-12"><a href="dealing-with-big-data-in-r.html#cb426-12" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;parLapply&quot;</span> <span class="ot">=</span> <span class="fu">parLapplyFunction</span>(<span class="at">cl=</span>cl, <span class="at">x=</span>vec, <span class="at">f=</span>f),</span>
+<span id="cb426-13"><a href="dealing-with-big-data-in-r.html#cb426-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">columns=</span><span class="fu">c</span>(<span class="st">&#39;test&#39;</span>, <span class="st">&#39;elapsed&#39;</span>, <span class="st">&#39;replications&#39;</span>),</span>
+<span id="cb426-14"><a href="dealing-with-big-data-in-r.html#cb426-14" aria-hidden="true" tabindex="-1"></a>                      <span class="at">replications =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>, <span class="dv">500</span>))</span>
+<span id="cb426-15"><a href="dealing-with-big-data-in-r.html#cb426-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb426-16"><a href="dealing-with-big-data-in-r.html#cb426-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb426-17"><a href="dealing-with-big-data-in-r.html#cb426-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb426-18"><a href="dealing-with-big-data-in-r.html#cb426-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb426-19"><a href="dealing-with-big-data-in-r.html#cb426-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb426-20"><a href="dealing-with-big-data-in-r.html#cb426-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> replications, <span class="at">y =</span> elapsed, <span class="at">colour =</span> test), <span class="at">data =</span> testdata1)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-147-1.png" width="672" /></p>
 <p>Another example could be to compare the performance of the five methods for matrix multiplication</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="dealing-with-big-data-in-r.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb394-2"><a href="dealing-with-big-data-in-r.html#cb394-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>), <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">5</span>)</span>
-<span id="cb394-3"><a href="dealing-with-big-data-in-r.html#cb394-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>), <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">5</span>)</span>
-<span id="cb394-4"><a href="dealing-with-big-data-in-r.html#cb394-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb394-5"><a href="dealing-with-big-data-in-r.html#cb394-5" aria-hidden="true" tabindex="-1"></a>FUN <span class="ot">&lt;-</span> <span class="cf">function</span>(i, A, B){</span>
-<span id="cb394-6"><a href="dealing-with-big-data-in-r.html#cb394-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">crossprod</span>(A,B)</span>
-<span id="cb394-7"><a href="dealing-with-big-data-in-r.html#cb394-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb394-8"><a href="dealing-with-big-data-in-r.html#cb394-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb394-9"><a href="dealing-with-big-data-in-r.html#cb394-9" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb394-10"><a href="dealing-with-big-data-in-r.html#cb394-10" aria-hidden="true" tabindex="-1"></a>testdata2 <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="st">&quot;For loop&quot;</span> <span class="ot">=</span> <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(a)){<span class="fu">FUN</span>(i, A, B)},</span>
-<span id="cb394-11"><a href="dealing-with-big-data-in-r.html#cb394-11" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;lapply&quot;</span> <span class="ot">=</span> <span class="fu">lapply</span>(a, <span class="at">FUN =</span> FUN, <span class="at">A=</span>A, <span class="at">B=</span>B), </span>
-<span id="cb394-12"><a href="dealing-with-big-data-in-r.html#cb394-12" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Foreach dopar&quot;</span> <span class="ot">=</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%dopar%</span> <span class="fu">FUN</span>(i, A, B),</span>
-<span id="cb394-13"><a href="dealing-with-big-data-in-r.html#cb394-13" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Foreach do&quot;</span> <span class="ot">=</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%do%</span> <span class="fu">FUN</span>(i, A, B),</span>
-<span id="cb394-14"><a href="dealing-with-big-data-in-r.html#cb394-14" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;parLapply&quot;</span> <span class="ot">=</span> <span class="fu">parLapply</span>(<span class="at">cl =</span> cl, <span class="at">X =</span> a, <span class="at">fun =</span> FUN, <span class="at">A=</span>A, <span class="at">B=</span>B),</span>
-<span id="cb394-15"><a href="dealing-with-big-data-in-r.html#cb394-15" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;parSapply&quot;</span> <span class="ot">=</span> <span class="fu">parSapply</span>(<span class="at">cl =</span> cl, <span class="at">X =</span> a, <span class="at">FUN =</span> FUN, <span class="at">A=</span>A, <span class="at">B=</span>B),</span>
-<span id="cb394-16"><a href="dealing-with-big-data-in-r.html#cb394-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">columns=</span><span class="fu">c</span>(<span class="st">&#39;test&#39;</span>, <span class="st">&#39;elapsed&#39;</span>, <span class="st">&#39;replications&#39;</span>),</span>
-<span id="cb394-17"><a href="dealing-with-big-data-in-r.html#cb394-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">replications =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>, <span class="dv">500</span>))</span>
-<span id="cb394-18"><a href="dealing-with-big-data-in-r.html#cb394-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb394-19"><a href="dealing-with-big-data-in-r.html#cb394-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb394-20"><a href="dealing-with-big-data-in-r.html#cb394-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> replications, <span class="at">y =</span> elapsed, <span class="at">colour =</span> test), <span class="at">data =</span> testdata2)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-130-1.png" width="672" /></p>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="dealing-with-big-data-in-r.html#cb427-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb427-2"><a href="dealing-with-big-data-in-r.html#cb427-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>), <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">5</span>)</span>
+<span id="cb427-3"><a href="dealing-with-big-data-in-r.html#cb427-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>), <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">5</span>)</span>
+<span id="cb427-4"><a href="dealing-with-big-data-in-r.html#cb427-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb427-5"><a href="dealing-with-big-data-in-r.html#cb427-5" aria-hidden="true" tabindex="-1"></a>FUN <span class="ot">&lt;-</span> <span class="cf">function</span>(i, A, B){</span>
+<span id="cb427-6"><a href="dealing-with-big-data-in-r.html#cb427-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">crossprod</span>(A,B)</span>
+<span id="cb427-7"><a href="dealing-with-big-data-in-r.html#cb427-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb427-8"><a href="dealing-with-big-data-in-r.html#cb427-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb427-9"><a href="dealing-with-big-data-in-r.html#cb427-9" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb427-10"><a href="dealing-with-big-data-in-r.html#cb427-10" aria-hidden="true" tabindex="-1"></a>testdata2 <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="st">&quot;For loop&quot;</span> <span class="ot">=</span> <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(a)){<span class="fu">FUN</span>(i, A, B)},</span>
+<span id="cb427-11"><a href="dealing-with-big-data-in-r.html#cb427-11" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;lapply&quot;</span> <span class="ot">=</span> <span class="fu">lapply</span>(a, <span class="at">FUN =</span> FUN, <span class="at">A=</span>A, <span class="at">B=</span>B), </span>
+<span id="cb427-12"><a href="dealing-with-big-data-in-r.html#cb427-12" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Foreach dopar&quot;</span> <span class="ot">=</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%dopar%</span> <span class="fu">FUN</span>(i, A, B),</span>
+<span id="cb427-13"><a href="dealing-with-big-data-in-r.html#cb427-13" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Foreach do&quot;</span> <span class="ot">=</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%do%</span> <span class="fu">FUN</span>(i, A, B),</span>
+<span id="cb427-14"><a href="dealing-with-big-data-in-r.html#cb427-14" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;parLapply&quot;</span> <span class="ot">=</span> <span class="fu">parLapply</span>(<span class="at">cl =</span> cl, <span class="at">X =</span> a, <span class="at">fun =</span> FUN, <span class="at">A=</span>A, <span class="at">B=</span>B),</span>
+<span id="cb427-15"><a href="dealing-with-big-data-in-r.html#cb427-15" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;parSapply&quot;</span> <span class="ot">=</span> <span class="fu">parSapply</span>(<span class="at">cl =</span> cl, <span class="at">X =</span> a, <span class="at">FUN =</span> FUN, <span class="at">A=</span>A, <span class="at">B=</span>B),</span>
+<span id="cb427-16"><a href="dealing-with-big-data-in-r.html#cb427-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">columns=</span><span class="fu">c</span>(<span class="st">&#39;test&#39;</span>, <span class="st">&#39;elapsed&#39;</span>, <span class="st">&#39;replications&#39;</span>),</span>
+<span id="cb427-17"><a href="dealing-with-big-data-in-r.html#cb427-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">replications =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>, <span class="dv">500</span>))</span>
+<span id="cb427-18"><a href="dealing-with-big-data-in-r.html#cb427-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb427-19"><a href="dealing-with-big-data-in-r.html#cb427-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb427-20"><a href="dealing-with-big-data-in-r.html#cb427-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> replications, <span class="at">y =</span> elapsed, <span class="at">colour =</span> test), <span class="at">data =</span> testdata2)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-148-1.png" width="672" /></p>
 <p>Finally, we could also compare the performance of the five methods for fitting generalized linear model</p>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="dealing-with-big-data-in-r.html#cb395-1" aria-hidden="true" tabindex="-1"></a>FUN <span class="ot">&lt;-</span> <span class="cf">function</span>(i) {</span>
-<span id="cb395-2"><a href="dealing-with-big-data-in-r.html#cb395-2" aria-hidden="true" tabindex="-1"></a>  ind <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb395-3"><a href="dealing-with-big-data-in-r.html#cb395-3" aria-hidden="true" tabindex="-1"></a>  mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(Species <span class="sc">~</span> Sepal.Length, <span class="at">family=</span><span class="fu">binomial</span>(logit), <span class="at">data =</span> iris[ind,])</span>
-<span id="cb395-4"><a href="dealing-with-big-data-in-r.html#cb395-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coefficients</span>(mod)</span>
-<span id="cb395-5"><a href="dealing-with-big-data-in-r.html#cb395-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb395-6"><a href="dealing-with-big-data-in-r.html#cb395-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb395-7"><a href="dealing-with-big-data-in-r.html#cb395-7" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb395-8"><a href="dealing-with-big-data-in-r.html#cb395-8" aria-hidden="true" tabindex="-1"></a>testdata3 <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="st">&quot;For loop&quot;</span> <span class="ot">=</span> <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(a)){ <span class="fu">FUN</span>(a[[i]])},</span>
-<span id="cb395-9"><a href="dealing-with-big-data-in-r.html#cb395-9" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;lapply&quot;</span> <span class="ot">=</span> <span class="fu">lapply</span>(a, <span class="at">FUN =</span> FUN), </span>
-<span id="cb395-10"><a href="dealing-with-big-data-in-r.html#cb395-10" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Foreach dopar&quot;</span> <span class="ot">=</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%dopar%</span> <span class="fu">FUN</span>(i),</span>
-<span id="cb395-11"><a href="dealing-with-big-data-in-r.html#cb395-11" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Foreach do&quot;</span> <span class="ot">=</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%do%</span> <span class="fu">FUN</span>(i),</span>
-<span id="cb395-12"><a href="dealing-with-big-data-in-r.html#cb395-12" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;parLapply&quot;</span> <span class="ot">=</span> <span class="fu">parLapply</span>(<span class="at">cl =</span> cl, <span class="at">X =</span> a, <span class="at">fun =</span> FUN),</span>
-<span id="cb395-13"><a href="dealing-with-big-data-in-r.html#cb395-13" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;parSapply&quot;</span> <span class="ot">=</span> <span class="fu">parSapply</span>(<span class="at">cl =</span> cl, <span class="at">X =</span> a, <span class="at">FUN =</span> FUN),</span>
-<span id="cb395-14"><a href="dealing-with-big-data-in-r.html#cb395-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">columns=</span><span class="fu">c</span>(<span class="st">&#39;test&#39;</span>, <span class="st">&#39;elapsed&#39;</span>, <span class="st">&#39;replications&#39;</span>),</span>
-<span id="cb395-15"><a href="dealing-with-big-data-in-r.html#cb395-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">replications =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>, <span class="dv">500</span>))</span>
-<span id="cb395-16"><a href="dealing-with-big-data-in-r.html#cb395-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb395-17"><a href="dealing-with-big-data-in-r.html#cb395-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb395-18"><a href="dealing-with-big-data-in-r.html#cb395-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> replications, <span class="at">y =</span> elapsed, <span class="at">colour =</span> test), <span class="at">data =</span> testdata3)</span></code></pre></div>
-<p><img src="fig/unnamed-chunk-131-1.png" width="672" /></p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="dealing-with-big-data-in-r.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="dealing-with-big-data-in-r.html#cb428-1" aria-hidden="true" tabindex="-1"></a>FUN <span class="ot">&lt;-</span> <span class="cf">function</span>(i) {</span>
+<span id="cb428-2"><a href="dealing-with-big-data-in-r.html#cb428-2" aria-hidden="true" tabindex="-1"></a>  ind <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb428-3"><a href="dealing-with-big-data-in-r.html#cb428-3" aria-hidden="true" tabindex="-1"></a>  mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(Species <span class="sc">~</span> Sepal.Length, <span class="at">family=</span><span class="fu">binomial</span>(logit), <span class="at">data =</span> iris[ind,])</span>
+<span id="cb428-4"><a href="dealing-with-big-data-in-r.html#cb428-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coefficients</span>(mod)</span>
+<span id="cb428-5"><a href="dealing-with-big-data-in-r.html#cb428-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb428-6"><a href="dealing-with-big-data-in-r.html#cb428-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb428-7"><a href="dealing-with-big-data-in-r.html#cb428-7" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb428-8"><a href="dealing-with-big-data-in-r.html#cb428-8" aria-hidden="true" tabindex="-1"></a>testdata3 <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="st">&quot;For loop&quot;</span> <span class="ot">=</span> <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(a)){ <span class="fu">FUN</span>(a[[i]])},</span>
+<span id="cb428-9"><a href="dealing-with-big-data-in-r.html#cb428-9" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;lapply&quot;</span> <span class="ot">=</span> <span class="fu">lapply</span>(a, <span class="at">FUN =</span> FUN), </span>
+<span id="cb428-10"><a href="dealing-with-big-data-in-r.html#cb428-10" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Foreach dopar&quot;</span> <span class="ot">=</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%dopar%</span> <span class="fu">FUN</span>(i),</span>
+<span id="cb428-11"><a href="dealing-with-big-data-in-r.html#cb428-11" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Foreach do&quot;</span> <span class="ot">=</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%do%</span> <span class="fu">FUN</span>(i),</span>
+<span id="cb428-12"><a href="dealing-with-big-data-in-r.html#cb428-12" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;parLapply&quot;</span> <span class="ot">=</span> <span class="fu">parLapply</span>(<span class="at">cl =</span> cl, <span class="at">X =</span> a, <span class="at">fun =</span> FUN),</span>
+<span id="cb428-13"><a href="dealing-with-big-data-in-r.html#cb428-13" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;parSapply&quot;</span> <span class="ot">=</span> <span class="fu">parSapply</span>(<span class="at">cl =</span> cl, <span class="at">X =</span> a, <span class="at">FUN =</span> FUN),</span>
+<span id="cb428-14"><a href="dealing-with-big-data-in-r.html#cb428-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">columns=</span><span class="fu">c</span>(<span class="st">&#39;test&#39;</span>, <span class="st">&#39;elapsed&#39;</span>, <span class="st">&#39;replications&#39;</span>),</span>
+<span id="cb428-15"><a href="dealing-with-big-data-in-r.html#cb428-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">replications =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>, <span class="dv">500</span>))</span>
+<span id="cb428-16"><a href="dealing-with-big-data-in-r.html#cb428-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb428-17"><a href="dealing-with-big-data-in-r.html#cb428-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb428-18"><a href="dealing-with-big-data-in-r.html#cb428-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> replications, <span class="at">y =</span> elapsed, <span class="at">colour =</span> test), <span class="at">data =</span> testdata3)</span></code></pre></div>
+<p><img src="fig/unnamed-chunk-149-1.png" width="672" /></p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="dealing-with-big-data-in-r.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span></code></pre></div>
 <p>To sum up, generally, <code>parLapply ()</code> perform better than <code>foreach ()</code>. However, for all parallel implementation methods, the increase in terms of efficiency is not proportional to the number of cores being used (Theoretical efficiency).</p>
 </div>
 </div>
-<div id="mapreduce" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> MapReduce</h2>
+<div id="mapreduce" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> MapReduce<a href="dealing-with-big-data-in-r.html#mapreduce" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>MapReduce is a programming model and an associated implementation for processing and generating big data sets with a parallel, distributed algorithm on a cluster. A MapReduce program is composed of a map procedure, which performs filtering and sorting (such as sorting students by first name into queues, one queue for each name), and a reduce method, which performs a summary operation (such as counting the number of students in each queue, yielding name frequencies). The “MapReduce System” (also called “infrastructure” or “framework”) orchestrates the processing by marshalling the distributed servers, running the various tasks in parallel, managing all communications and data transfers between the various parts of the system, and providing for redundancy and fault tolerance. The model is a specialization of the split-apply-combine strategy for data analysis. It is inspired by the map and reduce functions commonly used in <a href="https://en.wikipedia.org/wiki/Functional_programming">functional programming</a>. There are two main frameworks to deal with Big Data and where MapReduce can be applied efficiently</p>
 <ul>
 <li><strong><a href="https://hadoop.apache.org/">Hadoop</a></strong> provides support to perform MapReduce operations over a distributed file system of large data sets across clusters of computers using simple programming models. It is designed to scale up from single servers to thousands of machines, each offering local computation and storage.</li>
@@ -525,11 +535,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Next figure illustrate how to use MapReduce to count words in two different text files stored in different machines. The map operation splits each word in the original file and outputs a new word-counting file with a mapping of words and counts. The reduce operation can be defined to take two word-counting files and combine them by aggregating the totals for each word; this last file will contain a list of word counts across all the original files. Counting words is often the most basic MapReduce example, but we can also use MapReduce for much more sophisticated and interesting applications in statistics.</p>
 <p><img src="figures/mapreduce.png" style="width:60.0%" alt="MapReduce example counting words across files" />
 The MapReduce paradigm has long been a staple of big data computational strategies. However, properly leveraging MapReduce in R can be a challenge, even for experienced users. To get the most out of MapReduce, it is helpful to understand its relationship to functional programming. Functional programming, in a broad sense, is the one that some functions allows to have another function in one of its arguments. For instance, the function <code>sapply()</code>:</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="dealing-with-big-data-in-r.html#cb397-1" aria-hidden="true" tabindex="-1"></a>ff <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">log</span>(x) <span class="cf">else</span> <span class="fu">log</span>(<span class="sc">-</span>x)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb397-2"><a href="dealing-with-big-data-in-r.html#cb397-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">10</span>, ff)</span></code></pre></div>
-<pre><code> [1] 1.9218121 1.2069490 0.4804530 0.0000000       Inf 0.0000000
- [7] 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
-[13] 2.0794415 2.1972246 2.3025851</code></pre>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="dealing-with-big-data-in-r.html#cb430-1" aria-hidden="true" tabindex="-1"></a>ff <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">log</span>(x) <span class="cf">else</span> <span class="fu">log</span>(<span class="sc">-</span>x)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb430-2"><a href="dealing-with-big-data-in-r.html#cb430-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">10</span>, ff)</span></code></pre></div>
+<pre><code> [1] 1.9218121 1.2069490 0.4804530 0.0000000       Inf 0.0000000 0.6931472 1.0986123 1.3862944
+[10] 1.6094379 1.7917595 1.9459101 2.0794415 2.1972246 2.3025851</code></pre>
 <p>Functional programming is a very powerful tool that allows you to program in the following way:</p>
 <ul>
 <li>Create small and simple functions that solve a small and bounded problem</li>
@@ -544,7 +553,7 @@ The MapReduce paradigm has long been a staple of big data computational strategi
 <li>Las funciones ddply, ldply, etc. del paquete <code>plyr</code></li>
 </ul>
 <p>A very common example of this type of functions is used to inspect the type of columns in a table since they take advantage of the fact that a table is a list of columns and go through them one by one</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="dealing-with-big-data-in-r.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(iris, class)</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="dealing-with-big-data-in-r.html#cb432-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(iris, class)</span></code></pre></div>
 <pre><code>$Sepal.Length
 [1] &quot;numeric&quot;
 
@@ -562,21 +571,18 @@ $Species
 
 $Y
 [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="dealing-with-big-data-in-r.html#cb401-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(iris, length)</span></code></pre></div>
-<pre><code>Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-         150          150          150          150          150 
-           Y 
-         150 </code></pre>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="dealing-with-big-data-in-r.html#cb434-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(iris, length)</span></code></pre></div>
+<pre><code>Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species            Y 
+         150          150          150          150          150          150 </code></pre>
 <p>One of the advantages of this type of programming is that the code is shorter and more readable. We must remember that these functions include the argument <code>...</code> that allows to pass additional arguments to the function they call. For example this function would do the same as the previous one, but it would be more generic since it would allow calculations by varying the <code>s</code> argument.</p>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="dealing-with-big-data-in-r.html#cb403-1" aria-hidden="true" tabindex="-1"></a>ff2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, s) {</span>
-<span id="cb403-2"><a href="dealing-with-big-data-in-r.html#cb403-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">&gt;</span> s) <span class="fu">log</span>(x) <span class="cf">else</span> <span class="fu">log</span>(<span class="sc">-</span>x)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb403-3"><a href="dealing-with-big-data-in-r.html#cb403-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb403-4"><a href="dealing-with-big-data-in-r.html#cb403-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">10</span>, ff2, <span class="at">s=</span><span class="dv">0</span>)</span></code></pre></div>
-<pre><code> [1] 1.9218121 1.2069490 0.4804530 0.0000000       Inf 0.0000000
- [7] 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
-[13] 2.0794415 2.1972246 2.3025851</code></pre>
-<div id="map" class="section level3" number="7.3.1">
-<h3><span class="header-section-number">7.3.1</span> Map</h3>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="dealing-with-big-data-in-r.html#cb436-1" aria-hidden="true" tabindex="-1"></a>ff2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, s) {</span>
+<span id="cb436-2"><a href="dealing-with-big-data-in-r.html#cb436-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">&gt;</span> s) <span class="fu">log</span>(x) <span class="cf">else</span> <span class="fu">log</span>(<span class="sc">-</span>x)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb436-3"><a href="dealing-with-big-data-in-r.html#cb436-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb436-4"><a href="dealing-with-big-data-in-r.html#cb436-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">10</span>, ff2, <span class="at">s=</span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code> [1] 1.9218121 1.2069490 0.4804530 0.0000000       Inf 0.0000000 0.6931472 1.0986123 1.3862944
+[10] 1.6094379 1.7917595 1.9459101 2.0794415 2.1972246 2.3025851</code></pre>
+<div id="map" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> Map<a href="dealing-with-big-data-in-r.html#map" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The MapReduce methodology is also implemented in base R (<code>Map ()</code> and <code>Reduce ()</code> functions) as well as in <code>tidyverse</code>. Function <code>Map ()</code> applies one function to all elements from a list o vector:</p>
 <p><code>map(YOUR_LIST, YOUR_FUNCTION)</code></p>
 <p>or, graphically:</p>
@@ -585,7 +591,7 @@ $Y
 <p class="caption">Map</p>
 </div>
 <p>Previous operations could also be executed by using this code (<code>sapply ()</code> es un caso especial de la función <code>Map ()</code>):</p>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="dealing-with-big-data-in-r.html#cb405-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Map</span>(ff, <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">25</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="dealing-with-big-data-in-r.html#cb438-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Map</span>(ff, <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">25</span>))</span></code></pre></div>
 <pre><code>[[1]]
 [1] 2.197225
 
@@ -595,7 +601,7 @@ $Y
 [[3]]
 [1] 3.218876</code></pre>
 <p>y</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="dealing-with-big-data-in-r.html#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Map</span>(ff2, <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">25</span>), <span class="at">s=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="dealing-with-big-data-in-r.html#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Map</span>(ff2, <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">25</span>), <span class="at">s=</span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>[[1]]
 [1] 2.197225
 
@@ -605,28 +611,28 @@ $Y
 [[3]]
 [1] 3.218876</code></pre>
 <p>Another advantage appears when we want to <strong>vary more than one argument</strong>. With <code>lapply ()</code>, only one argument varies; the others are fixed. For example, how would you find a weighted mean when you have two lists, one of observations and the other of weights?</p>
-<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="dealing-with-big-data-in-r.html#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate some sample data</span></span>
-<span id="cb409-2"><a href="dealing-with-big-data-in-r.html#cb409-2" aria-hidden="true" tabindex="-1"></a>xs <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">5</span>, <span class="fu">runif</span>(<span class="dv">10</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb409-3"><a href="dealing-with-big-data-in-r.html#cb409-3" aria-hidden="true" tabindex="-1"></a>ws <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">5</span>, <span class="fu">rpois</span>(<span class="dv">10</span>, <span class="dv">5</span>) <span class="sc">+</span> <span class="dv">1</span>, <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb409-4"><a href="dealing-with-big-data-in-r.html#cb409-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(xs)</span></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="dealing-with-big-data-in-r.html#cb442-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate some sample data</span></span>
+<span id="cb442-2"><a href="dealing-with-big-data-in-r.html#cb442-2" aria-hidden="true" tabindex="-1"></a>xs <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">5</span>, <span class="fu">runif</span>(<span class="dv">10</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb442-3"><a href="dealing-with-big-data-in-r.html#cb442-3" aria-hidden="true" tabindex="-1"></a>ws <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">5</span>, <span class="fu">rpois</span>(<span class="dv">10</span>, <span class="dv">5</span>) <span class="sc">+</span> <span class="dv">1</span>, <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb442-4"><a href="dealing-with-big-data-in-r.html#cb442-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(xs)</span></code></pre></div>
 <pre><code>List of 5
  $ : num [1:10] 0.767 0.671 0.909 0.198 0.436 ...
  $ : num [1:10] 0.296 0.306 0.126 0.518 0.831 ...
  $ : num [1:10] 0.607 0.6956 0.1348 0.0715 0.1021 ...
  $ : num [1:10] 0.655 0.107 0.925 0.557 0.742 ...
  $ : num [1:10] 0.149 0.47 0.668 0.194 0.451 ...</code></pre>
-<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="dealing-with-big-data-in-r.html#cb411-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ws)</span></code></pre></div>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="dealing-with-big-data-in-r.html#cb444-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ws)</span></code></pre></div>
 <pre><code>List of 5
  $ : num [1:10] 6 3 5 4 8 13 5 5 3 5
  $ : num [1:10] 3 9 6 5 6 4 6 6 6 5
  $ : num [1:10] 3 14 12 4 8 8 4 8 3 4
  $ : num [1:10] 7 7 8 5 9 7 6 6 8 4
  $ : num [1:10] 4 5 7 4 3 4 8 4 4 7</code></pre>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="dealing-with-big-data-in-r.html#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the weighted.mean</span></span>
-<span id="cb413-2"><a href="dealing-with-big-data-in-r.html#cb413-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">Map</span>(weighted.mean, xs, ws))</span></code></pre></div>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="dealing-with-big-data-in-r.html#cb446-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the weighted.mean</span></span>
+<span id="cb446-2"><a href="dealing-with-big-data-in-r.html#cb446-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">Map</span>(weighted.mean, xs, ws))</span></code></pre></div>
 <pre><code>[1] 0.4676235 0.5447004 0.3928258 0.4760168 0.5505697</code></pre>
 <p>If some of the arguments should be fixed and constant, use an anonymous function:</p>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="dealing-with-big-data-in-r.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Map</span>(<span class="cf">function</span>(x, w) <span class="fu">weighted.mean</span>(x, w, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), xs, ws)</span></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="dealing-with-big-data-in-r.html#cb448-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Map</span>(<span class="cf">function</span>(x, w) <span class="fu">weighted.mean</span>(x, w, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), xs, ws)</span></code></pre></div>
 <pre><code>[[1]]
 [1] 0.4676235
 
@@ -642,8 +648,8 @@ $Y
 [[5]]
 [1] 0.5505697</code></pre>
 </div>
-<div id="reduce" class="section level3" number="7.3.2">
-<h3><span class="header-section-number">7.3.2</span> Reduce</h3>
+<div id="reduce" class="section level3 hasAnchor" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> Reduce<a href="dealing-with-big-data-in-r.html#reduce" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Another way of thinking about functionals is as a set of general tools for altering, subsetting, and collapsing lists. Every functional programming language has three tools for this: <code>Map()</code>, <code>Reduce()</code>, and <code>Filter()</code>. We have seen <code>Map()</code> already, and next we describe <code>Reduce()</code>, a powerful tool for extending two-argument functions. <code>Filter()</code> is a member of an important class of functionals that work with predicates, functions that return a single TRUE or FALSE (we will not cover that).</p>
 <p><code>Reduce()</code> reduces a vector, x, to a single value by recursively calling a function, f, two arguments at a time. It combines the first two elements with f, then combines the result of that call with the third element, and so on. Calling <code>Reduce(f, 1:3)</code> is equivalent to <code>f(f(1, 2), 3)</code></p>
 <div class="figure">
@@ -651,9 +657,9 @@ $Y
 <p class="caption">Reduce</p>
 </div>
 <p>The following two examples show what Reduce does with an infix and prefix function:</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="dealing-with-big-data-in-r.html#cb417-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Reduce</span>(<span class="st">`</span><span class="at">+</span><span class="st">`</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) <span class="co"># -&gt; ((1 + 2) + 3)</span></span></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="dealing-with-big-data-in-r.html#cb450-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Reduce</span>(<span class="st">`</span><span class="at">+</span><span class="st">`</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) <span class="co"># -&gt; ((1 + 2) + 3)</span></span></code></pre></div>
 <pre><code>[1] 6</code></pre>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="dealing-with-big-data-in-r.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Reduce</span>(sum, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) <span class="co"># -&gt; sum(sum(1, 2), 3)</span></span></code></pre></div>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="dealing-with-big-data-in-r.html#cb452-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Reduce</span>(sum, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) <span class="co"># -&gt; sum(sum(1, 2), 3)</span></span></code></pre></div>
 <pre><code>[1] 6</code></pre>
 <p>The essence of <code>Reduce()</code> can be described by a simple for loop:</p>
 <pre><code>Reduce2 &lt;- function(f, x) {
@@ -664,8 +670,8 @@ $Y
   out
 }</code></pre>
 <p><code>Reduce()</code> is also an elegant way of extending a function that works with two inputs into a function that can deal with any number of inputs. It is useful for implementing many types of recursive operations, like merges and intersections. Imagine you have a list of numeric vectors, and you want to find the values that occur in every element:</p>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="dealing-with-big-data-in-r.html#cb422-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">5</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">15</span>, <span class="at">replace =</span> T), <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb422-2"><a href="dealing-with-big-data-in-r.html#cb422-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(l)</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="dealing-with-big-data-in-r.html#cb455-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">5</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">15</span>, <span class="at">replace =</span> T), <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb455-2"><a href="dealing-with-big-data-in-r.html#cb455-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(l)</span></code></pre></div>
 <pre><code>List of 5
  $ : int [1:15] 9 7 9 6 6 6 10 4 3 8 ...
  $ : int [1:15] 8 3 7 1 9 5 3 8 10 7 ...
@@ -673,16 +679,16 @@ $Y
  $ : int [1:15] 7 4 10 8 6 6 3 7 6 4 ...
  $ : int [1:15] 10 7 8 10 5 1 6 9 6 8 ...</code></pre>
 <p>You could do that by intersecting each element in turn:</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="dealing-with-big-data-in-r.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="fu">intersect</span>(<span class="fu">intersect</span>(<span class="fu">intersect</span>(<span class="fu">intersect</span>(l[[<span class="dv">1</span>]], l[[<span class="dv">2</span>]]),</span>
-<span id="cb424-2"><a href="dealing-with-big-data-in-r.html#cb424-2" aria-hidden="true" tabindex="-1"></a>                              l[[<span class="dv">3</span>]]), l[[<span class="dv">4</span>]]), l[[<span class="dv">5</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="dealing-with-big-data-in-r.html#cb457-1" aria-hidden="true" tabindex="-1"></a><span class="fu">intersect</span>(<span class="fu">intersect</span>(<span class="fu">intersect</span>(<span class="fu">intersect</span>(l[[<span class="dv">1</span>]], l[[<span class="dv">2</span>]]),</span>
+<span id="cb457-2"><a href="dealing-with-big-data-in-r.html#cb457-2" aria-hidden="true" tabindex="-1"></a>                              l[[<span class="dv">3</span>]]), l[[<span class="dv">4</span>]]), l[[<span class="dv">5</span>]])</span></code></pre></div>
 <pre><code>[1]  9  6 10  8</code></pre>
 <p>That’s hard to read. With <code>Reduce()</code>, the equivalent is:</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="dealing-with-big-data-in-r.html#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Reduce</span>(intersect, l)</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="dealing-with-big-data-in-r.html#cb459-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Reduce</span>(intersect, l)</span></code></pre></div>
 <pre><code>[1]  9  6 10  8</code></pre>
 </div>
 </div>
-<div id="example-linear-regression-for-big-data" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Example: Linear regression for Big Data</h2>
+<div id="example-linear-regression-for-big-data" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Example: Linear regression for Big Data<a href="dealing-with-big-data-in-r.html#example-linear-regression-for-big-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this section, we describe a very nice application of MapReduce framework to a Big Data problem.</p>
 <p>There are several problems that require the analysis of large volumes of information. The analysis at very large scale of data is a challenging task since the available information cannot be practically analyzed on a single machine due to the sheer size of the data to fit in memory. In order to overcome this difficulty, high-performance analytical systems running on distributed environments can be used. To this end standard analytics algorithms need to be adapted to take advantage of cloud computing models which provide scalability and flexibility. Here, we describe an approach that introduces a new distributed training method for Multiple Linear Regression which will be based on the QR decomposition and the ordinary least squares method adapted to MapReduce framework. The method is called MLR-MR and is described in (<a href="https://ieeexplore.ieee.org/document/7345473">Moufida Adjout Rehab and Faouzi Boufares, 2105</a>). The paper is also available in our Moodle.</p>
 <p>In this figure we can observe as the model fitting using MLR-MR algorithm is dramatically reduced when the number of MapReduce processors increases.</p>
@@ -693,8 +699,8 @@ $Y
 <p>Let us start by recalling how to describe linear regression using the classical matrix notation:</p>
 <p><span class="math display">\[\mathbf{Y}=\mathbf{X}\mathbf{\beta}+\mathbf{\varepsilon}.\]</span></p>
 <p>The ordinary least square (OLS) estimate of <span class="math inline">\(\mathbf{\beta}\)</span> is <span class="math display">\[\widehat{\mathbf{\beta}}=[\mathbf{X}^T\mathbf{X}]^{-1}\mathbf{X}^T\mathbf{y}\]</span>. To illustrate, let us consider the “mtcars” example, and run this regression:</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="dealing-with-big-data-in-r.html#cb428-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
-<span id="cb428-2"><a href="dealing-with-big-data-in-r.html#cb428-2" aria-hidden="true" tabindex="-1"></a>(mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt <span class="sc">+</span> cyl, <span class="at">data =</span> mtcars))</span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="dealing-with-big-data-in-r.html#cb461-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb461-2"><a href="dealing-with-big-data-in-r.html#cb461-2" aria-hidden="true" tabindex="-1"></a>(mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt <span class="sc">+</span> cyl, <span class="at">data =</span> mtcars))</span></code></pre></div>
 <pre><code>
 Call:
 lm(formula = mpg ~ wt + cyl, data = mtcars)
@@ -704,80 +710,80 @@ Coefficients:
      39.686       -3.191       -1.508  </code></pre>
 <p>The algorithm implemented in the <code>lm ()</code> function uses the QR decomposition of <span class="math inline">\(\mathbf{X},\)</span> <span class="math display">\[\mathbf{X}=\mathbf{Q}\mathbf{R},\]</span> where <span class="math inline">\(\mathbf{Q}\)</span> is an orthogonal matrix (i.e. <span class="math inline">\(\mathbf{Q}^T\mathbf{Q}=\mathbb{I}\)</span>).Then,</p>
 <p><span class="math display">\[\widehat{\mathbf{\beta}}=[\mathbf{X}^T\mathbf{X}]^{-1}\mathbf{X}^T\mathbf{y}=\mathbf{R}^{-1}\mathbf{Q}^T\mathbf{y}\]</span></p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="dealing-with-big-data-in-r.html#cb430-1" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>mpg</span>
-<span id="cb430-2"><a href="dealing-with-big-data-in-r.html#cb430-2" aria-hidden="true" tabindex="-1"></a><span class="co">#similar to cbind(1, mtcars$wt, mtcars$cyl)</span></span>
-<span id="cb430-3"><a href="dealing-with-big-data-in-r.html#cb430-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> wt <span class="sc">+</span> cyl, <span class="at">data=</span>mtcars)</span>
-<span id="cb430-4"><a href="dealing-with-big-data-in-r.html#cb430-4" aria-hidden="true" tabindex="-1"></a>QR <span class="ot">&lt;-</span> <span class="fu">qr</span>(<span class="fu">as.matrix</span>(X))</span>
-<span id="cb430-5"><a href="dealing-with-big-data-in-r.html#cb430-5" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">qr.R</span>(QR)</span>
-<span id="cb430-6"><a href="dealing-with-big-data-in-r.html#cb430-6" aria-hidden="true" tabindex="-1"></a>Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(QR)</span>
-<span id="cb430-7"><a href="dealing-with-big-data-in-r.html#cb430-7" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(R) <span class="sc">%*%</span> <span class="fu">t</span>(Q) <span class="sc">%*%</span> Y</span></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="dealing-with-big-data-in-r.html#cb463-1" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>mpg</span>
+<span id="cb463-2"><a href="dealing-with-big-data-in-r.html#cb463-2" aria-hidden="true" tabindex="-1"></a><span class="co">#similar to cbind(1, mtcars$wt, mtcars$cyl)</span></span>
+<span id="cb463-3"><a href="dealing-with-big-data-in-r.html#cb463-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> wt <span class="sc">+</span> cyl, <span class="at">data=</span>mtcars)</span>
+<span id="cb463-4"><a href="dealing-with-big-data-in-r.html#cb463-4" aria-hidden="true" tabindex="-1"></a>QR <span class="ot">&lt;-</span> <span class="fu">qr</span>(<span class="fu">as.matrix</span>(X))</span>
+<span id="cb463-5"><a href="dealing-with-big-data-in-r.html#cb463-5" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">qr.R</span>(QR)</span>
+<span id="cb463-6"><a href="dealing-with-big-data-in-r.html#cb463-6" aria-hidden="true" tabindex="-1"></a>Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(QR)</span>
+<span id="cb463-7"><a href="dealing-with-big-data-in-r.html#cb463-7" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(R) <span class="sc">%*%</span> <span class="fu">t</span>(Q) <span class="sc">%*%</span> Y</span></code></pre></div>
 <pre><code>                 [,1]
 (Intercept) 39.686261
 wt          -3.190972
 cyl         -1.507795</code></pre>
 <p>We can parallelise computations using the MLR-MR method as follows:</p>
 <p>Consider <span class="math inline">\(m\)</span> blocks, for instance 3 (given tha we have 4 cores)</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="dealing-with-big-data-in-r.html#cb432-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="dealing-with-big-data-in-r.html#cb465-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">3</span></span></code></pre></div>
 <p>and split vectors and matrices</p>
 <p><span class="math display">\[\mathbf{y}=\left[\begin{matrix}\mathbf{y}_1\\\mathbf{y}_2\\\vdots \\\mathbf{y}_m\end{matrix}\right]\]</span></p>
 <p>and</p>
 <p><span class="math display">\[\mathbf{X}=\left[\begin{matrix}\mathbf{X}_1\\\mathbf{X}_2\\\vdots\\\mathbf{X}_m\end{matrix}\right]=\left[\begin{matrix}\mathbf{Q}_1^{(1)}\mathbf{R}_1^{(1)}\\\mathbf{Q}_2^{(1)}\mathbf{R}_2^{(1)}\\\vdots \\\mathbf{Q}_m^{(1)}\mathbf{R}_m^{(1)}\end{matrix}\right]\]</span></p>
 <p>In R to split vectors and matrices we can use these two functions:</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="dealing-with-big-data-in-r.html#cb433-1" aria-hidden="true" tabindex="-1"></a>chunk <span class="ot">&lt;-</span> <span class="cf">function</span>(x,n) <span class="fu">split</span>(x, <span class="fu">cut</span>(<span class="fu">seq_along</span>(x), n, <span class="at">labels =</span> <span class="cn">FALSE</span>)) </span>
-<span id="cb433-2"><a href="dealing-with-big-data-in-r.html#cb433-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb433-3"><a href="dealing-with-big-data-in-r.html#cb433-3" aria-hidden="true" tabindex="-1"></a>splitMatByRow <span class="ot">=</span> <span class="cf">function</span>(mat, size){</span>
-<span id="cb433-4"><a href="dealing-with-big-data-in-r.html#cb433-4" aria-hidden="true" tabindex="-1"></a>  row.index <span class="ot">&lt;-</span> <span class="fu">chunk</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(mat), size)</span>
-<span id="cb433-5"><a href="dealing-with-big-data-in-r.html#cb433-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(row.index, <span class="cf">function</span>(val) mat[val, ])</span>
-<span id="cb433-6"><a href="dealing-with-big-data-in-r.html#cb433-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="dealing-with-big-data-in-r.html#cb466-1" aria-hidden="true" tabindex="-1"></a>chunk <span class="ot">&lt;-</span> <span class="cf">function</span>(x,n) <span class="fu">split</span>(x, <span class="fu">cut</span>(<span class="fu">seq_along</span>(x), n, <span class="at">labels =</span> <span class="cn">FALSE</span>)) </span>
+<span id="cb466-2"><a href="dealing-with-big-data-in-r.html#cb466-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb466-3"><a href="dealing-with-big-data-in-r.html#cb466-3" aria-hidden="true" tabindex="-1"></a>splitMatByRow <span class="ot">=</span> <span class="cf">function</span>(mat, size){</span>
+<span id="cb466-4"><a href="dealing-with-big-data-in-r.html#cb466-4" aria-hidden="true" tabindex="-1"></a>  row.index <span class="ot">&lt;-</span> <span class="fu">chunk</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(mat), size)</span>
+<span id="cb466-5"><a href="dealing-with-big-data-in-r.html#cb466-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(row.index, <span class="cf">function</span>(val) mat[val, ])</span>
+<span id="cb466-6"><a href="dealing-with-big-data-in-r.html#cb466-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>We can do that with our data</p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="dealing-with-big-data-in-r.html#cb434-1" aria-hidden="true" tabindex="-1"></a>x.block <span class="ot">&lt;-</span> <span class="fu">splitMatByRow</span>(X, m)</span>
-<span id="cb434-2"><a href="dealing-with-big-data-in-r.html#cb434-2" aria-hidden="true" tabindex="-1"></a>y.block <span class="ot">&lt;-</span> <span class="fu">splitMatByRow</span>(<span class="fu">matrix</span>(Y, <span class="at">ncol =</span> <span class="dv">1</span>), m)</span></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="dealing-with-big-data-in-r.html#cb467-1" aria-hidden="true" tabindex="-1"></a>x.block <span class="ot">&lt;-</span> <span class="fu">splitMatByRow</span>(X, m)</span>
+<span id="cb467-2"><a href="dealing-with-big-data-in-r.html#cb467-2" aria-hidden="true" tabindex="-1"></a>y.block <span class="ot">&lt;-</span> <span class="fu">splitMatByRow</span>(<span class="fu">matrix</span>(Y, <span class="at">ncol =</span> <span class="dv">1</span>), m)</span></code></pre></div>
 <p>Then, we get small QR decomposition (per subset). This step correspond to de <strong>Map</strong> step in the <code>MapReduce</code> framework</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="dealing-with-big-data-in-r.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Algorithm 2 Mapper function in step1</span></span>
-<span id="cb435-2"><a href="dealing-with-big-data-in-r.html#cb435-2" aria-hidden="true" tabindex="-1"></a>getQR <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb435-3"><a href="dealing-with-big-data-in-r.html#cb435-3" aria-hidden="true" tabindex="-1"></a>  qrresult <span class="ot">&lt;-</span> <span class="fu">qr</span>(x)</span>
-<span id="cb435-4"><a href="dealing-with-big-data-in-r.html#cb435-4" aria-hidden="true" tabindex="-1"></a>  ans <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Q=</span><span class="fu">qr.Q</span>(qrresult), <span class="at">R=</span><span class="fu">qr.R</span>(qrresult))</span>
-<span id="cb435-5"><a href="dealing-with-big-data-in-r.html#cb435-5" aria-hidden="true" tabindex="-1"></a>  ans</span>
-<span id="cb435-6"><a href="dealing-with-big-data-in-r.html#cb435-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb435-7"><a href="dealing-with-big-data-in-r.html#cb435-7" aria-hidden="true" tabindex="-1"></a>x.block.qr <span class="ot">&lt;-</span> <span class="fu">Map</span>(getQR, x.block)</span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="dealing-with-big-data-in-r.html#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Algorithm 2 Mapper function in step1</span></span>
+<span id="cb468-2"><a href="dealing-with-big-data-in-r.html#cb468-2" aria-hidden="true" tabindex="-1"></a>getQR <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb468-3"><a href="dealing-with-big-data-in-r.html#cb468-3" aria-hidden="true" tabindex="-1"></a>  qrresult <span class="ot">&lt;-</span> <span class="fu">qr</span>(x)</span>
+<span id="cb468-4"><a href="dealing-with-big-data-in-r.html#cb468-4" aria-hidden="true" tabindex="-1"></a>  ans <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Q=</span><span class="fu">qr.Q</span>(qrresult), <span class="at">R=</span><span class="fu">qr.R</span>(qrresult))</span>
+<span id="cb468-5"><a href="dealing-with-big-data-in-r.html#cb468-5" aria-hidden="true" tabindex="-1"></a>  ans</span>
+<span id="cb468-6"><a href="dealing-with-big-data-in-r.html#cb468-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb468-7"><a href="dealing-with-big-data-in-r.html#cb468-7" aria-hidden="true" tabindex="-1"></a>x.block.qr <span class="ot">&lt;-</span> <span class="fu">Map</span>(getQR, x.block)</span></code></pre></div>
 <p>Now, consider the QR decomposition of <span class="math inline">\(\mathbf{R}^{(1)}\)</span> which is the first step of the reduce part</p>
 <p><span class="math display">\[\mathbf{R}^{(1)}=\left[\begin{matrix}\mathbf{R}_1^{(1)}\\\mathbf{R}_2^{(1)}\\\vdots \\\mathbf{R}_m^{(1)}\end{matrix}\right]=\mathbf{Q}^{(2)}\mathbf{R}^{(2)}\]</span> where</p>
 <p><span class="math display">\[\mathbf{Q}^{(2)}=\left[\begin{matrix}\mathbf{Q}^{(2)}_1\\\mathbf{Q}^{(2)}_2\\\vdots\\\mathbf{Q}^{(2)}_m\end{matrix}\right]\]</span></p>
 <p>that can be computed as</p>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="dealing-with-big-data-in-r.html#cb436-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Algorithm 3 Reducer function in step1</span></span>
-<span id="cb436-2"><a href="dealing-with-big-data-in-r.html#cb436-2" aria-hidden="true" tabindex="-1"></a>Rs <span class="ot">&lt;-</span> <span class="fu">Map</span>(<span class="cf">function</span> (l) l<span class="sc">$</span>R, x.block.qr)</span>
-<span id="cb436-3"><a href="dealing-with-big-data-in-r.html#cb436-3" aria-hidden="true" tabindex="-1"></a>Rtemp <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(rbind, Rs)</span>
-<span id="cb436-4"><a href="dealing-with-big-data-in-r.html#cb436-4" aria-hidden="true" tabindex="-1"></a>qrresult <span class="ot">&lt;-</span> <span class="fu">qr</span>(Rtemp)</span>
-<span id="cb436-5"><a href="dealing-with-big-data-in-r.html#cb436-5" aria-hidden="true" tabindex="-1"></a>Rtemp.qr <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Q=</span><span class="fu">qr.Q</span>(qrresult), <span class="at">R=</span><span class="fu">qr.R</span>(qrresult))</span>
-<span id="cb436-6"><a href="dealing-with-big-data-in-r.html#cb436-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb436-7"><a href="dealing-with-big-data-in-r.html#cb436-7" aria-hidden="true" tabindex="-1"></a>R.final <span class="ot">&lt;-</span> Rtemp.qr<span class="sc">$</span>R</span>
-<span id="cb436-8"><a href="dealing-with-big-data-in-r.html#cb436-8" aria-hidden="true" tabindex="-1"></a>Rtemp.Q.divide <span class="ot">&lt;-</span> <span class="fu">splitMatByRow</span>(Rtemp.qr<span class="sc">$</span>Q, m)</span></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="dealing-with-big-data-in-r.html#cb469-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Algorithm 3 Reducer function in step1</span></span>
+<span id="cb469-2"><a href="dealing-with-big-data-in-r.html#cb469-2" aria-hidden="true" tabindex="-1"></a>Rs <span class="ot">&lt;-</span> <span class="fu">Map</span>(<span class="cf">function</span> (l) l<span class="sc">$</span>R, x.block.qr)</span>
+<span id="cb469-3"><a href="dealing-with-big-data-in-r.html#cb469-3" aria-hidden="true" tabindex="-1"></a>Rtemp <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(rbind, Rs)</span>
+<span id="cb469-4"><a href="dealing-with-big-data-in-r.html#cb469-4" aria-hidden="true" tabindex="-1"></a>qrresult <span class="ot">&lt;-</span> <span class="fu">qr</span>(Rtemp)</span>
+<span id="cb469-5"><a href="dealing-with-big-data-in-r.html#cb469-5" aria-hidden="true" tabindex="-1"></a>Rtemp.qr <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Q=</span><span class="fu">qr.Q</span>(qrresult), <span class="at">R=</span><span class="fu">qr.R</span>(qrresult))</span>
+<span id="cb469-6"><a href="dealing-with-big-data-in-r.html#cb469-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb469-7"><a href="dealing-with-big-data-in-r.html#cb469-7" aria-hidden="true" tabindex="-1"></a>R.final <span class="ot">&lt;-</span> Rtemp.qr<span class="sc">$</span>R</span>
+<span id="cb469-8"><a href="dealing-with-big-data-in-r.html#cb469-8" aria-hidden="true" tabindex="-1"></a>Rtemp.Q.divide <span class="ot">&lt;-</span> <span class="fu">splitMatByRow</span>(Rtemp.qr<span class="sc">$</span>Q, m)</span></code></pre></div>
 <p>Define – as step 2 of the reduce part</p>
 <p><span class="math display">\[\mathbf{Q}^{(3)}_j=\mathbf{Q}^{(2)}_j\mathbf{Q}^{(1)}_j\]</span></p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="dealing-with-big-data-in-r.html#cb437-1" aria-hidden="true" tabindex="-1"></a>Q.result <span class="ot">=</span> <span class="fu">list</span>()</span>
-<span id="cb437-2"><a href="dealing-with-big-data-in-r.html#cb437-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
-<span id="cb437-3"><a href="dealing-with-big-data-in-r.html#cb437-3" aria-hidden="true" tabindex="-1"></a>  Q.result[[i]] <span class="ot">&lt;-</span> x.block.qr[[i]]<span class="sc">$</span>Q <span class="sc">%*%</span> Rtemp.Q.divide[[i]]</span>
-<span id="cb437-4"><a href="dealing-with-big-data-in-r.html#cb437-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="dealing-with-big-data-in-r.html#cb470-1" aria-hidden="true" tabindex="-1"></a>Q.result <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb470-2"><a href="dealing-with-big-data-in-r.html#cb470-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
+<span id="cb470-3"><a href="dealing-with-big-data-in-r.html#cb470-3" aria-hidden="true" tabindex="-1"></a>  Q.result[[i]] <span class="ot">&lt;-</span> x.block.qr[[i]]<span class="sc">$</span>Q <span class="sc">%*%</span> Rtemp.Q.divide[[i]]</span>
+<span id="cb470-4"><a href="dealing-with-big-data-in-r.html#cb470-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>and</p>
 <p><span class="math display">\[\mathbf{V}_j=\mathbf{Q}^{(3)T}_j\mathbf{y}_j\]</span></p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="dealing-with-big-data-in-r.html#cb438-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Algorithm 4 Reduce function in step2</span></span>
-<span id="cb438-2"><a href="dealing-with-big-data-in-r.html#cb438-2" aria-hidden="true" tabindex="-1"></a>V <span class="ot">=</span> <span class="fu">list</span>()</span>
-<span id="cb438-3"><a href="dealing-with-big-data-in-r.html#cb438-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
-<span id="cb438-4"><a href="dealing-with-big-data-in-r.html#cb438-4" aria-hidden="true" tabindex="-1"></a>  V[[i]]  <span class="ot">&lt;-</span>  <span class="fu">crossprod</span>(Q.result[[i]], y.block[[i]])  </span>
-<span id="cb438-5"><a href="dealing-with-big-data-in-r.html#cb438-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="dealing-with-big-data-in-r.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Algorithm 4 Reduce function in step2</span></span>
+<span id="cb471-2"><a href="dealing-with-big-data-in-r.html#cb471-2" aria-hidden="true" tabindex="-1"></a>V <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb471-3"><a href="dealing-with-big-data-in-r.html#cb471-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
+<span id="cb471-4"><a href="dealing-with-big-data-in-r.html#cb471-4" aria-hidden="true" tabindex="-1"></a>  V[[i]]  <span class="ot">&lt;-</span>  <span class="fu">crossprod</span>(Q.result[[i]], y.block[[i]])  </span>
+<span id="cb471-5"><a href="dealing-with-big-data-in-r.html#cb471-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>and finally set – as the step 3 of the reduce part</p>
 <p><span class="math display">\[\widehat{\mathbf{\beta}}=[\mathbf{R}^{(2)}]^{-1}\sum_{j=1}^m\mathbf{V}_j\]</span></p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="dealing-with-big-data-in-r.html#cb439-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Algorithm 5 Reduce function in step3</span></span>
-<span id="cb439-2"><a href="dealing-with-big-data-in-r.html#cb439-2" aria-hidden="true" tabindex="-1"></a>V.sum <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(<span class="st">&#39;+&#39;</span>, V)</span>
-<span id="cb439-3"><a href="dealing-with-big-data-in-r.html#cb439-3" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">solve</span>(R.final) <span class="sc">%*%</span> V.sum)</span></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="dealing-with-big-data-in-r.html#cb472-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Algorithm 5 Reduce function in step3</span></span>
+<span id="cb472-2"><a href="dealing-with-big-data-in-r.html#cb472-2" aria-hidden="true" tabindex="-1"></a>V.sum <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(<span class="st">&#39;+&#39;</span>, V)</span>
+<span id="cb472-3"><a href="dealing-with-big-data-in-r.html#cb472-3" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">solve</span>(R.final) <span class="sc">%*%</span> V.sum)</span></code></pre></div>
 <p>Let us compare the results</p>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="dealing-with-big-data-in-r.html#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">lm=</span><span class="fu">coef</span>(mod), <span class="at">parallel=</span>beta)</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="dealing-with-big-data-in-r.html#cb473-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">lm=</span><span class="fu">coef</span>(mod), <span class="at">parallel=</span>beta)</span></code></pre></div>
 <pre><code>                   lm  parallel
 (Intercept) 39.686261 39.686261
 wt          -3.190972 -3.190972
 cyl         -1.507795 -1.507795</code></pre>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="dealing-with-big-data-in-r.html#cb442-1" aria-hidden="true" tabindex="-1"></a><span class="co"># error</span></span>
-<span id="cb442-2"><a href="dealing-with-big-data-in-r.html#cb442-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((beta <span class="sc">-</span> <span class="fu">coef</span>(mod)) <span class="sc">**</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="dealing-with-big-data-in-r.html#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="co"># error</span></span>
+<span id="cb475-2"><a href="dealing-with-big-data-in-r.html#cb475-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((beta <span class="sc">-</span> <span class="fu">coef</span>(mod)) <span class="sc">**</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>[1] 2.607678e-28</code></pre>
 <table style="width:94%;">
 <colgroup>
@@ -812,12 +818,11 @@ cyl         -1.507795 -1.507795</code></pre>
           </div>
         </div>
       </div>
-<a href="regresión-logística.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modelos-de-regularización.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="caret.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -858,7 +863,7 @@ gitbook.start({
 },
 "download": ["_main.pdf", "_main.epub"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {
@@ -874,7 +879,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
