@@ -23,6 +23,7 @@ Los contenidos incluyen los siguientes temas:
 - Breve introducción a Tidyverse
 - Introducción al aprendizaje automático
 - Regresión lineal y logística
+- Métodos de regularización
 - Pasos previos a la creación de un modelo predictivo y medidas de validación
 - Datos no balanceados
 - Métodos de aprendizaje automático
